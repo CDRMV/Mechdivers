@@ -58,6 +58,9 @@ UnitBlueprint {
     },
     Description = 'Drop Reinforcement Beacon Pod',
     Display = {
+		Abilities = {
+			'Still in Development (Uncomplete)',
+        },
 		AnimationArrival = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0101/UEBMD0101_Arrival.sca',
 		AnimationUnpack = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0101/UEBMD0101_Unpack.sca',
         Mesh = {

@@ -25,3 +25,10 @@ ADFQuantumBeam = Class(DefaultBeamWeapon) {
         '/effects/emitters/oblivion_cannon_flash_03_emit.bp',
     },
 }
+
+TDFHeatBeam = Class(DefaultBeamWeapon) {
+    BeamType = ModCollisionBeams.HeatCollisionBeam,
+    FxChargeMuzzleFlash = {
+
+    },
+}
