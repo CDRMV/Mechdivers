@@ -23,8 +23,12 @@ local Effects = import('/lua/effecttemplates.lua')
 local explosion = import('/lua/defaultexplosions.lua')
 local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
 local TIFHighBallisticMortarWeapon = import('/lua/terranweapons.lua').TIFHighBallisticMortarWeapon
+local R, Ceil = Random, math.ceil
 
 UEBMD0102 = Class(TStructureUnit) {
+    Weapons = {
+        MainGun = Class(TDFGaussCannonWeapon) {}
+    },
 	
 	OnCreate = function(self)
 		self:HideBone( 'Pod', true )
@@ -67,7 +71,14 @@ UEBMD0102 = Class(TStructureUnit) {
 		self.ArrivalEffect1 = CreateAttachedEmitter(self.Dummy,0,self:GetArmy(), '/effects/emitters/nuke_munition_launch_trail_04_emit.bp'):ScaleEmitter(4):OffsetEmitter(0,-1,0)
 		self.ArrivalEffect2 = CreateAttachedEmitter(self.Dummy,0,self:GetArmy(), '/effects/emitters/nuke_munition_launch_trail_06_emit.bp'):ScaleEmitter(4):OffsetEmitter(0,-1,0)
 		self.ArrivalEffect3 = CreateAttachedEmitter(self.Dummy,0,self:GetArmy(), '/mods/Mechdivers/effects/emitters/fire_trail_08_emit.bp'):ScaleEmitter(4):OffsetEmitter(0,-1,0)
+		self.ArrivalEffect4 = CreateBeamEmitterOnEntity(self, 'Pod_Exhaust01', self:GetArmy(), '/effects/emitters/missile_exhaust_fire_beam_06_emit.bp')
+		self.ArrivalEffect5 = CreateBeamEmitterOnEntity(self, 'Pod_Exhaust02', self:GetArmy(), '/effects/emitters/missile_exhaust_fire_beam_06_emit.bp')
+		self.ArrivalEffect6 = CreateBeamEmitterOnEntity(self, 'Pod_Exhaust03', self:GetArmy(), '/effects/emitters/missile_exhaust_fire_beam_06_emit.bp')
+		self.ArrivalEffect7 = CreateBeamEmitterOnEntity(self, 'Pod_Exhaust04', self:GetArmy(), '/effects/emitters/missile_exhaust_fire_beam_06_emit.bp')
+		self.ArrivalEffect8 = CreateBeamEmitterOnEntity(self, 'Pod_Exhaust05', self:GetArmy(), '/effects/emitters/missile_exhaust_fire_beam_06_emit.bp')
+		self.ArrivalEffect9 = CreateBeamEmitterOnEntity(self, 'Pod_Exhaust06', self:GetArmy(), '/effects/emitters/missile_exhaust_fire_beam_06_emit.bp')
 		self:ShowBone( 0, true )
+		self:HideBone( 'Turret', true )
 		WaitSeconds(10)
 		CreateEmitterOnEntity(self,self:GetArmy(), '/effects/emitters/destruction_explosion_flash_04_emit.bp')
 		CreateEmitterOnEntity(self,self:GetArmy(), '/effects/emitters/destruction_explosion_flash_05_emit.bp')
@@ -79,6 +90,12 @@ UEBMD0102 = Class(TStructureUnit) {
 	    self.ArrivalEffect1:Destroy()
 		self.ArrivalEffect2:Destroy()
 		self.ArrivalEffect3:Destroy()
+		self.ArrivalEffect4:Destroy()
+		self.ArrivalEffect5:Destroy()
+		self.ArrivalEffect6:Destroy()
+		self.ArrivalEffect7:Destroy()
+		self.ArrivalEffect8:Destroy()
+		self.ArrivalEffect9:Destroy()
 		self:HideBone( 'CallBeacon', true )
 		self.Beam:Destroy()
 		if not self.AnimationManipulator2 then
@@ -87,6 +104,7 @@ UEBMD0102 = Class(TStructureUnit) {
         end
         self.AnimationManipulator2:PlayAnim(self:GetBlueprint().Display.AnimationUnpack, false):SetRate(1)	
 		self:SetUnSelectable(false)	
+		self:ShowBone( 'Turret', true )
 		WaitFor(self.AnimationManipulator2)
 		if not self.AnimationManipulator3 then
             self.AnimationManipulator3 = CreateAnimator(self)
@@ -94,9 +112,24 @@ UEBMD0102 = Class(TStructureUnit) {
         end
         self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationTurretUnpack, false):SetRate(2)	
 		WaitFor(self.AnimationManipulator3)
-		self.Spinner1:SetTargetSpeed(360)
-		WaitSeconds(5)
-		self.Spinner1:SetTargetSpeed(0)
+		local interval = 0
+        while (interval < 3) do
+				LOG(interval)
+					if interval == 0 then
+					self.Spinner1:SetTargetSpeed(360)
+					end
+					if interval == 2 then 
+						local wep1 = self:GetWeaponByLabel('MainGun')
+						wep1:SetEnabled(false)	
+						self.Spinner1:SetTargetSpeed(0)
+						break
+					end
+                    local num = Ceil((R()+R()+R()+R()+R()+R()+R()+R()+R()+R()+R())*R(1,10))
+                    coroutine.yield(num)
+                    self:GetWeaponByLabel'MainGun':FireWeapon()
+					WaitSeconds(1)
+					interval = interval + 1
+        end
 		end
 		)
     end,
