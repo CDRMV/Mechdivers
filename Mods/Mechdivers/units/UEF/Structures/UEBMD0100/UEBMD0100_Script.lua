@@ -90,6 +90,7 @@ UEBMD0100 = Class(TStructureUnit) {
 	OnCreate = function(self)
 		self:HideBone( 'Pod', true )
 		self:ShowBone( 'CallBeacon', true )
+		self:SetDoNotTarget(true)
         TStructureUnit.OnCreate(self)
     end,
 	
@@ -161,6 +162,7 @@ UEBMD0100 = Class(TStructureUnit) {
         end
         self.AnimationManipulator2:PlayAnim(self:GetBlueprint().Display.AnimationUnpack, false):SetRate(1)	
 		self:SetUnSelectable(false)	
+		self:SetDoNotTarget(false)
 		self:ShowBone( 'Turret', false )
 		local RandomNumber = math.random(1, 7)
 		if RandomNumber == 1 then

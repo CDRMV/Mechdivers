@@ -1,0 +1,71 @@
+UnitBlueprint {
+    Categories = {
+        'UEF',
+		'MINE',
+        'STRUCTURE',
+        'TECH1',
+        'SIZE4',
+        'VISIBLETORECON',
+		'UNTARGETDABLE',
+    },
+    Defense = {
+        ArmorType = 'Structure',
+        Health = 10,
+        MaxHealth = 10,
+    },
+    Description = 'Incendiary Mine',
+    Display = {
+        Mesh = {
+            IconFadeInZoom = 130,
+            LODs = {
+                {
+                    LODCutoff = 215,
+                    ShaderName = 'Unit',
+                },
+            },
+        },
+        UniformScale = 0.50,
+    },
+    Economy = {
+        BuildCostEnergy = 0,
+        BuildCostMass = 0,
+        BuildTime = 0,
+    },
+    General = {
+		CapCost = 0,
+        UnitName = 'MD-14',
+        FactionName = 'UEF',
+        Icon = 'land',
+        SelectionPriority = 5,
+    },
+    Intel = {
+        VisionRadius = 1,
+        WaterVisionRadius = 0,
+    },
+    LifeBarHeight = 0.075,
+    LifeBarOffset = 0.1,
+    LifeBarSize = 0.1,
+    Physics = {
+	    BuildOnLayerCaps = {
+            LAYER_Air = false,
+            LAYER_Land = true,
+            LAYER_Orbit = false,
+            LAYER_Seabed = false,
+            LAYER_Sub = false,
+            LAYER_Water = false,
+        },
+        MotionType = 'RULEUMT_None',
+        SkirtOffsetX = 0,
+        SkirtOffsetZ = 0,
+        SkirtSizeX = 0.1,
+        SkirtSizeZ = 0.1,
+    },
+    SelectionSizeX = 0.1,
+    SelectionSizeZ = 0.1,
+    SelectionThickness = 0.5,
+    SizeX = 0.1,
+    SizeY = 0.1,
+    SizeZ = 0.1,
+	StrategicIconName = 'icon_structure_directfire',
+    StrategicIconSortPriority = 175,
+}

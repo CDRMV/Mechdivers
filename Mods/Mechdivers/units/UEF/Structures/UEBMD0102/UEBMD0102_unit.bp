@@ -34,6 +34,7 @@ UnitBlueprint {
         'BUILTBYTIER3ENGINEER',
         'BUILTBYCOMMANDER',
         'UEF',
+		'UNTARGETABLE',
         'STRUCTURE',
         'DEFENSE',
         'TECH1',
@@ -56,10 +57,11 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 6,
     },
-    Description = 'Drop Mine Tower',
+    Description = 'Drop Incendiary Mine Tower',
     Display = {
 	    Abilities = {
-			'Still in Development (Uncomplete)',
+			'Creates an Incendiary Mine Field',
+			'Total amount of Mines: 48',
         },
 		AnimationArrival = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0102/UEBMD0102_Arrival.sca',
 		AnimationUnpack = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0102/UEBMD0102_Unpack.sca',
@@ -175,11 +177,12 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0.1,
             MuzzleSalvoSize = 48,
             MuzzleVelocity = 5.5,
-            ProjectileId = '/projectiles/TDFGauss01/TDFGauss01_proj.bp',
+            ProjectileId = '/mods/Mechdivers/projectiles/TDFFlameMine/TDFFlameMine_proj.bp',
             ProjectileLifetimeUsesMultiplier = 2.5,
             ProjectilesPerOnFire = 1,
             RackBones = {
                 {
+					HideMuzzle = true,
                     MuzzleBones = {
                         'L1_Mine01',
                         'L1_Mine02',

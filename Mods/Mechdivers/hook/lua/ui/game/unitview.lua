@@ -33,6 +33,11 @@ local MyUnitIdTable = {
 	  cskmdtl0303=true, 
 	  
 -- Structures
+      -- Mines --
+	  uebmd001=true,
+	  
+	  -----------
+
 	  uebmd0100=true,
 	  uebmd0101=true,						
 	  uebmd0102=true,						

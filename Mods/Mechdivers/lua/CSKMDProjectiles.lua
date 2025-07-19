@@ -42,6 +42,17 @@ Flamethrower02 = Class(EmitterProjectile) {
     FxNoneHitScale = 0.5,
 }
 
+TDFMineProjectile = Class(MultiPolyTrailProjectile) {
+    FxTrails = {},
+    PolyTrails = {'/mods/Mechdivers/Effects/Emitters/empty_trail_emit.bp',},
+    PolyTrailOffset = {0,0},
+    FxImpactUnit = EffectTemplate.TGaussCannonHitUnit01,
+    FxImpactProp = EffectTemplate.TGaussCannonHitUnit01,
+    FxImpactLand = nil,
+    FxTrailOffset = 0,
+    FxImpactUnderWater = {},
+}
+
 
 
 

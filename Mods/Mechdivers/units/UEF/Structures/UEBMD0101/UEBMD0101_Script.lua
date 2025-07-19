@@ -29,6 +29,7 @@ UEBMD0101 = Class(TStructureUnit) {
 	OnCreate = function(self)
 		self:HideBone( 'Pod', true )
 		self:ShowBone( 'CallBeacon', true )
+		self:SetDoNotTarget(true)
         TStructureUnit.OnCreate(self)
     end,
 	
@@ -99,6 +100,7 @@ UEBMD0101 = Class(TStructureUnit) {
         end
         self.AnimationManipulator2:PlayAnim(self:GetBlueprint().Display.AnimationUnpack, false):SetRate(1)	
 		self:SetUnSelectable(false)	
+		self:SetDoNotTarget(false)
 		self:ShowBone( 'Beacon', true )
 		WaitFor(self.AnimationManipulator2)
 		CreateBeamEmitterOnEntity(self, 'Beacon_Muzzle', army, '/mods/Mechdivers/effects/emitters/beacon_beam_01_emit.bp')
