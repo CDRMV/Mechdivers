@@ -30,6 +30,7 @@ local MyUnitIdTable = {
  -- Land 
  
  	  cskmdtl0205=true, 
+	  cskmdtl0300=true, 
 	  cskmdtl0303=true, 
 	  
 -- Structures

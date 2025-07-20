@@ -57,6 +57,14 @@ CSKMDTA0300 = Class(TAirUnit) {
 
     end,
 	
+	OnKilled = function(self, instigator, type, overkillRatio)
+        TAirUnit.OnKilled(self, instigator, type, overkillRatio)
+		if self.Beacon then
+		self.Beacon:Destroy()
+		end
+        self:TransportDetachAllUnits(true)
+    end,
+	
 	OnMotionVertEventChange = function(self, new, old)
             TAirUnit.OnMotionVertEventChange(self, new, old)
             if (new == 'Bottom') then
@@ -93,6 +101,8 @@ CSKMDTA0300 = Class(TAirUnit) {
 			if unit:IsUnitState('WaitForFerry') and unit:GetBlueprint().General.UnitName == '<LOC uel0106_name>Mech Marine' then
 			if number < 5 then
 			unit:AttachBoneTo(-2, self, 0)
+			unit:SetDoNotTarget(true)
+			unit:SetWeaponEnabledByLabel('ArmCannonTurret', false)
 			number = number + 1
 			else
 			end
@@ -116,6 +126,8 @@ CSKMDTA0300 = Class(TAirUnit) {
 		local position = self.Beacon:GetPosition()
         for _, unit in units do
 			Warp(unit, {position[1] + math.random(-1,1), GetTerrainHeight(position[1], position[3]), position[3] + math.random(-1,1)}, self.Beacon:GetOrientation())
+			unit:SetDoNotTarget(false)
+			unit:SetWeaponEnabledByLabel('ArmCannonTurret', true)
 			unit:DetachFrom(true)
         end
 		elseif bit == 0 then

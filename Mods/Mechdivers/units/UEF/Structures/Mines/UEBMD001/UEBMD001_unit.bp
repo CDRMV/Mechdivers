@@ -66,6 +66,5 @@ UnitBlueprint {
     SizeX = 0.1,
     SizeY = 0.1,
     SizeZ = 0.1,
-	StrategicIconName = 'icon_structure_directfire',
     StrategicIconSortPriority = 175,
 }

@@ -14,6 +14,10 @@ UnitList = {
 	T3ArmoredAssault = {
 		UEF = {'CSKMDTL0303', 50},      -- Emancipator, Tech 3 Multifunctional Assault Bot  
     },
+	
+	T3AttackTankSorian = {
+		UEF = {'CSKMDTL0300', 50},      -- Boxer, Tech 3 Amored Mech Marine Carrier
+    },
 
 	T3LandBot = {
         UEF = {'CSKMDTL0303', 50}, -- Emancipator, Tech 3 Multifunctional Assault Bot
