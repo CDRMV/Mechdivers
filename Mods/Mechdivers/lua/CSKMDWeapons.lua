@@ -7,7 +7,7 @@ local DefaultProjectileWeapon = WeaponFile.DefaultProjectileWeapon
 local DefaultBeamWeapon = WeaponFile.DefaultBeamWeapon
 local GinsuCollisionBeam = CollisionBeams.GinsuCollisionBeam
 local EffectTemplate = import('/lua/EffectTemplates.lua')
-local ModEffects = '/mods/Commander Survival Kit Units/effects/emitters/'
+local ModEffects = '/mods/Mechdivers/effects/emitters/'
 local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 local ModEffectTemplate = import('/mods/Mechdivers/lua/CSKMDEffectTemplates.lua')
 
@@ -30,5 +30,18 @@ TDFHeatBeam = Class(DefaultBeamWeapon) {
     BeamType = ModCollisionBeams.HeatCollisionBeam,
     FxChargeMuzzleFlash = {
 
+    },
+}
+
+CDFLaserFusionWeapon = Class(DefaultProjectileWeapon) {
+    FxMuzzleFlash = ModEffectTemplate.CFusionLaserMuzzleFlash,
+}
+
+CDFHLaserFusionWeapon = Class(DefaultProjectileWeapon) {
+    FxMuzzleFlash = ModEffectTemplate.CFusionLaserMuzzleFlash,
+	FxChargeMuzzleFlash = {
+		ModEffects .. 'heavyfusion_flash_01_emit.bp',
+        ModEffects .. 'heavyfusion_flash_02_emit.bp',
+        ModEffects .. 'heavyfusion_flash_03_emit.bp',
     },
 }

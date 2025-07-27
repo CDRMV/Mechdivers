@@ -19,7 +19,7 @@ local Effects = import('/lua/effecttemplates.lua')
 local explosion = import('/lua/defaultexplosions.lua')
 local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
 
-CSKMDTL0303 = Class(TWalkingLandUnit) {
+CSKMDTL0304 = Class(TWalkingLandUnit) {
 
     Weapons = {
         L_MissileLauncher = Class(TSAMLauncher) {},
@@ -118,7 +118,7 @@ CSKMDTL0303 = Class(TWalkingLandUnit) {
 		self:HideBone( 'R_Gatling_Arm', true )
 		self:HideBone( 'L_Cannon_Arm', true )
 		self:HideBone( 'R_Cannon_Arm', true )
-		local RandomNumber = 1
+		local RandomNumber = 2
 		
 		if RandomNumber == 1 then
 		self:HideBone( 'L_MissileLauncher', true )
@@ -230,4 +230,4 @@ CSKMDTL0303 = Class(TWalkingLandUnit) {
     end,
 	  
 }
-TypeClass = CSKMDTL0303
+TypeClass = CSKMDTL0304

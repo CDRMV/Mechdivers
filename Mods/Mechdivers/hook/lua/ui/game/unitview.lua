@@ -32,6 +32,7 @@ local MyUnitIdTable = {
  	  cskmdtl0205=true, 
 	  cskmdtl0300=true, 
 	  cskmdtl0303=true, 
+	  cskmdtl0304=true, 
 	  
 -- Structures
       -- Mines --
@@ -47,7 +48,10 @@ local MyUnitIdTable = {
 
  -- Air
 
- -- Land		 
+ -- Land	
+	  cskmdcl0300=true, 
+	  cskmdcl0301=true, 
+	  cskmdcl0302=true,  
 
 -- Structures 
 

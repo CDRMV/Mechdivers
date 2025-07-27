@@ -53,6 +53,36 @@ TDFMineProjectile = Class(MultiPolyTrailProjectile) {
     FxImpactUnderWater = {},
 }
 
+CLaserFusionProjectile = Class(MultiPolyTrailProjectile) {
+    PolyTrails = {
+        '/mods/Mechdivers/effects/emitters/Fusion_Laser_emit.bp',
+	},
+	PolyTrailOffset = {0,0}, 
+	
+    # Hit Effects
+    FxImpactUnit = EffectTemplate.TMissileHit01,
+    FxImpactLand = EffectTemplate.TMissileHit01,
+    FxImpactProp = EffectTemplate.TMissileHit01,
+    FxImpactUnderWater = {},
+}
+
+CHeavyLaserFusionProjectile = Class(MultiPolyTrailProjectile) {
+    PolyTrails = {
+        ModEffectTemplate.CHeavyFusionLaserPolyTrail,
+    },
+    PolyTrailOffset = {0,0}, 
+
+    FxTrails = ModEffectTemplate.CHeavyFusionLaserFXTrail01,
+	FxTrailScale = 4,
+	PolyTrailScale = 4,
+    #PolyTrail = ModEffectTemplate.CHeavyFusionLaserPolyTrail,
+    FxImpactUnit = EffectTemplate.TMissileHit01,
+    FxImpactLand = EffectTemplate.TMissileHit01,
+    FxImpactProp = EffectTemplate.TMissileHit01,
+    FxTrailOffset = 0,
+    FxImpactUnderWater = {},
+}
+
 
 
 

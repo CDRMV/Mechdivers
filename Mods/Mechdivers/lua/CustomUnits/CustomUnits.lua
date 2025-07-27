@@ -12,11 +12,21 @@ UnitList = {
     },
 	
 	T3ArmoredAssault = {
-		UEF = {'CSKMDTL0303', 50},      -- Emancipator, Tech 3 Multifunctional Assault Bot  
+		UEF = {'CSKMDTL0303', 50},      -- Patriot, Tech 3 Multifunctional Assault Bot  
+		Cybran = {'CSKMDCL0300', 50},      -- Annihilator, Tech 3 Heavy Tank
     },
 	
+	T3LandAA = {
+		Cybran = {'CSKMDCL0302', 50},      -- Shredder, Tech 3 Heavy Autocannon Tank
+	},
+	
+	T3LandArtillery = {
+	Cybran = {'CSKMDCL0301', 50},      -- Barrager, Tech 3 Mobile Missile Battery
+	},
+   
 	T3AttackTankSorian = {
 		UEF = {'CSKMDTL0300', 50},      -- Boxer, Tech 3 Amored Mech Marine Carrier
+		Cybran = {'CSKMDCL0300', 50},      -- Annihilator, Tech 3 Heavy Tank
     },
 
 	T3LandBot = {
