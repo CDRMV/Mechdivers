@@ -52,4 +52,16 @@ UnitList = {
 	T1GroundDefense = {
         UEF = {'UEBMD0100', 50}, -- Hell, Tech 1  Droppod Defense
     },
+	
+	T3GroundDefense = {
+        Cybran = {'URBMD0300', 50}, -- Kratos  Tech 3 Heavy Point Defense
+    },
+	
+	T3AADefense = {
+    Cybran =	{'URBMD0302', 50}, -- Smilodon Tech 3 Anti Air Quad Autocannon
+},
+
+	T2Artillery = {
+    Cybran =	{'URBMD0303', 50}, -- Pyros Tech 3 Mortar
+	},
 }

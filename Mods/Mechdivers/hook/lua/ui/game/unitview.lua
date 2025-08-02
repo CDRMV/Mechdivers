@@ -54,6 +54,18 @@ local MyUnitIdTable = {
 	  cskmdcl0302=true,  
 
 -- Structures 
+      -- Mines --
+	  urbmd001=true,
+	  
+	  ----------- 
+	  
+	  urbmd0100=true,
+	  urbmd0201=true,
+	  urbmd0202=true,
+	  urbmd0300=true,
+	  urbmd0301=true,
+	  urbmd0302=true,
+	  urbmd0303=true,
 
  -- Seraphim
  
