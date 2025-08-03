@@ -38,6 +38,7 @@ URBMD0100 = Class(CStructureUnit) {
         OnLostTarget = function(self)
 		Spinner2:SetTargetSpeed(5)
 		self.unit:RemoveToggleCap('RULEUTC_WeaponToggle')
+		Spinner2:SetGoal(10)
             CDFLaserFusionWeapon.OnLostTarget(self)
         end,  			
 		},
@@ -169,7 +170,7 @@ end,
 		Spinner1 = CreateRotator(self, 'Spinner', 'y', nil, 0, 60, 360):SetTargetSpeed(5)
 		Spinner2 = CreateRotator(self, 'Detector', 'x', 10, 10, 0, 10):SetTargetSpeed(5)
 		while true do
-		if Spinner2 then
+		if not self.Dead and Spinner2 then
 		Spinner2:SetGoal(math.random(10,20))
 		else
 		end
@@ -334,6 +335,27 @@ end,
 		self:AddToggleCap('RULEUTC_WeaponToggle')
 		end)
 		end
+    end,
+	
+	DeathThread = function( self, overkillRatio , instigator)  
+		if self.Scan then
+		self.Scan:Destroy()
+		end
+        self:DestroyAllDamageEffects()
+		local army = self:GetArmy()
+
+		if self.PlayDestructionEffects then
+            self:CreateDestructionEffects(overkillRatio)
+        end
+
+        if self.ShowUnitDestructionDebris and overkillRatio then
+            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
+        end
+		
+		self:CreateWreckage(overkillRatio or self.overkillRatio)
+
+        self:PlayUnitSound('Destroyed')
+        self:Destroy()
     end,
 	
 }	
