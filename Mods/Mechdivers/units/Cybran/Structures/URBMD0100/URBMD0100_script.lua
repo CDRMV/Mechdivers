@@ -169,8 +169,8 @@ end,
 			CreateAttachedEmitter(self, 'Detector_Effect2', self:GetArmy(), '/mods/Mechdivers/effects/emitters/heavyfusion_flash_01_emit.bp'):SetEmitterParam('LIFETIME', -1):SetEmitterParam('ALIGN_TO_BONE', 1):SetEmitterParam('USE_LOCAL_VELOCITY', 1):SetEmitterParam('USE_LOCAL_ACCELERATION', 1)
 		Spinner1 = CreateRotator(self, 'Spinner', 'y', nil, 0, 60, 360):SetTargetSpeed(5)
 		Spinner2 = CreateRotator(self, 'Detector', 'x', 10, 10, 0, 10):SetTargetSpeed(5)
-		while true do
-		if not self.Dead and Spinner2 then
+		while not self.Dead do
+		if Spinner2 then
 		Spinner2:SetGoal(math.random(10,20))
 		else
 		end
