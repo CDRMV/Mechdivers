@@ -64,4 +64,8 @@ UnitList = {
 	T2Artillery = {
     Cybran =	{'URBMD0303', 50}, -- Pyros Tech 3 Mortar
 	},
+	
+	T2RadarJammer = {
+    Cybran =	{'urbmd0101', 50}, -- Tech 2 Tactical Jammer
+	},
 }
