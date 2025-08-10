@@ -11,7 +11,6 @@ local ModEffects = '/mods/Mechdivers/effects/emitters/'
 local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 local ModEffectTemplate = import('/mods/Mechdivers/lua/CSKMDEffectTemplates.lua')
 
-
 DummyTurretWeapon = Class(DefaultProjectileWeapon) {
     
 }
@@ -24,6 +23,14 @@ ADFQuantumBeam = Class(DefaultBeamWeapon) {
         '/effects/emitters/oblivion_cannon_flash_02_emit.bp',
         '/effects/emitters/oblivion_cannon_flash_03_emit.bp',
     },
+}
+
+ADFLightningBeam = Class(DefaultBeamWeapon) {
+    BeamType = ModCollisionBeams.LightningCollisionBeam,
+    FxMuzzleFlash = {},
+    FxChargeMuzzleFlash = {}, ####EffectTemplate.SExperimentalUnstablePhasonLaserMuzzle01,
+    FxUpackingChargeEffects = EffectTemplate.CMicrowaveLaserCharge01,
+    FxUpackingChargeEffectScale = 0.1,
 }
 
 TDFHeatBeam = Class(DefaultBeamWeapon) {
@@ -44,4 +51,8 @@ CDFHLaserFusionWeapon = Class(DefaultProjectileWeapon) {
         ModEffects .. 'heavyfusion_flash_02_emit.bp',
         ModEffects .. 'heavyfusion_flash_03_emit.bp',
     },
+}
+
+CDFFusionMortarWeapon = Class(DefaultProjectileWeapon) {
+    FxMuzzleFlash = ModEffectTemplate.CFusionMortarMuzzleFlash,
 }

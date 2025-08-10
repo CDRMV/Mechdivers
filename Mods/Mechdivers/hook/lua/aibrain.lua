@@ -14,6 +14,7 @@ end,
 	OldAIBrain.OnCreateHuman(self)
 		
 		self:ForkThread(self.CheckDetectorTowerStep1)
+		self:ForkThread(self.CheckScoutDroneStep1)
     end,
 	
 	CheckDetectorTowerStep1 = function(self)
@@ -34,6 +35,30 @@ end,
 			if table.getn(labs) < 3  then
 				RemoveBuildRestriction(self:GetArmyIndex(), categories.DETECTORTOWER)
 				self:ForkThread(self.CheckDetectorTowerStep1)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	CheckScoutDroneStep1 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.SCOUTDRONE, true)
+			if table.getn(labs) >= 3 then
+				AddBuildRestriction(self:GetArmyIndex(), categories.SCOUTDRONE)
+				self:ForkThread(self.CheckScoutDroneStep2)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	CheckScoutDroneStep2 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.SCOUTDRONE, true)
+			if table.getn(labs) < 3  then
+				RemoveBuildRestriction(self:GetArmyIndex(), categories.SCOUTDRONE)
+				self:ForkThread(self.CheckScoutDroneStep1)
 				break
 			end
 			WaitSeconds(1)

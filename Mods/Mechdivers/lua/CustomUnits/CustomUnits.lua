@@ -8,6 +8,7 @@ UnitList = {
 	},
 	
 	T2AttackTank = {
+		Aeon = {'CSKMDAL0200', 50},      -- Watcher, Tech 2 Scout Drone
 		UEF = {'CSKMDTL0205', 50},      -- Razer G-167, Tech 2 Attack Truck
     },
 	

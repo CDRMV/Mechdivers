@@ -1,22 +1,25 @@
 #****************************************************************************
 #**
-#**  File     :  /cdimage/units/URB2301/URB2301_script.lua
+#**  File     :  /cdimage/units/URL0202/URL0202_script.lua
 #**  Author(s):  John Comes, David Tomandl, Jessica St. Croix
 #**
-#**  Summary  :  Cybran Heavy Gun Tower Script
+#**  Summary  :  Cybran Heavy Tank Script
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 
-local CStructureUnit = import('/lua/defaultunits.lua').StructureUnit
+local CLandUnit = import('/lua/defaultunits.lua').MobileUnit
 local ModWeaponsFile = import('/mods/Mechdivers/lua/CSKMDWeapons.lua')
+local CDFLaserFusionWeapon = ModWeaponsFile.CDFLaserFusionWeapon
 local CDFFusionMortarWeapon = ModWeaponsFile.CDFFusionMortarWeapon
 
-URBMD0303 = Class(CStructureUnit) {
-       Weapons = {
-		MainGun = Class(CDFFusionMortarWeapon) {		
-		},
+CSKMDCL0303 = Class(CLandUnit) {
+    Weapons = {
+	  MainGun = Class(CDFFusionMortarWeapon) {},
+      SecGun = Class(CDFLaserFusionWeapon) {},
 	},
+	  
+	
 }
 
-TypeClass = URBMD0303
+TypeClass = CSKMDCL0303

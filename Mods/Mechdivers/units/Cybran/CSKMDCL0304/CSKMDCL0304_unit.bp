@@ -61,11 +61,8 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 3,
     },
-    Description = 'Heavy Quad Autocannon Tank',
+    Description = 'Heavy Autocannon Tank',
     Display = {
-	    Abilities = {
-            '<LOC ability_aa>Anti-Air',
-        },
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -92,7 +89,7 @@ UnitBlueprint {
                     ScrollTreads = true,
                     TreadMarks = {
                         {
-                            BoneName = 'CSKMDCL0302',
+                            BoneName = 'CSKMDCL0304',
                             TreadMarks = 'tank_treads_albedo',
                             TreadMarksInterval = 0.2,
                             TreadMarksSizeX = 1.10,
@@ -139,7 +136,7 @@ UnitBlueprint {
         FactionName = 'Cybran',
         Icon = 'land',
         TechLevel = 'RULEUTL_Secret',
-        UnitName = 'Shredder',
+        UnitName = 'Mawler',
         UnitWeight = 1,
     },
     Intel = {
@@ -180,7 +177,7 @@ UnitBlueprint {
     SizeX = 0.9,
     SizeY = 0.5,
     SizeZ = 1.2,
-    StrategicIconName = 'icon_land3_antiair',
+    StrategicIconName = 'icon_land3_directfire',
     StrategicIconSortPriority = 125,
     Transport = {
         TransportClass = 3,
@@ -209,14 +206,14 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'Light Pulse Laser',
             FireTargetLayerCapsTable = {
-                Land = 'Air|Land|Water|Seabed',
+                Land = 'Land|Water|Seabed',
             },
             FiringRandomnessWhileMoving = 0,
             FiringTolerance = 2,
             Label = 'MainGun',
-            MaxRadius = 50,
+            MaxRadius = 70,
             MuzzleSalvoDelay = 0.1,
-            MuzzleSalvoSize = 4,
+            MuzzleSalvoSize = 1,
             MuzzleVelocity = 25,
             ProjectileId = '/mods/Mechdivers/projectiles/CDFLaserFusion01/CDFLaserFusion01_proj.bp',
             ProjectileLifetimeUsesMultiplier = 1.15,
@@ -224,10 +221,7 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'Turret_Muzzle01',
-						'Turret_Muzzle02',
-						'Turret_Muzzle03',
-						'Turret_Muzzle04',
+                        'Turret_Muzzle',
                     },
                     RackBone = 'Turret_Barrel',
                 },
@@ -240,7 +234,7 @@ UnitBlueprint {
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
             RangeCategory = 'UWRC_DirectFire',
-            RateOfFire = 0.5,
+            RateOfFire = 1,
             TargetCheckInterval = 0.16,
             TargetPriorities = {
                 'SPECIALHIGHPRI',
@@ -253,7 +247,7 @@ UnitBlueprint {
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             TrackingRadius = 1.15,
-            TurretBoneMuzzle = 'Turret_Muzzle01',
+            TurretBoneMuzzle = 'Turret_Muzzle',
             TurretBonePitch = 'Turret_Barrel',
             TurretBoneYaw = 'Turret',
             TurretDualManipulators = false,

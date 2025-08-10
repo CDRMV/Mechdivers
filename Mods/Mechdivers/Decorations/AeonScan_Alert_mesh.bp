@@ -1,0 +1,14 @@
+MeshBlueprint {
+    LODs = {
+        {
+            MeshName = '/mods/Mechdivers/Decorations/Scan2_LOD0.scm',
+            ShaderName = 'ShieldSeraphim',
+            AlbedoName = '/mods/Mechdivers/Decorations/AeonScan_Alert_Albedo.dds',
+            NormalsName = '/mods/Mechdivers/Decorations/AeonScan_Alert_Normals.dds',
+			SpecularName = '/mods/Mechdivers/Decorations/AeonScan_Alert_Specular.dds',
+            LODCutoff = 300,
+            
+        },
+    },
+    SortOrder = 999,
+}

@@ -6,4 +6,12 @@ UnitList = {
 	T3GroundDefense = {
         Cybran = {'URBMD0301', 50}, -- Kratos  Tech 3 Heavy Point Defense
     },
+	
+	T3ArmoredAssault = {
+		Cybran = {'CSKMDCL0304', 50},      -- Mawler, Tech 3 Heavy Autocannon Tank
+    },
+	
+	T3LandArtillery = {
+		Cybran = {'CSKMDCL0303', 50},      -- Breaker, Tech 3 Heavy Mortar Tank
+	},
 }

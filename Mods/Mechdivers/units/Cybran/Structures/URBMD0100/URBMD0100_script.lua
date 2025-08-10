@@ -225,7 +225,7 @@ end,
         local tpn = 0
         local army = self:GetArmy()
 		
-
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
         while created < quantity do
             tpn = tpn + 1
 			AirUnits[tpn] = CreateUnitHPR(
@@ -241,6 +241,7 @@ end,
                 break
             end
         end
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 
         for i, unit in AirUnits do
            IssueTransportUnload({unit}, {Targetposition[1]+ math.random(-12,12), Targetposition[2], Targetposition[3] + math.random(-12,12)})

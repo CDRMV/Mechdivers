@@ -18,7 +18,7 @@ local MyUnitIdTable = {
 	  cskmdaa0306=true, 	 
  
  -- Land
- 
+  	  cskmdal0200=true,
  	  cskmdal0306=true,
   
  
@@ -56,7 +56,9 @@ local MyUnitIdTable = {
  -- Land	
 	  cskmdcl0300=true, 
 	  cskmdcl0301=true, 
-	  cskmdcl0302=true, 	  
+	  cskmdcl0302=true, 
+	  cskmdcl0303=true, 
+	  cskmdcl0304=true, 		  
 
 -- Structures 
       -- Mines --

@@ -1,9 +1,9 @@
 #
 # CDFProtonCannon03
 #
-local CHeavyLaserFusionProjectile = import('/mods/Mechdivers/lua/CSKMDProjectiles.lua').CHeavyLaserFusionProjectile
+local CHeavyFusionArtilleryProjectile = import('/mods/Mechdivers/lua/CSKMDProjectiles.lua').CHeavyFusionArtilleryProjectile
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 
-CDFHeavyLaserFusionCannon01 = Class(CHeavyLaserFusionProjectile) {}
+CDFHeavyLaserFusionCannon01 = Class(CHeavyFusionArtilleryProjectile) {}
 TypeClass = CDFHeavyLaserFusionCannon01
 
