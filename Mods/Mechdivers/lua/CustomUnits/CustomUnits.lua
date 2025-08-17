@@ -1,10 +1,12 @@
 UnitList = {
     T3AirGunship = {
         UEF = {'CSKMDTA0300', 50}, 		-- Pelican, Tech 3 Mech Marine Transport Gunship
+		Cybran = {'CSKMDCA0300', 50}, 		-- Valkyrie, Tech 3 Assault Drone
     },
 	
 	T3AirTransport = {
         UEF = {'CSKMDTA0301', 50}, 		-- Hercules, Tech 3 Vehicle Transport Gunship
+		Cybran = {'CSKMDCA0301', 50}, 		-- Megacirus, Tech 3 Air Transport Drone
 	},
 	
 	T2AttackTank = {

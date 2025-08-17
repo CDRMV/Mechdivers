@@ -25,10 +25,6 @@ CSKMDCA0300 = Class(CAirUnit) {
         end,
                 
         OnGotTarget = function(self)
-		if Thruster1 and Thruster2 then
-		Thruster1:SetGoal(-90)
-		Thruster2:SetGoal(-90)
-		end
 		Spinner2:SetTargetSpeed(0)
 		Spinner2:SetGoal(Spinner2:GetCurrentAngle() - Spinner2:GetCurrentAngle())
                CDFLaserFusionWeapon.OnGotTarget(self)
@@ -36,20 +32,12 @@ CSKMDCA0300 = Class(CAirUnit) {
             },
         
         OnGotTarget = function(self)
-		if Thruster1 and Thruster2 then
-		Thruster1:SetGoal(-90)
-		Thruster2:SetGoal(-90)
-		end
 		Spinner2:SetTargetSpeed(0)
 		Spinner2:SetGoal(Spinner2:GetCurrentAngle() - Spinner2:GetCurrentAngle())
                CDFLaserFusionWeapon.OnGotTarget(self)
         end,
         
         OnLostTarget = function(self)
-		if Thruster1 and Thruster2 then
-		Thruster1:SetGoal(-20)
-		Thruster2:SetGoal(-20)
-		end
 		Spinner2:SetTargetSpeed(5)
 		Spinner2:SetGoal(30)
             CDFLaserFusionWeapon.OnLostTarget(self)
@@ -76,8 +64,6 @@ CSKMDCA0300 = Class(CAirUnit) {
 			self.Scan:SetVizToAllies('Intel')
 			self.Scan:SetVizToNeutrals('Intel')
 			self.Scan:SetVizToEnemies('Intel')
-		    Thruster1 = CreateRotator(self, 'Jet_Front', 'x',-20, 10, 0, 10):SetTargetSpeed(5)
-            Thruster2 = CreateRotator(self, 'Jet_Back', 'x', -20, 10, 0, 10):SetTargetSpeed(5)	
 				Spinner2 = CreateRotator(self, 'Barrel', 'x', 10, 10, 0, 10):SetTargetSpeed(5)
 		while not self.Dead do
 		if Spinner2 then
@@ -88,6 +74,27 @@ CSKMDCA0300 = Class(CAirUnit) {
 		end	
 
 		end)
+    end,
+	
+	DeathThread = function( self, overkillRatio , instigator)  
+		if self.Scan then
+		self.Scan:Destroy()
+		end
+        self:DestroyAllDamageEffects()
+		local army = self:GetArmy()
+
+		if self.PlayDestructionEffects then
+            self:CreateDestructionEffects(overkillRatio)
+        end
+
+        if self.ShowUnitDestructionDebris and overkillRatio then
+            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
+        end
+		
+		self:CreateWreckage(overkillRatio or self.overkillRatio)
+
+        self:PlayUnitSound('Destroyed')
+        self:Destroy()
     end,
     
 }
