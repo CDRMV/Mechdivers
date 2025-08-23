@@ -41,7 +41,37 @@ CSKMDCA0301 = Class(CAirUnit) {
         for k, v in self.EngineManipulators do
             self.Trash:Add(v)
         end
+		
+		EffectMesh = '/mods/Mechdivers/Decorations/CybranTransportEffect_mesh'
+		self.Effect = import('/lua/sim/Entity.lua').Entity()
+		self.Effect:AttachBoneTo( -2, self, 'Effect' )
+		self.Effect:SetMesh(EffectMesh)
+		self.Effect:SetDrawScale(0.03)
+		self.Effect:SetVizToAllies('Intel')
+		self.Effect:SetVizToNeutrals('Intel')
+		self.Effect:SetVizToEnemies('Intel')
 
+    end,
+	
+	DeathThread = function( self, overkillRatio , instigator)  
+		if self.Effect then
+		self.Effect:Destroy()
+		end
+        self:DestroyAllDamageEffects()
+		local army = self:GetArmy()
+
+		if self.PlayDestructionEffects then
+            self:CreateDestructionEffects(overkillRatio)
+        end
+
+        if self.ShowUnitDestructionDebris and overkillRatio then
+            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
+        end
+		
+		self:CreateWreckage(overkillRatio or self.overkillRatio)
+
+        self:PlayUnitSound('Destroyed')
+        self:Destroy()
     end,
     
 }

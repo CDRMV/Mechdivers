@@ -121,7 +121,7 @@ UnitBlueprint {
                 Effects = {
                     {
                         Bones = {
-                            'CSKMDCA0300',
+                            'CSKMDCA0301',
                         },
                         Offset = {
                             0,
@@ -137,7 +137,7 @@ UnitBlueprint {
                 Effects = {
                     {
                         Bones = {
-                            'CSKMDCA0300',
+                            'CSKMDCA0301',
                         },
                         Offset = {
                             0,

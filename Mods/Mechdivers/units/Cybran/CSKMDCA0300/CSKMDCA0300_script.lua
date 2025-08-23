@@ -76,6 +76,12 @@ CSKMDCA0300 = Class(CAirUnit) {
 		end)
     end,
 	
+	DestroyScan = function( self)  
+		if self.Scan then
+		self.Scan:Destroy()
+		end
+    end,
+	
 	DeathThread = function( self, overkillRatio , instigator)  
 		if self.Scan then
 		self.Scan:Destroy()

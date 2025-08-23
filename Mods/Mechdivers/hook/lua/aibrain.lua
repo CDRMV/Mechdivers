@@ -12,9 +12,33 @@ end,
 
     OnCreateHuman = function(self, planName)
 	OldAIBrain.OnCreateHuman(self)
-		
+		self:ForkThread(self.CheckAssaultDroneStationStep1)
 		self:ForkThread(self.CheckDetectorTowerStep1)
 		self:ForkThread(self.CheckScoutDroneStep1)
+    end,
+	
+	CheckAssaultDroneStationStep1 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.ASSAULTDRONESTATION, true)
+			if table.getn(labs) >= 3 then
+				AddBuildRestriction(self:GetArmyIndex(), categories.ASSAULTDRONESTATION)
+				self:ForkThread(self.CheckAssaultDroneStationStep2)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	CheckAssaultDroneStationStep2 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.ASSAULTDRONESTATION, true)
+			if table.getn(labs) < 3  then
+				RemoveBuildRestriction(self:GetArmyIndex(), categories.ASSAULTDRONESTATION)
+				self:ForkThread(self.CheckAssaultDroneStationStep1)
+				break
+			end
+			WaitSeconds(1)
+			end
     end,
 	
 	CheckDetectorTowerStep1 = function(self)

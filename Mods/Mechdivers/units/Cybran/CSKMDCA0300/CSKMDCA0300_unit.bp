@@ -91,7 +91,7 @@ UnitBlueprint {
         'AIR',
         'TECH3',
 		'GROUNDATTACK',
-        'BUILTBYTIER3FACTORY',
+        #'BUILTBYTIER3FACTORY',
         'VISIBLETORECON',
         'RECLAIMABLE',
         'OVERLAYDIRECTFIRE',
@@ -167,7 +167,7 @@ UnitBlueprint {
         },
         PlaceholderMeshName = 'UXB0000',
         SpawnRandomRotation = false,
-        UniformScale = 0.035,
+        UniformScale = 0.025,
     },
     Economy = {
         BuildCostEnergy = 52500,
@@ -180,6 +180,7 @@ UnitBlueprint {
         SizeZ = 1,
     },
     General = {
+		CapCost = 0,
         Category = 'Gunship',
         Classification = 'RULEUC_MilitaryAircraft',
         CommandCaps = {
@@ -214,6 +215,7 @@ UnitBlueprint {
     LifeBarOffset = 2.25,
     LifeBarSize = 3.0,
     Physics = {
+		AttackElevation = 10,
         BuildOnLayerCaps = {
             LAYER_Air = true,
             LAYER_Land = false,
@@ -222,7 +224,7 @@ UnitBlueprint {
             LAYER_Sub = false,
             LAYER_Water = false,
         },
-        Elevation = 9,
+        Elevation = 7,
         FuelRechargeRate = 70,
         FuelUseTime = 800,
         GroundCollisionOffset = 1.6,
@@ -237,8 +239,8 @@ UnitBlueprint {
         TurnRadius = 100,
         TurnRate = 100,
     },
-    SelectionSizeX = 1.35,
-    SelectionSizeZ = 1.85,
+    SelectionSizeX = 1.15,
+    SelectionSizeZ = 1.65,
     SelectionThickness = 0.32,
     SizeSphere = 1.6,
     SizeX = 1,
