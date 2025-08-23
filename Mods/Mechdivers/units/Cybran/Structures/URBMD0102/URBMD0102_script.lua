@@ -19,6 +19,10 @@ URBMD0102 = Class(CStructureUnit) {
 		self.OpenAnimManip = CreateAnimator(self)
 		self.Trash:Add(self.OpenAnimManip)
 		self.OpenAnimManip:PlayAnim('/Mods/Mechdivers/units/Cybran/Structures/URBMD0102/URBMD0102_AOpen.sca', false):SetRate(0)
+    end,
+	
+	OnStopBeingBuilt = function(self,builder,layer)
+        CStructureUnit.OnStopBeingBuilt(self,builder,layer)
 		self.SpawnDroneThreadLVL1Handle = self:ForkThread(self.SpawnDroneThreadLVL1)
     end,
 	
