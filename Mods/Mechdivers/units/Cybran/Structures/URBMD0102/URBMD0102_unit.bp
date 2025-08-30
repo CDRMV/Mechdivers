@@ -74,7 +74,7 @@ UnitBlueprint {
 		'Spawns Assault Drones if enemy Units are coming into its Range.',
 		'Comes with an Reload Time of 60 Seconds for each Drone Squadron.',
 		'Drones will attack the enemy automatically and return to the Station if there are destroyed.',
-		'Only 3 can be builded by each Player.',
+		'Only 6 can be builded by each Player.',
         },
         Mesh = {
             IconFadeInZoom = 130,

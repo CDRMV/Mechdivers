@@ -20,7 +20,7 @@ end,
 	CheckAssaultDroneStationStep1 = function(self)
 	        while true do
 			local labs = self:GetListOfUnits(categories.ASSAULTDRONESTATION, true)
-			if table.getn(labs) >= 3 then
+			if table.getn(labs) >= 6 then
 				AddBuildRestriction(self:GetArmyIndex(), categories.ASSAULTDRONESTATION)
 				self:ForkThread(self.CheckAssaultDroneStationStep2)
 				break
@@ -32,7 +32,7 @@ end,
 	CheckAssaultDroneStationStep2 = function(self)
 	        while true do
 			local labs = self:GetListOfUnits(categories.ASSAULTDRONESTATION, true)
-			if table.getn(labs) < 3  then
+			if table.getn(labs) < 6  then
 				RemoveBuildRestriction(self:GetArmyIndex(), categories.ASSAULTDRONESTATION)
 				self:ForkThread(self.CheckAssaultDroneStationStep1)
 				break
