@@ -59,9 +59,9 @@ UnitBlueprint {
     },
     Description = 'Drop Sensor Beacon',
     Display = {
-		AnimationArrival = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0105/UEBMD0106_Arrival.sca',
-		AnimationUnpack = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0105/UEBMD0106_Unpack.sca',
-		AnimationShieldUnpack = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0105/UEBMD0106_BeaconUnpack.sca',
+		AnimationArrival = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0106/UEBMD0106_Arrival.sca',
+		AnimationUnpack = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0106/UEBMD0106_Unpack.sca',
+		AnimationBeaconUnpack = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0106/UEBMD0106_BeaconUnpack.sca',
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {

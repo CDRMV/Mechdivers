@@ -50,7 +50,7 @@ UEBMD0105 = Class(TStructureUnit) {
             self.AnimationManipulator3 = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator3)
         end
-        self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationShieldUnpack, false):SetRate(0)	
+        self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationBombUnpack, false):SetRate(0)	
         self.AnimationManipulator:PlayAnim(self:GetBlueprint().Display.AnimationArrival, false):SetRate(2)	
 		self.ArmSlider1 = CreateSlider(self, 'Pod')
         self.Trash:Add(self.ArmSlider1)
