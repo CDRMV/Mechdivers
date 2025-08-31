@@ -38,6 +38,7 @@ UEBMD0105 = Class(TStructureUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
+		self.Enabled = false	
 		local army = self:GetArmy()
         local position = self:GetPosition()
 		local orientation = RandomFloat(0,2*math.pi)
@@ -112,10 +113,89 @@ UEBMD0105 = Class(TStructureUnit) {
 		WaitFor(self.AnimationManipulator2)
         self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationBombUnpack, false):SetRate(2)	
 		WaitFor(self.AnimationManipulator3)
-
+		self:AddToggleCap('RULEUTC_WeaponToggle')
+		self:AddToggleCap('RULEUTC_SpecialToggle')
+		
+		if not self.AnimationManipulator4 then
+            self.AnimationManipulator4 = CreateAnimator(self)
+            self.Trash:Add(self.AnimationManipulator4)
+        end
+		
 		end
 		)
     end,
+	
+	OnScriptBitSet = function(self, bit)
+        TStructureUnit.OnScriptBitSet(self, bit)
+        if bit == 1 then 
+			ForkThread( function()
+			self.Enabled = true
+			self:RemoveToggleCap('RULEUTC_WeaponToggle')
+			self:RemoveToggleCap('RULEUTC_SpecialToggle')
+			self.AnimationManipulator4:PlayAnim('/Mods/Mechdivers/units/UEF/Structures/UEBMD0105/UEBMD0105_Activate.sca', false):SetRate(1)	
+			WaitFor(self.AnimationManipulator4)
+			WaitSeconds(20)
+			if not self.Dead then
+			self:Kill()
+			end
+			end)
+        end
+		if bit == 7 then 
+			self.AutomaticDetonationThreadHandle = self:ForkThread(self.AutomaticDetonationThread)
+        end
+    end,
+
+    OnScriptBitClear = function(self, bit)
+        TStructureUnit.OnScriptBitClear(self, bit)
+        if bit == 1 then 
+
+        end
+		if bit == 7 then 
+			KillThread(self.AutomaticDetonationThreadHandle)
+        end
+    end,
+	
+	DeathThread = function( self, overkillRatio , instigator)  
+        self:DestroyAllDamageEffects()
+		local army = self:GetArmy()
+
+		if self.PlayDestructionEffects then
+            self:CreateDestructionEffects(overkillRatio)
+        end
+
+        if self.ShowUnitDestructionDebris and overkillRatio then
+            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
+        end
+		if self.Enabled == true then
+		local position = self:GetPosition()
+        DamageArea(self, position, 15, 25000, 'Nuke', true)
+		local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
+		local rotation = RandomFloat(0,2*math.pi)
+		local size = RandomFloat(45.75,45.0)
+		CreateDecal(self:GetPosition(), rotation, 'scorch_001_albedo', '', 'Albedo', size, size, 150, 150, self:GetArmy())
+		nukeProjectile = self:CreateProjectile('/mods/Mechdivers/effects/Entities/Blu4000/Blu4000EffectController01/Blu4000EffectController01_proj.bp', 0, 0, 0, nil, nil, nil):SetCollision(false)
+        nukeProjectile:PassDamageData(self.DamageData)
+        nukeProjectile:PassData(self.Data)
+		
+		else
+		self:CreateWreckage(overkillRatio or self.overkillRatio)
+		end
+
+        self:PlayUnitSound('Destroyed')
+        self:Destroy()
+    end,
+	
+	AutomaticDetonationThread = function(self)
+ 		while not self:IsDead() do
+			local unitPos = self:GetPosition()
+			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, 20, 'Enemy')
+            for _,unit in units do
+				self:SetScriptBit('RULEUTC_WeaponToggle', true)
+            end
+            WaitSeconds(0.1)
+		end	
+    end,
+	
 }
 
 TypeClass = UEBMD0105

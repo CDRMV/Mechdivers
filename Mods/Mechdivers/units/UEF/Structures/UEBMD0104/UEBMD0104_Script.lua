@@ -38,6 +38,8 @@ UEBMD0104 = Class(TStructureUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
+		self:DestroyShield()
+        self:SetMaintenanceConsumptionInactive()
 		local army = self:GetArmy()
         local position = self:GetPosition()
 		local orientation = RandomFloat(0,2*math.pi)
@@ -112,7 +114,10 @@ UEBMD0104 = Class(TStructureUnit) {
 		WaitFor(self.AnimationManipulator2)
         self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationShieldUnpack, false):SetRate(2)	
 		WaitFor(self.AnimationManipulator3)
-
+		local bp = self:GetBlueprint().Defense.Shield
+		self:CreateShield(bp)
+        self:SetEnergyMaintenanceConsumptionOverride(bp.MaintenanceConsumptionPerSecondEnergy or 0)
+        self:SetMaintenanceConsumptionActive()
 		end
 		)
     end,

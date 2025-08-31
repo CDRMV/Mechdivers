@@ -34,10 +34,10 @@ UnitBlueprint {
         #'BUILTBYTIER3ENGINEER',
         #'BUILTBYCOMMANDER',
         'UEF',
-		'UNTARGETABLE',
         'STRUCTURE',
         'DEFENSE',
         'TECH1',
+		'SHIELD',
         'DIRECTFIRE',
         'DRAGBUILD',
         'SIZE4',
@@ -56,6 +56,20 @@ UnitBlueprint {
         RegenRate = 0,
         SubThreatLevel = 0,
         SurfaceThreatLevel = 6,
+		Shield = {
+            ImpactEffects = 'UEFShieldHit01',
+            ImpactMesh = '/effects/entities/ShieldSection01/ShieldSection01_mesh',
+            Mesh = '/effects/entities/Shield01/Shield01_mesh',
+            MeshZ = '/effects/entities/Shield01/Shield01z_mesh',
+            RegenAssistMult = 60,
+            ShieldEnergyDrainRechargeTime = 5,
+            ShieldMaxHealth = 4000,
+            ShieldRechargeTime = 24,
+            ShieldRegenRate = 55,
+            ShieldRegenStartTime = 1,
+            ShieldSize = 16,
+            ShieldVerticalOffset = -3,
+        },
     },
     Description = 'Drop Shield Generator',
     Display = {
@@ -79,8 +93,9 @@ UnitBlueprint {
         BuildCostEnergy = 2000,
         BuildCostMass = 250,
         BuildTime = 250,
+		MaintenanceConsumptionPerSecondEnergy = 100,
         RebuildBonusIds = {
-            'ueb2101',
+            'uebmd0104',
         },
     },
     General = {
@@ -105,6 +120,15 @@ UnitBlueprint {
         SelectionPriority = 5,
         TechLevel = 'RULEUTL_Basic',
         UnitWeight = 1,
+		OrderOverrides = {
+            RULEUTC_ShieldToggle = {
+                bitmapId = 'shield-dome',
+                helpText = 'toggle_shield_dome',
+            },
+        },
+		ToggleCaps = {
+            RULEUTC_ShieldToggle = true,
+        },
     },
     Intel = {
         VisionRadius = 24,
@@ -144,7 +168,7 @@ UnitBlueprint {
     SizeX = 0.6,
     SizeY = 0.8,
     SizeZ = 0.6,
-    StrategicIconName = 'icon_structure1_directfire',
+    StrategicIconName = 'icon_structure1_shield',
     StrategicIconSortPriority = 205,
     Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',

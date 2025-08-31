@@ -8,7 +8,7 @@
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 
-local TStructureUnit = import('/lua/defaultunits.lua').MobileUnit
+local TStructureUnit = import('/lua/defaultunits.lua').RadarUnit
 local TDFRiotWeapon = import('/lua/terranweapons.lua').TDFRiotWeapon
 local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 local TSAMLauncher = import('/lua/terranweapons.lua').TSAMLauncher
@@ -24,9 +24,19 @@ local explosion = import('/lua/defaultexplosions.lua')
 local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
 local TIFHighBallisticMortarWeapon = import('/lua/terranweapons.lua').TIFHighBallisticMortarWeapon
 local R, Ceil = Random, math.ceil
+local VizMarker = import('/lua/sim/VizMarker.lua').VizMarker
+local CSoothSayerAmbient = import('/lua/EffectTemplates.lua').CSoothSayerAmbient
 
 UEBMD0106 = Class(TStructureUnit) {
 
+	IntelEffects = {
+		{
+            Bones = { 'Turret', },
+            Offset = { 0, 0, 0, },
+            Type = 'Jammer01',
+		},
+	},	
+	
 	
 	OnCreate = function(self)
 		self:HideBone( 'Pod', true )
@@ -112,10 +122,127 @@ UEBMD0106 = Class(TStructureUnit) {
 		WaitFor(self.AnimationManipulator2)
         self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationBeaconUnpack, false):SetRate(2)	
 		WaitFor(self.AnimationManipulator3)
-
+        self.ExpandingVisionDisableCount = 1
+		self:OnIntelEnabled()
 		end
 		)
     end,
+    
+    
+    OnKilled = function(self, instigator, type, overkillRatio)
+        local curRadius = self:GetIntelRadius('vision')
+        local position = self:GetPosition()
+        local army = self:GetAIBrain():GetArmyIndex()
+        TStructureUnit.OnKilled(self, instigator, type, overkillRatio)
+        local spec = {
+            X = position[1],
+            Z = position[3],
+            Radius = curRadius,
+            LifeTime = -1,
+            Army = army,
+        }
+        local vizEnt = VizMarker(spec)
+        vizEnt.DeathThread = ForkThread(self.VisibleEntityDeathThread, vizEnt, curRadius)
+    end,
+    
+    VisibleEntityDeathThread = function(entity, curRadius)
+        local lifetime = 0
+        while lifetime < 30 do
+            if curRadius > 1 then
+                curRadius = curRadius - 1
+                if curRadius < 1 then
+                    curRadius = 1
+                end
+                entity:SetIntelRadius('vision', curRadius)
+            end
+            lifetime = lifetime + 2
+            WaitSeconds(0.1)
+        end
+        entity:Destroy()
+    end,
+
+    OnIntelEnabled = function(self)
+		if not self.Spinner then
+		self.Spinner = CreateRotator(self, 'Turret', 'y', nil, 0, 30, 360)
+		end
+		self.Spinner:SetTargetSpeed(180)
+		if not self.AnimationManipulator4 then
+            self.AnimationManipulator4 = CreateAnimator(self)
+            self.Trash:Add(self.AnimationManipulator4)
+        end
+	
+		self.AnimationManipulator4:PlayAnim('/Mods/Mechdivers/units/UEF/Structures/UEBMD0106/UEBMD0106_Activate.sca', false):SetRate(1)	
+        self.ExpandingVisionDisableCount = self.ExpandingVisionDisableCount - 1
+        if self.ExpandingVisionDisableCount == 0 then 		            
+            ChangeState( self, self.ExpandingVision )
+        end
+    end,
+
+    OnIntelDisabled = function(self)
+		if not self.Spinner then
+		self.Spinner = CreateRotator(self, 'Turret', 'y', nil, 0, 30, 360)
+		end
+		self.Spinner:SetTargetSpeed(0)
+		if not self.AnimationManipulator4 then
+            self.AnimationManipulator4 = CreateAnimator(self)
+            self.Trash:Add(self.AnimationManipulator4)
+        end
+	
+		self.AnimationManipulator4:PlayAnim('/Mods/Mechdivers/units/UEF/Structures/UEBMD0106/UEBMD0106_Activate.sca', false):SetRate(-1)	
+        self.ExpandingVisionDisableCount = self.ExpandingVisionDisableCount + 1
+        if self.ExpandingVisionDisableCount == 1 then
+            ChangeState( self, self.ContractingVision )
+        end
+    end,
+    
+    ExpandingVision = State {
+        Main = function(self)
+            WaitSeconds(0.1)
+            while true do
+                if self:GetResourceConsumed() ~= 1 then
+                    self.ExpandingVisionEnergyCheck = true
+                    self:OnIntelDisabled()
+                end
+                local curRadius = self:GetIntelRadius('vision')
+                local targetRadius = self:GetBlueprint().Intel.MaxVisionRadius
+                if curRadius < targetRadius then
+                    curRadius = curRadius + 1
+                    if curRadius >= targetRadius then
+                        self:SetIntelRadius('vision', targetRadius)
+                    else
+                        self:SetIntelRadius('vision', curRadius)
+                    end
+                end
+                WaitSeconds(0.2)
+            end
+        end,
+    },
+    
+    ContractingVision = State {
+        Main = function(self)
+            while true do
+                if self:GetResourceConsumed() == 1 then
+                    if self.ExpandingVisionEnergyCheck then
+                        self:OnIntelEnabled()
+                    else
+                        self:OnIntelDisabled()
+                        self.ExpandingVisionEnergyCheck = true
+                    end
+                end
+                local curRadius = self:GetIntelRadius('vision')
+                local targetRadius = self:GetBlueprint().Intel.MinVisionRadius
+                if curRadius > targetRadius then
+                    curRadius = curRadius - 1
+                    if curRadius <= targetRadius then
+                        self:SetIntelRadius('vision', targetRadius)
+                    else
+                        self:SetIntelRadius('vision', curRadius)
+                    end
+                end
+                WaitSeconds(0.2)
+            end
+        end,
+    },
 }
 
 TypeClass = UEBMD0106

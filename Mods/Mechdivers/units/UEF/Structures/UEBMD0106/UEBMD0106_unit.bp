@@ -34,17 +34,17 @@ UnitBlueprint {
         #'BUILTBYTIER3ENGINEER',
         #'BUILTBYCOMMANDER',
         'UEF',
-		'UNTARGETABLE',
         'STRUCTURE',
         'DEFENSE',
         'TECH1',
-        'DIRECTFIRE',
+        'INTELLIGENCE',
         'DRAGBUILD',
         'SIZE4',
+		'OPTICS',
         'VISIBLETORECON',
         'RECLAIMABLE',
-        'OVERLAYDIRECTFIRE',
-        'SORTDEFENSE',
+        'OVERLAYMISC',
+        'SORTINTEL',
     },
     CollisionOffsetY = 0,
     Defense = {
@@ -79,8 +79,9 @@ UnitBlueprint {
         BuildCostEnergy = 2000,
         BuildCostMass = 250,
         BuildTime = 250,
+		MaintenanceConsumptionPerSecondEnergy = 100,
         RebuildBonusIds = {
-            'ueb2101',
+            'uebmd0106',
         },
     },
     General = {
@@ -100,6 +101,15 @@ UnitBlueprint {
             RULEUCC_Stop = false,
             RULEUCC_Transport = false,
         },
+		OrderOverrides = {
+            RULEUTC_IntelToggle = {
+                bitmapId = 'vision',
+                helpText = 'vision_toggle',
+            },
+        },
+		ToggleCaps = {
+            RULEUTC_IntelToggle = true,
+        },
         FactionName = 'UEF',
         Icon = 'land',
         SelectionPriority = 5,
@@ -107,7 +117,8 @@ UnitBlueprint {
         UnitWeight = 1,
     },
     Intel = {
-        VisionRadius = 24,
+        MaxVisionRadius = 50,
+        MinVisionRadius = 10,
     },
     Interface = {
         HelpText = '<LOC ueb2101_help>Point Defense',
@@ -144,7 +155,7 @@ UnitBlueprint {
     SizeX = 0.6,
     SizeY = 0.8,
     SizeZ = 0.6,
-    StrategicIconName = 'icon_structure1_directfire',
+    StrategicIconName = 'icon_structure1_intel',
     StrategicIconSortPriority = 205,
     Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',

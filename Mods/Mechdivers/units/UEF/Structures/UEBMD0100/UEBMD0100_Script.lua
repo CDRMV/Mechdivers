@@ -97,6 +97,13 @@ UEBMD0100 = Class(TStructureUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
+		self:SetWeaponEnabledByLabel('MG', false)
+		self:SetWeaponEnabledByLabel('Beam', false)
+		self:SetWeaponEnabledByLabel('MissileLauncher', false)
+		self:SetWeaponEnabledByLabel('Cannon', false)
+		self:SetWeaponEnabledByLabel('GatlingCannon', false)
+		self:SetWeaponEnabledByLabel('Mortar', false)
+		self:SetWeaponEnabledByLabel('Flamethrower', false)	
 		self:ShowBone( 'CallBeacon', true )
 		local army = self:GetArmy()
         local position = self:GetPosition()
@@ -271,6 +278,9 @@ UEBMD0100 = Class(TStructureUnit) {
 		self:SetWeaponEnabledByLabel('Mortar', false)
 		self:SetWeaponEnabledByLabel('Flamethrower', false)
 		end
+		self:AddCommandCap('RULEUCC_Attack')
+        self:AddCommandCap('RULEUCC_RetaliateToggle')
+		self:AddCommandCap('RULEUCC_Stop')
 		end
 		)
     end,

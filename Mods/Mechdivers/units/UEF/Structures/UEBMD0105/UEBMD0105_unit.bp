@@ -34,7 +34,6 @@ UnitBlueprint {
         #'BUILTBYTIER3ENGINEER',
         #'BUILTBYCOMMANDER',
         'UEF',
-		'UNTARGETABLE',
         'STRUCTURE',
         'DEFENSE',
         'TECH1',
@@ -80,7 +79,7 @@ UnitBlueprint {
         BuildCostMass = 250,
         BuildTime = 250,
         RebuildBonusIds = {
-            'ueb2101',
+            'uebmb0105',
         },
     },
     General = {
@@ -105,6 +104,16 @@ UnitBlueprint {
         SelectionPriority = 5,
         TechLevel = 'RULEUTL_Basic',
         UnitWeight = 1,
+		OrderOverrides = {
+            RULEUTC_WeaponToggle = {
+				bitmapId = 'OverCharge',
+                helpText = 'Detonate',
+            },
+			RULEUTC_SpecialToggle = {
+			    bitmapId = 'Production',
+                helpText = 'Automatic Detonation System',
+            },
+        },
     },
     Intel = {
         VisionRadius = 24,

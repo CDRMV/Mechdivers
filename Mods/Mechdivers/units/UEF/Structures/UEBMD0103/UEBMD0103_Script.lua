@@ -24,9 +24,16 @@ local explosion = import('/lua/defaultexplosions.lua')
 local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
 local TIFHighBallisticMortarWeapon = import('/lua/terranweapons.lua').TIFHighBallisticMortarWeapon
 local R, Ceil = Random, math.ceil
+local TIFCruiseMissileLauncher = import('/lua/terranweapons.lua').TIFCruiseMissileLauncher
 
 UEBMD0103 = Class(TStructureUnit) {
-
+    Weapons = {
+        MissileWeapon = Class(TIFCruiseMissileLauncher) 
+        {
+            FxMuzzleFlash = {'/effects/emitters/terran_mobile_missile_launch_01_emit.bp'},
+			
+        },
+    },
 	
 	OnCreate = function(self)
 		self:HideBone( 'Pod', true )
@@ -38,6 +45,7 @@ UEBMD0103 = Class(TStructureUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
+		self.number = 0	
 		local army = self:GetArmy()
         local position = self:GetPosition()
 		local orientation = RandomFloat(0,2*math.pi)
@@ -109,9 +117,11 @@ UEBMD0103 = Class(TStructureUnit) {
             self.AnimationManipulator3 = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator3)
         end
-        self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationSiloUnpack, false):SetRate(2)	
-		WaitFor(self.AnimationManipulator3)
-
+        --self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationSiloUnpack, false):SetRate(2)	
+		--WaitFor(self.AnimationManipulator3)
+		self:AddCommandCap('RULEUCC_Attack')
+        self:AddCommandCap('RULEUCC_RetaliateToggle')
+		self:AddCommandCap('RULEUCC_Stop')
 		end
 		)
     end,
