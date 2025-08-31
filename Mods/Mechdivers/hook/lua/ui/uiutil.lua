@@ -45,7 +45,11 @@ local MyUnitIdTable = {
 
 	  uebmd0100=true,
 	  uebmd0101=true,						
-	  uebmd0102=true,	
+	  uebmd0102=true,
+	  uebmd0103=true,
+	  uebmd0104=true,						
+	  uebmd0105=true,	
+	  uebmd0106=true,	  
 	  
 -- Cybran
 
