@@ -60,12 +60,14 @@ local MyUnitIdTable = {
 	  ura0107c=true,  
 	  
  -- Land	
+	  cskmdcl0200=true, 
 	  cskmdcl0300=true, 
 	  cskmdcl0301=true, 
 	  cskmdcl0302=true, 
 	  cskmdcl0303=true, 
 	  cskmdcl0304=true, 		  
-
+	  cskmdcl0305=true, 
+	  
 -- Structures 
       -- Mines --
 	  urbmd001=true,

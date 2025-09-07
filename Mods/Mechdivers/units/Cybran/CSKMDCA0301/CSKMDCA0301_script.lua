@@ -47,9 +47,9 @@ CSKMDCA0301 = Class(CAirUnit) {
 		self.Effect:AttachBoneTo( -2, self, 'Effect' )
 		self.Effect:SetMesh(EffectMesh)
 		self.Effect:SetDrawScale(0.03)
-		self.Effect:SetVizToAllies('Intel')
-		self.Effect:SetVizToNeutrals('Intel')
-		self.Effect:SetVizToEnemies('Intel')
+		self.Effect:SetVizToAllies('Never')
+		self.Effect:SetVizToNeutrals('Never')
+		self.Effect:SetVizToEnemies('Never')
 
     end,
 	
@@ -72,6 +72,34 @@ CSKMDCA0301 = Class(CAirUnit) {
 
         self:PlayUnitSound('Destroyed')
         self:Destroy()
+    end,
+	
+	OnTransportAttach = function(self, bone, attachee)
+        CAirUnit.OnTransportDetach(self, bone, attachee)
+		ForkThread(function()
+		local rate = attachee.Blueprint.Display.TransportAnimationSpeed
+		attachee:TransportAnimation(rate)
+        self.Effect:SetVizToAllies('Intel')
+		self.Effect:SetVizToNeutrals('Intel')
+		self.Effect:SetVizToEnemies('Intel')
+		WaitSeconds(1)
+		self.Effect:SetVizToAllies('Never')
+		self.Effect:SetVizToNeutrals('Never')
+		self.Effect:SetVizToEnemies('Never')
+		end)
+    end,
+	
+	 OnTransportDetach = function(self, bone, attachee)
+        CAirUnit.OnTransportDetach(self, bone, attachee)
+		ForkThread(function()
+        self.Effect:SetVizToAllies('Intel')
+		self.Effect:SetVizToNeutrals('Intel')
+		self.Effect:SetVizToEnemies('Intel')
+		WaitSeconds(1)
+		self.Effect:SetVizToAllies('Never')
+		self.Effect:SetVizToNeutrals('Never')
+		self.Effect:SetVizToEnemies('Never')
+		end)
     end,
     
 }
