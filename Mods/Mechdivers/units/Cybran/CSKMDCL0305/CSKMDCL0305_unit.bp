@@ -241,11 +241,11 @@ UnitBlueprint {
             Label = 'MainGun',
             MaxRadius = 25,
             MuzzleSalvoDelay = 0.5,
-            MuzzleSalvoSize = 2,
+            MuzzleSalvoSize = 4,
             MuzzleVelocity = 25,
             ProjectileId = '/mods/Mechdivers/projectiles/CDFLaserFusion01/CDFLaserFusion01_proj.bp',
             ProjectileLifetimeUsesMultiplier = 1.15,
-            ProjectilesPerOnFire = 2,
+            ProjectilesPerOnFire = 4,
             RackBones = {
                 {
                     MuzzleBones = {
