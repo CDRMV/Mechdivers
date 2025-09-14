@@ -82,7 +82,7 @@ UnitBlueprint {
             },
         },
         AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0100/CSKMDCL0100_Awalk01.sca',
-        AnimationWalkRate = 1,
+        AnimationWalkRate = 1.5,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -175,7 +175,7 @@ UnitBlueprint {
     SizeX = 0.6,
     SizeY = 0.6,
     SizeZ = 0.6,
-    StrategicIconName = 'icon_bot2_directfire',
+    StrategicIconName = 'icon_bot1_directfire',
     StrategicIconSortPriority = 135,
     Transport = {
         CanFireFromTransport = false,

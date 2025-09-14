@@ -23,11 +23,12 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition()
 		self.unit = CreateUnitHPR('CSKMDCL0100', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.unit:AttachBoneTo(-2, self, 0)
+		self.unit:AttachBoneTo(-2, self, 'Bot')
 		self.unit:SetDoNotTarget(true)
 		self.unit:SetWeaponEnabledByLabel('MainGun', false)
 		self.unit:SetCollisionShape('Box', 0, 0, 0, 0, 0 ,0)
 		self.unit:HideBone(0, true)
+		self.unit:SetUnSelectable(true)
 		self.unit:HideRifle()
 		self:EnableShield()
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
@@ -73,9 +74,10 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
             for _,unit in units do
 			if unit:IsUnitState('WaitForFerry') and unit:GetBlueprint().General.UnitName == 'Trooper' then
 			if number < 1 then
-			unit:AttachBoneTo(-2, self, 0)
+			unit:AttachBoneTo(-2, self, 'Bot')
 			unit:SetDoNotTarget(true)
 			unit:SetWeaponEnabledByLabel('MainGun', false)
+			unit:SetUnSelectable(true)
 			unit:HideBone(0, true)
 			unit:HideRifle()
 			unit:SetCollisionShape('Box', 0, 0, 0, 0, 0, 0)
@@ -121,6 +123,7 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 			unit:ShowBone(0, true)
 			unit:ShowRifle()
 			unit:SetDoNotTarget(false)
+			unit:SetUnSelectable(false)
 			unit:SetWeaponEnabledByLabel('MainGun', true)
 			unit:SetCollisionShape('Box', 0, 0,0, 0.6, 0.6, 0.6)
 			unit:DetachFrom(true)
@@ -131,6 +134,11 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 		elseif bit == 3 then
 		self.Beacon:ShowBone(0, true)
 		end
+    end,
+	
+	OnTransportDetach = function(self, attachBone, unit)
+        CWalkingLandUnit.OnTransportDetach(self, attachBone, unit)
+        unit:AttachBoneTo(-2, self, 'Bot')
     end,
 	
 	
