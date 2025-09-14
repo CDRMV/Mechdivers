@@ -39,6 +39,8 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
             self.Trash:Add(self.AnimationManipulator)
         end
 		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/Cybran/CSKMDCL0200/CSKMDCL0200_Afold01.sca', false):SetRate(0)
+		self.load = true
+		self.fold = false
     end,
 	
 	OnScriptBitSet = function(self, bit)
@@ -61,13 +63,14 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 		self:AddToggleCap('RULEUTC_ShieldToggle')
 		self:SetScriptBit('RULEUTC_ShieldToggle', true)
 		self:SetWeaponEnabledByLabel('MainGun', false)
-		LOG(self:GetScriptBit(7))
+		self.fold = true
 		end)
 		elseif bit == 7 then
 		if self.build == true then
 		self:SetScriptBit('RULEUTC_SpecialToggle', false)
 		self.build = false
 		else
+		self.load = true
 		local position = self.Beacon:GetPosition()
 			local units = self.Beacon:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND + categories.TECH1, position, 10, 'Ally')
 			local number = 0
@@ -113,8 +116,10 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 		self:AddCommandCap('RULEUCC_Move')
 		self:AddCommandCap('RULEUCC_Attack')
 		self:SetWeaponEnabledByLabel('MainGun', true)
+		self.fold = false
 		end)
 		elseif bit == 7 then
+		self.load = false
 		local units = self:GetCargo()
 		local position = self:GetPosition()
 		self:HideBone('Bot', true)
@@ -137,11 +142,63 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
     end,
 	
 	OnTransportDetach = function(self, attachBone, unit)
-        CWalkingLandUnit.OnTransportDetach(self, attachBone, unit)
+    CWalkingLandUnit.OnTransportDetach(self, attachBone, unit)
         unit:AttachBoneTo(-2, self, 'Bot')
     end,
 	
+	OnKilled = function(self, instigator, type, overkillRatio)
+	if self.Beacon then
+	self.Beacon:Destroy()
+	end
 	
+	self:HideBone('Bot', true)
+	
+	local units = self:GetCargo()
+	for _, unit in units do
+		unit:Destroy()
+    end
+	
+	
+	if self.load == false then
+	
+	else
+	SetIgnoreArmyUnitCap(self:GetArmy(), true)
+	local position = self:GetPosition()
+	local orientation = self:GetOrientation()
+	local angle = 2 * math.acos(orientation[2])
+	self.unit = CreateUnitHPR('CSKMDCL0100', self:GetArmy(), position[1], position[2], position[3], 0, angle, 0)
+	SetIgnoreArmyUnitCap(self:GetArmy(), false)
+	end
+	
+	
+    CWalkingLandUnit.OnKilled(self, instigator, type, overkillRatio)	
+    end,
+	
+	DeathThread = function( self, overkillRatio , instigator)  
+        self:DestroyAllDamageEffects()
+		local army = self:GetArmy()
+		
+		if self.fold == true then
+		
+		elseif self.fold == false then
+		if self.DeathAnimManip then
+            WaitFor(self.DeathAnimManip)
+        end
+		end
+
+		if self.PlayDestructionEffects then
+            self:CreateDestructionEffects(overkillRatio)
+        end
+
+        if self.ShowUnitDestructionDebris and overkillRatio then
+            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
+        end
+
+		self:CreateWreckage(overkillRatio or self.overkillRatio)
+
+        self:PlayUnitSound('Destroyed')
+        self:Destroy()
+    end,		
 }
 
 TypeClass = CSKMDCL0200
