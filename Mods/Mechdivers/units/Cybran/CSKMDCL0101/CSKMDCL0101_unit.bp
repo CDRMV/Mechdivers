@@ -56,13 +56,13 @@ UnitBlueprint {
         AirThreatLevel = 0,
         ArmorType = 'Normal',
         EconomyThreatLevel = 0,
-        Health = 250,
-        MaxHealth = 250,
+        Health = 450,
+        MaxHealth = 450,
         RegenRate = 0,
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
     },
-    Description = 'Advanced Light Assault Bot',
+    Description = 'Advanced Light Sturm Bot',
     Display = {
 	    Abilities = {
             'Speed Booster',
@@ -97,9 +97,9 @@ UnitBlueprint {
         UniformScale = 0.020,
     },
     Economy = {
-        BuildCostEnergy = 300,
-        BuildCostMass = 58,
-        BuildTime = 150,
+        BuildCostEnergy = 400,
+        BuildCostMass = 78,
+        BuildTime = 300,
         TeleportEnergyMod = 0.15,
         TeleportMassMod = 1,
         TeleportTimeMod = 0.01,
@@ -133,7 +133,7 @@ UnitBlueprint {
         ToggleCaps = {
             RULEUTC_WeaponToggle = true,
         },
-        UnitName = 'Trooper',
+        UnitName = 'Marauder',
         UnitWeight = 1,
     },
     Intel = {
@@ -259,7 +259,7 @@ UnitBlueprint {
             Turreted = true,
             WeaponCategory = 'Direct Fire',
 			WeaponRepackTimeout = 1,
-            WeaponUnpackAnimation = '/mods/Mechdivers/units/Cybran/CSKMDCL0100/CSKMDCL0100_AUnpack.sca',
+            WeaponUnpackAnimation = '/mods/Mechdivers/units/Cybran/CSKMDCL0101/CSKMDCL0101_AUnpack.sca',
             WeaponUnpackAnimationRate = 2,
             WeaponUnpacks = true,
         },

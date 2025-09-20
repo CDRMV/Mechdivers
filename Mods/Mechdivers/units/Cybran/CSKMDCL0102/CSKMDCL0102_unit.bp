@@ -56,32 +56,33 @@ UnitBlueprint {
         AirThreatLevel = 0,
         ArmorType = 'Normal',
         EconomyThreatLevel = 0,
-        Health = 250,
-        MaxHealth = 250,
+        Health = 450,
+        MaxHealth = 450,
         RegenRate = 0,
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
     },
-    Description = 'Advanced Light Assault Bot',
+    Description = 'Advanced Light Command Bot',
     Display = {
 	    Abilities = {
             'Speed Booster',
+			'Can call Land Reinforcments (Soon)',
         },
         AnimationDeath = {
             {
-                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0100/CSKMDCL0100_Adeath01.sca',
+                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0102/CSKMDCL0102_Adeath01.sca',
                 AnimationRateMax = 1.25,
                 AnimationRateMin = 0.75,
                 Weight = 50,
             },
             {
-                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0100/CSKMDCL0100_Adeath02.sca',
+                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0102/CSKMDCL0102_Adeath02.sca',
                 AnimationRateMax = 1.25,
                 AnimationRateMin = 0.75,
                 Weight = 50,
             },
         },
-        AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0100/CSKMDCL0100_Awalk01.sca',
+        AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0102/CSKMDCL0102_Awalk01.sca',
         AnimationWalkRate = 1.5,
         Mesh = {
             IconFadeInZoom = 130,
@@ -97,9 +98,9 @@ UnitBlueprint {
         UniformScale = 0.020,
     },
     Economy = {
-        BuildCostEnergy = 300,
-        BuildCostMass = 58,
-        BuildTime = 150,
+        BuildCostEnergy = 400,
+        BuildCostMass = 78,
+        BuildTime = 300,
         TeleportEnergyMod = 0.15,
         TeleportMassMod = 1,
         TeleportTimeMod = 0.01,
@@ -133,7 +134,7 @@ UnitBlueprint {
         ToggleCaps = {
             RULEUTC_WeaponToggle = true,
         },
-        UnitName = 'Trooper',
+        UnitName = 'Commissar',
         UnitWeight = 1,
     },
     Intel = {
@@ -220,9 +221,9 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'Gun_Muzzle',
+                        'Pistol_Muzzle',
                     },
-                    RackBone = 'Gun_Muzzle',
+                    RackBone = 'Pistol_Muzzle',
                 },
             },
             RackFireTogether = false,
@@ -246,7 +247,7 @@ UnitBlueprint {
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             TrackingRadius = 1.15,
-            TurretBoneMuzzle = 'Gun_Muzzle',
+            TurretBoneMuzzle = 'Pistol_Muzzle',
             TurretBonePitch = 'Torso2',
             TurretBoneYaw = 'Torso',
             TurretDualManipulators = false,
@@ -259,7 +260,7 @@ UnitBlueprint {
             Turreted = true,
             WeaponCategory = 'Direct Fire',
 			WeaponRepackTimeout = 1,
-            WeaponUnpackAnimation = '/mods/Mechdivers/units/Cybran/CSKMDCL0100/CSKMDCL0100_AUnpack.sca',
+            WeaponUnpackAnimation = '/mods/Mechdivers/units/Cybran/CSKMDCL0102/CSKMDCL0102_AUnpack.sca',
             WeaponUnpackAnimationRate = 2,
             WeaponUnpacks = true,
         },

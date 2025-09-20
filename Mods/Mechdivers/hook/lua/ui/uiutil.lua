@@ -61,6 +61,10 @@ local MyUnitIdTable = {
 	  
  -- Land	
 	  cskmdcl0100=true, 
+	  cskmdcl0101=true, 
+	  cskmdcl0102=true,
+	  cskmdcl0104=true, 
+	  cskmdcl0105=true, 
 	  cskmdcl0200=true, 
 	  cskmdcl0300=true, 
 	  cskmdcl0301=true, 
@@ -78,6 +82,7 @@ local MyUnitIdTable = {
 	  urbmd0100=true,
 	  urbmd0101=true,
 	  urbmd0102=true,
+	  urbmd0103=true,
 	  urbmd0201=true,
 	  urbmd0202=true,
 	  urbmd0300=true,
