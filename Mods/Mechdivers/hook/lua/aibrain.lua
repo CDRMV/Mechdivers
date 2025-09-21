@@ -15,6 +15,7 @@ end,
 		self:ForkThread(self.CheckAssaultDroneStationStep1)
 		self:ForkThread(self.CheckDetectorTowerStep1)
 		self:ForkThread(self.CheckScoutDroneStep1)
+		self:ForkThread(self.CheckCommissarStep1)
     end,
 	
 	CheckAssaultDroneStationStep1 = function(self)
@@ -83,6 +84,30 @@ end,
 			if table.getn(labs) < 3  then
 				RemoveBuildRestriction(self:GetArmyIndex(), categories.SCOUTDRONE)
 				self:ForkThread(self.CheckScoutDroneStep1)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	CheckCommissarStep1 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.OFFICER, true)
+			if table.getn(labs) >= 3 then
+				AddBuildRestriction(self:GetArmyIndex(), categories.OFFICER)
+				self:ForkThread(self.CheckCommissarStep2)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	CheckCommissarStep2 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.OFFICER, true)
+			if table.getn(labs) < 3  then
+				RemoveBuildRestriction(self:GetArmyIndex(), categories.OFFICER)
+				self:ForkThread(self.CheckCommissarStep1)
 				break
 			end
 			WaitSeconds(1)

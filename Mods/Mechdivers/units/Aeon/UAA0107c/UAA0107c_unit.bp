@@ -6,7 +6,7 @@ UnitBlueprint {
         },
     },
     Air = {
-        AutoLandTime = 1,
+        AutoLandTime = 0,
         BankFactor = 0.1,
         BankForward = false,
         CanFly = true,
@@ -96,7 +96,7 @@ UnitBlueprint {
     Categories = {
 		'AIRREINFORCEMENTTRANSPORT',
         'PRODUCTSC1',
-        'SELECTABLE',
+        'UNSELECTABLE',
         'CANTRANSPORTCOMMANDER',
         'AEON',
         'MOBILE',
@@ -177,6 +177,7 @@ UnitBlueprint {
         SizeZ = 1,
     },
     General = {
+		CapCost = 0,
         Category = 'Transport',
         Classification = 'RULEUC_MilitaryAircraft',
         CommandCaps = {

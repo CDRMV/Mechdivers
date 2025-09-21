@@ -10,11 +10,18 @@
 
 local CWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
 local ModWeaponsFile = import('/mods/Mechdivers/lua/CSKMDWeapons.lua')
+local CybranWeaponsFile = import('/lua/cybranweapons.lua')
 local CDFLaserFusionWeapon = ModWeaponsFile.CDFLaserFusionWeapon
+local CIFGrenadeWeapon = CybranWeaponsFile.CIFGrenadeWeapon
 
 CSKMDCL0100 = Class(CWalkingLandUnit) {
     Weapons = {
         MainGun = Class(CDFLaserFusionWeapon) {},
+		Grenade = Class(CIFGrenadeWeapon) {
+            FxMuzzleFlash = {
+            },
+            FxMuzzleFlashScale = 0,
+        },
     },
 	
 	OnCreate = function(self)
@@ -35,19 +42,42 @@ CSKMDCL0100 = Class(CWalkingLandUnit) {
         self.DropRifle:SetVizToAllies('Never')
         self.DropRifle:SetVizToNeutrals('Never')
         self.DropRifle:SetVizToEnemies('Never')
+		self:SetWeaponEnabledByLabel('Grenade', false)
+		self:RemoveToggleCap('RULEUTC_SpecialToggle')
     end,
 	
 	OnScriptBitSet = function(self, bit)
         CWalkingLandUnit.OnScriptBitSet(self, bit)
+		ForkThread(function()
         if bit == 1 then 
 		self:SetSpeedMult(2)
+		elseif bit == 7 then
+		self:SetWeaponEnabledByLabel('Grenade', true)
+		local TargetUnit = self:GetWeaponByLabel('MainGun'):GetCurrentTarget()
+		local TargetPos = self:GetWeaponByLabel('MainGun'):GetCurrentTargetPos()
+		IssueClearCommands({self})
+		self:SetWeaponEnabledByLabel('MainGun', false)
+		if TargetUnit and TargetPos == nil then
+		self:GetWeaponByLabel('Grenade'):SetTargetEntity(TargetUnit)
+		elseif TargetUnit == nil and TargetPos then
+		self:GetWeaponByLabel('Grenade'):SetTargetGround(TargetPos)
+		end
+		self:SetImmobile(true)
+		WaitSeconds(2)
+		IssueClearCommands({self})
+		self:SetScriptBit('RULEUTC_SpecialToggle', false)
         end
+		end)
     end,
 
     OnScriptBitClear = function(self, bit)
         CWalkingLandUnit.OnScriptBitClear(self, bit)
         if bit == 1 then 
 		self:SetSpeedMult(1)
+		elseif bit == 7 then
+		self:SetWeaponEnabledByLabel('Grenade', false)
+		self:SetWeaponEnabledByLabel('MainGun', true)
+		self:SetImmobile(false)
         end
     end,
 	

@@ -36,20 +36,49 @@ CSKMDCL0100 = Class(CWalkingLandUnit) {
         self.DropRifle:SetVizToNeutrals('Never')
         self.DropRifle:SetVizToEnemies('Never')
 		self:HideBone('R_Arm_B04', true)
+		if not self.AnimationManipulator then
+            self.AnimationManipulator = CreateAnimator(self)
+            self.Trash:Add(self.AnimationManipulator)
+        end
+		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/Cybran/CSKMDCL0102/CSKMDCL0102_ACallRef.sca', false):SetRate(0)
     end,
 	
 	OnScriptBitSet = function(self, bit)
         CWalkingLandUnit.OnScriptBitSet(self, bit)
+		ForkThread(function()
         if bit == 1 then 
 		self:SetSpeedMult(2)
-        end
+		elseif bit == 7 then
+		self:SetWeaponEnabledByLabel('MainGun', false)
+		IssueClearCommands({self})
+		self:SetImmobile(true)
+		self.AnimationManipulator:SetRate(2)
+		WaitFor(self.AnimationManipulator)
+		self.PistolFlash = CreateAttachedEmitter(self, 'Pistol_Muzzle', self:GetArmy(), '/Mods/Mechdivers/effects/emitters/fusion_laser_muzzle_flash_01_emit.bp')
+        self.PistolFlash2 = CreateAttachedEmitter(self, 'Pistol_Muzzle', self:GetArmy(), '/Mods/Mechdivers/effects/emitters/fusion_laser_muzzle_flash_02_emit.bp')
+		WaitSeconds(1)
+		self:CreateProjectile('/Mods/Mechdivers/projectiles/CDFReinforcementFlare/CDFReinforcementFlare_proj.bp', 0, 0.5, 0, 0, 20, 0)
+		self.PistolFlash:Destroy()
+		self.PistolFlash2:Destroy()
+		self:RemoveToggleCap('RULEUTC_SpecialToggle')
+		WaitSeconds(2)
+		self.AnimationManipulator:SetRate(-2)
+		WaitFor(self.AnimationManipulator)
+		self:SetImmobile(false)
+		self:SetWeaponEnabledByLabel('MainGun', true)
+		WaitSeconds(60)
+		self:AddToggleCap('RULEUTC_SpecialToggle')
+		end
+		end)
     end,
 
     OnScriptBitClear = function(self, bit)
         CWalkingLandUnit.OnScriptBitClear(self, bit)
         if bit == 1 then 
 		self:SetSpeedMult(1)
-        end
+		elseif bit == 7 then
+		self:SetScriptBit('RULEUTC_SpecialToggle', true)
+		end
     end,
 	
 	HideRifle = function(self)

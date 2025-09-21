@@ -43,6 +43,7 @@ UnitBlueprint {
         'BUILTBYTIER2BOTFACTORY',
         'BUILTBYTIER3BOTFACTORY',
         'CYBRAN',
+		'OFFICER',
         'MOBILE',
         'LAND',
         'TECH1',
@@ -66,7 +67,8 @@ UnitBlueprint {
     Display = {
 	    Abilities = {
             'Speed Booster',
-			'Can call Land Reinforcments (Soon)',
+			'Can call Land Reinforcments',
+			'Only 3 can be builded by each Player.',
         },
         AnimationDeath = {
             {
@@ -129,10 +131,15 @@ UnitBlueprint {
                 bitmapId = 'production',
 				helpText = 'Speed Booster',		
             },
+			RULEUTC_SpecialToggle = {
+			    bitmapId = 'unload',
+				helpText = 'Call Land Reinforcements',
+            },
         },
         TechLevel = 'RULEUTL_Advanced',
         ToggleCaps = {
             RULEUTC_WeaponToggle = true,
+			RULEUTC_SpecialToggle = true,
         },
         UnitName = 'Commissar',
         UnitWeight = 1,

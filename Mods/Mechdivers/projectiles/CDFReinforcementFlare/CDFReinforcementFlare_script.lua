@@ -1,17 +1,31 @@
-#****************************************************************************
-#**
-#**  File     :  /data/units/XAL0203/XAL0203_script.lua
-#**  Author(s):  Jessica St. Croix
-#**
-#**  Summary  :  Aeon Assault Tank Script
-#**
-#**  Copyright © 2007 Gas Powered Games, Inc.  All rights reserved.
-#****************************************************************************
-local AHoverLandUnit = import('/lua/defaultunits.lua').MobileUnit
+-- Ship-based Anti-Torpedo Script
 
-CSKMDAL0200b = Class(AHoverLandUnit) {
+local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
+local Flare = import('/mods/Mechdivers/lua/CSKMDProjectiles.lua').Flare
+local EffectTemplate = import('/lua/effecttemplates.lua')
 
-GetNearestPlayablePoint = function(self,position) 
+local EmitterProjectile = import('/lua/sim/defaultprojectiles.lua').EmitterProjectile
+local EmitterProjectileOnCreate = EmitterProjectile.OnCreate
+
+-- upvalue scope for performance
+local IsEnemy = IsEnemy
+local EntityCategoryContains = EntityCategoryContains
+
+-- pre-computed for performance
+local FlareCategories = categories.MISSILE
+
+function GetPlayableArea()
+    if ScenarioInfo.MapData.PlayableRect then
+        return ScenarioInfo.MapData.PlayableRect
+    end
+    return {0, 0, ScenarioInfo.size[1], ScenarioInfo.size[2]}
+end
+
+
+flare = Class(EmitterProjectile) {
+
+	
+	GetNearestPlayablePoint = function(self,position) 
 
     local px, _, pz = unpack(position)
 	
@@ -131,7 +145,7 @@ end,
             elseif orders == 1 then
                 coroutine.yield(100) 
 				if beacon and not beacon.Dead then
-				    WaitSeconds(5)
+				    WaitSeconds(20)
                     beacon:Destroy()
                 end
             elseif orders == 0 then
@@ -159,32 +173,20 @@ end,
             end
     end,
 
-	OnStopBeingBuilt = function(self,builder,layer)
-		ForkThread(function()
-		self.Sphere1 = CreateSlider(self, 'Sphere1')
-		self.Sphere1:SetGoal(0, 68, 0)
-		self.Sphere1:SetSpeed(30)
-		self.Sphere2 = CreateSlider(self, 'Sphere2')
-		self.Sphere2:SetGoal(0, 52, 0)
-		self.Sphere2:SetSpeed(30)
-		self.Sphere3 = CreateSlider(self, 'Sphere3')
-		self.Sphere3:SetGoal(0, 46, 0)
-		self.Sphere3:SetSpeed(30)
-		self.Sphere4 = CreateSlider(self, 'Sphere4')
-		self.Sphere4:SetGoal(0, 35, 0)
-		self.Sphere4:SetSpeed(30)
-		self.Effect1 = CreateAttachedEmitter(self, 'Sphere1', self:GetArmy(), '/mods/Mechdivers/effects/emitters/watcher_effect01_emit.bp'):SetEmitterParam('LIFETIME', -1):ScaleEmitter(0.3)
-		self.Effect2 = CreateAttachedEmitter(self, 'Sphere2', self:GetArmy(), '/mods/Mechdivers/effects/emitters/watcher_effect01_emit.bp'):SetEmitterParam('LIFETIME', -1):ScaleEmitter(0.3)
-		self.Effect3 = CreateAttachedEmitter(self, 'Sphere3', self:GetArmy(), '/mods/Mechdivers/effects/emitters/watcher_effect01_emit.bp'):SetEmitterParam('LIFETIME', -1):ScaleEmitter(0.3)
-		self.Effect4 = CreateAttachedEmitter(self, 'Sphere4', self:GetArmy(), '/mods/Mechdivers/effects/emitters/watcher_effect01_emit.bp'):SetEmitterParam('LIFETIME', -1):ScaleEmitter(0.3)
-		WaitSeconds(2)
+
+    OnCreate = function(self)
+        EmitterProjectileOnCreate(self)
+	ForkThread(function()
+	WaitSeconds(1)
+	self:SetMaxSpeed(0.05)
+	self:SetLifetime(200)
 		local Targetposition = self:GetPosition()
 		local Random = math.random(1,2)
 		local unitID = nil
 		if Random == 1 then
-		unitID = 'UAA0107c'
+		unitID = 'URA0107c'
 		else
-		unitID = 'UAA0104c'
+		unitID = 'URA0104c'
 		end
         local quantity = 1
 
@@ -241,34 +243,35 @@ end,
             unit.DeliveryThread = self.DeliveryThread
             unit:ForkThread(unit.DeliveryThread, self)
 		end	
-			
-            self:ForkThread(self.AirUnitSurvivalCheckThread)
-		self.Effect5 = CreateAttachedEmitter(self, 'Sphere1', self:GetArmy(), '/mods/Mechdivers/effects/emitters/watcher_effect02_emit.bp'):SetEmitterParam('LIFETIME', -1):ScaleEmitter(0.3)
-		self.Effect6 = CreateAttachedEmitter(self, 'Sphere2', self:GetArmy(), '/mods/Mechdivers/effects/emitters/watcher_effect02_emit.bp'):SetEmitterParam('LIFETIME', -1):ScaleEmitter(0.3)
-		self.Effect7 = CreateAttachedEmitter(self, 'Sphere3', self:GetArmy(), '/mods/Mechdivers/effects/emitters/watcher_effect02_emit.bp'):SetEmitterParam('LIFETIME', -1):ScaleEmitter(0.3)
-		self.Effect8 = CreateAttachedEmitter(self, 'Sphere4', self:GetArmy(), '/mods/Mechdivers/effects/emitters/watcher_effect02_emit.bp'):SetEmitterParam('LIFETIME', -1):ScaleEmitter(0.3)
-		WaitSeconds(10)
-		self.Effect5:Destroy()
-		self.Effect6:Destroy()
-		self.Effect7:Destroy()
-		self.Effect8:Destroy()
-		end)
-        AHoverLandUnit.OnStopBeingBuilt(self,builder,layer)
+	end)
     end,
+
+    FxAirUnitHitScale = 1,
+    FxLandHitScale = 1,
+    FxNoneHitScale = 3,
+    FxPropHitScale = 1,
+    FxProjectileHitScale = 3,
+    FxProjectileUnderWaterHitScale = 0.1,
+    FxShieldHitScale = 1,
+    FxUnderWaterHitScale = 0.1,
+    FxUnitHitScale = 1,
+    FxWaterHitScale = 0.1,
+    FxOnKilledScale = 3,
+    FxTrails = {
+	'/mods/Mechdivers/effects/emitters/CRef_flaresmoke_emit.bp', --SMOKE
+	'/mods/Mechdivers/effects/emitters/CRef_flare01_emit.bp', --FIRE
+	'/mods/Mechdivers/effects/emitters/CRef_flare02_emit.bp', --GLOW
+	'/mods/Mechdivers/effects/emitters/CRef_flare03_emit.bp', --SPARKS
+	'/mods/Mechdivers/effects/emitters/CRef_flare04_emit.bp', --GLOW
+	},
+	
+	FxTrailScale = 1.5,
+	
+	OnKilled = function(self, instigator, type, overkillRatio)
+        EmitterProjectile.OnKilled(self, instigator, type, overkillRatio)
+        CreateLightParticle(self, -1, self.Army, 3, 6, 'flare_lens_add_02', 'ramp_fire_13')
+    end,
+
 }
 
-
-function GetPlayableArea()
-    if ScenarioInfo.MapData.PlayableRect then
-        return ScenarioInfo.MapData.PlayableRect
-    end
-    return {0, 0, ScenarioInfo.size[1], ScenarioInfo.size[2]}
-end
-
-
-
-
-
-	
-
-TypeClass = CSKMDAL0200b
+TypeClass = flare

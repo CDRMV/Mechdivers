@@ -386,8 +386,7 @@ end
                 end
             elseif orders == 0 then
 				if number == 0 then
-				self:RotateTowardsMid()
-				IssueAttack({self}, pos)
+				
 				end
                 coroutine.yield(100) --shouldn't matter, but just in case
             end
