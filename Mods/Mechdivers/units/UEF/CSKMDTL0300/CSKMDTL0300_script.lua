@@ -293,7 +293,7 @@ CSKMDTL0300 = Class(TLandUnit) {
 			if number < 10 then
 			unit:AttachBoneTo(-2, self, 'MM_Attachpoint')
 			unit:SetDoNotTarget(true)
-			nit:SetWeaponEnabledByLabel('ArmCannonTurret', false)
+			unit:SetWeaponEnabledByLabel('ArmCannonTurret', false)
 			number = number + 1
 			else
 			end
@@ -318,7 +318,7 @@ CSKMDTL0300 = Class(TLandUnit) {
         for _, unit in units do
 			Warp(unit, {position[1] + math.random(-1,1), GetTerrainHeight(position[1], position[3]), position[3] + math.random(-1,1)}, self.Beacon:GetOrientation())
 			unit:SetDoNotTarget(false)
-			nit:SetWeaponEnabledByLabel('ArmCannonTurret', true)
+			unit:SetWeaponEnabledByLabel('ArmCannonTurret', true)
 			unit:DetachFrom(true)
         end
 		elseif bit == 0 then
