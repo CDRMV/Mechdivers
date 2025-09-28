@@ -1,4 +1,9 @@
 UnitList = {
+
+	T2AttackTank = {
+		Cybran = {'CSKMDCL0201', 50},      -- Devastator, Tech 2 Advanced Assualt Bot
+    },
+	
 	T1GroundDefense = {
         UEF = {'UEBMD0103', 50}, -- Tech 1  Mine Tower
     },
