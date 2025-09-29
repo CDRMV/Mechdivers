@@ -12,7 +12,7 @@ local CWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
 local ModWeaponsFile = import('/mods/Mechdivers/lua/CSKMDWeapons.lua')
 local CDFLaserFusionWeapon = ModWeaponsFile.CDFLaserFusionWeapon
 
-CSKMDCL0100 = Class(CWalkingLandUnit) {
+CSKMDCL0101 = Class(CWalkingLandUnit) {
     Weapons = {
         MainGun = Class(CDFLaserFusionWeapon) {},
     },
@@ -93,4 +93,4 @@ CSKMDCL0100 = Class(CWalkingLandUnit) {
     end,
 }
 
-TypeClass = CSKMDCL0100
+TypeClass = CSKMDCL0101

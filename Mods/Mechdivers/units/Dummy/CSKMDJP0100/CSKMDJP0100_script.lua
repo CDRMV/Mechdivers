@@ -18,6 +18,7 @@ CSKMDJP0100 = Class(TAirUnit) {
 		TAirUnit.OnCreate(self)
 		self:ForkThread(
         function()
+		self:HideBone(0, true)
 		local number = 0
 		while true do
 		if number == 0 then

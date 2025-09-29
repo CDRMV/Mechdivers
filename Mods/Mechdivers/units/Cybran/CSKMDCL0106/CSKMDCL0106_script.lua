@@ -11,8 +11,10 @@
 local CWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
 local ModWeaponsFile = import('/mods/Mechdivers/lua/CSKMDWeapons.lua')
 local CDFLaserFusionWeapon = ModWeaponsFile.CDFLaserFusionWeapon
+local ModTexPath = '/mods/Mechdivers/textures/particles/'
+local ModEmPath = '/mods/Mechdivers/effects/emitters/'
 
-CSKMDCL0102 = Class(CWalkingLandUnit) {
+CSKMDCL0106 = Class(CWalkingLandUnit) {
     Weapons = {
         MainGun = Class(CDFLaserFusionWeapon) {},
     },
@@ -36,13 +38,25 @@ CSKMDCL0102 = Class(CWalkingLandUnit) {
         self.DropRifle:SetVizToNeutrals('Never')
         self.DropRifle:SetVizToEnemies('Never')
 		self:HideBone('R_Arm_B04', true)
-		self:HideBone('B01', true)
+		--self:HideBone('B01', true)
 		--self:HideBone('L_Arm_B04', true)
 		if not self.AnimationManipulator then
             self.AnimationManipulator = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator)
         end
 		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/Cybran/CSKMDCL0102/CSKMDCL0102_ACallRef.sca', false):SetRate(0)
+		self.JetPackEffectsBag = {}
+		self:RemoveToggleCap('RULEUTC_SpecialToggle')
+    end,
+	
+	OnMotionHorzEventChange = function(self, new, old)
+        CWalkingLandUnit.OnMotionHorzEventChange(self, new, old)
+		if old == 'Stopped' then
+			self:AddToggleCap('RULEUTC_SpecialToggle')
+			self:SetScriptBit('RULEUTC_SpecialToggle', false)
+        elseif new == 'Stopped' then
+			self:RemoveToggleCap('RULEUTC_SpecialToggle')
+        end
     end,
 	
 	OnScriptBitSet = function(self, bit)
@@ -50,27 +64,37 @@ CSKMDCL0102 = Class(CWalkingLandUnit) {
 		ForkThread(function()
         if bit == 1 then 
 		self:SetSpeedMult(2)
-		elseif bit == 7 then
-		self:SetWeaponEnabledByLabel('MainGun', false)
-		IssueClearCommands({self})
-		self:SetImmobile(true)
-		self.AnimationManipulator:SetRate(2)
-		WaitFor(self.AnimationManipulator)
-		self.PistolFlash = CreateAttachedEmitter(self, 'Pistol_Muzzle', self:GetArmy(), '/Mods/Mechdivers/effects/emitters/fusion_laser_muzzle_flash_01_emit.bp')
-        self.PistolFlash2 = CreateAttachedEmitter(self, 'Pistol_Muzzle', self:GetArmy(), '/Mods/Mechdivers/effects/emitters/fusion_laser_muzzle_flash_02_emit.bp')
-		WaitSeconds(1)
-		self:CreateProjectile('/Mods/Mechdivers/projectiles/CDFReinforcementFlare/CDFReinforcementFlare_proj.bp', 0, 0.5, 0, 0, 20, 0)
-		self.PistolFlash:Destroy()
-		self.PistolFlash2:Destroy()
-		self:RemoveToggleCap('RULEUTC_SpecialToggle')
-		WaitSeconds(2)
-		self.AnimationManipulator:SetRate(-2)
-		WaitFor(self.AnimationManipulator)
-		self:SetImmobile(false)
-		self:SetWeaponEnabledByLabel('MainGun', true)
-		WaitSeconds(60)
-		self:AddToggleCap('RULEUTC_SpecialToggle')
-		end
+        elseif bit == 7 then 
+			local Oldlocation = self:GetPosition()
+			local MovePos = self:GetCurrentMoveLocation()
+			local LandUnit = {} 
+			local bp = self:GetBlueprint()
+			local AirDummyUnit = bp.Display.AirDummyUnit
+			LOG('ScriptBit: ',self:GetScriptBit(2))
+			LOG('MovePos: ',MovePos)
+			ForkThread( function()
+			local aiBrain = self:GetAIBrain()
+			local qx, qy, qz, qw = unpack(self:GetOrientation())
+			SetIgnoreArmyUnitCap(self:GetArmy(), true)
+			LandUnit[1] = CreateUnit(AirDummyUnit,self:GetArmy(),Oldlocation[1], Oldlocation[2], Oldlocation[3],qx, qy, qz, qw, 0)
+			SetIgnoreArmyUnitCap(self:GetArmy(), false)
+			self:AttachBoneTo(-2, LandUnit[1], 0)
+			for i, Unit in LandUnit do
+			EffectBones = self:GetBlueprint().Display.JetPackEffectBones
+			self.Effect1 = CreateAttachedEmitter(self,EffectBones[1],self:GetArmy(), ModEmPath .. 'jetpack_trail_01_emit.bp'):OffsetEmitter(0 ,0, -0.4):ScaleEmitter(0.5)
+            self.Trash:Add(self.Effect1)
+			self.Effect2 = CreateAttachedEmitter(self,EffectBones[2],self:GetArmy(), ModEmPath .. 'jetpack_trail_01_emit.bp'):OffsetEmitter(0 ,0, -0.4):ScaleEmitter(0.5)
+            self.Trash:Add(self.Effect2)
+			self.Effect3 = CreateAttachedBeam(self,EffectBones[1],self:GetArmy(),  0.2, 0.05, ModTexPath .. 'beam_jetpack_exhaust.dds')
+            self.Trash:Add(self.Effect3)
+			self.Effect4 = CreateAttachedBeam(self,EffectBones[2],self:GetArmy(), 0.2, 0.05, ModTexPath .. 'beam_jetpack_exhaust.dds')
+            self.Trash:Add(self.Effect4)
+			LandUnit[1]:SetElevation(10)
+            IssueTransportUnload({Unit}, MovePos)
+            end
+			end
+			)
+        end
 		end)
     end,
 
@@ -78,9 +102,12 @@ CSKMDCL0102 = Class(CWalkingLandUnit) {
         CWalkingLandUnit.OnScriptBitClear(self, bit)
         if bit == 1 then 
 		self:SetSpeedMult(1)
-		elseif bit == 7 then
-		self:SetScriptBit('RULEUTC_SpecialToggle', true)
-		end
+        elseif bit == 7 then 
+			self.Effect1:Destroy()
+			self.Effect2:Destroy()
+			self.Effect3:Destroy()
+			self.Effect4:Destroy()
+        end
     end,
 	
 	HideRifle = function(self)
@@ -124,4 +151,4 @@ CSKMDCL0102 = Class(CWalkingLandUnit) {
     end,
 }
 
-TypeClass = CSKMDCL0102
+TypeClass = CSKMDCL0106
