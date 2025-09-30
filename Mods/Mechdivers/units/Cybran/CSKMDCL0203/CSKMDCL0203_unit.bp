@@ -200,7 +200,7 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
-            Damage = 25,
+            Damage = 100,
             DamageType = 'Normal',
             DisplayName = 'Light Pulse Laser',
             FireTargetLayerCapsTable = {
@@ -281,8 +281,8 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
-            Damage = 350,
-            DamageRadius = 0,
+            Damage = 100,
+            DamageRadius = 1,
             DamageType = 'Normal',
             DisplayName = 'Gauss Cannon',
             FireTargetLayerCapsTable = {
@@ -352,8 +352,6 @@ UnitBlueprint {
             Turreted = true,
             WeaponCategory = 'Direct Fire',
 			WeaponRepackTimeout = 1,
-            WeaponUnpackAnimation = '/mods/Mechdivers/units/Cybran/CSKMDCL0203/CSKMDCL0203_AUnpack2.sca',
-            WeaponUnpackAnimationRate = 2,
 			WeaponUnpackLocksMotion = true,
             WeaponUnpacks = true,
         },
