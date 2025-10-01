@@ -1,0 +1,55 @@
+UnitBlueprint {
+                    BuildIconSortPriority = 5,
+                    Categories = {
+                        'INVULNERABLE',
+                        'STRUCTURE',
+                        'BENIGN',
+                        'UNSELECTABLE',
+                        'UNTARGETABLE',
+                        'UNSPAWNABLE',
+						'WALL',
+                    },
+                    Defense = {Health = 0, MaxHealth = 0},
+                    Description = 'Footprint Dummy Unit',
+                    Display = {
+        Mesh = {
+            IconFadeInZoom = 130,
+            LODs = {
+                {
+                    LODCutoff = 0,
+                    ShaderName = 'Unit',
+                },
+            },
+        },
+                        UniformScale = 0,
+                        HideLifebars = true,
+                    },
+                    Economy = {
+                        BuildCostEnergy = 1,
+                        BuildCostMass = 1,
+                        BuildTime = 1,
+                    },
+                    General = {CapCost = 0},
+                    Intel = {
+                        VisionRadius = 0,
+                        WaterVisionRadius = 0,
+                    },
+                    Physics = {
+                        BuildOnLayerCaps = {
+                            LAYER_Land = true,
+                            LAYER_Seabed = true,
+                            LAYER_Water = true,
+                        },
+						MeshExtentsX = 1,
+						MeshExtentsY = 1,
+						MeshExtentsZ = 1,
+                        SkirtOffsetX = 0,
+                        SkirtOffsetZ = 0,
+                        SkirtSizeX = 1,
+                        SkirtSizeZ = 1,
+                        MotionType = 'RULEUMT_None',
+                    },
+                    SizeX = 1,
+                    SizeY = 1,
+                    SizeZ = 1,
+}

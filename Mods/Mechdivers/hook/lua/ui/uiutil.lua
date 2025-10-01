@@ -50,7 +50,7 @@ local MyUnitIdTable = {
 	  uebmd0104=true,						
 	  uebmd0105=true,	
 	  uebmd0106=true,	  
-	  
+	  uebmd0108=true,
 -- Cybran
 
  -- Air
