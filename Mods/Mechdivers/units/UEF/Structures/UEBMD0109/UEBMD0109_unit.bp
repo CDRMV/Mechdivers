@@ -29,10 +29,10 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-        'BUILTBYTIER1ENGINEER',
-        'BUILTBYTIER2ENGINEER',
-        'BUILTBYTIER3ENGINEER',
-        'BUILTBYCOMMANDER',
+        #'BUILTBYTIER1ENGINEER',
+        #'BUILTBYTIER2ENGINEER',
+        #'BUILTBYTIER3ENGINEER',
+        #'BUILTBYCOMMANDER',
         'UEF',
         'STRUCTURE',
 		'WALL',
@@ -53,14 +53,14 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 6,
     },
-    Description = 'Drop Wall Emplacement',
+    Description = 'Drop HMG Emplacement',
     Display = {
 		Abilities = {
 			'Can be manually Rotated to the Right or Left.',
         },
-		AnimationArrival = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0108/UEBMD0108_Arrival.sca',
-		AnimationUnpack = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0108/UEBMD0108_Unpack.sca',
-		AnimationUnpack2 = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0108/UEBMD0108_Unpack2.sca',
+		AnimationArrival = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0107/UEBMD0107_Arrival.sca',
+		AnimationUnpack = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0107/UEBMD0107_Unpack.sca',
+		AnimationUnpack2 = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0107/UEBMD0107_Unpack2.sca',
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -86,7 +86,7 @@ UnitBlueprint {
         Category = 'Defense',
         Classification = 'RULEUC_Weapon',
         CommandCaps = {
-            RULEUCC_Attack = false,
+            RULEUCC_Attack = true,
             RULEUCC_CallTransport = false,
             RULEUCC_Capture = false,
             RULEUCC_Guard = false,
@@ -95,8 +95,8 @@ UnitBlueprint {
             RULEUCC_Patrol = false,
             RULEUCC_Reclaim = false,
             RULEUCC_Repair = false,
-            RULEUCC_RetaliateToggle = false,
-            RULEUCC_Stop = false,
+            RULEUCC_RetaliateToggle = true,
+            RULEUCC_Stop = true,
             RULEUCC_Transport = false,
         },
 		OrderOverrides = {
@@ -156,7 +156,7 @@ UnitBlueprint {
     SizeX = 0.6,
     SizeY = 0.8,
     SizeZ = 0.6,
-    StrategicIconName = 'icon_structure_generic',
+    StrategicIconName = 'icon_structure1_directfire',
     StrategicIconSortPriority = 205,
     Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
