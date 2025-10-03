@@ -376,13 +376,13 @@ UnitBlueprint {
                     MuzzleBones = {
                         'Turret_Muzzle01',
                     },
-                    RackBone = 'Turret_Muzzle01',
+                    RackBone = 'Turret_Recoil01',
                 },
 				{
 					MuzzleBones = {
                         'Turret_Muzzle02',
                     },
-                    RackBone = 'Turret_Muzzle02',
+                    RackBone = 'Turret_Recoil02',
                 },
             },
             RackRecoilDistance = -0.2,
