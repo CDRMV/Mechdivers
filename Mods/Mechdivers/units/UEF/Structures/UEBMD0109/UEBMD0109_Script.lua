@@ -25,19 +25,83 @@ local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
 local TIFHighBallisticMortarWeapon = import('/lua/terranweapons.lua').TIFHighBallisticMortarWeapon
 
 UEBMD0109 = Class(TStructureUnit) {
-	
+    Weapons = {
+        MG = Class(TDFMachineGunWeapon) {
+		PlayFxMuzzleSequence = function(self, muzzle)
+		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
+		if muzzle == 'Turret_Muzzle01' then
+		CreateAttachedEmitter(self.unit, 'Bullets01', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
+		end
+		if muzzle == 'Turret_Muzzle02' then
+		CreateAttachedEmitter(self.unit, 'Bullets02', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
+		end
+		end,
+        },
+		WallMG = Class(TDFMachineGunWeapon) {
+		PlayFxMuzzleSequence = function(self, muzzle)
+		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
+		if muzzle == 'Turret_Muzzle01' then
+		CreateAttachedEmitter(self.unit, 'Bullets01', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
+		end
+		if muzzle == 'Turret_Muzzle02' then
+		CreateAttachedEmitter(self.unit, 'Bullets02', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
+		end
+		end,
+        },
+    },
 	OnCreate = function(self)
 		self:HideBone( 'Pod', true )
 		self:ShowBone( 'CallBeacon', true )
 		self:SetDoNotTarget(true)
+		self:SetWeaponEnabledByLabel('WallMG', false)
+		self:SetWeaponEnabledByLabel('MG', true)
         TStructureUnit.OnCreate(self)
+    end,
+	
+	CreateEnhancement = function(self, enh)
+        TStructureUnit.CreateEnhancement(self, enh)
+        local bp = self:GetBlueprint().Enhancements[enh]
+        if not bp then return end
+        if enh == 'PODWall' then
+		self:AddToggleCap('RULEUTC_WeaponToggle')
+		self:AddToggleCap('RULEUTC_SpecialToggle')
+		self:SetWeaponEnabledByLabel('WallMG', true)
+		self:SetWeaponEnabledByLabel('MG', false)	
+		self:SetMaxHealth(4000)
+		self:SetHealth(self, 4000)
+        elseif enh == 'PODWallRemove' then
+		self:RemoveToggleCap('RULEUTC_WeaponToggle')
+		self:RemoveToggleCap('RULEUTC_SpecialToggle')
+		self:SetWeaponEnabledByLabel('WallMG', false)
+		self:SetWeaponEnabledByLabel('MG', true)
+		self:SetMaxHealth(1000)
+		self:SetHealth(self, 1000)
+		elseif enh == 'WallTurretArmor' then
+		self:SetWeaponEnabledByLabel('WallMG', true)
+		self:SetWeaponEnabledByLabel('MG', false)	
+		self:SetMaxHealth(4500)
+		self:SetHealth(self, 4500)
+        elseif enh == 'WallTurretArmorRemove' then
+		self:SetWeaponEnabledByLabel('WallMG', false)
+		self:SetWeaponEnabledByLabel('MG', true)
+		self:SetMaxHealth(1000)
+		self:SetHealth(self, 1000)
+		elseif enh == 'TurretArmor' then
+		self:SetMaxHealth(1500)
+		self:SetHealth(self, 1500)
+        elseif enh == 'TurretArmorRemove' then
+		self:SetMaxHealth(1000)
+		self:SetHealth(self, 1000)
+        end
     end,
 	
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
-			self.Rotate = CreateRotator(self, 'Turret', 'y', nil, 0, 0, 0)
+			self.Rotate = CreateRotator(self, 'Wall01', 'y', nil, 0, 0, 0)
 			self.RotateValue = 0
+			self.TurretRotate = CreateRotator(self, 'Turret', 'y', nil, 0, 0, 0)
+			self.TurretRotateValue = 0
 		local army = self:GetArmy()
         local position = self:GetPosition()
 		local orientation = RandomFloat(0,2*math.pi)
@@ -50,7 +114,7 @@ UEBMD0109 = Class(TStructureUnit) {
             self.AnimationManipulator3 = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator3)
         end
-        self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationUnpack2, false):SetRate(-2)	
+        self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationUnpack2, false):SetRate(2)	
         self.AnimationManipulator:PlayAnim(self:GetBlueprint().Display.AnimationArrival, false):SetRate(2)	
 		self.ArmSlider1 = CreateSlider(self, 'Pod')
         self.Trash:Add(self.ArmSlider1)
@@ -81,8 +145,7 @@ UEBMD0109 = Class(TStructureUnit) {
 		self.ArrivalEffect8 = CreateBeamEmitterOnEntity(self, 'Pod_Exhaust05', self:GetArmy(), '/effects/emitters/missile_exhaust_fire_beam_06_emit.bp')
 		self.ArrivalEffect9 = CreateBeamEmitterOnEntity(self, 'Pod_Exhaust06', self:GetArmy(), '/effects/emitters/missile_exhaust_fire_beam_06_emit.bp')
 		self:ShowBone( 0, true )
-		self:HideBone( 'Wall', true )
-		self:HideBone( 'Pod_Armor', true )
+		self:HideBone( 'Wall01', true )
 		self:HideBone( 'Turret', true )
 		WaitSeconds(10)
 		CreateEmitterOnEntity(self,self:GetArmy(), '/effects/emitters/destruction_explosion_flash_04_emit.bp')
@@ -113,7 +176,6 @@ UEBMD0109 = Class(TStructureUnit) {
 		self:ShowBone( 'Turret', true )
 		self:HideBone( 'Turret_Armor', true )
 		WaitFor(self.AnimationManipulator2)
-        self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationUnpack2, false):SetRate(2)	
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		self.Blocker = CreateUnitHPR('UEBMD0001', self:GetArmy(), position.x+1, position.y, position.z, 0, 0, 0)
 		self.Blocker2 = CreateUnitHPR('UEBMD0001', self:GetArmy(), position.x-1, position.y, position.z, 0, 0, 0)
@@ -127,6 +189,7 @@ UEBMD0109 = Class(TStructureUnit) {
         self.Bot:SetVizToAllies('Intel')
         self.Bot:SetVizToNeutrals('Intel')
         self.Bot:SetVizToEnemies('Intel')
+		self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationUnpack2, false):SetRate(-2)	
 		end
 		)
     end,
@@ -173,6 +236,10 @@ UEBMD0109 = Class(TStructureUnit) {
 		self.Rotate:SetGoal(self.RotateValue)
 		self.Rotate:SetSpeed(90)
 		self.Rotate:SetTargetSpeed(90)
+		self.TurretRotateValue = self.TurretRotateValue - 90
+		self.TurretRotate:SetGoal(self.TurretRotateValue)
+		self.TurretRotate:SetSpeed(90)
+		self.TurretRotate:SetTargetSpeed(90)
 		LOG(self.RotateValue)
 		if self.RotateValue == 0 then
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
@@ -279,6 +346,10 @@ UEBMD0109 = Class(TStructureUnit) {
 		self.Rotate:SetGoal(self.RotateValue)
 		self.Rotate:SetSpeed(90)
 		self.Rotate:SetTargetSpeed(90)
+		self.TurretRotateValue = self.TurretRotateValue + 90
+		self.TurretRotate:SetGoal(self.TurretRotateValue)
+		self.TurretRotate:SetSpeed(90)
+		self.TurretRotate:SetTargetSpeed(90)
 		LOG(self.RotateValue)
 		if self.RotateValue == 0 then
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
@@ -390,6 +461,10 @@ UEBMD0109 = Class(TStructureUnit) {
 		self.Rotate:SetGoal(self.RotateValue)
 		self.Rotate:SetSpeed(90)
 		self.Rotate:SetTargetSpeed(90)
+		self.TurretRotateValue = self.TurretRotateValue - 90
+		self.TurretRotate:SetGoal(self.TurretRotateValue)
+		self.TurretRotate:SetSpeed(90)
+		self.TurretRotate:SetTargetSpeed(90)
 		LOG(self.RotateValue)
 		if self.RotateValue == 0 then
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
@@ -496,6 +571,10 @@ UEBMD0109 = Class(TStructureUnit) {
 		self.Rotate:SetGoal(self.RotateValue)
 		self.Rotate:SetSpeed(90)
 		self.Rotate:SetTargetSpeed(90)
+		self.TurretRotateValue = self.TurretRotateValue + 90
+		self.TurretRotate:SetGoal(self.TurretRotateValue)
+		self.TurretRotate:SetSpeed(90)
+		self.TurretRotate:SetTargetSpeed(90)
 		LOG(self.RotateValue)
 		if self.RotateValue == 0 then
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
