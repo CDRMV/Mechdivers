@@ -294,6 +294,7 @@ CSKMDTL0300 = Class(TLandUnit) {
 			unit:AttachBoneTo(-2, self, 'MM_Attachpoint')
 			unit:SetDoNotTarget(true)
 			unit:SetWeaponEnabledByLabel('ArmCannonTurret', false)
+			IssueClearCommands({unit})
 			number = number + 1
 			else
 			end

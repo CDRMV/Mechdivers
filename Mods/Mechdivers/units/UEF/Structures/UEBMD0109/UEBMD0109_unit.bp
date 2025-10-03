@@ -29,10 +29,10 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-        #'BUILTBYTIER1ENGINEER',
-        #'BUILTBYTIER2ENGINEER',
-        #'BUILTBYTIER3ENGINEER',
-        #'BUILTBYCOMMANDER',
+        'BUILTBYTIER1ENGINEER',
+        'BUILTBYTIER2ENGINEER',
+        'BUILTBYTIER3ENGINEER',
+        'BUILTBYCOMMANDER',
         'UEF',
         'STRUCTURE',
 		'WALL',
@@ -58,6 +58,7 @@ UnitBlueprint {
 		Abilities = {
 			'Only if Armored Wall Upgrade is installed:',
 			'The Wall can be manually Rotated to the Right or Left.',
+			'Can be manned with an Mech Marine to make it functional.',
 			'<LOC ability_customizable>Customizable',
         },
 		AnimationArrival = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0109/UEBMD0109_Arrival.sca',
@@ -214,17 +215,13 @@ UnitBlueprint {
 			    bitmapId = 'production',
 				helpText = 'Rotate the Wall to the Right',
             },
-			RULEUTC_ShieldToggle = {
-                bitmapId = 'production',
-				helpText = 'Fold/Unfold',
-            },
 			RULEUTC_IntelToggle = {
                 bitmapId = 'Vision',
 				helpText = 'Show/Hide Ferry Beacon',
             },
 			RULEUTC_ProductionToggle = {
 			    bitmapId = 'load',
-				helpText = 'Load/Unload Pilot',
+				helpText = 'Man/Unman the Turret',
             },
         },
         FactionName = 'UEF',

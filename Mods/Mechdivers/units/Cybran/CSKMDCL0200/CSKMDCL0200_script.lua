@@ -84,6 +84,7 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 			unit:HideBone(0, true)
 			unit:HideRifle()
 			unit:SetCollisionShape('Box', 0, 0, 0, 0, 0, 0)
+			IssueClearCommands({unit})
 			self:SetScriptBit('RULEUTC_ShieldToggle', false)
 			--self:RemoveToggleCap('RULEUTC_SpecialToggle')
 			self:AddToggleCap('RULEUTC_ShieldToggle')
