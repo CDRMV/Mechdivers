@@ -98,6 +98,7 @@ UEBMD0109 = Class(TStructureUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
+			self:RemoveCommandCap('RULEUCC_Transport')
 			self.Rotate = CreateRotator(self, 'Wall01', 'y', nil, 0, 0, 0)
 			self.RotateValue = 0
 			self.TurretRotate = CreateRotator(self, 'Turret', 'y', nil, 0, 0, 0)
@@ -186,17 +187,28 @@ UEBMD0109 = Class(TStructureUnit) {
         self.Bot:AttachBoneTo( -1, self, 'AttachPoint' )
         self.Bot:SetMesh(BotMesh)
         self.Bot:SetDrawScale(0.500)
-        self.Bot:SetVizToAllies('Intel')
-        self.Bot:SetVizToNeutrals('Intel')
-        self.Bot:SetVizToEnemies('Intel')
-		self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationUnpack2, false):SetRate(-2)	
+        self.Bot:SetVizToAllies('Never')
+        self.Bot:SetVizToNeutrals('Never')
+        self.Bot:SetVizToEnemies('Never')	
+		self:AddToggleCap('RULEUTC_ShieldToggle')
+		--self:AddToggleCap('RULEUTC_ProductionToggle')
+		self.load = false
 		end
 		)
     end,
 	
 	OnScriptBitSet = function(self, bit)
         TStructureUnit.OnScriptBitSet(self, bit)
-        if bit == 1 then 
+		if bit == 0 then 
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition()
+		self.Beacon = CreateUnitHPR('UEB5102', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		self:AddToggleCap('RULEUTC_IntelToggle')
+		self:AddToggleCap('RULEUTC_ShieldToggle')
+		self:AddToggleCap('RULEUTC_ProductionToggle')
+		self:SetScriptBit('RULEUTC_ShieldToggle', true)
+        elseif bit == 1 then 
 		self.Blocker:Destroy()
 		self.Blocker2:Destroy()
 		if self.RotateValue == 0 then
@@ -306,6 +318,38 @@ UEBMD0109 = Class(TStructureUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		self:SetCollisionShape('Box', 0, 0, 0, 1, 0.6, 0.1)
 		end
+		elseif bit == 4 then
+		LOG('Test')
+		self.load = true
+		local position = self.Beacon:GetPosition()
+			local units = self.Beacon:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND + categories.TECH1, position, 10, 'Ally')
+			local number = 0
+        for _,unit in units do
+			if unit:IsUnitState('WaitForFerry') and unit:GetBlueprint().General.UnitName == '<LOC uel0106_name>Mech Marine' then
+			if number < 1 then
+			unit:AttachBoneTo(-2, self, 0)
+			unit:SetDoNotTarget(true)
+			unit:SetWeaponEnabledByLabel('MainGun', false)
+			unit:SetUnSelectable(true)
+			unit:HideBone(0, true)
+			unit:SetCollisionShape('Box', 0, 0, 0, 0, 0, 0)
+			self:SetScriptBit('RULEUTC_ShieldToggle', false)
+			--self:RemoveToggleCap('RULEUTC_ProductionToggle')
+			self:AddToggleCap('RULEUTC_ShieldToggle')
+			self.Bot:SetVizToAllies('Intel')
+			self.Bot:SetVizToNeutrals('Intel')
+			self.Bot:SetVizToEnemies('Intel')
+			self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationUnpack2, false):SetRate(-2)
+			self:SetWeaponEnabledByLabel('MG', true)
+			self:AddCommandCap('RULEUCC_Attack')
+			self:AddCommandCap('RULEUCC_RetaliateToggle')
+			self:AddCommandCap('RULEUCC_Stop')
+			number = number + 1
+			else
+			end
+			else
+            end
+		end		
 		elseif bit == 7 then 
 		self.Blocker:Destroy()
 		self.Blocker2:Destroy()
@@ -416,12 +460,18 @@ UEBMD0109 = Class(TStructureUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		self:SetCollisionShape('Box', 0, 0, 0, 1, 0.6, 0.1)
 		end
-        end
+		elseif bit == 3 then
+		self.Beacon:HideBone(0, true)
+        end	
     end,
 
     OnScriptBitClear = function(self, bit)
         TStructureUnit.OnScriptBitClear(self, bit)
-        if bit == 1 then 
+		if bit == 0 then 
+		self.Beacon:Destroy()
+		self:RemoveToggleCap('RULEUTC_IntelToggle')
+		self:RemoveToggleCap('RULEUTC_ProductionToggle')
+        elseif bit == 1 then 
 		self.Blocker:Destroy()
 		self.Blocker2:Destroy()
 		if self.RotateValue == 0 then
@@ -531,6 +581,27 @@ UEBMD0109 = Class(TStructureUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		self:SetCollisionShape('Box', 0, 0, 0, 1, 0.6, 0.1)
 		end
+		elseif bit == 4 then
+		self.load = false
+		local units = self:GetCargo()
+		local position = self:GetPosition()
+		self.Bot:SetVizToAllies('Never')
+		self.Bot:SetVizToNeutrals('Never')
+		self.Bot:SetVizToEnemies('Never')
+        for _, unit in units do
+			Warp(unit, {position[1] + math.random(-1,1), GetTerrainHeight(position[1], position[3]), position[3] + math.random(-1,1)}, self:GetOrientation())
+			unit:ShowBone(0, true)
+			unit:SetDoNotTarget(false)
+			unit:SetUnSelectable(false)
+			unit:SetWeaponEnabledByLabel('MainGun', true)
+			unit:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
+			unit:DetachFrom(true)
+			self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationUnpack2, false):SetRate(2)
+			self:SetWeaponEnabledByLabel('MG', false)
+			self:RemoveCommandCap('RULEUCC_Attack')
+			self:RemoveCommandCap('RULEUCC_RetaliateToggle')
+			self:RemoveCommandCap('RULEUCC_Stop')
+        end
 		elseif bit == 7 then 
 		self.Blocker:Destroy()
 		self.Blocker2:Destroy()
@@ -641,7 +712,9 @@ UEBMD0109 = Class(TStructureUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		self:SetCollisionShape('Box', 0, 0, 0, 1, 0.6, 0.1)
 		end
-        end
+		elseif bit == 3 then
+		self.Beacon:ShowBone(0, true)
+		end
     end,
 	
 	OnKilled = function(self, instigator, type, overkillRatio)
