@@ -30,21 +30,25 @@ UEBMD0110 = Class(TStructureUnit) {
 		
 		PlayFxRackSalvoReloadSequence = function(self)
 		ForkThread( function()
+		local turretpitchmin, turretpitchmax = self:GetTurretPitchMinMax()
+		self:SetTurretPitch(0,0)
 		self.unit:HideBone('Shell01', true)
 		self.unit:ShowBone('Shell02', true)
         local bp = self.Blueprint
+		if not self.animator then
             local animator = CreateAnimator(self.unit)
             self.Animator = animator
+		end	
 			self.unit:ShowBone('Shell01', true)
-            animator:PlayAnim('/Mods/Mechdivers/units/UEF/Structures/UEBMD0110/UEBMD0110_Reload.sca', false):SetRate(2)
-			if animator == nil then
+            self.Animator:PlayAnim('/Mods/Mechdivers/units/UEF/Structures/UEBMD0110/UEBMD0110_Reload.sca', false):SetRate(2)
+			if self.Animator == nil then
 
 			else
-			WaitFor(animator)
+			WaitFor(self.Animator)
 			end
 			self.unit:HideBone('Shell01', true)
 			self.unit:ShowBone('Shell02', true)
-			animator:Destroy()
+			self:SetTurretPitch(turretpitchmin, turretpitchmax)
 			end)
 		end,
 		
