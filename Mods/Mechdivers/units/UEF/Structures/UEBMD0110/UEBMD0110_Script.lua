@@ -37,9 +37,14 @@ UEBMD0110 = Class(TStructureUnit) {
             self.Animator = animator
 			self.unit:ShowBone('Shell01', true)
             animator:PlayAnim('/Mods/Mechdivers/units/UEF/Structures/UEBMD0110/UEBMD0110_Reload.sca', false):SetRate(2)
+			if animator == nil then
+
+			else
 			WaitFor(animator)
+			end
 			self.unit:HideBone('Shell01', true)
 			self.unit:ShowBone('Shell02', true)
+			animator:Destroy()
 			end)
 		end,
 		
