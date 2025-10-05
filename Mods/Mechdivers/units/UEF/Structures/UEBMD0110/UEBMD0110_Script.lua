@@ -27,6 +27,23 @@ local TIFHighBallisticMortarWeapon = import('/lua/terranweapons.lua').TIFHighBal
 UEBMD0110 = Class(TStructureUnit) {
     Weapons = {
 		MG = Class(TDFGaussCannonWeapon) {
+		
+		PlayFxRackSalvoReloadSequence = function(self)
+		ForkThread( function()
+		self.unit:HideBone('Shell01', true)
+		self.unit:ShowBone('Shell02', true)
+        local bp = self.Blueprint
+            local animator = CreateAnimator(self.unit)
+            self.Animator = animator
+			self.unit:ShowBone('Shell01', true)
+            animator:PlayAnim('/Mods/Mechdivers/units/UEF/Structures/UEBMD0110/UEBMD0110_Reload.sca', false):SetRate(2)
+			WaitFor(animator)
+			self.unit:HideBone('Shell01', true)
+			self.unit:ShowBone('Shell02', true)
+			end)
+		end,
+		
+		
 	--[[
 		PlayFxMuzzleSequence = function(self, muzzle)
 		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
