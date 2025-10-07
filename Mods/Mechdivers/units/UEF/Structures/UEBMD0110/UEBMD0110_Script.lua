@@ -757,6 +757,41 @@ UEBMD0110 = Class(TStructureUnit) {
 		self.Blocker2:Destroy()
 	end
     end,
+	
+	DeathThread = function( self, overkillRatio , instigator)  
+		if self.Beacon then
+		self.Beacon:Destroy()
+		end
+		
+		if self.Bot then
+		self.Bot:Destroy()
+		local RandomNumber = math.random(1, 2)
+		if RandomNumber == 2 then
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition()
+		local Bot = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		end
+		else
+		
+		end
+		
+        self:DestroyAllDamageEffects()
+		local army = self:GetArmy()
+
+		if self.PlayDestructionEffects then
+            self:CreateDestructionEffects(overkillRatio)
+        end
+
+        if self.ShowUnitDestructionDebris and overkillRatio then
+            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
+        end
+		
+		self:CreateWreckage(overkillRatio or self.overkillRatio)
+
+        self:PlayUnitSound('Destroyed')
+        self:Destroy()
+    end,
 }
 
 TypeClass = UEBMD0110
