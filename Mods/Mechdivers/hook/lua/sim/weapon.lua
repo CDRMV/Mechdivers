@@ -1579,8 +1579,35 @@ Weapon = ClassWeapon(WeaponMethods, DebugWeaponComponent) {
             end
             self:ForkThread(self.AmmoThread, bp.NukeWeapon, initStore)
         end
+		if DiskGetFileInfo('lua/CustomFactions/Nomads.lua') then
+		self:DetermineColourIndex()
+		end
 
         self.CollideFriendly = bp.CollideFriendly or false
+    end,
+	
+	DetermineColourIndex = function(self)
+        --we determine the index once on create then save it in the entity table to save on sim slowdown
+        if not self.unit.ColourIndex then
+            WARN('crazy unit is crazy - no colour index despite when its set OnPreCreate! blueprintID: ' .. self.unit.UnitId)
+        end
+        self.ColourIndex = self.unit.ColourIndex or 383.999
+    end,
+	
+	SwitchAimController = function(self)
+        -- Alternate between aim controller after each shot so each barrel fires at the unit and no shots are wasted.
+        if self.DoAlternateDualAimController then
+            if self.AlternateDualAimCtrlThread then
+                KillThread(self.AlternateDualAimCtrlThread)
+                self.AlternateDualAimCtrlThread = nil
+            end
+
+            local bp = self:GetBlueprint()
+            local rack = bp.RackBones[ self:GetNextRackSalvoNumber() ]
+            local switchTo = rack.TurretBoneDualManip
+            local delay = rack.TurretBoneDualManipSwitchDelay or (0.2 * (1 / self.RateOfFire)) -- switch when half way to next salvo, calculate in real time to include buffs and alike
+            self.AlternateDualAimCtrlThread = self:ForkThread( self.SwitchAimControllerThread, switchTo, delay )
+        end
     end,
 
     ---@param self Weapon
