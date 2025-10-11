@@ -22,14 +22,28 @@ CSKMDTL0205 = Class(TLandUnit) {
 
 	OnStopBeingBuilt = function(self,builder,layer)
 		TLandUnit.OnStopBeingBuilt(self,builder,layer)
+		self.build = true
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition()
+		local Bot = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		Bot:AttachBoneTo(-2, self, 'Attachpoint')
+		Bot:SetDoNotTarget(true)
+		Bot:SetWeaponEnabledByLabel('ArmCannonTurret', false)
+		Bot:SetUnSelectable(true)
+		Bot:HideBone(0, true)
+		Bot:SetCollisionShape('Box', 0, 0, 0, 0, 0, 0)
+		Bot:RemoveCommandCap('RULEUCC_Attack')
+		Bot:RemoveCommandCap('RULEUCC_RetaliateToggle')
+		Bot:RemoveCommandCap('RULEUCC_Stop')
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		BotMesh = '/mods/Mechdivers/Decorations/T1Bot_mesh'
 		self.Bot = import('/lua/sim/Entity.lua').Entity()
         self.Bot:AttachBoneTo( -1, self, 'Attachpoint' )
         self.Bot:SetMesh(BotMesh)
         self.Bot:SetDrawScale(0.0625)
-        self.Bot:SetVizToAllies('Never')
-        self.Bot:SetVizToNeutrals('Never')
-        self.Bot:SetVizToEnemies('Never')
+        self.Bot:SetVizToAllies('Intel')
+        self.Bot:SetVizToNeutrals('Intel')
+        self.Bot:SetVizToEnemies('Intel')
 		self:AddToggleCap('RULEUTC_ProductionToggle')
 		self:RemoveCommandCap('RULEUCC_Transport')
 		if not self.AnimationManipulator then
@@ -37,7 +51,7 @@ CSKMDTL0205 = Class(TLandUnit) {
             self.Trash:Add(self.AnimationManipulator)
         end
 		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTL0205/CSKMDTL0205_Door.sca', false):SetRate(0)
-		
+		self.load = true
     end,
 	
 		OnMotionHorzEventChange = function(self, new, old)
@@ -92,7 +106,11 @@ CSKMDTL0205 = Class(TLandUnit) {
 		self:AddToggleCap('RULEUTC_SpecialToggle')
 		self:AddToggleCap('RULEUTC_IntelToggle')
 		elseif bit == 7 then 
+		if self.build == true then
+		self:SetScriptBit('RULEUTC_SpecialToggle', false)
+		self.build = false
 		LOG('Test')
+		else
 		self.load = true
 		local position = self.Beacon:GetPosition()
 			local units = self.Beacon:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND + categories.TECH1, position, 10, 'Ally')
@@ -121,7 +139,8 @@ CSKMDTL0205 = Class(TLandUnit) {
 			end
 			else
             end
-		end	
+		end
+		end		
 		elseif bit == 3 then
 		self.Beacon:HideBone(0, true)		
 		elseif bit == 4 then
