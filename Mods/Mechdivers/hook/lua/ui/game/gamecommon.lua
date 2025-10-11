@@ -34,8 +34,10 @@ local MyUnitIdTable = {
 	  cskmdtl0300=true, 
 	  cskmdtl0303=true, 
 	  cskmdtl0304=true, 
-	  
+	  cskmdtl0305=true, 
+		  
 -- Structures
+
       -- Mines --
 	  uebmd001=true,
 	  
@@ -49,7 +51,8 @@ local MyUnitIdTable = {
 	  uebmd0105=true,	
 	  uebmd0106=true,	  
 	  uebmd0108=true,
-	  uebmd0109=true,					
+	  uebmd0109=true,
+	  uebmd0110=true,					
 	  
 -- Cybran
 

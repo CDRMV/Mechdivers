@@ -199,7 +199,28 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 
         self:PlayUnitSound('Destroyed')
         self:Destroy()
-    end,		
+    end,
+
+	OnReclaimed = function(self, reclaimer)
+		if self.Beacon then
+		self.Beacon:Destroy()
+		end
+		
+		local units = self:GetCargo()
+		if units[1] == nil then
+		
+		else
+			units[1]:ShowBone(0, true)
+			units[1]:SetDoNotTarget(false)
+			units[1]:SetUnSelectable(false)
+			units[1]:SetWeaponEnabledByLabel('MainGun', true)
+			units[1]:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
+			units[1]:DetachFrom(true)
+			units[1]:AddCommandCap('RULEUCC_Attack')
+			units[1]:AddCommandCap('RULEUCC_RetaliateToggle')
+			units[1]:AddCommandCap('RULEUCC_Stop')
+		end
+    end,	
 }
 
 TypeClass = CSKMDCL0200

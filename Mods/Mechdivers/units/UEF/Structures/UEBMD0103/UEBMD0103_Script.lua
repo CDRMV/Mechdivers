@@ -45,6 +45,14 @@ UEBMD0103 = Class(TStructureUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
+		self.ClapDummy = import('/lua/sim/Entity.lua').Entity()
+		ClapDummy = '/mods/Mechdivers/projectiles/Null/Null_proj_mesh',
+        self.ClapDummy:AttachBoneTo( -2, self, 'Main_Clap1' )
+        self.ClapDummy:SetMesh(ClapDummy)
+        self.ClapDummy:SetDrawScale(0.50)
+        self.ClapDummy:SetVizToAllies('Intel')
+        self.ClapDummy:SetVizToNeutrals('Intel')
+        self.ClapDummy:SetVizToEnemies('Intel')
 		self.number = 0	
 		local army = self:GetArmy()
         local position = self:GetPosition()
@@ -112,6 +120,10 @@ UEBMD0103 = Class(TStructureUnit) {
 		self:SetUnSelectable(false)	
 		self:SetDoNotTarget(false)
 		self:ShowBone( 'Turret', true )
+		self.ClapDummy:Destroy()
+		local x = math.random(-1, 1)
+		local z = math.random(-1, 1)
+		self.Clap = self:CreateProjectile('/Mods/Mechdivers/projectiles/Null/Null_proj.bp', 0, 0.5, 0, x, 7, z)
 		WaitFor(self.AnimationManipulator2)
 		if not self.AnimationManipulator3 then
             self.AnimationManipulator3 = CreateAnimator(self)

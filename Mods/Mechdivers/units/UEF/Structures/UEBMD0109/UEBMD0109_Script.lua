@@ -100,6 +100,14 @@ UEBMD0109 = Class(TStructureUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
+		self.ClapDummy = import('/lua/sim/Entity.lua').Entity()
+		ClapDummy = '/mods/Mechdivers/projectiles/Null/Null_proj_mesh',
+        self.ClapDummy:AttachBoneTo( -2, self, 'Main_Clap1' )
+        self.ClapDummy:SetMesh(ClapDummy)
+        self.ClapDummy:SetDrawScale(0.50)
+        self.ClapDummy:SetVizToAllies('Intel')
+        self.ClapDummy:SetVizToNeutrals('Intel')
+        self.ClapDummy:SetVizToEnemies('Intel')
 			self:RemoveCommandCap('RULEUCC_Transport')
 			self.Rotate = CreateRotator(self, 'Wall01', 'y', nil, 0, 0, 0)
 			self.RotateValue = 0
@@ -178,6 +186,10 @@ UEBMD0109 = Class(TStructureUnit) {
 		self:SetDoNotTarget(false)
 		self:ShowBone( 'Turret', true )
 		self:HideBone( 'Turret_Armor', true )
+		self.ClapDummy:Destroy()
+		local x = math.random(-1, 1)
+		local z = math.random(-1, 1)
+		self.Clap = self:CreateProjectile('/Mods/Mechdivers/projectiles/Null/Null_proj.bp', 0, 0.5, 0, x, 7, z)
 		WaitFor(self.AnimationManipulator2)
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		self.Blocker = CreateUnitHPR('UEBMD0001', self:GetArmy(), position.x+1, position.y, position.z, 0, 0, 0)
@@ -734,18 +746,15 @@ UEBMD0109 = Class(TStructureUnit) {
 	TStructureUnit.OnKilled(self, instigator, type, overkillRatio)	
 	end,
 	
-	OnReclaimed = function(self, reclaimer)
-	if self.Blocker and self.Blocker2 then
-		self.Blocker:Destroy()
-		self.Blocker2:Destroy()
-	end
-    end,
-	
 	DeathThread = function( self, overkillRatio , instigator)  
 		if self.Beacon then
 		self.Beacon:Destroy()
 		end
 		
+		local units = self:GetCargo()
+		if units[2] == nil then
+		
+		else
 		if self.Bot then
 		self.Bot:Destroy()
 		local RandomNumber = math.random(1, 2)
@@ -757,6 +766,7 @@ UEBMD0109 = Class(TStructureUnit) {
 		end
 		else
 		
+		end
 		end
 		
         self:DestroyAllDamageEffects()
@@ -775,6 +785,39 @@ UEBMD0109 = Class(TStructureUnit) {
         self:PlayUnitSound('Destroyed')
         self:Destroy()
     end,
+	
+	OnReclaimed = function(self, reclaimer)
+		if self.Beacon then
+		self.Beacon:Destroy()
+		end
+		
+		if self.Blocker and self.Blocker2 then
+		self.Blocker:Destroy()
+		self.Blocker2:Destroy()
+		end
+		
+		local units = self:GetCargo()
+		if units[1] == nil then
+		
+		else
+		if self.Bot then
+			self.Bot:Destroy()
+			units[1]:ShowBone(0, true)
+			units[1]:SetDoNotTarget(false)
+			units[1]:SetUnSelectable(false)
+			units[1]:SetWeaponEnabledByLabel('ArmCannonTurret', true)
+			units[1]:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
+			units[1]:DetachFrom(true)
+			units[1]:AddCommandCap('RULEUCC_Attack')
+			units[1]:AddCommandCap('RULEUCC_RetaliateToggle')
+			units[1]:AddCommandCap('RULEUCC_Stop')
+		else
+		
+		end
+		
+		end
+    end,
+	
 }
 
 TypeClass = UEBMD0109

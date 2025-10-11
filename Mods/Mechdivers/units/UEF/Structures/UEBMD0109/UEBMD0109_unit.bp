@@ -220,7 +220,7 @@ UnitBlueprint {
 				helpText = 'Show/Hide Ferry Beacon',
             },
 			RULEUTC_ProductionToggle = {
-			    bitmapId = 'load',
+			    bitmapId = 'Deploy',
 				helpText = 'Man/Unman the Turret',
             },
         },

@@ -72,7 +72,7 @@ CSKMDTL0300 = Class(TLandUnit) {
 			self:SetWeaponEnabledByLabel('RMG', false)
 			ForkThread(function()
 			while true do
-			if self:GetCurrentLayer() == 'Land' then
+			if not self.Dead and self:GetCurrentLayer() == 'Land' then
 			local units = self:GetCargo()
 			if units[1] and units[2] then
 			self.AnimationManipulator2:SetRate(1)
@@ -172,6 +172,12 @@ CSKMDTL0300 = Class(TLandUnit) {
         end
 		
 		self:CreateWreckage(overkillRatio or self.overkillRatio)
+		
+		local units = self:GetCargo()
+		if  units[1] == nil and units[2] == nil then
+		
+		else
+
 		if self.Bot and self.Bot2 then
 		self.Bot:Destroy()
 		self.Bot2:Destroy()
@@ -186,8 +192,47 @@ CSKMDTL0300 = Class(TLandUnit) {
 		else
 		
 		end
+		
+		end
         self:PlayUnitSound('Destroyed')
         self:Destroy()
+    end,
+	
+	OnReclaimed = function(self, reclaimer)
+		if self.Beacon then
+		self.Beacon:Destroy()
+		end
+		
+		local units = self:GetCargo()
+		if units[1] == nil and units[2] == nil then
+		
+		else
+		if self.Bot and self.Bot2 then
+		self.Bot:Destroy()
+		self.Bot2:Destroy()
+			units[1]:ShowBone(0, true)
+			units[1]:SetDoNotTarget(false)
+			units[1]:SetUnSelectable(false)
+			units[1]:SetWeaponEnabledByLabel('ArmCannonTurret', true)
+			units[1]:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
+			units[1]:DetachFrom(true)
+			units[1]:AddCommandCap('RULEUCC_Attack')
+			units[1]:AddCommandCap('RULEUCC_RetaliateToggle')
+			units[1]:AddCommandCap('RULEUCC_Stop')
+			units[2]:ShowBone(0, true)
+			units[2]:SetDoNotTarget(false)
+			units[2]:SetUnSelectable(false)
+			units[2]:SetWeaponEnabledByLabel('ArmCannonTurret', true)
+			units[2]:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
+			units[2]:DetachFrom(true)
+			units[2]:AddCommandCap('RULEUCC_Attack')
+			units[2]:AddCommandCap('RULEUCC_RetaliateToggle')
+			units[2]:AddCommandCap('RULEUCC_Stop')
+		else
+		
+		end
+		
+		end
     end,
 		
 	OnMotionHorzEventChange = function(self, new, old)

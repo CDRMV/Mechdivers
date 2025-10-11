@@ -160,7 +160,7 @@ UnitBlueprint {
 				helpText = 'Speed Booster',		
             },
 			RULEUTC_SpecialToggle = {
-			    bitmapId = 'load',
+			    bitmapId = 'Deploy',
 				helpText = 'Load/Unload Pilot',
             },
 			RULEUTC_ShieldToggle = {

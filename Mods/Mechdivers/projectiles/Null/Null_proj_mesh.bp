@@ -1,0 +1,14 @@
+MeshBlueprint {
+    LODs = {
+        {
+            ShaderName = 'TMeshAlpha',
+            MeshName = '/mods/Mechdivers/projectiles/Null/Null_lod0.scm',
+            AlbedoName = '/mods/Mechdivers/projectiles/Null/Null_albedo.dds',
+			NormalsName = '/mods/Mechdivers/projectiles/Null/Null_normalsTS.dds',
+			SpecularName = '/mods/Mechdivers/projectiles/Null/Null_SpecTeam.dds',
+            LODCutoff = 300,
+            
+        },
+    },
+    SortOrder = 999,
+}

@@ -35,16 +35,47 @@ UEBMD0110 = Class(TStructureUnit) {
 		self.unit:HideBone('Shell01', true)
 		self.unit:ShowBone('Shell02', true)
         local bp = self.Blueprint
-		if not self.animator then
-            local animator = CreateAnimator(self.unit)
-            self.Animator = animator
-		end	
 			self.unit:ShowBone('Shell01', true)
-            self.Animator:PlayAnim('/Mods/Mechdivers/units/UEF/Structures/UEBMD0110/UEBMD0110_Reload.sca', false):SetRate(2)
-			if self.Animator == nil then
+            self.unit.Animator:PlayAnim('/Mods/Mechdivers/units/UEF/Structures/UEBMD0110/UEBMD0110_Reload.sca', false):SetRate(2)
+			if self.unit.Animator == nil then
 
 			else
-			WaitFor(self.Animator)
+			WaitFor(self.unit.Animator)
+			end
+			self.unit:HideBone('Shell01', true)
+			self.unit:ShowBone('Shell02', true)
+			self:SetTurretPitch(turretpitchmin, turretpitchmax)
+			end)
+		end,
+		
+		
+	--[[
+		PlayFxMuzzleSequence = function(self, muzzle)
+		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
+		if muzzle == 'Turret_Muzzle01' then
+		CreateAttachedEmitter(self.unit, 'R_Cannon_Shell01', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
+		end
+		if muzzle == 'R_Cannon_Muzzle02' then
+		CreateAttachedEmitter(self.unit, 'R_Cannon_Shell02', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
+		end
+		end,
+	]]--	
+		},
+		WallMG = Class(TDFGaussCannonWeapon) {
+		
+		PlayFxRackSalvoReloadSequence = function(self)
+		ForkThread( function()
+		local turretpitchmin, turretpitchmax = self:GetTurretPitchMinMax()
+		self:SetTurretPitch(0,0)
+		self.unit:HideBone('Shell01', true)
+		self.unit:ShowBone('Shell02', true)
+        local bp = self.Blueprint
+			self.unit:ShowBone('Shell01', true)
+            self.unit.Animator:PlayAnim('/Mods/Mechdivers/units/UEF/Structures/UEBMD0110/UEBMD0110_Reload.sca', false):SetRate(2)
+			if self.unit.Animator == nil then
+
+			else
+			WaitFor(self.unit.Animator)
 			end
 			self.unit:HideBone('Shell01', true)
 			self.unit:ShowBone('Shell02', true)
@@ -68,10 +99,13 @@ UEBMD0110 = Class(TStructureUnit) {
     },
 	OnCreate = function(self)
 		self:HideBone( 'Pod', true )
+		self:HideBone( 'Wall01', true )
 		self:ShowBone( 'CallBeacon', true )
 		self:SetDoNotTarget(true)
 		self:SetWeaponEnabledByLabel('WallMG', false)
 		self:SetWeaponEnabledByLabel('MG', true)
+		local animator = CreateAnimator(self)
+        self.Animator = animator
         TStructureUnit.OnCreate(self)
     end,
 	
@@ -117,6 +151,14 @@ UEBMD0110 = Class(TStructureUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
+		self.ClapDummy = import('/lua/sim/Entity.lua').Entity()
+		ClapDummy = '/mods/Mechdivers/projectiles/Null/Null_proj_mesh',
+        self.ClapDummy:AttachBoneTo( -2, self, 'Main_Clap1' )
+        self.ClapDummy:SetMesh(ClapDummy)
+        self.ClapDummy:SetDrawScale(0.50)
+        self.ClapDummy:SetVizToAllies('Intel')
+        self.ClapDummy:SetVizToNeutrals('Intel')
+        self.ClapDummy:SetVizToEnemies('Intel')
 			self:RemoveCommandCap('RULEUCC_Transport')
 			self.Rotate = CreateRotator(self, 'Wall01', 'y', nil, 0, 0, 0)
 			self.RotateValue = 0
@@ -165,6 +207,7 @@ UEBMD0110 = Class(TStructureUnit) {
 		self.ArrivalEffect8 = CreateBeamEmitterOnEntity(self, 'Pod_Exhaust05', self:GetArmy(), '/effects/emitters/missile_exhaust_fire_beam_06_emit.bp')
 		self.ArrivalEffect9 = CreateBeamEmitterOnEntity(self, 'Pod_Exhaust06', self:GetArmy(), '/effects/emitters/missile_exhaust_fire_beam_06_emit.bp')
 		self:ShowBone( 0, true )
+		self:HideBone( 'Turret_Armor', true )
 		self:HideBone( 'Wall01', true )
 		self:HideBone( 'Turret', true )
 		WaitSeconds(10)
@@ -194,7 +237,12 @@ UEBMD0110 = Class(TStructureUnit) {
 		self:SetUnSelectable(false)	
 		self:SetDoNotTarget(false)
 		self:ShowBone( 'Turret', true )
-		self:HideBone( 'Turret_Armor01', true )
+		self:HideBone( 'Turret_Armor', true )
+		self:HideBone( 'Wall01', true )
+		self.ClapDummy:Destroy()
+		local x = math.random(-1, 1)
+		local z = math.random(-1, 1)
+		self.Clap = self:CreateProjectile('/Mods/Mechdivers/projectiles/Null/Null_proj.bp', 0, 0.5, 0, x, 7, z)
 		WaitFor(self.AnimationManipulator2)
 		self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationUnpack2, false):SetRate(2)	
 		WaitFor(self.AnimationManipulator3)
@@ -751,18 +799,16 @@ UEBMD0110 = Class(TStructureUnit) {
 	TStructureUnit.OnKilled(self, instigator, type, overkillRatio)	
 	end,
 	
-	OnReclaimed = function(self, reclaimer)
-	if self.Blocker and self.Blocker2 then
-		self.Blocker:Destroy()
-		self.Blocker2:Destroy()
-	end
-    end,
 	
 	DeathThread = function( self, overkillRatio , instigator)  
 		if self.Beacon then
 		self.Beacon:Destroy()
 		end
 		
+		local units = self:GetCargo()
+		if units[2] == nil then
+		
+		else
 		if self.Bot then
 		self.Bot:Destroy()
 		local RandomNumber = math.random(1, 2)
@@ -774,6 +820,7 @@ UEBMD0110 = Class(TStructureUnit) {
 		end
 		else
 		
+		end
 		end
 		
         self:DestroyAllDamageEffects()
@@ -791,6 +838,38 @@ UEBMD0110 = Class(TStructureUnit) {
 
         self:PlayUnitSound('Destroyed')
         self:Destroy()
+    end,
+	
+	OnReclaimed = function(self, reclaimer)
+		if self.Beacon then
+		self.Beacon:Destroy()
+		end
+		
+		if self.Blocker and self.Blocker2 then
+		self.Blocker:Destroy()
+		self.Blocker2:Destroy()
+		end
+		
+		local units = self:GetCargo()
+		if units[1] == nil then
+		
+		else
+		if self.Bot then
+			self.Bot:Destroy()
+			units[1]:ShowBone(0, true)
+			units[1]:SetDoNotTarget(false)
+			units[1]:SetUnSelectable(false)
+			units[1]:SetWeaponEnabledByLabel('ArmCannonTurret', true)
+			units[1]:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
+			units[1]:DetachFrom(true)
+			units[1]:AddCommandCap('RULEUCC_Attack')
+			units[1]:AddCommandCap('RULEUCC_RetaliateToggle')
+			units[1]:AddCommandCap('RULEUCC_Stop')
+		else
+		
+		end
+		
+		end
     end,
 }
 
