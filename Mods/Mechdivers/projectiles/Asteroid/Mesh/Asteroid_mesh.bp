@@ -1,9 +1,9 @@
 MeshBlueprint {
     LODs = {
         {
-            MeshName = '/mods/Commander Survival Kit/projectiles/Asteroid/Mesh/Asteroid_lod0.scm',
+            MeshName = '/mods/Mechdivers/projectiles/Asteroid/Mesh/Asteroid_lod0.scm',
             ShaderName = 'TMeshNoNormals',
-            AlbedoName = '/mods/Commander Survival Kit/projectiles/Asteroid/Mesh/Asteroid.dds',
+            AlbedoName = '/mods/Mechdivers/projectiles/Asteroid/Mesh/Asteroid.dds',
             LODCutoff = 300,
             
         },

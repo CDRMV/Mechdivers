@@ -17,7 +17,6 @@ local EffectTemplate = import('/lua/EffectTemplates.lua')
 local utilities = import('/lua/utilities.lua')
 local Util = import('/lua/utilities.lua')
 local RandomFloat = Util.GetRandomFloat
-local ModeffectPath = '/mods/Commander Survival Kit/effects/emitters/'
 local EffectUtils = import('/lua/effectutilities.lua')
 local Effects = import('/lua/effecttemplates.lua')
 local explosion = import('/lua/defaultexplosions.lua')

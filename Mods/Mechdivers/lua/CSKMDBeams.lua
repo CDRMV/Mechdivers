@@ -1,6 +1,6 @@
 local CollisionBeam = import('/lua/sim/CollisionBeam.lua').CollisionBeam
 local EffectTemplate = import('/lua/EffectTemplates.lua')
-local ModEffectTemplate = import('/mods/Commander Survival Kit Units/lua/CSKUnitsEffects.lua')
+local ModEffectTemplate = import('/mods/Mechdivers/lua/CSKMDEffectTemplates.lua')
 local Util = import('/lua/utilities.lua')
 
 

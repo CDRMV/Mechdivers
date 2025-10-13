@@ -8,7 +8,7 @@
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 
-local TStructureUnit = import('/lua/defaultunits.lua').RadarUnit
+local TStructureUnit = import('/lua/defaultunits.lua').MobileUnit
 local TDFRiotWeapon = import('/lua/terranweapons.lua').TDFRiotWeapon
 local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 local TSAMLauncher = import('/lua/terranweapons.lua').TSAMLauncher
@@ -17,7 +17,6 @@ local EffectTemplate = import('/lua/EffectTemplates.lua')
 local utilities = import('/lua/utilities.lua')
 local Util = import('/lua/utilities.lua')
 local RandomFloat = Util.GetRandomFloat
-local ModeffectPath = '/mods/Commander Survival Kit/effects/emitters/'
 local EffectUtils = import('/lua/effectutilities.lua')
 local Effects = import('/lua/effecttemplates.lua')
 local explosion = import('/lua/defaultexplosions.lua')
@@ -48,6 +47,7 @@ UEBMD0106 = Class(TStructureUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
+			self:SetScriptBit('RULEUTC_IntelToggle', true)
 		self.ClapDummy = import('/lua/sim/Entity.lua').Entity()
 		ClapDummy = '/mods/Mechdivers/projectiles/Null/Null_proj_mesh',
         self.ClapDummy:AttachBoneTo( -2, self, 'Main_Clap1' )
@@ -135,7 +135,7 @@ UEBMD0106 = Class(TStructureUnit) {
         self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationBeaconUnpack, false):SetRate(2)	
 		WaitFor(self.AnimationManipulator3)
         self.ExpandingVisionDisableCount = 1
-		self:OnIntelEnabled()
+		self:SetScriptBit('RULEUTC_IntelToggle', false)
 		end
 		)
     end,
@@ -174,6 +174,7 @@ UEBMD0106 = Class(TStructureUnit) {
     end,
 
     OnIntelEnabled = function(self)
+	LOG(self.ExpandingVisionDisableCount) 
 		if not self.Spinner then
 		self.Spinner = CreateRotator(self, 'Turret', 'y', nil, 0, 30, 360)
 		end
