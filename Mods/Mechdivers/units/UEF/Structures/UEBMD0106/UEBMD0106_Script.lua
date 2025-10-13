@@ -47,7 +47,6 @@ UEBMD0106 = Class(TStructureUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
-			self:SetScriptBit('RULEUTC_IntelToggle', true)
 		self.ClapDummy = import('/lua/sim/Entity.lua').Entity()
 		ClapDummy = '/mods/Mechdivers/projectiles/Null/Null_proj_mesh',
         self.ClapDummy:AttachBoneTo( -2, self, 'Main_Clap1' )
@@ -127,6 +126,7 @@ UEBMD0106 = Class(TStructureUnit) {
 		self:SetUnSelectable(false)	
 		self:SetDoNotTarget(false)
 		self:ShowBone( 'Turret', true )
+		self:SetScriptBit('RULEUTC_IntelToggle', true)
 		self.ClapDummy:Destroy()
 		local x = math.random(-1, 1)
 		local z = math.random(-1, 1)
@@ -134,10 +134,11 @@ UEBMD0106 = Class(TStructureUnit) {
 		WaitFor(self.AnimationManipulator2)
         self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationBeaconUnpack, false):SetRate(2)	
 		WaitFor(self.AnimationManipulator3)
-        self.ExpandingVisionDisableCount = 1
 		self:SetScriptBit('RULEUTC_IntelToggle', false)
 		end
 		)
+		self.ExpandingVisionDisableCount = 1
+		self:OnIntelEnabled()
     end,
     
     
@@ -174,7 +175,6 @@ UEBMD0106 = Class(TStructureUnit) {
     end,
 
     OnIntelEnabled = function(self)
-	LOG(self.ExpandingVisionDisableCount) 
 		if not self.Spinner then
 		self.Spinner = CreateRotator(self, 'Turret', 'y', nil, 0, 30, 360)
 		end
