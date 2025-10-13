@@ -33,7 +33,9 @@ URBMD0101 = Class(CStructureUnit) {
 		self:SetMaintenanceConsumptionInactive()
 		KillThread(self.AutomaticDisableShieldThreadHandle)
 		self.Effect = false
+		if self.MySpinner then
         self.MySpinner:SetTargetSpeed(0)
+		end
 		if self.effect then
 		self.effect:Destroy()
 		self.effect = nil

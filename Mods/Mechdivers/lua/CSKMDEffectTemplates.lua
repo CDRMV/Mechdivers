@@ -21,9 +21,8 @@ CFusionMortarMuzzleFlash = {
 CHeavyFusionLaserFXTrail01 =  { 
     ModBpPath .. 'HFusion_laser_fxtrail_01_emit.bp',     
 }
-CHeavyFusionLaserPolyTrail =  {
-ModBpPath .. 'Fusion_Laser_emit.bp',
-}
+
+CHeavyFusionLaserPolyTrail = ModBpPath .. 'Fusion_Laser_emit.bp'
 
 CHeavyFusionMortarFXTrail01 =  { 
 '/effects/emitters/mortar_munition_03_emit.bp',
