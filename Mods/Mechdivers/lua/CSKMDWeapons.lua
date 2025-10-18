@@ -56,3 +56,12 @@ CDFHLaserFusionWeapon = Class(DefaultProjectileWeapon) {
 CDFFusionMortarWeapon = Class(DefaultProjectileWeapon) {
     FxMuzzleFlash = ModEffectTemplate.CFusionMortarMuzzleFlash,
 }
+
+
+TDFLightningBeam = Class(DefaultBeamWeapon) {
+    BeamType = ModCollisionBeams.TerranLightningCollisionBeam,
+    FxMuzzleFlash = {},
+    FxChargeMuzzleFlash = {}, ####EffectTemplate.SExperimentalUnstablePhasonLaserMuzzle01,
+    FxUpackingChargeEffects = EffectTemplate.CMicrowaveLaserCharge01,
+    FxUpackingChargeEffectScale = 0.1,
+}
