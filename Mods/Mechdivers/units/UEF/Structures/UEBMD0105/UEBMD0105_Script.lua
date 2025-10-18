@@ -38,7 +38,7 @@ UEBMD0105 = Class(TStructureUnit) {
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
 		self.ClapDummy = import('/lua/sim/Entity.lua').Entity()
-		ClapDummy = '/mods/Mechdivers/projectiles/Null/Null_proj_mesh',
+		ClapDummy = '/Mods/Mechdivers/projectiles/DropClap/DropClap_proj_mesh',
         self.ClapDummy:AttachBoneTo( -2, self, 'Main_Clap1' )
         self.ClapDummy:SetMesh(ClapDummy)
         self.ClapDummy:SetDrawScale(0.50)
@@ -117,10 +117,11 @@ UEBMD0105 = Class(TStructureUnit) {
 		self:SetUnSelectable(false)	
 		self:SetDoNotTarget(false)
 		self:ShowBone( 'Turret', true )
-		self.ClapDummy:Destroy()
 		local x = math.random(-1, 1)
 		local z = math.random(-1, 1)
-		self.Clap = self:CreateProjectile('/Mods/Mechdivers/projectiles/Null/Null_proj.bp', 0, 0.5, 0, x, 7, z)
+		self.Clap = self:CreateProjectile('/Mods/Mechdivers/projectiles/DropClap/DropClap_proj.bp', 0, 0.5, 0, x, 7, z)
+		self.ClapDummy:DetachFrom(true)
+		self.ClapDummy:AttachBoneTo( -2, self.Clap, -2 )
 		WaitFor(self.AnimationManipulator2)
         self.AnimationManipulator3:PlayAnim(self:GetBlueprint().Display.AnimationBombUnpack, false):SetRate(2)	
 		WaitFor(self.AnimationManipulator3)
@@ -205,6 +206,35 @@ UEBMD0105 = Class(TStructureUnit) {
             end
             WaitSeconds(0.1)
 		end	
+    end,
+	
+	OnReclaimed = function(self, reclaimer)
+		if self.ClapDummy then
+		self.ClapDummy:Destroy()
+		end
+    end,
+	
+	DeathThread = function( self, overkillRatio , instigator)  
+		
+		if self.ClapDummy then
+		self.ClapDummy:Destroy()
+		end
+		
+        self:DestroyAllDamageEffects()
+		local army = self:GetArmy()
+
+		if self.PlayDestructionEffects then
+            self:CreateDestructionEffects(overkillRatio)
+        end
+
+        if self.ShowUnitDestructionDebris and overkillRatio then
+            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
+        end
+		
+		self:CreateWreckage(overkillRatio or self.overkillRatio)
+
+        self:PlayUnitSound('Destroyed')
+        self:Destroy()
     end,
 	
 }

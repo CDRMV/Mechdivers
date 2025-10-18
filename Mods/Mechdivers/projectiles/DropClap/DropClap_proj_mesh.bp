@@ -1,0 +1,14 @@
+MeshBlueprint {
+    LODs = {
+        {
+            ShaderName = 'TMeshAlpha',
+            MeshName = '/mods/Mechdivers/projectiles/DropClap/DropClap_lod0.scm',
+            AlbedoName = '/mods/Mechdivers/projectiles/DropClap/DropClap_albedo.dds',
+			NormalsName = '/mods/Mechdivers/projectiles/DropClap/DropClap_normalsTS.dds',
+			SpecularName = '/mods/Mechdivers/projectiles/DropClap/DropClap_SpecTeam.dds',
+            LODCutoff = 300,
+            
+        },
+    },
+    SortOrder = 999,
+}

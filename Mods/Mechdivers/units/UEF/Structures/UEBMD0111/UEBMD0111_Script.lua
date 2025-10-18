@@ -53,7 +53,7 @@ UEBMD0111 = Class(TStructureUnit) {
 		self.SphereEffectBp = '/mods/Mechdivers/effects/emitters/electricity_01_emit.bp'
 		self.SphereEffectBp2 = '/mods/Mechdivers/effects/emitters/electricity_02_emit.bp'
 		self.ClapDummy = import('/lua/sim/Entity.lua').Entity()
-		ClapDummy = '/mods/Mechdivers/projectiles/Null/Null_proj_mesh',
+		ClapDummy = '/mods/Mechdivers/projectiles/DropClap/DropClap_proj_mesh',
         self.ClapDummy:AttachBoneTo( -2, self, 'Main_Clap1' )
         self.ClapDummy:SetMesh(ClapDummy)
         self.ClapDummy:SetDrawScale(0.50)
@@ -126,10 +126,11 @@ UEBMD0111 = Class(TStructureUnit) {
 		self:SetUnSelectable(false)	
 		self:SetDoNotTarget(false)
 		self:ShowBone( 'Turret', true )   
-		self.ClapDummy:Destroy()
 		local x = math.random(-1, 1)
 		local z = math.random(-1, 1)
-		self.Clap = self:CreateProjectile('/Mods/Mechdivers/projectiles/Null/Null_proj.bp', 0, 0.5, 0, x, 7, z)
+		self.Clap = self:CreateProjectile('/Mods/Mechdivers/projectiles/DropClap/DropClap_proj.bp', 0, 0.5, 0, x, 7, z)
+		self.ClapDummy:DetachFrom(true)
+		self.ClapDummy:AttachBoneTo( -2, self.Clap, -2 )
 		WaitFor(self.AnimationManipulator2)
 		self.Spinner1 = CreateRotator(self, 'Spinner', 'y', nil, 0, 60, 360):SetTargetSpeed(180)
 		self.Spinner2 = CreateRotator(self, 'Electro_Spinner', 'y', nil, 0, 60, 360):SetTargetSpeed(90)
@@ -142,7 +143,7 @@ UEBMD0111 = Class(TStructureUnit) {
 	DoElectroEffect = function(self)
 		ForkThread( function()
 		local ChoosedBone = nil
-		while true do
+		while not self.Dead do
 		local number = math.random(0, 4)
 		if number == 0 then
 		
@@ -166,6 +167,35 @@ UEBMD0111 = Class(TStructureUnit) {
 		WaitSeconds(0.1)
 		end
 		end)
+    end,
+	
+	DeathThread = function( self, overkillRatio , instigator)  
+		
+		if self.ClapDummy then
+		self.ClapDummy:Destroy()
+		end
+		
+        self:DestroyAllDamageEffects()
+		local army = self:GetArmy()
+
+		if self.PlayDestructionEffects then
+            self:CreateDestructionEffects(overkillRatio)
+        end
+
+        if self.ShowUnitDestructionDebris and overkillRatio then
+            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
+        end
+		
+		self:CreateWreckage(overkillRatio or self.overkillRatio)
+
+        self:PlayUnitSound('Destroyed')
+        self:Destroy()
+    end,
+	
+	OnReclaimed = function(self, reclaimer)
+		if self.ClapDummy then
+		self.ClapDummy:Destroy()
+		end
     end,
 }
 

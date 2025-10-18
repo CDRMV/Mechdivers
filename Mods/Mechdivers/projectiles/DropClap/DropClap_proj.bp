@@ -22,9 +22,18 @@ ProjectileBlueprint {
         'DIRECTFIRE',
     },
     Display = {
+	    Mesh = {
+            LODs = {
+                {
+                    ShaderName = 'TMeshAlpha',
+                    LODCutoff = 5000,
+                },
+            },
+        },
         ImpactEffects = {
             Type = 'Medium03',
         },
+		UniformScale = 0.01,
         StrategicIconSize = 1,
     },
     General = {
@@ -42,9 +51,11 @@ ProjectileBlueprint {
     },
     Physics = {
         DestroyOnWater = true,
-        InitialSpeed = 13,
-        Lifetime = 1.3,
-        UseGravity = false,
-        VelocityAlign = true,
+        InitialSpeed = 3,
+        Lifetime = 5,
+        UseGravity = true,
+        VelocityAlign = false,
+		RotationalVelocity = 360,
+		RotationalVelocityRange = 180,
     },
 }

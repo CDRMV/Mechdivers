@@ -100,7 +100,7 @@ UEBMD0109 = Class(TStructureUnit) {
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()
 		self.ClapDummy = import('/lua/sim/Entity.lua').Entity()
-		ClapDummy = '/mods/Mechdivers/projectiles/Null/Null_proj_mesh',
+		ClapDummy = '/mods/Mechdivers/projectiles/DropClap/DropClap_proj_mesh',
         self.ClapDummy:AttachBoneTo( -2, self, 'Main_Clap1' )
         self.ClapDummy:SetMesh(ClapDummy)
         self.ClapDummy:SetDrawScale(0.50)
@@ -185,10 +185,11 @@ UEBMD0109 = Class(TStructureUnit) {
 		self:SetDoNotTarget(false)
 		self:ShowBone( 'Turret', true )
 		self:HideBone( 'Turret_Armor', true )
-		self.ClapDummy:Destroy()
 		local x = math.random(-1, 1)
 		local z = math.random(-1, 1)
-		self.Clap = self:CreateProjectile('/Mods/Mechdivers/projectiles/Null/Null_proj.bp', 0, 0.5, 0, x, 7, z)
+		self.Clap = self:CreateProjectile('/Mods/Mechdivers/projectiles/DropClap/DropClap_proj.bp', 0, 0.5, 0, x, 7, z)
+		self.ClapDummy:DetachFrom(true)
+		self.ClapDummy:AttachBoneTo( -2, self.Clap, -2 )
 		WaitFor(self.AnimationManipulator2)
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		self.Blocker = CreateUnitHPR('UEBMD0001', self:GetArmy(), position.x+1, position.y, position.z, 0, 0, 0)
@@ -746,6 +747,10 @@ UEBMD0109 = Class(TStructureUnit) {
 	end,
 	
 	DeathThread = function( self, overkillRatio , instigator)  
+		if self.ClapDummy then
+		self.ClapDummy:Destroy()
+		end
+		
 		if self.Beacon then
 		self.Beacon:Destroy()
 		end
@@ -786,6 +791,10 @@ UEBMD0109 = Class(TStructureUnit) {
     end,
 	
 	OnReclaimed = function(self, reclaimer)
+		if self.ClapDummy then
+		self.ClapDummy:Destroy()
+		end
+	
 		if self.Beacon then
 		self.Beacon:Destroy()
 		end
@@ -816,6 +825,7 @@ UEBMD0109 = Class(TStructureUnit) {
 		
 		end
     end,
+
 	
 }
 
