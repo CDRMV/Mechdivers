@@ -85,7 +85,7 @@ UnitBlueprint {
     BuildIconSortPriority = 40,
     Categories = {
         'PRODUCTSC1',
-        'SELECTABLE',
+        'UNSELECTABLE',
         'CYBRAN',
         'MOBILE',
         'AIR',
