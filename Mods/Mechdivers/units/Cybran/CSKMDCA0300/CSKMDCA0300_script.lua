@@ -65,6 +65,7 @@ CSKMDCA0300 = Class(CAirUnit) {
 			self.Scan:SetVizToNeutrals('Intel')
 			self.Scan:SetVizToEnemies('Intel')
 				Spinner2 = CreateRotator(self, 'Barrel', 'x', 10, 10, 0, 10):SetTargetSpeed(5)
+			self:ForkThread(self.CreateIntelEntity,'Scanner', 'Vision')	
 		while not self.Dead do
 		if Spinner2 then
 		Spinner2:SetGoal(math.random(30,40))
@@ -75,6 +76,37 @@ CSKMDCA0300 = Class(CAirUnit) {
 
 		end)
     end,
+	
+	CreateIntelEntity = function(self, bone, intel)
+	local radius = 25
+    if not self.IntelEntity then
+        self.IntelEntity = {}
+    end
+    if not self:BeenDestroyed() and radius > 0 then
+        local counter = 1
+		local anglevalue = 1
+        while counter <= radius do
+		anglevalue = anglevalue + 1
+            local angle = math.ceil((anglevalue) / 3.14)
+            if counter + angle < radius then
+                ent = import('/lua/sim/Entity.lua').Entity({Owner = self,})
+                table.insert(self.IntelEntity, ent)
+                self.Trash:Add(ent)					
+                ent:AttachBoneTo( -1, self, bone or 0 )
+                local pos = self:CalculateWorldPositionFromRelative({0, 0, counter})
+                ent:SetParentOffset(Vector(0,0, counter))
+                ent:SetVizToFocusPlayer('Always')
+                ent:SetVizToAllies('Always')
+                ent:SetVizToNeutrals('Never')
+                ent:SetVizToEnemies('Never')
+				LOG(angle)
+                ent:InitIntel(self:GetArmy(), intel, angle)
+                ent:EnableIntel(intel)
+            end
+            counter = counter + 1
+        end	
+    end
+end,
 	
 	DestroyScan = function( self)  
 		if self.Scan then

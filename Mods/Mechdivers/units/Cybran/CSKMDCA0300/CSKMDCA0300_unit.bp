@@ -85,7 +85,7 @@ UnitBlueprint {
     BuildIconSortPriority = 40,
     Categories = {
         'PRODUCTSC1',
-        'UNSELECTABLE',
+        'SELECTABLE',
         'CYBRAN',
         'MOBILE',
         'AIR',
@@ -206,7 +206,7 @@ UnitBlueprint {
         UnitWeight = 1,
     },
     Intel = {
-        VisionRadius = 32,
+        VisionRadius = 5,
     },
     Interface = {
         HelpText = '<LOC ura0104_help>Air Transport',

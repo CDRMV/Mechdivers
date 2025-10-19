@@ -45,7 +45,7 @@ CSKMDAL0200 = Class(AHoverLandUnit) {
 		self.Scan:SetVizToAllies('Intel')
 		self.Scan:SetVizToNeutrals('Intel')
 		self.Scan:SetVizToEnemies('Intel')
-		
+		self:ForkThread(self.CreateIntelEntity,'Scan', 'Vision')
 		--
 		-- Lets check the TerrianType of the Drones current position
         -- The Drone should not be able to call in Land Reinforcements on Water			
@@ -65,6 +65,37 @@ CSKMDAL0200 = Class(AHoverLandUnit) {
 		end)
         AHoverLandUnit.OnStopBeingBuilt(self,builder,layer)
     end,
+	
+	CreateIntelEntity = function(self, bone, intel)
+	local radius = 20
+    if not self.IntelEntity then
+        self.IntelEntity = {}
+    end
+    if not self:BeenDestroyed() and radius > 0 then
+        local counter = 1
+		local anglevalue = 1
+        while counter <= radius do
+		anglevalue = anglevalue + 1
+            local angle = math.ceil((anglevalue) / 3.14)
+            if counter + angle < radius then
+                ent = import('/lua/sim/Entity.lua').Entity({Owner = self,})
+                table.insert(self.IntelEntity, ent)
+                self.Trash:Add(ent)					
+                ent:AttachBoneTo( -1, self, bone or 0 )
+                local pos = self:CalculateWorldPositionFromRelative({0, 0, counter})
+                ent:SetParentOffset(Vector(0,0, counter))
+                ent:SetVizToFocusPlayer('Always')
+                ent:SetVizToAllies('Always')
+                ent:SetVizToNeutrals('Never')
+                ent:SetVizToEnemies('Never')
+				LOG(angle)
+                ent:InitIntel(self:GetArmy(), intel, angle)
+                ent:EnableIntel(intel)
+            end
+            counter = counter + 1
+        end	
+    end
+end,
 	
 	OnScriptBitSet = function(self, bit)
         AHoverLandUnit.OnScriptBitSet(self, bit)

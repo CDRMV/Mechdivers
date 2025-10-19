@@ -22,23 +22,25 @@ URBMD0100 = Class(CStructureUnit) {
                 
         OnGotTarget = function(self)
 		self.unit:AddToggleCap('RULEUTC_WeaponToggle')
-		Spinner2:SetTargetSpeed(0)
-		Spinner2:SetGoal(Spinner2:GetCurrentAngle() - Spinner2:GetCurrentAngle())
+		self.unit.Spinner2:SetTargetSpeed(0)
+		self.unit.Spinner2:SetGoal(self.unit.Spinner2:GetCurrentAngle() - self.unit.Spinner2:GetCurrentAngle())
                CDFLaserFusionWeapon.OnGotTarget(self)
         end,                
             },
         
         OnGotTarget = function(self)
-		Spinner2:SetTargetSpeed(0)
+		self.unit.Spinner2:SetTargetSpeed(0)
 		self.unit:AddToggleCap('RULEUTC_WeaponToggle')
-		Spinner2:SetGoal(Spinner2:GetCurrentAngle() - Spinner2:GetCurrentAngle())
+		self.unit.Spinner2:SetGoal(self.unit.Spinner2:GetCurrentAngle() - self.unit.Spinner2:GetCurrentAngle())
                CDFLaserFusionWeapon.OnGotTarget(self)
         end,
         
         OnLostTarget = function(self)
-		Spinner2:SetTargetSpeed(5)
+		local turretpitchmin, turretpitchmax = self:GetTurretPitchMinMax()
+		self.unit.Spinner2:SetTargetSpeed(5)
 		self.unit:RemoveToggleCap('RULEUTC_WeaponToggle')
-		Spinner2:SetGoal(10)
+		self.unit.Spinner2:SetGoal(-20)
+		self:SetTurretPitch(turretpitchmin, turretpitchmax)
             CDFLaserFusionWeapon.OnLostTarget(self)
         end,  			
 		},
@@ -167,17 +169,54 @@ end,
 			self.Scan:SetVizToEnemies('Intel')
 						CreateAttachedEmitter(self, 'Detector_Effect2', self:GetArmy(), '/mods/Mechdivers/effects/emitters/heavyfusion_flash_02_emit.bp'):SetEmitterParam('LIFETIME', -1):SetEmitterParam('ALIGN_TO_BONE', 1):SetEmitterParam('USE_LOCAL_VELOCITY', 1):SetEmitterParam('USE_LOCAL_ACCELERATION', 1)
 			CreateAttachedEmitter(self, 'Detector_Effect2', self:GetArmy(), '/mods/Mechdivers/effects/emitters/heavyfusion_flash_01_emit.bp'):SetEmitterParam('LIFETIME', -1):SetEmitterParam('ALIGN_TO_BONE', 1):SetEmitterParam('USE_LOCAL_VELOCITY', 1):SetEmitterParam('USE_LOCAL_ACCELERATION', 1)
-		Spinner1 = CreateRotator(self, 'Spinner', 'y', nil, 0, 60, 360):SetTargetSpeed(5)
-		Spinner2 = CreateRotator(self, 'Detector', 'x', 10, 10, 0, 10):SetTargetSpeed(5)
+		self.Spinner1 = CreateRotator(self, 'Spinner', 'y', nil, 0, 60, 360):SetTargetSpeed(5)
+		self.Spinner2 = CreateRotator(self, 'Detector', 'x', 10, 10, 0, 10):SetTargetSpeed(5)
+		self:ForkThread(self.CreateIntelEntity,'Detector_Effect', 'Vision')
 		while not self.Dead do
-		if Spinner2 then
-		Spinner2:SetGoal(math.random(10,20))
+		if self.Spinner2 then
+		local wep = self:GetWeaponByLabel('MainGun')
+		if wep:WeaponHasTarget() then
+		self.Spinner2:SetGoal(0)
+		else
+		self.Spinner2:SetGoal(math.random(-10,20))
+		end
 		else
 		end
 		WaitSeconds(1)
 		end
 		end)
     end,
+	
+	CreateIntelEntity = function(self, bone, intel)
+	local radius = 60
+    if not self.IntelEntity then
+        self.IntelEntity = {}
+    end
+    if not self:BeenDestroyed() and radius > 0 then
+        local counter = 1
+		local anglevalue = 1
+        while counter <= radius do
+		anglevalue = anglevalue + 1
+            local angle = math.ceil((anglevalue) / 3.14)
+            if counter + angle < radius then
+                ent = import('/lua/sim/Entity.lua').Entity({Owner = self,})
+                table.insert(self.IntelEntity, ent)
+                self.Trash:Add(ent)					
+                ent:AttachBoneTo( -1, self, bone or 0 )
+                local pos = self:CalculateWorldPositionFromRelative({0, 0, counter})
+                ent:SetParentOffset(Vector(0,0, counter))
+                ent:SetVizToFocusPlayer('Always')
+                ent:SetVizToAllies('Always')
+                ent:SetVizToNeutrals('Never')
+                ent:SetVizToEnemies('Never')
+				LOG(angle)
+                ent:InitIntel(self:GetArmy(), intel, angle)
+                ent:EnableIntel(intel)
+            end
+            counter = counter + 1
+        end	
+    end
+end,
 	
 		OnScriptBitSet = function(self, bit)
         CStructureUnit.OnScriptBitSet(self, bit)

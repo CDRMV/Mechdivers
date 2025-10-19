@@ -157,7 +157,7 @@ UnitBlueprint {
         UnitWeight = 1,
     },
     Intel = {
-        VisionRadius = 50,
+        VisionRadius = 10,
     },
     Interface = {
         HelpText = '<LOC urb1201_help>Power Generator',
@@ -256,8 +256,8 @@ UnitBlueprint {
             TurretBonePitch = 'Detector',
             TurretBoneYaw = 'Spinner',
             TurretDualManipulators = false,
-            TurretPitch = 0,
-            TurretPitchRange = 75,
+            TurretPitch = -20,
+            TurretPitchRange = 10,
             TurretPitchSpeed = 100,
             TurretYaw = 0,
             TurretYawRange = 180,
