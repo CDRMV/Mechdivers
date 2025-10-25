@@ -19,4 +19,8 @@ UnitList = {
 	T3LandArtillery = {
 		Cybran = {'CSKMDCL0303', 50},      -- Breaker, Tech 3 Heavy Mortar Tank
 	},
+	
+	T3LandBot = {
+		Cybran = {'CSKMDCL0306', 50},      -- Hulk Bruiser, Tech 3 Heavy Assualt Bot
+    },
 }

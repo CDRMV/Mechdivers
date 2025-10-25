@@ -7,4 +7,8 @@ UnitList = {
 	T3GroundDefense = {
         Cybran = {'URBMD0202', 50}, -- Zeta  Tech 3 Rapid Fire Autocannon
     },
+	
+	T3LandBot = {
+		Cybran = {'CSKMDCL0308', 50},      -- Hulk Obliterator, Tech 3 Heavy Siege Bot
+    },
 }
