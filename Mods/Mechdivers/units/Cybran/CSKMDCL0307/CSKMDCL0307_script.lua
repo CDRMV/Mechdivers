@@ -16,10 +16,39 @@ CSKMDCL0307 = Class(CWalkingLandUnit) {
     Weapons = {
 		Dummy = Class(DummyTurretWeapon) {
 		
+		IdleState = State (DummyTurretWeapon.IdleState) {
+        Main = function(self)
+            DummyTurretWeapon.IdleState.Main(self)
+        end,
+                
+        OnGotTarget = function(self)
+			   local wep1 = self.unit:GetWeaponByLabel('Flamethrower')
+			   wep1:SetEnabled(false)
+               DummyTurretWeapon.OnGotTarget(self)
+        end,                
+            },
+        
+        OnGotTarget = function(self)
+			   local wep1 = self.unit:GetWeaponByLabel('Flamethrower')
+			   wep1:SetEnabled(false)
+               DummyTurretWeapon.OnGotTarget(self)
+        end,
+        
+        OnLostTarget = function(self)
+			local wep1 = self.unit:GetWeaponByLabel('Flamethrower')
+			wep1:SetEnabled(true)
+            DummyTurretWeapon.OnLostTarget(self)
+        end,  
+		
 		OnWeaponFired = function(self)
 			ForkThread( function()
 			local animator = CreateAnimator(self.unit)
+			local number = math.random(1,2)
+			if number == 1 then
             animator:PlayAnim('/Mods/Mechdivers/units/Cybran/CSKMDCL0307/CSKMDCL0307_ASaw01.sca', false):SetRate(2)
+			else
+			animator:PlayAnim('/Mods/Mechdivers/units/Cybran/CSKMDCL0307/CSKMDCL0307_ASaw02.sca', false):SetRate(2)
+			end
 			WaitFor(animator)
 			animator:Destroy()
 			end)
@@ -44,6 +73,8 @@ CSKMDCL0307 = Class(CWalkingLandUnit) {
 	
 	OnCreate = function(self)
 		CWalkingLandUnit.OnCreate(self)
+		self.FireEffect = CreateAttachedEmitter(self,'L_Arm_Fire',self:GetArmy(), '/effects/emitters/op_ambient_fire_01_emit.bp'):ScaleEmitter(0.05)
+		self.SawEffect = CreateAttachedEmitter(self,'R_Arm_Saw',self:GetArmy(), '/effects/emitters/destruction_damaged_sparks_01_emit.bp'):ScaleEmitter(0.8)
 		self.Saw = CreateRotator(self, 'R_Arm_Saw', 'x', nil, 0, 60, 360):SetTargetSpeed(270)
     end,
 }

@@ -11,9 +11,45 @@
 local CWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
 local ModWeaponsFile = import('/mods/Mechdivers/lua/CSKMDWeapons.lua')
 local CDFLaserFusionWeapon = ModWeaponsFile.CDFLaserFusionWeapon
+local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 
 CSKMDCL0102 = Class(CWalkingLandUnit) {
     Weapons = {
+		Dummy = Class(DummyTurretWeapon) {
+		
+		IdleState = State (DummyTurretWeapon.IdleState) {
+        Main = function(self)
+            DummyTurretWeapon.IdleState.Main(self)
+        end,
+                
+        OnGotTarget = function(self)
+			   local wep1 = self.unit:GetWeaponByLabel('MainGun')
+			   wep1:SetEnabled(false)
+               DummyTurretWeapon.OnGotTarget(self)
+        end,                
+            },
+        
+        OnGotTarget = function(self)
+			   local wep1 = self.unit:GetWeaponByLabel('MainGun')
+			   wep1:SetEnabled(false)
+               DummyTurretWeapon.OnGotTarget(self)
+        end,
+        
+        OnLostTarget = function(self)
+			local wep1 = self.unit:GetWeaponByLabel('MainGun')
+			wep1:SetEnabled(true)
+            DummyTurretWeapon.OnLostTarget(self)
+        end,  
+		
+		OnWeaponFired = function(self)
+			ForkThread( function()
+			local animator = CreateAnimator(self.unit)
+            animator:PlayAnim('/Mods/Mechdivers/units/Cybran/CSKMDCL0102/CSKMDCL0102_ASword01.sca', false):SetRate(2)
+			WaitFor(animator)
+			animator:Destroy()
+			end)
+		end,
+			},
         MainGun = Class(CDFLaserFusionWeapon) {},
     },
 	
