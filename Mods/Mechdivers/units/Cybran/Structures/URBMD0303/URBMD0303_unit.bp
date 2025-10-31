@@ -190,8 +190,8 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_HighArc',
             CollideFriendly = false,
-            Damage = 500,
-            DamageRadius = 2,
+            Damage = 800,
+            DamageRadius = 3,
             DamageType = 'Normal',
             DisplayName = 'Proton Cannon',
             FireTargetLayerCapsTable = {

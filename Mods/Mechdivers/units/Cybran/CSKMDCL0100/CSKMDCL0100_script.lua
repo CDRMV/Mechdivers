@@ -44,6 +44,7 @@ CSKMDCL0100 = Class(CWalkingLandUnit) {
         self.DropRifle:SetVizToEnemies('Never')
 		self:SetWeaponEnabledByLabel('Grenade', false)
 		self:RemoveToggleCap('RULEUTC_SpecialToggle')
+		self:HideBone('B01', true)
     end,
 	
 	OnScriptBitSet = function(self, bit)

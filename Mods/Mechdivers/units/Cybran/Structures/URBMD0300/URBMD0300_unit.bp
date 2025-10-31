@@ -222,9 +222,9 @@ UnitBlueprint {
             RackSalvoReloadTime = 10,
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
-			RenderFireClock = true,
+			RenderFireClock = false,
             RangeCategory = 'UWRC_DirectFire',
-            RateOfFire = 0.08,
+            RateOfFire = 0.12,
             TargetCheckInterval = 2,
             TargetPriorities = {
                 'SPECIALHIGHPRI',

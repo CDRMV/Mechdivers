@@ -35,6 +35,7 @@ CSKMDCL0105 = Class(CWalkingLandUnit) {
         self.DropRifle:SetVizToAllies('Never')
         self.DropRifle:SetVizToNeutrals('Never')
         self.DropRifle:SetVizToEnemies('Never')
+		self:HideBone('B03', true)
     end,
 	
 	OnScriptBitSet = function(self, bit)
