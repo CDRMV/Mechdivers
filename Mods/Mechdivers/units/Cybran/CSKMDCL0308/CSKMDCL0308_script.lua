@@ -13,7 +13,7 @@ local ModWeaponsFile = import('/mods/Mechdivers/lua/CSKMDWeapons.lua')
 local CDFLaserFusionWeapon = ModWeaponsFile.CDFLaserFusionWeapon
 local CIFGrenadeWeapon = import('/lua/cybranweapons.lua').CIFGrenadeWeapon
 
-CSKMDCL0306 = Class(CWalkingLandUnit) {
+CSKMDCL0308 = Class(CWalkingLandUnit) {
     Weapons = {
         MainGun = Class(CDFLaserFusionWeapon) {},
 		MissileRack = Class(CIFGrenadeWeapon) {},
@@ -32,6 +32,11 @@ CSKMDCL0306 = Class(CWalkingLandUnit) {
 		self:SetSpeedMult(1)
         end
     end,
+	
+	OnCreate = function(self)
+		CWalkingLandUnit.OnCreate(self)
+		self:HideBone('B01', true)
+    end,
 }
 
-TypeClass = CSKMDCL0306
+TypeClass = CSKMDCL0308
