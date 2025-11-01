@@ -1,4 +1,9 @@
 UnitList = {
+
+	T1LandDFTank = {
+		Cybran = {'CSKMDCL0100', 50},
+	},
+
     T3AirGunship = {
         UEF = {'CSKMDTA0300', 50}, 		-- Pelican, Tech 3 Mech Marine Transport Gunship
 		Cybran = {'CSKMDCA0300', 50}, 		-- Valkyrie, Tech 3 Assault Drone

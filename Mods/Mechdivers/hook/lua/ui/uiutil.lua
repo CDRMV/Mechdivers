@@ -77,6 +77,7 @@ local MyUnitIdTable = {
 	  cskmdcl0201=true, 
 	  cskmdcl0202=true, 
 	  cskmdcl0203=true, 
+	  cskmdcl0204=true, 
 	  cskmdcl0205=true, 	  
 	  cskmdcl0300=true, 
 	  cskmdcl0301=true, 
@@ -114,12 +115,35 @@ local MyUnitIdTable = {
  -- Structures  
 
 }
+
+
+-- Table for new Ability Icons
+
+local MyOrderIdTable = {
+
+	example_btn_over=true,
+	example_btn_up=true,
+	example_btn_over_sel=true,
+	example_btn_up_sel=true,
+	example_btn_dis=true,
+	example_btn_dis_sel=true,
+	example_btn_down=true,
+	
+}
+
+
 local IconPath = "/Mods/Mechdivers"
 	-- Adds icons to the engeneer/factory buildmenu
 	local oldUIFile = UIFile
 	function UIFile(filespec)
 		local skins = import('/lua/skins/skins.lua').skins
 		local visitingSkin = currentSkin()
+		local OrderIconName = string.gsub(filespec,'.dds','')
+		OrderIconName = string.gsub(OrderIconName,'/game/orders/','')
+		if MyOrderIdTable[OrderIconName] then
+			local curfile =  IconPath .. filespec
+			return curfile
+		end
 		local IconName = string.gsub(filespec,'_icon.dds','')
 		IconName = string.gsub(IconName,'/icons/units/','')
 		if MyUnitIdTable[IconName] then

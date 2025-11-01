@@ -1,5 +1,9 @@
 UnitList = {
 
+	T1LandDFTank = {
+		Cybran = {'CSKMDCL0101', 50},
+	},
+
 	T2AttackTank = {
 		Cybran = {'CSKMDCL0201', 50},      -- Devastator, Tech 2 Advanced Assualt Bot
     },

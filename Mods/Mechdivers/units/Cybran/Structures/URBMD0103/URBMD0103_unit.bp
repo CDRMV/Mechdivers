@@ -1,11 +1,4 @@
 UnitBlueprint {
-    AI = {
-        TargetBones = {
-            'URB0101',
-            'B07',
-            'B08',
-        },
-    },
     Audio = {
         Construct = Sound {
             Bank = 'URB',
@@ -46,6 +39,7 @@ UnitBlueprint {
         'BUILTBYTIER2ENGINEER',
         'BUILTBYTIER3ENGINEER',
         'BUILTBYCOMMANDER',
+		'ADVANCEDLIGHTBOTFACTORY',
         'CYBRAN',
         'STRUCTURE',
         'LAND',
@@ -54,7 +48,7 @@ UnitBlueprint {
         'FACTORY',
         'RALLYPOINT',
         'DRAGBUILD',
-        'SIZE16',
+        'SIZE12',
         'VISIBLETORECON',
         'RECLAIMABLE',
         'SHOWQUEUE',
@@ -124,6 +118,88 @@ UnitBlueprint {
     Footprint = {
         SizeX = 3,
         SizeZ = 3,
+    },
+	Enhancements = {
+        Slots = {
+            Back = {
+                name = '<LOC _Back>',
+                x = 38,
+                y = -10,
+            },
+            LCH = {
+                name = '<LOC _LCH>',
+                x = 105,
+                y = 30,
+            },
+            RCH = {
+                name = '<LOC _RCH>',
+                x = -10,
+                y = 30,
+            },
+        },
+		RegularLegion = {
+            BuildCostEnergy = 18000,
+            BuildCostMass = 720,
+            BuildTime = 900,
+            Icon = 'regular',
+            Name = 'Regular Legion',
+            Slot = 'Back',
+        },
+        RegularLegionRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'regular',
+            Name = 'Regular Legion',
+            Prerequisite = 'RegularLegion',
+            RemoveEnhancements = {
+                'RegularLegion',
+                'RegularLegionRemove',
+            },
+            Slot = 'Back',
+        },
+        JetBrigade = {
+            BuildCostEnergy = 18000,
+            BuildCostMass = 720,
+            BuildTime = 900,
+            Icon = 'jetpack',
+            Name = 'Add Build Access: Jet Brigade',
+            Slot = 'Back',
+        },
+        JetBrigadeRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'jetpack',
+            Name = 'Remove Build Access: Jet Brigade',
+            Prerequisite = 'JetBrigade',
+            RemoveEnhancements = {
+                'JetBrigade',
+                'JetBrigadeRemove',
+            },
+            Slot = 'Back',
+        },
+		IncinerationCorps = {
+            BuildCostEnergy = 18000,
+            BuildCostMass = 720,
+            BuildTime = 900,
+            Icon = 'flame',
+            Name = 'Add Build Access: Incineration Corps',
+            Slot = 'Back',
+        },
+        IncinerationCorpsRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'flame',
+            Name = 'Remove Build Access: Incineration Corps',
+            Prerequisite = 'IncinerationCorps',
+            RemoveEnhancements = {
+                'IncinerationCorps',
+                'IncinerationCorpsRemove',
+            },
+            Slot = 'Back',
+        },
     },
     General = {
         BuildBones = {
@@ -310,12 +386,6 @@ UnitBlueprint {
                 X = 0,
                 Y = 0,
                 Z = 3,
-            },
-            {
-                UnitSpin = -90,
-                X = -3,
-                Y = 0,
-                Z = 0,
             },
         },
         SkirtOffsetX = -1.5,
