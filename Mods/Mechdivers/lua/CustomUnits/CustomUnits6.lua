@@ -1,5 +1,5 @@
 UnitList = {
 	T1LandDFTank = {
-		Cybran = {'CSKMDCL0106', 50},
+		Cybran = {'CSKMDCL0106', 80},
 	},
 }

@@ -76,6 +76,7 @@ CSKMDCL0307 = Class(CWalkingLandUnit) {
 		self.FireEffect = CreateAttachedEmitter(self,'L_Arm_Fire',self:GetArmy(), '/effects/emitters/op_ambient_fire_01_emit.bp'):ScaleEmitter(0.05)
 		self.SawEffect = CreateAttachedEmitter(self,'R_Arm_Saw',self:GetArmy(), '/effects/emitters/destruction_damaged_sparks_01_emit.bp'):ScaleEmitter(0.8)
 		self.Saw = CreateRotator(self, 'R_Arm_Saw', 'x', nil, 0, 60, 360):SetTargetSpeed(270)
+		self:HideBone('B01', true)
     end,
 }
 
