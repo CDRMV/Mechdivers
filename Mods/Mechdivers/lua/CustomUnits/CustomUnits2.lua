@@ -4,7 +4,7 @@ UnitList = {
 		Cybran = {'CSKMDCL0102', 50},
 	},
 
-	T2AttackTank = {
+	T2AttackTankSorian = {
 		Cybran = {'CSKMDCL0202', 50},      -- Heavy Devastator, Tech 2 Advanced Siege Bot
     },
 	

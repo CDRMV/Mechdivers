@@ -1,6 +1,7 @@
 UnitList = {
 
 	T1LandDFTank = {
+		UEF = {'CSKMDTL0205', 50},      -- Razer G-167, Tech 1 Attack Truck
 		Cybran = {'CSKMDCL0100', 50},
 	},
 
@@ -14,11 +15,7 @@ UnitList = {
 		Cybran = {'CSKMDCA0301', 50}, 		-- Megacirus, Tech 3 Air Transport Drone
 	},
 	
-	T1AttackTank = {
-		UEF = {'CSKMDTL0205', 50},      -- Razer G-167, Tech 1 Attack Truck
-    },
-	
-	T2AttackTank = {
+	T2AttackTankSorian = {
 		Aeon = {'CSKMDAL0200', 50},      -- Watcher, Tech 2 Scout Drone
 		UEF = {'CSKMDTL0205', 50},      --  T 080 DAD, Tech 2 Heavy Tank
 		Cybran = {'CSKMDCL0200', 50},      -- Hunter II, Tech 2 Medium Assualt Bot (Scout Strider)
