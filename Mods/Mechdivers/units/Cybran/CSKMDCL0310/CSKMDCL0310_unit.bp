@@ -99,6 +99,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
+		'JETBRIGADE',
         'BUILTBYTIER3FACTORY',
         'CYBRAN',
         'MOBILE',
@@ -122,26 +123,29 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
     },
-    Description = 'Heavy Ambush Bot',
+    Description = 'Heavy Jetpack Ambush Bot',
     Display = {
+		AirDummyUnit = 'CSKMDJP0100',
+		JetPackEffectBones = {'B01_LExhaust', 'B01_RExhaust'},
 		Abilities = {
             'Speed Booster',
+			'Jetpack Toggle Button is available if the Unit is moving',
         },
         AnimationDeath = {
             {
-                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0307/CSKMDCL0307_Adeath01.sca',
+                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0310/CSKMDCL0310_Adeath01.sca',
                 AnimationRateMax = 1.25,
                 AnimationRateMin = 0.75,
                 Weight = 10,
             },
             {
-                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0307/CSKMDCL0307_Adeath02.sca',
+                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0310/CSKMDCL0310_Adeath02.sca',
                 AnimationRateMax = 1.25,
                 AnimationRateMin = 0.75,
                 Weight = 90,
             },
         },
-        AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0307/CSKMDCL0307_Awalk01.sca',
+        AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0310/CSKMDCL0310_Awalk01.sca',
         AnimationWalkRate = 1.0,
         Mesh = {
             IconFadeInZoom = 130,
@@ -169,7 +173,7 @@ UnitBlueprint {
         SpawnRandomRotation = true,
         TransportAnimation = {
             {
-                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0307/CSKMDCL0307_afold01.sca',
+                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0310/CSKMDCL0310_afold01.sca',
                 Weight = 100,
             },
         },
@@ -205,14 +209,18 @@ UnitBlueprint {
         OrderOverrides = {
             RULEUTC_WeaponToggle = {
                 bitmapId = 'production',
-				helpText = 'Speed Booster',	
+				helpText = 'Speed Booster',		
+            },
+			RULEUTC_SpecialToggle = {
+				helpText = 'JetPack',
             },
         },
         TechLevel = 'RULEUTL_Secret',
         ToggleCaps = {
             RULEUTC_WeaponToggle = true,
+			RULEUTC_SpecialToggle = true,
         },
-        UnitName = 'Hulk Scorcher',
+        UnitName = 'Jet Brigade Hulk Scorcher',
         UnitWeight = 1,
     },
     Intel = {

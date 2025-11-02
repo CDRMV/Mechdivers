@@ -5,13 +5,12 @@ BuilderGroup {
     Builder {
         BuilderName = 'AdvancedLightBotFactory Commander Priority Builder',
         PlatoonTemplate = 'CommanderBuilder',
-        Priority = 500,
+        Priority = 800,
         BuilderConditions = {
-            { UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
-            { EBC, 'GreaterThanEconEfficiencyCombined', { 0.85, 1.0 } },
-            { UCBC, 'ForcePathLimit', {'LocationType', categories.FACTORY * categories.LAND, 'Land', 2}},
-            { UCBC, 'UnitCapCheckLess', { .8 } },
-            { EBC, 'MassToFactoryRatioBaseCheck', { 'LocationType' } },
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'FactoryLessAtLocation', { 'LocationType', 1, 'Land' } },
+			{ UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 6, categories.ADVANCEDLIGHTBOTFACTORY } },
+			{ UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
         },
         BuilderType = 'Any',
         BuilderData = {

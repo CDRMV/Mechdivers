@@ -102,6 +102,7 @@ UnitBlueprint {
         'BUILTBYTIER3FACTORY',
         'CYBRAN',
         'MOBILE',
+		'INCINERATIONCORPS',
         'LAND',
         'TECH3',
         'DIRECTFIRE',
@@ -116,32 +117,32 @@ UnitBlueprint {
         AirThreatLevel = 0,
         ArmorType = 'Normal',
         EconomyThreatLevel = 0,
-        Health = 9300,
-        MaxHealth = 9300,
+        Health = 11000,
+        MaxHealth = 11000,
         RegenRate = 0,
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
     },
-    Description = 'Heavy Ambush Bot',
+    Description = 'Heavy Armored Ambush Bot',
     Display = {
 		Abilities = {
             'Speed Booster',
         },
         AnimationDeath = {
             {
-                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0307/CSKMDCL0307_Adeath01.sca',
+                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0309/CSKMDCL0309_Adeath01.sca',
                 AnimationRateMax = 1.25,
                 AnimationRateMin = 0.75,
                 Weight = 10,
             },
             {
-                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0307/CSKMDCL0307_Adeath02.sca',
+                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0309/CSKMDCL0309_Adeath02.sca',
                 AnimationRateMax = 1.25,
                 AnimationRateMin = 0.75,
                 Weight = 90,
             },
         },
-        AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0307/CSKMDCL0307_Awalk01.sca',
+        AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0309/CSKMDCL0309_Awalk01.sca',
         AnimationWalkRate = 1.0,
         Mesh = {
             IconFadeInZoom = 130,
@@ -169,16 +170,16 @@ UnitBlueprint {
         SpawnRandomRotation = true,
         TransportAnimation = {
             {
-                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0307/CSKMDCL0307_afold01.sca',
+                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0309/CSKMDCL0309_afold01.sca',
                 Weight = 100,
             },
         },
         UniformScale = 0.15,
     },
     Economy = {
-        BuildCostEnergy = 14000,
-        BuildCostMass = 1280,
-        BuildTime = 4800,
+        BuildCostEnergy = 15000,
+        BuildCostMass = 1380,
+        BuildTime = 4900,
         TeleportEnergyMod = 0.15,
         TeleportMassMod = 1,
         TeleportTimeMod = 0.01,
@@ -212,7 +213,7 @@ UnitBlueprint {
         ToggleCaps = {
             RULEUTC_WeaponToggle = true,
         },
-        UnitName = 'Hulk Scorcher',
+        UnitName = 'Incineration Corps Hulk Scorcher',
         UnitWeight = 1,
     },
     Intel = {

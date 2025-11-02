@@ -1,38 +1,88 @@
 UnitBlueprint {
     Audio = {
-        AmbientMove = Sound {
-            Bank = 'XEL',
-            Cue = 'XEL0305_Move_Loop',
+        CaptureLoop = Sound {
+            Bank = 'URL',
+            Cue = 'URL0301_Capture_Loop',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        Construct = Sound {
+            Bank = 'URL',
+            Cue = 'URL0301_Construct_Start',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        ConstructLoop = Sound {
+            Bank = 'URL',
+            Cue = 'URL0301_Construct_Loop',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        Destroyed = Sound {
+            Bank = 'URLDestroy',
+            Cue = 'URL_Destroy_Land',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        EnhanceEnd = Sound {
+            Bank = 'UnitsGlobal',
+            Cue = 'GLB_Enhance_Stop',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        EnhanceFail = Sound {
+            Bank = 'UnitsGlobal',
+            Cue = 'GLB_Enhance_Fail',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        EnhanceLoop = Sound {
+            Bank = 'UnitsGlobal',
+            Cue = 'GLB_Enhance_Loop',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        EnhanceStart = Sound {
+            Bank = 'UnitsGlobal',
+            Cue = 'GLB_Enhance_Start',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        FootFallGeneric = Sound {
+            Bank = 'URL',
+            Cue = 'URL0301_Move_Step',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        FootFallGenericSeabed = Sound {
+            Bank = 'URL',
+            Cue = 'URL0001_Move_UW_Step',
             LodCutoff = 'UnitMove_LodCutoff',
         },
         Killed = Sound {
-            Bank = 'UELDestroy',
-            Cue = 'UEL_Destroy_Huge',
+            Bank = 'Explosions',
+            Cue = 'Cybran_Nuke_Impact',
             LodCutoff = 'UnitMove_LodCutoff',
         },
-        ShieldOff = Sound {
-            Bank = 'UEL',
-            Cue = 'UEL0303_Shield_Activate',
+        ReclaimLoop = Sound {
+            Bank = 'URL',
+            Cue = 'URL0301_Reclaim_Loop',
             LodCutoff = 'UnitMove_LodCutoff',
         },
-        ShieldOn = Sound {
-            Bank = 'UEL',
-            Cue = 'UEL0303_Shield_Activate',
+        StartCapture = Sound {
+            Bank = 'URL',
+            Cue = 'URL0301_Capture_Start',
             LodCutoff = 'UnitMove_LodCutoff',
         },
         StartMove = Sound {
-            Bank = 'XEL',
-            Cue = 'XEL0305_Move_Start',
+            Bank = 'URL',
+            Cue = 'URL0301_Move_Start',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        StartReclaim = Sound {
+            Bank = 'URL',
+            Cue = 'URL0301_Reclaim_Start',
             LodCutoff = 'UnitMove_LodCutoff',
         },
         StopMove = Sound {
-            Bank = 'XEL',
-            Cue = 'XEL0305_Move_Stop',
+            Bank = 'URL',
+            Cue = 'URL0301_Move_Stop',
             LodCutoff = 'UnitMove_LodCutoff',
         },
         UISelection = Sound {
             Bank = 'Interface',
-            Cue = 'UEF_Select_Bot',
+            Cue = 'Cybran_Select_Commander',
             LodCutoff = 'UnitMove_LodCutoff',
         },
     },
@@ -90,7 +140,7 @@ UnitBlueprint {
             },
         },
         AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0308/CSKMDCL0308_Awalk01.sca',
-        AnimationWalkRate = 1.2,
+        AnimationWalkRate = 1.0,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {

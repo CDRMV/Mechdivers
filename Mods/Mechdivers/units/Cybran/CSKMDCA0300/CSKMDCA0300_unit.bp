@@ -202,7 +202,7 @@ UnitBlueprint {
         Icon = 'air',
         SelectionPriority = 2,
         TechLevel = 'RULEUTL_Secret',
-        UnitName = 'Valkyrie',
+        UnitName = 'Predator',
         UnitWeight = 1,
     },
     Intel = {

@@ -5,15 +5,12 @@ BuilderGroup {
     Builder {
         BuilderName = 'Sorian AdvancedLightBotFactory Commander Priority Builder',
         PlatoonTemplate = 'CommanderBuilderSorian',
-        Priority = 505,
+        Priority = 805,
         BuilderConditions = {                        
-            { SIBC, 'GreaterThanEconEfficiencyOverTime', { 0.8, 1.1} },
-            { UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
-            { UCBC, 'UnitCapCheckLess', { .8 } },
-            { EBC, 'MassToFactoryRatioBaseCheck', { 'LocationType' } },
-			#{ UCBC, 'HaveLessThanUnitsWithCategory', { 4, categories.ADVANCEDLIGHTBOTFACTORY}},
-			{ UCBC, 'FactoryLessAtLocation', { 'LocationType', 3, 'FACTORY LAND' }},
-			{ UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.ADVANCEDLIGHTBOTFACTORY, 'LocationType', }},
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'FactoryLessAtLocation', { 'LocationType', 1, 'Land' } },
+			{ UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 6, categories.ADVANCEDLIGHTBOTFACTORY } },
+			{ UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
         },
         BuilderType = 'Any',
         BuilderData = {

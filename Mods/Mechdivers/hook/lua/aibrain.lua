@@ -18,6 +18,14 @@ end,
 		self:ForkThread(self.CheckCommissarStep1)
     end,
 	
+	OnCreateAI = function(self, planName)
+	OldAIBrain.OnCreateAI(self)
+		self:ForkThread(self.CheckAssaultDroneStationStep1)
+		self:ForkThread(self.CheckDetectorTowerStep1)
+		self:ForkThread(self.CheckScoutDroneStep1)
+		self:ForkThread(self.CheckCommissarStep1)
+    end,
+	
 	CheckAssaultDroneStationStep1 = function(self)
 	        while true do
 			local labs = self:GetListOfUnits(categories.ASSAULTDRONESTATION, true)

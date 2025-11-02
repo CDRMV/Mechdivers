@@ -10,7 +10,7 @@ UnitList = {
 
     T3AirGunship = {
         UEF = {'CSKMDTA0300', 80}, 		-- Pelican, Tech 3 Mech Marine Transport Gunship
-		Cybran = {'CSKMDCA0300', 80}, 		-- Valkyrie, Tech 3 Assault Drone
+		Cybran = {'CSKMDCA0300', 80}, 		-- Predator, Tech 3 Assault Drone
     },
 	
 	T3AirTransport = {
@@ -51,10 +51,6 @@ UnitList = {
 		Aeon = {'CSKMDAA0303', 80},  -- Stingray, Tech 3 Groundattack Fighter
 	},
 	
-	T3AirGunship = {
-	    UEF = {'CSKMDTA0300', 80}, 		-- Pelican, Tech 3 Mech Marine Transport Gunship
-    },
-	
 	T4LandExperimental1 = {
 		Aeon = {'CSKMDAL0306', 80},    	-- Harvester, Tech 3 Super Heavy Tripod
     },
@@ -75,11 +71,11 @@ UnitList = {
     Cybran =	{'URBMD0302', 80}, -- Smilodon Tech 3 Anti Air Quad Autocannon
 },
 
-	T2Artillery = {
+	T3Artillery = {
     Cybran =	{'URBMD0303', 80}, -- Pyros Tech 3 Mortar
 	},
 	
-	T2RadarJammer = {
+	T2ShieldDefense = {
     Cybran =	{'urbmd0101', 80}, -- Tech 2 Tactical Jammer
 	},
 }
