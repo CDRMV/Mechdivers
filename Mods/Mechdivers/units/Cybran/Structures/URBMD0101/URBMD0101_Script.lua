@@ -76,7 +76,7 @@ URBMD0101 = Class(CStructureUnit) {
         CStructureUnit.OnIntelEnabled(self)
         self.MySpinner:SetTargetSpeed(180)
 		while true do
-		if self.Effect == true then
+		if self.Effect == true and not self:IsDead() then
         self.effect = CreateAttachedEmitter(self, 'Effect', self:GetArmy(), ModBpPath .. 'cybran_jammer_ambient_01_emit.bp'):ScaleEmitter(0.2):OffsetEmitter(0,0,-1) 
 		end
 		WaitSeconds(4.5)
