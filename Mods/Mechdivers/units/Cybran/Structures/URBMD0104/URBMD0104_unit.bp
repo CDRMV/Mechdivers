@@ -1,0 +1,437 @@
+UnitBlueprint {
+    Audio = {
+        Construct = Sound {
+            Bank = 'URB',
+            Cue = 'URB0101_Construct_Start',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        ConstructLoop = Sound {
+            Bank = 'URB',
+            Cue = 'URB0101_Construct_Loop',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        DeathExplosion = Sound {
+            Bank = 'URLDestroy',
+            Cue = 'URB_Destroy_Lrg_PreDestroy',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        Destroyed = Sound {
+            Bank = 'URLDestroy',
+            Cue = 'URB_Destroy_Huge',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        DoneBeingBuilt = Sound {
+            Bank = 'URB',
+            Cue = 'URB0101_Activate',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+        UISelection = Sound {
+            Bank = 'Interface',
+            Cue = 'Cybran_Select_Factory',
+            LodCutoff = 'UnitMove_LodCutoff',
+        },
+    },
+    BuildIconSortPriority = 10,
+    Categories = {
+        'PRODUCTSC1',
+        'SELECTABLE',
+        'BUILTBYTIER2ENGINEER',
+        'BUILTBYTIER3ENGINEER',
+		'ADVANCEDLIGHTBOTFACTORY',
+        'CYBRAN',
+        'STRUCTURE',
+        'LAND',
+        'TECH2',
+        'CONSTRUCTION',
+        'FACTORY',
+        'RALLYPOINT',
+        'DRAGBUILD',
+        'SIZE12',
+        'VISIBLETORECON',
+        'RECLAIMABLE',
+        'SHOWQUEUE',
+        'SORTCONSTRUCTION',
+    },
+    Defense = {
+        AirThreatLevel = 0,
+        ArmorType = 'Structure',
+        EconomyThreatLevel = 11,
+        Health = 7800,
+        MaxHealth = 7800,
+        RegenRate = 0,
+        SubThreatLevel = 0,
+        SurfaceThreatLevel = 0,
+    },
+    Description = 'Advanced Heavy Factory',
+    Display = {
+        Abilities = {
+            '<LOC ability_upgradable>Upgradeable',
+        },
+		AnimationFinishBuildLand = '/mods/Mechdivers/units/Cybran/Structures/urbmd0104/urbmd0104_aopen.sca',
+        BuildAttachBone = 'Attachpoint',
+        Mesh = {
+            IconFadeInZoom = 130,
+            LODs = {
+                {
+                    LODCutoff = 500,
+                    ShaderName = 'Insect',
+                },
+            },
+        },
+        PlaceholderMeshName = 'UXB0007',
+        SpawnRandomRotation = true,
+        Tarmacs = {
+            {
+                Albedo = 'Tarmacs/Tar12x_cybran_01_albedo',
+                DeathLifetime = 300,
+                FadeOut = 150,
+                Length = 12.8,
+                Normal = 'Tarmacs/Tar12x_cybran_01_normals',
+                Orientations = {
+                    0,
+                },
+                RemoveWhenDead = false,
+                Width = 12.8,
+            },
+        },
+        UniformScale = 0.04,
+    },
+    Economy = {
+        BuildCostEnergy = 7200,
+        BuildCostMass = 800,
+        BuildRate = 40,
+        BuildTime = 1600,
+        BuildableCategory = {
+            'BUILTBYTIER2HEAVYFACTORY CYBRAN',
+			'BUILTBYTIER3HEAVYFACTORY CYBRAN',
+        },
+        RebuildBonusIds = {
+            'urbmd0104',
+        },
+        StorageEnergy = 0,
+        StorageMass = 80,
+    },
+    Footprint = {
+        SizeX = 5,
+        SizeZ = 5,
+    },
+	Enhancements = {
+        Slots = {
+            Back = {
+                name = '<LOC _Back>',
+                x = 38,
+                y = -10,
+            },
+            LCH = {
+                name = '<LOC _LCH>',
+                x = 105,
+                y = 30,
+            },
+            RCH = {
+                name = '<LOC _RCH>',
+                x = -10,
+                y = 30,
+            },
+        },
+		RegularLegion = {
+            BuildCostEnergy = 18000,
+            BuildCostMass = 720,
+            BuildTime = 900,
+            Icon = 'regular',
+            Name = 'Regular Legion',
+            Slot = 'Back',
+        },
+        RegularLegionRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'regular',
+            Name = 'Regular Legion',
+            Prerequisite = 'RegularLegion',
+            RemoveEnhancements = {
+                'RegularLegion',
+                'RegularLegionRemove',
+            },
+            Slot = 'Back',
+        },
+        JetBrigade = {
+            BuildCostEnergy = 18000,
+            BuildCostMass = 720,
+            BuildTime = 900,
+            Icon = 'jetpack',
+            Name = 'Add Build Access: Jet Brigade',
+            Slot = 'Back',
+        },
+        JetBrigadeRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'jetpack',
+            Name = 'Remove Build Access: Jet Brigade',
+            Prerequisite = 'JetBrigade',
+            RemoveEnhancements = {
+                'JetBrigade',
+                'JetBrigadeRemove',
+            },
+            Slot = 'Back',
+        },
+		IncinerationCorps = {
+            BuildCostEnergy = 18000,
+            BuildCostMass = 720,
+            BuildTime = 900,
+            Icon = 'flame',
+            Name = 'Add Build Access: Incineration Corps',
+            Slot = 'Back',
+        },
+        IncinerationCorpsRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'flame',
+            Name = 'Remove Build Access: Incineration Corps',
+            Prerequisite = 'IncinerationCorps',
+            RemoveEnhancements = {
+                'IncinerationCorps',
+                'IncinerationCorpsRemove',
+            },
+            Slot = 'Back',
+        },
+		T3Engineering = {
+            BuildCostEnergy = 50000,
+            BuildCostMass = 2400,
+            BuildTime = 6000,
+            Icon = 'ees',
+            Name = '<LOC enhancements_0103>Tech 3 Engineering Suite',
+            NewBuildRate = 90,
+            Slot = 'RCH',
+        },
+        T3EngineeringRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'ees',
+            Name = '<LOC enhancements_0104>Remove Tech 3 Engineering Suite',
+            Prerequisite = 'T3Engineering',
+            RemoveEnhancements = {
+                'T3Engineering',
+                'T3EngineeringRemove',
+            },
+            Slot = 'RCH',
+        },
+    },
+    General = {
+        BuildBones = {
+            BuildAttachBone = 'Attachpoint',
+            BuildEffectBones = {
+                'Attachpoint',
+            },
+        },
+        Category = 'Factory',
+        Classification = 'RULEUC_Factory',
+        CommandCaps = {
+            RULEUCC_Attack = false,
+            RULEUCC_CallTransport = false,
+            RULEUCC_Capture = false,
+            RULEUCC_Guard = true,
+            RULEUCC_Move = true,
+            RULEUCC_Nuke = false,
+            RULEUCC_Patrol = true,
+            RULEUCC_Pause = true,
+            RULEUCC_Reclaim = false,
+            RULEUCC_Repair = false,
+            RULEUCC_RetaliateToggle = true,
+            RULEUCC_Stop = true,
+            RULEUCC_Transport = false,
+        },
+        ConstructionBar = true,
+        FactionName = 'Cybran',
+        Icon = 'land',
+        SelectionPriority = 5,
+        TechLevel = 'RULEUTL_Advanced',
+        UnitWeight = 1,
+    },
+    Intel = {
+        VisionRadius = 20,
+    },
+    Interface = {
+        HelpText = '<LOC urb0101_help>Land Factory',
+    },
+    LifeBarHeight = 0.075,
+    LifeBarOffset = 1.1,
+    LifeBarSize = 3,
+    Physics = {
+        BankingSlope = 0,
+        BuildOnLayerCaps = {
+            LAYER_Air = false,
+            LAYER_Land = true,
+            LAYER_Orbit = false,
+            LAYER_Seabed = false,
+            LAYER_Sub = false,
+            LAYER_Water = false,
+        },
+        DragCoefficient = 0.2,
+        FlattenSkirt = true,
+        MaxSteerForce = 0,
+        MinSpeedPercent = 0,
+        MotionType = 'RULEUMT_None',
+        RaisedPlatforms = {
+
+            # Platform 1
+            # TopLeft Offset From Center
+            -1.6,
+
+            # x
+            -2,
+
+            # z
+            0.18,
+
+            # height
+            # TopRight Offset From Center
+            2,
+
+            # x
+            -2,
+
+            # z
+            0.18,
+
+            # height
+            # BottomLeft Offset From Center
+            -1.6,
+
+            # x
+            1.6,
+
+            # z
+            0.18,
+
+            # height
+            # BottomRight Offset From Center
+            2,
+
+            # x
+            1.6,
+
+            # z
+            0.18,
+
+            # height
+            # Platform 2
+            # TopLeft Offset From Center
+            -1.75,
+
+            # x
+            -2,
+
+            # z
+            0,
+
+            # height
+            # TopRight Offset From Center
+            -1.6,
+
+            # x
+            -2,
+
+            # z
+            0.18,
+
+            # height
+            # BottomLeft Offset From Center
+            -1.75,
+
+            # x
+            1.6,
+
+            # z
+            0,
+
+            # height
+            # BottomRight Offset From Center
+            -1.6,
+
+            # x
+            1.6,
+
+            # z
+            0.18,
+
+            # height
+            # Platform 3
+            # TopLeft Offset From Center
+            -2,
+
+            # x
+            1.6,
+
+            # z
+            0.18,
+
+            # height
+            # TopRight Offset From Center
+            2,
+
+            # x
+            1.6,
+
+            # z
+            0.18,
+
+            # height
+            # BottomLeft Offset From Center
+            -2,
+
+            # x
+            1.75,
+
+            # z
+            0,
+
+            # height
+            # BottomRight Offset From Center
+            2,
+
+            # x
+            1.75,
+
+            # z
+            0,
+        },
+        RollOffPoints = {
+            {
+                UnitSpin = 0,
+                X = 0,
+                Y = 0,
+                Z = 3,
+            },
+        },
+        SkirtOffsetX = -1.5,
+        SkirtOffsetZ = -1.5,
+        SkirtSizeX = 8,
+        SkirtSizeZ = 8,
+        TurnRate = 0,
+    },
+    SelectionSizeX = 3.25,
+    SelectionSizeZ = 3,
+    SelectionThickness = 0.3,
+    SizeX = 2.9,
+    SizeY = 1,
+    SizeZ = 4.2,
+    StrategicIconName = 'icon_factory2_land',
+    StrategicIconSortPriority = 220,
+    Wreckage = {
+        Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
+        EnergyMult = 0,
+        HealthMult = 0.9,
+        MassMult = 0.9,
+        ReclaimTimeMultiplier = 1,
+        WreckageLayers = {
+            Air = false,
+            Land = true,
+            Seabed = false,
+            Sub = false,
+            Water = false,
+        },
+    },
+}

@@ -100,6 +100,7 @@ UnitBlueprint {
         'PRODUCTSC1',
         'SELECTABLE',
 		'JETBRIGADE',
+		'BUILTBYTIER3HEAVYFACTORY',
         'BUILTBYTIER3FACTORY',
         'CYBRAN',
         'MOBILE',
