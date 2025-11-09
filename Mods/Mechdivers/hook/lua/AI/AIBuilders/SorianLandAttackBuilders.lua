@@ -4,10 +4,9 @@ BuilderGroup {
     Builder {
         BuilderName = 'Sorian T1 Bot - Late Game Rush',
         PlatoonTemplate = 'T1LandDFBot',
-        Priority = 1500,
+        Priority = 999999,
         BuilderConditions = {
-			{ UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1000, 'TECH1 BOT'} },
-			{ UCBC, 'UnitsLessAtLocation', { 'LocationType', 100, 'TECH1 BOT'} },
+			{ UCBC, 'UnitsLessAtLocation', { 'LocationType', 100, categories.TECH1 * categories.BOT} },
         },
         BuilderType = 'Land',
     },
