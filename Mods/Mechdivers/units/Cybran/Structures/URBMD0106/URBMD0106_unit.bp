@@ -107,7 +107,7 @@ UnitBlueprint {
         Icon = 'land',
         SelectionPriority = 5,
         TechLevel = 'RULEUTL_Advanced',
-        UnitName = 'Fusion MG Emplacement',
+        UnitName = 'Dual Fusion Cannon Emplacement',
         UnitWeight = 1,
 		OrderOverrides = {
 			RULEUTC_IntelToggle = {
