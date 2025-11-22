@@ -89,7 +89,8 @@ local MyUnitIdTable = {
 	  cskmdcl0308=true, 
 	  cskmdcl0309=true, 
 	  cskmdcl0310=true, 		  
-	  cskmdcl0311=true,  
+	  cskmdcl0311=true,
+	  cskmdcl0313=true,   
 	  
 -- Structures 
       -- Mines --
