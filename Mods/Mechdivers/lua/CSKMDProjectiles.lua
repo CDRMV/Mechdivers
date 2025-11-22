@@ -83,6 +83,23 @@ CHeavyLaserFusionProjectile = Class(MultiPolyTrailProjectile) {
     FxImpactUnderWater = {},
 }
 
+CHeavyLaserFusionProjectile2 = Class(MultiPolyTrailProjectile) {
+    PolyTrails = {
+        ModEffectTemplate.CHeavyFusionLaserPolyTrail2,
+    },
+    PolyTrailOffset = {0,0}, 
+
+    FxTrails = ModEffectTemplate.CHeavyFusionLaserFXTrail02,
+	FxTrailScale = 4,
+	PolyTrailScale = 4,
+    #PolyTrail = ModEffectTemplate.CHeavyFusionLaserPolyTrail,
+    FxImpactUnit = EffectTemplate.TMissileHit01,
+    FxImpactLand = EffectTemplate.TMissileHit01,
+    FxImpactProp = EffectTemplate.TMissileHit01,
+    FxTrailOffset = 0,
+    FxImpactUnderWater = {},
+}
+
 CHeavyFusionArtilleryProjectile = Class(MultiPolyTrailProjectile) {
     PolyTrails = {
         ModEffectTemplate.CHeavyFusionMortarPolyTrail,

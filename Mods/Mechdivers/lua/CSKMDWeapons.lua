@@ -53,6 +53,15 @@ CDFHLaserFusionWeapon = Class(DefaultProjectileWeapon) {
     },
 }
 
+CDFHLaserFusionWeapon2 = Class(DefaultProjectileWeapon) {
+    FxMuzzleFlash = ModEffectTemplate.CFusionLaserMuzzleFlash,
+	FxRackChargeMuzzleFlash  = {
+		ModEffects .. 'heavyfusion_flash_01_emit.bp',
+        ModEffects .. 'heavyfusion_flash_02_emit.bp',
+        ModEffects .. 'heavyfusion_flash_03_emit.bp',
+    },
+}
+
 CDFFusionMortarWeapon = Class(DefaultProjectileWeapon) {
     FxMuzzleFlash = ModEffectTemplate.CFusionMortarMuzzleFlash,
 }
