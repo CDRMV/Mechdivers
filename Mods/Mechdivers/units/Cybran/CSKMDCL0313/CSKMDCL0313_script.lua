@@ -17,6 +17,7 @@ local ModEffects = '/mods/Mechdivers/effects/emitters/'
 
 CSKMDCL0313 = Class(CWalkingLandUnit) {
 	ChargeEffects = {
+		ModEffects .. 'fusion_electricity_01_emit.bp',
 		ModEffects .. 'heavyfusion_flash_01_emit.bp',
         ModEffects .. 'heavyfusion_flash_02_emit.bp',
         ModEffects .. 'heavyfusion_flash_03_emit.bp',
@@ -27,9 +28,9 @@ CSKMDCL0313 = Class(CWalkingLandUnit) {
 		ForkThread( function()
         local bp = self.Blueprint
         local muzzleBones = {
-	'R_Muzzle',
-	'L_Muzzle',
-    }
+			'R_Muzzle',
+			'L_Muzzle',
+		}
         for _, effect in self.unit.ChargeEffects do
             for _, muzzle in muzzleBones do
                 CreateAttachedEmitter(self.unit, muzzle, self.unit:GetArmy(), effect):ScaleEmitter(1)
@@ -47,6 +48,32 @@ CSKMDCL0313 = Class(CWalkingLandUnit) {
 		MissileRack = Class(CIFGrenadeWeapon) {},
 		Dummy = Class(DummyTurretWeapon) {},
     },
+	
+	OnCreate = function(self)
+        CWalkingLandUnit.OnCreate(self)
+		ForkThread( function()
+		if not self.AnimationManipulator then
+            self.AnimationManipulator = CreateAnimator(self)
+            self.Trash:Add(self.AnimationManipulator)
+        end
+		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/Cybran/CSKMDCL0313/CSKMDCL0313_Afold01.sca', false):SetRate(1)
+		end)
+    end,
+	
+	OnStopBeingBuilt = function(self,builder,layer)
+        CWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+		ForkThread( function()
+		self.AnimationManipulator:SetRate(-1)
+		WaitFor(self.AnimationManipulator)
+		self.AnimationManipulator:Destroy()
+		while not self.Dead do
+		self:SetWeaponEnabledByLabel('MissileRack', false)
+		WaitSeconds(15)
+		self:SetWeaponEnabledByLabel('MissileRack', true)
+		WaitSeconds(15)
+		end
+		end)
+    end,
 	
 }
 

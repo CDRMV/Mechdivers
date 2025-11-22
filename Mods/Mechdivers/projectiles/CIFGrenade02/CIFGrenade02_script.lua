@@ -10,15 +10,16 @@ CIFGrenade02 = Class(CArtilleryProjectile) {
 		CArtilleryProjectile.OnCreate(self)
 		self:SetMaxSpeed(math.random(5,12))
 		self.Number = 0
+		CreateAttachedEmitter(self,0,self:GetArmy(), '/mods/Mechdivers/effects/emitters/Cybergrenade_01_emit.bp'):OffsetEmitter(0,0,0.1):ScaleEmitter(0.1)
+		CreateAttachedEmitter(self,0,self:GetArmy(), '/mods/Mechdivers/effects/emitters/Cybergrenade_02_emit.bp'):OffsetEmitter(0,0,0.1):ScaleEmitter(0.1)
+		CreateAttachedEmitter(self,0,self:GetArmy(), '/mods/Mechdivers/effects/emitters/Cybergrenade_03_emit.bp'):OffsetEmitter(0,0,0.1):ScaleEmitter(0.1)
 	end,  
 
     OnImpact = function(self, targetType, targetEntity)
 		if self.Number == 0 then
         ForkThread( function()
 		if targetType == 'Water' then
-		if self and not self:BeenDestroyed() then
             self:Destroy()
-		end
         end
         if targetType == 'Terrain' then
 			WaitSeconds(3) 
