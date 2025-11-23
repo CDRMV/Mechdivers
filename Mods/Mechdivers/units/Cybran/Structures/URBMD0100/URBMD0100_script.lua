@@ -431,6 +431,12 @@ end,
         self:Destroy()
     end,
 	
+	OnReclaimed = function(self, reclaimer)
+		if self.Scan then
+		self.Scan:Destroy()
+		end
+    end,
+	
 }	
 	
 function GetPlayableArea()

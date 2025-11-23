@@ -28,7 +28,7 @@ CHeavyFusionLaserFXTrail02 =  {
 
 CHeavyFusionLaserPolyTrail2 = ModBpPath .. 'Fusion_Laser2_emit.bp'
 
-CHeavyFusionLaserPolyTrail = ModBpPath .. 'Fusion_Laser_emit.bp'
+CHeavyFusionLaserPolyTrail = ModBpPath .. 'Fusion_Laser3_emit.bp'
 
 CHeavyFusionMortarFXTrail01 =  { 
 '/effects/emitters/mortar_munition_03_emit.bp',

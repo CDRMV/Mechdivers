@@ -1,0 +1,14 @@
+MeshBlueprint {
+    LODs = {
+        {
+            MeshName = '/mods/Mechdivers/Decorations/CybranBanner1_LOD0.scm',
+            ShaderName = 'UEFQuantumGate',
+            AlbedoName = '/mods/Mechdivers/Decorations/CybranTransportEffect_Albedo.dds',
+            NormalsName = '/mods/Mechdivers/Decorations/CybranTransportEffect_Normals.dds',
+			SpecularName = '/mods/Mechdivers/Decorations/CybranTransportEffect_Specular.dds',
+            LODCutoff = 300,
+            
+        },
+    },
+    SortOrder = 999,
+}

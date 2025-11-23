@@ -134,6 +134,12 @@ end,
         self:PlayUnitSound('Destroyed')
         self:Destroy()
     end,
+	
+	OnReclaimed = function(self, reclaimer)
+		if self.Scan then
+		self.Scan:Destroy()
+		end
+    end,
     
 }
 

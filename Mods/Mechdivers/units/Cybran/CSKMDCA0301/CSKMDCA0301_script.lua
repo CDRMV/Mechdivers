@@ -74,6 +74,12 @@ CSKMDCA0301 = Class(CAirUnit) {
         self:Destroy()
     end,
 	
+	OnReclaimed = function(self, reclaimer)
+		if self.Effect then
+		self.Effect:Destroy()
+		end
+    end,
+	
 	OnTransportAttach = function(self, bone, attachee)
         CAirUnit.OnTransportDetach(self, bone, attachee)
 		ForkThread(function()
