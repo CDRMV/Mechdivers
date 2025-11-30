@@ -2,13 +2,13 @@
 function GetEnhancementPrefix(unitID, iconID)
 LOG('unitID: ', unitID)
     local factionPrefix = ''
-    if string.sub(unitID, 4, 4) == 'a' or string.sub(unitID, 2, 2) == 'a' then
+    if string.sub(unitID, 6, 6) == 'a' or string.sub(unitID, 2, 2) == 'a' then
         factionPrefix = 'aeon-enhancements/' 
-    elseif string.sub(unitID, 4, 4) == 't' or string.sub(unitID, 2, 2) == 'e' then
+    elseif string.sub(unitID, 6, 6) == 't' or string.sub(unitID, 2, 2) == 'e' then
         factionPrefix = 'uef-enhancements/'
-    elseif string.sub(unitID, 4, 4) == 'c' or string.sub(unitID, 2, 2) == 'r' then
+    elseif string.sub(unitID, 6, 6) == 'c' or string.sub(unitID, 2, 2) == 'r' then
         factionPrefix = 'cybran-enhancements/'
-    elseif string.sub(unitID, 4, 4) == 's' or string.sub(unitID, 2, 2) == 's' then
+    elseif string.sub(unitID, 6, 6) == 's' or string.sub(unitID, 2, 2) == 's' then
         factionPrefix = 'seraphim-enhancements/'
     end
     local prefix = '/game/' .. factionPrefix .. iconID
@@ -24,13 +24,13 @@ end
 
 function GetEnhancementTextures(unitID, iconID)
     local factionPrefix = ''
-    if string.sub(unitID, 4, 4) == 'a' or string.sub(unitID, 2, 2) == 'a' then
+    if string.sub(unitID, 6, 6) == 'a' or string.sub(unitID, 2, 2) == 'a' then
         factionPrefix = 'aeon-enhancements/' 
-    elseif string.sub(unitID, 4, 4) == 't' or string.sub(unitID, 2, 2) == 'e' then
+    elseif string.sub(unitID, 6, 6) == 't' or string.sub(unitID, 2, 2) == 'e' then
         factionPrefix = 'uef-enhancements/'
-    elseif string.sub(unitID, 4, 4) == 'c' or string.sub(unitID, 2, 2) == 'r' then
+    elseif string.sub(unitID, 6, 6) == 'c' or string.sub(unitID, 2, 2) == 'r' then
         factionPrefix = 'cybran-enhancements/'
-    elseif string.sub(unitID, 4, 4) == 's' or string.sub(unitID, 2, 2) == 's' then
+    elseif string.sub(unitID, 6, 6) == 's' or string.sub(unitID, 2, 2) == 's' then
         factionPrefix = 'seraphim-enhancements/'
     end
     

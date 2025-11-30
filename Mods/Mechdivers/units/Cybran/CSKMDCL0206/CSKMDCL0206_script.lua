@@ -9,12 +9,28 @@
 #****************************************************************************
 
 local CWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
-local ModWeaponsFile = import('/mods/Mechdivers/lua/CSKMDWeapons.lua')
-local CDFLaserFusionWeapon = ModWeaponsFile.CDFLaserFusionWeapon
+local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 
 CSKMDCL0206 = Class(CWalkingLandUnit) {
     Weapons = {
-        MainGun = Class(CDFLaserFusionWeapon) {},
+		Dummy = Class(DummyTurretWeapon) {
+		
+		OnWeaponFired = function(self)
+			ForkThread( function()
+			local animator = CreateAnimator(self.unit)
+			local number = math.random(1,3)
+			if number == 1 then
+            animator:PlayAnim('/Mods/Mechdivers/units/Cybran/CSKMDCL0205/CSKMDCL0206_ASaw01.sca', false):SetRate(2)
+			elseif number == 2 then
+			animator:PlayAnim('/Mods/Mechdivers/units/Cybran/CSKMDCL0206/CSKMDCL0206_ASaw02.sca', false):SetRate(2)
+			elseif number == 3 then
+			animator:PlayAnim('/Mods/Mechdivers/units/Cybran/CSKMDCL0206/CSKMDCL0206_ASaw03.sca', false):SetRate(2)
+			end
+			WaitFor(animator)
+			animator:Destroy()
+			end)
+		end,
+			},
     },
 	
 	OnCreate = function(self)

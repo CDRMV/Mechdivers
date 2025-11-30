@@ -148,6 +148,7 @@ UnitBlueprint {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
+			Description = 'Left Auto Cannon',
             Icon = 'hamc',
             Name = 'Add 2 Barrel Autocannon',
             Slot = 'LCH',
