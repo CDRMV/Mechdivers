@@ -42,6 +42,16 @@ CSKMDCL0201 = Class(CWalkingLandUnit) {
 		self:SetSpeedMult(1)
         end
     end,
+	
+	HideStuff = function(self)
+		self:ShowBone(0, true)
+		self:HideBone('R_Arm_B04', true)
+		self:HideBone('L_Arm_Shield', true)
+		self:HideBone('L_Arm_Shield2', true)
+		self:HideBone('B01', true)
+		self:HideBone('B02', true)
+		self:HideBone('B04', true)
+    end,
 }
 
 TypeClass = CSKMDCL0201

@@ -56,6 +56,14 @@ UnitList = {
 		Cybran = {'CSKMDCL0313', 80},    	-- Hunter IV, Tech 3 Heavy Siege Bot (War Strider)
     },
 	
+	T4LandExperimental2 = {
+		Cybran = {'CSKMDCL0314', 80},    	-- CX-300: Factory Strider, Tech 3 Heavy Walker
+    },
+	
+	T4LandExperimental3 = {
+		Cybran = {'CSKMDCL0315', 80},    	-- CX-300b: Factory Jamming Strider, Tech 3 Heavy Support Walker
+    },
+	
 	T4AirExperimental1 = {
 		Aeon = {'CSKMDAA0306', 80},	-- Leviathan, Tech 3 Super Heavy Airship
 	},
