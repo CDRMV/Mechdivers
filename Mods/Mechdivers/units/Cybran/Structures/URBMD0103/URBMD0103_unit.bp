@@ -142,7 +142,8 @@ UnitBlueprint {
             BuildCostMass = 720,
             BuildTime = 900,
             Icon = 'regular',
-            Name = 'Regular Legion',
+            Name = '<LOC RegularLegion>Regular Legion',
+			Description = '<LOC AddRegularLegion>Add build access to the Regular Legion',
             Slot = 'Back',
         },
         RegularLegionRemove = {
@@ -150,7 +151,8 @@ UnitBlueprint {
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'regular',
-            Name = 'Regular Legion',
+            Name = '<LOC RegularLegion>Regular Legion',
+			Description = '<LOC RemoveRegularLegion>Remove build access to the Regular Legion',
             Prerequisite = 'RegularLegion',
             RemoveEnhancements = {
                 'RegularLegion',
@@ -163,7 +165,8 @@ UnitBlueprint {
             BuildCostMass = 720,
             BuildTime = 900,
             Icon = 'jetpack',
-            Name = 'Add Build Access: Jet Brigade',
+            Name = '<LOC JetBrigade>Jet Brigade',
+			Description = '<LOC AddJetBrigade>Add build access to the Jet Brigade',
             Slot = 'Back',
         },
         JetBrigadeRemove = {
@@ -171,7 +174,8 @@ UnitBlueprint {
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'jetpack',
-            Name = 'Remove Build Access: Jet Brigade',
+            Name = '<LOC JetBrigade>Jet Brigade',
+			Description = '<LOC RemoveJetBrigade>Remove build access to the Jet Brigade',
             Prerequisite = 'JetBrigade',
             RemoveEnhancements = {
                 'JetBrigade',
@@ -184,7 +188,8 @@ UnitBlueprint {
             BuildCostMass = 720,
             BuildTime = 900,
             Icon = 'flame',
-            Name = 'Add Build Access: Incineration Corps',
+			Description = '<LOC AddIncinerationCorps>Add build access to the Incineration Corps',
+            Name = '<LOC IncinerationCorps>Incineration Corps',
             Slot = 'Back',
         },
         IncinerationCorpsRemove = {
@@ -192,7 +197,8 @@ UnitBlueprint {
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'flame',
-            Name = 'Remove Build Access: Incineration Corps',
+			Description = '<LOC RemoveIncinerationCorps>Remove build access to the Incineration Corps',
+            Name = '<LOC IncinerationCorps>Incineration Corps',
             Prerequisite = 'IncinerationCorps',
             RemoveEnhancements = {
                 'IncinerationCorps',

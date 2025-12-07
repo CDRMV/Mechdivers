@@ -29,6 +29,8 @@ UEBMD0110 = Class(TStructureUnit) {
 		
 		PlayFxRackSalvoReloadSequence = function(self)
 		ForkThread( function()
+		local OldFireState = self.unit:GetFireState()
+		self.unit:SetFireState('HoldFire')
 		local turretpitchmin, turretpitchmax = self:GetTurretPitchMinMax()
 		self:SetTurretPitch(0,0)
 		self.unit:HideBone('Shell01', true)
@@ -44,6 +46,7 @@ UEBMD0110 = Class(TStructureUnit) {
 			self.unit:HideBone('Shell01', true)
 			self.unit:ShowBone('Shell02', true)
 			self:SetTurretPitch(turretpitchmin, turretpitchmax)
+			self.unit:SetFireState(OldFireState)
 			end)
 		end,
 		

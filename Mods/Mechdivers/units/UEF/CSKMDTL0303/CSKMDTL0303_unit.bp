@@ -126,7 +126,7 @@ UnitBlueprint {
         SpawnRandomRotation = false,       
         UniformScale = 0.40,
     },
-		Enhancements = {
+	Enhancements = {
         Slots = {
             Back = {
                 name = '<LOC _Back>',
@@ -148,9 +148,9 @@ UnitBlueprint {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
-			Description = 'Left Auto Cannon',
+			Description = '<LOC AddGaussAutoCannons>Add two Gauss Autocannons to this Arm.',
             Icon = 'hamc',
-            Name = 'Add 2 Barrel Autocannon',
+            Name = '<LOC GaussAutocannons>Gauss Autocannons',
             Slot = 'LCH',
 			HideBones = {
                 'L_Gatling_Arm',
@@ -170,7 +170,8 @@ UnitBlueprint {
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
-            Name = 'Remove 2 Barrel Autocannon',
+			Description = '<LOC RemoveGaussAutoCannons>Removes the two Gauss Autocannons from this Arm.',
+            Name = '<LOC GaussAutocannons>Gauss Autocannons',
             Prerequisite = 'LeftAutoCannon',
             RemoveEnhancements = {
 				'LeftAutoCannon',
@@ -189,7 +190,8 @@ UnitBlueprint {
             BuildCostMass = 5,
             BuildTime = 5,
             Icon = 'hamc',
-            Name = 'Add Gatling Gun',
+            Name = '<LOC GatlingGun>Gatling Gun',
+			Description = '<LOC AddGatlingGun>Add a Gatling Gun to this Arm.',
             Slot = 'LCH',
 			HideBones = {
 				'L_Cannon_Arm',
@@ -212,7 +214,8 @@ UnitBlueprint {
                 'L_Gatling',
             },
             Icon = 'hamc',
-            Name = 'Remove Gatling Gun',
+            Name = '<LOC GatlingGun>Gatling Gun',
+			Description = '<LOC RemoveGatlingGun>Remove the Gatling Gun from this Arm.',
             Prerequisite = 'LeftGatling',
             RemoveEnhancements = {
 				'LeftGatling',
@@ -230,7 +233,8 @@ UnitBlueprint {
             BuildCostMass = 5,
             BuildTime = 5,
             Icon = 'tm',
-            Name = 'Add Missile Launcher',
+            Name = '<LOC MissileLauncher>Missile Launcher',
+			Description = '<LOC AddMissileLauncher>Add a Missile Launcher to this Arm.',
             Slot = 'LCH',
 			HideBones = {
 				'L_Cannon_Arm',
@@ -250,7 +254,8 @@ UnitBlueprint {
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'tm',
-            Name = 'Remove Missile Launcher',
+			Description = '<LOC RemoveMissileLauncher>Remove Missile Launcher from this Arm.',
+            Name = '<LOC MissileLauncher>Missile Launcher',
             Prerequisite = 'LeftMissileLauncher',
             Slot = 'LCH',
 			RemoveEnhancements = {
@@ -266,7 +271,8 @@ UnitBlueprint {
             BuildCostMass = 5,
             BuildTime = 5,
             Icon = 'hamc',
-            Name = 'Add 2 Barrel Autocannon',
+			Description = '<LOC AddGaussAutoCannons>Add two Gauss Autocannons to this Arm.',
+            Name = '<LOC GaussAutocannons>Gauss Autocannons',
             Slot = 'RCH',
 			HideBones = {
                 'R_Gatling_Arm',
@@ -286,7 +292,8 @@ UnitBlueprint {
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
-            Name = 'Remove 2 Barrel Autocannon',
+            Name = '<LOC GaussAutocannons>Gauss Autocannons',
+			Description = '<LOC RemoveGaussAutoCannons>Remove the two Gauss Autocannons to this Arm.',
             Prerequisite = 'RightAutoCannon',
             RemoveEnhancements = {
 				'RightAutoCannon',
@@ -305,7 +312,8 @@ UnitBlueprint {
             BuildCostMass = 5,
             BuildTime = 5,
             Icon = 'hamc',
-            Name = 'Add Gatling Gun',
+            Name = '<LOC GatlingGun>Gatling Gun',
+			Description = '<LOC AddGatlingGun>Add a Gatling Gun to this Arm.',
             Slot = 'RCH',
 			HideBones = {
 				'R_Cannon_Arm',
@@ -325,7 +333,8 @@ UnitBlueprint {
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
-            Name = 'Remove Gatling Gun',
+            Name = '<LOC GatlingGun>Gatling Gun',
+			Description = '<LOC RemoveGatlingGun>Remove the Gatling Gun from this Arm.',
             Prerequisite = 'RightGatling',
             Slot = 'RCH',
 			RemoveEnhancements = {
@@ -343,7 +352,8 @@ UnitBlueprint {
             BuildCostMass = 5,
             BuildTime = 5,
             Icon = 'tm',
-            Name = 'Add Missile Launcher',
+            Name = '<LOC MissileLauncher>Missile Launcher',
+			Description = '<LOC AddMissileLauncher>Add a Missile Launcher to this Arm.',
             Slot = 'RCH',
 			HideBones = {
 				'R_Cannon_Arm',
@@ -363,7 +373,8 @@ UnitBlueprint {
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'tm',
-            Name = 'Remove Missile Launcher',
+			Description = '<LOC RemoveMissileLauncher>Remove Missile Launcher from this Arm.',
+            Name = '<LOC MissileLauncher>Missile Launcher',
             Prerequisite = 'RightMissileLauncher',
             Slot = 'RCH',
 			RemoveEnhancements = {

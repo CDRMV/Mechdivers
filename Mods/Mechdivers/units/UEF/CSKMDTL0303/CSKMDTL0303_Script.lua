@@ -112,12 +112,21 @@ CSKMDTL0303 = Class(TWalkingLandUnit) {
 
 	OnCreate = function(self)
         TWalkingLandUnit.OnCreate(self)
+		ForkThread( function()
 		self:HideBone( 'L_MissileLauncher', true )
 		self:HideBone( 'R_MissileLauncher', true )
 		self:HideBone( 'L_Gatling_Arm', true )
 		self:HideBone( 'R_Gatling_Arm', true )
 		self:HideBone( 'L_Cannon_Arm', true )
 		self:HideBone( 'R_Cannon_Arm', true )
+		Dummy = self:GetWeaponByLabel('Dummy')
+		self.R_Cannon = self:GetWeaponByLabel('R_Cannon')
+		self.L_Cannon = self:GetWeaponByLabel('L_Cannon')
+		self.L_GatlingCannon = self:GetWeaponByLabel('L_GatlingCannon')
+		self.R_GatlingCannon = self:GetWeaponByLabel('R_GatlingCannon')
+		self.L_MissileLauncher = self:GetWeaponByLabel('L_MissileLauncher')
+		self.R_MissileLauncher = self:GetWeaponByLabel('R_MissileLauncher')
+
 		local RandomNumber = 1
 		
 		if RandomNumber == 1 then
@@ -127,13 +136,9 @@ CSKMDTL0303 = Class(TWalkingLandUnit) {
 		self:HideBone( 'R_Gatling_Arm', true )
 		self:ShowBone( 'L_Cannon_Arm', true )
 		self:ShowBone( 'R_Cannon_Arm', true )
-		self:SetWeaponEnabledByLabel('Dummy', true)
-		self:SetWeaponEnabledByLabel('R_Cannon', true)
-		self:SetWeaponEnabledByLabel('L_Cannon', true)
-		self:SetWeaponEnabledByLabel('L_GatlingCannon', false)
-		self:SetWeaponEnabledByLabel('R_GatlingCannon', false)
-		self:SetWeaponEnabledByLabel('L_MissileLauncher', false)
-		self:SetWeaponEnabledByLabel('R_MissileLauncher', false)
+		Dummy:SetEnabled(true)
+		self:CreateEnhancement('RightAutoCannon')
+		self:CreateEnhancement('LeftAutoCannon')
 		elseif RandomNumber == 2 then
 		self:ShowBone( 'L_MissileLauncher', true )
 		self:HideBone( 'R_MissileLauncher', true )
@@ -141,17 +146,10 @@ CSKMDTL0303 = Class(TWalkingLandUnit) {
 		self:ShowBone( 'R_Gatling_Arm', true )
 		self:HideBone( 'L_Cannon_Arm', true )
 		self:HideBone( 'R_Cannon_Arm', true )
-		self:SetWeaponEnabledByLabel('Dummy', true)
-		self:SetWeaponEnabledByLabel('L_MissileLauncher', true)
-		self:SetWeaponEnabledByLabel('R_MissileLauncher', false)
-		self:SetWeaponEnabledByLabel('L_GatlingCannon', false)
-		self:SetWeaponEnabledByLabel('R_GatlingCannon', true)
-		self:SetWeaponEnabledByLabel('R_Cannon', false)
-		self:SetWeaponEnabledByLabel('L_Cannon', false)
+		Dummy:SetEnabled(true)
+		self:CreateEnhancement('RightGatling')
+		self:CreateEnhancement('LeftMissileLauncher')
 		end
-		
-		ForkThread( function()
-
 		end
 		)
     end,
@@ -161,34 +159,34 @@ CSKMDTL0303 = Class(TWalkingLandUnit) {
         local bp = self:GetBlueprint().Enhancements[enh]
         if not bp then return end
         if enh == 'LeftGatling' then
-		self:SetWeaponEnabledByLabel('L_Cannon', false)
-		self:SetWeaponEnabledByLabel('L_GatlingCannon', true)
-		self:SetWeaponEnabledByLabel('L_MissileLauncher', false)
+		self.L_Cannon:SetEnabled(false)
+		self.L_GatlingCannon:SetEnabled(true)
+		self.L_MissileLauncher:SetEnabled(false)
 		
         elseif enh == 'RightGatling' then
-		self:SetWeaponEnabledByLabel('R_Cannon', false)
-		self:SetWeaponEnabledByLabel('R_GatlingCannon', true)
-		self:SetWeaponEnabledByLabel('R_MissileLauncher', false)
+		self.R_Cannon:SetEnabled(false)
+		self.R_GatlingCannon:SetEnabled(true)
+		self.R_MissileLauncher:SetEnabled(false)
 		
 		elseif enh == 'RightAutoCannon' then
-		self:SetWeaponEnabledByLabel('R_Cannon', true)
-		self:SetWeaponEnabledByLabel('R_GatlingCannon', false)
-		self:SetWeaponEnabledByLabel('R_MissileLauncher', false)
+		self.R_Cannon:SetEnabled(true)
+		self.R_GatlingCannon:SetEnabled(false)
+		self.R_MissileLauncher:SetEnabled(false)
 		
 		elseif enh == 'LeftAutoCannon' then
-		self:SetWeaponEnabledByLabel('L_Cannon', true)
-		self:SetWeaponEnabledByLabel('L_GatlingCannon', false)
-		self:SetWeaponEnabledByLabel('L_MissileLauncher', false)
+		self.L_Cannon:SetEnabled(true)
+		self.L_GatlingCannon:SetEnabled(false)
+		self.L_MissileLauncher:SetEnabled(false)
 		
 		elseif enh == 'LeftMissileLauncher' then
-		self:SetWeaponEnabledByLabel('L_Cannon', false)
-		self:SetWeaponEnabledByLabel('L_GatlingCannon', false)
-		self:SetWeaponEnabledByLabel('L_MissileLauncher', true)
+		self.L_Cannon:SetEnabled(false)
+		self.L_GatlingCannon:SetEnabled(false)
+		self.L_MissileLauncher:SetEnabled(true)
 		
 		elseif enh == 'RightMissileLauncher' then
-		self:SetWeaponEnabledByLabel('R_Cannon', false)
-		self:SetWeaponEnabledByLabel('R_GatlingCannon', false)
-		self:SetWeaponEnabledByLabel('R_MissileLauncher', true)
+		self.R_Cannon:SetEnabled(false)
+		self.R_GatlingCannon:SetEnabled(false)
+		self.R_MissileLauncher:SetEnabled(true)
         end
     end,
 	
