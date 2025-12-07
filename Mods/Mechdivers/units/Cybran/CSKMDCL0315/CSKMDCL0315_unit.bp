@@ -210,7 +210,7 @@ UnitBlueprint {
         FactionName = 'Cybran',
         Icon = 'land',
         TechLevel = 'RULEUTL_Secret',
-        UnitName = 'CX-300b: Factory Jamming Strider',
+        UnitName = 'CX-300b: Factory Strider Mark II',
         UnitWeight = 1,
     },
     Intel = {
