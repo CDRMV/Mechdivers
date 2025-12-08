@@ -61,7 +61,15 @@ UnitList = {
     },
 	
 	T4LandExperimental3 = {
-		Cybran = {'CSKMDCL0315', 80},    	-- CX-300b: Factory Jamming Strider, Tech 3 Heavy Support Walker
+		Cybran = {'CSKMDCL0315', 80},    	-- CX-300b: Factory Strider Mark II, Tech 3 Heavy Support Walker
+    },
+	
+	T4LandExperimental4 = {
+		Cybran = {'CSKMDCL0316', 80},    	-- CX-300c: Factory Strider Mark III, Tech 3 Heavy Missile Walker
+    },
+	
+	T4LandExperimental5 = {
+		Cybran = {'CSKMDCL0317', 80},    	-- CX-300d: Factory Strider Mark IV, Tech 3 Heavy Detector Walker
     },
 	
 	T4AirExperimental1 = {
