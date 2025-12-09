@@ -77,6 +77,7 @@ UnitBlueprint {
 			'Can attack Ground Targets',
             '<LOC ability_aa>Anti-Air',
             '<LOC ability_deathaoe>Volatile',
+			'Usable Pilot as an seperated Unit',
         },
         AnimationDeath = {
             {
@@ -124,7 +125,7 @@ UnitBlueprint {
         },
         PlaceholderMeshName = 'UXL0001',
         SpawnRandomRotation = false,       
-        UniformScale = 0.40,
+        UniformScale = 0.50,
     },
 	Enhancements = {
         Slots = {
@@ -411,7 +412,24 @@ UnitBlueprint {
             RULEUCC_Repair = false,
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
-            RULEUCC_Transport = false,
+            RULEUCC_Transport = true,
+        },
+		OrderOverrides = {
+			RULEUTC_SpecialToggle = {
+			    bitmapId = 'Deploy',
+				helpText = 'Load/Unload Pilot',
+            },
+			RULEUTC_WeaponToggle = {
+                bitmapId = 'production',
+				helpText = 'Fold/Unfold',
+            },
+			RULEUTC_IntelToggle = {
+                bitmapId = 'Vision',
+				helpText = 'Show/Hide Ferry Beacon',
+            },
+        },
+		ToggleCaps = {
+            RULEUTC_WeaponToggle = true,
         },
         FactionName = 'UEF',
         Icon = 'land',       
@@ -455,8 +473,8 @@ UnitBlueprint {
     },
     SelectionCenterOffsetX = 0,
     SelectionCenterOffsetZ = 0,
-    SelectionSizeX = 0.55,
-    SelectionSizeZ = 0.5,
+    SelectionSizeX = 0.8,
+    SelectionSizeZ = 0.8,
     SelectionThickness = 0.7,
     SizeX = 0.7,
     SizeY = 1.2,
