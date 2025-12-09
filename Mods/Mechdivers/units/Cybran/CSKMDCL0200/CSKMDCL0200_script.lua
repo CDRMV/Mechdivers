@@ -112,7 +112,9 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 		self:SetSpeedMult(1)
 		elseif bit == 0 then 
 		ForkThread(function()
+		if self.Beacon then
 		self.Beacon:Destroy()
+		end
 		self:RemoveToggleCap('RULEUTC_IntelToggle')
 		self:RemoveToggleCap('RULEUTC_SpecialToggle')
 		self.AnimationManipulator:SetRate(-1)
@@ -150,8 +152,8 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 		end
     end,
 	
+	
 	OnTransportDetach = function(self, attachBone, unit)
-    CWalkingLandUnit.OnTransportDetach(self, attachBone, unit)
         unit:AttachBoneTo(-2, self, 'Bot')
     end,
 	

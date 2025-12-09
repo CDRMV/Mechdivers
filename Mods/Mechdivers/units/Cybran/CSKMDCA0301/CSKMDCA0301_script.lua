@@ -46,7 +46,7 @@ CSKMDCA0301 = Class(CAirUnit) {
 		self.Effect = import('/lua/sim/Entity.lua').Entity()
 		self.Effect:AttachBoneTo( -2, self, 'Effect' )
 		self.Effect:SetMesh(EffectMesh)
-		self.Effect:SetDrawScale(0.06)
+		self.Effect:SetDrawScale(0.05)
 		self.Effect:SetVizToAllies('Never')
 		self.Effect:SetVizToNeutrals('Never')
 		self.Effect:SetVizToEnemies('Never')
@@ -105,6 +105,12 @@ CSKMDCA0301 = Class(CAirUnit) {
 		self.Effect:SetVizToAllies('Never')
 		self.Effect:SetVizToNeutrals('Never')
 		self.Effect:SetVizToEnemies('Never')
+		if attachee:GetBlueprint().General.UnitName == 'Hunter II' then
+		attachee:SetUnSelectable(true)
+		WaitSeconds(1)
+		attachee:DisableShield()
+		attachee:SetUnSelectable(false)
+		end
 		end)
     end,
     
