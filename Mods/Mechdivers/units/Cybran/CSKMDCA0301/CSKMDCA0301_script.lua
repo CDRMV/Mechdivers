@@ -46,7 +46,7 @@ CSKMDCA0301 = Class(CAirUnit) {
 		self.Effect = import('/lua/sim/Entity.lua').Entity()
 		self.Effect:AttachBoneTo( -2, self, 'Effect' )
 		self.Effect:SetMesh(EffectMesh)
-		self.Effect:SetDrawScale(0.03)
+		self.Effect:SetDrawScale(0.06)
 		self.Effect:SetVizToAllies('Never')
 		self.Effect:SetVizToNeutrals('Never')
 		self.Effect:SetVizToEnemies('Never')

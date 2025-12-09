@@ -19,7 +19,7 @@ UnitBlueprint {
         MaxAirspeed = 9,
         MinAirspeed = 3.5,
         StartTurnDistance = 5,
-		TransportHoverHeight = 2,
+		TransportHoverHeight = 4,
     },
     Audio = {
         AirUnitWaterImpact = Sound {
@@ -174,7 +174,7 @@ UnitBlueprint {
         },
         PlaceholderMeshName = 'UXB0000',
         SpawnRandomRotation = false,
-        UniformScale = 0.035,
+        UniformScale = 0.050,
     },
     Economy = {
        BuildCostEnergy = 45000,
@@ -235,8 +235,8 @@ UnitBlueprint {
         MaxSpeed = 0.5,
         MotionType = 'RULEUMT_Air',
     },
-    SelectionSizeX = 1.65,
-    SelectionSizeZ = 3.0,
+    SelectionSizeX = 1.95,
+    SelectionSizeZ = 4.0,
     SelectionThickness = 0.22,
     SizeX = 3,
     SizeY = 1.8,

@@ -267,6 +267,7 @@ UnitBlueprint {
     StrategicIconSortPriority = 135,
     Transport = {
         CanFireFromTransport = false,
+        TransportClass = 3,
     },
     Veteran = {
         Level1 = 2,
