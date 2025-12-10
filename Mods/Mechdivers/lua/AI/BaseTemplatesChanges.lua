@@ -31,104 +31,116 @@ function ChangeBaseTemplate(group)
 			    'AdvancedLightBotFactoryCommanderConstruction',
                 'AdvancedLightBotFactoryConstruction',
 				'AdvancedLightBotFactorySupport',
+				'LandingpadCommanderConstruction',
+                'LandingpadConstruction',
+				'LandingpadSupport',
             },
         },
-        ChallengeExpansion = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}},
+        ChallengeExpansion = {Builders = {'AdvancedLightBotFactorySupport', 'LandingpadSupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4, Landingpad = 2,}}},
         ChallengeMain = {
             Builders = {
                 'AdvancedLightBotFactorySupport',
+				'LandingpadSupport',
             },
             NonCheatBuilders = {
             },
-            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2}}
+            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2, Landingpad = 2}}
         },
-        ChallengeNaval = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}},
-        NavalExpansionLarge = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}},
-        NavalExpansionSmall = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2}}},
+        ChallengeNaval = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4, Landingpad = 2}}},
+        NavalExpansionLarge = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4, Landingpad = 2}}},
+        NavalExpansionSmall = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2, Landingpad = 1}}},
         NormalMain = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}},
         NormalNaval = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}},
-        RushExpansionAirFull = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}},
-        RushExpansionAirSmall = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2}}},
-        RushExpansionBalancedFull = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}},
-        RushExpansionBalancedSmall = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2}}},
-        RushExpansionLandFull = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}},
-        RushExpansionLandSmall = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2}}},
+        RushExpansionAirFull = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4, Landingpad = 2}}},
+        RushExpansionAirSmall = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2, Landingpad = 1}}},
+        RushExpansionBalancedFull = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4, Landingpad = 2}}},
+        RushExpansionBalancedSmall = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2, Landingpad = 1}}},
+        RushExpansionLandFull = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4, Landingpad = 2}}},
+        RushExpansionLandSmall = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2, Landingpad = 1}}},
         RushExpansionNaval = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 0}}},
         RushMainAir = {
             Builders = {
                 'AdvancedLightBotFactorySupport',
+				'LandingpadSupport',
             },
             NonCheatBuilders = {
             },
-            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 5}}
+            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 5, Landingpad = 3}}
         },
         RushMainBalanced = {
             Builders = {
                 'AdvancedLightBotFactorySupport',
+				'LandingpadSupport',
             },
             NonCheatBuilders = {
             },
-            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}
+            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4, Landingpad = 2}}
         },
         RushMainLand = {
             Builders = {
                 'AdvancedLightBotFactorySupport',
+				'LandingpadSupport',
             },
             NonCheatBuilders = {
             },
-            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 5}}
+            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 5, Landingpad = 3}}
         },
         RushMainNaval = {
             Builders = {
                 'AdvancedLightBotFactorySupport',
+				'LandingpadSupport',
             },
             NonCheatBuilders = {
             },
-            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 3}}
+            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 3, Landingpad = 2}}
         },
-        SorianExpansionAirFull = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}},
-        SorianExpansionBalancedFull = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2}}},
-        SorianExpansionBalancedSmall = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 1}}},
-        SorianExpansionTurtleFull = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 1}}},
-        SorianExpansionWaterFull = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 3}}},
-        SorianMainAir = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 5}}},
-        SorianMainBalanced = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 5}}},
-        SorianMainRush = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}},
-        SorianMainTurtle = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2}}},
-        SorianMainWater = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}},
-        SorianNavalExpansionLarge = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 3}}},
-        SorianNavalExpansionSmall = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2}}},
-        TechExpansion = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 3}}},
-        TechExpansionSmall = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2}}},
+        SorianExpansionAirFull = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4, Landingpad = 2}}},
+        SorianExpansionBalancedFull = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2, Landingpad = 2}}},
+        SorianExpansionBalancedSmall = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 1, Landingpad = 1}}},
+        SorianExpansionTurtleFull = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 1, Landingpad = 1}}},
+        SorianExpansionWaterFull = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 3, Landingpad = 2}}},
+        SorianMainAir = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 5, Landingpad = 3}}},
+        SorianMainBalanced = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 5, Landingpad = 3}}},
+        SorianMainRush = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4, Landingpad = 1}}},
+        SorianMainTurtle = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2, Landingpad = 1}}},
+        SorianMainWater = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4, Landingpad = 2}}},
+        SorianNavalExpansionLarge = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 3, Landingpad = 2}}},
+        SorianNavalExpansionSmall = {BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2, Landingpad = 1}}},
+        TechExpansion = {Builders = {'AdvancedLightBotFactorySupport', 'LandingpadSupport',}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 3, Landingpad = 2}}},
+        TechExpansionSmall = {Builders = {'AdvancedLightBotFactorySupport', 'LandingpadSupport',}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2, Landingpad = 1}}},
         TechMain = {
             Builders = {
                 'AdvancedLightBotFactorySupport',
+				'LandingpadSupport',
             },
             NonCheatBuilders = {
             },
-            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 3}}
+            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 3, Landingpad = 2}}
         },
-        TurtleExpansion = {Builders = {'AdvancedLightBotFactorySupport'}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 1}}},
+        TurtleExpansion = {Builders = {'AdvancedLightBotFactorySupport', 'LandingpadSupport',}, BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 1, Landingpad = 1}}},
         TurtleMain = {
             Builders = {
                 'AdvancedLightBotFactorySupport',
+				'LandingpadSupport',
             },
             NonCheatBuilders = {
             },
-            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 1}}
+            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 1, Landingpad = 1}}
         },
         --FAF specific things:
         SetonsCustom = {
             Builders = {
                 'AdvancedLightBotFactorySupport',
+				'LandingpadSupport',
             },
-            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4}}
+            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 4, Landingpad = 2}}
         },
         TechSmallMap = {
             Builders = {
                 'AdvancedLightBotFactorySupport',
+				'LandingpadSupport',
             },
-            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2}}
+            BaseSettings = {FactoryCount = {AdvancedLightBotFactory = 2, Landingpad = 1}}
         },
     }
 

@@ -184,44 +184,31 @@ CSKMDTL0205 = Class(TLandUnit) {
 		end
     end,
 	
-	DeathThread = function( self, overkillRatio , instigator)  
-		if self.Beacon then
-		self.Beacon:Destroy()
-		end
-		
-		local units = self:GetCargo()
-		if units[2] == nil then
-		
-		else
-		if self.Bot then
-		self.Bot:Destroy()
-		local RandomNumber = math.random(1, 2)
-		if RandomNumber == 2 then
-		SetIgnoreArmyUnitCap(self:GetArmy(), true)
-		local position = self:GetPosition()
-		local Bot = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		SetIgnoreArmyUnitCap(self:GetArmy(), false)
-		end
-		else
-		
-		end
-		end
-		
-        self:DestroyAllDamageEffects()
-		local army = self:GetArmy()
-
-		if self.PlayDestructionEffects then
-            self:CreateDestructionEffects(overkillRatio)
-        end
-
-        if self.ShowUnitDestructionDebris and overkillRatio then
-            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
-        end
-		
-		self:CreateWreckage(overkillRatio or self.overkillRatio)
-
-        self:PlayUnitSound('Destroyed')
-        self:Destroy()
+	
+	OnKilled = function(self, instigator, type, overkillRatio)
+	if self.Beacon then
+	self.Beacon:Destroy()
+	end	
+	
+	if self.load == false then
+	
+	else
+	if self.Bot then
+	self.Bot:Destroy()
+	end
+	local RandomNumber = math.random(1, 2)
+	if RandomNumber == 2 then
+	SetIgnoreArmyUnitCap(self:GetArmy(), true)
+	local position = self:GetPosition()
+	local orientation = self:GetOrientation()
+	local angle = 2 * math.acos(orientation[2])
+	self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, angle, 0)
+	SetIgnoreArmyUnitCap(self:GetArmy(), false)
+	end
+	end
+	
+	
+    TLandUnit.OnKilled(self, instigator, type, overkillRatio)	
     end,
 	
 	OnReclaimed = function(self, reclaimer)
@@ -229,21 +216,20 @@ CSKMDTL0205 = Class(TLandUnit) {
 		self.Beacon:Destroy()
 		end
 		
-		local units = self:GetCargo()
-		if units[2] == nil then
-		
+		if self.load == false then
+	
 		else
 		if self.Bot then
 			self.Bot:Destroy()
-			units[2]:ShowBone(0, true)
-			units[2]:SetDoNotTarget(false)
-			units[2]:SetUnSelectable(false)
-			units[2]:SetWeaponEnabledByLabel('ArmCannonTurret', true)
-			units[2]:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
-			units[2]:DetachFrom(true)
-			units[2]:AddCommandCap('RULEUCC_Attack')
-			units[2]:AddCommandCap('RULEUCC_RetaliateToggle')
-			units[2]:AddCommandCap('RULEUCC_Stop')
+			units[1]:ShowBone(0, true)
+			units[1]:SetDoNotTarget(false)
+			units[1]:SetUnSelectable(false)
+			units[1]:SetWeaponEnabledByLabel('ArmCannonTurret', true)
+			units[1]:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
+			units[1]:DetachFrom(true)
+			units[1]:AddCommandCap('RULEUCC_Attack')
+			units[1]:AddCommandCap('RULEUCC_RetaliateToggle')
+			units[1]:AddCommandCap('RULEUCC_Stop')
 		else
 		
 		end

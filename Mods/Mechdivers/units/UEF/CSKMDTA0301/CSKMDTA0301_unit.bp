@@ -87,7 +87,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-        'BUILTBYTIER3FACTORY',
+        'BUILTBYLANDINGPAD',
         'UEF',
         'MOBILE',
         'AIR',

@@ -156,47 +156,35 @@ CSKMDTL0300 = Class(TLandUnit) {
         end	
     end,
 	
-	DeathThread = function( self, overkillRatio , instigator)  
-		if self.Beacon then
-		self.Beacon:Destroy()
-		end
-        self:DestroyAllDamageEffects()
-		local army = self:GetArmy()
-
-		if self.PlayDestructionEffects then
-            self:CreateDestructionEffects(overkillRatio)
-        end
-
-        if self.ShowUnitDestructionDebris and overkillRatio then
-            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
-        end
-		
-		self:CreateWreckage(overkillRatio or self.overkillRatio)
-		
-		local units = self:GetCargo()
-		if  units[1] == nil and units[2] == nil then
-		
-		else
-
-		if self.Bot and self.Bot2 then
-		self.Bot:Destroy()
-		self.Bot2:Destroy()
-		local RandomNumber = math.random(1, 2)
-		if RandomNumber == 2 then
-		SetIgnoreArmyUnitCap(self:GetArmy(), true)
-		local position = self:GetPosition()
-		local Bot = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		local Bot2 = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		SetIgnoreArmyUnitCap(self:GetArmy(), false)
-		end
-		else
-		
-		end
-		
-		end
-        self:PlayUnitSound('Destroyed')
-        self:Destroy()
+	OnKilled = function(self, instigator, type, overkillRatio)
+	if self.Beacon then
+	self.Beacon:Destroy()
+	end	
+	
+	if self.load == false then
+	
+	else
+	if self.Bot and self.Bot2 then
+	self.Bot:Destroy()
+	self.Bot2:Destroy()
+	end
+	local RandomNumber = math.random(1, 2)
+	if RandomNumber == 2 then
+	SetIgnoreArmyUnitCap(self:GetArmy(), true)
+	local position = self:GetPosition()
+	local orientation = self:GetOrientation()
+	local angle = 2 * math.acos(orientation[2])
+	self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, angle, 0)
+	SetIgnoreArmyUnitCap(self:GetArmy(), false)
+	self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, angle, 0)
+	SetIgnoreArmyUnitCap(self:GetArmy(), false)
+	end
+	end
+	
+	
+    TLandUnit.OnKilled(self, instigator, type, overkillRatio)	
     end,
+	
 	
 	OnReclaimed = function(self, reclaimer)
 		if self.Beacon then

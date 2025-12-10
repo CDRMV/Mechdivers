@@ -86,7 +86,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-        'BUILTBYTIER3FACTORY',
+        'BUILTBYLANDINGPAD',
         'UEF',
         'MOBILE',
         'AIR',
@@ -203,7 +203,7 @@ UnitBlueprint {
         },
         PlaceholderMeshName = 'UXA0009',
         SpawnRandomRotation = false,
-        UniformScale = 0.11,
+        UniformScale = 0.18,
     },
     Economy = {
         BuildCostEnergy = 53500,
@@ -290,8 +290,8 @@ UnitBlueprint {
         TurnRadius = 100,
         TurnRate = 100,
     },
-    SelectionSizeX = 1.6,
-    SelectionSizeZ = 2.0,
+    SelectionSizeX = 2.6,
+    SelectionSizeZ = 3.0,
     SelectionThickness = 0.37,
     SizeSphere = 1.8,
     SizeX = 1,

@@ -18,6 +18,26 @@ function AdvancedLightBotFactoryCapCheck(aiBrain, locationType, factoryType)
     return false
 end
 
+function LandingpadCapCheck(aiBrain, locationType, factoryType)
+    local catCheck = false
+    if factoryType == 'Landingpad' then
+        catCheck = categories.LANDINGPAD * categories.FACTORY * categories.STRUCTURE
+    else
+        WARN('*AI WARNING: Invalid factorytype - ' .. factoryType)
+        return false
+    end
+    local factoryManager = aiBrain.BuilderManagers[locationType].FactoryManager
+    if not factoryManager then
+        WARN('*AI WARNING: FactoryCapCheck - Invalid location - ' .. locationType)
+        return false
+    end
+    local numUnits = factoryManager:GetNumCategoryFactories(catCheck) + aiBrain:GetEngineerManagerUnitsBeingBuilt(catCheck)
+    if numUnits < aiBrain.BuilderManagers[locationType].BaseSettings.FactoryCount[factoryType] then
+        return true
+    end
+    return false
+end
+
 --[[function EngineerCapCheck(aiBrain, locationType, techLevel)
     local catCheck = false
     if techLevel == 'Tech1' then

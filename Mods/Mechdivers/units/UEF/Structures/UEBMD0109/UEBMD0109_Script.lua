@@ -743,11 +743,8 @@ UEBMD0109 = Class(TStructureUnit) {
 		self.Blocker:Destroy()
 		self.Blocker2:Destroy()
 	end
-	TStructureUnit.OnKilled(self, instigator, type, overkillRatio)	
-	end,
 	
-	DeathThread = function( self, overkillRatio , instigator)  
-		if self.ClapDummy then
+			if self.ClapDummy then
 		self.ClapDummy:Destroy()
 		end
 		
@@ -755,8 +752,7 @@ UEBMD0109 = Class(TStructureUnit) {
 		self.Beacon:Destroy()
 		end
 		
-		local units = self:GetCargo()
-		if units[2] == nil then
+		if self.load == false then
 		
 		else
 		if self.Bot then
@@ -772,23 +768,9 @@ UEBMD0109 = Class(TStructureUnit) {
 		
 		end
 		end
-		
-        self:DestroyAllDamageEffects()
-		local army = self:GetArmy()
-
-		if self.PlayDestructionEffects then
-            self:CreateDestructionEffects(overkillRatio)
-        end
-
-        if self.ShowUnitDestructionDebris and overkillRatio then
-            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
-        end
-		
-		self:CreateWreckage(overkillRatio or self.overkillRatio)
-
-        self:PlayUnitSound('Destroyed')
-        self:Destroy()
-    end,
+	TStructureUnit.OnKilled(self, instigator, type, overkillRatio)	
+	end,
+	
 	
 	OnReclaimed = function(self, reclaimer)
 		if self.ClapDummy then

@@ -104,6 +104,95 @@ BuilderGroup {
 }
 
 BuilderGroup {
+    BuilderGroupName = 'LandingpadConstruction',
+    BuildersType = 'EngineerBuilder',
+
+    Builder {
+        BuilderName = 'Sorian Landingpad Priority Builder',
+        PlatoonTemplate = 'EngineerBuilder',
+        Priority = 880,
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.LANDINGPAD } },
+            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.LANDINGPAD } },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            NumAssistees = 1,
+            Construction = {
+                AdjacencyCategory = 'ENERGYPRODUCTION',
+                AdjacencyDistance = 100,
+                BuildClose = false,
+                Location = 'LocationType',
+                BuildStructures = {
+                    'Landingpad',
+                },
+            }
+        }
+    },
+    Builder {
+        BuilderName = 'Sorian Landingpad Builder',
+        PlatoonTemplate = 'EngineerBuilder',
+        Priority = 725,
+        BuilderConditions = {
+            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.9, 1.2} },
+            { IBC, 'BrainNotLowPowerMode', {} },
+            { UCBC, 'UnitCapCheckLess', { .8 } },
+            { UCBC, 'LandingpadCapCheck', { 'LocationType', 'Landingpad' } },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            NumAssistees = 1,
+            Construction = {
+                AdjacencyCategory = 'ENERGYPRODUCTION',
+                AdjacencyDistance = 100,
+                BuildClose = false,
+                Location = 'LocationType',
+                BuildStructures = {
+                    'Landingpad',
+                },
+            }
+        }
+    },
+}
+
+
+BuilderGroup {
+    BuilderGroupName = 'LandingpadSupport',
+    BuildersType = 'EngineerBuilder',
+
+    Builder {
+        BuilderName = 'Landingpad Engineer Builder',
+        PlatoonTemplate = 'EngineerBuilder',
+        Priority = 850,
+        BuilderConditions = {
+            { UCBC, 'UnitsGreaterAtLocation', { 'LocationType', 0, categories.LANDINGPAD }},
+            { MIBC, 'FactionIndex', {1, 3, 4}},
+            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.9, 1.2} },
+            { IBC, 'BrainNotLowPowerMode', {} },
+            { UCBC, 'UnitCapCheckLess', { .8 } },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            NumAssistees = 1,
+            Construction = {
+                AdjacencyCategory = 'ENERGYPRODUCTION',
+                AdjacencyDistance = 100,
+                BuildClose = false,
+                Location = 'LocationType',
+                BuildStructures = {
+                    'T1EngineerSupport',
+                    'T1EngineerSupport',
+                    'T1EngineerSupport',
+                    'T1EngineerSupport',
+                    'T1EngineerSupport',
+                },
+            }
+        }
+    },
+}
+
+BuilderGroup {
     BuilderGroupName = 'SorianAdvancedLightBotFactorySupport',
     BuildersType = 'EngineerBuilder',
 

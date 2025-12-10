@@ -375,25 +375,20 @@ CSKMDTL0304 = Class(TWalkingLandUnit) {
 	OnKilled = function(self, instigator, type, overkillRatio)
 	if self.Beacon then
 	self.Beacon:Destroy()
-	end
-	
-	self:HideBone('Bot', true)
-	
-	local units = self:GetCargo()
-	for _, unit in units do
-		unit:Destroy()
-    end
-	
+	end	
 	
 	if self.load == false then
 	
 	else
+	local RandomNumber = math.random(1, 2)
+	if RandomNumber == 2 then
 	SetIgnoreArmyUnitCap(self:GetArmy(), true)
 	local position = self:GetPosition()
 	local orientation = self:GetOrientation()
 	local angle = 2 * math.acos(orientation[2])
 	self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, angle, 0)
 	SetIgnoreArmyUnitCap(self:GetArmy(), false)
+	end
 	end
 	
 	

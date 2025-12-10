@@ -5,6 +5,11 @@ do
             --UEF       AEON      CYBRAN    SERAPHIM
             {false,false,'URBMD0103',false},
         },
+		{
+            'Landingpad',
+            --UEF       AEON      CYBRAN    SERAPHIM
+            {'UEBMD00100',false,false,false},
+        },
     }
     for group, data in inserts do
         for i, id in data[2] do

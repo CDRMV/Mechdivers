@@ -26,6 +26,7 @@ UnitList = {
 	
 	T3LandBot = {
 		Cybran = {'CSKMDCL0306', 80},      -- Hulk Bruiser, Tech 3 Heavy Assualt Bot
+		UEF = {'CSKMDTL0304', 80}, -- Patriot, Tech 3 Multifunctional Assault Bot
     },
 	
 	T2ShieldDefense = {

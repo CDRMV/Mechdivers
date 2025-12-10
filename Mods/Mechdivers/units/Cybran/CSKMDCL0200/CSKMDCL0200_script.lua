@@ -160,19 +160,14 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 	OnKilled = function(self, instigator, type, overkillRatio)
 	if self.Beacon then
 	self.Beacon:Destroy()
-	end
-	
-	self:HideBone('Bot', true)
-	
-	local units = self:GetCargo()
-	for _, unit in units do
-		unit:Destroy()
-    end
-	
+	end	
 	
 	if self.load == false then
 	
 	else
+	self:HideBone('Bot', true)
+	local RandomNumber = math.random(1, 2)
+	if RandomNumber == 2 then
 	SetIgnoreArmyUnitCap(self:GetArmy(), true)
 	local position = self:GetPosition()
 	local orientation = self:GetOrientation()
@@ -180,36 +175,12 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 	self.unit = CreateUnitHPR('CSKMDCL0100', self:GetArmy(), position[1], position[2], position[3], 0, angle, 0)
 	SetIgnoreArmyUnitCap(self:GetArmy(), false)
 	end
+	end
 	
 	
     CWalkingLandUnit.OnKilled(self, instigator, type, overkillRatio)	
     end,
 	
-	DeathThread = function( self, overkillRatio , instigator)  
-        self:DestroyAllDamageEffects()
-		local army = self:GetArmy()
-		
-		if self.fold == true then
-		
-		elseif self.fold == false then
-		if self.DeathAnimManip then
-            WaitFor(self.DeathAnimManip)
-        end
-		end
-
-		if self.PlayDestructionEffects then
-            self:CreateDestructionEffects(overkillRatio)
-        end
-
-        if self.ShowUnitDestructionDebris and overkillRatio then
-            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
-        end
-
-		self:CreateWreckage(overkillRatio or self.overkillRatio)
-
-        self:PlayUnitSound('Destroyed')
-        self:Destroy()
-    end,
 
 	OnReclaimed = function(self, reclaimer)
 		if self.Beacon then
