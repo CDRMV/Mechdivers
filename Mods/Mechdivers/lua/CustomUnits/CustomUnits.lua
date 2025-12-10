@@ -1,11 +1,11 @@
 UnitList = {
 
+	T1LandDFBot = {
+		Cybran = {'CSKMDCL0100', 80},
+	},
+
 	T1LandDFTank = {
 		UEF = {'CSKMDTL0205', 80},      -- Razer G-167, Tech 1 Attack Truck
-		Cybran = {'CSKMDCL0200', 80},      -- Hunter II, Tech 2 Medium Assualt Bot (Scout Strider)
-	},
-	
-	T1LandDFBot = {
 		Cybran = {'CSKMDCL0100', 80},
 	},
 
@@ -22,17 +22,17 @@ UnitList = {
 	T2LandDFTank = {
 	Aeon = {'CSKMDAL0200', 80},      -- Watcher, Tech 2 Scout Drone
 	UEF = {'CSKMDTL0305', 80},      --  T 080 DAD, Tech 2 Heavy Tank
-	Cybran = {'CSKMDCL0305', 80},      -- Hunter III, Tech 3 Medium Assualt Bot (Advanced Scout Strider)
+	Cybran = {'CSKMDCL0200', 80},      -- Hunter II, Tech 2 Medium Assualt Bot (Scout Strider)
 	},
 	
 	T2AttackTankSorian = {
 		Aeon = {'CSKMDAL0200', 80},      -- Watcher, Tech 2 Scout Drone
 		UEF = {'CSKMDTL0305', 80},      --  T 080 DAD, Tech 2 Heavy Tank
-		Cybran = {'CSKMDCL0305', 80},      -- Hunter III, Tech 3 Medium Assualt Bot (Advanced Scout Strider)
+		Cybran = {'CSKMDCL0200', 80},      -- Hunter II, Tech 2 Medium Assualt Bot (Scout Strider)
     },
 	
 	T3ArmoredAssault = {
-		UEF = {'CSKMDTL0303', 80},      -- Patriot, Tech 3 Multifunctional Assault Bot  
+		UEF = {'CSKMDTL0300', 80},      -- Boxer, Tech 3 Amored Mech Marine Carrier
 		Cybran = {'CSKMDCL0300', 80},      -- Annihilator, Tech 3 Heavy Tank
     },
 	

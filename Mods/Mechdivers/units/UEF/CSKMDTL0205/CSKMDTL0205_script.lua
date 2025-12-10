@@ -23,6 +23,7 @@ CSKMDTL0205 = Class(TLandUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
 		TLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self.build = true
+		if self:GetAIBrain().BrainType == 'Human' then
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition()
 		local Bot = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
@@ -36,6 +37,7 @@ CSKMDTL0205 = Class(TLandUnit) {
 		Bot:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		Bot:RemoveCommandCap('RULEUCC_Stop')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		end
 		BotMesh = '/mods/Mechdivers/Decorations/T1Bot_mesh'
 		self.Bot = import('/lua/sim/Entity.lua').Entity()
         self.Bot:AttachBoneTo( -1, self, 'Attachpoint' )

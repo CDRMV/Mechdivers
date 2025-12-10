@@ -10,6 +10,7 @@ do
         {
             --Cybran
             'T1AdvancedLightBotFactory',
+			'T2AdvancedHeavyFactory',
         },
         {
             --Seraphim

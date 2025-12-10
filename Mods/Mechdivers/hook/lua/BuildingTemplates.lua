@@ -6,6 +6,11 @@ do
             {false,false,'URBMD0103',false},
         },
 		{
+            'T2AdvancedHeavyFactory',
+            --UEF       AEON      CYBRAN    SERAPHIM
+            {false,false,'URBMD0104',false},
+        },
+		{
             'Landingpad',
             --UEF       AEON      CYBRAN    SERAPHIM
             {'UEBMD00100',false,false,false},

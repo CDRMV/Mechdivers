@@ -20,6 +20,7 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         CWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self.build = true
+		if self:GetAIBrain().BrainType == 'Human' then
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition()
 		self.unit = CreateUnitHPR('CSKMDCL0100', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
@@ -32,6 +33,7 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 		self.unit:HideRifle()
 		self:EnableShield()
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		end
 		self:RemoveCommandCap('RULEUCC_Transport')
 		self:AddToggleCap('RULEUTC_ShieldToggle')
 		if not self.AnimationManipulator then

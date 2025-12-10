@@ -1,107 +1,202 @@
 BuilderGroup {
-    BuilderGroupName = 'AdvancedLightBotFactoryCommanderConstruction',
-    BuildersType = 'CommanderBuilder',
-
-    Builder {
-        BuilderName = 'AdvancedLightBotFactory Commander Priority Builder',
-        PlatoonTemplate = 'CommanderBuilder',
-        Priority = 800,
-        BuilderConditions = {
-            { IBC, 'BrainNotLowPowerMode', {} },
-			{ UCBC, 'FactoryLessAtLocation', { 'LocationType', 1, 'Land' } },
-			{ UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 6, categories.ADVANCEDLIGHTBOTFACTORY } },
-			{ UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
-        },
-        BuilderType = 'Any',
-        BuilderData = {
-            Construction = {
-                BuildClose = true,
-                BuildStructures = {
-                    'T1AdvancedLightBotFactory',
-                },
-            }
-        }
-    },
-}
-
-BuilderGroup {
-    BuilderGroupName = 'LandingpadCommanderConstruction',
-    BuildersType = 'CommanderBuilder',
-
-    Builder {
-        BuilderName = 'Landingpad Commander Priority Builder',
-        PlatoonTemplate = 'CommanderBuilder',
-        Priority = 800,
-        BuilderConditions = {
-            { IBC, 'BrainNotLowPowerMode', {} },
-			{ UCBC, 'FactoryLessAtLocation', { 'LocationType', 1, 'Land' } },
-			{ UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 6, categories.LANDINGPAD } },
-			{ UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
-        },
-        BuilderType = 'Any',
-        BuilderData = {
-            Construction = {
-                BuildClose = true,
-                BuildStructures = {
-                    'Landingpad',
-                },
-            }
-        }
-    },
-}
-
-BuilderGroup {
     BuilderGroupName = 'AdvancedLightBotFactoryConstruction',
     BuildersType = 'EngineerBuilder',
-
+    -- =============================
+    --     Land Factory Builders
+    -- =============================
     Builder {
-        BuilderName = 'Sorian Advanced Light Bot Factory Priority Builder',
+        BuilderName = 'T1 Land Factory Primary Builder',
         PlatoonTemplate = 'EngineerBuilder',
-        Priority = 880,
+        Priority = 925,
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.ADVANCEDLIGHTBOTFACTORY } },
-            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.ADVANCEDLIGHTBOTFACTORY } },
+            { UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
+            { UCBC, 'FactoryLessAtLocation', { 'MAIN', 1, categories.STRUCTURE * categories.FACTORY * categories.LAND}},
+            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.STRUCTURE * categories.FACTORY * categories.LAND}},
+            { UCBC, 'UnitCapCheckLess', { .8 } },
         },
         BuilderType = 'Any',
         BuilderData = {
-            NumAssistees = 1,
             Construction = {
-                AdjacencyCategory = 'ENERGYPRODUCTION',
-                AdjacencyDistance = 100,
-                BuildClose = false,
-                Location = 'LocationType',
                 BuildStructures = {
-                    'T1AdvancedLightBotFactory',
+                   'T1LandFactory',
+					'T1AdvancedLightBotFactory',
+					'T2AdvancedHeavyFactory',
                 },
+                Location = 'LocationType',
+                AdjacencyCategory = 'ENERGYPRODUCTION',
             }
-        }
+        },
     },
     Builder {
-        BuilderName = 'Sorian AdvancedLightBotFactory Builder',
+        BuilderName = 'T1 Land Factory Builder Land Path',
         PlatoonTemplate = 'EngineerBuilder',
-        Priority = 725,
+        Priority = 950,
         BuilderConditions = {
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.9, 1.2} },
             { IBC, 'BrainNotLowPowerMode', {} },
+            { UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
+            { UCBC, 'FactoryLessAtLocation', { 'MAIN', 4, categories.STRUCTURE * categories.FACTORY * categories.LAND }},
             { UCBC, 'UnitCapCheckLess', { .8 } },
-            { UCBC, 'AdvancedLightBotFactoryCapCheck', { 'LocationType', 'AdvancedLightBotFactory' } },
+            { EBC, 'MassToFactoryRatioBaseCheck', { 'LocationType' } },
         },
         BuilderType = 'Any',
         BuilderData = {
-            NumAssistees = 1,
             Construction = {
-                AdjacencyCategory = 'ENERGYPRODUCTION',
-                AdjacencyDistance = 100,
-                BuildClose = false,
-                Location = 'LocationType',
                 BuildStructures = {
-                    'T1AdvancedLightBotFactory',
+                   'T1LandFactory',
+					'T1AdvancedLightBotFactory',
+					'T2AdvancedHeavyFactory',
+                },
+                Location = 'LocationType',
+                AdjacencyCategory = 'ENERGYPRODUCTION',
+            }
+        },
+    },
+    Builder {
+        BuilderName = 'T1 Land Factory Builder',
+        PlatoonTemplate = 'EngineerBuilder',
+        Priority = 900,
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+            { UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
+            { UCBC, 'UnitCapCheckLess', { .8 } },
+            { EBC, 'MassToFactoryRatioBaseCheck', { 'LocationType' } },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            Construction = {
+                BuildStructures = {
+                   'T1LandFactory',
+					'T1AdvancedLightBotFactory',
+					'T2AdvancedHeavyFactory',
+                },
+                Location = 'LocationType',
+                AdjacencyCategory = 'ENERGYPRODUCTION',
+            }
+        },
+    },
+    Builder {
+        BuilderName = 'CDR T1 Land Factory',
+        PlatoonTemplate = 'CommanderBuilder',
+        Priority = 900,
+        BuilderConditions = {
+            { UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
+            { UCBC, 'UnitCapCheckLess', { .8 } },
+            { EBC, 'MassToFactoryRatioBaseCheck', { 'LocationType' } },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            Construction = {
+                BuildClose = true,
+                BuildStructures = {
+                    'T1LandFactory',
+					'T1AdvancedLightBotFactory',
+					'T2AdvancedHeavyFactory',
                 },
             }
         }
     },
 }
+
+BuilderGroup {
+    BuilderGroupName = 'SorianAdvancedLightBotFactoryConstruction',
+    BuildersType = 'EngineerBuilder',
+    -- =============================
+    --     Land Factory Builders
+    -- =============================
+    Builder {
+        BuilderName = 'T1 Land Factory Primary Builder',
+        PlatoonTemplate = 'EngineerBuilder',
+        Priority = 925,
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+            { UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
+            { UCBC, 'FactoryLessAtLocation', { 'MAIN', 1, categories.STRUCTURE * categories.FACTORY * categories.LAND}},
+            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.STRUCTURE * categories.FACTORY * categories.LAND}},
+            { UCBC, 'UnitCapCheckLess', { .8 } },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            Construction = {
+                BuildStructures = {
+                   'T1LandFactory',
+					'T1AdvancedLightBotFactory',
+                },
+                Location = 'LocationType',
+                AdjacencyCategory = 'ENERGYPRODUCTION',
+            }
+        },
+    },
+    Builder {
+        BuilderName = 'T1 Land Factory Builder Land Path',
+        PlatoonTemplate = 'EngineerBuilder',
+        Priority = 950,
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+            { UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
+            { UCBC, 'FactoryLessAtLocation', { 'MAIN', 4, categories.STRUCTURE * categories.FACTORY * categories.LAND }},
+            { UCBC, 'UnitCapCheckLess', { .8 } },
+            { EBC, 'MassToFactoryRatioBaseCheck', { 'LocationType' } },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            Construction = {
+                BuildStructures = {
+                   'T1LandFactory',
+					'T1AdvancedLightBotFactory',
+					'T2AdvancedHeavyFactory',
+                },
+                Location = 'LocationType',
+                AdjacencyCategory = 'ENERGYPRODUCTION',
+            }
+        },
+    },
+    Builder {
+        BuilderName = 'T1 Land Factory Builder',
+        PlatoonTemplate = 'EngineerBuilder',
+        Priority = 900,
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+            { UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
+            { UCBC, 'UnitCapCheckLess', { .8 } },
+            { EBC, 'MassToFactoryRatioBaseCheck', { 'LocationType' } },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            Construction = {
+                BuildStructures = {
+                   'T1LandFactory',
+					'T1AdvancedLightBotFactory',
+					'T2AdvancedHeavyFactory',
+                },
+                Location = 'LocationType',
+                AdjacencyCategory = 'ENERGYPRODUCTION',
+            }
+        },
+    },
+    Builder {
+        BuilderName = 'CDR T1 Land Factory',
+        PlatoonTemplate = 'CommanderBuilder',
+        Priority = 900,
+        BuilderConditions = {
+            { UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
+            { UCBC, 'UnitCapCheckLess', { .8 } },
+            { EBC, 'MassToFactoryRatioBaseCheck', { 'LocationType' } },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            Construction = {
+                BuildClose = true,
+                BuildStructures = {
+                    'T1LandFactory',
+					'T1AdvancedLightBotFactory',
+					'T2AdvancedHeavyFactory',
+                },
+            }
+        }
+    },
+}
+
 
 BuilderGroup {
     BuilderGroupName = 'LandingpadConstruction',
@@ -185,6 +280,94 @@ BuilderGroup {
                     'T1EngineerSupport',
                     'T1EngineerSupport',
                     'T1EngineerSupport',
+                },
+            }
+        }
+    },
+}
+
+BuilderGroup {
+    BuilderGroupName = 'AdvancedHeavyFactoryConstruction',
+    BuildersType = 'EngineerBuilder',
+
+    Builder {
+        BuilderName = 'Sorian AdvancedHeavyFactory Priority Builder',
+        PlatoonTemplate = 'EngineerBuilder',
+        Priority = 880,
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.ADVANCEDHEAVYFACTORY } },
+            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.ADVANCEDHEAVYFACTORY } },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            NumAssistees = 1,
+            Construction = {
+                AdjacencyCategory = 'ENERGYPRODUCTION',
+                AdjacencyDistance = 100,
+                BuildClose = false,
+                Location = 'LocationType',
+                BuildStructures = {
+                    'T2AdvancedHeavyFactory',
+                },
+            }
+        }
+    },
+    Builder {
+        BuilderName = 'Sorian AdvancedHeavyFactory Builder',
+        PlatoonTemplate = 'EngineerBuilder',
+        Priority = 725,
+        BuilderConditions = {
+            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.9, 1.2} },
+            { IBC, 'BrainNotLowPowerMode', {} },
+            { UCBC, 'UnitCapCheckLess', { .8 } },
+            { UCBC, 'AdvancedHeavyFactoryCapCheck', { 'LocationType', 'AdvancedHeavyFactory' } },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            NumAssistees = 1,
+            Construction = {
+                AdjacencyCategory = 'ENERGYPRODUCTION',
+                AdjacencyDistance = 100,
+                BuildClose = false,
+                Location = 'LocationType',
+                BuildStructures = {
+                    'T2AdvancedHeavyFactory',
+                },
+            }
+        }
+    },
+}
+
+BuilderGroup {
+    BuilderGroupName = 'AdvancedHeavyFactorySupport',
+    BuildersType = 'EngineerBuilder',
+
+    Builder {
+        BuilderName = 'AdvancedHeavyFactory Engineer Builder',
+        PlatoonTemplate = 'EngineerBuilder',
+        Priority = 850,
+        BuilderConditions = {
+            { UCBC, 'UnitsGreaterAtLocation', { 'LocationType', 0, categories.ADVANCEDHEAVYFACTORY }},
+            { MIBC, 'FactionIndex', {1, 3, 4}},
+            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.9, 1.2} },
+            { IBC, 'BrainNotLowPowerMode', {} },
+            { UCBC, 'UnitCapCheckLess', { .8 } },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            NumAssistees = 1,
+            Construction = {
+                AdjacencyCategory = 'ENERGYPRODUCTION',
+                AdjacencyDistance = 100,
+                BuildClose = false,
+                Location = 'LocationType',
+                BuildStructures = {
+                    'T2EngineerSupport',
+                    'T2EngineerSupport',
+                    'T2EngineerSupport',
+                    'T2EngineerSupport',
+                    'T2EngineerSupport',
                 },
             }
         }
