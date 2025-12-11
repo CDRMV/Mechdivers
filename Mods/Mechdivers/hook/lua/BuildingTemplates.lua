@@ -13,7 +13,7 @@ do
 		{
             'Landingpad',
             --UEF       AEON      CYBRAN    SERAPHIM
-            {'UEBMD00100',false,false,false},
+            {'UEBMD00100',false,'URBMD00100',false},
         },
     }
     for group, data in inserts do

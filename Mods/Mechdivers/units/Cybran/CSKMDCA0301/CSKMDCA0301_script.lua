@@ -21,16 +21,26 @@ CSKMDCA0301 = Class(CAirUnit) {
 
     BeamExhaustIdle = '/effects/emitters/missile_exhaust_fire_beam_05_emit.bp',
     BeamExhaustCruise = '/effects/emitters/missile_exhaust_fire_beam_04_emit.bp',
-		
-
-    OnStopBeingBuilt = function(self,builder,layer)
-        CAirUnit.OnStopBeingBuilt(self,builder,layer)
+	
+	OnCreate = function(self)
+        CAirUnit.OnCreate(self)
         self.EngineManipulators = {}
 
         # create the engine thrust manipulators
         for key, value in self.EngineRotateBones do
             table.insert(self.EngineManipulators, CreateThrustController(self, "thruster", value))
         end
+
+        # set up the thursting arcs for the engines
+        for key,value in self.EngineManipulators do
+            #                          XMAX, XMIN, YMAX,YMIN, ZMAX,ZMIN, TURNMULT, TURNSPEED
+            value:SetThrustingParam( 0, 0.0, 0, 0, 0, 0, 0,      0 )
+        end
+    end,
+		
+
+    OnStopBeingBuilt = function(self,builder,layer)
+        CAirUnit.OnStopBeingBuilt(self,builder,layer)
 
         # set up the thursting arcs for the engines
         for key,value in self.EngineManipulators do

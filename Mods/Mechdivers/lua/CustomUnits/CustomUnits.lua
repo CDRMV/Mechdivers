@@ -79,6 +79,11 @@ UnitList = {
 	
 	T1GroundDefense = {
         UEF = {'UEBMD0100', 80}, -- Hell, Tech 1  Droppod Defense
+		Cybran = {'URBMD0105', 80}, -- Tech 1  Light Fusion Emplacement
+    },
+	
+	T2GroundDefense = {
+		Cybran = {'URBMD0106', 80}, -- Tech 1 Dual Fusion Cannon Emplacement
     },
 	
 	T3GroundDefense = {

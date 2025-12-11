@@ -28,6 +28,22 @@ CSKMDTA0301 = Class(TAirUnit) {
 		end,
 		},
     },
+	
+	OnCreate = function(self)
+        TAirUnit.OnCreate(self)
+        self.EngineManipulators = {}
+
+        # create the engine thrust manipulators
+        for key, value in self.EngineRotateBones do
+            table.insert(self.EngineManipulators, CreateThrustController(self, "thruster", value))
+        end
+
+        # set up the thursting arcs for the engines
+        for key,value in self.EngineManipulators do
+            #                          XMAX, XMIN, YMAX,YMIN, ZMAX,ZMIN, TURNMULT, TURNSPEED
+            value:SetThrustingParam( 0, 0.0, 0, 0, 0, 0, 0,      0 )
+        end
+    end,
     
     OnStopBeingBuilt = function(self,builder,layer)
         TAirUnit.OnStopBeingBuilt(self,builder,layer)
@@ -37,11 +53,6 @@ CSKMDTA0301 = Class(TAirUnit) {
         end
 		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTA0301/CSKMDTA0301_UnpackAll.sca', false):SetRate(1)
         self.EngineManipulators = {}
-
-        # create the engine thrust manipulators
-        for key, value in self.EngineRotateBones do
-            table.insert(self.EngineManipulators, CreateThrustController(self, 'Thruster', value))
-        end
 
         # set up the thursting arcs for the engines
         for key,value in self.EngineManipulators do

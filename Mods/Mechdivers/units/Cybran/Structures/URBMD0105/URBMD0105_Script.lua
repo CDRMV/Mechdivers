@@ -26,6 +26,7 @@ URBMD0105 = Class(CStructureUnit) {
 	
 	OnStopBeingBuilt = function(self,builder,layer)
         CStructureUnit.OnStopBeingBuilt(self,builder,layer)
+		if self:GetAIBrain().BrainType == 'Human' then
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition()
 		self.Beacon = CreateUnitHPR('UEB5102', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
@@ -44,6 +45,16 @@ URBMD0105 = Class(CStructureUnit) {
             self.Trash:Add(self.AnimationManipulator)
         end
         self.AnimationManipulator:PlayAnim(self:GetBlueprint().Display.Animation, false):SetRate(0)	
+		else
+		if not self.AnimationManipulator then
+            self.AnimationManipulator = CreateAnimator(self)
+            self.Trash:Add(self.AnimationManipulator)
+        end
+        self.AnimationManipulator:PlayAnim(self:GetBlueprint().Display.Animation, false):SetRate(1)	
+		self.load = true
+		self:ShowBone('Bot', true)
+		self:HideBone('B01', true)
+		end
     end,
 	
 		
