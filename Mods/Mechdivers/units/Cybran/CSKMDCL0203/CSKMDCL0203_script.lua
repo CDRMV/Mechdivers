@@ -54,15 +54,16 @@ CSKMDCL0203 = Class(CWalkingLandUnit) {
 		},
     },
 	
-	OnCreate = function(self)
-		CWalkingLandUnit.OnCreate(self)
+	OnStopBeingBuilt = function(self,builder,layer)
+        CWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self:HideBone('R_Arm_B04', true)
 		self:HideBone('L_Arm_Shield', true)
 		self:HideBone('L_Arm_Shield2', true)
 		self:HideBone('B01', true)
 		self:HideBone('B03', true)
 		self:HideBone('B04', true)
-    end,
+	end,
+	
 	
 	OnScriptBitSet = function(self, bit)
         CWalkingLandUnit.OnScriptBitSet(self, bit)

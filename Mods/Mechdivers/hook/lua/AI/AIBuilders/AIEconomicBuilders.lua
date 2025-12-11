@@ -7,7 +7,7 @@ BuilderGroup {
     -- Initial builder
     Builder {
         BuilderName = 'CDR Initial Land Rush',
-        PlatoonTemplate = 'CommanderInitialBuilder',
+        PlatoonTemplate = 'CommanderBuilder',
         Priority = 1000,
         BuilderConditions = {
                 { IBC, 'NotPreBuilt', {}},

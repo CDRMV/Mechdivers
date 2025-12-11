@@ -71,15 +71,19 @@ CSKMDCL0102 = Class(CWalkingLandUnit) {
         self.DropRifle:SetVizToAllies('Never')
         self.DropRifle:SetVizToNeutrals('Never')
         self.DropRifle:SetVizToEnemies('Never')
-		self:HideBone('R_Arm_B04', true)
-		self:HideBone('B01', true)
-		--self:HideBone('L_Arm_B04', true)
 		if not self.AnimationManipulator then
             self.AnimationManipulator = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator)
         end
 		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/Cybran/CSKMDCL0102/CSKMDCL0102_ACallRef.sca', false):SetRate(0)
     end,
+	
+	OnStopBeingBuilt = function(self,builder,layer)
+        CWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+		self:HideBone('R_Arm_B04', true)
+		self:HideBone('B01', true)
+		--self:HideBone('L_Arm_B04', true)
+	end,
 	
 	OnScriptBitSet = function(self, bit)
         CWalkingLandUnit.OnScriptBitSet(self, bit)

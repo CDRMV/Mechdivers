@@ -1,12 +1,7 @@
 UnitList = {
 
-	T1LandDFBot = {
-		Cybran = {'CSKMDCL0100', 80},
-	},
-
 	T1LandDFTank = {
 		UEF = {'CSKMDTL0205', 80},      -- Razer G-167, Tech 1 Attack Truck
-		Cybran = {'CSKMDCL0100', 80},
 	},
 
     T3AirGunship = {

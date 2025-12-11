@@ -17,14 +17,14 @@ CSKMDCL0204 = Class(CWalkingLandUnit) {
         MainGun = Class(CDFLaserFusionWeapon) {},
     },
 	
-	OnCreate = function(self)
-		CWalkingLandUnit.OnCreate(self)
+	OnStopBeingBuilt = function(self,builder,layer)
+        CWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self:HideBone('R_Arm_B04', true)
 		self:HideBone('L_Arm_Shield', true)
 		self:HideBone('B01', true)
 		self:HideBone('B02', true)
 		self:HideBone('B04', true)
-    end,
+	end,
 	
 	OnScriptBitSet = function(self, bit)
         CWalkingLandUnit.OnScriptBitSet(self, bit)

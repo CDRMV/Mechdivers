@@ -1,12 +1,4 @@
 UnitList = {
-
-	T1LandDFBot = {
-		Cybran = {'CSKMDCL0104', 80},
-	},
-
-	T1LandDFTank = {
-		Cybran = {'CSKMDCL0104', 80},
-	},
 	
 	T2AttackTankSorian = {
 		Cybran = {'CSKMDCL0204', 80},  -- Devastator, Tech 2 Advanced Shotgun Bot

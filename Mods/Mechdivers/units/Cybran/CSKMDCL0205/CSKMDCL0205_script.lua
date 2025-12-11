@@ -19,8 +19,8 @@ CSKMDCL0205 = Class(CWalkingLandUnit) {
         MainGun = Class(CDFLaserFusionWeapon) {},
     },
 	
-	OnCreate = function(self)
-		CWalkingLandUnit.OnCreate(self)
+	OnStopBeingBuilt = function(self,builder,layer)
+        CWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self:HideBone('R_Arm_B04', true)
 		self:HideBone('L_Arm_Shield', true)
 		self:HideBone('L_Arm_Shield2', true)
@@ -28,7 +28,7 @@ CSKMDCL0205 = Class(CWalkingLandUnit) {
 		self:HideBone('B02', true)
 		self.JetPackEffectsBag = {}
 		self:RemoveToggleCap('RULEUTC_SpecialToggle')
-    end,
+	end,
 	
 	OnMotionHorzEventChange = function(self, new, old)
         CWalkingLandUnit.OnMotionHorzEventChange(self, new, old)

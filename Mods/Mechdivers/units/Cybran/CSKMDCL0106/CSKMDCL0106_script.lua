@@ -73,9 +73,6 @@ CSKMDCL0106 = Class(CWalkingLandUnit) {
         self.DropRifle:SetVizToAllies('Never')
         self.DropRifle:SetVizToNeutrals('Never')
         self.DropRifle:SetVizToEnemies('Never')
-		self:HideBone('R_Arm_B04', true)
-		--self:HideBone('B01', true)
-		--self:HideBone('L_Arm_B04', true)
 		if not self.AnimationManipulator then
             self.AnimationManipulator = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator)
@@ -84,6 +81,13 @@ CSKMDCL0106 = Class(CWalkingLandUnit) {
 		self.JetPackEffectsBag = {}
 		self:RemoveToggleCap('RULEUTC_SpecialToggle')
     end,
+	
+	OnStopBeingBuilt = function(self,builder,layer)
+        CWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+		self:HideBone('R_Arm_B04', true)
+		--self:HideBone('B01', true)
+		--self:HideBone('L_Arm_B04', true)
+	end,
 	
 	OnMotionHorzEventChange = function(self, new, old)
         CWalkingLandUnit.OnMotionHorzEventChange(self, new, old)

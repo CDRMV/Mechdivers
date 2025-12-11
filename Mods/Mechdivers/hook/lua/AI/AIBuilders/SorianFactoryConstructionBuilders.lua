@@ -21,7 +21,6 @@ BuilderGroup {
                 BuildStructures = {
                    'T1LandFactory',
 					'T1AdvancedLightBotFactory',
-					'T2AdvancedHeavyFactory',
                 },
                 Location = 'LocationType',
                 AdjacencyCategory = 'ENERGYPRODUCTION',
@@ -45,7 +44,6 @@ BuilderGroup {
                 BuildStructures = {
                    'T1LandFactory',
 					'T1AdvancedLightBotFactory',
-					'T2AdvancedHeavyFactory',
                 },
                 Location = 'LocationType',
                 AdjacencyCategory = 'ENERGYPRODUCTION',
@@ -68,7 +66,6 @@ BuilderGroup {
                 BuildStructures = {
                    'T1LandFactory',
 					'T1AdvancedLightBotFactory',
-					'T2AdvancedHeavyFactory',
                 },
                 Location = 'LocationType',
                 AdjacencyCategory = 'ENERGYPRODUCTION',
@@ -91,7 +88,6 @@ BuilderGroup {
                 BuildStructures = {
                     'T1LandFactory',
 					'T1AdvancedLightBotFactory',
-					'T2AdvancedHeavyFactory',
                 },
             }
         }
@@ -107,7 +103,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'T1 Land Factory Primary Builder',
         PlatoonTemplate = 'EngineerBuilder',
-        Priority = 925,
+        Priority = 1200,
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
             { UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
@@ -121,7 +117,6 @@ BuilderGroup {
                 BuildStructures = {
                    'T1LandFactory',
 					'T1AdvancedLightBotFactory',
-					'T2AdvancedHeavyFactory',
                 },
                 Location = 'LocationType',
                 AdjacencyCategory = 'ENERGYPRODUCTION',
@@ -145,7 +140,6 @@ BuilderGroup {
                 BuildStructures = {
                    'T1LandFactory',
 					'T1AdvancedLightBotFactory',
-					'T2AdvancedHeavyFactory',
                 },
                 Location = 'LocationType',
                 AdjacencyCategory = 'ENERGYPRODUCTION',
@@ -168,7 +162,6 @@ BuilderGroup {
                 BuildStructures = {
                    'T1LandFactory',
 					'T1AdvancedLightBotFactory',
-					'T2AdvancedHeavyFactory',
                 },
                 Location = 'LocationType',
                 AdjacencyCategory = 'ENERGYPRODUCTION',
@@ -178,7 +171,7 @@ BuilderGroup {
     Builder {
         BuilderName = 'CDR T1 Land Factory',
         PlatoonTemplate = 'CommanderBuilder',
-        Priority = 900,
+        Priority = 1200,
         BuilderConditions = {
             { UCBC, 'FactoryCapCheck', { 'LocationType', 'Land' } },
             { UCBC, 'UnitCapCheckLess', { .8 } },
@@ -191,7 +184,6 @@ BuilderGroup {
                 BuildStructures = {
                     'T1LandFactory',
 					'T1AdvancedLightBotFactory',
-					'T2AdvancedHeavyFactory',
                 },
             }
         }
@@ -293,12 +285,12 @@ BuilderGroup {
 
     Builder {
         BuilderName = 'Sorian AdvancedHeavyFactory Priority Builder',
-        PlatoonTemplate = 'EngineerBuilder',
-        Priority = 880,
+        PlatoonTemplate = 'T2EngineerBuilder',
+        Priority = 1500,
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.ADVANCEDHEAVYFACTORY } },
-            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 1, categories.ADVANCEDHEAVYFACTORY } },
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 5, categories.ADVANCEDHEAVYFACTORY } },
+            { UCBC, 'HaveLessThanUnitsInCategoryBeingBuilt', { 5, categories.ADVANCEDHEAVYFACTORY } },
         },
         BuilderType = 'Any',
         BuilderData = {
@@ -316,8 +308,8 @@ BuilderGroup {
     },
     Builder {
         BuilderName = 'Sorian AdvancedHeavyFactory Builder',
-        PlatoonTemplate = 'EngineerBuilder',
-        Priority = 725,
+        PlatoonTemplate = 'T2EngineerBuilder',
+        Priority = 1500,
         BuilderConditions = {
             { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.9, 1.2} },
             { IBC, 'BrainNotLowPowerMode', {} },
@@ -346,8 +338,8 @@ BuilderGroup {
 
     Builder {
         BuilderName = 'AdvancedHeavyFactory Engineer Builder',
-        PlatoonTemplate = 'EngineerBuilder',
-        Priority = 850,
+        PlatoonTemplate = 'T2EngineerBuilder',
+        Priority = 1500,
         BuilderConditions = {
             { UCBC, 'UnitsGreaterAtLocation', { 'LocationType', 0, categories.ADVANCEDHEAVYFACTORY }},
             { MIBC, 'FactionIndex', {1, 3, 4}},
@@ -381,8 +373,8 @@ BuilderGroup {
 
     Builder {
         BuilderName = 'Advanced Light Bot Factory Engineer Builder',
-        PlatoonTemplate = 'EngineerBuilder',
-        Priority = 850,
+        PlatoonTemplate = 'T2EngineerBuilder',
+        Priority = 1500,
         BuilderConditions = {
             { UCBC, 'UnitsGreaterAtLocation', { 'LocationType', 0, categories.ADVANCEDLIGHTBOTFACTORY }},
             { MIBC, 'FactionIndex', {1, 3, 4}},
