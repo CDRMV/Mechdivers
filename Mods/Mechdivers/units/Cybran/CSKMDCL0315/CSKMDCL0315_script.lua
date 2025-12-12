@@ -35,6 +35,8 @@ CSKMDCL0315 = Class(CWalkingLandUnit) {
         self.PrepareToBuildManipulator:PlayAnim(self:GetBlueprint().Display.AnimationBuild, false):SetRate(0)
 		self.AnimationManipulator = CreateAnimator(self)
         self.AnimationManipulator:PlayAnim(self:GetBlueprint().Display.AnimationDeco, true):SetRate(0.5)
+		self.AnimationManipulator2 = CreateAnimator(self)
+        self.AnimationManipulator2:PlayAnim(self:GetBlueprint().Display.AnimationDeco2, true):SetRate(0.5)
 		ChangeState(self, self.IdleState)
     end,
 	
@@ -90,6 +92,7 @@ CSKMDCL0315 = Class(CWalkingLandUnit) {
 	
 	OnScriptBitSet = function(self, bit)
         CWalkingLandUnit.OnScriptBitSet(self, bit)
+		ForkThread(function()
         if bit == 2 then 
 		self:SetMaintenanceConsumptionInactive()
 		KillThread(self.AutomaticDisableShieldThreadHandle)
@@ -105,18 +108,31 @@ CSKMDCL0315 = Class(CWalkingLandUnit) {
 		self.Beam:Destroy()
 		self.Beam = nil
 		end
-		end
 		local unitPos = self:GetPosition()
 		local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, 30, 'Enemy')
 		for _,unit in units do
 			unit:EnableShield()	
         end
+		elseif bit == 7 then
+		self.Flash = CreateAttachedEmitter(self, 'Flare03', self:GetArmy(), '/Mods/Mechdivers/effects/emitters/fusion_laser_muzzle_flash_01_emit.bp')
+        self.Flash2 = CreateAttachedEmitter(self, 'Flare03', self:GetArmy(), '/Mods/Mechdivers/effects/emitters/fusion_laser_muzzle_flash_02_emit.bp')
+		WaitSeconds(1)
+		local BonePos = self:GetPosition('Flare03')
+		self.Flare = self:CreateProjectile('/Mods/Mechdivers/projectiles/CDFReinforcementFlare/CDFReinforcementFlare_proj.bp', 0, 0.5, 0, 0, 20, 0)
+		Warp(self.Flare, BonePos)
+		self.Flash:Destroy()
+		self.Flash2:Destroy()
+		self:RemoveToggleCap('RULEUTC_SpecialToggle')
+		WaitSeconds(62)
+		self:AddToggleCap('RULEUTC_SpecialToggle')
+		end
+		end)
     end,
 
     OnScriptBitClear = function(self, bit)
         CWalkingLandUnit.OnScriptBitClear(self, bit)
-        if bit == 2 then
 		ForkThread(function()
+        if bit == 2 then
 		self:SetMaintenanceConsumptionActive()
 		self.Effect = true
 		self.AutomaticDisableShieldThreadHandle = self:ForkThread(self.AutomaticDisableShieldThread)
@@ -141,9 +157,11 @@ CSKMDCL0315 = Class(CWalkingLandUnit) {
         self.effect = CreateAttachedEmitter(self, 'JammerEffect', self:GetArmy(), ModEffects .. 'cybran_jammer_ambient_01_emit.bp'):ScaleEmitter(0.2):OffsetEmitter(0,0,-1) 
 		end
 		WaitSeconds(4.5)
+		end	
+		elseif bit == 7 then
+		self:SetScriptBit('RULEUTC_SpecialToggle', true)
 		end
-		end)		
-		end
+		end)	
     end,
 
 	AutomaticDisableShieldThread = function(self)

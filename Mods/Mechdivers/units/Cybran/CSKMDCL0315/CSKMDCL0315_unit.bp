@@ -120,7 +120,7 @@ UnitBlueprint {
     },
     Defense = {
         AirThreatLevel = 0,
-        ArmorType = 'Normal',
+        ArmorType = 'Experimental',
         EconomyThreatLevel = 0,
         Health = 17000,
         MaxHealth = 17000,
@@ -132,6 +132,7 @@ UnitBlueprint {
     Display = {
 	    Abilities = {
            'Can produce Devastators (Factory)',
+		   'Can call Land Reinforcments',
 		   'Disables the Shields of enemy Units if they are in its Range.',
         },
         AnimationDeath = {
@@ -144,6 +145,7 @@ UnitBlueprint {
         },
 		AnimationBuild = '/mods/Mechdivers/units/Cybran/CSKMDCL0315/CSKMDCL0314_Open.sca',
 		AnimationDeco = '/mods/Mechdivers/units/Cybran/CSKMDCL0315/CSKMDCL0315_Deco.sca',
+		AnimationDeco2 = '/mods/Mechdivers/units/Cybran/CSKMDCL0315/CSKMDCL0315_Deco2.sca',
         AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0315/CSKMDCL0315_Awalk01.sca',
         AnimationWalkRate = 0.6,
         Mesh = {
@@ -185,6 +187,9 @@ UnitBlueprint {
         TeleportTimeMod = 0.01,
 		BuildableCategory = {
             'cskmdcl0201',
+			'cskmdcl0202',
+			'cskmdcl0203',
+			'cskmdcl0206',
         },
     },
     General = {
@@ -204,8 +209,15 @@ UnitBlueprint {
             RULEUCC_Stop = true,
             RULEUCC_Transport = false,
         },
+		OrderOverrides = {
+			RULEUTC_SpecialToggle = {
+			    bitmapId = 'unload',
+				helpText = 'Call Land Reinforcements',
+            },
+        },
 		ToggleCaps = {
             RULEUTC_JammingToggle = true,
+			RULEUTC_SpecialToggle = true,
         },
         FactionName = 'Cybran',
         Icon = 'land',
@@ -279,7 +291,7 @@ UnitBlueprint {
             },
             FiringTolerance = 1,
             Label = 'Dummy',
-            MaxRadius = 15,
+            MaxRadius = 25,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 0,
@@ -350,7 +362,7 @@ UnitBlueprint {
             FiringRandomness = 0,
             FiringTolerance = 2,
             Label = 'MainGun',
-            MaxRadius = 15,
+            MaxRadius = 25,
             MuzzleSalvoDelay = 0.2,
             MuzzleSalvoSize = 15,
             MuzzleVelocity = 25,
@@ -423,7 +435,7 @@ UnitBlueprint {
             FiringRandomness = 0,
             FiringTolerance = 2,
             Label = 'MainGun',
-            MaxRadius = 15,
+            MaxRadius = 25,
             MuzzleSalvoDelay = 0.2,
             MuzzleSalvoSize = 15,
             MuzzleVelocity = 25,

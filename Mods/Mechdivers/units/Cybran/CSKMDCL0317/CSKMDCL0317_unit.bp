@@ -120,7 +120,7 @@ UnitBlueprint {
     },
     Defense = {
         AirThreatLevel = 0,
-        ArmorType = 'Normal',
+        ArmorType = 'Experimental',
         EconomyThreatLevel = 0,
         Health = 17000,
         MaxHealth = 17000,
@@ -148,6 +148,7 @@ UnitBlueprint {
         },
 		AnimationBuild = '/mods/Mechdivers/units/Cybran/CSKMDCL0317/CSKMDCL0317_Open.sca',
 		AnimationDeco = '/mods/Mechdivers/units/Cybran/CSKMDCL0317/CSKMDCL0317_Deco.sca',
+		AnimationDeco2 = '/mods/Mechdivers/units/Cybran/CSKMDCL0317/CSKMDCL0317_Deco2.sca',
         AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0317/CSKMDCL0317_Awalk01.sca',
         AnimationWalkRate = 0.6,
         Mesh = {
@@ -188,6 +189,9 @@ UnitBlueprint {
         TeleportTimeMod = 0.01,
 		BuildableCategory = {
             'cskmdcl0201',
+			'cskmdcl0202',
+			'cskmdcl0203',
+			'cskmdcl0206',
         },
     },
     General = {
@@ -287,7 +291,7 @@ UnitBlueprint {
             },
             FiringTolerance = 1,
             Label = 'Dummy',
-            MaxRadius = 15,
+            MaxRadius = 25,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 0,
@@ -358,7 +362,7 @@ UnitBlueprint {
             FiringRandomness = 0,
             FiringTolerance = 2,
             Label = 'MainGun',
-            MaxRadius = 15,
+            MaxRadius = 25,
             MuzzleSalvoDelay = 0.2,
             MuzzleSalvoSize = 15,
             MuzzleVelocity = 25,
@@ -431,7 +435,7 @@ UnitBlueprint {
             FiringRandomness = 0,
             FiringTolerance = 2,
             Label = 'MainGun',
-            MaxRadius = 15,
+            MaxRadius = 25,
             MuzzleSalvoDelay = 0.2,
             MuzzleSalvoSize = 15,
             MuzzleVelocity = 25,

@@ -198,6 +198,8 @@ end,
         self.PrepareToBuildManipulator:PlayAnim(self:GetBlueprint().Display.AnimationBuild, false):SetRate(0)
 		self.AnimationManipulator = CreateAnimator(self)
         self.AnimationManipulator:PlayAnim(self:GetBlueprint().Display.AnimationDeco, true):SetRate(0.5)
+		self.AnimationManipulator2 = CreateAnimator(self)
+        self.AnimationManipulator2:PlayAnim(self:GetBlueprint().Display.AnimationDeco2, true):SetRate(0.5)
 		self:RemoveToggleCap('RULEUTC_WeaponToggle')
 		ScanMesh = '/mods/Mechdivers/Decorations/CybranScan_mesh'
 		self.Scan = import('/lua/sim/Entity.lua').Entity()
