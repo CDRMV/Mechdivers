@@ -25,6 +25,7 @@ TAAMissile01 = Class(SingleBeamProjectile) {
         }
         self:SetCollisionShape('Sphere', 0, 0, 0, 2.0)
 		local army = self:GetArmy()
+		self.Army = self:GetArmy()
 		CreateBeamEmitterOnEntity(self, 'Exhaust', army, self.BeamName):SetBeamParam('THICKNESS', 0.01):SetBeamParam('LENGTH', 1.5)
         self.CreateEffects( self, self.InitialEffects, army, 1 )
         self.CreateEffects( self, self.LaunchEffects, army, 1 )
