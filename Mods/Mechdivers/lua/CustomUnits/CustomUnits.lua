@@ -91,6 +91,7 @@ UnitList = {
     },
 	
 	T3AADefense = {
+	UEF =	{'URBMD00300', 80}, -- Slatter Tech 3 Heavy Anti Air Sam Launcher
     Cybran =	{'URBMD0302', 80}, -- Smilodon Tech 3 Anti Air Quad Autocannon
 },
 
