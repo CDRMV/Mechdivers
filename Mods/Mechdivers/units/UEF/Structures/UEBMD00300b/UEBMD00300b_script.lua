@@ -11,7 +11,7 @@
 local TStructureUnit = import('/lua/defaultunits.lua').StructureUnit
 local TSAMLauncher = import('/lua/terranweapons.lua').TSAMLauncher
 
-UEBMD00300 = Class(TStructureUnit) {
+UEBMD00300b = Class(TStructureUnit) {
     Weapons = {
         MissileRack01 = Class(TSAMLauncher) {
 		OnWeaponFired = function(self)
@@ -449,17 +449,57 @@ UEBMD00300 = Class(TStructureUnit) {
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		self.wep = self:GetWeaponByLabel('MissileRack01')
 		self.wep:SetEnabled(false)
-		ForkThread( function()	
+	end,
+	
+	CreateEnhancement = function(self, enh)
+        TStructureUnit.CreateEnhancement(self, enh)
+        local bp = self:GetBlueprint().Enhancements[enh]
+        if not bp then return end
+        if enh == 'RaiseMissileLauncher' then
+		
+        elseif enh == 'RemoveRaiseMissileLauncher' then
+		
+		elseif enh == 'Guidance' then
+		
+		elseif enh == 'RemoveGuidance' then
+		
+		elseif enh == 'Targeting' then
+		
+		elseif enh == 'RemoveTargeting' then
+		
+		elseif enh == 'WarHead' then
+		
+		elseif enh == 'RemoveWarHead' then
+		
+		elseif enh == 'Propulsion' then
+		
+		elseif enh == 'RemovePropulsion' then
+        end
+    end,
+	
+    OnWorkBegin = function(self, work)
+		TStructureUnit.OnWorkBegin(self, work)
+		local tempEnhanceBp = self:GetBlueprint().Enhancements[work]
+		if tempEnhanceBp.Name == '<LOC RaiseMissileLauncher>Raise surface to air launcher' then
 		self.AnimationManipulator:SetRate(0.03)
-		WaitFor(self.AnimationManipulator)
-        self.AnimationUnpack1Manipulator:SetRate(-1)
-		WaitFor(self.AnimationUnpack1Manipulator)		
-        self.AnimationUnpack2Manipulator:SetRate(1)
-		WaitFor(self.AnimationUnpack2Manipulator)
-        self.AnimationUnpack3Manipulator:SetRate(1)
-		WaitFor(self.AnimationUnpack3Manipulator)
-        self.AnimationUnpack4Manipulator:SetRate(1)
-		WaitFor(self.AnimationUnpack4Manipulator)
+		return true
+		end
+		if tempEnhanceBp.Name == '<LOC GuidanceSubsystem>Guidance Subsystem' then
+		 self.AnimationUnpack1Manipulator:SetRate(-1)
+		return true
+		end
+		if tempEnhanceBp.Name == '<LOC TargetingSubsystem>Targeting Subsystem' then
+		 self.AnimationUnpack2Manipulator:SetRate(1)
+		 return true
+		end
+		if tempEnhanceBp.Name == '<LOC WarheadSubsystem>Warhead Subsystem' then
+		 self.AnimationUnpack3Manipulator:SetRate(1)
+		 return true
+		end
+		if tempEnhanceBp.Name == '<LOC PropulsionSubsystem>Propulsion Subsystem' then
+		 self.AnimationUnpack4Manipulator:SetRate(1)
+		 ForkThread( function()	
+		 WaitFor(self.AnimationUnpack4Manipulator)
 		self:AddCommandCap('RULEUCC_Attack')
 		self:AddCommandCap('RULEUCC_Stop')
 		self:AddCommandCap('RULEUCC_RetaliateToggle')
@@ -510,7 +550,10 @@ UEBMD00300 = Class(TStructureUnit) {
 		WaitSeconds(0.1)
 		end
 		end)
-	end,	
+		return true
+		end
+		return false
+    end,	
 }
 
-TypeClass = UEBMD00300
+TypeClass = UEBMD00300b
