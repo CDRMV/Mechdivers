@@ -118,6 +118,12 @@ UEBMD00300b = Class(TStructureUnit) {
     },
 	
 	OnCreate = function(self)
+		ForkThread( function()
+		while true do
+		self:FlattenSkirt()
+		WaitSeconds(0.1)
+		end
+		end)
 		if not self.AnimationManipulator then
             self.AnimationManipulator = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator)
@@ -444,6 +450,7 @@ UEBMD00300b = Class(TStructureUnit) {
 	
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
+		self:CreateTarmac(true, true, true, false, false)
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_Stop')
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')

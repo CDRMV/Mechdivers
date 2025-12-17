@@ -28,4 +28,17 @@ UnitList = {
 	T2ShieldDefense = {
     Cybran =	{'urbmd0100', 70}, -- Tech 2 Detector Tower
 	},
+	
+	
+	T4LandExperimental1 = {
+		Cybran = {'CSKMDCL0316', 80},    	-- CX-300c: Factory Strider Mark III, Tech 3 Heavy Missile Walker
+    },
+	
+	T4LandExperimental2 = {
+		Cybran = {'CSKMDCL0317', 80},    	-- CX-300d: Factory Strider Mark IV, Tech 3 Heavy Detector Walker
+	},	
+	
+	T4LandExperimental3 = {
+		Cybran = {'CSKMDCL0318', 80},    	-- CX-300d: Factory Strider Mark V, Tech 3 Heavy Assault Walker
+	},
 }

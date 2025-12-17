@@ -63,6 +63,7 @@ UnitBlueprint {
 	AnimationUnpack4 = '/mods/Mechdivers/units/UEF/Structures/UEBMD00300/UEBMD00300_UnPack4.sca',
         Abilities = {
             '<LOC ability_aa>Anti-Air',
+			'Can be captured and activated by installing of the Enhancement Upgrades by the Player.',
 			'Can only Target large Air Units such as Air Transports and Air Experimentals',
 			'Has 24 Missiles in its Storage and fires 1 with each Salvo',
 			'If the Storage goes empty (0) you can build new Missiles to refuel it',
