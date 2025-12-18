@@ -120,7 +120,10 @@ UEBMD00300b = Class(TStructureUnit) {
 	OnCreate = function(self)
 		ForkThread( function()
 		while true do
+		local bp = self:GetBlueprint()
+		if bp.Footprint.SizeX and bp.Footprint.SizeZ then
 		self:FlattenSkirt()
+		end
 		WaitSeconds(0.1)
 		end
 		end)
