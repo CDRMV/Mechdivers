@@ -32,6 +32,7 @@ UnitBlueprint {
         'BUILTBYTIER3ENGINEER',
         'BUILTBYTIER3COMMANDER',
         'UEF',
+		'ARTILLERY',
         'STRUCTURE',
         'DEFENSE',
 		'SILO',

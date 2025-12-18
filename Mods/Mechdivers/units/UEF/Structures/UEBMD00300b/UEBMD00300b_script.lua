@@ -457,6 +457,8 @@ UEBMD00300b = Class(TStructureUnit) {
 		self.wep = self:GetWeaponByLabel('MissileRack01')
 		self.wep:SetEnabled(false)
 		self:GiveTacticalSiloAmmo(24)
+		self.ReclaimedMass = 0
+		self.ReclaimedEnergy = 0
 	end,
 	
 	CreateEnhancement = function(self, enh)
