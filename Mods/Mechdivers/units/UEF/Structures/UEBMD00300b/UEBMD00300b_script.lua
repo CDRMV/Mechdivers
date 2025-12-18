@@ -456,6 +456,7 @@ UEBMD00300b = Class(TStructureUnit) {
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		self.wep = self:GetWeaponByLabel('MissileRack01')
 		self.wep:SetEnabled(false)
+		self:GiveTacticalSiloAmmo(24)
 	end,
 	
 	CreateEnhancement = function(self, enh)

@@ -28,6 +28,7 @@ MarkerNames
 
 					else
 					local unit = CreateUnitHPR(UnitID, 'NEUTRAL_CIVILIAN', MarkerPosition[1], MarkerPosition[2], MarkerPosition[3], 0, 0, 0)
+					unit:AddCommandCap('RULEUCC_Reclaim')
 							    local reclaim = GetEntitiesInRect(unit:GetSkirtRect())
 					for _, r in reclaim do
 					if IsProp(r)then
