@@ -9,6 +9,8 @@ MarkerNames
 - Large Expansion Area
 - Defensive Point
 - Protected Experimental Construction
+- Combat Zone
+- Transport Marker
 
 ]]--
 
@@ -21,8 +23,18 @@ MarkerNames
 					local MarkerAmount = table.getsize(Locations)
 					local SetRandomLocation = math.random(1, MarkerAmount)
 					local MarkerPosition = Locations[SetRandomLocation].Position
+					local terrain  = GetTerrainType(MarkerPosition[1], MarkerPosition[3])
+					if string.find(terrain.Name, 'Water') then
+
+					else
 					local unit = CreateUnitHPR(UnitID, 'NEUTRAL_CIVILIAN', MarkerPosition[1], MarkerPosition[2], MarkerPosition[3], 0, 0, 0)
-					
+							    local reclaim = GetEntitiesInRect(unit:GetSkirtRect())
+					for _, r in reclaim do
+					if IsProp(r)then
+						IssueReclaim({unit},r)
+					end
+					end
+					unit:RemoveCommandCap('RULEUCC_Reclaim')
 					---------------------------------------------------------------------------------------------
 					-- Spawn Props (Fences and Lights)
 					---------------------------------------------------------------------------------------------
@@ -54,6 +66,7 @@ MarkerNames
 					CreatePropHPR( '/env/UEF/Props/UEF_Streetlight_01_prop.bp', pos[1]+2.4, pos[2], pos[3]+2.39, 0, 0, 0 )
 					number = number + 1
 					end
+					end
 					end)
 end
 
@@ -63,8 +76,9 @@ OldInitializeArmies = InitializeArmies
 function InitializeArmies()
 OldInitializeArmies()
 
+SpawnCivilianSlatter('UEBMD00300b', 'Combat Zone', 2)
+SpawnCivilianSlatter('UEBMD00300b', 'Transport Marker', 2)
 SpawnCivilianSlatter('UEBMD00300b', 'Protected Experimental Construction', 2)
-SpawnCivilianSlatter('UEBMD00300b', 'Defensive Point', 2)
 end
 
 
