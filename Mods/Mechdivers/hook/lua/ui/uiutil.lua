@@ -29,6 +29,13 @@ local MyUnitIdTable = {
       cskmdta0300=true,  
       cskmdta0301=true, 
 	  
+	  
+	  cskmdta0301a=true,
+	  cskmdta0301b=true, 
+	  cskmdta0301c=true,
+	  cskmdta0301d=true, 
+	  cskmdta0301e=true,
+	  
  -- Land 
  
  	  cskmdtl0205=true, 
@@ -59,6 +66,7 @@ local MyUnitIdTable = {
 	  uebmd0110=true,
 	  uebmd0111=true,
 	  uebmd0112=true,
+	  uebmd0113=true,
 	  
 -- Cybran
 

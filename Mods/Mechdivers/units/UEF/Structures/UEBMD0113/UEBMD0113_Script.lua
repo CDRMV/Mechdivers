@@ -9,10 +9,6 @@
 #****************************************************************************
 
 local TStructureUnit = import('/lua/defaultunits.lua').MobileUnit
-local TDFRiotWeapon = import('/lua/terranweapons.lua').TDFRiotWeapon
-local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
-local TSAMLauncher = import('/lua/terranweapons.lua').TSAMLauncher
-local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local utilities = import('/lua/utilities.lua')
 local Util = import('/lua/utilities.lua')
@@ -21,9 +17,9 @@ local EffectUtils = import('/lua/effectutilities.lua')
 local Effects = import('/lua/effecttemplates.lua')
 local explosion = import('/lua/defaultexplosions.lua')
 local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
-local TIFHighBallisticMortarWeapon = import('/lua/terranweapons.lua').TIFHighBallisticMortarWeapon
 
-UEBMD0101 = Class(TStructureUnit) {
+UEBMD0100 = Class(TStructureUnit) {
+ 
 	
 	OnCreate = function(self)
 		self:HideBone( 'Pod', true )
@@ -43,6 +39,7 @@ UEBMD0101 = Class(TStructureUnit) {
         self.ClapDummy:SetVizToAllies('Intel')
         self.ClapDummy:SetVizToNeutrals('Intel')
         self.ClapDummy:SetVizToEnemies('Intel')
+		self:ShowBone( 'CallBeacon', true )
 		local army = self:GetArmy()
         local position = self:GetPosition()
 		local orientation = RandomFloat(0,2*math.pi)
@@ -56,6 +53,22 @@ UEBMD0101 = Class(TStructureUnit) {
         self.Trash:Add(self.ArmSlider1)
 		self.ArmSlider1:SetGoal(0, 1000, 0)
 		self.ArmSlider1:SetSpeed(1000)
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition()
+		self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.unit:AttachBoneTo(-2, self, 'AttachPoint')
+		self.unit:SetDoNotTarget(true)
+		self.unit:SetWeaponEnabledByLabel('MainGun', false)
+		self.unit:SetCollisionShape('Box', 0, 0, 0, 0, 0 ,0)
+		self.unit:HideBone(0, true)
+		self.unit:SetUnSelectable(true)
+		--self.unit:HideRifle()
+		if not self.unit.AnimationManipulator then
+            self.unit.AnimationManipulator = CreateAnimator(self.unit)
+            self.unit.Trash:Add(self.unit.AnimationManipulator)
+        end
+        self.unit.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/Structures/UEBMD0113/MechMarine.sca', false):SetRate(0)	
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		self:HideBone( 'Pod', true )
         self:SetUnSelectable(true)	
 		WaitSeconds(1)			
@@ -81,7 +94,7 @@ UEBMD0101 = Class(TStructureUnit) {
 		self.ArrivalEffect8 = CreateBeamEmitterOnEntity(self, 'Pod_Exhaust05', self:GetArmy(), '/effects/emitters/missile_exhaust_fire_beam_06_emit.bp')
 		self.ArrivalEffect9 = CreateBeamEmitterOnEntity(self, 'Pod_Exhaust06', self:GetArmy(), '/effects/emitters/missile_exhaust_fire_beam_06_emit.bp')
 		self:ShowBone( 0, true )
-		self:HideBone( 'Beacon', true )
+		self:HideBone( 'Turret', true )
 		WaitSeconds(10)
 		CreateEmitterOnEntity(self,self:GetArmy(), '/effects/emitters/destruction_explosion_flash_04_emit.bp')
 		CreateEmitterOnEntity(self,self:GetArmy(), '/effects/emitters/destruction_explosion_flash_05_emit.bp')
@@ -108,15 +121,21 @@ UEBMD0101 = Class(TStructureUnit) {
         self.AnimationManipulator2:PlayAnim(self:GetBlueprint().Display.AnimationUnpack, false):SetRate(1)	
 		self:SetUnSelectable(false)	
 		self:SetDoNotTarget(false)
-		self:ShowBone( 'Beacon', true )
+		self:ShowBone( 'Turret', true )
+		self.unit:ShowBone(0, true)
 		local x = math.random(-1, 1)
 		local z = math.random(-1, 1)
 		self.Clap = self:CreateProjectile('/Mods/Mechdivers/projectiles/DropClap/DropClap_proj.bp', 0, 0.5, 0, x, 7, z)
 		self.ClapDummy:DetachFrom(true)
 		self.ClapDummy:AttachBoneTo( -2, self.Clap, -2 )
 		WaitFor(self.AnimationManipulator2)
-		CreateBeamEmitterOnEntity(self, 'Beacon_Muzzle', army, '/mods/Mechdivers/effects/emitters/beacon_beam_01_emit.bp')
-		self:SetScriptBit(7, false)
+		self.unit.AnimationManipulator:SetRate(2)
+		self.unit:SetDoNotTarget(false)
+		self.unit:SetUnSelectable(false)
+		self.unit:SetWeaponEnabledByLabel('MainGun', true)
+		self.unit:SetCollisionShape('Box', 0, 0,0, 0.6, 0.6, 0.6)
+		self.unit:DetachFrom(true)
+		self.unit.AnimationManipulator:Destroy()
 		end
 		)
     end,
@@ -151,4 +170,4 @@ UEBMD0101 = Class(TStructureUnit) {
     end,
 }
 
-TypeClass = UEBMD0101
+TypeClass = UEBMD0100

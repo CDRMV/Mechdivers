@@ -1,6 +1,6 @@
 
 do
-
+local SimFile = '/mods/Mechdivers/UI/RefWindowSim.lua'
 ArmyBrains = {}
 Area = {
 	x0 = 0,
@@ -12,6 +12,7 @@ Area = {
 local oldBeginSession = BeginSession
 function BeginSession()
     oldBeginSession()
+	ForkThread(import(SimFile).CheckEnableButton)
 	LOG('ScenarioInfo.type', ScenarioInfo.type)
 	LOG('x0: ', Area.x0)
 	LOG('y0: ', Area.y0)

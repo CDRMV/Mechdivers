@@ -130,7 +130,9 @@ UEBMD0108 = Class(TStructureUnit) {
 		self:SetCollisionShape('Box', 0, 0, 0, 1, 0.6, 0.1)
 		end
 		)
+		self.Pressed = nil
     end,
+	
 	
 	OnScriptBitSet = function(self, bit)
         TStructureUnit.OnScriptBitSet(self, bit)
@@ -565,6 +567,7 @@ UEBMD0108 = Class(TStructureUnit) {
 		end
         end
     end,
+	
 	
 	OnKilled = function(self, instigator, type, overkillRatio)
 	if self.Blocker and self.Blocker2 then
