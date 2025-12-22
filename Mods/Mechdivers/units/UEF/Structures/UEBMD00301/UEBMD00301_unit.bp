@@ -207,7 +207,7 @@ UnitBlueprint {
             MuzzleVelocity = 62,
             MuzzleVelocityReduceDistance = 700,
             ProjectileId = '/mods/Mechdivers/projectiles/TIFExplosiveShell/TIFExplosiveShell_proj.bp',
-            ProjectileLifetime = 20,
+            ProjectileLifetime = 100,
             ProjectilesPerOnFire = 1,
             RackBones = {
                 {
