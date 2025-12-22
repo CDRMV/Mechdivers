@@ -17,6 +17,7 @@ end,
 		self:ForkThread(self.CheckDetectorFactoryStriderStep1)
 		self:ForkThread(self.CheckScoutDroneStep1)
 		self:ForkThread(self.CheckCommissarStep1)
+		self:ForkThread(self.CheckDeimosAmmuntionStorageStep1)
     end,
 	
 	OnCreateAI = function(self, planName)
@@ -26,7 +27,33 @@ end,
 		self:ForkThread(self.CheckDetectorFactoryStriderStep1)
 		self:ForkThread(self.CheckScoutDroneStep1)
 		self:ForkThread(self.CheckCommissarStep1)
+		self:ForkThread(self.CheckDeimosAmmuntionStorageStep1)
     end,
+	
+	CheckDeimosAmmuntionStorageStep1 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.DEIMOSAMMOSTORAGE, true)
+			if table.getn(labs) > 1 then
+				--import("/lua/enhancementcommon.lua").RestrictList(restrict)
+				self:ForkThread(self.CheckDeimosAmmuntionStorageStep2)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	CheckDeimosAmmuntionStorageStep2 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.DEIMOSAMMOSTORAGE, true)
+			if table.getn(labs) == 0 then
+				--import("/lua/enhancementcommon.lua").RestrictList(restrict)
+				self:ForkThread(self.CheckDeimosAmmuntionStorageStep1)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
 	CheckAssaultDroneStationStep1 = function(self)
 	        while true do
 			local labs = self:GetListOfUnits(categories.ASSAULTDRONESTATION, true)
