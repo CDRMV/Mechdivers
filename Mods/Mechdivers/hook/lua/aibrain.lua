@@ -17,6 +17,7 @@ end,
 		self:ForkThread(self.CheckDetectorFactoryStriderStep1)
 		self:ForkThread(self.CheckScoutDroneStep1)
 		self:ForkThread(self.CheckCommissarStep1)
+		self:ForkThread(self.DeimosAmmuntionMechanic)
 		self:ForkThread(self.CheckDeimosAmmuntionStorageStep1)
     end,
 	
@@ -27,14 +28,56 @@ end,
 		self:ForkThread(self.CheckDetectorFactoryStriderStep1)
 		self:ForkThread(self.CheckScoutDroneStep1)
 		self:ForkThread(self.CheckCommissarStep1)
+		self:ForkThread(self.CheckDeimosAmmuntionMechanic)
 		self:ForkThread(self.CheckDeimosAmmuntionStorageStep1)
+    end,
+	
+	DeimosAmmuntionMechanic = function(self)
+			local number = 1
+	        while true do
+			local labs = self:GetListOfUnits(categories.DEIMOSAMMOSTORAGE, true)
+			local labs2 = self:GetListOfUnits(categories.DEIMOSARTILLERY, true)
+			if table.getn(labs) == 1 and table.getn(labs2) == 1 then
+			if labs[number]:GetFractionComplete() == 1 then
+				for k in labs2 do			
+				local SiloAmount = labs2[k]:GetTacticalSiloAmmoCount()
+				local StorageAmount = labs[number]:GetTacticalSiloAmmoCount()
+				if SiloAmount == 0 and StorageAmount >= 1 then
+				labs[number]:RemoveTacticalSiloAmmo(1)
+				labs2[k]:GiveTacticalSiloAmmo(1)
+				elseif SiloAmount == 0 and StorageAmount == 0 then
+				while true do
+				if table.getn(labs) > 1 and labs[number]:GetFractionComplete() == 1 and labs[number]:GetTacticalSiloAmmoCount() > 1 then
+				
+				else
+				if number > table.getn(labs2) then
+				number = 1
+				else
+				number = number + 1
+				end
+				end
+				WaitSeconds(0.1)
+				end
+				end
+				end
+			end	
+			end
+			WaitSeconds(1)
+			end
     end,
 	
 	CheckDeimosAmmuntionStorageStep1 = function(self)
 	        while true do
 			local labs = self:GetListOfUnits(categories.DEIMOSAMMOSTORAGE, true)
-			if table.getn(labs) > 1 then
-				--import("/lua/enhancementcommon.lua").RestrictList(restrict)
+			if table.getn(labs) == 0 then
+				import("/lua/ScenarioFramework.lua").RestrictEnhancements({
+				'ExplosiveGrenade',
+				'HighYieldExplosiveGrenade',
+				'MiniNukeGrenade',
+				'NapalmGrenade',
+				'StunGrenade',
+				'SmokeGrenade',
+				})
 				self:ForkThread(self.CheckDeimosAmmuntionStorageStep2)
 				break
 			end
@@ -45,8 +88,8 @@ end,
 	CheckDeimosAmmuntionStorageStep2 = function(self)
 	        while true do
 			local labs = self:GetListOfUnits(categories.DEIMOSAMMOSTORAGE, true)
-			if table.getn(labs) == 0 then
-				--import("/lua/enhancementcommon.lua").RestrictList(restrict)
+			if table.getn(labs) >= 1 then
+				import("/lua/ScenarioFramework.lua").RestrictEnhancements({})
 				self:ForkThread(self.CheckDeimosAmmuntionStorageStep1)
 				break
 			end

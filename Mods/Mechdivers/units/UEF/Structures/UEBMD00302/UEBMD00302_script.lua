@@ -24,6 +24,7 @@ UEBMD00302 = Class(TStructureUnit) {
 		ForkThread( function()	
 		self:HideBone('B01', true)
 		self:HideBone('B02', true)
+		self:GiveTacticalSiloAmmo(10)
 		end)
 	end,	
 }
