@@ -29,8 +29,8 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-        #'BUILTBYTIER3ENGINEER',
-        #'BUILTBYTIER3COMMANDER',
+        'BUILTBYTIER3ENGINEER',
+        'BUILTBYTIER3COMMANDER',
 		'DEIMOSAMMOSTORAGE',
         'UEF',
         'STRUCTURE',
@@ -54,6 +54,15 @@ UnitBlueprint {
     },
     Description = 'Ammunition Storage',
     Display = {
+		Abilities = {
+            'Only 1 can be builded by each Player.',
+			'Storage Capacity: 50',
+			'Once the Storage gets empty it will be refueled with an Cargo Gunship automatically.',
+			'However the arrival of the Cargo Gunship takes time so please be patient.',
+			'Can refuel the Grenade Storage of the Deimos - Tech 3 Heavy Mortar.',
+			'Unlocks the Enhancement Upgrades to stitch the grenade types for the Deimos - Tech 3 Heavy Mortar',
+			'However those Upgrades only show up if the Storage of this Building is not empty',
+        },
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {

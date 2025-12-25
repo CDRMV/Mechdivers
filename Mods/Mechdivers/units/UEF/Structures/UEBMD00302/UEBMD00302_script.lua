@@ -24,7 +24,7 @@ UEBMD00302 = Class(TStructureUnit) {
 		ForkThread( function()	
 		self:HideBone('B01', true)
 		self:HideBone('B02', true)
-		self:GiveTacticalSiloAmmo(10)
+		self:GiveTacticalSiloAmmo(50)
 		self:RefuelStorage()
 		end)
 	end,	
@@ -41,8 +41,8 @@ UEBMD00302 = Class(TStructureUnit) {
 		self:HideBone('B05', true)
 		WaitSeconds(60)
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
-		local RandomPos1 = math.random(-120, 120)
-		local RandomPos2 = math.random(-120, 120)
+		local RandomPos1 = math.random(-60, 60)
+		local RandomPos2 = math.random(-60, 60)
 		local position = self:GetPosition()
 		self.unit = CreateUnitHPR('CSKMDTA0301Ammo', self:GetArmy(), position[1] + RandomPos1, position[2], position[3] + RandomPos2, 0, 0, 0)
 		local RotateTowards = import('/lua/defaultunits.lua').RotateTowards
@@ -51,16 +51,15 @@ UEBMD00302 = Class(TStructureUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		while not self.unit.Dead do
 		if self.unit:IsMoving() == true then
-		self.unit:SetElevation(10)
-		elseif self.unit:IsIdleState() then
 		self.unit:SetElevation(2)
+		elseif self.unit:IsIdleState() then
 		if ammonumber == 0 then
 	    ammonumber = 1
 		WaitSeconds(50)
 		self:ShowBone('B03', true)
 		self:ShowBone('B04', true)
 		self:ShowBone('B05', true)
-		self:GiveTacticalSiloAmmo(10)
+		self:GiveTacticalSiloAmmo(50)
 		end
 		self.unit:SetElevation(120)
 		unitpos = self.unit:GetPosition()

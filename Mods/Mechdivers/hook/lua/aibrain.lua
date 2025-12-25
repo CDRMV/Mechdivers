@@ -18,7 +18,9 @@ end,
 		self:ForkThread(self.CheckScoutDroneStep1)
 		self:ForkThread(self.CheckCommissarStep1)
 		self:ForkThread(self.DeimosAmmuntionMechanic)
-		self:ForkThread(self.CheckDeimosAmmuntionStorageStep1)
+		self:ForkThread(self.DeimosAmmuntionEnhancementManageStep1)
+		self:ForkThread(self.DeimosAmmuntionStorageStep1)
+		self:ForkThread(self.DeimosArtilleryStep1)
     end,
 	
 	OnCreateAI = function(self, planName)
@@ -28,8 +30,10 @@ end,
 		self:ForkThread(self.CheckDetectorFactoryStriderStep1)
 		self:ForkThread(self.CheckScoutDroneStep1)
 		self:ForkThread(self.CheckCommissarStep1)
-		self:ForkThread(self.CheckDeimosAmmuntionMechanic)
-		self:ForkThread(self.CheckDeimosAmmuntionStorageStep1)
+		self:ForkThread(self.DeimosAmmuntionMechanic)
+		self:ForkThread(self.DeimosAmmuntionEnhancementManageStep1)
+		self:ForkThread(self.DeimosAmmuntionStorageStep1)
+		self:ForkThread(self.DeimosArtilleryStep1)
     end,
 	
 	DeimosAmmuntionMechanic = function(self)
@@ -69,8 +73,7 @@ end,
 			end
     end,
 	
-	CheckDeimosAmmuntionStorageStep1 = function(self)
-			local number = 0
+	DeimosAmmuntionEnhancementManageStep1 = function(self)
 	        while true do
 			local labs = self:GetListOfUnits(categories.DEIMOSAMMOSTORAGE, true)
 			if table.getn(labs) == 0 then
@@ -82,16 +85,14 @@ end,
 				'StunGrenade',
 				'SmokeGrenade',
 				})
-				self:ForkThread(self.CheckDeimosAmmuntionStorageStep2)
+				self:ForkThread(self.DeimosAmmuntionEnhancementManageStep2, 0)
 				break
 			end
 			WaitSeconds(1)
 			end
     end,
 	
-	CheckDeimosAmmuntionStorageStep2 = function(self)
-		local number = 0
-		local number2 = 0
+	DeimosAmmuntionEnhancementManageStep2 = function(self, number)
 	        while true do
 			local labs = self:GetListOfUnits(categories.DEIMOSAMMOSTORAGE, true)
 			if table.getn(labs) >= 1 and labs[1]:GetFractionComplete() == 1 then
@@ -105,7 +106,7 @@ end,
 				number = 1
 				end
 				end
-				self:ForkThread(self.CheckDeimosAmmuntionStorageStep1)
+				self:ForkThread(self.DeimosAmmuntionEnhancementManageStep1)
 				break
 				elseif labs[c]:GetTacticalSiloAmmoCount() == 0 then
 				import("/lua/ScenarioFramework.lua").RestrictEnhancements({
@@ -118,15 +119,63 @@ end,
 				})
 				local labs2 = self:GetListOfUnits(categories.DEIMOSARTILLERY, true)
 				for k in labs2 do
-				if number2 == 0 then
+				if number == 1 then
 				labs2[k]:RequestRefreshUI()
-				number2 = 1
+				number = 0
 				end
 				end
-				self:ForkThread(self.CheckDeimosAmmuntionStorageStep1)
+				self:ForkThread(self.DeimosAmmuntionEnhancementManageStep1)
 				break
 				end
 				end
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	DeimosAmmuntionStorageStep1 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.DEIMOSAMMOSTORAGE, true)
+			if table.getn(labs) >= 1 then
+				AddBuildRestriction(self:GetArmyIndex(), categories.DEIMOSAMMOSTORAGE)
+				self:ForkThread(self.DeimosAmmuntionStorageStep2)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	DeimosAmmuntionStorageStep2 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.DEIMOSAMMOSTORAGE, true)
+			if table.getn(labs) < 1  then
+				RemoveBuildRestriction(self:GetArmyIndex(), categories.DEIMOSAMMOSTORAGE)
+				self:ForkThread(self.DeimosAmmuntionStorageStep1)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	DeimosArtilleryStep1 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.DEIMOSARTILLERY, true)
+			if table.getn(labs) >= 3 then
+				AddBuildRestriction(self:GetArmyIndex(), categories.DEIMOSARTILLERY)
+				self:ForkThread(self.DeimosArtilleryStep2)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	DeimosArtilleryStep2 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.DEIMOSARTILLERY, true)
+			if table.getn(labs) < 1  then
+				RemoveBuildRestriction(self:GetArmyIndex(), categories.DEIMOSARTILLERY)
+				self:ForkThread(self.DeimosArtilleryStep1)
+				break
 			end
 			WaitSeconds(1)
 			end

@@ -29,8 +29,8 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-        #'BUILTBYTIER3ENGINEER',
-        #'BUILTBYTIER3COMMANDER',
+        'BUILTBYTIER3ENGINEER',
+        'BUILTBYTIER3COMMANDER',
         'UEF',
 		'ARTILLERY',
 		'DEIMOSARTILLERY',
@@ -59,6 +59,13 @@ UnitBlueprint {
     },
     Description = 'Heavy Mortar',
     Display = {
+		Abilities = {
+            'Only 3 can be builded by each Player.',
+			'Can only fire 1 Grenade per Salvo.',
+			'Needs the Deimos Supply - Tech 3 Ammunition Storage to get refueled with Grenades.',
+			'Has access to Enhancement Upgrades to stitch the grenade types.',
+			'However those Upgrades only show up if the Deimos Supply - Tech 3 Ammunition Storage is builded and not empty',
+        },
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
