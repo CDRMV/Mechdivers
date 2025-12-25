@@ -37,7 +37,7 @@ end,
 	        while true do
 			local labs = self:GetListOfUnits(categories.DEIMOSAMMOSTORAGE, true)
 			local labs2 = self:GetListOfUnits(categories.DEIMOSARTILLERY, true)
-			if table.getn(labs) == 1 and table.getn(labs2) == 1 then
+			if table.getn(labs) >= 1 and table.getn(labs2) >= 1 then
 			if labs[number]:GetFractionComplete() == 1 then
 				for k in labs2 do			
 				local SiloAmount = labs2[k]:GetTacticalSiloAmmoCount()
@@ -46,17 +46,20 @@ end,
 				labs[number]:RemoveTacticalSiloAmmo(1)
 				labs2[k]:GiveTacticalSiloAmmo(1)
 				elseif SiloAmount == 0 and StorageAmount == 0 then
-				while true do
-				if table.getn(labs) > 1 and labs[number]:GetFractionComplete() == 1 and labs[number]:GetTacticalSiloAmmoCount() > 1 then
-				
-				else
-				if number > table.getn(labs2) then
+				if labs[1]:GetTacticalSiloAmmoCount() >= 1 then
 				number = 1
 				else
-				number = number + 1
+				if table.getn(labs) >= 1 then
+				if labs[table.getn(labs)]:GetFractionComplete() == 1 then
+				if labs[table.getn(labs)]:GetTacticalSiloAmmoCount() >= 1 then
+				if number > table.getn(labs) then
+				number = 1
+				else
+				number = table.getn(labs)
 				end
 				end
-				WaitSeconds(0.1)
+				end
+				end
 				end
 				end
 				end
@@ -67,6 +70,7 @@ end,
     end,
 	
 	CheckDeimosAmmuntionStorageStep1 = function(self)
+			local number = 0
 	        while true do
 			local labs = self:GetListOfUnits(categories.DEIMOSAMMOSTORAGE, true)
 			if table.getn(labs) == 0 then
@@ -86,12 +90,43 @@ end,
     end,
 	
 	CheckDeimosAmmuntionStorageStep2 = function(self)
+		local number = 0
+		local number2 = 0
 	        while true do
 			local labs = self:GetListOfUnits(categories.DEIMOSAMMOSTORAGE, true)
-			if table.getn(labs) >= 1 then
+			if table.getn(labs) >= 1 and labs[1]:GetFractionComplete() == 1 then
+				for c in labs do
+				if labs[c]:GetTacticalSiloAmmoCount() >= 1 then
 				import("/lua/ScenarioFramework.lua").RestrictEnhancements({})
+				local labs2 = self:GetListOfUnits(categories.DEIMOSARTILLERY, true)
+				for k in labs2 do
+				if number == 0 then
+				labs2[k]:RequestRefreshUI()
+				number = 1
+				end
+				end
 				self:ForkThread(self.CheckDeimosAmmuntionStorageStep1)
 				break
+				elseif labs[c]:GetTacticalSiloAmmoCount() == 0 then
+				import("/lua/ScenarioFramework.lua").RestrictEnhancements({
+				'ExplosiveGrenade',
+				'HighYieldExplosiveGrenade',
+				'MiniNukeGrenade',
+				'NapalmGrenade',
+				'StunGrenade',
+				'SmokeGrenade',
+				})
+				local labs2 = self:GetListOfUnits(categories.DEIMOSARTILLERY, true)
+				for k in labs2 do
+				if number2 == 0 then
+				labs2[k]:RequestRefreshUI()
+				number2 = 1
+				end
+				end
+				self:ForkThread(self.CheckDeimosAmmuntionStorageStep1)
+				break
+				end
+				end
 			end
 			WaitSeconds(1)
 			end

@@ -1,6 +1,6 @@
 UnitBlueprint {
     Air = {
-        AutoLandTime = 1,
+        AutoLandTime = 0,
         BankFactor = 0.1,
         BankForward = false,
         CanFly = true,
