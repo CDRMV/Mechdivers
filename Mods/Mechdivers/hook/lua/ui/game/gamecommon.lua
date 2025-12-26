@@ -40,6 +40,9 @@ local MyUnitIdTable = {
 
       -- Mines --
 	  uebmd001=true,
+	  uebmd002=true,
+	  uebmd003=true,
+	  uebmd004=true,
 	  
 	  -----------
 
@@ -52,6 +55,9 @@ local MyUnitIdTable = {
 	  uebmd0100=true,
 	  uebmd0101=true,						
 	  uebmd0102=true,
+	  uebmd0102b=true,
+	  uebmd0102c=true,
+	  uebmd0102d=true,
 	  uebmd0103=true,
 	  uebmd0104=true,						
 	  uebmd0105=true,	

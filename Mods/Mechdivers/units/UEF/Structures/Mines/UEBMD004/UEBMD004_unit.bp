@@ -12,7 +12,7 @@ UnitBlueprint {
         Health = 10,
         MaxHealth = 10,
     },
-    Description = 'Incendiary Mine',
+    Description = 'Gas Mine',
     Display = {
         Mesh = {
             IconFadeInZoom = 130,
@@ -32,7 +32,7 @@ UnitBlueprint {
     },
     General = {
 		CapCost = 0,
-        UnitName = 'MD-14',
+        UnitName = 'MD-8',
         FactionName = 'UEF',
         Icon = 'land',
         SelectionPriority = 5,

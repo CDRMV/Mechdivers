@@ -2,7 +2,7 @@
 # Terran Gauss Cannon Projectile
 
 local TDFMineProjectile = import('/mods/Mechdivers/lua/CSKMDProjectiles.lua').TDFMineProjectile
-TDFFlameMine = Class(TDFMineProjectile) {
+TDFLightAntiTankMine = Class(TDFMineProjectile) {
 	
     OnCreate = function(self, inWater)
         TDFMineProjectile.OnCreate(self, inWater)
@@ -24,11 +24,11 @@ TDFFlameMine = Class(TDFMineProjectile) {
 		
 		else
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
-		local ShieldUnit =CreateUnitHPR('UEBMD001', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		local ShieldUnit =CreateUnitHPR('UEBMD003', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		end
 		TDFMineProjectile.OnImpact( self, TargetType, targetEntity )
 	end,
 }
-TypeClass = TDFFlameMine
+TypeClass = TDFLightAntiTankMine
 

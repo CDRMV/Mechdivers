@@ -1,0 +1,14 @@
+MeshBlueprint {
+    LODs = {
+        {
+            MeshName = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0102b/Mine.scm',
+            ShaderName = 'Unit',
+            AlbedoName = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0102/UEBMD01022_Albedo.dds',
+            NormalsName = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0102/UEBMD0102_NormalsTS.dds',
+			SpecularName = '/Mods/Mechdivers/units/UEF/Structures/UEBMD0102/UEBMD0102_SpecTeam.dds',
+            LODCutoff = 300,
+            
+        },
+    },
+    SortOrder = 999,
+}

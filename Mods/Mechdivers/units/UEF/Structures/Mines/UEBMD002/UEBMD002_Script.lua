@@ -5,7 +5,7 @@ EmtBpPath = '/effects/emitters/'
 local Util = import('/lua/utilities.lua')
 local RandomFloat = Util.GetRandomFloat
 
-UEBMD001 = Class(TStructureUnit) {
+UEBMD002 = Class(TStructureUnit) {
 	
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
@@ -13,7 +13,7 @@ UEBMD001 = Class(TStructureUnit) {
 		self:SetCollisionShape('Sphere', 0, 0, 0, 0.5)
 		self.AutomaticDetonationThreadHandle = self:ForkThread(self.AutomaticDetonationThread)
     end,
-	
+    
 	FxImpactLand = {
 	EmtBpPath .. 'uef_t2_artillery_hit_01_emit.bp',
 	EmtBpPath .. 'uef_t2_artillery_hit_02_emit.bp',
@@ -22,13 +22,6 @@ UEBMD001 = Class(TStructureUnit) {
 	EmtBpPath .. 'uef_t2_artillery_hit_05_emit.bp',
 	EmtBpPath .. 'uef_t2_artillery_hit_06_emit.bp',
 	EmtBpPath .. 'uef_t2_artillery_hit_07_emit.bp',
-	EmtBpPath .. 'napalm_hvy_flash_emit.bp',
-    EmtBpPath .. 'napalm_hvy_thick_smoke_emit.bp',
-    #EmtBpPath .. 'napalm_hvy_fire_emit.bp',
-    EmtBpPath .. 'napalm_hvy_thin_smoke_emit.bp',
-    EmtBpPath .. 'napalm_hvy_01_emit.bp',
-    EmtBpPath .. 'napalm_hvy_02_emit.bp',
-    EmtBpPath .. 'napalm_hvy_03_emit.bp',
 	},
 
 	AutomaticDetonationThread = function(self)
@@ -38,21 +31,13 @@ UEBMD001 = Class(TStructureUnit) {
             #Get Enemy units in the area
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, 1, 'Enemy')
             for _,unit in units do
-				local location = self:GetPosition()
-				SetIgnoreArmyUnitCap(self:GetArmy(), true)
-				local Unit =CreateUnitHPR('UEFSSP0200p', self:GetArmy(), location[1], location[2], location[3], 0, 0, 0)
-				if unit then
-				Unit:AttachBoneTo(0, unit, 0)
-				end
-				SetIgnoreArmyUnitCap(self:GetArmy(), false)
 				self:Kill()
             end
             
-            #Wait 2 seconds        
+            #Wait 2 seconds
             WaitSeconds(1)
 		end	
     end,
-	
 	
 	DeathThread = function( self, overkillRatio , instigator)  
 		local army = self:GetArmy()
@@ -61,7 +46,7 @@ UEBMD001 = Class(TStructureUnit) {
 				CreateEmitterAtEntity(self, army, effect):ScaleEmitter(0.5)
 				end
     explosion.CreateFlash( self, 0, 1, army )
-	DamageArea(self, self:GetPosition(), 1, 250, 'Fire', false, true)
+	DamageArea(self, self:GetPosition(), 1, 750, 'Fire', false, true)
 	        local position = self:GetPosition()
 		local orientation = RandomFloat(0,2*math.pi)
 	        CreateDecal(position, orientation, 'Scorch_010_albedo', '', 'Albedo', 2, 2, 500, 600, army)
@@ -74,7 +59,6 @@ UEBMD001 = Class(TStructureUnit) {
         self:PlayUnitSound('Destroyed')
         self:Destroy()
     end,
-	
 }
 
-TypeClass = UEBMD001
+TypeClass = UEBMD002
