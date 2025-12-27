@@ -56,6 +56,9 @@ UnitBlueprint {
         'UEF',
         'MOBILE',
         'LAND',
+		'CONSTRUCTION',
+		'FACTORY',
+		'CARRIER',
         'TECH3',
         'VISIBLETORECON',
         'RECLAIMABLE',
@@ -73,7 +76,8 @@ UnitBlueprint {
     Description = 'Armored Mech Marine Carrier (AMMC)',
     Display = {
 		Abilities = {
-            'Can Transport 10 Mech Marines only',
+			'Can produce and transport 10 Mech Marines only',
+			'<LOC ability_factory>Factory',
         },
         Mesh = {
             IconFadeInZoom = 130,
@@ -123,13 +127,18 @@ UnitBlueprint {
         BuildCostEnergy = 12000,
         BuildCostMass = 1080,
         BuildTime = 4200,
+		BuildRate = 60,
+		BuildableCategory = {
+            'BUILDBYAMMC UEF',
+        },
         TeleportEnergyMod = 0.15,
         TeleportMassMod = 1,
         TeleportTimeMod = 0.01,
     },
     General = {
-        Category = 'Indirect Fire',
+        Category = 'Factory',
         Classification = 'RULEUC_MilitaryVehicle',
+		ConstructionBar = true,
         CommandCaps = {
             RULEUCC_Attack = true,
             RULEUCC_CallTransport = true,
@@ -160,6 +169,7 @@ UnitBlueprint {
         },
 		ToggleCaps = {
             RULEUTC_WeaponToggle = true,
+			RULEUTC_SpecialToggle = true,
         },
         FactionName = 'UEF',
         Icon = 'amph',
@@ -211,6 +221,7 @@ UnitBlueprint {
     StrategicIconSortPriority = 125,
     Transport = {
         TransportClass = 3,
+		StorageSlots = 10,
     },
 	 Weapon = {
 	    {

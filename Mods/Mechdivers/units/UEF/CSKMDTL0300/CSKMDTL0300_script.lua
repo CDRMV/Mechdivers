@@ -35,6 +35,7 @@ CSKMDTL0300 = Class(TLandUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
 		TLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self:RemoveCommandCap('RULEUCC_Transport')
+		self:RemoveToggleCap('RULEUTC_SpecialToggle')
 		if not self.AnimationManipulator then
             self.AnimationManipulator = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator)
@@ -50,6 +51,8 @@ CSKMDTL0300 = Class(TLandUnit) {
             self.Trash:Add(self.AnimationManipulator3)
         end
 		self.AnimationManipulator3:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTL0300/CSKMDTL0300_RMG_Unpack.sca', false):SetRate(0)
+		ChangeState(self, self.IdleState)
+		local number = 0
 		if self:GetAIBrain().BrainType == 'Human' then
 			self.AnimationManipulator2:SetRate(-1)
 			self.AnimationManipulator3:SetRate(-1)
@@ -74,6 +77,17 @@ CSKMDTL0300 = Class(TLandUnit) {
 			while true do
 			if not self.Dead and self:GetCurrentLayer() == 'Land' then
 			local units = self:GetCargo()
+			if table.getn(units) >= 10 then
+			if number == 0 then
+			self:AddBuildRestriction(categories.BUILDBYAMMC)
+			number = 1
+			end
+			else
+			if number == 1 then
+			self:RemoveBuildRestriction(categories.BUILDBYAMMC)
+			number = 0
+			end
+			end
 			if units[1] and units[2] then
 			self.AnimationManipulator2:SetRate(1)
 			WaitFor(self.AnimationManipulator2)
@@ -351,6 +365,7 @@ CSKMDTL0300 = Class(TLandUnit) {
 		local position = self.Beacon:GetPosition()
         for _, unit in units do
 			Warp(unit, {position[1] + math.random(-1,1), GetTerrainHeight(position[1], position[3]), position[3] + math.random(-1,1)}, self.Beacon:GetOrientation())
+			unit:ShowBone(0, true)
 			unit:SetDoNotTarget(false)
 			unit:SetWeaponEnabledByLabel('ArmCannonTurret', true)
 			unit:DetachFrom(true)
@@ -359,6 +374,67 @@ CSKMDTL0300 = Class(TLandUnit) {
 		self.Beacon:HideBone(0, true)
         end
     end,
+	
+	
+    BuildAttachBone = 'Build_Attachpoint',
+
+    OnFailedToBuild = function(self)
+        TLandUnit.OnFailedToBuild(self)
+        ChangeState(self, self.IdleState)
+    end,
+
+    IdleState = State {
+        Main = function(self)
+            self:DetachAll(self.BuildAttachBone)
+            self:SetBusy(false)
+        end,
+
+        OnStartBuild = function(self, unitBuilding, order)
+            TLandUnit.OnStartBuild(self, unitBuilding, order)
+            self.UnitBeingBuilt = unitBuilding
+            ChangeState(self, self.BuildingState)
+        end,
+    },
+
+    BuildingState = State {
+        Main = function(self)
+            local unitBuilding = self.UnitBeingBuilt
+            self:SetBusy(true)
+            local bone = self.BuildAttachBone
+            self:DetachAll(bone)
+            unitBuilding:HideBone(0, true)
+            self.UnitDoneBeingBuilt = false
+        end,
+
+        OnStopBuild = function(self, unitBeingBuilt)
+            TLandUnit.OnStopBuild(self, unitBeingBuilt)
+            ChangeState(self, self.FinishedBuildingState)
+        end,
+    },
+
+    FinishedBuildingState = State {
+        Main = function(self)
+            self:SetBusy(true)
+            local unitBuilding = self.UnitBeingBuilt
+            unitBuilding:DetachFrom(true)
+			self:SetScriptBit('RULEUTC_SpecialToggle', true)
+            self:DetachAll(self.BuildAttachBone)
+            if self:TransportHasAvailableStorage() then
+                self:AddUnitToStorage(unitBuilding)
+				local units = self:GetCargo()
+				if table.getn(units) >= 10 then
+					self:AddBuildRestriction(categories.BUILDBYAMMC)
+				end
+            else
+                local worldPos = self:CalculateWorldPositionFromRelative({0, 0, -20})
+                IssueMoveOffFactory({unitBuilding}, worldPos)
+                unitBuilding:ShowBone(0,true)
+            end
+            self:SetBusy(false)
+            self:RequestRefreshUI()
+            ChangeState(self, self.IdleState)
+        end,
+    },
 	
 }
 

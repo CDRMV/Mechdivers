@@ -1,0 +1,11 @@
+--------------------------------------------------------------------------------
+-- Land Units
+--------------------------------------------------------------------------------
+UnitBlueprint {
+	Merge = true,
+	BlueprintId="uel0106",		-- UEF Tech 1 Light Assault Bot (Mech Marine)
+	Categories = {
+        'BUILDBYAMMC',
+    },
+}
+
