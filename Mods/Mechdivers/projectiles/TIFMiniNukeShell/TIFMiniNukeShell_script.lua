@@ -53,6 +53,8 @@ TIFMiniNukeShell = Class(SinglePolyTrailProjectile) {
             self:ShakeCamera(20, 1, 0, 1)
         end
         local pos = self:GetPosition()
+		self.DamageData.DamageRadius = 20
+		self.DamageData.DamageAmount = 25000
         DamageArea(self, pos, self.DamageData.DamageRadius, 1, 'Force', true)
         DamageArea(self, pos, self.DamageData.DamageRadius, 1, 'Force', true)
             local myBlueprint = self:GetBlueprint()

@@ -13,8 +13,7 @@ local TIFArtilleryWeapon = import('/lua/terranweapons.lua').TIFArtilleryWeapon
 
 UEBMD00301 = Class(TStructureUnit) {
     Weapons = {
-        MainGun = Class(TIFArtilleryWeapon) {
-        }
+        MainGun = Class(TIFArtilleryWeapon) {}
     },
 	
 	OnCreate = function(self)
@@ -47,21 +46,19 @@ UEBMD00301 = Class(TStructureUnit) {
         TStructureUnit.CreateEnhancement(self, enh)
         local bp = self:GetBlueprint().Enhancements[enh]
         if not bp then return end
-		self.MainGun = self:GetWeaponByLabel('MainGun')
-		local ProjectileId = self.MainGun:GetBlueprint().ProjectileId
-		LOG(ProjectileId)
+		local wep = self:GetWeaponByLabel('MainGun')
         if enh == 'ExplosiveGrenade' then
-		self.MainGun:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/tifexplosiveshell/tifexplosiveshell_proj.bp')
+		wep:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/tifexplosiveshell/tifexplosiveshell_proj.bp')
         elseif enh == 'HighYieldExplosiveGrenade' then
-		self.MainGun:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/tifhighyieldexplosiveshell/tifhighyieldexplosiveshell_proj.bp')
+		wep:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/tifhighyieldexplosiveshell/tifhighyieldexplosiveshell_proj.bp')
 		elseif enh == 'MiniNukeGrenade' then
-		self.MainGun:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/tifmininukeshell/tifmininukeshell_proj.bp')
+		wep:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/tifmininukeshell/tifmininukeshell_proj.bp')
 		elseif enh == 'NapalmGrenade' then
-		self.MainGun:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/tifnapalmshell/tifnapalmshell_proj.bp')
+		wep:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/tifnapalmshell/tifnapalmshell_proj.bp')
 		elseif enh == 'StunGrenade' then
-		self.MainGun:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/tifstunshell/tifstunshell_proj.bp')
+		wep:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/tifstunshell/tifstunshell_proj.bp')
 		elseif enh == 'SmokeGrenade' then
-		self.MainGun:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/tifsmokeshell/tifsmokeshell_proj.bp')
+		wep:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/tifsmokeshell/tifsmokeshell_proj.bp')
         end
     end,
 }

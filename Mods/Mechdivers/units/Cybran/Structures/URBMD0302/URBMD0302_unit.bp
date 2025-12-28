@@ -179,7 +179,7 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
-            Damage = 100,
+            Damage = 800,
             DamageRadius = 0,
             DamageType = 'Normal',
             DisplayName = 'Light Pulse Laser',

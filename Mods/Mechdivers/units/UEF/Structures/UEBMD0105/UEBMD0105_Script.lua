@@ -168,6 +168,10 @@ UEBMD0105 = Class(TStructureUnit) {
     end,
 	
 	DeathThread = function( self, overkillRatio , instigator)  
+		if self.ClapDummy then
+		self.ClapDummy:Destroy()
+		end
+		
         self:DestroyAllDamageEffects()
 		local army = self:GetArmy()
 
@@ -180,7 +184,12 @@ UEBMD0105 = Class(TStructureUnit) {
         end
 		if self.Enabled == true then
 		local position = self:GetPosition()
-        DamageArea(self, position, 15, 25000, 'Nuke', true)
+		DamageArea(self, position, 20, 1, 'Force', true)
+		DamageArea(self, position, 20, 1, 'Force', true)
+		local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, position, 20, 'Enemy')
+        for _,unit in units do
+			Damage(self, position, unit, 25000, 'Fire')
+        end
 		local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 		local rotation = RandomFloat(0,2*math.pi)
 		local size = RandomFloat(45.75,45.0)
@@ -212,29 +221,6 @@ UEBMD0105 = Class(TStructureUnit) {
 		if self.ClapDummy then
 		self.ClapDummy:Destroy()
 		end
-    end,
-	
-	DeathThread = function( self, overkillRatio , instigator)  
-		
-		if self.ClapDummy then
-		self.ClapDummy:Destroy()
-		end
-		
-        self:DestroyAllDamageEffects()
-		local army = self:GetArmy()
-
-		if self.PlayDestructionEffects then
-            self:CreateDestructionEffects(overkillRatio)
-        end
-
-        if self.ShowUnitDestructionDebris and overkillRatio then
-            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
-        end
-		
-		self:CreateWreckage(overkillRatio or self.overkillRatio)
-
-        self:PlayUnitSound('Destroyed')
-        self:Destroy()
     end,
 	
 }

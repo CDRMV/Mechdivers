@@ -53,6 +53,8 @@ TIFHighYieldExplosiveShell = Class(SinglePolyTrailProjectile) {
             self:ShakeCamera(20, 1, 0, 1)
         end
         local pos = self:GetPosition()
+		self.DamageData.DamageRadius = 15
+		self.DamageData.DamageAmount = 10000
         DamageArea(self, pos, self.DamageData.DamageRadius, 1, 'Force', true)
         DamageArea(self, pos, self.DamageData.DamageRadius, 1, 'Force', true)
             local myBlueprint = self:GetBlueprint()
