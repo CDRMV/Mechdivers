@@ -71,7 +71,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 15,              
     },
-    Description = 'Multifunctional Support Bot',
+    Description = 'Multifunctional Assault Bot',
     Display = {
         Abilities = {
 			'Can attack Ground Targets',
@@ -125,7 +125,7 @@ UnitBlueprint {
         },
         PlaceholderMeshName = 'UXL0001',
         SpawnRandomRotation = false,       
-        UniformScale = 0.50,
+        UniformScale = 0.42,
     },
 	Enhancements = {
         Slots = {
@@ -154,6 +154,8 @@ UnitBlueprint {
             Name = '<LOC GaussAutocannons>Gauss Autocannons',
             Slot = 'LCH',
 			HideBones = {
+			    'L_FlameThrower',
+				'L_FlameThrower_Barrel',
                 'L_Gatling_Arm',
 				'L_Gatling_Barrel',
 				'L_Gatling_Rotate',
@@ -195,6 +197,8 @@ UnitBlueprint {
 			Description = '<LOC AddGatlingGun>Add a Gatling Gun to this Arm.',
             Slot = 'LCH',
 			HideBones = {
+				'L_FlameThrower',
+				'L_FlameThrower_Barrel',
 				'L_Cannon_Arm',
 				'L_Cannon_Barrel',
 				'L_Cannon_Muzzle01',
@@ -234,10 +238,12 @@ UnitBlueprint {
             BuildCostMass = 5,
             BuildTime = 5,
             Icon = 'tm',
-            Name = '<LOC MissileLauncher>Missile Launcher',
-			Description = '<LOC AddMissileLauncher>Add a Missile Launcher to this Arm.',
+            Name = '<LOC ArmMissileLauncher>Missile Launcher',
+			Description = '<LOC AddArmMissileLauncher>Add a Missile Launcher to this Arm.',
             Slot = 'LCH',
 			HideBones = {
+				'L_FlameThrower',
+				'L_FlameThrower_Barrel',
 				'L_Cannon_Arm',
 				'L_Cannon_Barrel',
 				'L_Cannon_Muzzle01',
@@ -255,8 +261,8 @@ UnitBlueprint {
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'tm',
-			Description = '<LOC RemoveMissileLauncher>Remove Missile Launcher from this Arm.',
-            Name = '<LOC MissileLauncher>Missile Launcher',
+			Description = '<LOC RemoveArmMissileLauncher>Remove Missile Launcher from this Arm.',
+            Name = '<LOC ArmMissileLauncher>Missile Launcher',
             Prerequisite = 'LeftMissileLauncher',
             Slot = 'LCH',
 			RemoveEnhancements = {
@@ -276,6 +282,8 @@ UnitBlueprint {
             Name = '<LOC GaussAutocannons>Gauss Autocannons',
             Slot = 'RCH',
 			HideBones = {
+				'R_FlameThrower',
+				'R_FlameThrower_Barrel',
                 'R_Gatling_Arm',
 				'R_Gatling_Barrel',
 				'R_Gatling_Rotate',
@@ -317,6 +325,8 @@ UnitBlueprint {
 			Description = '<LOC AddGatlingGun>Add a Gatling Gun to this Arm.',
             Slot = 'RCH',
 			HideBones = {
+				'R_FlameThrower',
+				'R_FlameThrower_Barrel',
 				'R_Cannon_Arm',
 				'R_Cannon_Barrel',
 				'R_Cannon_Muzzle01',
@@ -353,10 +363,12 @@ UnitBlueprint {
             BuildCostMass = 5,
             BuildTime = 5,
             Icon = 'tm',
-            Name = '<LOC MissileLauncher>Missile Launcher',
-			Description = '<LOC AddMissileLauncher>Add a Missile Launcher to this Arm.',
+            Name = '<LOC ArmMissileLauncher>Missile Launcher',
+			Description = '<LOC AddArmMissileLauncher>Add a Missile Launcher to this Arm.',
             Slot = 'RCH',
 			HideBones = {
+				'R_FlameThrower',
+				'R_FlameThrower_Barrel',
 				'R_Cannon_Arm',
 				'R_Cannon_Barrel',
 				'R_Cannon_Muzzle01',
@@ -374,8 +386,8 @@ UnitBlueprint {
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'tm',
-			Description = '<LOC RemoveMissileLauncher>Remove Missile Launcher from this Arm.',
-            Name = '<LOC MissileLauncher>Missile Launcher',
+			Description = '<LOC RemoveArmMissileLauncher>Remove Missile Launcher from this Arm.',
+            Name = '<LOC ArmMissileLauncher>Missile Launcher',
             Prerequisite = 'RightMissileLauncher',
             Slot = 'RCH',
 			RemoveEnhancements = {
@@ -434,7 +446,7 @@ UnitBlueprint {
         FactionName = 'UEF',
         Icon = 'land',       
         TechLevel = 'RULEUTL_Secret',      
-        UnitName = 'Emancipator',
+        UnitName = 'EXO-49 Emancipator',
         UnitWeight = 1,
     },
     Intel = {

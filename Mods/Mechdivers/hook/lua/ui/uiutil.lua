@@ -37,12 +37,17 @@ local MyUnitIdTable = {
 	  cskmdta0301e=true,
 	  
  -- Land 
- 
+	  cskmdtl0200=true, 
+	  cskmdtl0201=true, 
+	  cskmdtl0202=true, 
+	  cskmdtl0203=true, 
  	  cskmdtl0205=true, 
 	  cskmdtl0300=true, 
 	  cskmdtl0303=true, 
 	  cskmdtl0304=true, 
 	  cskmdtl0305=true, 
+	  cskmdtl0306=true, 
+	  cskmdtl0307=true, 
 		  
 -- Structures
 

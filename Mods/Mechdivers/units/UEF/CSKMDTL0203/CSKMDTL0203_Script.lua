@@ -18,96 +18,13 @@ local EffectUtils = import('/lua/effectutilities.lua')
 local Effects = import('/lua/effecttemplates.lua')
 local explosion = import('/lua/defaultexplosions.lua')
 local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
+local TDFHeatBeam = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').TDFHeatBeam
 
-CSKMDTL0304 = Class(TWalkingLandUnit) {
+CSKMDTL0203 = Class(TWalkingLandUnit) {
 
     Weapons = {
-        L_MissileLauncher = Class(TSAMLauncher) {},
-		R_MissileLauncher = Class(TSAMLauncher) {},
-		Dummy = Class(DummyTurretWeapon) {},
-		R_Cannon = Class(TDFGaussCannonWeapon) {
-
-		PlayFxMuzzleSequence = function(self, muzzle)
-		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
-		if muzzle == 'R_Cannon_Muzzle01' then
-		CreateAttachedEmitter(self.unit, 'R_Cannon_Shell01', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
-		end
-		if muzzle == 'R_Cannon_Muzzle02' then
-		CreateAttachedEmitter(self.unit, 'R_Cannon_Shell02', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
-		end
-		end,
-		},
-		L_Cannon = Class(TDFGaussCannonWeapon) {
-		PlayFxMuzzleSequence = function(self, muzzle)
-		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
-		if muzzle == 'L_Cannon_Muzzle01' then
-		CreateAttachedEmitter(self.unit, 'L_Cannon_Shell01', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
-		end
-		if muzzle == 'L_Cannon_Muzzle02' then
-		CreateAttachedEmitter(self.unit, 'L_Cannon_Shell02', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
-		end
-		end,
-		},
-		R_GatlingCannon = Class(TDFMachineGunWeapon) 
-        {
-            PlayFxWeaponPackSequence = function(self)
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(0)
-                end
-                self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'R_Gatling_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
-                TDFMachineGunWeapon.PlayFxWeaponPackSequence(self)
-            end,
-        
-            PlayFxRackSalvoChargeSequence = function(self)
-                if not self.SpinManip then 
-                    self.SpinManip = CreateRotator(self.unit, 'R_Gatling_Rotate', 'z', nil, 270, 180, 60)
-                    self.unit.Trash:Add(self.SpinManip)
-                end
-                
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(500)
-                end
-                TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
-            end,            
-            
-            PlayFxRackSalvoReloadSequence = function(self)
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(200)
-                end
-                self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'R_Gatling_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
-                TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
-            end,
-        },
-		L_GatlingCannon = Class(TDFMachineGunWeapon) 
-        {
-            PlayFxWeaponPackSequence = function(self)
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(0)
-                end
-                self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'L_Gatling_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
-                TDFMachineGunWeapon.PlayFxWeaponPackSequence(self)
-            end,
-        
-            PlayFxRackSalvoChargeSequence = function(self)
-                if not self.SpinManip then 
-                    self.SpinManip = CreateRotator(self.unit, 'L_Gatling_Rotate', 'z', nil, 270, 180, 60)
-                    self.unit.Trash:Add(self.SpinManip)
-                end
-                
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(500)
-                end
-                TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
-            end,            
-            
-            PlayFxRackSalvoReloadSequence = function(self)
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(200)
-                end
-                self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'L_Gatling_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
-                TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
-            end,
-        },
+		Beam = Class(TDFHeatBeam) {},
+		L_MissileLauncher = Class(TSAMLauncher) {},
     },  
 
 	OnCreate = function(self)
@@ -117,27 +34,11 @@ CSKMDTL0304 = Class(TWalkingLandUnit) {
 		self:HideBone( 'R_MissileLauncher', true )
 		self:HideBone( 'L_Gatling_Arm', true )
 		self:HideBone( 'R_Gatling_Arm', true )
-		self:HideBone( 'L_FlameThrower', true )
-		self:HideBone( 'R_FlameThrower', true )
-		self:HideBone( 'L_Canister', true )
-		self:HideBone( 'R_Canister', true )
-		self:HideBone( 'L_MG1', true )
-		self:HideBone( 'R_MG1', true )
-		self:HideBone( 'L_MineLauncher', true )
-		self:HideBone( 'R_MineLauncher', true )
-		Dummy = self:GetWeaponByLabel('Dummy')
-		self.L_GatlingCannon = self:GetWeaponByLabel('L_GatlingCannon')
-		self.R_GatlingCannon = self:GetWeaponByLabel('R_GatlingCannon')
-		self.L_MissileLauncher = self:GetWeaponByLabel('L_MissileLauncher')
-		self.R_MissileLauncher = self:GetWeaponByLabel('R_MissileLauncher')
-
+		self:HideBone( 'L_Cannon_Arm', true )
+		self:HideBone( 'R_Cannon_Arm', true )
+		self:HideBone( 'L_LaserCannon', true )
+		self:ShowBone( 'R_LaserCannon', true )
 		self:ShowBone( 'L_MissileLauncher', true )
-		self:HideBone( 'R_MissileLauncher', true )
-		self:HideBone( 'L_Gatling_Arm', true )
-		self:ShowBone( 'R_Gatling_Arm', true )
-		Dummy:SetEnabled(true)
-		self:CreateEnhancement('RightGatling')
-		self:CreateEnhancement('LeftMissileLauncher')
 		end
 		)
     end,
@@ -168,27 +69,6 @@ CSKMDTL0304 = Class(TWalkingLandUnit) {
 		self.fold = false
     end,
 	
-	CreateEnhancement = function(self, enh)
-        TWalkingLandUnit.CreateEnhancement(self, enh)
-        local bp = self:GetBlueprint().Enhancements[enh]
-        if not bp then return end
-        if enh == 'LeftGatling' then
-		self.L_GatlingCannon:SetEnabled(true)
-		self.L_MissileLauncher:SetEnabled(false)
-		
-        elseif enh == 'RightGatling' then
-		self.R_GatlingCannon:SetEnabled(true)
-		self.R_MissileLauncher:SetEnabled(false)
-		
-		elseif enh == 'LeftMissileLauncher' then
-		self.L_GatlingCannon:SetEnabled(false)
-		self.L_MissileLauncher:SetEnabled(true)
-		
-		elseif enh == 'RightMissileLauncher' then
-		self.R_GatlingCannon:SetEnabled(false)
-		self.R_MissileLauncher:SetEnabled(true)
-        end
-    end,
 	
 	DeathThread = function( self, overkillRatio , instigator)  
 		if self.fold == true then
@@ -366,8 +246,7 @@ CSKMDTL0304 = Class(TWalkingLandUnit) {
 	SetIgnoreArmyUnitCap(self:GetArmy(), false)
 	end
 	end
-	
-	
+
     TWalkingLandUnit.OnKilled(self, instigator, type, overkillRatio)	
     end,
 
@@ -393,4 +272,4 @@ CSKMDTL0304 = Class(TWalkingLandUnit) {
     end,
 	  
 }
-TypeClass = CSKMDTL0304
+TypeClass = CSKMDTL0203

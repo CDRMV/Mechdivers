@@ -175,7 +175,7 @@ UnitBlueprint {
                 Weight = 100,
             },
         },
-        UniformScale = 0.15,
+        UniformScale = 0.12,
     },
     Economy = {
         BuildCostEnergy = 15000,

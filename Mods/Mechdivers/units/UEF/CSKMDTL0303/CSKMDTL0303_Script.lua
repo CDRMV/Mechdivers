@@ -119,6 +119,8 @@ CSKMDTL0303 = Class(TWalkingLandUnit) {
 		self:HideBone( 'R_Gatling_Arm', true )
 		self:HideBone( 'L_Cannon_Arm', true )
 		self:HideBone( 'R_Cannon_Arm', true )
+		self:HideBone( 'L_LaserCannon', true )
+		self:HideBone( 'R_LaserCannon', true )
 		Dummy = self:GetWeaponByLabel('Dummy')
 		self.R_Cannon = self:GetWeaponByLabel('R_Cannon')
 		self.L_Cannon = self:GetWeaponByLabel('L_Cannon')
