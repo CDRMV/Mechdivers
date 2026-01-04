@@ -70,6 +70,8 @@ CSKMDTL0200 = Class(TWalkingLandUnit) {
 		self.unit:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		self.unit:RemoveCommandCap('RULEUCC_Stop')
 		self.unit:SetCollisionShape('Box', 0, 0, 0, 0, 0 ,0)
+		self.unit.CanTakeDamage = false
+		self.unit.CanBeKilled = false
 		self.unit:HideBone(0, true)
 		self.unit:SetUnSelectable(true)
 		--self.unit:HideRifle()
@@ -173,6 +175,8 @@ CSKMDTL0200 = Class(TWalkingLandUnit) {
 			unit:RemoveCommandCap('RULEUCC_Attack')
 			unit:RemoveCommandCap('RULEUCC_RetaliateToggle')
 			unit:RemoveCommandCap('RULEUCC_Stop')
+			unit.CanTakeDamage = false
+			unit.CanBeKilled = false
 			unit:SetUnSelectable(true)
 			unit:HideBone(0, true)
 			WaitSeconds(1)
@@ -239,6 +243,8 @@ CSKMDTL0200 = Class(TWalkingLandUnit) {
 			unit:AddCommandCap('RULEUCC_RetaliateToggle')
 			unit:AddCommandCap('RULEUCC_Stop')
 			unit:SetCollisionShape('Box', 0, 0,0, 0.6, 0.6, 0.6)
+			unit.CanTakeDamage = true
+			unit.CanBeKilled = true
 			unit:DetachFrom(true)
 			unit:ShowBone(0, true)
 			self:RemoveToggleCap('RULEUTC_WeaponToggle')
@@ -262,9 +268,17 @@ CSKMDTL0200 = Class(TWalkingLandUnit) {
 	self.Beacon:Destroy()
 	end	
 	
+	local units = self:GetCargo()
+	if units[1] == nil then
+		
+	else
+	units[1]:Destroy()
+	end
+	
 	if self.load == false then
 	
 	else
+	ForkThread(function()
 	local RandomNumber = math.random(1, 2)
 	if RandomNumber == 2 then
 	SetIgnoreArmyUnitCap(self:GetArmy(), true)
@@ -272,9 +286,16 @@ CSKMDTL0200 = Class(TWalkingLandUnit) {
 	local orientation = self:GetOrientation()
 	local angle = 2 * math.acos(orientation[2])
 	self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, angle, 0)
+	self.unit.CanTakeDamage = false
+	self.unit.CanBeKilled = false
 	SetIgnoreArmyUnitCap(self:GetArmy(), false)
+	WaitSeconds(1)
+	self.unit.CanTakeDamage = true
+	self.unit.CanBeKilled = true
 	end
-	end
+	end)
+	end	
+
 
     TWalkingLandUnit.OnKilled(self, instigator, type, overkillRatio)	
     end,
@@ -291,6 +312,8 @@ CSKMDTL0200 = Class(TWalkingLandUnit) {
 			units[1]:ShowBone(0, true)
 			units[1]:SetDoNotTarget(false)
 			units[1]:SetUnSelectable(false)
+			units[1].CanTakeDamage = true
+			units[1].CanBeKilled = true
 			units[1]:SetWeaponEnabledByLabel('ArmCannonTurret', true)
 			units[1]:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
 			units[1]:DetachFrom(true)

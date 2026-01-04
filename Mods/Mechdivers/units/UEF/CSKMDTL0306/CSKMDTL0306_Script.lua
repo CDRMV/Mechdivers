@@ -56,6 +56,8 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
 		self.unit:AttachBoneTo(-2, self, 'Bot')
 		self.unit:SetDoNotTarget(true)
+		self.unit.CanTakeDamage = false
+		self.unit.CanBeKilled = false
 		self.unit:SetWeaponEnabledByLabel('ArmCannonTurret', false)
 		self.unit:RemoveCommandCap('RULEUCC_Attack')
 		self.unit:RemoveCommandCap('RULEUCC_RetaliateToggle')
@@ -174,6 +176,8 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 			if number < 1 then
 			unit:AttachBoneTo(-2, self, 'Exit')
 			unit:SetDoNotTarget(true)
+			unit.CanTakeDamage = false
+			unit.CanBeKilled = false
 			unit:SetWeaponEnabledByLabel('ArmCannonTurret', false)
 			unit:RemoveCommandCap('RULEUCC_Attack')
 			unit:RemoveCommandCap('RULEUCC_RetaliateToggle')
@@ -235,6 +239,8 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 			Warp(unit, {position[1] + math.random(-1,1), GetTerrainHeight(position[1], position[3]), position[3] + math.random(-1,1)}, self:GetOrientation())
 			--unit:ShowRifle()
 			unit:SetDoNotTarget(false)
+			unit.CanTakeDamage = true
+			unit.CanBeKilled = true
 			unit:SetUnSelectable(false)
 			unit:SetWeaponEnabledByLabel('ArmCannonTurret', true)
 			unit:AddCommandCap('RULEUCC_Attack')
@@ -263,9 +269,17 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 	self.Beacon:Destroy()
 	end	
 	
+	local units = self:GetCargo()
+	if units[1] == nil then
+		
+	else
+	units[1]:Destroy()
+	end
+	
 	if self.load == false then
 	
 	else
+	ForkThread(function()
 	local RandomNumber = math.random(1, 2)
 	if RandomNumber == 2 then
 	SetIgnoreArmyUnitCap(self:GetArmy(), true)
@@ -273,9 +287,16 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 	local orientation = self:GetOrientation()
 	local angle = 2 * math.acos(orientation[2])
 	self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, angle, 0)
+	self.unit.CanTakeDamage = false
+	self.unit.CanBeKilled = false
 	SetIgnoreArmyUnitCap(self:GetArmy(), false)
+	WaitSeconds(1)
+	self.unit.CanTakeDamage = true
+	self.unit.CanBeKilled = true
 	end
-	end
+	end)
+	end	
+
 
     TWalkingLandUnit.OnKilled(self, instigator, type, overkillRatio)	
     end,
@@ -291,6 +312,8 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		else
 			units[1]:ShowBone(0, true)
 			units[1]:SetDoNotTarget(false)
+			units[1].CanTakeDamage = true
+			units[1].CanBeKilled = true
 			units[1]:SetUnSelectable(false)
 			units[1]:SetWeaponEnabledByLabel('ArmCannonTurret', true)
 			units[1]:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
