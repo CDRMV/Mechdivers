@@ -52,10 +52,13 @@ CSKMDTL0203 = Class(TWalkingLandUnit) {
 		self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
 		self.unit:AttachBoneTo(-2, self, 'Bot')
 		self.unit:SetDoNotTarget(true)
-		self.unit:SetWeaponEnabledByLabel('MainGun', false)
 		self.unit:SetCollisionShape('Box', 0, 0, 0, 0, 0 ,0)
 		self.unit:HideBone(0, true)
 		self.unit:SetUnSelectable(true)
+		self.unit:SetWeaponEnabledByLabel('ArmCannonTurret', false)
+		self.unit:RemoveCommandCap('RULEUCC_Attack')
+		self.unit:RemoveCommandCap('RULEUCC_RetaliateToggle')
+		self.unit:RemoveCommandCap('RULEUCC_Stop')
 		--self.unit:HideRifle()
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		end
@@ -122,6 +125,7 @@ CSKMDTL0203 = Class(TWalkingLandUnit) {
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_Patrol')
 		self:RemoveCommandCap('RULEUCC_Stop')
+		self:SetFireState(1)
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		self:RemoveCommandCap('RULEUCC_Guard')
 		self:SetImmobile(true)
@@ -135,7 +139,8 @@ CSKMDTL0203 = Class(TWalkingLandUnit) {
 		self:AddToggleCap('RULEUTC_IntelToggle')
 		self:AddToggleCap('RULEUTC_WeaponToggle')
 		self:SetScriptBit('RULEUTC_WeaponToggle', true)
-		self:SetWeaponEnabledByLabel('MainGun', false)
+		self:SetWeaponEnabledByLabel('Beam', false)
+		self:SetWeaponEnabledByLabel('L_MissileLauncher', false)
 		self.fold = true
 		elseif bit == 7 then
 		if self.build == true then
@@ -151,7 +156,10 @@ CSKMDTL0203 = Class(TWalkingLandUnit) {
 			if number < 1 then
 			unit:AttachBoneTo(-2, self, 'Exit')
 			unit:SetDoNotTarget(true)
-			unit:SetWeaponEnabledByLabel('MainGun', false)
+			unit:SetWeaponEnabledByLabel('ArmCannonTurret', false)
+			unit:RemoveCommandCap('RULEUCC_Attack')
+			unit:RemoveCommandCap('RULEUCC_RetaliateToggle')
+			unit:RemoveCommandCap('RULEUCC_Stop')
 			unit:SetUnSelectable(true)
 			unit:HideBone(0, true)
 			WaitSeconds(1)
@@ -163,8 +171,9 @@ CSKMDTL0203 = Class(TWalkingLandUnit) {
 			self:SetScriptBit('RULEUTC_WeaponToggle', false)
 			--self:RemoveToggleCap('RULEUTC_SpecialToggle')
 			self:AddToggleCap('RULEUTC_WeaponToggle')
-			self:ShowBone('Bot', true)
-			self:SetWeaponEnabledByLabel('MainGun', true)
+			self:SetWeaponEnabledByLabel('Beam', true)
+			self:SetWeaponEnabledByLabel('L_MissileLauncher', true)
+			self:SetDoNotTarget(false)
 			number = number + 1
 			else
 			end
@@ -192,9 +201,11 @@ CSKMDTL0203 = Class(TWalkingLandUnit) {
 		self:AddCommandCap('RULEUCC_Attack')
 		self:AddCommandCap('RULEUCC_Patrol')
 		self:AddCommandCap('RULEUCC_Stop')
+		self:SetFireState(0)
 		self:AddCommandCap('RULEUCC_RetaliateToggle')
 		self:AddCommandCap('RULEUCC_Guard')
-		self:SetWeaponEnabledByLabel('MainGun', true)
+		self:SetWeaponEnabledByLabel('Beam', true)
+		self:SetWeaponEnabledByLabel('L_MissileLauncher', true)
 		self.fold = false
 		elseif bit == 7 then
 		self.load = false
@@ -209,12 +220,16 @@ CSKMDTL0203 = Class(TWalkingLandUnit) {
 			--unit:ShowRifle()
 			unit:SetDoNotTarget(false)
 			unit:SetUnSelectable(false)
-			unit:SetWeaponEnabledByLabel('MainGun', true)
+			unit:SetWeaponEnabledByLabel('ArmCannonTurret', true)
+			unit:AddCommandCap('RULEUCC_Attack')
+			unit:AddCommandCap('RULEUCC_RetaliateToggle')
+			unit:AddCommandCap('RULEUCC_Stop')
 			unit:SetCollisionShape('Box', 0, 0,0, 0.6, 0.6, 0.6)
 			unit:DetachFrom(true)
 			unit:ShowBone(0, true)
 			self:RemoveToggleCap('RULEUTC_WeaponToggle')
-			self:SetWeaponEnabledByLabel('MainGun', false)
+			self:SetWeaponEnabledByLabel('Beam', false)
+			self:SetWeaponEnabledByLabel('L_MissileLauncher', false)
 			self:SetDoNotTarget(true)
         end
 		elseif bit == 3 then
@@ -262,12 +277,12 @@ CSKMDTL0203 = Class(TWalkingLandUnit) {
 			units[1]:ShowBone(0, true)
 			units[1]:SetDoNotTarget(false)
 			units[1]:SetUnSelectable(false)
-			units[1]:SetWeaponEnabledByLabel('MainGun', true)
-			units[1]:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
-			units[1]:DetachFrom(true)
+			units[1]:SetWeaponEnabledByLabel('ArmCannonTurret', true)
 			units[1]:AddCommandCap('RULEUCC_Attack')
 			units[1]:AddCommandCap('RULEUCC_RetaliateToggle')
 			units[1]:AddCommandCap('RULEUCC_Stop')
+			units[1]:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
+			units[1]:DetachFrom(true)
 		end
     end,
 	  

@@ -22,7 +22,7 @@ local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
 CSKMDTL0306 = Class(TWalkingLandUnit) {
 
     Weapons = {
-		L_MG = Class(TDFMachineGunWeapon) {},
+		MineLauncher = Class(TDFMachineGunWeapon) {},
 		Dummy = Class(DummyTurretWeapon) {},
     },  
 
@@ -56,7 +56,10 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
 		self.unit:AttachBoneTo(-2, self, 'Bot')
 		self.unit:SetDoNotTarget(true)
-		self.unit:SetWeaponEnabledByLabel('MainGun', false)
+		self.unit:SetWeaponEnabledByLabel('ArmCannonTurret', false)
+		self.unit:RemoveCommandCap('RULEUCC_Attack')
+		self.unit:RemoveCommandCap('RULEUCC_RetaliateToggle')
+		self.unit:RemoveCommandCap('RULEUCC_Stop')
 		self.unit:SetCollisionShape('Box', 0, 0, 0, 0, 0 ,0)
 		self.unit:HideBone(0, true)
 		self.unit:SetUnSelectable(true)
@@ -71,7 +74,22 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_Afold01.sca', false):SetRate(0)
 		self.load = true
 		self.fold = false
+		self:GiveTacticalSiloAmmo(48)
+		self:CheckSiloAmount(self)
     end,
+	
+	CheckSiloAmount = function(self)
+		ForkThread( function()
+		while not self.Dead do
+			if self:GetTacticalSiloAmmoCount() == 0 then
+				self:SetAutoMode(true)
+			elseif self:GetTacticalSiloAmmoCount() == 48 then
+				self:SetAutoMode(false)
+			end
+		WaitSeconds(0.1)
+		end
+		end)
+	end,
 	
 	
 	DeathThread = function( self, overkillRatio , instigator)  
@@ -87,14 +105,14 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
         CreateAttachedEmitter(self,'L_Gatling_Arm', army, '/effects/emitters/explosion_fire_sparks_02_emit.bp')
 		CreateDeathExplosion( self, 'L_Gatling_Arm', 1.0)
 		explosion.CreateFlash( self, 'L_Gatling_Arm', 1.0, army )
-		self:HideBone("L_Cannon_Arm", true)
+		--self:HideBone("L_Cannon_Arm", true)
 		self:HideBone("L_Gatling_Arm", true)
 		self:HideBone("L_MissileLauncher", true)
 		CreateAttachedEmitter(self, 'R_Gatling_Arm', army, '/effects/emitters/destruction_explosion_concussion_ring_03_emit.bp')
         CreateAttachedEmitter(self,'R_Gatling_Arm', army, '/effects/emitters/explosion_fire_sparks_02_emit.bp')
 		CreateDeathExplosion( self, 'R_Gatling_Arm', 1.0)
 		explosion.CreateFlash( self, 'R_Gatling_Arm', 1.0, army )
-		self:HideBone("R_Cannon_Arm", true)
+		--self:HideBone("R_Cannon_Arm", true)
 		self:HideBone("R_Gatling_Arm", true)
 		self:HideBone("R_MissileLauncher", true)
 
@@ -126,6 +144,7 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_Patrol')
 		self:RemoveCommandCap('RULEUCC_Stop')
+		self:SetFireState(1)
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		self:RemoveCommandCap('RULEUCC_Guard')
 		self:SetImmobile(true)
@@ -139,7 +158,7 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self:AddToggleCap('RULEUTC_IntelToggle')
 		self:AddToggleCap('RULEUTC_WeaponToggle')
 		self:SetScriptBit('RULEUTC_WeaponToggle', true)
-		self:SetWeaponEnabledByLabel('MainGun', false)
+		self:SetWeaponEnabledByLabel('MineLauncher', false)
 		self.fold = true
 		elseif bit == 7 then
 		if self.build == true then
@@ -155,7 +174,10 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 			if number < 1 then
 			unit:AttachBoneTo(-2, self, 'Exit')
 			unit:SetDoNotTarget(true)
-			unit:SetWeaponEnabledByLabel('MainGun', false)
+			unit:SetWeaponEnabledByLabel('ArmCannonTurret', false)
+			unit:RemoveCommandCap('RULEUCC_Attack')
+			unit:RemoveCommandCap('RULEUCC_RetaliateToggle')
+			unit:RemoveCommandCap('RULEUCC_Stop')
 			unit:SetUnSelectable(true)
 			unit:HideBone(0, true)
 			WaitSeconds(1)
@@ -167,8 +189,8 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 			self:SetScriptBit('RULEUTC_WeaponToggle', false)
 			--self:RemoveToggleCap('RULEUTC_SpecialToggle')
 			self:AddToggleCap('RULEUTC_WeaponToggle')
-			self:ShowBone('Bot', true)
-			self:SetWeaponEnabledByLabel('MainGun', true)
+			self:SetWeaponEnabledByLabel('MineLauncher', true)
+			self:SetDoNotTarget(false)
 			number = number + 1
 			else
 			end
@@ -196,9 +218,10 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self:AddCommandCap('RULEUCC_Attack')
 		self:AddCommandCap('RULEUCC_Patrol')
 		self:AddCommandCap('RULEUCC_Stop')
+		self:SetFireState(0)
 		self:AddCommandCap('RULEUCC_RetaliateToggle')
 		self:AddCommandCap('RULEUCC_Guard')
-		self:SetWeaponEnabledByLabel('MainGun', true)
+		self:SetWeaponEnabledByLabel('MineLauncher', true)
 		self.fold = false
 		elseif bit == 7 then
 		self.load = false
@@ -213,12 +236,15 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 			--unit:ShowRifle()
 			unit:SetDoNotTarget(false)
 			unit:SetUnSelectable(false)
-			unit:SetWeaponEnabledByLabel('MainGun', true)
+			unit:SetWeaponEnabledByLabel('ArmCannonTurret', true)
+			unit:AddCommandCap('RULEUCC_Attack')
+			unit:AddCommandCap('RULEUCC_RetaliateToggle')
+			unit:AddCommandCap('RULEUCC_Stop')
 			unit:SetCollisionShape('Box', 0, 0,0, 0.6, 0.6, 0.6)
 			unit:DetachFrom(true)
 			unit:ShowBone(0, true)
 			self:RemoveToggleCap('RULEUTC_WeaponToggle')
-			self:SetWeaponEnabledByLabel('MainGun', false)
+			self:SetWeaponEnabledByLabel('MineLauncher', false)
 			self:SetDoNotTarget(true)
         end
 		elseif bit == 3 then
@@ -266,7 +292,7 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 			units[1]:ShowBone(0, true)
 			units[1]:SetDoNotTarget(false)
 			units[1]:SetUnSelectable(false)
-			units[1]:SetWeaponEnabledByLabel('MainGun', true)
+			units[1]:SetWeaponEnabledByLabel('ArmCannonTurret', true)
 			units[1]:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
 			units[1]:DetachFrom(true)
 			units[1]:AddCommandCap('RULEUCC_Attack')

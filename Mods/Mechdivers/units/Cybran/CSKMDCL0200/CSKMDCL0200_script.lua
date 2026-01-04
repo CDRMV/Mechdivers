@@ -55,6 +55,7 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_Patrol')
 		self:RemoveCommandCap('RULEUCC_Stop')
+		self:SetFireState(1)
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		self:RemoveCommandCap('RULEUCC_Guard')
 		self:SetImmobile(true)
@@ -96,6 +97,7 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 			self:AddToggleCap('RULEUTC_ShieldToggle')
 			self:ShowBone('Bot', true)
 			self:SetWeaponEnabledByLabel('MainGun', true)
+			self:SetDoNotTarget(false)
 			number = number + 1
 			else
 			end
@@ -126,6 +128,7 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 		self:AddCommandCap('RULEUCC_Attack')
 		self:AddCommandCap('RULEUCC_Patrol')
 		self:AddCommandCap('RULEUCC_Stop')
+		self:SetFireState(0)
 		self:AddCommandCap('RULEUCC_RetaliateToggle')
 		self:AddCommandCap('RULEUCC_Guard')
 		self:SetWeaponEnabledByLabel('MainGun', true)

@@ -629,7 +629,6 @@ UnitBlueprint {
 				{
             AboveWaterFireOnly = true,
             AboveWaterTargetsOnly = true,
-            AimsStraightOnDisable = true,
             Audio = {
                 BeamLoop = Sound {
                     Bank = 'UALWeapon',
@@ -696,10 +695,6 @@ UnitBlueprint {
             TargetCheckInterval = 0.5,
             TargetPriorities = {
                 'SPECIALHIGHPRI',
-                'TECH1 MOBILE',
-                'TECH2 MOBILE',
-                'TECH3 MOBILE',
-                'STRUCTURE DEFENSE',
                 'SPECIALLOWPRI',
                 'ALLUNITS',
             },
