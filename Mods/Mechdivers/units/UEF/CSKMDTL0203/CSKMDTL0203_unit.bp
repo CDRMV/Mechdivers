@@ -48,6 +48,7 @@ UnitBlueprint {
     BuildIconSortPriority = 20,
     Categories = {
         'BOT',
+		'BUILTBYTIER2FACTORY',
         'BUILTBYTIER3FACTORY',
         'DIRECTFIRE',
         'INDIRECTFIRE',
@@ -57,7 +58,7 @@ UnitBlueprint {
         'OVERLAYINDIRECTFIRE',
         'RECLAIMABLE',
         'SELECTABLE',       
-        'TECH3',
+        'TECH2',
         'UEF',
         'VISIBLETORECON',
     },
