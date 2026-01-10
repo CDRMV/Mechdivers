@@ -18,6 +18,7 @@ local EffectUtils = import('/lua/effectutilities.lua')
 local Effects = import('/lua/effecttemplates.lua')
 local explosion = import('/lua/defaultexplosions.lua')
 local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
+local R, Ceil = Random, math.ceil
 
 CSKMDTL0306 = Class(TWalkingLandUnit) {
 
@@ -49,6 +50,7 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 	
 	OnStopBeingBuilt = function(self,builder,layer)
         TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+		ForkThread( function()
 		self.build = true
 		if self:GetAIBrain().BrainType == 'Human' then
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
@@ -78,15 +80,58 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self.fold = false
 		self:GiveTacticalSiloAmmo(48)
 		self:CheckSiloAmount(self)
+		if not self.MineLayingAnimationManipulator then
+            self.MineLayingAnimationManipulator = CreateAnimator(self)
+            self.Trash:Add(self.MineLayingAnimationManipulator)
+        end
+		self.MineLayingAnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_MineLaying.sca', false):SetRate(0)
+		local number = 0
+		while not self.Dead do
+		if self:GetTacticalSiloAmmoCount() == 0 then
+		self:RemoveToggleCap('RULEUTC_GenericToggle')
+		self:RemoveCommandCap('RULEUCC_Attack')
+		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
+		if number == 0 then
+		number = 1
+		if self:GetAIBrain().BrainType == 'Human' then
+		while self:GetTacticalSiloAmmoCount() <= 48 do
+		WaitSeconds(2)
+		self:GiveTacticalSiloAmmo(1)
+		self:CheckSiloAmount()
+		end
+		--self:AddCommandCap('RULEUCC_SiloBuildTactical')
+		else
+		while self:GetTacticalSiloAmmoCount() <= 48 do
+		WaitSeconds(2)
+		self:GiveTacticalSiloAmmo(1)
+		self:CheckSiloAmount()
+		end
+		end
+		end
+		elseif self:GetTacticalSiloAmmoCount() == 49 then
+		self:RemoveTacticalSiloAmmo(1)
+		self:AddCommandCap('RULEUCC_Attack')
+		self:AddCommandCap('RULEUCC_RetaliateToggle')
+		self:AddToggleCap('RULEUTC_GenericToggle')
+		WaitSeconds(1)
+		self:SetFireState('ReturnFire')
+		number = 0
+		end
+		WaitSeconds(0.1)
+		end
+		end)
     end,
+	
+	
 	
 	CheckSiloAmount = function(self)
 		ForkThread( function()
 		while not self.Dead do
 			if self:GetTacticalSiloAmmoCount() == 0 then
-				self:SetAutoMode(true)
+					self:RemoveToggleCap('RULEUTC_GenericToggle')
+		self:RemoveCommandCap('RULEUCC_Attack')
+		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
 			elseif self:GetTacticalSiloAmmoCount() == 48 then
-				self:SetAutoMode(false)
 			end
 		WaitSeconds(0.1)
 		end
@@ -142,6 +187,7 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
         TWalkingLandUnit.OnScriptBitSet(self, bit)
 		ForkThread(function()
 		if bit == 1 then 
+		self:RemoveToggleCap('RULEUTC_GenericToggle')
 		self:RemoveCommandCap('RULEUCC_Move')
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_Patrol')
@@ -162,6 +208,25 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self:SetScriptBit('RULEUTC_WeaponToggle', true)
 		self:SetWeaponEnabledByLabel('MineLauncher', false)
 		self.fold = true
+		elseif bit == 6 then 
+		self:RemoveToggleCap('RULEUTC_WeaponToggle')
+		self:RemoveCommandCap('RULEUCC_Attack')
+		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
+		local interval = 0
+        while (interval < 48) do
+		if interval == 0 then
+		self.MineLayingAnimationManipulator:SetRate(0.15)
+		
+		end
+                    coroutine.yield(1)
+                    self:GetWeaponByLabel'MineLauncher':FireWeapon()
+					WaitSeconds(0.001)
+					interval = interval + 1
+        end
+		WaitFor(self.MineLayingAnimationManipulator)
+		self:AddCommandCap('RULEUCC_Attack')
+		self:AddCommandCap('RULEUCC_RetaliateToggle')
+		self:AddToggleCap('RULEUTC_WeaponToggle')
 		elseif bit == 7 then
 		if self.build == true then
 		self:SetScriptBit('RULEUTC_SpecialToggle', false)
@@ -227,6 +292,26 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self:AddCommandCap('RULEUCC_Guard')
 		self:SetWeaponEnabledByLabel('MineLauncher', true)
 		self.fold = false
+		self:AddToggleCap('RULEUTC_GenericToggle')
+		elseif bit == 6 then 
+		self:RemoveToggleCap('RULEUTC_WeaponToggle')
+		self:RemoveCommandCap('RULEUCC_Attack')
+		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
+		local interval = 0
+        while (interval < 48) do
+		if interval == 0 then
+		self.MineLayingAnimationManipulator:SetRate(-0.15)
+		
+		end
+                    coroutine.yield(1)
+                    self:GetWeaponByLabel('MineLauncher'):FireWeapon()
+					WaitSeconds(0.001)
+					interval = interval + 1
+        end
+		WaitFor(self.MineLayingAnimationManipulator)
+		self:AddCommandCap('RULEUCC_Attack')
+		self:AddCommandCap('RULEUCC_RetaliateToggle')
+		self:AddToggleCap('RULEUTC_WeaponToggle')
 		elseif bit == 7 then
 		self.load = false
 		local units = self:GetCargo()

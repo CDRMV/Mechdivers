@@ -107,9 +107,9 @@ UnitBlueprint {
             LODs = {
                 {
 					MeshName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_lod02.scm',
-					AlbedoName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_Albedo.dds',
-					SpecularName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_SpecTeam.dds',
-					NormalsName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_NormalsTs.dds',
+					AlbedoName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_Albedo2.dds',
+					SpecularName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_SpecTeam2.dds',
+					NormalsName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_NormalsTs2.dds',
                     LODCutoff = 300,
                     ShaderName = 'Unit',
                 },

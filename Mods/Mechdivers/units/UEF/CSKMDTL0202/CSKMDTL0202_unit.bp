@@ -108,9 +108,9 @@ UnitBlueprint {
             LODs = {
                 {
 					MeshName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_lod02.scm',
-					AlbedoName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_Albedo.dds',
-					SpecularName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_SpecTeam.dds',
-					NormalsName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_NormalsTs.dds',
+					AlbedoName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_Albedo2.dds',
+					SpecularName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_SpecTeam2.dds',
+					NormalsName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_NormalsTs2.dds',
                     LODCutoff = 300,
                     ShaderName = 'Unit',
                 },
@@ -157,7 +157,7 @@ UnitBlueprint {
             RULEUCC_Reclaim = false,
             RULEUCC_Repair = false,
             RULEUCC_RetaliateToggle = true,
-            RULEUCC_SiloBuildTactical = true,
+            RULEUCC_SiloBuildTactical = false,
             RULEUCC_Stop = true,
             RULEUCC_Tactical = false,
             RULEUCC_Transport = true,
@@ -175,9 +175,14 @@ UnitBlueprint {
                 bitmapId = 'Vision',
 				helpText = 'Show/Hide Ferry Beacon',
             },
+			RULEUTC_GenericToggle = {
+                bitmapId = 'production',
+				helpText = 'Lay a minefield',
+            },
         },
 		ToggleCaps = {
             RULEUTC_WeaponToggle = true,
+			RULEUTC_GenericToggle = true,
         },
         FactionName = 'UEF',
         Icon = 'land',       
