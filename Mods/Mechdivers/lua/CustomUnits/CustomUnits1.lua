@@ -2,8 +2,11 @@ UnitList = {
 
 	T2LandDFTank = {
 		Cybran = {'CSKMDCL0201', 80},      -- Devastator, Tech 2 Advanced Assualt Bot
+		UEF = {'CSKMDTL0304', 80},      -- Patriot, Tech 2 Sturm Bot
     },
-	
+	T2AttackTankSorian = {
+		UEF = {'CSKMDTL0303', 80},      -- Emancipator, Tech 2 Assualt Bot
+    },
 	T1GroundDefense = {
         UEF = {'UEBMD0103', 80}, -- Tech 1  Mine Tower
     },
@@ -22,11 +25,15 @@ UnitList = {
 	
 	T3LandBot = {
 		Cybran = {'CSKMDCL0306', 80},      -- Hulk Bruiser, Tech 3 Heavy Assualt Bot
-		UEF = {'CSKMDTL0304', 80}, -- Patriot, Tech 3 Multifunctional Assault Bot
+		UEF = {'CSKMDTL0304b', 80}, -- Patriot Mark II, Tech 3 Improved Sturm Bot
     },
 	
 	T2ShieldDefense = {
     Cybran =	{'urbmd0100', 70}, -- Tech 2 Detector Tower
+	},
+	
+	T3AirFighter = {
+		UEF = {'CSKMDTA0302b', 80},  -- Eagle, Tech 3 Groundattack Fighter
 	},
 	
 	

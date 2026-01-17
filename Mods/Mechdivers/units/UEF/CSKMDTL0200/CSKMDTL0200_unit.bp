@@ -76,7 +76,7 @@ UnitBlueprint {
     Display = {
         Abilities = {
 			'Can attack Ground Targets',
-            '<LOC ability_aa>Anti-Air',
+            #'<LOC ability_aa>Anti-Air',
             '<LOC ability_deathaoe>Volatile',
 			'Usable Pilot as an seperated Unit',
         },

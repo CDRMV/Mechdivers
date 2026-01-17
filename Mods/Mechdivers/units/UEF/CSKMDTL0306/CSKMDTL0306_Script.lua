@@ -41,9 +41,10 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self:HideBone( 'R_MG1', true )
 		self:HideBone( 'L_MG1', true )
 		Dummy = self:GetWeaponByLabel('Dummy')
-
+		self.MineLauncher = self:GetWeaponByLabel('MineLauncher')
 		self:ShowBone( 'R_MineLauncher', true )
 		self:ShowBone( 'L_MineLauncher', true )
+		self:CreateEnhancement('AntiTankMine')
 		end
 		)
     end,
@@ -88,7 +89,7 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		local number = 0
 		while not self.Dead do
 		if self:GetTacticalSiloAmmoCount() == 0 then
-		self:RemoveToggleCap('RULEUTC_GenericToggle')
+		self:RemoveToggleCap('RULEUTC_ShieldToggle')
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		if number == 0 then
@@ -112,7 +113,7 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self:RemoveTacticalSiloAmmo(1)
 		self:AddCommandCap('RULEUCC_Attack')
 		self:AddCommandCap('RULEUCC_RetaliateToggle')
-		self:AddToggleCap('RULEUTC_GenericToggle')
+		self:AddToggleCap('RULEUTC_ShieldToggle')
 		WaitSeconds(1)
 		self:SetFireState('ReturnFire')
 		number = 0
@@ -122,13 +123,26 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		end)
     end,
 	
-	
+	CreateEnhancement = function(self, enh)
+        TWalkingLandUnit.CreateEnhancement(self, enh)
+        local bp = self:GetBlueprint().Enhancements[enh]
+        if not bp then return end
+        if enh == 'AntiTankMine' then
+		self.MineLauncher:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/TDFAntiTankMine2/TDFAntiTankMine2_proj.bp')
+        elseif enh == 'GasMine' then
+		self.MineLauncher:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/TDFGasMine2/TDFGasMine2_proj.bp')
+		elseif enh == 'LightAntiTankMine' then
+	    self.MineLauncher:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/TDFLightAntiTankMine2/TDFLightAntiTankMine2_proj.bp')
+		elseif enh == 'IncendiaryMine' then
+		self.MineLauncher:ChangeProjectileBlueprint('/mods/mechdivers/projectiles/TDFFlameMine2/TDFFlameMine2_proj.bp')
+        end
+    end,
 	
 	CheckSiloAmount = function(self)
 		ForkThread( function()
 		while not self.Dead do
 			if self:GetTacticalSiloAmmoCount() == 0 then
-					self:RemoveToggleCap('RULEUTC_GenericToggle')
+					self:RemoveToggleCap('RULEUTC_ShieldToggle')
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
 			elseif self:GetTacticalSiloAmmoCount() == 48 then
@@ -187,7 +201,7 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
         TWalkingLandUnit.OnScriptBitSet(self, bit)
 		ForkThread(function()
 		if bit == 1 then 
-		self:RemoveToggleCap('RULEUTC_GenericToggle')
+		self:RemoveToggleCap('RULEUTC_ShieldToggle')
 		self:RemoveCommandCap('RULEUCC_Move')
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_Patrol')
@@ -208,7 +222,7 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self:SetScriptBit('RULEUTC_WeaponToggle', true)
 		self:SetWeaponEnabledByLabel('MineLauncher', false)
 		self.fold = true
-		elseif bit == 6 then 
+		elseif bit == 0 then 
 		self:RemoveToggleCap('RULEUTC_WeaponToggle')
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
@@ -292,8 +306,8 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self:AddCommandCap('RULEUCC_Guard')
 		self:SetWeaponEnabledByLabel('MineLauncher', true)
 		self.fold = false
-		self:AddToggleCap('RULEUTC_GenericToggle')
-		elseif bit == 6 then 
+		self:AddToggleCap('RULEUTC_ShieldToggle')
+		elseif bit == 0 then 
 		self:RemoveToggleCap('RULEUTC_WeaponToggle')
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')

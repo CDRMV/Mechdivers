@@ -81,7 +81,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-        #'BUILTBYTIER3FACTORY',
+        'BUILTBYTIER3FACTORY',
         'UEF',
         'MOBILE',
         'AIR',
@@ -100,17 +100,19 @@ UnitBlueprint {
         AirThreatLevel = 0.1,
         ArmorType = 'Light',
         EconomyThreatLevel = 0,
-        Health = 1150,
-        MaxHealth = 1150,
+        Health = 5000,
+        MaxHealth = 5000,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 0,
+        SurfaceThreatLevel = 18,
     },
-    Description = 'Space-capable Attack Fighter',
+    Description = 'Groundattack Fighter (Nose MiniGun)',
     Display = {
         Abilities = {
             '<LOC ability_omni>Omni Sensor',
             '<LOC ability_radar>Radar',
+			'Armed with an single MiniGun on its Nose',
+			'This MiniGun can be used agianst enemy Air and Ground Targets',
         },
         LayerChangeEffects = {
             AirLand = {
@@ -169,9 +171,9 @@ UnitBlueprint {
         UniformScale = 0.05,
     },
     Economy = {
-        BuildCostEnergy = 7500,
-        BuildCostMass = 195,
-        BuildTime = 900,
+        BuildCostEnergy = 45000,
+        BuildCostMass = 500,
+        BuildTime = 3500,
     },
     Footprint = {
         MaxSlope = 0.25,
@@ -234,7 +236,7 @@ UnitBlueprint {
         MinSpeedPercent = 0.85,
         MotionType = 'RULEUMT_Air',
     },
-    SelectionSizeX = 0.9,
+    SelectionSizeX = 2.0,
     SelectionSizeZ = 1.2,
     SelectionThickness = 0.36,
     SizeSphere = 1.6,

@@ -45,11 +45,12 @@ UnitList = {
     },
 
 	T3LandBot = {
-        UEF = {'CSKMDTL0303', 80}, -- Emancipator, Tech 3 Multifunctional Assault Bot
+        UEF = {'CSKMDTL0303b', 80}, -- Emancipator Mark II, Tech 3 Improved Assault Bot
     },
 	
 	T3AirFighter = {
 		Aeon = {'CSKMDAA0303', 80},  -- Stingray, Tech 3 Groundattack Fighter
+		UEF = {'CSKMDTA0302', 80},  -- Eagle, Tech 3 Groundattack Fighter
 	},
 	
 	T4LandExperimental1 = {

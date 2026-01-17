@@ -136,8 +136,6 @@ CSKMDTL0304 = Class(TWalkingLandUnit) {
 		self:HideBone( 'L_Gatling_Arm', true )
 		self:ShowBone( 'R_Gatling_Arm', true )
 		Dummy:SetEnabled(true)
-		self:CreateEnhancement('RightGatling')
-		self:CreateEnhancement('LeftMissileLauncher')
 		end
 		)
     end,
@@ -171,28 +169,6 @@ CSKMDTL0304 = Class(TWalkingLandUnit) {
 		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_Afold01.sca', false):SetRate(0)
 		self.load = true
 		self.fold = false
-    end,
-	
-	CreateEnhancement = function(self, enh)
-        TWalkingLandUnit.CreateEnhancement(self, enh)
-        local bp = self:GetBlueprint().Enhancements[enh]
-        if not bp then return end
-        if enh == 'LeftGatling' then
-		self.L_GatlingCannon:SetEnabled(true)
-		self.L_MissileLauncher:SetEnabled(false)
-		
-        elseif enh == 'RightGatling' then
-		self.R_GatlingCannon:SetEnabled(true)
-		self.R_MissileLauncher:SetEnabled(false)
-		
-		elseif enh == 'LeftMissileLauncher' then
-		self.L_GatlingCannon:SetEnabled(false)
-		self.L_MissileLauncher:SetEnabled(true)
-		
-		elseif enh == 'RightMissileLauncher' then
-		self.R_GatlingCannon:SetEnabled(false)
-		self.R_MissileLauncher:SetEnabled(true)
-        end
     end,
 	
 	DeathThread = function( self, overkillRatio , instigator)  
