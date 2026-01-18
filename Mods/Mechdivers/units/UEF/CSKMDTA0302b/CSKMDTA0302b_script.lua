@@ -50,6 +50,11 @@ CSKMDTA0302b = Class(TAirUnit) {
 		self:HideBone('L_BombHold' ,true)
 		self:HideBone('R_BombHold' ,true)
 		self:HideBone('Bomb' ,true)
+		self:HideBone('MissilePod' ,true)
+		self:HideBone('L_MissilePod' ,true)
+		self:HideBone('L_MissilePod2' ,true)
+		self:HideBone('R_MissilePod' ,true)
+		self:HideBone('R_MissilePod2' ,true)
     end,
 
 

@@ -47,6 +47,7 @@ UnitBlueprint {
         'BUILTBYTIER3ENGINEER',
         'CYBRAN',
         'STRUCTURE',
+		'CARRIER',
         'LAND',
         'TECH2',
         'DRAGBUILD',
@@ -55,6 +56,7 @@ UnitBlueprint {
         'RECLAIMABLE',
         'SHOWQUEUE',
         'SORTDEFENSE',
+		'OVERLAYRADAR',
     },
     CollisionOffsetX = 0,
     CollisionOffsetY = -1,
@@ -72,8 +74,8 @@ UnitBlueprint {
     Description = 'Assault Dronestation',
     Display = {
 	    Abilities = {
-		'Spawns Assault Drones if enemy Units are coming into its Range.',
-		'Comes with an Reload Time of 60 Seconds for each Drone Squadron.',
+		'Spawns 3 Assault Drones if enemy Units are coming into its Range.',
+		'Comes with an Reload Time of 30 Seconds for each Drone Squadron.',
 		'Drones will attack the enemy automatically and return to the Station if there are destroyed.',
 		'Only 6 can be builded by each Player.',
         },
@@ -130,7 +132,7 @@ UnitBlueprint {
             RULEUCC_Repair = false,
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
-            RULEUCC_Transport = false,
+            RULEUCC_Transport = true,
         },
         FactionName = 'Cybran',
         Icon = 'land',
@@ -139,6 +141,7 @@ UnitBlueprint {
         UnitWeight = 1,
     },
     Intel = {
+        RadarRadius = 55,
         VisionRadius = 20,
     },
     Interface = {
@@ -172,10 +175,15 @@ UnitBlueprint {
     SelectionSizeZ = 3,
     SelectionThickness = 0.3,
     SizeX = 2.9,
-    SizeY = 1,
+    SizeY = 5,
     SizeZ = 4.2,
     StrategicIconName = 'icon_factory3_air',
     StrategicIconSortPriority = 210,
+	Transport = {
+        ClassGenericUpTo = 2,
+        StorageSlots = 3,
+        TransportClass = 10,
+    },
     Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,

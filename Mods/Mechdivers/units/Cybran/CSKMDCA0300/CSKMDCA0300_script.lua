@@ -25,21 +25,21 @@ CSKMDCA0300 = Class(CAirUnit) {
         end,
                 
         OnGotTarget = function(self)
-		Spinner2:SetTargetSpeed(0)
-		Spinner2:SetGoal(Spinner2:GetCurrentAngle() - Spinner2:GetCurrentAngle())
+		self.unit.Spinner2:SetTargetSpeed(0)
+		self.unit.Spinner2:SetGoal(self.unit.Spinner2:GetCurrentAngle() - self.unit.Spinner2:GetCurrentAngle())
                CDFLaserFusionWeapon.OnGotTarget(self)
         end,                
             },
         
         OnGotTarget = function(self)
-		Spinner2:SetTargetSpeed(0)
-		Spinner2:SetGoal(Spinner2:GetCurrentAngle() - Spinner2:GetCurrentAngle())
+		self.unit.Spinner2:SetTargetSpeed(0)
+		self.unit.Spinner2:SetGoal(self.unit.Spinner2:GetCurrentAngle() - self.unit.Spinner2:GetCurrentAngle())
                CDFLaserFusionWeapon.OnGotTarget(self)
         end,
         
         OnLostTarget = function(self)
-		Spinner2:SetTargetSpeed(5)
-		Spinner2:SetGoal(30)
+		self.unit.Spinner2:SetTargetSpeed(5)
+		self.unit.Spinner2:SetGoal(30)
             CDFLaserFusionWeapon.OnLostTarget(self)
         end,  			
 		},
@@ -55,7 +55,6 @@ CSKMDCA0300 = Class(CAirUnit) {
         CAirUnit.OnStopBeingBuilt(self,builder,layer)
 		ForkThread(function()
         self.EngineManipulators = {}
-
 			ScanMesh = '/mods/Mechdivers/Decorations/CybranScan2_mesh'
 			self.Scan = import('/lua/sim/Entity.lua').Entity()
 			self.Scan:AttachBoneTo( -2, self, 'Scanner' )
@@ -64,14 +63,14 @@ CSKMDCA0300 = Class(CAirUnit) {
 			self.Scan:SetVizToAllies('Intel')
 			self.Scan:SetVizToNeutrals('Intel')
 			self.Scan:SetVizToEnemies('Intel')
-				Spinner2 = CreateRotator(self, 'Barrel', 'x', 10, 10, 0, 10):SetTargetSpeed(5)
+			self.Spinner2 = CreateRotator(self, 'Barrel', 'x', 10, 10, 0, 10):SetTargetSpeed(5)
 			self:ForkThread(self.CreateIntelEntity,'Scanner', 'Vision')	
 		while not self.Dead do
-		if Spinner2 then
-		Spinner2:SetGoal(math.random(30,40))
-		else
+		if self:IsIdleState() == true then
+		self:DestroyScan()
+		self:Destroy()
 		end
-		WaitSeconds(1)
+		WaitSeconds(0.1)
 		end	
 
 		end)
@@ -99,7 +98,6 @@ CSKMDCA0300 = Class(CAirUnit) {
                 ent:SetVizToAllies('Always')
                 ent:SetVizToNeutrals('Never')
                 ent:SetVizToEnemies('Never')
-				LOG(angle)
                 ent:InitIntel(self:GetArmy(), intel, angle)
                 ent:EnableIntel(intel)
             end
@@ -107,6 +105,17 @@ CSKMDCA0300 = Class(CAirUnit) {
         end	
     end
 end,
+
+	Scan = function( self)  
+	ForkThread(function()
+		while not self.Dead do
+		if self.Spinner2 then
+		self.Spinner2:SetGoal(math.random(30,40))
+		end
+		WaitSeconds(0.1)
+		end	
+		end)
+    end,
 	
 	DestroyScan = function( self)  
 		if self.Scan then

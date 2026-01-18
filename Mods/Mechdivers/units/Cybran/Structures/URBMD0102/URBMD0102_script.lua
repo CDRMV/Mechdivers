@@ -32,35 +32,21 @@ URBMD0102 = Class(CStructureUnit) {
 		local attachposition = self:GetPosition('Attachpoint')
 		local number = 0
 		local movenumber = 0
+		local idledrones = 0
 		local reload = 0
  		while not self:IsDead() do
 			if reload == 0 then
 			local unitPos = self:GetPosition()
-			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 30, 'Enemy')
+			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
 			if units[1] == nil and units[2] == nil then
-			if self.Drone and not self.Drone:IsDead() then
+			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
 			if movenumber == 0 then
-			IssueMove({self.Drone}, position)
-			while not self.Drone:IsDead() do
-			local Droneposition = self.Drone:GetPosition()
-				if Droneposition[1]+0.5 <= attachposition[1] and Droneposition[3]+0.5 <= attachposition[3] then
-				self.Drone:DestroyScan()
-				self.Drone:Destroy()
-				reload = 60
-				self.OpenAnimManip:SetRate(-1)
-				end
-				if Droneposition[1]-0.5 <= attachposition[1] and Droneposition[3]-0.5 <= attachposition[3] then
-				self.Drone:DestroyScan()
-				self.Drone:Destroy()
-				reload = 60
-				self.OpenAnimManip:SetRate(-1)
-				end
-			WaitSeconds(0.1)
-			end
+			IssueMove({self.Drone, self.Drone2, self.Drone3}, position)
 			movenumber = 1
 			end
 			else
 			self.OpenAnimManip:SetRate(-1)
+			reload = 30
 			end
 			else
 			if number == 0 then
@@ -68,16 +54,19 @@ URBMD0102 = Class(CStructureUnit) {
 			WaitFor(self.OpenAnimManip:SetRate(1))
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
 			self.Drone = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
-			SetIgnoreArmyUnitCap(self:GetArmy(), false)
+			self.Drone2 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
+			self.Drone3 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone:DetachFrom(true)
+			self.Drone2:DetachFrom(true)
+			self.Drone3:DetachFrom(true)
+			self.Drone:Scan()
+			self.Drone2:Scan()
+			self.Drone3:Scan()
+			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			for i, unit in units do
-			IssueAttack({self.Drone}, unit)
+			IssueFormAttack({self.Drone, self.Drone2, self.Drone3}, unit, 'AttackFormation', 0)
 			end
 			number = 1
-			end
-			if self.Drone:IsDead() then
-			reload = 60
-			self.OpenAnimManip:SetRate(-1)
 			end
 			end
             WaitSeconds(0.1)
@@ -87,8 +76,8 @@ URBMD0102 = Class(CStructureUnit) {
 			number = 0
 			movenumber = 0
 			end
-			WaitSeconds(1)
 			end
+			WaitSeconds(0.1)
 		end	
     end,
 }

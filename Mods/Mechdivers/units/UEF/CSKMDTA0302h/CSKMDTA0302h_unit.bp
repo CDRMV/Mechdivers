@@ -107,12 +107,12 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 18,
     },
-    Description = 'Groundattack Fighter (Napalm Bombs)',
+    Description = 'Groundattack Fighter (Cluster Bombs)',
     Display = {
         Abilities = {
             '<LOC ability_omni>Omni Sensor',
             '<LOC ability_radar>Radar',
-			'Armed with 8 Napalm Bombs and an Air to Air MiniGun',
+			'Armed with 8 Cluster Bombs and an Air to Air MiniGun',
         },
         LayerChangeEffects = {
             AirLand = {
@@ -342,13 +342,11 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             BombDropThreshold = 3.5,
             CollideFriendly = false,
-            Damage = 50,
+            Damage = 150,
             DamageFriendly = true,
-            DamageRadius = 2.5,
+            DamageRadius = 0,
             DamageType = 'Normal',
             DisplayName = 'Napalm Carpet Bomb',
-            DoTPulses = 15,
-            DoTTime = 1.5,
             FireTargetLayerCapsTable = {
                 Air = 'Land|Water|Seabed',
                 Land = 'Land|Water|Seabed',
@@ -361,7 +359,7 @@ UnitBlueprint {
             MuzzleSalvoSize = 4,
             MuzzleVelocity = 0,
             NeedToComputeBombDrop = true,
-            ProjectileId = '/mods/Mechdivers/projectiles/TIFEagleNapalmBomb01/TIFEagleNapalmBomb01_proj.bp',
+            ProjectileId = '/mods/Mechdivers/projectiles/TIFEagleClusterBomb01/TIFEagleClusterBomb01_proj.bp',
             ProjectilesPerOnFire = 1,
             RackBones = {
                 {
@@ -416,7 +414,7 @@ UnitBlueprint {
             AutoInitiateAttackCommand = true,
             BallisticArc = 'RULEUBA_None',
             CollideFriendly = false,
-            Damage = 50,
+            Damage = 150,
 			BombDropThreshold = 3.5,
             DamageFriendly = true,
             DamageRadius = 2.5,
@@ -436,7 +434,7 @@ UnitBlueprint {
             MuzzleSalvoSize = 4,
             MuzzleVelocity = 0,
 			NeedToComputeBombDrop = true,
-            ProjectileId = '/mods/Mechdivers/projectiles/TIFEagleNapalmBomb01/TIFEagleNapalmBomb01_proj.bp',
+            ProjectileId = '/mods/Mechdivers/projectiles/TIFEagleBomb01/TIFEagleBomb01_proj.bp',
             ProjectilesPerOnFire = 1,
             RackBones = {
                 {

@@ -12,7 +12,7 @@ local TAirUnit = import('/lua/defaultunits.lua').AirUnit
 local TIFCarpetBombWeapon = import('/lua/terranweapons.lua').TIFCarpetBombWeapon
 local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
 
-CSKMDTA0302f = Class(TAirUnit) {
+CSKMDTA0302h = Class(TAirUnit) {
 	Weapons = {
 		Bomb = Class(TIFCarpetBombWeapon) {
 		OnWeaponFired = function(self)
@@ -47,8 +47,7 @@ CSKMDTA0302f = Class(TAirUnit) {
 		elseif number == 2 then
 		self.AnimationManipulator2:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTA0302/CSKMDTA0302_RightBelowWing.sca', false):SetRate(2)
 		end
-		self:HideBone('L_BombHold' ,true)
-		self:HideBone('R_BombHold' ,true)
+		self:HideBone('Bomb' ,true)
 		self:HideBone('L_Gatling' ,true)
 		self:HideBone('R_Gatling' ,true)
 		self:HideBone('MissilePod' ,true)
@@ -82,4 +81,4 @@ CSKMDTA0302f = Class(TAirUnit) {
 
 }
 
-TypeClass = CSKMDTA0302f
+TypeClass = CSKMDTA0302h

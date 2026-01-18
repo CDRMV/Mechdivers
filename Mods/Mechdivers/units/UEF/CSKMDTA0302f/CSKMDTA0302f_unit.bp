@@ -170,6 +170,14 @@ UnitBlueprint {
                     },
                 },
             },
+			BeamExhaust = {
+                Bones = {
+                    'L_Exhaust',
+                    'R_Exhaust',
+                },
+                Cruise = true,
+                Idle = false,
+            },
         },
         PlaceholderMeshName = 'UXA0010',
         SpawnRandomRotation = false,
@@ -272,7 +280,7 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'Linked Railgun',
             FireTargetLayerCapsTable = {
-                Air = 'Land|Seabed|Water',
+                Air = 'Air',
             },
             FiringRandomness = 0.8,
             FiringTolerance = 2,

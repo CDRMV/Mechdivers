@@ -11,10 +11,11 @@
 local TAirUnit = import('/lua/defaultunits.lua').AirUnit
 local TIFCarpetBombWeapon = import('/lua/terranweapons.lua').TIFCarpetBombWeapon
 local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
+local TSAMLauncher = import('/lua/terranweapons.lua').TSAMLauncher
 
-CSKMDTA0302f = Class(TAirUnit) {
+CSKMDTA0302g = Class(TAirUnit) {
 	Weapons = {
-		Bomb = Class(TIFCarpetBombWeapon) {
+		Missile = Class(TSAMLauncher) {
 		OnWeaponFired = function(self)
 		ForkThread( function()
 		WaitSeconds(1)
@@ -49,13 +50,10 @@ CSKMDTA0302f = Class(TAirUnit) {
 		end
 		self:HideBone('L_BombHold' ,true)
 		self:HideBone('R_BombHold' ,true)
+		self:HideBone('Bomb' ,true)
 		self:HideBone('L_Gatling' ,true)
 		self:HideBone('R_Gatling' ,true)
 		self:HideBone('MissilePod' ,true)
-		self:HideBone('L_MissilePod' ,true)
-		self:HideBone('L_MissilePod2' ,true)
-		self:HideBone('R_MissilePod' ,true)
-		self:HideBone('R_MissilePod2' ,true)
     end,
 
 
@@ -82,4 +80,4 @@ CSKMDTA0302f = Class(TAirUnit) {
 
 }
 
-TypeClass = CSKMDTA0302f
+TypeClass = CSKMDTA0302g
