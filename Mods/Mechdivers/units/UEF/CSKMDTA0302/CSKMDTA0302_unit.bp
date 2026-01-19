@@ -1,4 +1,8 @@
 UnitBlueprint {
+    AI = {
+        GuardReturnRadius = 125,
+        GuardScanRadius = 100,
+    },
     Air = {
         AutoLandTime = 1,
         BankFactor = 4,
@@ -310,6 +314,17 @@ UnitBlueprint {
             SlavedToBodyArcRange = 50,
             TargetCheckInterval = 1,
             TargetRestrictDisallow = 'UNTARGETABLE',
+			TargetPriorities = {
+                'SPECIALHIGHPRI',
+                'TECH1 MOBILE',
+                'TECH2 MOBILE',
+                'TECH3 MOBILE',
+				'AIR MOBILE',
+                'AIR MOBILE -INTELLIGENCE',
+                'STRUCTURE DEFENSE',
+                'SPECIALLOWPRI',
+                'ALLUNITS',
+            },
             TrackingRadius = 1.25,
             TurretBoneMuzzle = 'Gatling_Muzzle',
             TurretBonePitch = 'Gatling_Muzzle',

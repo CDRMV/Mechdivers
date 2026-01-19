@@ -66,9 +66,14 @@ CSKMDCA0300 = Class(CAirUnit) {
 			self.Spinner2 = CreateRotator(self, 'Barrel', 'x', 10, 10, 0, 10):SetTargetSpeed(5)
 			self:ForkThread(self.CreateIntelEntity,'Scanner', 'Vision')	
 		while not self.Dead do
+		WaitSeconds(1)
+		if self:BeenDestroyed() then
+		break
+		else
 		if self:IsIdleState() == true then
 		self:DestroyScan()
 		self:Destroy()
+		end
 		end
 		WaitSeconds(0.1)
 		end	

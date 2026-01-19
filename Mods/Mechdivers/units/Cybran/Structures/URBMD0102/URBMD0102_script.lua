@@ -49,24 +49,47 @@ URBMD0102 = Class(CStructureUnit) {
 			reload = 30
 			end
 			else
+			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+			for i, unit in units do
+			IssueFormAttack({self.Drone, self.Drone2, self.Drone3}, unit, 'AttackFormation', 0)
+			end
+			end
 			if number == 0 then
 			WaitSeconds(1)
 			WaitFor(self.OpenAnimManip:SetRate(1))
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
 			self.Drone = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
-			self.Drone2 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
-			self.Drone3 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone:DetachFrom(true)
-			self.Drone2:DetachFrom(true)
-			self.Drone3:DetachFrom(true)
 			self.Drone:Scan()
-			self.Drone2:Scan()
-			self.Drone3:Scan()
-			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			for i, unit in units do
-			IssueFormAttack({self.Drone, self.Drone2, self.Drone3}, unit, 'AttackFormation', 0)
+			IssueFormAttack({self.Drone}, unit, 'AttackFormation', 0)
 			end
+			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 1
+			end
+			if number == 1 then
+			WaitSeconds(0.5)
+			SetIgnoreArmyUnitCap(self:GetArmy(), true)
+			self.Drone2 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
+			self.Drone2:DetachFrom(true)
+			self.Drone2:Scan()
+			for i, unit in units do
+			IssueFormAttack({self.Drone2}, unit, 'AttackFormation', 0)
+			end
+			SetIgnoreArmyUnitCap(self:GetArmy(), false)
+			number = 2
+			end
+			if number == 2 then
+			WaitSeconds(0.5)
+			SetIgnoreArmyUnitCap(self:GetArmy(), true)
+			self.Drone3 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
+			self.Drone3:DetachFrom(true)
+			self.Drone3:Scan()
+			for i, unit in units do
+			IssueFormAttack({self.Drone3}, unit, 'AttackFormation', 0)
+			end
+			SetIgnoreArmyUnitCap(self:GetArmy(), false)
+			number = 3
 			end
 			end
             WaitSeconds(0.1)
@@ -79,6 +102,26 @@ URBMD0102 = Class(CStructureUnit) {
 			end
 			WaitSeconds(0.1)
 		end	
+    end,
+	
+	OnKilled = function(self, instigator, type, overkillRatio)
+	if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+		self.Drone:Kill()
+		self.Drone2:Kill()
+		self.Drone3:Kill()
+	end
+
+
+    CStructureUnit.OnKilled(self, instigator, type, overkillRatio)	
+    end,
+	
+	
+	OnReclaimed = function(self, reclaimer)
+		if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+		self.Drone:Kill()
+		self.Drone2:Kill()
+		self.Drone3:Kill()
+		end
     end,
 }
 

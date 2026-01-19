@@ -47,7 +47,6 @@ UnitBlueprint {
         'BUILTBYTIER3ENGINEER',
         'CYBRAN',
         'STRUCTURE',
-		'CARRIER',
         'LAND',
         'TECH2',
         'DRAGBUILD',
@@ -132,7 +131,7 @@ UnitBlueprint {
             RULEUCC_Repair = false,
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
-            RULEUCC_Transport = true,
+            RULEUCC_Transport = false,
         },
         FactionName = 'Cybran',
         Icon = 'land',
@@ -179,11 +178,6 @@ UnitBlueprint {
     SizeZ = 4.2,
     StrategicIconName = 'icon_factory3_air',
     StrategicIconSortPriority = 210,
-	Transport = {
-        ClassGenericUpTo = 2,
-        StorageSlots = 3,
-        TransportClass = 10,
-    },
     Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',
         EnergyMult = 0,
@@ -192,10 +186,10 @@ UnitBlueprint {
         ReclaimTimeMultiplier = 1,
         WreckageLayers = {
             Air = false,
-            Land = false,
+            Land = true,
             Seabed = false,
             Sub = false,
-            Water = true,
+            Water = false,
         },
     },
 }
