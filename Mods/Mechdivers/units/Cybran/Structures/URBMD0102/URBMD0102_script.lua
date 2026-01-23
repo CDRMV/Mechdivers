@@ -19,6 +19,7 @@ URBMD0102 = Class(CStructureUnit) {
 		self.OpenAnimManip = CreateAnimator(self)
 		self.Trash:Add(self.OpenAnimManip)
 		self.OpenAnimManip:PlayAnim('/Mods/Mechdivers/units/Cybran/Structures/URBMD0102/URBMD0102_AOpen.sca', false):SetRate(0)
+		self:SetCapturable(false)
     end,
 	
 	OnStopBeingBuilt = function(self,builder,layer)
@@ -32,15 +33,33 @@ URBMD0102 = Class(CStructureUnit) {
 		local attachposition = self:GetPosition('Attachpoint')
 		local number = 0
 		local movenumber = 0
+		local stoporder = 0
 		local idledrones = 0
 		local reload = 0
+		local GetDistanceBetweenTwoEntities = import("/lua/utilities.lua").GetDistanceBetweenTwoEntities
  		while not self:IsDead() do
 			if reload == 0 then
 			local unitPos = self:GetPosition()
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
 			if units[1] == nil and units[2] == nil then
 			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+			if GetDistanceBetweenTwoEntities(self.Drone, self) > 55 then
+			IssueClearCommands({self.Drone})
+			IssueMove({self.Drone}, position)
+			stoporder = 0
+			end
+			if GetDistanceBetweenTwoEntities(self.Drone2, self) > 55 then
+			IssueClearCommands({self.Drone2})
+			IssueMove({self.Drone2}, position)
+			stoporder = 0
+			end
+			if GetDistanceBetweenTwoEntities(self.Drone3, self) > 55 then
+			IssueClearCommands({self.Drone3})
+			IssueMove({self.Drone3}, position)
+			stoporder = 0
+			end
 			if movenumber == 0 then
+			stoporder = 0
 			IssueMove({self.Drone, self.Drone2, self.Drone3}, position)
 			movenumber = 1
 			end
@@ -50,20 +69,51 @@ URBMD0102 = Class(CStructureUnit) {
 			end
 			else
 			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+			if GetDistanceBetweenTwoEntities(self.Drone, self) > 55 then
+			IssueClearCommands({self.Drone})
+			IssueMove({self.Drone}, position)
+			stoporder = 0
+			end
+			if GetDistanceBetweenTwoEntities(self.Drone2, self) > 55 then
+			IssueClearCommands({self.Drone2})
+			IssueMove({self.Drone2}, position)
+			stoporder = 0
+			end
+			if GetDistanceBetweenTwoEntities(self.Drone3, self) > 55 then
+			IssueClearCommands({self.Drone3})
+			IssueMove({self.Drone3}, position)
+			stoporder = 0
+			end
+			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
 			for i, unit in units do
+			if stoporder == 0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 35 and GetDistanceBetweenTwoEntities(self.Drone2, self) < 35 and GetDistanceBetweenTwoEntities(self.Drone3, self) < 35 then
+			IssueClearCommands({self.Drone, self.Drone2 , self.Drone3})
+			stoporder = 1
+			movenumber = 0
+			end
+			if GetDistanceBetweenTwoEntities(self.Drone, self) < 35 and GetDistanceBetweenTwoEntities(self.Drone2, self) < 35 and GetDistanceBetweenTwoEntities(self.Drone3, self) < 35 then
 			IssueFormAttack({self.Drone, self.Drone2, self.Drone3}, unit, 'AttackFormation', 0)
 			end
 			end
+			end
+			if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+			self.OpenAnimManip:SetRate(-1)
+			number = 0
+			movenumber = 0
+			end
 			if number == 0 then
+			if self.Drone and self.Drone2 and self.Drone3 then
+			table.empty(self.Drone) 
+			table.empty(self.Drone2) 
+			table.empty(self.Drone3) 
+			end
 			WaitSeconds(1)
 			WaitFor(self.OpenAnimManip:SetRate(1))
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
 			self.Drone = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone:DetachFrom(true)
 			self.Drone:Scan()
-			for i, unit in units do
-			IssueFormAttack({self.Drone}, unit, 'AttackFormation', 0)
-			end
+			IssueFormAttack({self.Drone}, units[1], 'AttackFormation', 0)
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 1
 			end
@@ -73,9 +123,7 @@ URBMD0102 = Class(CStructureUnit) {
 			self.Drone2 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone2:DetachFrom(true)
 			self.Drone2:Scan()
-			for i, unit in units do
-			IssueFormAttack({self.Drone2}, unit, 'AttackFormation', 0)
-			end
+			IssueFormAttack({self.Drone2}, units[1], 'AttackFormation', 0)
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 2
 			end
@@ -85,9 +133,7 @@ URBMD0102 = Class(CStructureUnit) {
 			self.Drone3 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone3:DetachFrom(true)
 			self.Drone3:Scan()
-			for i, unit in units do
-			IssueFormAttack({self.Drone3}, unit, 'AttackFormation', 0)
-			end
+			IssueFormAttack({self.Drone3}, units[1], 'AttackFormation', 0)
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 3
 			end
