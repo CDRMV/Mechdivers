@@ -27,8 +27,10 @@ URBMD0102 = Class(CStructureUnit) {
 		self.SpawnDroneThreadLVL1Handle = self:ForkThread(self.SpawnDroneThreadLVL1)
     end,
 	
+	
 	SpawnDroneThreadLVL1 = function(self)
 		local army = self:GetArmy()
+		local aiBrain = self:GetAIBrain()
 		local position = self:GetPosition()
 		local attachposition = self:GetPosition('Attachpoint')
 		local number = 0
@@ -36,6 +38,7 @@ URBMD0102 = Class(CStructureUnit) {
 		local stoporder = 0
 		local idledrones = 0
 		local reload = 0
+		local build = 0
 		local GetDistanceBetweenTwoEntities = import("/lua/utilities.lua").GetDistanceBetweenTwoEntities
  		while not self:IsDead() do
 			if reload == 0 then
@@ -101,19 +104,49 @@ URBMD0102 = Class(CStructureUnit) {
 			number = 0
 			movenumber = 0
 			end
+			if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+			IssueMove({self.Drone, self.Drone2}, position)
+			end
+			if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+			IssueMove({self.Drone, self.Drone3}, position)
+			end
+			if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+			IssueMove({self.Drone2, self.Drone3}, position)
+			end
+			if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+			IssueMove({self.Drone}, position)
+			end
+			if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+			IssueMove({self.Drone2}, position)
+			end
+			if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+			IssueMove({self.Drone3}, position)
+			end
 			if number == 0 then
+			SetArmyEconomy(self:GetArmy(), -250,  -450)
+			if aiBrain:GetEconomyStored("MASS") < 250 and aiBrain:GetEconomyStored("MASS") < 450 then
+			elseif aiBrain:GetEconomyStored("MASS") < 250 and aiBrain:GetEconomyStored("MASS") > 450 then
+			elseif aiBrain:GetEconomyStored("MASS") > 250 and aiBrain:GetEconomyStored("MASS") < 450 then
+			else
 			if self.Drone and self.Drone2 and self.Drone3 then
 			table.empty(self.Drone) 
 			table.empty(self.Drone2) 
 			table.empty(self.Drone3) 
 			end
+			if build == 0 then
 			WaitSeconds(1)
+			build = 1
+			else
+			WaitSeconds(5)
+			end
 			WaitFor(self.OpenAnimManip:SetRate(1))
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
 			self.Drone = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone:DetachFrom(true)
 			self.Drone:Scan()
-			IssueFormAttack({self.Drone}, units[1], 'AttackFormation', 0)
+			for i, unit in units do
+			IssueFormAttack({self.Drone}, unit, 'AttackFormation', 0)
+			end	
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 1
 			end
@@ -123,7 +156,9 @@ URBMD0102 = Class(CStructureUnit) {
 			self.Drone2 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone2:DetachFrom(true)
 			self.Drone2:Scan()
-			IssueFormAttack({self.Drone2}, units[1], 'AttackFormation', 0)
+			for i, unit in units do
+			IssueFormAttack({self.Drone2}, unit, 'AttackFormation', 0)
+			end	
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 2
 			end
@@ -133,9 +168,12 @@ URBMD0102 = Class(CStructureUnit) {
 			self.Drone3 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone3:DetachFrom(true)
 			self.Drone3:Scan()
-			IssueFormAttack({self.Drone3}, units[1], 'AttackFormation', 0)
+			for i, unit in units do
+			IssueFormAttack({self.Drone3}, unit, 'AttackFormation', 0)
+			end	
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 3
+			end
 			end
 			end
             WaitSeconds(0.1)
@@ -151,11 +189,39 @@ URBMD0102 = Class(CStructureUnit) {
     end,
 	
 	OnKilled = function(self, instigator, type, overkillRatio)
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+		self.Drone:Kill()
+		self.Drone2:Kill()
+	end
+	
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+		self.Drone:Kill()
+		self.Drone3:Kill()
+	end
+	
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+		self.Drone2:Kill()
+		self.Drone3:Kill()
+	end
+	
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+		self.Drone:Kill()
+	end
+	
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+		self.Drone2:Kill()
+	end
+	
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+		self.Drone3:Kill()
+	end
+	
 	if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
 		self.Drone:Kill()
 		self.Drone2:Kill()
 		self.Drone3:Kill()
 	end
+	
 
 
     CStructureUnit.OnKilled(self, instigator, type, overkillRatio)	
@@ -163,11 +229,40 @@ URBMD0102 = Class(CStructureUnit) {
 	
 	
 	OnReclaimed = function(self, reclaimer)
-		if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+	
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+		self.Drone:Kill()
+		self.Drone2:Kill()
+	end
+	
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+		self.Drone:Kill()
+		self.Drone3:Kill()
+	end
+	
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+		self.Drone2:Kill()
+		self.Drone3:Kill()
+	end
+	
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+		self.Drone:Kill()
+	end
+	
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+		self.Drone2:Kill()
+	end
+	
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+		self.Drone3:Kill()
+	end
+	
+	if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
 		self.Drone:Kill()
 		self.Drone2:Kill()
 		self.Drone3:Kill()
-		end
+	end
+	
     end,
 }
 

@@ -49,6 +49,7 @@ UnitBlueprint {
         'STRUCTURE',
         'LAND',
         'TECH2',
+		'RADAR',
         'DRAGBUILD',
         'SIZE16',
         'VISIBLETORECON',
@@ -77,6 +78,7 @@ UnitBlueprint {
 		'Comes with an Reload Time of 30 Seconds for each Drone Squadron.',
 		'Drones will attack the enemy automatically and return to the Station if there are destroyed.',
 		'Only 6 can be builded by each Player.',
+		'Launch of an Drone Squadron costs: 250 Mass and 450 Energy.',
         },
         Mesh = {
             IconFadeInZoom = 130,
