@@ -229,8 +229,7 @@ UnitBlueprint {
             LAYER_Water = false,
         },
         Elevation = 7,
-        FuelRechargeRate = 70,
-        FuelUseTime = 800,
+        FuelUseTime = 100,
         GroundCollisionOffset = 1.6,
         MaxAcceleration = 10,
         MaxSpeed = 10,
@@ -310,7 +309,7 @@ UnitBlueprint {
             RackSlavedToTurret = false,
             RangeCategory = 'UWRC_DirectFire',
             RateOfFire = 1.5,
-            TargetCheckInterval = 0.16,
+            TargetCheckInterval = 1.25,
             TargetPriorities = {
                 'SPECIALHIGHPRI',
                 'TECH1 MOBILE',
@@ -385,7 +384,7 @@ UnitBlueprint {
             RackSlavedToTurret = false,
             RangeCategory = 'UWRC_DirectFire',
             RateOfFire = 0.05,
-            TargetCheckInterval = 0.5,
+            TargetCheckInterval = 1.25,
             TargetPriorities = {
                 'SPECIALHIGHPRI',
                 'TECH1 MOBILE',

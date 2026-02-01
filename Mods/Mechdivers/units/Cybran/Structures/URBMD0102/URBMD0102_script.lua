@@ -25,20 +25,21 @@ URBMD0102 = Class(CStructureUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         CStructureUnit.OnStopBeingBuilt(self,builder,layer)
 		if ArmyIsCivilian(self:GetArmy()) then
-		self.SpawnDroneThreadLVL1Handle = self:ForkThread(self.SpawnDroneThreadLVL2)
+		self.SpawnDroneThreadLVL2Handle = self:ForkThread(self.SpawnDroneThreadLVL2)
 		else
-		self.SpawnDroneThreadLVL1Handle = self:ForkThread(self.SpawnDroneThreadLVL1)
+		self.SpawnDroneThreadLVL0Handle = self:ForkThread(self.SpawnDroneThreadLVL0)
 		end
     end,
 	
 	
-	SpawnDroneThreadLVL1 = function(self)
+	SpawnDroneThreadLVL0 = function(self)
 		local army = self:GetArmy()
 		local aiBrain = self:GetAIBrain()
 		local position = self:GetPosition()
 		local attachposition = self:GetPosition('Attachpoint')
 		local number = 0
 		local movenumber = 0
+		local econumber = 0
 		local stoporder = 0
 		local idledrones = 0
 		local reload = 0
@@ -49,106 +50,79 @@ URBMD0102 = Class(CStructureUnit) {
 		local GetDistanceBetweenTwoEntities = import("/lua/utilities.lua").GetDistanceBetweenTwoEntities
  		while not self:IsDead() do
 			if reload == 0 then
+			if self.Drone and not self.Drone:IsDead() then
+			if self.Drone:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 8 then
+			self.Drone:Destroy()
+			self.Drone:DestroyScan()
+			else
+
+			end
+			end
+			if self.Drone2 and not self.Drone2:IsDead() then
+			if self.Drone2:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone2, self) < 8 then
+			self.Drone2:Destroy()
+			self.Drone2:DestroyScan()
+			else
+
+			end
+			end
+			if self.Drone3 and not self.Drone3:IsDead() then
+			if self.Drone3:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone3, self) < 8 then
+			self.Drone3:Destroy()
+			self.Drone3:DestroyScan()
+			else
+
+			end
+			end
+			if self.Drone and not self.Drone:IsDead() then
+			if self.Drone:GetFuelRatio() == 0.0 then
+			self.Drone:SetSpeedMult(2)
+			IssueClearCommands({self.Drone})
+			IssueMove({self.Drone}, position)
+			else
+
+			end
+			end
+			if self.Drone2 and not self.Drone2:IsDead() then
+			if self.Drone2:GetFuelRatio() == 0.0 then
+			self.Drone2:SetSpeedMult(2)
+			IssueClearCommands({self.Drone2})
+			IssueMove({self.Drone2}, position)
+			else
+
+			end
+			end
+			if self.Drone3 and not self.Drone3:IsDead() then
+			if self.Drone3:GetFuelRatio() == 0.0 then
+			self.Drone3:SetSpeedMult(2)
+			IssueClearCommands({self.Drone3})
+			IssueMove({self.Drone3}, position)
+			else
+
+			end
+			end
+			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+			else
+			self.OpenAnimManip:SetRate(-1)
+			number = 0
+			econumber = 0
+			end
+			if number == 0 then
 			local unitPos = self:GetPosition()
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
 			if units[1] == nil and units[2] == nil then
-			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone, self) > 55 then
-			IssueClearCommands({self.Drone})
-			IssueMove({self.Drone}, position)
-			stoporder = 0
-			end
-			if GetDistanceBetweenTwoEntities(self.Drone2, self) > 55 then
-			IssueClearCommands({self.Drone2})
-			IssueMove({self.Drone2}, position)
-			stoporder = 0
-			end
-			if GetDistanceBetweenTwoEntities(self.Drone3, self) > 55 then
-			IssueClearCommands({self.Drone3})
-			IssueMove({self.Drone3}, position)
-			stoporder = 0
-			end
-			if movenumber == 0 then
-			stoporder = 0
-			IssueMove({self.Drone, self.Drone2, self.Drone3}, position)
-			movenumber = 1
-			end
+
 			else
-			self.OpenAnimManip:SetRate(-1)
-			reload = 30
-			end
+			if build == 0 then
+			WaitSeconds(1)
+			build = 1
 			else
-			if self.Drone and not self.Drone:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone, self) > 55 then
-			IssueClearCommands({self.Drone})
-			IssueMove({self.Drone}, position)
-			stoporder = 0
+			WaitSeconds(5)
 			end
-			end
-			if self.Drone2 and not self.Drone2:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone2, self) > 55 then
-			IssueClearCommands({self.Drone2})
-			IssueMove({self.Drone2}, position)
-			stoporder = 0
-			end
-			end
-			if self.Drone3 and not self.Drone3:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone3, self) > 55 then
-			IssueClearCommands({self.Drone3})
-			IssueMove({self.Drone3}, position)
-			stoporder = 0
-			end
-			end
-			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
-			for i, unit in units do
-			if stoporder == 0 then
-			if self.Drone and not self.Drone:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone, self) < 35 then
-			IssueClearCommands({self.Drone})
-			IssueFormAttack({self.Drone, self.Drone2, self.Drone3}, unit, 'AttackFormation', 0)
-			end
-			end
-			if self.Drone2 and not self.Drone2:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone2, self) < 35 then
-			IssueClearCommands({self.Drone2})
-			IssueFormAttack({self.Drone, self.Drone2, self.Drone3}, unit, 'AttackFormation', 0)
-			end
-			end
-			if self.Drone3 and not self.Drone3:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone3, self) < 35 then
-			IssueClearCommands({self.Drone3})
-			IssueFormAttack({self.Drone, self.Drone2, self.Drone3}, unit, 'AttackFormation', 0)
-			end
-			end
-			stoporder = 1
-			movenumber = 0
-			end
-			end
-			if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
-			self.OpenAnimManip:SetRate(-1)
-			number = 0
-			movenumber = 0
-			end
-			if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
-			IssueMove({self.Drone, self.Drone2}, position)
-			end
-			if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
-			IssueMove({self.Drone, self.Drone3}, position)
-			end
-			if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
-			IssueMove({self.Drone2, self.Drone3}, position)
-			end
-			if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
-			IssueMove({self.Drone}, position)
-			end
-			if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
-			IssueMove({self.Drone2}, position)
-			end
-			if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
-			IssueMove({self.Drone3}, position)
-			end
-			if number == 0 then
+			if econumber == 0 then
 			SetArmyEconomy(self:GetArmy(), -250,  -450)
+			econumber = 1 
+			end
 			if aiBrain:GetEconomyStored("MASS") < 250 and aiBrain:GetEconomyStored("MASS") < 450 then
 			elseif aiBrain:GetEconomyStored("MASS") < 250 and aiBrain:GetEconomyStored("MASS") > 450 then
 			elseif aiBrain:GetEconomyStored("MASS") > 250 and aiBrain:GetEconomyStored("MASS") < 450 then
@@ -158,53 +132,35 @@ URBMD0102 = Class(CStructureUnit) {
 			table.empty(self.Drone2) 
 			table.empty(self.Drone3) 
 			end
-			if build == 0 then
-			WaitSeconds(1)
-			build = 1
-			else
-			WaitSeconds(5)
-			end
 			WaitFor(self.OpenAnimManip:SetRate(1))
-			units1 = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
 			self.Drone = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone:DetachFrom(true)
 			self.Drone:Scan()
-			for i, unit in units1 do
-			IssueFormAttack({self.Drone}, unit, 'AttackFormation', 0)
-			end	
+			IssueGuard({self.Drone}, self)
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 1
-			table.empty(units1)
 			end
 			if number == 1 then
-			WaitSeconds(0.5)
-			units2 = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
+			WaitSeconds(1)
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
 			self.Drone2 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone2:DetachFrom(true)
 			self.Drone2:Scan()
-			for i, unit in units2 do
-			IssueFormAttack({self.Drone2}, unit, 'AttackFormation', 0)
-			end	
+			IssueGuard({self.Drone2}, self)
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 2
-			table.empty(units2) 
 			end
 			if number == 2 then
-			WaitSeconds(0.5)
-			units3 = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
+			WaitSeconds(1)
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
 			self.Drone3 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone3:DetachFrom(true)
 			self.Drone3:Scan()
-			for i, unit in units3 do
-			IssueFormAttack({self.Drone3}, unit, 'AttackFormation', 0)
-			end	
+			IssueGuard({self.Drone3}, self)
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
-			number = 3
-			table.empty(units3) 			
-			end
+			number = 3	
+			end			
 			end
 			end
             WaitSeconds(0.1)
@@ -236,156 +192,109 @@ URBMD0102 = Class(CStructureUnit) {
 		local GetDistanceBetweenTwoEntities = import("/lua/utilities.lua").GetDistanceBetweenTwoEntities
  		while not self:IsDead() do
 			if reload == 0 then
+			if self.Drone and not self.Drone:IsDead() then
+			if self.Drone:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 8 then
+			self.Drone:Destroy()
+			self.Drone:DestroyScan()
+			else
+
+			end
+			end
+			if self.Drone2 and not self.Drone2:IsDead() then
+			if self.Drone2:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone2, self) < 8 then
+			self.Drone2:Destroy()
+			self.Drone2:DestroyScan()
+			else
+
+			end
+			end
+			if self.Drone3 and not self.Drone3:IsDead() then
+			if self.Drone3:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone3, self) < 8 then
+			self.Drone3:Destroy()
+			self.Drone3:DestroyScan()
+			else
+
+			end
+			end
+			if self.Drone and not self.Drone:IsDead() then
+			if self.Drone:GetFuelRatio() == 0.0 then
+			self.Drone:SetSpeedMult(2)
+			IssueClearCommands({self.Drone})
+			IssueMove({self.Drone}, position)
+			else
+
+			end
+			end
+			if self.Drone2 and not self.Drone2:IsDead() then
+			if self.Drone2:GetFuelRatio() == 0.0 then
+			self.Drone2:SetSpeedMult(2)
+			IssueClearCommands({self.Drone2})
+			IssueMove({self.Drone2}, position)
+			else
+
+			end
+			end
+			if self.Drone3 and not self.Drone3:IsDead() then
+			if self.Drone3:GetFuelRatio() == 0.0 then
+			self.Drone3:SetSpeedMult(2)
+			IssueClearCommands({self.Drone3})
+			IssueMove({self.Drone3}, position)
+			else
+
+			end
+			end
+			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+			else
+			self.OpenAnimManip:SetRate(-1)
+			number = 0
+			econumber = 0
+			end
+			if number == 0 then
 			local unitPos = self:GetPosition()
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
 			if units[1] == nil and units[2] == nil then
-			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone, self) > 55 then
-			IssueClearCommands({self.Drone})
-			IssueMove({self.Drone}, position)
-			stoporder = 0
-			end
-			if GetDistanceBetweenTwoEntities(self.Drone2, self) > 55 then
-			IssueClearCommands({self.Drone2})
-			IssueMove({self.Drone2}, position)
-			stoporder = 0
-			end
-			if GetDistanceBetweenTwoEntities(self.Drone3, self) > 55 then
-			IssueClearCommands({self.Drone3})
-			IssueMove({self.Drone3}, position)
-			stoporder = 0
-			end
-			if movenumber == 0 then
-			stoporder = 0
-			IssueMove({self.Drone, self.Drone2, self.Drone3}, position)
-			movenumber = 1
-			end
+
 			else
-			self.OpenAnimManip:SetRate(-1)
-			reload = 30
-			end
-			else
-			if self.Drone and not self.Drone:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone, self) > 55 then
-			IssueClearCommands({self.Drone})
-			IssueMove({self.Drone}, position)
-			stoporder = 0
-			end
-			end
-			if self.Drone2 and not self.Drone2:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone2, self) > 55 then
-			IssueClearCommands({self.Drone2})
-			IssueMove({self.Drone2}, position)
-			stoporder = 0
-			end
-			end
-			if self.Drone3 and not self.Drone3:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone3, self) > 55 then
-			IssueClearCommands({self.Drone3})
-			IssueMove({self.Drone3}, position)
-			stoporder = 0
-			end
-			end
-			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
-			for i, unit in units do
-			if stoporder == 0 then
-			if self.Drone and not self.Drone:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone, self) < 35 then
-			IssueClearCommands({self.Drone})
-			IssueFormAttack({self.Drone, self.Drone2, self.Drone3}, unit, 'AttackFormation', 0)
-			end
-			end
-			if self.Drone2 and not self.Drone2:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone2, self) < 35 then
-			IssueClearCommands({self.Drone2})
-			IssueFormAttack({self.Drone, self.Drone2, self.Drone3}, unit, 'AttackFormation', 0)
-			end
-			end
-			if self.Drone3 and not self.Drone3:IsDead() then
-			if GetDistanceBetweenTwoEntities(self.Drone3, self) < 35 then
-			IssueClearCommands({self.Drone3})
-			IssueFormAttack({self.Drone, self.Drone2, self.Drone3}, unit, 'AttackFormation', 0)
-			end
-			end
-			stoporder = 1
-			movenumber = 0
-			end
-			end
-			if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
-			self.OpenAnimManip:SetRate(-1)
-			number = 0
-			movenumber = 0
-			end
-			if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
-			IssueMove({self.Drone, self.Drone2}, position)
-			end
-			if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
-			IssueMove({self.Drone, self.Drone3}, position)
-			end
-			if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
-			IssueMove({self.Drone2, self.Drone3}, position)
-			end
-			if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
-			IssueMove({self.Drone}, position)
-			end
-			if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
-			IssueMove({self.Drone2}, position)
-			end
-			if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
-			IssueMove({self.Drone3}, position)
-			end
-			if number == 0 then
-			if self.Drone and self.Drone2 and self.Drone3 then
-			table.empty(self.Drone) 
-			table.empty(self.Drone2) 
-			table.empty(self.Drone3) 
-			end
 			if build == 0 then
 			WaitSeconds(1)
 			build = 1
 			else
 			WaitSeconds(5)
 			end
+			
+			if self.Drone and self.Drone2 and self.Drone3 then
+			table.empty(self.Drone) 
+			table.empty(self.Drone2) 
+			table.empty(self.Drone3) 
+			end
 			WaitFor(self.OpenAnimManip:SetRate(1))
-			units1 = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
 			self.Drone = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone:DetachFrom(true)
 			self.Drone:Scan()
-			for i, unit in units1 do
-			IssueFormAttack({self.Drone}, unit, 'AttackFormation', 0)
-			end	
+			IssueGuard({self.Drone}, self)
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 1
-			table.empty(units1)
 			if number == 1 then
-			WaitSeconds(0.5)
-			units2 = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
+			WaitSeconds(1)
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
 			self.Drone2 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone2:DetachFrom(true)
 			self.Drone2:Scan()
-			for i, unit in units2 do
-			IssueFormAttack({self.Drone2}, unit, 'AttackFormation', 0)
-			end	
+			IssueGuard({self.Drone2}, self)
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 2
-			table.empty(units2)
 			end
 			if number == 2 then
-			WaitSeconds(0.5)
-			units3 = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
+			WaitSeconds(1)
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
 			self.Drone3 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
 			self.Drone3:DetachFrom(true)
 			self.Drone3:Scan()
-			for i, unit in units3 do
-			IssueFormAttack({self.Drone3}, unit, 'AttackFormation', 0)
-			end	
+			IssueGuard({self.Drone3}, self)
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
-			number = 3
-			table.empty(units3) 			
-			end
+			number = 3	
+			end			
 			end
 			end
             WaitSeconds(0.1)
@@ -399,6 +308,7 @@ URBMD0102 = Class(CStructureUnit) {
 			WaitSeconds(0.1)
 		end	
     end,
+	
 	
 	OnKilled = function(self, instigator, type, overkillRatio)
 	if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
