@@ -18,7 +18,7 @@ You need to do these following Steps:
 
 Download the Zip File (Green Code Button)
 
-I recommend to use the HTTPS Option
+I recommend to switch to the HTTPS Option to Download the Zip File
 
 <img width="926" height="396" alt="image" src="https://github.com/user-attachments/assets/16aecdad-0a59-42bd-ba27-f74682663a99" />
 
