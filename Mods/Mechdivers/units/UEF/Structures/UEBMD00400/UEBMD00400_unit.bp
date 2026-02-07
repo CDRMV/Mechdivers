@@ -225,7 +225,7 @@ UnitBlueprint {
             },
             FiringTolerance = 2,
             ForceSingleFire = true,
-            InitialProjectileStorage = 1,
+            InitialProjectileStorage = 0,
             Label = 'NukeMissiles',
             ManualFire = 1,
             MaxProjectileStorage = 1,
