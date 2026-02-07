@@ -42,6 +42,8 @@ local MyUnitIdTable = {
 	  cskmdta0302f=true, 
 	  cskmdta0302g=true, 
 	  cskmdta0302h=true, 
+	  cskmdta0302i=true, 
+	  cskmdta0302j=true, 
 	  
  -- Land 
  
@@ -73,6 +75,7 @@ local MyUnitIdTable = {
 	  uebmd00301=true,
 	  uebmd00302=true,
 	  uebmd00300b=true,
+	  uebmd00400=true,
 	  
 	  uebmd0100=true,
 	  uebmd0101=true,						

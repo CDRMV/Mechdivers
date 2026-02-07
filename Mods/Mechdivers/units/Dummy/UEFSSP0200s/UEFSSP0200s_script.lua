@@ -12,10 +12,10 @@
 
 local StructureUnit = import('/lua/defaultunits.lua').StructureUnit
 local DefaultProjectileWeapon = import('/lua/sim/DefaultWeapons.lua').DefaultProjectileWeapon
+local Effectpath = '/effects/emitters/'
 local ModEffectpath = '/mods/Mechdivers/effects/emitters/'
 
-
-UEFSSP0301b = Class(StructureUnit) {
+UEFSSP0200r= Class(StructureUnit) {
     Weapons = {
         Nanites = Class(DefaultProjectileWeapon) {},
     },
@@ -57,18 +57,18 @@ UEFSSP0301b = Class(StructureUnit) {
         StructureUnit.OnStopBeingBuilt(self,builder,layer)
 			self:ForkThread(function()
 			self:HideBone('UEFSSP0100b', true)
-			self.Effect1 = CreateAttachedEmitter(self,0,self:GetArmy(), ModEffectpath .. 'emp_shell_empeffect_01_emit.bp'):ScaleEmitter(3.0):SetEmitterParam('LIFETIME', -1)
-			self.Effect2 = CreateAttachedEmitter(self,0,self:GetArmy(), ModEffectpath .. 'emp_shell_empeffect_02_emit.bp'):ScaleEmitter(3.0):SetEmitterParam('LIFETIME', -1)
-			self.Effect3 = CreateAttachedEmitter(self,0,self:GetArmy(), ModEffectpath .. 'emp_shell_smoke_01_emit.bp'):ScaleEmitter(3.0):SetEmitterParam('LIFETIME', -1)
-			self.Effect4 = CreateAttachedEmitter(self,0,self:GetArmy(), ModEffectpath .. 'emp_shell_smoke_01_emit.bp'):ScaleEmitter(3.0):SetEmitterParam('LIFETIME', -1)
+			self.Effect1 = CreateAttachedEmitter(self,0,self:GetArmy(), ModEffectpath .. 'emp_shell_empeffect_01_emit.bp'):ScaleEmitter(1.0):SetEmitterParam('LIFETIME', -1)
+			self.Effect2 = CreateAttachedEmitter(self,0,self:GetArmy(), ModEffectpath .. 'emp_shell_empeffect_02_emit.bp'):ScaleEmitter(1.0):SetEmitterParam('LIFETIME', -1)
+			self.Effect3 = CreateAttachedEmitter(self,0,self:GetArmy(), ModEffectpath .. 'emp_shell_smoke_01_emit.bp'):ScaleEmitter(1.0):SetEmitterParam('LIFETIME', -1)
+			self.Effect4 = CreateAttachedEmitter(self,0,self:GetArmy(), ModEffectpath .. 'emp_shell_smoke_01_emit.bp'):ScaleEmitter(1.0):SetEmitterParam('LIFETIME', -1)
 				local interval = 0
-                while (interval < 21) do
+                while (interval < 6) do
 				LOG(interval)
-					if interval < 20 then 
+					if interval < 5 then 
 						self.StunThreadHandle = self:ForkThread(self.StunThread)
 						WaitSeconds(1)
 						interval = interval + 1
-					elseif interval == 20 then
+					elseif interval == 5 then
 						self.Effect1:Destroy()
 						self.Effect2:Destroy()
 						self.Effect3:Destroy()
@@ -82,4 +82,4 @@ UEFSSP0301b = Class(StructureUnit) {
 
 }
 
-TypeClass = UEFSSP0301b
+TypeClass = UEFSSP0200r

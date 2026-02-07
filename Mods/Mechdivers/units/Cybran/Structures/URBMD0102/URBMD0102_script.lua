@@ -51,7 +51,7 @@ URBMD0102 = Class(CStructureUnit) {
  		while not self:IsDead() do
 			if reload == 0 then
 			if self.Drone and not self.Drone:IsDead() then
-			if self.Drone:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 8 then
+			if self.Drone:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) >= 0 and GetDistanceBetweenTwoEntities(self.Drone, self) <= 8 or self.Drone2:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 0 then
 			self.Drone:Destroy()
 			self.Drone:DestroyScan()
 			else
@@ -59,7 +59,7 @@ URBMD0102 = Class(CStructureUnit) {
 			end
 			end
 			if self.Drone2 and not self.Drone2:IsDead() then
-			if self.Drone2:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone2, self) < 8 then
+			if self.Drone2:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone2, self) >= 0 and GetDistanceBetweenTwoEntities(self.Drone2, self) <= 8 or self.Drone2:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone2, self) < 0 then
 			self.Drone2:Destroy()
 			self.Drone2:DestroyScan()
 			else
@@ -67,9 +67,17 @@ URBMD0102 = Class(CStructureUnit) {
 			end
 			end
 			if self.Drone3 and not self.Drone3:IsDead() then
-			if self.Drone3:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone3, self) < 8 then
+			if self.Drone3:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone3, self) >= 0 and GetDistanceBetweenTwoEntities(self.Drone3, self) <= 8 or self.Drone3:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone3, self) < 0 then
 			self.Drone3:Destroy()
 			self.Drone3:DestroyScan()
+			else
+
+			end
+			end
+			if self.Drone4 and not self.Drone4:IsDead() then
+			if self.Drone4:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone4, self) >= 0 and GetDistanceBetweenTwoEntities(self.Drone4, self) <= 8 or self.Drone4:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone4, self) < 0 then
+			self.Drone4:Destroy()
+			self.Drone4:DestroyScan()
 			else
 
 			end
@@ -101,7 +109,16 @@ URBMD0102 = Class(CStructureUnit) {
 
 			end
 			end
-			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+			if self.Drone4 and not self.Drone4:IsDead() then
+			if self.Drone4:GetFuelRatio() == 0.0 then
+			self.Drone4:SetSpeedMult(2)
+			IssueClearCommands({self.Drone4})
+			IssueMove({self.Drone4}, position)
+			else
+
+			end
+			end
+			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
 			else
 			self.OpenAnimManip:SetRate(-1)
 			number = 0
@@ -127,10 +144,11 @@ URBMD0102 = Class(CStructureUnit) {
 			elseif aiBrain:GetEconomyStored("MASS") < 250 and aiBrain:GetEconomyStored("MASS") > 450 then
 			elseif aiBrain:GetEconomyStored("MASS") > 250 and aiBrain:GetEconomyStored("MASS") < 450 then
 			else
-			if self.Drone and self.Drone2 and self.Drone3 then
+			if self.Drone and self.Drone2 and self.Drone3 and self.Drone4 then
 			table.empty(self.Drone) 
 			table.empty(self.Drone2) 
 			table.empty(self.Drone3) 
+			table.empty(self.Drone4)
 			end
 			WaitFor(self.OpenAnimManip:SetRate(1))
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
@@ -160,7 +178,17 @@ URBMD0102 = Class(CStructureUnit) {
 			IssueGuard({self.Drone3}, self)
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 3	
-			end			
+			end	
+			if number == 3 then
+			WaitSeconds(1)
+			SetIgnoreArmyUnitCap(self:GetArmy(), true)
+			self.Drone4 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
+			self.Drone4:DetachFrom(true)
+			self.Drone4:Scan()
+			IssueGuard({self.Drone4}, self)
+			SetIgnoreArmyUnitCap(self:GetArmy(), false)
+			number = 4	
+			end				
 			end
 			end
             WaitSeconds(0.1)
@@ -193,7 +221,7 @@ URBMD0102 = Class(CStructureUnit) {
  		while not self:IsDead() do
 			if reload == 0 then
 			if self.Drone and not self.Drone:IsDead() then
-			if self.Drone:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 8 then
+			if self.Drone:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) >= 0 and GetDistanceBetweenTwoEntities(self.Drone, self) <= 8 or self.Drone2:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 0 then
 			self.Drone:Destroy()
 			self.Drone:DestroyScan()
 			else
@@ -201,7 +229,7 @@ URBMD0102 = Class(CStructureUnit) {
 			end
 			end
 			if self.Drone2 and not self.Drone2:IsDead() then
-			if self.Drone2:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone2, self) < 8 then
+			if self.Drone2:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone2, self) >= 0 and GetDistanceBetweenTwoEntities(self.Drone2, self) <= 8 or self.Drone2:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone2, self) < 0 then
 			self.Drone2:Destroy()
 			self.Drone2:DestroyScan()
 			else
@@ -209,9 +237,17 @@ URBMD0102 = Class(CStructureUnit) {
 			end
 			end
 			if self.Drone3 and not self.Drone3:IsDead() then
-			if self.Drone3:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone3, self) < 8 then
+			if self.Drone3:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone3, self) >= 0 and GetDistanceBetweenTwoEntities(self.Drone3, self) <= 8 or self.Drone3:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone3, self) < 0 then
 			self.Drone3:Destroy()
 			self.Drone3:DestroyScan()
+			else
+
+			end
+			end
+			if self.Drone4 and not self.Drone4:IsDead() then
+			if self.Drone4:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone4, self) >= 0 and GetDistanceBetweenTwoEntities(self.Drone4, self) <= 8 or self.Drone4:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone4, self) < 0 then
+			self.Drone4:Destroy()
+			self.Drone4:DestroyScan()
 			else
 
 			end
@@ -243,7 +279,16 @@ URBMD0102 = Class(CStructureUnit) {
 
 			end
 			end
-			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+			if self.Drone4 and not self.Drone4:IsDead() then
+			if self.Drone4:GetFuelRatio() == 0.0 then
+			self.Drone4:SetSpeedMult(2)
+			IssueClearCommands({self.Drone4})
+			IssueMove({self.Drone4}, position)
+			else
+
+			end
+			end
+			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
 			else
 			self.OpenAnimManip:SetRate(-1)
 			number = 0
@@ -262,10 +307,11 @@ URBMD0102 = Class(CStructureUnit) {
 			WaitSeconds(5)
 			end
 			
-			if self.Drone and self.Drone2 and self.Drone3 then
+			if self.Drone and self.Drone2 and self.Drone3 and self.Drone4 then
 			table.empty(self.Drone) 
 			table.empty(self.Drone2) 
 			table.empty(self.Drone3) 
+			table.empty(self.Drone4)
 			end
 			WaitFor(self.OpenAnimManip:SetRate(1))
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
@@ -294,7 +340,17 @@ URBMD0102 = Class(CStructureUnit) {
 			IssueGuard({self.Drone3}, self)
 			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			number = 3	
-			end			
+			end	
+			if number == 3 then
+			WaitSeconds(1)
+			SetIgnoreArmyUnitCap(self:GetArmy(), true)
+			self.Drone4 = CreateUnitHPR('CSKMDCA0300', self:GetArmy(), attachposition.x, attachposition.y, attachposition.z, 0, 0, 0)
+			self.Drone4:DetachFrom(true)
+			self.Drone4:Scan()
+			IssueGuard({self.Drone4}, self)
+			SetIgnoreArmyUnitCap(self:GetArmy(), false)
+			number = 4	
+			end				
 			end
 			end
             WaitSeconds(0.1)

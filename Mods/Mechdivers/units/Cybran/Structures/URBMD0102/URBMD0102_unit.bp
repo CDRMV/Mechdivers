@@ -74,7 +74,7 @@ UnitBlueprint {
     Description = 'Assault Dronestation',
     Display = {
 	    Abilities = {
-		'Spawns 3 Assault Drones if enemy Units are coming into its Range.',
+		'Spawns 4 Assault Drones if enemy Units are coming into its Range.',
 		'Comes with an Reload Time of 30 Seconds for each Drone Squadron.',
 		'Drones will attack the enemy automatically and return to the Station if there are destroyed.',
 		'Only 6 can be builded by each Player.',

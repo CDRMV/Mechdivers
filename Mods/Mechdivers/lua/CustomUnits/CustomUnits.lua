@@ -56,6 +56,7 @@ UnitList = {
 	T4LandExperimental1 = {
 		Aeon = {'CSKMDAL0306', 80},    	-- Harvester, Tech 3 Super Heavy Tripod
 		Cybran = {'CSKMDCL0313', 80},    	-- Hunter IV, Tech 3 Heavy Siege Bot (War Strider)
+		UEF = {'UEBMD00400', 80},  -- Kīlauea, Experimental ICBM Launcher
     },
 	
 	T4LandExperimental2 = {
