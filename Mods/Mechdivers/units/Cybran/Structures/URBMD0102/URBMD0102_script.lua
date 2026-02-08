@@ -118,8 +118,9 @@ URBMD0102 = Class(CStructureUnit) {
 
 			end
 			end
-			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
-			else
+			if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
+			
+			elseif self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 			self.OpenAnimManip:SetRate(-1)
 			number = 0
 			econumber = 0
@@ -288,8 +289,9 @@ URBMD0102 = Class(CStructureUnit) {
 
 			end
 			end
-			if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
-			else
+			if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
+			
+			elseif self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 			self.OpenAnimManip:SetRate(-1)
 			number = 0
 			econumber = 0
