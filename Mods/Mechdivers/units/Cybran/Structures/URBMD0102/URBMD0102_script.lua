@@ -51,7 +51,7 @@ URBMD0102 = Class(CStructureUnit) {
  		while not self:IsDead() do
 			if reload == 0 then
 			if self.Drone and not self.Drone:IsDead() then
-			if self.Drone:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) >= 0 and GetDistanceBetweenTwoEntities(self.Drone, self) <= 8 or self.Drone2:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 0 then
+			if self.Drone:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) >= 0 and GetDistanceBetweenTwoEntities(self.Drone, self) <= 8 or self.Drone:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 0 then
 			self.Drone:Destroy()
 			self.Drone:DestroyScan()
 			else
@@ -221,7 +221,7 @@ URBMD0102 = Class(CStructureUnit) {
  		while not self:IsDead() do
 			if reload == 0 then
 			if self.Drone and not self.Drone:IsDead() then
-			if self.Drone:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) >= 0 and GetDistanceBetweenTwoEntities(self.Drone, self) <= 8 or self.Drone2:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 0 then
+			if self.Drone:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) >= 0 and GetDistanceBetweenTwoEntities(self.Drone, self) <= 8 or self.Drone:GetFuelRatio() == 0.0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 0 then
 			self.Drone:Destroy()
 			self.Drone:DestroyScan()
 			else
