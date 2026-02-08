@@ -18,7 +18,9 @@ You need to do these following Steps:
 
 Download the Zip File (Green Code Button)
 
-<img width="924" height="702" alt="image" src="https://github.com/user-attachments/assets/5443ef92-3116-4a1c-b0bd-16fbbdd264fe" />
+I recommend to switch to the HTTPS Option to Download the Zip File
+
+<img width="926" height="396" alt="image" src="https://github.com/user-attachments/assets/16aecdad-0a59-42bd-ba27-f74682663a99" />
 
 Open the zip file they should be an Folder called: Mechdivers-main inside it.
 
