@@ -118,6 +118,73 @@ URBMD0102 = Class(CStructureUnit) {
 
 			end
 			end
+			
+			if self.Drone and not self.Drone:IsDead() then
+			if self.Drone:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone, self) >= 55 then
+			IssueClearCommands({self.Drone})
+			IssueMove({self.Drone}, position)
+			else
+
+			end
+			end
+			if self.Drone2 and not self.Drone2:IsDead() then
+			if self.Drone2:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone2, self) >= 55 then
+			IssueClearCommands({self.Drone2})
+			IssueMove({self.Drone2}, position)
+			else
+
+			end
+			end
+			if self.Drone3 and not self.Drone3:IsDead() then
+			if self.Drone3:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone3, self) >= 55 then
+			IssueClearCommands({self.Drone3})
+			IssueMove({self.Drone3}, position)
+			else
+
+			end
+			end
+			if self.Drone4 and not self.Drone4:IsDead() then
+			if self.Drone4:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone4, self) >= 55 then
+			IssueClearCommands({self.Drone4})
+			IssueMove({self.Drone4}, position)
+			else
+
+			end
+			end
+			
+			if self.Drone and not self.Drone:IsDead() then
+			if self.Drone:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 40 then
+			IssueClearCommands({self.Drone})
+			IssueGuard({self.Drone}, self)
+			else
+
+			end
+			end
+			if self.Drone2 and not self.Drone2:IsDead() then
+			if self.Drone2:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone2, self) < 40 then
+			IssueClearCommands({self.Drone2})
+			IssueGuard({self.Drone2}, self)
+			else
+
+			end
+			end
+			if self.Drone3 and not self.Drone3:IsDead() then
+			if self.Drone3:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone3, self) < 40 then
+			IssueClearCommands({self.Drone3})
+			IssueGuard({self.Drone3}, self)
+			else
+
+			end
+			end
+			if self.Drone4 and not self.Drone4:IsDead() then
+			if self.Drone4:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone4, self) < 40 then
+			IssueClearCommands({self.Drone4})
+			IssueGuard({self.Drone4}, self)
+			else
+
+			end
+			end
+			
 			if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
 			
 			elseif self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
@@ -289,6 +356,74 @@ URBMD0102 = Class(CStructureUnit) {
 
 			end
 			end
+			
+			if self.Drone and not self.Drone:IsDead() then
+			if self.Drone:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone, self) >= 55 then
+			IssueClearCommands({self.Drone})
+			IssueMove({self.Drone}, position)
+			else
+
+			end
+			end
+			if self.Drone2 and not self.Drone2:IsDead() then
+			if self.Drone2:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone2, self) >= 55 then
+			IssueClearCommands({self.Drone2})
+			IssueMove({self.Drone2}, position)
+			else
+
+			end
+			end
+			if self.Drone3 and not self.Drone3:IsDead() then
+			if self.Drone3:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone3, self) >= 55 then
+			IssueClearCommands({self.Drone3})
+			IssueMove({self.Drone3}, position)
+			else
+
+			end
+			end
+			if self.Drone4 and not self.Drone4:IsDead() then
+			if self.Drone4:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone4, self) >= 55 then
+			IssueClearCommands({self.Drone4})
+			IssueMove({self.Drone4}, position)
+			else
+
+			end
+			end
+			
+			if self.Drone and not self.Drone:IsDead() then
+			if self.Drone:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone, self) < 40 then
+			IssueClearCommands({self.Drone})
+			IssueGuard({self.Drone}, self)
+			else
+
+			end
+			end
+			if self.Drone2 and not self.Drone2:IsDead() then
+			if self.Drone2:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone2, self) < 40 then
+			IssueClearCommands({self.Drone2})
+			IssueGuard({self.Drone2}, self)
+			else
+
+			end
+			end
+			if self.Drone3 and not self.Drone3:IsDead() then
+			if self.Drone3:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone3, self) < 40 then
+			IssueClearCommands({self.Drone3})
+			IssueGuard({self.Drone3}, self)
+			else
+
+			end
+			end
+			if self.Drone4 and not self.Drone4:IsDead() then
+			if self.Drone4:GetFuelRatio() == 1.0 and GetDistanceBetweenTwoEntities(self.Drone4, self) < 40 then
+			IssueClearCommands({self.Drone4})
+			IssueGuard({self.Drone4}, self)
+			else
+
+			end
+			end
+			
+			
 			if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
 			
 			elseif self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
@@ -369,37 +504,57 @@ URBMD0102 = Class(CStructureUnit) {
 	
 	
 	OnKilled = function(self, instigator, type, overkillRatio)
-	if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 		self.Drone:Kill()
 		self.Drone2:Kill()
 	end
 	
-	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 		self.Drone:Kill()
 		self.Drone3:Kill()
 	end
 	
-	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 		self.Drone2:Kill()
 		self.Drone3:Kill()
 	end
 	
-	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
+		self.Drone:Kill()
+		self.Drone4:Kill()
+	end
+	
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
+		self.Drone2:Kill()
+		self.Drone4:Kill()
+	end
+	
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
+		self.Drone3:Kill()
+		self.Drone4:Kill()
+	end
+	
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 		self.Drone:Kill()
 	end
 	
-	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 		self.Drone2:Kill()
 	end
 	
-	if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 		self.Drone3:Kill()
 	end
 	
-	if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
+		self.Drone4:Kill()
+	end
+	
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
 		self.Drone:Kill()
 		self.Drone2:Kill()
 		self.Drone3:Kill()
+		self.Drone4:Kill()
 	end
 	
 
@@ -410,37 +565,57 @@ URBMD0102 = Class(CStructureUnit) {
 	
 	OnReclaimed = function(self, reclaimer)
 	
-	if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 		self.Drone:Kill()
 		self.Drone2:Kill()
 	end
 	
-	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 		self.Drone:Kill()
 		self.Drone3:Kill()
 	end
 	
-	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 		self.Drone2:Kill()
 		self.Drone3:Kill()
 	end
 	
-	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
+		self.Drone:Kill()
+		self.Drone4:Kill()
+	end
+	
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
+		self.Drone2:Kill()
+		self.Drone4:Kill()
+	end
+	
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
+		self.Drone3:Kill()
+		self.Drone4:Kill()
+	end
+	
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 		self.Drone:Kill()
 	end
 	
-	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() then
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 		self.Drone2:Kill()
 	end
 	
-	if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 		self.Drone3:Kill()
 	end
 	
-	if self.Drone and not self.Drone:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() or self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() then
+	if self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
+		self.Drone4:Kill()
+	end
+	
+	if self.Drone and not self.Drone:IsDead() and self.Drone2 and not self.Drone2:IsDead() and self.Drone3 and not self.Drone3:IsDead() and self.Drone4 and not self.Drone4:IsDead() then
 		self.Drone:Kill()
 		self.Drone2:Kill()
 		self.Drone3:Kill()
+		self.Drone4:Kill()
 	end
 	
     end,
