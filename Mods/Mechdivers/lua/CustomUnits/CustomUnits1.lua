@@ -16,6 +16,7 @@ UnitList = {
     },
 	
 	T3ArmoredAssault = {
+		UEF = {'CSKMDTL0308', 80},      -- UD-250 Bastion MK X, Tech 3 Heavy Tankhunter
 		Cybran = {'CSKMDCL0304', 80},      -- Mawler, Tech 3 Heavy Autocannon Tank
     },
 	
