@@ -66,6 +66,36 @@ CLaserFusionProjectile = Class(MultiPolyTrailProjectile) {
     FxImpactUnderWater = {},
 }
 
+CLaserHydrogenProjectile = Class(MultiPolyTrailProjectile) {
+    PolyTrails = {
+        '/mods/Mechdivers/effects/emitters/hydrogen_Laser_emit.bp',
+	},
+	PolyTrailOffset = {0,0}, 
+	
+    # Hit Effects
+    FxImpactUnit = EffectTemplate.TMissileHit01,
+    FxImpactLand = EffectTemplate.TMissileHit01,
+    FxImpactProp = EffectTemplate.TMissileHit01,
+    FxImpactUnderWater = {},
+}
+
+CHeavyLaserHydrogenProjectile = Class(MultiPolyTrailProjectile) {
+    PolyTrails = {
+        ModEffectTemplate.CHeavyHydrogenLaserPolyTrail,
+    },
+    PolyTrailOffset = {0,0}, 
+
+    FxTrails = ModEffectTemplate.CHeavyHydrogenLaserFXTrail01,
+	FxTrailScale = 4,
+	PolyTrailScale = 4,
+    #PolyTrail = ModEffectTemplate.CHeavyFusionLaserPolyTrail,
+    FxImpactUnit = EffectTemplate.TMissileHit01,
+    FxImpactLand = EffectTemplate.TMissileHit01,
+    FxImpactProp = EffectTemplate.TMissileHit01,
+    FxTrailOffset = 0,
+    FxImpactUnderWater = {},
+}
+
 CHeavyLaserFusionProjectile = Class(MultiPolyTrailProjectile) {
     PolyTrails = {
         ModEffectTemplate.CHeavyFusionLaserPolyTrail,

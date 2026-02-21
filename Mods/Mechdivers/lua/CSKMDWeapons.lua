@@ -40,6 +40,19 @@ TDFHeatBeam = Class(DefaultBeamWeapon) {
     },
 }
 
+CDFLaserHydrogenWeapon = Class(DefaultProjectileWeapon) {
+    FxMuzzleFlash = ModEffectTemplate.CHydrogenLaserMuzzleFlash,
+}
+
+CDFHLaserHydrogenWeapon = Class(DefaultProjectileWeapon) {
+    FxMuzzleFlash = ModEffectTemplate.CHydrogenLaserMuzzleFlash,
+	FxChargeMuzzleFlash = {
+		ModEffects .. 'heavyHydrogen_flash_01_emit.bp',
+        ModEffects .. 'heavyHydrogen_flash_02_emit.bp',
+        ModEffects .. 'heavyHydrogen_flash_03_emit.bp',
+    },
+}
+
 CDFLaserFusionWeapon = Class(DefaultProjectileWeapon) {
     FxMuzzleFlash = ModEffectTemplate.CFusionLaserMuzzleFlash,
 }
