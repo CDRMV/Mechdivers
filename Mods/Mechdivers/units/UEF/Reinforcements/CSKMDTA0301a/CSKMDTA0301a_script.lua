@@ -67,7 +67,7 @@ CSKMDTA0301a = Class(TAirUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition()
 		self.unit = CreateUnitHPR('CSKMDTL0304', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.unit:AttachBoneTo('AttachPoint', self, 'Attachpoint1')
+		self.unit:AttachBoneTo('AttachPoint', self, 'SpawnAttachpoint1')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 
     end,
@@ -83,8 +83,6 @@ CSKMDTA0301a = Class(TAirUnit) {
 		local LGatlingCannon = unit:GetWeaponByLabel('L_GatlingCannon')
 		local RGatlingCannon = unit:GetWeaponByLabel('R_GatlingCannon')
 		Dummy:SetEnabled(true)
-		LCannon:SetEnabled(false)
-		RCannon:SetEnabled(false)
 		LMissileLauncher:SetEnabled(true)
 		RMissileLauncher:SetEnabled(false)
 		LGatlingCannon:SetEnabled(false)

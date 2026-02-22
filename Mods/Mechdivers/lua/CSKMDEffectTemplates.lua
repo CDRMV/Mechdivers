@@ -52,3 +52,8 @@ CPhotonMissileFxtrails= {
 	ModBpPath .. 'proton_missile_fxtrail_emit.bp',
     ModBpPath .. 'proton_missile_smoke_exhaust_emit.bp',
 }
+
+CIcarusMissileFxtrails= {
+	ModBpPath .. 'icarus_missile_fxtrail_emit.bp',
+    ModBpPath .. 'icarus_missile_smoke_exhaust_emit.bp',
+}

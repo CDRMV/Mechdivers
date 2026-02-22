@@ -67,7 +67,7 @@ CSKMDTA0301c = Class(TAirUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition()
 		self.unit = CreateUnitHPR('CSKMDTL0205', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.unit:AttachBoneTo('AttachPoint', self, 'SpawnAttachpoint1')
+		self.unit:AttachBoneTo('AttachPoint', self, 'Attachpoint_sml_01')
 		local MainGun = self.unit:GetWeaponByLabel('MainGun')
 		MainGun:SetEnabled(false)
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
