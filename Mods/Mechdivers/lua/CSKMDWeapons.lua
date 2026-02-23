@@ -46,7 +46,7 @@ CDFLaserHydrogenWeapon = Class(DefaultProjectileWeapon) {
 
 CDFHLaserHydrogenWeapon = Class(DefaultProjectileWeapon) {
     FxMuzzleFlash = ModEffectTemplate.CHydrogenLaserMuzzleFlash,
-	FxChargeMuzzleFlash = {
+	FxRackChargeMuzzleFlash = {
 		ModEffects .. 'heavyHydrogen_flash_01_emit.bp',
         ModEffects .. 'heavyHydrogen_flash_02_emit.bp',
         ModEffects .. 'heavyHydrogen_flash_03_emit.bp',

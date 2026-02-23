@@ -52,13 +52,14 @@ UnitBlueprint {
         'RECLAIMABLE',
         'TANK',
         'OVERLAYDIRECTFIRE',
+		'OVERLAYRADAR',
     },
     Defense = {
         AirThreatLevel = 0,
         ArmorType = 'Experimental',
         EconomyThreatLevel = 0,
-        Health = 15000,
-        MaxHealth = 15000,
+        Health = 19000,
+        MaxHealth = 19000,
         RegenRate = 0,
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
@@ -110,9 +111,9 @@ UnitBlueprint {
         UniformScale = 0.078,
     },
     Economy = {
-        BuildCostEnergy = 16000,
-        BuildCostMass = 2400,
-        BuildTime = 7400,
+        BuildCostEnergy = 18000,
+        BuildCostMass = 2600,
+        BuildTime = 7600,
         TeleportEnergyMod = 0.15,
         TeleportMassMod = 1,
         TeleportTimeMod = 0.01,
@@ -141,6 +142,7 @@ UnitBlueprint {
         UnitWeight = 1,
     },
     Intel = {
+		RadarRadius = 70,
         VisionRadius = 20,
     },
     Interface = {
@@ -226,8 +228,8 @@ UnitBlueprint {
             Label = 'MainGun',
             MaxRadius = 70,
 			MinRadius = 5,
-            MuzzleChargeDelay = 1,
-			MuzzleSalvoDelay = 0.05,
+            MuzzleChargeDelay = 0,
+			MuzzleSalvoDelay = 0.02,
             MuzzleSalvoSize = 6,
             MuzzleVelocity = 30,
             ProjectileId = '/mods/Mechdivers/projectiles/CDFHeavyLaserHydrogenCannon01/CDFHeavyLaserHydrogenCannon01_proj.bp',
@@ -244,13 +246,13 @@ UnitBlueprint {
             RackFireTogether = true,
             RackRecoilDistance = 0,
             RackReloadTimeout = 0,
-            RackSalvoChargeTime = 0,     
+            RackSalvoChargeTime = 1,     
             RackSalvoReloadTime = 3,
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
 			RenderFireClock = false,
             RangeCategory = 'UWRC_IndirectFire',
-            RateOfFire = 0.12,
+            RateOfFire = 0.4,
             TargetCheckInterval = 2,
             TargetPriorities = {
                 'SPECIALHIGHPRI',
@@ -279,6 +281,7 @@ UnitBlueprint {
             WeaponCategory = 'Indirect Fire',
         },
 		{
+		AimsStraightOnDisable = true,
             AboveWaterTargetsOnly = true,
             Audio = {
                 Fire = Sound {
@@ -300,7 +303,7 @@ UnitBlueprint {
             FiringRandomness = 1,
             FiringTolerance = 2,
             Label = 'GatlingGuns',
-            MaxRadius = 25,
+            MaxRadius = 30,
             MuzzleSalvoDelay = 0.2,
             MuzzleSalvoSize = 15,
             MuzzleVelocity = 25,
@@ -352,6 +355,7 @@ UnitBlueprint {
             WeaponUnpacks = true,
         },
 				{
+			AimsStraightOnDisable = true,
             AboveWaterTargetsOnly = true,
             Audio = {
                 Fire = Sound {
@@ -373,7 +377,7 @@ UnitBlueprint {
             FiringRandomness = 1,
             FiringTolerance = 2,
             Label = 'GatlingGuns',
-            MaxRadius = 25,
+            MaxRadius = 30,
             MuzzleSalvoDelay = 0.2,
             MuzzleSalvoSize = 15,
             MuzzleVelocity = 25,

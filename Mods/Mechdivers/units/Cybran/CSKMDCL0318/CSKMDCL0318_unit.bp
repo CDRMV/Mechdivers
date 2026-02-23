@@ -327,6 +327,7 @@ UnitBlueprint {
         },
 		{
             AboveWaterTargetsOnly = true,
+			AimsStraightOnDisable = true,
             Audio = {
                 Fire = Sound {
                     Bank = 'URLWeapon',
@@ -400,6 +401,7 @@ UnitBlueprint {
         },
 		{
             AboveWaterTargetsOnly = true,
+			AimsStraightOnDisable = true,
             Audio = {
                 Fire = Sound {
                     Bank = 'URLWeapon',
