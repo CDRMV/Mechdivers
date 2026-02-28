@@ -212,9 +212,9 @@ end,
 		local Random = math.random(1,2)
 		local unitID = nil
 		if Random == 1 then
-		unitID = 'URA0107c'
+		unitID = 'CSKMDCA0301b'
 		else
-		unitID = 'URA0104c'
+		unitID = 'CSKMDCA0301b'
 		end
         local quantity = 1
 
