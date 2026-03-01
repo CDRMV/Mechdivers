@@ -10,10 +10,14 @@
 
 local TAirUnit = import('/lua/defaultunits.lua').AirUnit
 local TIFCarpetBombWeapon = import('/lua/terranweapons.lua').TIFCarpetBombWeapon
+local TAAFlakArtilleryCannon = import('/lua/terranweapons.lua').TAAFlakArtilleryCannon
 
 CSKMDTA0303 = Class(TAirUnit) {
 	Weapons = {
 		Bomb = Class(TIFCarpetBombWeapon) {},
+		AAGun = Class(TAAFlakArtilleryCannon) {
+            PlayOnlyOneSoundCue = true,
+        },
     },
 
 
