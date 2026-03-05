@@ -223,6 +223,7 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self:SetWeaponEnabledByLabel('MineLauncher', false)
 		self.fold = true
 		elseif bit == 0 then 
+		self:RemoveToggleCap('RULEUTC_ShieldToggle')
 		self:RemoveToggleCap('RULEUTC_WeaponToggle')
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
@@ -308,6 +309,7 @@ CSKMDTL0306 = Class(TWalkingLandUnit) {
 		self.fold = false
 		self:AddToggleCap('RULEUTC_ShieldToggle')
 		elseif bit == 0 then 
+		self:RemoveToggleCap('RULEUTC_ShieldToggle')
 		self:RemoveToggleCap('RULEUTC_WeaponToggle')
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')

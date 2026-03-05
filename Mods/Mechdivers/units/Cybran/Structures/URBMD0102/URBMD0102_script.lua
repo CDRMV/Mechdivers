@@ -205,13 +205,13 @@ URBMD0102 = Class(CStructureUnit) {
 			WaitSeconds(5)
 			end
 			if econumber == 0 then
-			SetArmyEconomy(self:GetArmy(), -250,  -450)
 			econumber = 1 
 			end
-			if aiBrain:GetEconomyStored("MASS") < 250 and aiBrain:GetEconomyStored("MASS") < 450 then
-			elseif aiBrain:GetEconomyStored("MASS") < 250 and aiBrain:GetEconomyStored("MASS") > 450 then
-			elseif aiBrain:GetEconomyStored("MASS") > 250 and aiBrain:GetEconomyStored("MASS") < 450 then
+			if aiBrain:GetEconomyStored("MASS") < 250 and aiBrain:GetEconomyStored("ENERGY") < 4500 then
+			elseif aiBrain:GetEconomyStored("MASS") < 250 and aiBrain:GetEconomyStored("ENERGY") > 4500 then
+			elseif aiBrain:GetEconomyStored("MASS") > 250 and aiBrain:GetEconomyStored("ENERGY") < 4500 then
 			else
+			SetArmyEconomy(self:GetArmy(), -250,  -4500)
 			if self.Drone and self.Drone2 and self.Drone3 and self.Drone4 then
 			table.empty(self.Drone) 
 			table.empty(self.Drone2) 
