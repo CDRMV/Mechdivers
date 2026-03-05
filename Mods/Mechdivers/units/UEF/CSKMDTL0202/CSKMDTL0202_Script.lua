@@ -314,7 +314,6 @@ CSKMDTL0200 = Class(TWalkingLandUnit) {
 		self:SetWeaponEnabledByLabel('L_MG', true)
 		self:SetWeaponEnabledByLabel('MineLauncher', true)
 		self.fold = false
-		self:AddToggleCap('RULEUTC_ShieldToggle')
 		elseif bit == 0 then 
 		self:RemoveToggleCap('RULEUTC_ShieldToggle')
 		self:RemoveToggleCap('RULEUTC_WeaponToggle')
