@@ -226,11 +226,13 @@ TerranLightningCollisionBeam = Class(SCCollisionBeam) {
 				if targetEntity == unit then
 				
 				else
+				if not unit.Dead then
 				self.Beam = AttachBeamEntityToEntity(unit, 1, targetEntity, 1, self:GetArmy(), '/mods/Mechdivers/effects/emitters/Lightning_beam_02_emit.bp')
 				unit:SetStunned(5)
 				unit:SetHealth(unit, unit:GetHealth() - Damage)			
 				WaitSeconds(0.1)
 				self.Beam:Destroy()
+				end
 				end
             end
 		end
