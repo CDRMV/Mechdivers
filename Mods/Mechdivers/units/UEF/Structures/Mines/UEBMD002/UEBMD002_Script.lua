@@ -29,7 +29,7 @@ UEBMD002 = Class(TStructureUnit) {
  		while not self:IsDead() do
 			local unitPos = self:GetPosition()
             #Get Enemy units in the area
-			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, 1, 'Enemy')
+			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND - categories.AIR, unitPos, 1, 'Enemy')
             for _,unit in units do
 				self:Kill()
             end

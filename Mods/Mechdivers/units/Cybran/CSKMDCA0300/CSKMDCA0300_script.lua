@@ -54,6 +54,7 @@ CSKMDCA0300 = Class(CAirUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         CAirUnit.OnStopBeingBuilt(self,builder,layer)
 		ForkThread(function()
+			SetArmyEconomy(self:GetArmy(), -250,  -4500)
         self.EngineManipulators = {}
 			ScanMesh = '/mods/Mechdivers/Decorations/CybranScan2_mesh'
 			self.Scan = import('/lua/sim/Entity.lua').Entity()

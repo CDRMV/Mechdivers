@@ -39,7 +39,6 @@ URBMD0102 = Class(CStructureUnit) {
 		local attachposition = self:GetPosition('Attachpoint')
 		local number = 0
 		local movenumber = 0
-		local econumber = 0
 		local stoporder = 0
 		local idledrones = 0
 		local reload = 0
@@ -190,9 +189,8 @@ URBMD0102 = Class(CStructureUnit) {
 			elseif self.Drone and self.Drone:IsDead() and self.Drone2 and self.Drone2:IsDead() and self.Drone3 and self.Drone3:IsDead() and self.Drone4 and self.Drone4:IsDead() then
 			self.OpenAnimManip:SetRate(-1)
 			number = 0
-			econumber = 0
 			end
-			if number == 0 then
+			if number == 0 and self:GetScriptBit('RULEUTC_ProductionToggle') == false then
 			local unitPos = self:GetPosition()
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE - categories.AIR, unitPos, 55, 'Enemy')
 			if units[1] == nil and units[2] == nil then
@@ -204,14 +202,10 @@ URBMD0102 = Class(CStructureUnit) {
 			else
 			WaitSeconds(5)
 			end
-			if econumber == 0 then
-			econumber = 1 
-			end
-			if aiBrain:GetEconomyStored("MASS") < 250 and aiBrain:GetEconomyStored("ENERGY") < 4500 then
-			elseif aiBrain:GetEconomyStored("MASS") < 250 and aiBrain:GetEconomyStored("ENERGY") > 4500 then
-			elseif aiBrain:GetEconomyStored("MASS") > 250 and aiBrain:GetEconomyStored("ENERGY") < 4500 then
-			else
-			SetArmyEconomy(self:GetArmy(), -250,  -4500)
+			if aiBrain:GetEconomyStored("MASS") < 1000 and aiBrain:GetEconomyStored("ENERGY") < 18000 then
+			elseif aiBrain:GetEconomyStored("MASS") < 1000 and aiBrain:GetEconomyStored("ENERGY") > 18000 then
+			elseif aiBrain:GetEconomyStored("MASS") > 1000 and aiBrain:GetEconomyStored("ENERGY") < 18000 then
+			elseif aiBrain:GetEconomyStored("MASS") >= 1000 and aiBrain:GetEconomyStored("ENERGY") >= 18000 then
 			if self.Drone and self.Drone2 and self.Drone3 and self.Drone4 then
 			table.empty(self.Drone) 
 			table.empty(self.Drone2) 
@@ -500,6 +494,20 @@ URBMD0102 = Class(CStructureUnit) {
 			end
 			WaitSeconds(0.1)
 		end	
+    end,
+	
+	OnScriptBitSet = function(self, bit)
+        CStructureUnit.OnScriptBitSet(self, bit)
+        if bit == 4 then 
+		
+        end	
+    end,
+
+    OnScriptBitClear = function(self, bit)
+        CStructureUnit.OnScriptBitClear(self, bit)
+        if bit == 4 then 
+
+		end
     end,
 	
 	

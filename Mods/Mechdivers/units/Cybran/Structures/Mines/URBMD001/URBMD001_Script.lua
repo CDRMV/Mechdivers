@@ -15,7 +15,7 @@ URBMD001 = Class(TStructureUnit) {
  		while not self:IsDead() do
 			local unitPos = self:GetPosition()
             #Get Enemy units in the area
-			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, 1, 'Enemy')
+			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND - categories.AIR, unitPos, 1, 'Enemy')
             for _,unit in units do
 				ForkThread( function()
 				CreateAttachedEmitter(self, 0, army, '/effects/emitters/destruction_explosion_concussion_ring_03_emit.bp')

@@ -78,7 +78,7 @@ UnitBlueprint {
 		'Comes with an Reload Time of 30 Seconds for each Drone Squadron.',
 		'Drones will attack the enemy automatically and return to the Station if there are destroyed.',
 		'Only 6 can be builded by each Player.',
-		'Launch of an Drone Squadron costs: 250 Mass and 450 Energy.',
+		'Launch of an Drone costs: 250 Mass and 4500 Energy.',
         },
         Mesh = {
             IconFadeInZoom = 130,
@@ -136,6 +136,15 @@ UnitBlueprint {
             RULEUCC_Transport = false,
         },
         FactionName = 'Cybran',
+        OrderOverrides = {
+            RULEUTC_ProductionToggle = {
+                bitmapId = 'deploy',
+				helpText = 'Turn On/Off Drone Launch',		
+            },
+        },
+		ToggleCaps = {
+            RULEUTC_ProductionToggle = true,
+        },
         Icon = 'land',
         SelectionPriority = 5,
         TechLevel = 'RULEUTL_Secret',

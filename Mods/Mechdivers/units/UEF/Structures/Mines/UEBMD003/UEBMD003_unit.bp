@@ -18,7 +18,7 @@ UnitBlueprint {
             IconFadeInZoom = 130,
             LODs = {
                 {
-                    LODCutoff = 215,
+                    LODCutoff = 15,
                     ShaderName = 'Unit',
                 },
             },
