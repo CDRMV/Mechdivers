@@ -9,6 +9,10 @@ UnitList = {
 		Cybran = {'CSKMDCA0300', 80}, 		-- Predator, Tech 3 Assault Drone
     },
 	
+	T3AirBomber = {
+		UEF = {'CSKMDTA0303', 80}, 		-- Phobos, Tech 3 Heavy Bomber
+	},
+	
 	T3AirTransport = {
         UEF = {'CSKMDTA0301', 80}, 		-- Hercules, Tech 3 Vehicle Transport Gunship
 		Cybran = {'CSKMDCA0301', 80}, 		-- Megacirus, Tech 3 Air Transport Drone

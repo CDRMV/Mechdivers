@@ -86,7 +86,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-        #'BUILTBYLANDINGPAD',
+        'BUILTBYLANDINGPAD',
         'UEF',
         'MOBILE',
         'AIR',
@@ -220,7 +220,7 @@ UnitBlueprint {
         FactionName = 'UEF',
         Icon = 'air',
         TechLevel = 'RULEUTL_Secret',
-        UnitName = 'Prototype',
+        UnitName = 'Phobos',
         UnitWeight = 1,
     },
     Intel = {

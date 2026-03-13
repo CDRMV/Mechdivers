@@ -12,9 +12,11 @@ local TAirUnit = import('/lua/defaultunits.lua').AirUnit
 local TIFCarpetBombWeapon = import('/lua/terranweapons.lua').TIFCarpetBombWeapon
 local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
 local TSAMLauncher = import('/lua/terranweapons.lua').TSAMLauncher
+local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 
 CSKMDTA0302g = Class(TAirUnit) {
 	Weapons = {
+		Guns = Class(TDFMachineGunWeapon) {},
 		Missile = Class(TSAMLauncher) {
 		OnWeaponFired = function(self)
 		ForkThread( function()

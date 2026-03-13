@@ -283,7 +283,7 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'Linked Railgun',
             FireTargetLayerCapsTable = {
-                Air = 'Air',
+                Air = 'Land|Seabed|Water|Air',
             },
             FiringRandomness = 0.8,
             FiringTolerance = 2,
@@ -318,8 +318,12 @@ UnitBlueprint {
             TargetCheckInterval = 1,
 			TargetPriorities = {
                 'SPECIALHIGHPRI',
-                'AIR MOBILE',
+                'TECH1 MOBILE',
+                'TECH2 MOBILE',
+                'TECH3 MOBILE',
+				'AIR MOBILE',
                 'AIR MOBILE -INTELLIGENCE',
+                'STRUCTURE DEFENSE',
                 'SPECIALLOWPRI',
                 'ALLUNITS',
             },
