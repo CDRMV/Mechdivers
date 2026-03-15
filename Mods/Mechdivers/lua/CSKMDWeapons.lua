@@ -15,6 +15,10 @@ DummyTurretWeapon = Class(DefaultProjectileWeapon) {
     
 }
 
+TIFMediumArtilleryStrike = Class(DefaultProjectileWeapon) {
+    
+}
+
 
 ADFQuantumBeam = Class(DefaultBeamWeapon) {
     BeamType = ModCollisionBeams.QuantumCollisionBeam,
