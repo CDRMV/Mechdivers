@@ -1,6 +1,7 @@
 UnitList = {
 
-	T2LandDFTank = {
+	T2LandDFTank = 
+		Aeon = {'CSKMDAL0201', 80},      -- Obtruder, Tech 2 Assault Drone{
 		Cybran = {'CSKMDCL0201', 80},      -- Devastator, Tech 2 Advanced Assualt Bot
 		UEF = {'CSKMDTL0304', 80},      -- Patriot, Tech 2 Sturm Bot
     },

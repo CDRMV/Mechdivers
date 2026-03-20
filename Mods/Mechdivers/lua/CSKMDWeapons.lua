@@ -19,6 +19,13 @@ TIFMediumArtilleryStrike = Class(DefaultProjectileWeapon) {
     
 }
 
+ADFPlasmaWeapon = Class(DefaultProjectileWeapon) {
+    FxMuzzleFlash = {},
+    FxChargeMuzzleFlash = {}, ####EffectTemplate.SExperimentalUnstablePhasonLaserMuzzle01,
+    FxRackChargeMuzzleFlash = EffectTemplate.CMicrowaveLaserCharge01,
+    FxRackChargeEffectScale = 0.1,
+}
+
 
 ADFQuantumBeam = Class(DefaultBeamWeapon) {
     BeamType = ModCollisionBeams.QuantumCollisionBeam,

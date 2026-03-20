@@ -250,6 +250,11 @@ CSKMDTL0307 = Class(TWalkingLandUnit) {
 	self.Beacon:Destroy()
 	end	
 	
+	if self.load == false then
+	
+	else
+	ForkThread(function()
+	
 	local units = self:GetCargo()
 	if units[1] == nil then
 		
@@ -257,10 +262,6 @@ CSKMDTL0307 = Class(TWalkingLandUnit) {
 	units[1]:Destroy()
 	end
 	
-	if self.load == false then
-	
-	else
-	ForkThread(function()
 	local RandomNumber = math.random(1, 2)
 	if RandomNumber == 2 then
 	SetIgnoreArmyUnitCap(self:GetArmy(), true)
@@ -287,6 +288,9 @@ CSKMDTL0307 = Class(TWalkingLandUnit) {
 		self.Beacon:Destroy()
 		end
 		
+		if self.load == false then
+		
+		else
 		local units = self:GetCargo()
 		if units[1] == nil then
 		
@@ -302,6 +306,7 @@ CSKMDTL0307 = Class(TWalkingLandUnit) {
 			units[1]:AddCommandCap('RULEUCC_Attack')
 			units[1]:AddCommandCap('RULEUCC_RetaliateToggle')
 			units[1]:AddCommandCap('RULEUCC_Stop')
+		end
 		end
     end,
 	  

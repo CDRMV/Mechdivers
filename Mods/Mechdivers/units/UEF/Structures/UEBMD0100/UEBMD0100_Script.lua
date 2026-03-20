@@ -84,6 +84,34 @@ UEBMD0100 = Class(TStructureUnit) {
                     end
                 end,
             },
+		AcidMortar = Class(TIFHighBallisticMortarWeapon) {
+                
+                CreateProjectileAtMuzzle = function(self, muzzle)
+                    local proj = TIFHighBallisticMortarWeapon.CreateProjectileAtMuzzle(self, muzzle)
+                    local data = {
+                        Radius = self:GetBlueprint().CameraVisionRadius or 5,
+                        Lifetime = self:GetBlueprint().CameraLifetime or 5,
+                        Army = self.unit:GetArmy(),
+                    }
+                    if proj and not proj:BeenDestroyed() then
+                        proj:PassData(data)
+                    end
+                end,
+            },
+		EMPMortar = Class(TIFHighBallisticMortarWeapon) {
+                
+                CreateProjectileAtMuzzle = function(self, muzzle)
+                    local proj = TIFHighBallisticMortarWeapon.CreateProjectileAtMuzzle(self, muzzle)
+                    local data = {
+                        Radius = self:GetBlueprint().CameraVisionRadius or 5,
+                        Lifetime = self:GetBlueprint().CameraLifetime or 5,
+                        Army = self.unit:GetArmy(),
+                    }
+                    if proj and not proj:BeenDestroyed() then
+                        proj:PassData(data)
+                    end
+                end,
+            },	
     },
 	
 	OnCreate = function(self)
@@ -186,7 +214,8 @@ UEBMD0100 = Class(TStructureUnit) {
 		self.ClapDummy:DetachFrom(true)
 		self.ClapDummy:AttachBoneTo( -2, self.Clap, -2 )
 		
-		local RandomNumber = math.random(1, 7)
+		local RandomNumber = math.random(1, 9)
+		--RandomNumber = 0
 		if RandomNumber == 1 then
 		self:HideBone( 'Mortar_Barrel', true )
 		self:HideBone( 'Gatling_Barrel', true )
@@ -201,6 +230,8 @@ UEBMD0100 = Class(TStructureUnit) {
 		self:SetWeaponEnabledByLabel('Cannon', false)
 		self:SetWeaponEnabledByLabel('GatlingCannon', false)
 		self:SetWeaponEnabledByLabel('Mortar', false)
+		self:SetWeaponEnabledByLabel('AcidMortar', false)
+		self:SetWeaponEnabledByLabel('EMPMortar', false)
 		self:SetWeaponEnabledByLabel('Flamethrower', false)
 		elseif RandomNumber == 2 then
 		self:HideBone( 'Mortar_Barrel', true )
@@ -216,6 +247,8 @@ UEBMD0100 = Class(TStructureUnit) {
 		self:SetWeaponEnabledByLabel('Cannon', false)
 		self:SetWeaponEnabledByLabel('GatlingCannon', false)
 		self:SetWeaponEnabledByLabel('Mortar', false)
+		self:SetWeaponEnabledByLabel('AcidMortar', false)
+		self:SetWeaponEnabledByLabel('EMPMortar', false)
 		self:SetWeaponEnabledByLabel('Flamethrower', false)
 		elseif RandomNumber == 3 then
 		self:HideBone( 'Mortar_Barrel', true )
@@ -231,6 +264,8 @@ UEBMD0100 = Class(TStructureUnit) {
 		self:SetWeaponEnabledByLabel('Cannon', true)
 		self:SetWeaponEnabledByLabel('GatlingCannon', false)
 		self:SetWeaponEnabledByLabel('Mortar', false)
+		self:SetWeaponEnabledByLabel('AcidMortar', false)
+		self:SetWeaponEnabledByLabel('EMPMortar', false)
 		self:SetWeaponEnabledByLabel('Flamethrower', false)
 		elseif RandomNumber == 4 then
 		self:HideBone( 'Mortar_Barrel', true )
@@ -246,6 +281,8 @@ UEBMD0100 = Class(TStructureUnit) {
 		self:SetWeaponEnabledByLabel('Cannon', false)
 		self:SetWeaponEnabledByLabel('GatlingCannon', true)
 		self:SetWeaponEnabledByLabel('Mortar', false)
+		self:SetWeaponEnabledByLabel('AcidMortar', false)
+		self:SetWeaponEnabledByLabel('EMPMortar', false)
 		self:SetWeaponEnabledByLabel('Flamethrower', false)
 		elseif RandomNumber == 5 then
 		self:HideBone( 'Mortar_Barrel', true )
@@ -261,6 +298,8 @@ UEBMD0100 = Class(TStructureUnit) {
 		self:SetWeaponEnabledByLabel('Cannon', false)
 		self:SetWeaponEnabledByLabel('GatlingCannon', false)
 		self:SetWeaponEnabledByLabel('Mortar', false)
+		self:SetWeaponEnabledByLabel('AcidMortar', false)
+		self:SetWeaponEnabledByLabel('EMPMortar', false)
 		self:SetWeaponEnabledByLabel('Flamethrower', true)
 		elseif RandomNumber == 6 then
 		self:ShowBone( 'Mortar_Barrel', true )
@@ -276,6 +315,8 @@ UEBMD0100 = Class(TStructureUnit) {
 		self:SetWeaponEnabledByLabel('Cannon', false)
 		self:SetWeaponEnabledByLabel('GatlingCannon', false)
 		self:SetWeaponEnabledByLabel('Mortar', true)
+		self:SetWeaponEnabledByLabel('AcidMortar', false)
+		self:SetWeaponEnabledByLabel('EMPMortar', false)
 		self:SetWeaponEnabledByLabel('Flamethrower', false)
 		elseif RandomNumber == 7 then
 		self:HideBone( 'Mortar_Barrel', true )
@@ -291,6 +332,42 @@ UEBMD0100 = Class(TStructureUnit) {
 		self:SetWeaponEnabledByLabel('Cannon', false)
 		self:SetWeaponEnabledByLabel('GatlingCannon', false)
 		self:SetWeaponEnabledByLabel('Mortar', false)
+		self:SetWeaponEnabledByLabel('AcidMortar', false)
+		self:SetWeaponEnabledByLabel('EMPMortar', false)
+		self:SetWeaponEnabledByLabel('Flamethrower', false)
+		elseif RandomNumber == 8 then
+		self:ShowBone( 'Mortar_Barrel', true )
+		self:HideBone( 'Gatling_Barrel', true )
+		self:HideBone( 'MG_Barrel', true )
+		self:HideBone( 'AC_Barrel', true )
+		self:HideBone( 'Flame_Barrel', true )
+		self:HideBone( 'Laser_Barrel', true )
+		self:HideBone( 'MissileLauncher', true )
+		self:SetWeaponEnabledByLabel('MG', false)
+		self:SetWeaponEnabledByLabel('Beam', false)
+		self:SetWeaponEnabledByLabel('MissileLauncher', false)
+		self:SetWeaponEnabledByLabel('Cannon', false)
+		self:SetWeaponEnabledByLabel('GatlingCannon', false)
+		self:SetWeaponEnabledByLabel('Mortar', false)
+		self:SetWeaponEnabledByLabel('AcidMortar', true)
+		self:SetWeaponEnabledByLabel('EMPMortar', false)
+		self:SetWeaponEnabledByLabel('Flamethrower', false)
+		elseif RandomNumber == 9 then
+		self:ShowBone( 'Mortar_Barrel', true )
+		self:HideBone( 'Gatling_Barrel', true )
+		self:HideBone( 'MG_Barrel', true )
+		self:HideBone( 'AC_Barrel', true )
+		self:HideBone( 'Flame_Barrel', true )
+		self:HideBone( 'Laser_Barrel', true )
+		self:HideBone( 'MissileLauncher', true )
+		self:SetWeaponEnabledByLabel('MG', false)
+		self:SetWeaponEnabledByLabel('Beam', false)
+		self:SetWeaponEnabledByLabel('MissileLauncher', false)
+		self:SetWeaponEnabledByLabel('Cannon', false)
+		self:SetWeaponEnabledByLabel('GatlingCannon', false)
+		self:SetWeaponEnabledByLabel('Mortar', false)
+		self:SetWeaponEnabledByLabel('AcidMortar', false)
+		self:SetWeaponEnabledByLabel('EMPMortar', true)
 		self:SetWeaponEnabledByLabel('Flamethrower', false)
 		end
 		self:AddCommandCap('RULEUCC_Attack')
