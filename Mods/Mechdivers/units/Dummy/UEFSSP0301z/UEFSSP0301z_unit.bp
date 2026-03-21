@@ -36,8 +36,8 @@ UnitBlueprint {
         AirThreatLevel = 0,
         ArmorType = 'Structure',
         EconomyThreatLevel = 0,
-        Health = 1,
-        MaxHealth = 1,
+        Health = 999999,
+        MaxHealth = 999999,
         RegenRate = 0,
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
@@ -45,6 +45,7 @@ UnitBlueprint {
     },
     Description = '<LOC Ionparticleclouddesc>A dense cloud of concentrated ion particles.',
     Display = {
+	HideLifebars=true,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {

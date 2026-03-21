@@ -21,6 +21,7 @@ end,
 		self:ForkThread(self.DeimosAmmuntionEnhancementManageStep1)
 		self:ForkThread(self.DeimosAmmuntionStorageStep1)
 		self:ForkThread(self.DeimosArtilleryStep1)
+		self:ForkThread(self.SpawnSuperDestroyer)	
     end,
 	
 	OnCreateAI = function(self, planName)
@@ -34,6 +35,16 @@ end,
 		self:ForkThread(self.DeimosAmmuntionEnhancementManageStep1)
 		self:ForkThread(self.DeimosAmmuntionStorageStep1)
 		self:ForkThread(self.DeimosArtilleryStep1)
+    end,
+	
+	SpawnSuperDestroyer = function(self)
+		local factionIndex = self:GetFactionIndex()
+		local key  = import("/lua/factions.lua").Factions[factionIndex].Key 
+
+		if key == 'uef' then  
+		local position1, position2 = self:GetArmyStartPos()
+		CreateUnitHPR('CSKMDTA0400', self:GetArmyIndex(), position1, 0, position2, 0, 0, 0)
+		end
     end,
 	
 	DeimosAmmuntionMechanic = function(self)
