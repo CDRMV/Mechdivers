@@ -1,6 +1,6 @@
 do 
 
-function SpawnCivilianSlatter(UnitID, MarkerName, Amount)
+function SpawnCivilianSlatter(UnitID, MarkerName, bp, Amount)
 --[[
 
 MarkerNames
@@ -19,7 +19,7 @@ MarkerNames
 					ForkThread(function()
 					local number = 0
 					while number <= Amount do
-					local Locations = import('/lua/AI/aiutilities.lua').AIGetMarkerLocations('NEUTRAL_CIVILIAN', MarkerName) --Expansion Area, Large Expansion Area
+					local Locations = import('/lua/AI/aiutilities.lua').AIVanillaGetMarkerLocations('NEUTRAL_CIVILIAN', MarkerName) --Expansion Area, Large Expansion Area
 					local MarkerAmount = table.getsize(Locations)
 					local SetRandomLocation = math.random(1, MarkerAmount)
 					local MarkerPosition = Locations[SetRandomLocation].Position
@@ -29,7 +29,13 @@ MarkerNames
 					else
 					local unit = CreateUnitHPR(UnitID, 'NEUTRAL_CIVILIAN', MarkerPosition[1], MarkerPosition[2], MarkerPosition[3], 0, 0, 0)
 					unit:AddCommandCap('RULEUCC_Reclaim')
-							    local reclaim = GetEntitiesInRect(unit:GetSkirtRect())
+					local reclaim = nil
+					if bp == true then
+					local bp = unit:GetBlueprint()
+					reclaim = GetEntitiesInRect(unit:GetSkirtRect(bp))
+					else
+					reclaim = GetEntitiesInRect(unit:GetSkirtRect())
+					end			
 					for _, r in reclaim do
 					if IsProp(r)then
 						IssueReclaim({unit},r)
@@ -106,9 +112,36 @@ OldInitializeArmies = InitializeArmies
 function InitializeArmies()
 OldInitializeArmies()
 
-SpawnCivilianSlatter('UEBMD00300b', 'Combat Zone', 2)
-SpawnCivilianSlatter('UEBMD00300b', 'Transport Marker', 2)
-SpawnCivilianSlatter('UEBMD00300b', 'Protected Experimental Construction', 2)
+local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+
+if version < 3652 then
+if DiskGetFileInfo('/lua/AI/CustomAIs_v2/ExtrasAI.lua') then
+if import('/lua/AI/CustomAIs_v2/ExtrasAI.lua').AI.Name == 'AI Patch LOUD' then
+LOG('Mechdivers Gameversion Analyzer: LOUD Detected')
+SpawnCivilianSlatter('UEBMD00300b', 'Combat Zone', true, 2)
+SpawnCivilianSlatter('UEBMD00300b', 'Transport Marker', true, 2)
+SpawnCivilianSlatter('UEBMD00300b', 'Land Path Node', true, 2)
+
+else
+LOG('Mechdivers Gameversion Analyzer: Other AI Mod Detected')
+SpawnCivilianSlatter('UEBMD00300b', 'Combat Zone', false, 2)
+SpawnCivilianSlatter('UEBMD00300b', 'Transport Marker', false, 2)
+SpawnCivilianSlatter('UEBMD00300b', 'Protected Experimental Construction', false, 2)
+end
+
+else
+LOG('Mechdivers Gameversion Analyzer: Vanilla Detected')
+SpawnCivilianSlatter('UEBMD00300b', 'Combat Zone', false, 2)
+SpawnCivilianSlatter('UEBMD00300b', 'Transport Marker', false, 2)
+SpawnCivilianSlatter('UEBMD00300b', 'Protected Experimental Construction', false, 2)
+end
+
+else
+LOG('Mechdivers Gameversion Analyzer: FAF Detected')
+SpawnCivilianSlatter('UEBMD00300b', 'Combat Zone', false, 2)
+SpawnCivilianSlatter('UEBMD00300b', 'Transport Marker', false, 2)
+SpawnCivilianSlatter('UEBMD00300b', 'Protected Experimental Construction', false, 2)
+end
 end
 
 
