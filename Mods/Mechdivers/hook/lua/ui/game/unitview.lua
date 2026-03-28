@@ -11,15 +11,17 @@ local MyUnitIdTable = {
  -- Aeon
  
  -- Air
- 
+	  cskmdaa0100=true, 
  	  cskmdaa0303=true, 	
 	  cskmdaa0306=true, 	 
  
  -- Land
- 
   	  cskmdal0200=true,
 	  cskmdal0201=true,
  	  cskmdal0306=true,
+	  
+-- Structures
+	  uabaa0100b=true, 	
   
  
  -- UEF
