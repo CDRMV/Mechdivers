@@ -23,7 +23,8 @@ local MyUnitIdTable = {
  	  cskmdal0306=true,
 	  
 -- Structures
-	  uabaa0100b=true, 	
+	  uabmd0100=true, 
+	  uabmd0201=true,	 	
   
  
  -- UEF

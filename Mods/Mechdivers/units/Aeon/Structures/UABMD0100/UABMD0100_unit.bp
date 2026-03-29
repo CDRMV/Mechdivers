@@ -198,7 +198,7 @@ UnitBlueprint {
 			'BUILTBYTIER1FACTORY AEON MOBILE LAND BOT',
         },
         RebuildBonusIds = {
-            'CSKMDAA0100b',
+            'uabmd0100',
         },
         StorageEnergy = 0,
         StorageMass = 80,

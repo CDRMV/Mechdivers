@@ -13,7 +13,7 @@ local ALandFactoryUnit = import('/lua/defaultunits.lua').StructureUnit
 EmtBpPath = '/effects/emitters/'
 	
 
-UABAA0100b = Class(ALandFactoryUnit) {
+UABMD0100 = Class(ALandFactoryUnit) {
 
 
 	OnCreate = function(self)
@@ -56,4 +56,4 @@ UABAA0100b = Class(ALandFactoryUnit) {
 
 
 
-TypeClass = UABAA0100b
+TypeClass = UABMD0100
