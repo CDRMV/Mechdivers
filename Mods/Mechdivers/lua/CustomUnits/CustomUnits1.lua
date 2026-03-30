@@ -10,6 +10,7 @@ UnitList = {
     },
 	T1GroundDefense = {
         UEF = {'UEBMD0103', 80}, -- Tech 1  Mine Tower
+		Aeon = {'UABMD0202', 80}, -- Lightning Spire Tech 1 Tesla Defense
     },
 	
 	T3GroundDefense = {
