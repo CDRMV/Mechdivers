@@ -1,0 +1,14 @@
+MeshBlueprint {
+    LODs = {
+        {
+            MeshName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect1_lod0.scm',
+            ShaderName = 'ShieldSeraphim',
+            AlbedoName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect1_Albedo.dds',
+            NormalsName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect1_Normals.dds',
+			SpecularName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect1_Specular.dds',
+            LODCutoff = 600,
+            
+        },
+    },
+    SortOrder = 999,
+}

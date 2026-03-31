@@ -471,25 +471,14 @@ end,
 		end
     end,
 	
-	DeathThread = function( self, overkillRatio , instigator)  
+	
+	OnKilled = function(self, instigator, type, overkillRatio)
 		if self.Scan then
 		self.Scan:Destroy()
 		end
-        self:DestroyAllDamageEffects()
-		local army = self:GetArmy()
-
-		if self.PlayDestructionEffects then
-            self:CreateDestructionEffects(overkillRatio)
-        end
-
-        if self.ShowUnitDestructionDebris and overkillRatio then
-            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
-        end
-		
-		self:CreateWreckage(overkillRatio or self.overkillRatio)
-
-        self:PlayUnitSound('Destroyed')
-        self:Destroy()
+	
+	
+    CWalkingLandUnit.OnKilled(self, instigator, type, overkillRatio)	
     end,
 	
 	OnReclaimed = function(self, reclaimer)

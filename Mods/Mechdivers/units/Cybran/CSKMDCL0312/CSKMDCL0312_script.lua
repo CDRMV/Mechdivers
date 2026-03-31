@@ -13,7 +13,7 @@ local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 local CDFFusionMortarWeapon = ModWeaponsFile.CDFFusionMortarWeapon
 
-CSKMDCL0309 = Class(CWalkingLandUnit) {
+CSKMDCL0312 = Class(CWalkingLandUnit) {
     Weapons = {
 		Dummy = Class(DummyTurretWeapon) {},
         Flamethrower = Class(TDFMachineGunWeapon) {},
@@ -55,29 +55,18 @@ CSKMDCL0309 = Class(CWalkingLandUnit) {
 		self.Effect2:SetVizToEnemies('Intel')
     end,
 	
-	DeathThread = function( self, overkillRatio , instigator)  
+	OnKilled = function(self, instigator, type, overkillRatio)
 		if self.Effect then
 		self.Effect:Destroy()
 		end
 		if self.Effect2 then
 		self.Effect2:Destroy()
 		end
-        self:DestroyAllDamageEffects()
-		local army = self:GetArmy()
-
-		if self.PlayDestructionEffects then
-            self:CreateDestructionEffects(overkillRatio)
-        end
-
-        if self.ShowUnitDestructionDebris and overkillRatio then
-            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
-        end
-		
-		self:CreateWreckage(overkillRatio or self.overkillRatio)
-
-        self:PlayUnitSound('Destroyed')
-        self:Destroy()
+	
+	
+    CWalkingLandUnit.OnKilled(self, instigator, type, overkillRatio)	
     end,
+	
 	
 	OnReclaimed = function(self, reclaimer)
 		if self.Effect then
@@ -89,4 +78,4 @@ CSKMDCL0309 = Class(CWalkingLandUnit) {
     end,
 }
 
-TypeClass = CSKMDCL0309
+TypeClass = CSKMDCL0312

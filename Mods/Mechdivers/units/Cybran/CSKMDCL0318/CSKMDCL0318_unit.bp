@@ -134,16 +134,16 @@ UnitBlueprint {
         },
         AnimationDeath = {
             {
-                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0314/CSKMDCL0314_Adeath01.sca',
+                Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0318/CSKMDCL0318_Adeath01.sca',
                 AnimationRateMax = 1.25,
                 AnimationRateMin = 0.75,
                 Weight = 10,
             },
         },
-		AnimationBuild = '/mods/Mechdivers/units/Cybran/CSKMDCL0314/CSKMDCL0314_Open.sca',
-		AnimationDeco = '/mods/Mechdivers/units/Cybran/CSKMDCL0314/CSKMDCL0314_Deco.sca',
-		AnimationDeco2 = '/mods/Mechdivers/units/Cybran/CSKMDCL0314/CSKMDCL0314_Deco2.sca',
-        AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0314/CSKMDCL0314_Awalk01.sca',
+		AnimationBuild = '/mods/Mechdivers/units/Cybran/CSKMDCL0318/CSKMDCL0318_Open.sca',
+		AnimationDeco = '/mods/Mechdivers/units/Cybran/CSKMDCL0318/CSKMDCL0318_Deco.sca',
+		AnimationDeco2 = '/mods/Mechdivers/units/Cybran/CSKMDCL0318/CSKMDCL0318_Deco2.sca',
+        AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0318/CSKMDCL0318_Awalk01.sca',
         AnimationWalkRate = 0.6,
         Mesh = {
             IconFadeInZoom = 130,

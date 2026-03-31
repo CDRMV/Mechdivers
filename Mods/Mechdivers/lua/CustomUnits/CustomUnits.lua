@@ -101,5 +101,6 @@ UnitList = {
 	
 	T2ShieldDefense = {
     Cybran =	{'urbmd0101', 80}, -- Tech 2 Tactical Jammer
+	Aeon =	{'uabmd0203', 80}, -- Tech 2 Tactical Jammer
 	},
 }

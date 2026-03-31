@@ -23,7 +23,8 @@ local MyUnitIdTable = {
 -- Structures
 	  uabmd0100=true, 
 	  uabmd0201=true,
-	  uabmd0202=true,		 	
+	  uabmd0202=true,	  
+	  uabmd0203=true,		 	
   
  
  -- UEF

@@ -143,7 +143,7 @@ UnitBlueprint {
             },
         },
         AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0307/CSKMDCL0307_Awalk01.sca',
-        AnimationWalkRate = 1.0,
+        AnimationWalkRate = 0.95,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -370,9 +370,9 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'R_Arm_B02',
+                        'R_Arm_B02.002',
                     },
-                    RackBone = 'R_Arm_B02',
+                    RackBone = 'R_Arm_B02.002',
                 },
             },
             RackFireTogether = false,
@@ -394,8 +394,8 @@ UnitBlueprint {
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             TrackingRadius = 1.15,
-            TurretBoneMuzzle = 'R_Arm_B02',
-            TurretBonePitch = 'R_Arm_B02',
+            TurretBoneMuzzle = 'R_Arm_B02.002',
+            TurretBonePitch = 'R_Arm_B02.002',
             TurretBoneYaw = 'Torso',
             TurretDualManipulators = false,
             TurretPitch = 0,

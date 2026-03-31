@@ -165,15 +165,17 @@ CSKMDCL0315 = Class(CWalkingLandUnit) {
     end,
 
 	AutomaticDisableShieldThread = function(self)
-		local army = self:GetArmy()
+		local unitPos = self:GetPosition()
+		local radius = self:GetBlueprint().Intel.VisionRadius
  		while not self:IsDead() do
-			local unitPos = self:GetPosition()
-			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, 30, 'Enemy')
+			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Enemy')
             for _,unit in units do
-			    if GetDistanceBetweenTwoEntities(unit, self) < 29 then
-                    unit:DisableShield()
-				elseif GetDistanceBetweenTwoEntities(unit, self) > 29 then
-					unit:EnableShield()	
+			local VisionRadius = unit:GetBlueprint().Intel.VisionRadius
+			    if GetDistanceBetweenTwoEntities(unit, self) < 30 then
+				unit:DisableShield()
+			    end
+				if GetDistanceBetweenTwoEntities(unit, self) > 30 then
+				unit:EnableShield()	
                 end
             end
             WaitSeconds(0.1)

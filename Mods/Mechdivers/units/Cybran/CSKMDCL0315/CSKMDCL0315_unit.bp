@@ -226,8 +226,8 @@ UnitBlueprint {
         UnitWeight = 1,
     },
     Intel = {
-	    RadarStealthFieldRadius = 30,
-        VisionRadius = 30,
+	    RadarStealthFieldRadius = 32,
+        VisionRadius = 32,
     },
     Interface = {
         HelpText = '<LOC url0106_help>Light Assault Bot',
