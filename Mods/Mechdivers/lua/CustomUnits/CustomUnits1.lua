@@ -33,6 +33,7 @@ UnitList = {
 	
 	T2ShieldDefense = {
     Cybran =	{'urbmd0100', 70}, -- Tech 2 Detector Tower
+	Aeon =	{'uabmd0204', 70}, -- Tech 2 Monolith
 	},
 	
 	T3AirFighter = {

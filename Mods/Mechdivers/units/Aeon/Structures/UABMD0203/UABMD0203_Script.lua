@@ -19,6 +19,7 @@ UABMD0203 = Class(AStructureUnit) {
 			EffectMesh1 = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect1_mesh'
 			self.Effect1 = import('/lua/sim/Entity.lua').Entity()
 			self.Effect1:AttachBoneTo( -2, self, 'Effect' )
+			self.Beam = nil
 			self.Effect1:SetMesh(EffectMesh1)
 			self.Effect1:SetDrawScale(0.2)
 			EffectMesh2 = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect2_mesh'
@@ -35,6 +36,7 @@ UABMD0203 = Class(AStructureUnit) {
         AStructureUnit.OnScriptBitSet(self, bit)
         if bit == 2 then 
 		KillThread(self.AutomaticCognitiveThreadHandle)
+		self.RemoveAutomaticCognitiveThreadHandle = self:ForkThread(self.RemoveAutomaticCognitiveThread)
 		self.Effect1:SetVizToAllies('Never')
 		self.Effect1:SetVizToNeutrals('Never')
 		self.Effect1:SetVizToEnemies('Never')
@@ -49,6 +51,7 @@ UABMD0203 = Class(AStructureUnit) {
         AStructureUnit.OnScriptBitClear(self, bit)
         if bit == 2 then
 		ForkThread(function()
+		KillThread(self.RemoveAutomaticCognitiveThreadHandle)
 		self.AutomaticCognitiveThreadHandle = self:ForkThread(self.AutomaticCognitiveThread)
 		self.Effect1:SetVizToAllies('Intel')
 		self.Effect1:SetVizToNeutrals('Intel')
@@ -88,6 +91,7 @@ UABMD0203 = Class(AStructureUnit) {
     end,
 	
 	OnReclaimed = function(self, reclaimer)
+		self:SetScriptBit('RULEUTC_JammingToggle', true)
 		if self.Effect1 then
 		self.Effect1:Destroy()
 		end
@@ -125,6 +129,22 @@ UABMD0203 = Class(AStructureUnit) {
             end
 			WaitSeconds(0.1)
 			end
+    end,
+
+	RemoveAutomaticCognitiveThread = function(self)
+			local unitPos = self:GetPosition()
+			local radius = self:GetBlueprint().Intel.VisionRadius
+			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Enemy')
+            for _,unit in units do
+			local VisionRadius = unit:GetBlueprint().Intel.VisionRadius
+				  unit:SetIntelRadius('Vision', VisionRadius)
+				  for i = 1, unit:GetWeaponCount() do
+				  local wep = unit:GetWeapon(i)
+				  local wepbp = wep:GetBlueprint()
+				  local weprad = wepbp.MaxRadius
+				  wep:ChangeMaxRadius(weprad)
+				  end
+            end
     end,	
 
 }

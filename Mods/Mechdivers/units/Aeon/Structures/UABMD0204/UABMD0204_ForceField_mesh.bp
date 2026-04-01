@@ -1,0 +1,14 @@
+MeshBlueprint {
+    IconFadeInZoom = 130,
+    LODs = {
+        {
+ 			MeshName = '/Mods/Mechdivers/units/Aeon/Structures/UABMD0204/UABMD0204_ForceField_lod0.scm',
+            AlbedoName = '/Mods/Mechdivers/units/Aeon/Structures/UABMD0204/SeraphimShield01_Specular3.dds',
+            NormalsName = '/Mods/Mechdivers/units/Aeon/Structures/UABMD0204/SeraphimShield01_Specular2.dds',
+            SpecularName = '/Mods/Mechdivers/units/Aeon/Structures/UABMD0204/SeraphimShield01_Specular2.dds',
+			LookupName = '/Mods/Mechdivers/units/Aeon/Structures/UABMD0204/SeraphimShield01_Specular2.dds',
+            ShaderName = 'UEFQuantumGate',
+            LODCutoff = 500,
+        },
+    },
+}
