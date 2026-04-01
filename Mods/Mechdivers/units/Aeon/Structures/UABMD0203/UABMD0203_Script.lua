@@ -106,11 +106,21 @@ UABMD0203 = Class(AStructureUnit) {
 			local VisionRadius = unit:GetBlueprint().Intel.VisionRadius
 			    if GetDistanceBetweenTwoEntities(unit, self) < 30 then
                   unit:SetIntelRadius('Vision', VisionRadius - 10)
-				  unit:SetSpeedMult(-1)
+				  for i = 1, unit:GetWeaponCount() do
+				  local wep = unit:GetWeapon(i)
+				  local wepbp = wep:GetBlueprint()
+				  local weprad = wepbp.MaxRadius
+				  wep:ChangeMaxRadius(weprad - 10)
+				  end
 			    end
 				if GetDistanceBetweenTwoEntities(unit, self) > 30 then
-				  unit:SetIntelRadius('Vision', VisionRadius + 10)
-				  unit:SetSpeedMult(1)	
+				  unit:SetIntelRadius('Vision', VisionRadius)
+				  for i = 1, unit:GetWeaponCount() do
+				  local wep = unit:GetWeapon(i)
+				  local wepbp = wep:GetBlueprint()
+				  local weprad = wepbp.MaxRadius
+				  wep:ChangeMaxRadius(weprad)
+				  end	
                 end
             end
 			WaitSeconds(0.1)

@@ -1,0 +1,14 @@
+MeshBlueprint {
+    IconFadeInZoom = 130,
+    LODs = {
+        {
+ 			MeshName = '/Mods/Mechdivers/units/Aeon/CSKMDAA0100/CSKMDAA0100_lod0.scm',
+			AlbedoName = '/Mods/Mechdivers/units/Aeon/CSKMDAA0100/CSKMDAA0100_Albedo.dds',
+			SpecularName = '/Mods/Mechdivers/units/Aeon/CSKMDAA0100/CSKMDAA0100_SpecTeam.dds',
+			NormalsName = '/Mods/Mechdivers/units/Aeon/CSKMDAA0100/CSKMDAA0100_NormalsTs.dds',
+			LookupName = '/effects/Entities/SeraphimShield01/SeraphimShield01_Specular2.dds',
+            ShaderName = 'PhaseShield',
+            LODCutoff = 500,
+        },
+    },
+}

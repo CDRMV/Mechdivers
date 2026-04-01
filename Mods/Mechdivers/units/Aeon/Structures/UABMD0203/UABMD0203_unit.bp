@@ -61,7 +61,7 @@ UnitBlueprint {
     Description = 'Tactical Jammer',
     Display = {
 		Abilities = {
-            'Reduces the Vision Range and Movement Speed of enemy Units if they are in its Range.',
+            'Reduces the Vision Range and Weapon Range of enemy Units if they are in its Range.',
 			'Second Ability: Coming Soon.',
         },
         DamageEffects = {

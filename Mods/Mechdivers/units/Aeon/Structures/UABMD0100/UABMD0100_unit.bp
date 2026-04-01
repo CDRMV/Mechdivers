@@ -43,6 +43,7 @@ UnitBlueprint {
         'STRUCTURE',
         'LAND',
         'TECH1',
+		'SHIELD',
         'CONSTRUCTION',
         'FACTORY',
         'RALLYPOINT',
@@ -62,10 +63,25 @@ UnitBlueprint {
         RegenRate = 0,
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
+		Shield = {
+            ImpactEffects = 'UEFShieldHit01',
+            OwnerShieldMesh = '/Mods/Mechdivers/units/Aeon/CSKMDAA0100/CSKMDAA0100_PersonalShield_mesh',
+            PersonalShield = true,
+            RegenAssistMult = 60,
+            ShieldEnergyDrainRechargeTime = 5,
+            ShieldMaxHealth = 2200,
+            ShieldRechargeTime = 60,
+            ShieldRegenRate = 9,
+            ShieldRegenStartTime = 3,
+            ShieldSize = 2.5,
+            ShieldVerticalOffset = 0,
+            StartsOff = true,
+        },
     },
     Description = 'Warp Ship',
     Display = {
 	    Abilities = {
+			'<LOC ability_personalshield>Personal Shield',
             'Coming Soon',
         },
         BlinkingLights = {
@@ -194,6 +210,7 @@ UnitBlueprint {
         BuildCostMass = 240,
         BuildRate = 20,
         BuildTime = 300,
+		MaintenanceConsumptionPerSecondEnergy = 25,
         BuildableCategory = {
 			'BUILTBYTIER1FACTORY AEON MOBILE LAND BOT',
         },
@@ -231,11 +248,20 @@ UnitBlueprint {
             RULEUCC_Transport = false,
         },
         ConstructionBar = true,
+		OrderOverrides = {
+            RULEUTC_ShieldToggle = {
+                bitmapId = 'shield-personal',
+                helpText = 'toggle_shield_personal',
+            },
+        },
         FactionName = 'Aeon',
         Icon = 'land',
         SelectionPriority = 5,
         TechLevel = 'RULEUTL_Basic',
         UnitWeight = 1,
+		ToggleCaps = {
+            RULEUTC_ShieldToggle = true,
+        },
     },
     Intel = {
         VisionRadius = 20,
