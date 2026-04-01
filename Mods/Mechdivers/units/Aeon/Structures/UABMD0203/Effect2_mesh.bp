@@ -2,11 +2,10 @@ MeshBlueprint {
     LODs = {
         {
             MeshName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect2_lod0.scm',
-            ShaderName = 'UEFQuantumGate',
-            AlbedoName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect2_Albedo.dds',
-            NormalsName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect2_Normals.dds',
-			SpecularName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect2_Specular.dds',
-			LookupName = '/textures/particles/ramp_jammer_01.dds',
+            ShaderName = 'ShieldSeraphim',
+            AlbedoName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect1_Specular.dds',
+            NormalsName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect1_Specular.dds',
+			SpecularName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/ramp_yellow_to_purple_01.dds',
             LODCutoff = 600,
             
         },

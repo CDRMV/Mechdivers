@@ -27,6 +27,15 @@ UABMD0203 = Class(AStructureUnit) {
 			self.Effect2:AttachBoneTo( -2, self, 'Effect' )
 			self.Effect2:SetMesh(EffectMesh2)
 			self.Effect2:SetDrawScale(0.2)
+			EffectMesh3 = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect3_mesh'
+			self.Effect3 = import('/lua/sim/Entity.lua').Entity()
+			self.Effect3:AttachBoneTo( -2, self, 'Effect' )
+			self.Effect3:SetMesh(EffectMesh3)
+			self.Effect3:SetDrawScale(0.2)
+			self.Effect4 = import('/lua/sim/Entity.lua').Entity()
+			self.Effect4:AttachBoneTo( -2, self, 'Effect' )
+			self.Effect4:SetMesh(EffectMesh3)
+			self.Effect4:SetDrawScale(0.2)
 			self:SetScriptBit('RULEUTC_JammingToggle', true)
 			self:SetScriptBit('RULEUTC_JammingToggle', false)
     end,
@@ -43,6 +52,12 @@ UABMD0203 = Class(AStructureUnit) {
 		self.Effect2:SetVizToAllies('Never')
 		self.Effect2:SetVizToNeutrals('Never')
 		self.Effect2:SetVizToEnemies('Never')
+		self.Effect3:SetVizToAllies('Never')
+		self.Effect3:SetVizToNeutrals('Never')
+		self.Effect3:SetVizToEnemies('Never')
+		self.Effect4:SetVizToAllies('Never')
+		self.Effect4:SetVizToNeutrals('Never')
+		self.Effect4:SetVizToEnemies('Never')
 		self:SetMaintenanceConsumptionInactive()
 		end
     end,
@@ -59,6 +74,12 @@ UABMD0203 = Class(AStructureUnit) {
 		self.Effect2:SetVizToAllies('Intel')
 		self.Effect2:SetVizToNeutrals('Intel')
 		self.Effect2:SetVizToEnemies('Intel')
+		self.Effect3:SetVizToAllies('Intel')
+		self.Effect3:SetVizToNeutrals('Intel')
+		self.Effect3:SetVizToEnemies('Intel')
+		self.Effect4:SetVizToAllies('Intel')
+		self.Effect4:SetVizToNeutrals('Intel')
+		self.Effect4:SetVizToEnemies('Intel')
 		self:SetMaintenanceConsumptionActive()
 		end)		
 		end
@@ -72,6 +93,14 @@ UABMD0203 = Class(AStructureUnit) {
 		
 		if self.Effect2 then
 		self.Effect2:Destroy()
+		end
+		
+		if self.Effect3 then
+		self.Effect3:Destroy()
+		end
+		
+		if self.Effect4 then
+		self.Effect4:Destroy()
 		end
         self:DestroyAllDamageEffects()
 		local army = self:GetArmy()
@@ -98,6 +127,14 @@ UABMD0203 = Class(AStructureUnit) {
 		
 		if self.Effect2 then
 		self.Effect2:Destroy()
+		end
+		
+		if self.Effect3 then
+		self.Effect3:Destroy()
+		end
+		
+		if self.Effect4 then
+		self.Effect4:Destroy()
 		end
     end,
 	
