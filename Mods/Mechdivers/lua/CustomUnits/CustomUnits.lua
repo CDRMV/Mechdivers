@@ -50,6 +50,7 @@ UnitList = {
 
 	T3LandBot = {
         UEF = {'CSKMDTL0303b', 80}, -- Emancipator Mark II, Tech 3 Improved Assault Bot
+		Aeon = {'CSKMDAL0300', 80},      -- Gatekeeper, Tech 3 Assault Tripod
     },
 	
 	T3AirFighter = {
