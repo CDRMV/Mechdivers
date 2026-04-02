@@ -20,6 +20,7 @@ UABMD0203 = Class(AStructureUnit) {
 			self.Effect1 = import('/lua/sim/Entity.lua').Entity()
 			self.Effect1:AttachBoneTo( -2, self, 'Effect' )
 			self.Beam = nil
+			self.Effect01 = nil
 			self.Effect1:SetMesh(EffectMesh1)
 			self.Effect1:SetDrawScale(0.2)
 			EffectMesh2 = '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/Effect2_mesh'
@@ -44,6 +45,9 @@ UABMD0203 = Class(AStructureUnit) {
 	OnScriptBitSet = function(self, bit)
         AStructureUnit.OnScriptBitSet(self, bit)
         if bit == 2 then 
+		if self.Effect01 then
+		self.Effect01:Destroy()
+		end
 		KillThread(self.AutomaticCognitiveThreadHandle)
 		self.RemoveAutomaticCognitiveThreadHandle = self:ForkThread(self.RemoveAutomaticCognitiveThread)
 		self.Effect1:SetVizToAllies('Never')
@@ -66,6 +70,9 @@ UABMD0203 = Class(AStructureUnit) {
         AStructureUnit.OnScriptBitClear(self, bit)
         if bit == 2 then
 		ForkThread(function()
+		self.Effect01 = CreateAttachedEmitter(self,'Effect',self:GetArmy(), '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/water_splash_plume_02_emit.bp'):OffsetEmitter(0, 42, 0):ScaleEmitter(2.1)
+		--self.Effect02 = CreateAttachedEmitter(self,'Effect',self:GetArmy(), '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/water_splash_plume_03_emit.bp')
+		self.Beam = CreateBeamEmitterOnEntity(self, 'Beam', self:GetArmy(), '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/beam_01_emit.bp')
 		KillThread(self.RemoveAutomaticCognitiveThreadHandle)
 		self.AutomaticCognitiveThreadHandle = self:ForkThread(self.AutomaticCognitiveThread)
 		self.Effect1:SetVizToAllies('Intel')
@@ -87,6 +94,11 @@ UABMD0203 = Class(AStructureUnit) {
 	
 	DeathThread = function( self, overkillRatio , instigator)  
 		self:SetScriptBit('RULEUTC_JammingToggle', true)
+		
+		if self.Effect01 then
+		self.Effect01:Destroy()
+		end
+		
 		if self.Effect1 then
 		self.Effect1:Destroy()
 		end
@@ -121,6 +133,10 @@ UABMD0203 = Class(AStructureUnit) {
 	
 	OnReclaimed = function(self, reclaimer)
 		self:SetScriptBit('RULEUTC_JammingToggle', true)
+		if self.Effect01 then
+		self.Effect01:Destroy()
+		end
+		
 		if self.Effect1 then
 		self.Effect1:Destroy()
 		end
