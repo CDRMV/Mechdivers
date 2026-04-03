@@ -147,7 +147,7 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 		self.unit:SetDoNotTarget(true)
 		self.unit.CanTakeDamage = false
 		self.unit.CanBeKilled = false
-		self.unit:SetWeaponEnabledByLabel('MainGun', false)
+		self.unit:SetWeaponEnabledByLabel('ArmLaserTurret', false)
 		self.unit:RemoveCommandCap('RULEUCC_Attack')
 		self.unit:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		self.unit:RemoveCommandCap('RULEUCC_Stop')
@@ -178,7 +178,7 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 			self.unit:SetUnSelectable(false)
 			self.unit.CanTakeDamage = true
 			self.unit.CanBeKilled = true
-			self.unit:SetWeaponEnabledByLabel('MainGun', true)
+			self.unit:SetWeaponEnabledByLabel('ArmLaserTurret', true)
 			self.unit:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
 			self.unit:DetachFrom(true)
 			self.unit:AddCommandCap('RULEUCC_Attack')
@@ -202,7 +202,7 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 			self.unit:SetUnSelectable(false)
 			self.unit.CanTakeDamage = true
 			self.unit.CanBeKilled = true
-			self.unit:SetWeaponEnabledByLabel('MainGun', true)
+			self.unit:SetWeaponEnabledByLabel('ArmLaserTurret', true)
 			self.unit:SetCollisionShape('Box', 0, 0,0, 0.45, 0.55, 0.35)
 			self.unit:DetachFrom(true)
 			self.unit:AddCommandCap('RULEUCC_Attack')

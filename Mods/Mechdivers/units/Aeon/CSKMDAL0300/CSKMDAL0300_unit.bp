@@ -224,7 +224,7 @@ UnitBlueprint {
             },
             FiringTolerance = 1,
             Label = 'Dummy',
-            MaxRadius = 20,
+            MaxRadius = 35,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 0,
@@ -267,6 +267,7 @@ UnitBlueprint {
             WeaponUnpacks = false,
         },
         {
+			AimsStraightOnDisable = true,
 			AnimationReload = '/Mods/Mechdivers/units/Aeon/CSKMDAL0300/CSKMDAL0300_laload.sca',
             AboveWaterTargetsOnly = true,
             Audio = {
@@ -288,7 +289,7 @@ UnitBlueprint {
             },
             FiringTolerance = 1,
             Label = 'LGun',
-            MaxRadius = 20,
+            MaxRadius = 35,
             MuzzleChargeDelay = 0.4,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
@@ -339,6 +340,7 @@ UnitBlueprint {
             WeaponCategory = 'Direct Fire',
         },
 		        {
+			AimsStraightOnDisable = true,
 			AnimationReload = '/Mods/Mechdivers/units/Aeon/CSKMDAL0300/CSKMDAL0300_raload.sca',
             AboveWaterTargetsOnly = true,
             Audio = {
@@ -360,7 +362,7 @@ UnitBlueprint {
             },
             FiringTolerance = 1,
             Label = 'RGun',
-            MaxRadius = 20,
+            MaxRadius = 35,
             MuzzleChargeDelay = 0.4,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
@@ -411,6 +413,7 @@ UnitBlueprint {
             WeaponCategory = 'Direct Fire',
         },
 		{
+			AimsStraightOnDisable = true,
             AboveWaterTargetsOnly = true,
             Audio = {
                 MuzzleChargeStart = Sound {
@@ -431,7 +434,7 @@ UnitBlueprint {
             },
             FiringTolerance = 1,
             Label = 'LGatlingGun',
-            MaxRadius = 20,
+            MaxRadius = 35,
             MuzzleChargeDelay = 0,
             MuzzleSalvoDelay = 0.2,
             MuzzleSalvoSize = 10,
@@ -486,6 +489,7 @@ UnitBlueprint {
             WeaponUnpacks = true,
         },
 		{
+			AimsStraightOnDisable = true,
             AboveWaterTargetsOnly = true,
             Audio = {
                 MuzzleChargeStart = Sound {
@@ -506,7 +510,7 @@ UnitBlueprint {
             },
             FiringTolerance = 1,
             Label = 'RGatlingGun',
-            MaxRadius = 20,
+            MaxRadius = 35,
             MuzzleChargeDelay = 0,
             MuzzleSalvoDelay = 0.2,
             MuzzleSalvoSize = 10,

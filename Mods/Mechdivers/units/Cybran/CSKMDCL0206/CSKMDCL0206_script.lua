@@ -52,6 +52,7 @@ CSKMDCL0206 = Class(CWalkingLandUnit) {
 		self.AnimationManipulator3:PlayAnim('/mods/Mechdivers/units/Cybran/CSKMDCL0206/CSKMDCL0206_Attack.sca', false):SetRate(0)
 		self.SawEffect1 = CreateAttachedEmitter(self,'R_Arm_Saw',self:GetArmy(), '/effects/emitters/destruction_damaged_sparks_01_emit.bp'):ScaleEmitter(0.4)
 		self.SawEffect2 = CreateAttachedEmitter(self,'L_Arm_Saw',self:GetArmy(), '/effects/emitters/destruction_damaged_sparks_01_emit.bp'):ScaleEmitter(0.4)
+		self.DoMeleeThreadHandle = self:ForkThread(self.DoMeleeThread)
     end,
 	
 	OnScriptBitSet = function(self, bit)
@@ -70,6 +71,23 @@ CSKMDCL0206 = Class(CWalkingLandUnit) {
 		self:SetSpeedMult(1)
 		self.AnimationManipulator3:SetRate(-2)
         end
+    end,
+	
+		
+	DoMeleeThread = function(self)
+			local unitPos = self:GetPosition()
+			local radius = self:GetBlueprint().Intel.VisionRadius
+			while not self:IsDead() do
+			if self:GetFireState() == 1 then
+			
+			else
+			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Enemy')
+            for _,unit in units do
+			IssueAttack({self}, unit)
+            end
+			end
+			WaitSeconds(0.1)
+			end
     end,
 }
 

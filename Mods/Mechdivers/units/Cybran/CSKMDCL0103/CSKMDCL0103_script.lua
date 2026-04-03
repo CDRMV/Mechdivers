@@ -31,6 +31,11 @@ CSKMDCL0103 = Class(CWalkingLandUnit) {
 			},
     },
 	
+	OnCreate = function(self)
+		CWalkingLandUnit.OnCreate(self)
+		self.DoMeleeThreadHandle = self:ForkThread(self.DoMeleeThread)
+    end,
+	
 	OnScriptBitSet = function(self, bit)
         CWalkingLandUnit.OnScriptBitSet(self, bit)
         if bit == 1 then 
@@ -43,6 +48,22 @@ CSKMDCL0103 = Class(CWalkingLandUnit) {
         if bit == 1 then 
 		self:SetSpeedMult(1)
         end
+    end,
+	
+	DoMeleeThread = function(self)
+			local unitPos = self:GetPosition()
+			local radius = self:GetBlueprint().Intel.VisionRadius
+			while not self:IsDead() do
+			if self:GetFireState() == 1 then
+			
+			else
+			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Enemy')
+            for _,unit in units do
+			IssueAttack({self}, unit)
+            end
+			end
+			WaitSeconds(0.1)
+			end
     end,
 	
 }
