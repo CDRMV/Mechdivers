@@ -52,13 +52,14 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 		self:SetEnabled(false)
 		WaitSeconds(2)
 		ChangeState(self, self.IdleState)
-		WaitSeconds(2)
+		WaitSeconds(5)
 		self.unit.LGun:SetEnabled(true)
 		end)
 		end, 
 		    PlayFxWeaponPackSequence = function(self)
                 if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(0)
+                     self.SpinManip:SetSpinDown(true)
+					 WaitFor(self.SpinManip)
                 end
                 self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'L_Arm_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
                 ADFCannonQuantumWeapon.PlayFxWeaponPackSequence(self)
@@ -71,6 +72,7 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
                 end
                 
                 if self.SpinManip then
+				self.SpinManip:SetSpinDown(false)
                     self.SpinManip:SetTargetSpeed(500)
                 end
                 ADFCannonQuantumWeapon.PlayFxRackSalvoChargeSequence(self)
@@ -78,7 +80,8 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
             
             PlayFxRackSalvoReloadSequence = function(self)
                 if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(200)
+				self.SpinManip:SetSpinDown(false)
+                    self.SpinManip:SetTargetSpeed(500)
                 end
                 self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'L_Arm_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
                 ADFCannonQuantumWeapon.PlayFxRackSalvoChargeSequence(self)
@@ -91,13 +94,14 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 		self:SetEnabled(false)
 		WaitSeconds(2)
 		ChangeState(self, self.IdleState)
-		WaitSeconds(2)
+		WaitSeconds(5)
 		self.unit.RGun:SetEnabled(true)
 		end)
 		end, 
 			PlayFxWeaponPackSequence = function(self)
                 if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(0)
+                    self.SpinManip:SetSpinDown(true)
+					WaitFor(self.SpinManip)
                 end
                 self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'R_Arm_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
                 ADFCannonQuantumWeapon.PlayFxWeaponPackSequence(self)
@@ -110,6 +114,7 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
                 end
                 
                 if self.SpinManip then
+				self.SpinManip:SetSpinDown(false)
                     self.SpinManip:SetTargetSpeed(500)
                 end
                 ADFCannonQuantumWeapon.PlayFxRackSalvoChargeSequence(self)
@@ -117,7 +122,8 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
             
             PlayFxRackSalvoReloadSequence = function(self)
                 if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(200)
+				self.SpinManip:SetSpinDown(false)
+                    self.SpinManip:SetTargetSpeed(500)
                 end
                 self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'R_Arm_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
                 ADFCannonQuantumWeapon.PlayFxRackSalvoChargeSequence(self)
