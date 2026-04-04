@@ -267,7 +267,6 @@ UnitBlueprint {
             WeaponUnpacks = false,
         },
         {
-			AimsStraightOnDisable = true,
 			AnimationReload = '/Mods/Mechdivers/units/Aeon/CSKMDAL0300/CSKMDAL0300_laload.sca',
             AboveWaterTargetsOnly = true,
             Audio = {
@@ -308,7 +307,7 @@ UnitBlueprint {
             RackFireTogether = false,
             RackRecoilDistance = -1,
             RackReloadTimeout = 10,
-            RackSalvoChargeTime = 0,
+            RackSalvoChargeTime = 2,
             RackSalvoReloadTime = 10,
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
@@ -340,7 +339,6 @@ UnitBlueprint {
             WeaponCategory = 'Direct Fire',
         },
 		        {
-			AimsStraightOnDisable = true,
 			AnimationReload = '/Mods/Mechdivers/units/Aeon/CSKMDAL0300/CSKMDAL0300_raload.sca',
             AboveWaterTargetsOnly = true,
             Audio = {
@@ -381,7 +379,7 @@ UnitBlueprint {
             RackFireTogether = false,
             RackRecoilDistance = -1,
             RackReloadTimeout = 10,
-            RackSalvoChargeTime = 0,
+            RackSalvoChargeTime = 2,
             RackSalvoReloadTime = 10,
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
@@ -413,7 +411,6 @@ UnitBlueprint {
             WeaponCategory = 'Direct Fire',
         },
 		{
-			AimsStraightOnDisable = true,
             AboveWaterTargetsOnly = true,
             Audio = {
                 MuzzleChargeStart = Sound {
@@ -489,7 +486,6 @@ UnitBlueprint {
             WeaponUnpacks = true,
         },
 		{
-			AimsStraightOnDisable = true,
             AboveWaterTargetsOnly = true,
             Audio = {
                 MuzzleChargeStart = Sound {

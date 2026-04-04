@@ -20,6 +20,9 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 		LGun = Class(ADFCannonQuantumWeapon) {
 		OnWeaponFired = function(self)
 		ForkThread(function()
+				if self.LBeam then
+					self.LBeam:Destroy()
+					end
         ADFCannonQuantumWeapon.OnLostTarget(self)
 		ChangeState(self, self.RackSalvoReloadState)
 		WaitSeconds(2)
@@ -29,11 +32,19 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 		WaitSeconds(2)
 		self.unit.LGatlingGun:SetEnabled(true)
 		end)
-		end,  
-		},
+		end,
+        
+            PlayFxRackSalvoChargeSequence = function(self)
+				self.LBeam = CreateBeamEmitterOnEntity(self.unit, 'L_Arm_Muzzle', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/beacon_beam_01_emit.bp')
+                ADFCannonQuantumWeapon.PlayFxRackSalvoChargeSequence(self)
+            end, 	
+        },
 		RGun = Class(ADFCannonQuantumWeapon) {
 		OnWeaponFired = function(self)
 		ForkThread(function()
+				if self.RBeam then
+				self.RBeam:Destroy()
+				end
         ADFCannonQuantumWeapon.OnLostTarget(self)
 		ChangeState(self, self.RackSalvoReloadState)
 		WaitSeconds(2)
@@ -44,6 +55,12 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 		self.unit.RGatlingGun:SetEnabled(true)
 		end)
 		end, 
+
+            PlayFxRackSalvoChargeSequence = function(self)
+				self.RBeam = CreateBeamEmitterOnEntity(self.unit, 'R_Arm_Muzzle', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/beacon_beam_01_emit.bp')
+                ADFCannonQuantumWeapon.PlayFxRackSalvoChargeSequence(self)
+            end,  		
+		
 		},
 		LGatlingGun = Class(ADFCannonQuantumWeapon) {
 		OnWeaponFired = function(self)
