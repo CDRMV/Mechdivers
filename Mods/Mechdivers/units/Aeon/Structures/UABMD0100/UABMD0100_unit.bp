@@ -119,7 +119,7 @@ UnitBlueprint {
             Red = '/effects/emitters/light_red_03_emit.bp',
             Yellow = '/effects/emitters/light_yellow_02_emit.bp',
         },
-        BuildAttachBone = 'Spawn',
+        BuildAttachBone = 'Attachpoint',
         DamageEffects = {
             {
                 Bone = 0,
@@ -212,7 +212,7 @@ UnitBlueprint {
         BuildTime = 300,
 		MaintenanceConsumptionPerSecondEnergy = 25,
         BuildableCategory = {
-			'BUILTBYTIER1FACTORY AEON MOBILE LAND BOT',
+			'BUILTBYTIER1WARPSHIPFACTORY AEON',
         },
         RebuildBonusIds = {
             'uabmd0100',
@@ -227,7 +227,7 @@ UnitBlueprint {
     General = {
         BuildBones = {
             BuildEffectBones = {
-                'Spawn',
+                'Attachpoint',
             },
         },
         Category = 'Factory',
