@@ -15,6 +15,8 @@ CSKMDAL0200 = Class(AHoverLandUnit) {
 		LightningWeapon = Class(ADFLightningBeam) {
 		IdleState = State (ADFLightningBeam.IdleState) {
         Main = function(self)
+			self.unit:RemoveToggleCap('RULEUTC_WeaponToggle')
+			self.unit.Scan:SetMesh('/mods/Mechdivers/Decorations/AeonScan_mesh') 
            ADFLightningBeam.IdleState.Main(self)
         end,
                 

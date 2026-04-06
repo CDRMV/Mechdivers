@@ -6,8 +6,10 @@ UnitList = {
 		UEF = {'CSKMDTL0304', 80},      -- Patriot, Tech 2 Sturm Bot
     },
 	T2AttackTankSorian = {
+	    Aeon = {'CSKMDAL0203', 80},      -- Elevated Overseer, Tech 2 Advanced Jetpack Bot
 		UEF = {'CSKMDTL0303', 80},      -- Emancipator, Tech 2 Assualt Bot
     },
+	
 	T1GroundDefense = {
         UEF = {'UEBMD0103', 80}, -- Tech 1  Mine Tower
 		Aeon = {'UABMD0202', 80}, -- Lightning Spire Tech 1 Tesla Defense

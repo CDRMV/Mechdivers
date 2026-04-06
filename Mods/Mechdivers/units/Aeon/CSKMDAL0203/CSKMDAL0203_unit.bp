@@ -92,7 +92,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 3,
     },
-    Description = 'Jetpack Advanced Assaut Bot',
+    Description = 'Advanced Jetpack Bot',
     Display = {
 		JetPackEffectBones = {'Exhaust01', 'Exhaust02'},
         Abilities = {

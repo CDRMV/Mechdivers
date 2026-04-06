@@ -20,7 +20,8 @@ local MyUnitIdTable = {
  -- Land
   	  cskmdal0200=true,
 	  cskmdal0201=true,
-	  cskmdal0205=true,
+	  cskmdal0202=true,
+	  cskmdal0203=true,
 	  cskmdal0300=true,
 	  cskmdal0301=true,
  	  cskmdal0306=true,

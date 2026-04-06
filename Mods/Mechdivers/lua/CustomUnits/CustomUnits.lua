@@ -25,7 +25,7 @@ UnitList = {
 	},
 	
 	T2AttackTankSorian = {
-		Aeon = {'CSKMDAL0200', 80},      -- Watcher, Tech 2 Scout Drone
+		Aeon = {'CSKMDAL0202', 80},      -- Overseer, Tech 2 Advanced Assault Bot
 		UEF = {'CSKMDTL0305', 80},      --  T 080 DAD, Tech 2 Heavy Tank
 		Cybran = {'CSKMDCL0200', 80},      -- Hunter II, Tech 2 Medium Assualt Bot (Scout Strider)
     },

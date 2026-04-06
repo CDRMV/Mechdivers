@@ -49,7 +49,6 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-		'BUILTBYTIER2FACTORY',
         'BUILTBYTIER3FACTORY',
         'AEON',
         'MOBILE',
