@@ -22,6 +22,7 @@ local MyUnitIdTable = {
 	  cskmdal0201=true,
 	  cskmdal0202=true,
 	  cskmdal0203=true,
+	  cskmdal0204=true,
 	  cskmdal0300=true,
 	  cskmdal0301=true,
  	  cskmdal0306=true,

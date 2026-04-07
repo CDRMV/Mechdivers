@@ -35,9 +35,9 @@ self.unit.OpenAnimManip:SetRate(2)
 			self.Trash:Add(self.OpenAnimManip2)
 			self.OpenAnimManip2:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0203/CSKMDAL0203_Fly.sca', true):SetRate(1)
 			self.EffectBones = self:GetBlueprint().Display.JetPackEffectBones
-			self.Effect1 = CreateAttachedBeam(self,self.EffectBones[1],self:GetArmy(),  0.2, 0.05, ModTexPath .. 'beam_jetpack_exhaust.dds')
+			self.Effect1 = CreateBeamEmitterOnEntity(self,self.EffectBones[1],self:GetArmy(),  '/effects/emitters/air_move_trail_beam_01_emit.bp'):SetBeamParam('LENGTH', 0.2)
             self.Trash:Add(self.Effect1)
-			self.Effect2 = CreateAttachedBeam(self,self.EffectBones[2],self:GetArmy(),  0.2, 0.05, ModTexPath .. 'beam_jetpack_exhaust.dds')
+			self.Effect2 = CreateBeamEmitterOnEntity(self,self.EffectBones[2],self:GetArmy(),  '/effects/emitters/air_move_trail_beam_01_emit.bp'):SetBeamParam('LENGTH', 0.2)
             self.Trash:Add(self.Effect2)
     end,
 	 

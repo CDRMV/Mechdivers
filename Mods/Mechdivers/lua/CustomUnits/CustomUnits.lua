@@ -39,8 +39,8 @@ UnitList = {
 		Cybran = {'CSKMDCL0302', 80},      -- Shredder, Tech 3 Heavy Autocannon Tank
 	},
 	
-	T3LandArtillery = {
-	Cybran = {'CSKMDCL0301', 80},      -- Barrager, Tech 3 Mobile Missile Battery
+	T2LandArtillery = {
+	Aeon = {'CSKMDAL0204', 80},      -- Crescent Overseer, Tech 2 Advanced Artillery Bot
 	},
    
 	T3AttackTankSorian = {
