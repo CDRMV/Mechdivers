@@ -2742,6 +2742,9 @@ end
 end
 
 else
+if CSKPath and CSKTimeosPath or CSKPath or CSKTimeosPath then
+
+else
 --*****************************************************************************
 --FAF
 --*****************************************************************************
@@ -3212,6 +3215,7 @@ function CreateWldUIProvider()
             if not SessionIsReplay() then
                 import("/lua/ui/game/economy.lua").InitialAnimation()
             end
+			import('/mods/Mechdivers/UI/MainPanel.lua').InitialAnimation()
             import("/lua/ui/game/score.lua").InitialAnimation()
             WaitSeconds(.15)
             import("/mods/Mechdivers/hook/lua/ui/game/multifunction.lua").InitialAnimation()
@@ -3918,5 +3922,6 @@ SendChat = function()
         end
         WaitSeconds(0.1)
     end
+end
 end
 end
