@@ -30,6 +30,7 @@ UnitBlueprint {
         'PRODUCTSC1',
         'SELECTABLE',
         'CIVILIAN',
+		'MECHDIVERSCIVILIANSTRUCTURE',
         'UEF',
         'STRUCTURE',
 		'ARTILLERY',
