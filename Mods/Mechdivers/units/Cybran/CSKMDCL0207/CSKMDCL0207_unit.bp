@@ -74,7 +74,7 @@ UnitBlueprint {
             },
         },
         AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0207/CSKMDCL0207_Awalk01.sca',
-        AnimationWalkRate = 1.5,
+        AnimationWalkRate = 1.6,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
