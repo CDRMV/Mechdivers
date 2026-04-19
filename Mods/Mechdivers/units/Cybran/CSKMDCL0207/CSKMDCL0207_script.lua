@@ -14,7 +14,7 @@ local CybranWeaponsFile = import('/lua/cybranweapons.lua')
 local CDFLaserHydrogenWeapon = ModWeaponsFile.CDFLaserHydrogenWeapon
 local CIFGrenadeWeapon = CybranWeaponsFile.CIFGrenadeWeapon
 
-CSKMDCL0100 = Class(CWalkingLandUnit) {
+CSKMDCL0207 = Class(CWalkingLandUnit) {
     Weapons = {
         MainGun = Class(CDFLaserHydrogenWeapon) {},
 		Grenade = Class(CIFGrenadeWeapon) {
@@ -71,4 +71,4 @@ CSKMDCL0100 = Class(CWalkingLandUnit) {
     end,
 }
 
-TypeClass = CSKMDCL0100
+TypeClass = CSKMDCL0207
