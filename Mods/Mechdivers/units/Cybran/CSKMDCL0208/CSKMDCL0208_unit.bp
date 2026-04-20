@@ -275,7 +275,7 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
-            Damage = 500,
+            Damage = 3000,
             DamageType = 'Overcharge',
 			EnergyChargeForFirstShot = false,
             EnergyDrainPerSecond = 250,

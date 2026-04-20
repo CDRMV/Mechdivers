@@ -55,6 +55,7 @@ UABMD0204 = Class(AStructureUnit) {
 			while not self:IsDead() do
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Ally')
             for _,unit in units do
+			if unit:GetFractionComplete() == 1 then
 			    if GetDistanceBetweenTwoEntities(unit, self) < 10 then
 				local regen = unit:GetBlueprint().Defense.RegenRate
 				local maxhealth = unit:GetBlueprint().Defense.MaxHealth
@@ -71,6 +72,7 @@ UABMD0204 = Class(AStructureUnit) {
 				  unit:SetHealth(unit, health)
                   unit:SetRegenRate(regen)	
                 end
+			end	
             end
 			WaitSeconds(0.1)
 			end
@@ -81,12 +83,14 @@ UABMD0204 = Class(AStructureUnit) {
 			local radius = self:GetBlueprint().Intel.VisionRadius
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Ally')
             for _,unit in units do
+				if unit:GetFractionComplete() == 1 then
 				local regen = unit:GetBlueprint().Defense.RegenRate
 				local maxhealth = unit:GetBlueprint().Defense.MaxHealth
 				local health = unit:GetBlueprint().Defense.Health
 				  unit:SetMaxHealth(maxhealth)
 				  unit:SetHealth(unit, health)
-                  unit:SetRegenRate(regen)	
+                  unit:SetRegenRate(regen)
+				end  
             end
     end,
 	
