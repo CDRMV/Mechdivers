@@ -135,7 +135,7 @@ UnitBlueprint {
         UnitWeight = 1,
     },
     Intel = {
-        VisionRadius = 18,
+        VisionRadius = 30,
     },
     Interface = {
         HelpText = '<LOC url0106_help>Light Assault Bot',
@@ -208,7 +208,7 @@ UnitBlueprint {
             FiringRandomness = 0,
             FiringTolerance = 2,
             Label = 'MainGun',
-            MaxRadius = 15,
+            MaxRadius = 25,
             MuzzleSalvoDelay = 0.2,
             MuzzleSalvoSize = 15,
             MuzzleVelocity = 25,
@@ -230,6 +230,8 @@ UnitBlueprint {
             RackSalvoReloadTime = 0,
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
+			SlavedToBody = true,
+            SlavedToBodyArcRange = 5,
             RangeCategory = 'UWRC_DirectFire',
             RateOfFire = 0.2,
             TargetCheckInterval = 0.6,

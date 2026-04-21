@@ -354,7 +354,7 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
-            Damage = 150,
+            Damage = 650,
             DamageType = 'Normal',
             DisplayName = 'Heavy Plasma Cannon',
             FireTargetLayerCapsTable = {
@@ -437,9 +437,9 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
-            Damage = 100,
+            Damage = 0,
             DamageFriendly = false,
-            DamageRadius = 2,
+            DamageRadius = 0,
             DamageType = 'Normal',
             DisplayName = 'EMP Grenade Launcher',
             FireTargetLayerCapsTable = {

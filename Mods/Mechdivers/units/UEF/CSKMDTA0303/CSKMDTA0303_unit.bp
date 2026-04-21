@@ -281,9 +281,9 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             BombDropThreshold = 3.5,
             CollideFriendly = false,
-            Damage = 150,
+            Damage = 1900,
             DamageFriendly = true,
-            DamageRadius = 2.5,
+            DamageRadius = 3.5,
             DamageType = 'Normal',
             DisplayName = 'Napalm Carpet Bomb',
             FireTargetLayerCapsTable = {

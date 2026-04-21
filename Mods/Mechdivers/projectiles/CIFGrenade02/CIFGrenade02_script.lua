@@ -28,6 +28,7 @@ CIFGrenade02 = Class(CArtilleryProjectile) {
 			CreateEmitterAtEntity(self, self:GetArmy(), '/effects/emitters/cybran_empgrenade_hit_03_emit.bp'):ScaleEmitter(1)	
 			CreateLightParticle( self, -1, self:GetArmy(), 7, 12, 'glow_03', 'ramp_red_06' )
 			CreateLightParticle( self, -1, self:GetArmy(), 7, 22, 'glow_03', 'ramp_antimatter_02' ) 
+			DamageArea(self, self:GetPosition(), 2, 500, 'Fire', false, true)
 			self:Destroy()
         end
 		end)

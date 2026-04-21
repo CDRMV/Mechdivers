@@ -118,32 +118,6 @@ UEBMD00300b = Class(TStructureUnit) {
     },
 	
 	OnCreate = function(self)
-		ForkThread( function()
-		while true do
-		local bp = self:GetBlueprint()
-		if bp.Physics.SkirtSizeX and bp.Physics.SkirtSizeZ then
-		local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
-
-if version < 3652 then
-if DiskGetFileInfo('/lua/AI/CustomAIs_v2/ExtrasAI.lua') then
-if import('/lua/AI/CustomAIs_v2/ExtrasAI.lua').AI.Name == 'AI Patch LOUD' then
---self:FlattenSkirt()
-
-else
-self:FlattenSkirt()
-end
-
-else
-self:FlattenSkirt()
-end
-
-else
-self:FlattenSkirt()
-end
-		end
-		WaitSeconds(0.1)
-		end
-		end)
 					self:RemoveCommandCap('RULEUCC_Reclaim')
 		if not self.AnimationManipulator then
             self.AnimationManipulator = CreateAnimator(self)
