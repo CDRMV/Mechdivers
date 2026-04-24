@@ -15,6 +15,10 @@ DummyTurretWeapon = Class(DefaultProjectileWeapon) {
     
 }
 
+MineExplosion = Class(KamikazeWeapon){
+
+}
+
 TIFMediumArtilleryStrike = Class(DefaultProjectileWeapon) {
     
 }

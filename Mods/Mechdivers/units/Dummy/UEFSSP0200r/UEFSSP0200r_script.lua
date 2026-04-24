@@ -23,7 +23,7 @@ UEFSSP0200r= Class(StructureUnit) {
 	DamageThread = function(self)
         while not self:IsDead() do
             #Get friendly units in the area (including self)
-			DamageArea(self, self:GetPosition(), 1, 5, 'Fire', true, false)
+			DamageArea(self, self:GetPosition(), 1, 5, 'Fire', false, false)
             WaitSeconds(0.1)
         end
     end,
