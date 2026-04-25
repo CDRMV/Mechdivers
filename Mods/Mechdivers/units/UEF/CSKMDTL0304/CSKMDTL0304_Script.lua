@@ -135,6 +135,11 @@ CSKMDTL0304 = Class(TWalkingLandUnit) {
 		self:HideBone( 'R_MissileLauncher', true )
 		self:HideBone( 'L_Gatling_Arm', true )
 		self:ShowBone( 'R_Gatling_Arm', true )
+		Dummy = self:GetWeaponByLabel('Dummy')
+		self.L_GatlingCannon:SetEnabled(false)
+		self.R_GatlingCannon:SetEnabled(true)
+		self.L_MissileLauncher:SetEnabled(true)
+		self.R_MissileLauncher:SetEnabled(false)
 		Dummy:SetEnabled(true)
 		end
 		)

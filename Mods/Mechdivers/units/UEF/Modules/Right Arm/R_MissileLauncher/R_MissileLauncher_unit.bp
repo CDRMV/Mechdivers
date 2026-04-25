@@ -1,0 +1,226 @@
+
+UnitBlueprint {
+    Categories = { 'SELECTABLE', 'INVULNERABLE', 'UNTARGETABLE', 'UNSPAWNABLE','OVERLAYDIRECTFIRE','DIRECTFIRE',},
+       Defense = { Health = 100, MaxHealth = 100 },
+       Display = {         
+			Mesh = {
+            IconFadeInZoom = 130,
+            LODs = {
+                {
+					MeshName = '/Mods/Mechdivers/units/UEF/Modules/Right Arm/R_MissileLauncher/R_MissileLauncher_lod0.scm',
+					AlbedoName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303c/CSKMDTL0303c_Albedo.dds',
+					SpecularName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303c/CSKMDTL0303c_SpecTeam.dds',
+					NormalsName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303c/CSKMDTL0303c_NormalsTs.dds',
+                    LODCutoff = 300,
+                    ShaderName = 'Unit',
+                },
+            },
+			},
+			 UniformScale = 0.42,
+			},
+     Footprint = { SizeX = 0, SizeZ = 0 },
+       General = { CapCost = 0, FactionName = 'None',         Category = 'Direct Fire',
+        Classification = 'RULEUC_MilitaryVehicle',
+        CommandCaps = {
+            RULEUCC_Attack = true,
+            RULEUCC_CallTransport = false,
+            RULEUCC_Capture = false,
+            RULEUCC_Guard = false,
+            RULEUCC_Move = false,
+            RULEUCC_Nuke = false,
+            RULEUCC_Patrol = false,
+            RULEUCC_Pause = false,
+            RULEUCC_Reclaim = false,
+            RULEUCC_Repair = false,
+            RULEUCC_RetaliateToggle = true,
+            RULEUCC_Stop = true,
+            RULEUCC_Transport =false,
+        },},
+         Intel = { VisionRadius = 0, WaterVisionRadius = 0 },
+       Physics = { BuildOnLayerCaps = { LAYER_Land = true }, MotionType = 'RULEUMT_None',
+                   SkirtSizeX = 0, SkirtSizeZ = 0, SkirtOffsetX = 0, SkirtOffsetZ = 0 },
+	SelectionCenterOffsetX = 0,
+    SelectionCenterOffsetZ = -0.1,
+    SelectionSizeX = 0.2,
+    SelectionSizeZ = 0.2,
+    SelectionThickness = 0.6,
+    Veteran = {
+        Level1 = 9,
+        Level2 = 18,
+        Level3 = 27,
+        Level4 = 36,
+        Level5 = 45,
+    },
+		    Weapon = {
+				{
+            AboveWaterTargetsOnly = true,
+            Audio = {
+                Fire = Sound {
+                    Bank = 'UELWeapon',
+                    Cue = 'UEL0202_Cannon_Dbl',
+                    LodCutoff = 'Weapon_LodCutoff',
+                },
+            },
+            BallisticArc = 'RULEUBA_LowArc',
+            CollideFriendly = false,
+            Damage = 35,
+            DamageRadius = 0,
+            DamageType = 'Normal',
+            DisplayName = 'Gauss Cannon',
+            FireTargetLayerCapsTable = {
+                Land = 'Land|Water|Seabed|Air',
+                Water = 'Land|Water|Seabed|Air',
+            },
+            FiringTolerance = 1,
+            Label = 'MissileLauncher',
+            MaxRadius = 40,
+            MuzzleSalvoDelay = 0.2,
+            MuzzleSalvoSize = 1,
+            MuzzleVelocity = 30,
+            ProjectileId = '/projectiles/TAAMissileFlayer01/TAAMissileFlayer01_proj.bp',
+            ProjectileLifetimeUsesMultiplier = 1.15,
+            ProjectilesPerOnFire = 2,
+            RackBones = {
+                {
+                    MuzzleBones = {
+                        'Missile01',
+                    },
+                    RackBone = 'Missile01',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile02',
+                    },
+                    RackBone = 'Missile02',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile03',
+                    },
+                    RackBone = 'Missile03',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile04',
+                    },
+                    RackBone = 'Missile04',
+                },
+				                {
+                    MuzzleBones = {
+                        'Missile05',
+                    },
+                    RackBone = 'Missile05',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile06',
+                    },
+                    RackBone = 'Missile06',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile07',
+                    },
+                    RackBone = 'Missile07',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile08',
+                    },
+                    RackBone = 'Missile08',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile09',
+                    },
+                    RackBone = 'Missile09',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile10',
+                    },
+                    RackBone = 'Missile10',
+                },
+				                {
+                    MuzzleBones = {
+                        'Missile11',
+                    },
+                    RackBone = 'Missile11',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile12',
+                    },
+                    RackBone = 'Missile12',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile13',
+                    },
+                    RackBone = 'Missile13',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile14',
+                    },
+                    RackBone = 'Missile14',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile15',
+                    },
+                    RackBone = 'Missile15',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile16',
+                    },
+                    RackBone = 'Missile16',
+                },
+				                {
+                    MuzzleBones = {
+                        'Missile17',
+                    },
+                    RackBone = 'Missile17',
+                },
+				{
+                    MuzzleBones = {
+                        'Missile18',
+                    },
+                    RackBone = 'Missile18',
+                },
+            },
+            RackFireTogether = false,
+            RackRecoilDistance = 0,
+            RackReloadTimeout = 0,
+            RackSalvoChargeTime = 0,
+            RackSalvoReloadTime = 0,
+            RackSalvoSize = 1,
+            RackSlavedToTurret = false,
+            RangeCategory = 'UWRC_DirectFire',
+            RateOfFire = 0.75,
+            TargetCheckInterval = 0.5,
+            TargetPriorities = {
+                'SPECIALHIGHPRI',
+                'SPECIALLOWPRI',
+                'ALLUNITS',
+            },
+            TargetRestrictDisallow = 'UNTARGETABLE',
+            TrackingRadius = 1.15,
+            TurretBoneMuzzle = 'Missile01',
+            TurretBonePitch = 'MissileLauncher',
+            TurretBoneYaw = 'MissileLauncher',
+            TurretDualManipulators = false,
+            TurretPitch = 0,
+            TurretPitchRange = 50,
+            TurretPitchSpeed = 50,
+            TurretYaw = 0,
+            TurretYawRange = 9,
+            TurretYawSpeed = 90,
+            Turreted = true,
+            WeaponCategory = 'Direct Fire',
+            WeaponRepackTimeout = 0,
+            WeaponUnpacks = false,
+		},
+    },		   
+}

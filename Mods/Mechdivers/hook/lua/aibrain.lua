@@ -21,7 +21,8 @@ end,
 		self:ForkThread(self.DeimosAmmuntionEnhancementManageStep1)
 		self:ForkThread(self.DeimosAmmuntionStorageStep1)
 		self:ForkThread(self.DeimosArtilleryStep1)
-		self:ForkThread(self.SpawnSuperDestroyer)	
+		self:ForkThread(self.SpawnSuperDestroyer)
+		self:ForkThread(self.CheckModuularMechStep1)		
     end,
 	
 	OnCreateAI = function(self, planName)
@@ -35,6 +36,7 @@ end,
 		self:ForkThread(self.DeimosAmmuntionEnhancementManageStep1)
 		self:ForkThread(self.DeimosAmmuntionStorageStep1)
 		self:ForkThread(self.DeimosArtilleryStep1)
+		self:ForkThread(self.CheckModuularMechStep1)
     end,
 	
 	SpawnSuperDestroyer = function(self)
@@ -311,6 +313,31 @@ end,
 			WaitSeconds(1)
 			end
     end,
+	
+    CheckModuularMechStep1 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.MODULARMECH, true)
+			if table.getn(labs) >= 10 then
+				AddBuildRestriction(self:GetArmyIndex(), categories.MODULARMECH)
+				self:ForkThread(self.CheckModuularMechStep2)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	CheckModuularMechStep2 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.MODULARMECH, true)
+			if table.getn(labs) < 10  then
+				RemoveBuildRestriction(self:GetArmyIndex(), categories.MODULARMECH)
+				self:ForkThread(self.CheckModuularMechStep1)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
 
 	
 

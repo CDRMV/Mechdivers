@@ -129,25 +129,20 @@ CSKMDTL0303 = Class(TWalkingLandUnit) {
 		self.L_MissileLauncher = self:GetWeaponByLabel('L_MissileLauncher')
 		self.R_MissileLauncher = self:GetWeaponByLabel('R_MissileLauncher')
 
-		local RandomNumber = 1
-		
-		if RandomNumber == 1 then
+
 		self:HideBone( 'L_MissileLauncher', true )
 		self:HideBone( 'R_MissileLauncher', true )
 		self:HideBone( 'L_Gatling_Arm', true )
 		self:HideBone( 'R_Gatling_Arm', true )
 		self:ShowBone( 'L_Cannon_Arm', true )
 		self:ShowBone( 'R_Cannon_Arm', true )
+		self.R_Cannon:SetEnabled(true)
+		self.L_Cannon:SetEnabled(true)
+		self.L_GatlingCannon:SetEnabled(false)
+		self.R_GatlingCannon:SetEnabled(false)
+		self.L_MissileLauncher:SetEnabled(false)
+		self.R_MissileLauncher:SetEnabled(false)
 		Dummy:SetEnabled(true)
-		elseif RandomNumber == 2 then
-		self:ShowBone( 'L_MissileLauncher', true )
-		self:HideBone( 'R_MissileLauncher', true )
-		self:HideBone( 'L_Gatling_Arm', true )
-		self:ShowBone( 'R_Gatling_Arm', true )
-		self:HideBone( 'L_Cannon_Arm', true )
-		self:HideBone( 'R_Cannon_Arm', true )
-		Dummy:SetEnabled(true)
-		end
 		end
 		)
     end,

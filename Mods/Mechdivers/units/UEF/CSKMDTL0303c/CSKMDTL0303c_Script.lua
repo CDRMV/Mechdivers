@@ -8,11 +8,7 @@
 #**  Copyright © 2025, Commander Survival Kit Project
 #****************************************************************************
 
-local TerranWeaponFile = import('/lua/terranweapons.lua')
 local TWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
-local TSAMLauncher = import('/lua/terranweapons.lua').TSAMLauncher
-local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
-local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 local EffectUtils = import('/lua/effectutilities.lua')
 local Effects = import('/lua/effecttemplates.lua')
@@ -22,146 +18,9 @@ local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
 CSKMDTL0303b = Class(TWalkingLandUnit) {
 
     Weapons = {
-        L_MissileLauncher = Class(TSAMLauncher) {},
-		R_MissileLauncher = Class(TSAMLauncher) {},
-		Dummy = Class(DummyTurretWeapon) {},
-		R_Cannon = Class(TDFGaussCannonWeapon) {
-
-		PlayFxMuzzleSequence = function(self, muzzle)
-		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
-		if muzzle == 'R_Cannon_Muzzle01' then
-		CreateAttachedEmitter(self.unit, 'R_Cannon_Shell01', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
-		end
-		if muzzle == 'R_Cannon_Muzzle02' then
-		CreateAttachedEmitter(self.unit, 'R_Cannon_Shell02', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
-		end
-		end,
-		},
-		L_Cannon = Class(TDFGaussCannonWeapon) {
-		PlayFxMuzzleSequence = function(self, muzzle)
-		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
-		if muzzle == 'L_Cannon_Muzzle01' then
-		CreateAttachedEmitter(self.unit, 'L_Cannon_Shell01', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
-		end
-		if muzzle == 'L_Cannon_Muzzle02' then
-		CreateAttachedEmitter(self.unit, 'L_Cannon_Shell02', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
-		end
-		end,
-		},
-		R_GatlingCannon = Class(TDFMachineGunWeapon) 
-        {
-            PlayFxWeaponPackSequence = function(self)
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(0)
-                end
-                self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'R_Gatling_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
-                TDFMachineGunWeapon.PlayFxWeaponPackSequence(self)
-            end,
-        
-            PlayFxRackSalvoChargeSequence = function(self)
-                if not self.SpinManip then 
-                    self.SpinManip = CreateRotator(self.unit, 'R_Gatling_Rotate', 'z', nil, 270, 180, 60)
-                    self.unit.Trash:Add(self.SpinManip)
-                end
-                
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(500)
-                end
-                TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
-            end,            
-            
-            PlayFxRackSalvoReloadSequence = function(self)
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(200)
-                end
-                self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'R_Gatling_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
-                TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
-            end,
-        },
-		L_GatlingCannon = Class(TDFMachineGunWeapon) 
-        {
-            PlayFxWeaponPackSequence = function(self)
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(0)
-                end
-                self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'L_Gatling_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
-                TDFMachineGunWeapon.PlayFxWeaponPackSequence(self)
-            end,
-        
-            PlayFxRackSalvoChargeSequence = function(self)
-                if not self.SpinManip then 
-                    self.SpinManip = CreateRotator(self.unit, 'L_Gatling_Rotate', 'z', nil, 270, 180, 60)
-                    self.unit.Trash:Add(self.SpinManip)
-                end
-                
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(500)
-                end
-                TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
-            end,            
-            
-            PlayFxRackSalvoReloadSequence = function(self)
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(200)
-                end
-                self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'L_Gatling_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
-                TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
-            end,
-        },
-		GatlingCannon = Class(TDFMachineGunWeapon) 
-        {
-            PlayFxWeaponPackSequence = function(self)
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(0)
-                end
-                self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'Gatling_Turret_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
-                TDFMachineGunWeapon.PlayFxWeaponPackSequence(self)
-            end,
-        
-            PlayFxRackSalvoChargeSequence = function(self)
-                if not self.SpinManip then 
-                    self.SpinManip = CreateRotator(self.unit, 'Gatling_Turret_Rotate', 'z', nil, 270, 180, 60)
-                    self.unit.Trash:Add(self.SpinManip)
-                end
-                
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(500)
-                end
-                TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
-            end,            
-            
-            PlayFxRackSalvoReloadSequence = function(self)
-                if self.SpinManip then
-                    self.SpinManip:SetTargetSpeed(200)
-                end
-                self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'Gatling_Turret_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
-                TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
-            end,
-        },
+		Dummy = Class(DummyTurretWeapon) {},	
     },  
 
-	OnCreate = function(self)
-        TWalkingLandUnit.OnCreate(self)
-		ForkThread( function()
-
-		Dummy = self:GetWeaponByLabel('Dummy')
-
-		local RandomNumber = 1
-		
-		if RandomNumber == 1 then
-
-		Dummy:SetEnabled(true)
-		self:CreateEnhancement('RightAutoCannon')
-		self:CreateEnhancement('LeftAutoCannon')
-		elseif RandomNumber == 2 then
-
-		Dummy:SetEnabled(true)
-		self:CreateEnhancement('RightGatling')
-		self:CreateEnhancement('LeftMissileLauncher')
-		end
-		end
-		)
-    end,
 	
 	OnStopBeingBuilt = function(self,builder,layer)
         TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
@@ -192,15 +51,23 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_Afold01.sca', false):SetRate(0)
 		self.load = true
 		self.fold = false
-			SetIgnoreArmyUnitCap(self:GetArmy(), true)
-	local position = self:GetPosition()
-	self.Turret = CreateUnitHPR('Autocannon', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-	self.Turret:AttachBoneTo(-2, self, 'Turret')
-	self.LArm = CreateUnitHPR('L_Autocannon', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-	self.LArm:AttachBoneTo('Cannon_Attach', self, 'L_Arm')
-	self.RArm = CreateUnitHPR('R_Autocannon', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-	self.RArm:AttachBoneTo('Cannon_Attach', self, 'R_Arm')
-	SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		self.LArm = nil
+		self.RArm = nil
+		self.Turret = nil
+		
+		local RandomNumber = math.random(1,2)
+		
+		if RandomNumber == 1 then
+
+		self:CreateEnhancement('RightAutoCannon')
+		self:CreateEnhancement('LeftAutoCannon')
+		self:CreateEnhancement('GatlingTurret')
+		elseif RandomNumber == 2 then
+
+		self:CreateEnhancement('RightGatling')
+		self:CreateEnhancement('LeftMissileLauncher')
+		self:CreateEnhancement('AutocannonTurret')
+		end
     end,
 	
 	CreateEnhancement = function(self, enh)
@@ -208,22 +75,105 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
         local bp = self:GetBlueprint().Enhancements[enh]
         if not bp then return end
         if enh == 'LeftGatling' then
-
+		if self.LArm then
+		self.LArm:Destroy()
+		end
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition('L_Arm')
+		self.LArm = CreateUnitHPR('L_Gatling', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.LArm:HideBone(0,true)
+		self.LArm:AttachBoneTo('Gatling_Attach', self, 'L_Arm')
+		self.LArm:ShowBone(0,true)
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
         elseif enh == 'RightGatling' then
-
+		if self.RArm then
+		self.RArm:Destroy()
+		end
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition('R_Arm')
+		self.RArm = CreateUnitHPR('R_Gatling', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.RArm:HideBone(0,true)
+		self.RArm:AttachBoneTo('Gatling_Attach', self, 'R_Arm')
+		self.RArm:ShowBone(0,true)
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'RightAutoCannon' then
-
+		if self.RArm then
+		self.RArm:Destroy()
+		end
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition('R_Arm')
+		self.RArm = CreateUnitHPR('R_Autocannon', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.RArm:HideBone(0,true)
+		self.RArm:AttachBoneTo('Cannon_Attach', self, 'R_Arm')
+		self.RArm:ShowBone(0,true)
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'LeftAutoCannon' then
-
+		if self.LArm then
+		self.LArm:Destroy()
+		end
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition('L_Arm')
+		self.LArm = CreateUnitHPR('L_Autocannon', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.LArm:HideBone(0,true)
+		self.LArm:AttachBoneTo('Cannon_Attach', self, 'L_Arm')
+		self.LArm:ShowBone(0,true)
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'LeftMissileLauncher' then
-
+		if self.LArm then
+		self.LArm:Destroy()
+		end
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition('L_Arm')
+		self.LArm = CreateUnitHPR('L_MissileLauncher', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.LArm:HideBone(0,true)
+		self.LArm:AttachBoneTo('MissileLauncher_Attach', self, 'L_Arm')
+		self.LArm:ShowBone(0,true)
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'RightMissileLauncher' then
-
+		if self.RArm then
+		self.RArm:Destroy()
+		end
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition('R_Arm')
+		self.RArm = CreateUnitHPR('R_MissileLauncher', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.RArm:HideBone(0,true)
+		self.RArm:AttachBoneTo('MissileLauncher_Attach', self, 'R_Arm')
+		self.RArm:ShowBone(0,true)
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		
+		elseif enh == 'Empty' then
+		if self.Turret then
+		self.Turret:Destroy()
+		end
+		
+		elseif enh == 'AutocannonTurret' then
+		if self.Turret then
+		self.Turret:Destroy()
+		end
+		
+		local position = self:GetPosition('Turret')
+		self.Turret = CreateUnitHPR('Autocannon', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.Turret:HideBone(0,true)
+		self.Turret:AttachBoneTo(0, self, 'Turret')
+		self.Turret:ShowBone(0,true)
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		
+		elseif enh == 'GatlingTurret' then
+		if self.Turret then
+		self.Turret:Destroy()
+		end
+		
+		local position = self:GetPosition('Turret')
+		self.Turret = CreateUnitHPR('Gatling', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.Turret:HideBone(0,true)
+		self.Turret:AttachBoneTo(0, self, 'Turret')
+		self.Turret:ShowBone(0,true)
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
         end
     end,
 	
@@ -235,21 +185,6 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
             WaitFor(self.DeathAnimManip)
         end
 		end
-		local army = self:GetArmy()
-		CreateAttachedEmitter(self, 'L_Gatling_Arm', army, '/effects/emitters/destruction_explosion_concussion_ring_03_emit.bp')
-        CreateAttachedEmitter(self,'L_Gatling_Arm', army, '/effects/emitters/explosion_fire_sparks_02_emit.bp')
-		CreateDeathExplosion( self, 'L_Gatling_Arm', 1.0)
-		explosion.CreateFlash( self, 'L_Gatling_Arm', 1.0, army )
-		self:HideBone("L_Cannon_Arm", true)
-		self:HideBone("L_Gatling_Arm", true)
-		self:HideBone("L_MissileLauncher", true)
-		CreateAttachedEmitter(self, 'R_Gatling_Arm', army, '/effects/emitters/destruction_explosion_concussion_ring_03_emit.bp')
-        CreateAttachedEmitter(self,'R_Gatling_Arm', army, '/effects/emitters/explosion_fire_sparks_02_emit.bp')
-		CreateDeathExplosion( self, 'R_Gatling_Arm', 1.0)
-		explosion.CreateFlash( self, 'R_Gatling_Arm', 1.0, army )
-		self:HideBone("R_Cannon_Arm", true)
-		self:HideBone("R_Gatling_Arm", true)
-		self:HideBone("R_MissileLauncher", true)
 
         if self.DeathAnimManip then
             WaitFor(self.DeathAnimManip)
@@ -399,11 +334,11 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 	if self.Beacon then
 	self.Beacon:Destroy()
 	end	
-	
+
 	if self.load == false then
 	
 	else
-	ForkThread(function()
+
 	
 	local units = self:GetCargo()
 	if units[1] == nil then
@@ -422,12 +357,23 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 	self.unit.CanTakeDamage = false
 	self.unit.CanBeKilled = false
 	SetIgnoreArmyUnitCap(self:GetArmy(), false)
+	ForkThread(function()
 	WaitSeconds(1)
+		end)
 	self.unit.CanTakeDamage = true
 	self.unit.CanBeKilled = true
 	end
-	end)
 	end	
+
+				if self.Turret and not self.Turret.Dead then
+		self.Turret:Destroy()
+		end
+				if self.LArm and not self.LArm.Dead then
+		self.LArm:Destroy()
+		end
+				if self.RArm and not self.RArm.Dead then
+		self.RArm:Destroy()
+		end
 
 
     TWalkingLandUnit.OnKilled(self, instigator, type, overkillRatio)	
@@ -457,6 +403,16 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 			units[1]:AddCommandCap('RULEUCC_RetaliateToggle')
 			units[1]:AddCommandCap('RULEUCC_Stop')
 		end
+		end
+		
+		if self.Turret and not self.Turret.Dead then
+		self.Turret:Destroy()
+		end
+		if self.LArm and not self.LArm.Dead then
+		self.LArm:Destroy()
+		end
+		if self.RArm and not self.RArm.Dead then
+		self.RArm:Destroy()
 		end
     end,
 	  
