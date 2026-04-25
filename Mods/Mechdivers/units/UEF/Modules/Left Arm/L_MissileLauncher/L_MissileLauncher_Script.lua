@@ -8,7 +8,7 @@
 #**  Copyright © 2025, Commander Survival Kit Project
 #****************************************************************************
 
-local DummyUnit = import('/lua/defaultunits.lua').StructureUnit
+local DummyUnit = import('/lua/defaultunits.lua').MobileUnit
 local TSAMLauncher = import('/lua/terranweapons.lua').TSAMLauncher
 
 L_MissileLauncher = Class(DummyUnit) {

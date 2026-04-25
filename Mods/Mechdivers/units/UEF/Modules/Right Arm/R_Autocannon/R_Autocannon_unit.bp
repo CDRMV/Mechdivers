@@ -1,6 +1,6 @@
 
 UnitBlueprint {
-    Categories = { 'SELECTABLE', 'INVULNERABLE', 'UNTARGETABLE', 'UNSPAWNABLE','OVERLAYDIRECTFIRE','DIRECTFIRE',},
+    Categories = { 'SELECTABLE', 'INVULNERABLE', 'UNTARGETABLE', 'UNSPAWNABLE','OVERLAYDIRECTFIRE','DIRECTFIRE', 'VISIBLETORECON',},
        Defense = { Health = 100, MaxHealth = 100 },
        Display = {         
 			Mesh = {

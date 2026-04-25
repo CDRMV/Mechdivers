@@ -42,7 +42,6 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.unit:SetUnSelectable(true)
 		--self.unit:HideRifle()
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
-		end
 		self:RemoveCommandCap('RULEUCC_Transport')
 		if not self.AnimationManipulator then
             self.AnimationManipulator = CreateAnimator(self)
@@ -67,6 +66,34 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self:CreateEnhancement('RightGatling')
 		self:CreateEnhancement('LeftMissileLauncher')
 		self:CreateEnhancement('AutocannonTurret')
+		end
+		
+		else
+		self:RemoveCommandCap('RULEUCC_Transport')
+		if not self.AnimationManipulator then
+            self.AnimationManipulator = CreateAnimator(self)
+            self.Trash:Add(self.AnimationManipulator)
+        end
+		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTL0303/CSKMDTL0303_Afold01.sca', false):SetRate(0)
+		self.load = true
+		self.fold = false
+		self.LArm = nil
+		self.RArm = nil
+		self.Turret = nil
+		
+		local RandomNumber = math.random(1,2)
+		
+		if RandomNumber == 1 then
+
+		self:CreateEnhancement('RightAutoCannon')
+		self:CreateEnhancement('LeftAutoCannon')
+		self:CreateEnhancement('GatlingTurret')
+		elseif RandomNumber == 2 then
+
+		self:CreateEnhancement('RightGatling')
+		self:CreateEnhancement('LeftMissileLauncher')
+		self:CreateEnhancement('AutocannonTurret')
+		end
 		end
     end,
 	

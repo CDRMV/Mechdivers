@@ -8,7 +8,7 @@
 #**  Copyright © 2025, Commander Survival Kit Project
 #****************************************************************************
 
-local DummyUnit = import('/lua/defaultunits.lua').StructureUnit
+local DummyUnit = import('/lua/defaultunits.lua').MobileUnit
 local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 local EffectUtils = import('/lua/effectutilities.lua')
 local Effects = import('/lua/effecttemplates.lua')
