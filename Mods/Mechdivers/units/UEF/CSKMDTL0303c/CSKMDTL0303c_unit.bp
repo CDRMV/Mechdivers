@@ -48,7 +48,7 @@ UnitBlueprint {
     BuildIconSortPriority = 20,
     Categories = {
         'BOT',
-        'BUILTBYTIER3FACTORY',
+        #'BUILTBYTIER3FACTORY',
         'DIRECTFIRE',
         'INDIRECTFIRE',
 		'MODULARMECH',
