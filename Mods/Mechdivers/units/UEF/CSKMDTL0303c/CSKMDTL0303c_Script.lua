@@ -18,7 +18,45 @@ local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
 CSKMDTL0303b = Class(TWalkingLandUnit) {
 
     Weapons = {
-		Dummy = Class(DummyTurretWeapon) {},	
+		Dummy = Class(DummyTurretWeapon) {
+		IdleState = State (DummyTurretWeapon.IdleState) {
+        Main = function(self)
+                    DummyTurretWeapon.IdleState.Main(self)
+                end,
+                
+        OnGotTarget = function(self)
+		IssueClearCommands({self.unit.LArm, self.unit.RArm, self.unit.Turret})
+			local targetposition = self:GetCurrentTargetPos()
+			local target = self:GetCurrentTarget()
+			if targetposition then
+			IssueAttack({self.unit.LArm, self.unit.RArm, self.unit.Turret}, targetposition)
+			end
+			if target then
+			IssueAttack({self.unit.LArm, self.unit.RArm, self.unit.Turret}, target)
+			end
+               DummyTurretWeapon.OnGotTarget(self)
+        end,                
+            },
+        
+        OnGotTarget = function(self)
+		IssueClearCommands({self.unit.LArm, self.unit.RArm, self.unit.Turret})
+					local targetposition = self:GetCurrentTargetPos()
+			local target = self:GetCurrentTarget()
+			if targetposition then
+			IssueAttack({self.unit.LArm, self.unit.RArm, self.unit.Turret}, targetposition)
+			end
+			if target then
+			IssueAttack({self.unit.LArm, self.unit.RArm, self.unit.Turret}, target)
+			end
+               DummyTurretWeapon.OnGotTarget(self)
+        end,
+        
+        OnLostTarget = function(self)
+			IssueClearCommands({self.unit.LArm, self.unit.RArm, self.unit.Turret})
+            DummyTurretWeapon.OnLostTarget(self)
+        end,  	
+		
+		},	
     },  
 
 	
@@ -374,7 +412,7 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		local position = self:GetPosition()
 		self:HideBone('Bot', true)
         for _, unit in units do
-			if unit:GetBlueprint().General.UnitName ~= nil then
+			if unit:GetBlueprint().General.UnitName == '<LOC uel0106_name>Mech Marine' then
 			unit:DetachFrom(true)
 			unit:AttachBoneTo(-2, self, 'Exit')
 			WaitSeconds(1)

@@ -60,11 +60,6 @@ Gatling = Class(DummyUnit) {
         self.Parent = nil
         DummyUnit.OnKilled(self, instigator, type, overkillRatio)
     end,
-	
-	OnCreate = function(self)
-     DummyUnit.OnCreate(self)
-	 self:GetWeaponByLabel('GatlingCannon'):SetEnabled(true)        
-    end,
 	  
 }
 TypeClass = Gatling
