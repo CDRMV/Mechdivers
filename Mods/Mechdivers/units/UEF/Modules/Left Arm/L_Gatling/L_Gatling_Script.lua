@@ -46,7 +46,20 @@ L_Gatling = Class(DummyUnit) {
                 TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
             end,
         },
-    },  
+    },
+
+    Parent = nil,
+
+    SetParent = function(self, parent, podName)
+        self.Parent = parent
+        self.Pod = podName
+    end,
+
+    OnKilled = function(self, instigator, type, overkillRatio)
+        self.Parent:NotifyOfPodDeath(self.Pod)
+        self.Parent = nil
+        DummyUnit.OnKilled(self, instigator, type, overkillRatio)
+    end,	
 	  
 }
 TypeClass = L_Gatling

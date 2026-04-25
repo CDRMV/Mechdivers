@@ -25,6 +25,9 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self.build = true
+		        self.HasLeftPod = false
+        self.HasRightPod = false
+		self.HasCenterPod = false
 		if self:GetAIBrain().BrainType == 'Human' then
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition()
@@ -97,6 +100,42 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		end
     end,
 	
+	NotifyOfPodDeath = function(self, pod)
+        if pod == 'LeftGatling' then
+            self:CreateEnhancement('LeftGatlingRemove')
+            self:CreateEnhancement('LeftEmpty')
+            self:RequestRefreshUI()
+        elseif pod == 'RightGatling' then
+            self:CreateEnhancement('RightGatlingRemove')
+            self:CreateEnhancement('RightEmpty')
+            self:RequestRefreshUI()
+        elseif pod == 'RightAutoCannon' then
+            self:CreateEnhancement('RightAutoCannonRemove')
+            self:CreateEnhancement('RightEmpty')
+            self:RequestRefreshUI()
+		elseif pod == 'LeftAutoCannon' then
+            self:CreateEnhancement('LeftAutoCannonRemove')
+            self:CreateEnhancement('LeftEmpty')
+            self:RequestRefreshUI()
+		elseif pod == 'LeftMissileLauncher' then
+            self:CreateEnhancement('LeftMissileLauncherRemove')
+            self:CreateEnhancement('LeftEmpty')
+            self:RequestRefreshUI()
+		elseif pod == 'RightMissileLauncher' then
+            self:CreateEnhancement('RightMissileLauncherRemove')
+            self:CreateEnhancement('RightEmpty')
+            self:RequestRefreshUI()
+		elseif pod == 'AutocannonTurret' then
+            self:CreateEnhancement('AutocannonTurretRemove')
+            self:CreateEnhancement('Empty')
+            self:RequestRefreshUI()	
+		elseif pod == 'GatlingTurret' then
+            self:CreateEnhancement('GatlingTurretRemove')
+            self:CreateEnhancement('Empty')
+            self:RequestRefreshUI()	
+        end
+    end,
+	
 	CreateEnhancement = function(self, enh)
         TWalkingLandUnit.CreateEnhancement(self, enh)
         local bp = self:GetBlueprint().Enhancements[enh]
@@ -106,11 +145,11 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.LArm:Destroy()
 		end
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
-		local position = self:GetPosition('L_Arm')
+		local position = self:GetPosition('AttachSpecial02')
 		self.LArm = CreateUnitHPR('L_Gatling', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.LArm:HideBone(0,true)
-		self.LArm:AttachBoneTo('Gatling_Attach', self, 'L_Arm')
-		self.LArm:ShowBone(0,true)
+		self.LArm:SetParent(self, 'LeftGatling')
+        self.LArm:SetCreator(self)
+		self.LArm:AttachBoneTo('Gatling_Attach', self, 'AttachSpecial02')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
         elseif enh == 'RightGatling' then
@@ -118,11 +157,11 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.RArm:Destroy()
 		end
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
-		local position = self:GetPosition('R_Arm')
+		local position = self:GetPosition('AttachSpecial03')
 		self.RArm = CreateUnitHPR('R_Gatling', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.RArm:HideBone(0,true)
-		self.RArm:AttachBoneTo('Gatling_Attach', self, 'R_Arm')
-		self.RArm:ShowBone(0,true)
+		self.RArm:SetParent(self, 'RightGatling')
+        self.RArm:SetCreator(self)
+		self.RArm:AttachBoneTo('Gatling_Attach', self, 'AttachSpecial03')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'RightAutoCannon' then
@@ -130,11 +169,11 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.RArm:Destroy()
 		end
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
-		local position = self:GetPosition('R_Arm')
+		local position = self:GetPosition('AttachSpecial03')
 		self.RArm = CreateUnitHPR('R_Autocannon', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.RArm:HideBone(0,true)
-		self.RArm:AttachBoneTo('Cannon_Attach', self, 'R_Arm')
-		self.RArm:ShowBone(0,true)
+		self.RArm:SetParent(self, 'RightAutoCannon')
+        self.RArm:SetCreator(self)
+		self.RArm:AttachBoneTo('Cannon_Attach', self, 'AttachSpecial03')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'LeftAutoCannon' then
@@ -142,11 +181,11 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.LArm:Destroy()
 		end
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
-		local position = self:GetPosition('L_Arm')
+		local position = self:GetPosition('AttachSpecial02')
 		self.LArm = CreateUnitHPR('L_Autocannon', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.LArm:HideBone(0,true)
-		self.LArm:AttachBoneTo('Cannon_Attach', self, 'L_Arm')
-		self.LArm:ShowBone(0,true)
+		self.LArm:SetParent(self, 'LeftAutoCannon')
+        self.LArm:SetCreator(self)
+		self.LArm:AttachBoneTo('Cannon_Attach', self, 'AttachSpecial02')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'LeftMissileLauncher' then
@@ -154,11 +193,11 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.LArm:Destroy()
 		end
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
-		local position = self:GetPosition('L_Arm')
+		local position = self:GetPosition('AttachSpecial02')
 		self.LArm = CreateUnitHPR('L_MissileLauncher', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.LArm:HideBone(0,true)
-		self.LArm:AttachBoneTo('MissileLauncher_Attach', self, 'L_Arm')
-		self.LArm:ShowBone(0,true)
+		self.LArm:SetParent(self, 'LeftMissileLauncher')
+        self.LArm:SetCreator(self)
+		self.LArm:AttachBoneTo('MissileLauncher_Attach', self, 'AttachSpecial02')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'RightMissileLauncher' then
@@ -166,11 +205,11 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.RArm:Destroy()
 		end
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
-		local position = self:GetPosition('R_Arm')
+		local position = self:GetPosition('AttachSpecial03')
 		self.RArm = CreateUnitHPR('R_MissileLauncher', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.RArm:HideBone(0,true)
-		self.RArm:AttachBoneTo('MissileLauncher_Attach', self, 'R_Arm')
-		self.RArm:ShowBone(0,true)
+		self.RArm:SetParent(self, 'RightMissileLauncher')
+        self.RArm:SetCreator(self)
+		self.RArm:AttachBoneTo('MissileLauncher_Attach', self, 'AttachSpecial03')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'Empty' then
@@ -178,16 +217,26 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.Turret:Destroy()
 		end
 		
+		elseif enh == 'LeftEmpty' then
+		if self.LArm then
+		self.LArm:Destroy()
+		end
+		
+		elseif enh == 'RightEmpty' then
+		if self.RArm then
+		self.RArm:Destroy()
+		end
+		
 		elseif enh == 'AutocannonTurret' then
 		if self.Turret then
 		self.Turret:Destroy()
 		end
 		
-		local position = self:GetPosition('Turret')
+		local position = self:GetPosition('AttachSpecial01')
 		self.Turret = CreateUnitHPR('Autocannon', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.Turret:HideBone(0,true)
-		self.Turret:AttachBoneTo(0, self, 'Turret')
-		self.Turret:ShowBone(0,true)
+		self.Turret:SetParent(self, 'AutocannonTurret')
+        self.Turret:SetCreator(self)
+		self.Turret:AttachBoneTo(0, self, 'AttachSpecial01')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'GatlingTurret' then
@@ -195,11 +244,11 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.Turret:Destroy()
 		end
 		
-		local position = self:GetPosition('Turret')
+		local position = self:GetPosition('AttachSpecial01')
 		self.Turret = CreateUnitHPR('Gatling', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.Turret:HideBone(0,true)
-		self.Turret:AttachBoneTo(0, self, 'Turret')
-		self.Turret:ShowBone(0,true)
+		self.Turret:SetParent(self, 'GatlingTurret')
+        self.Turret:SetCreator(self)
+		self.Turret:AttachBoneTo(0, self, 'AttachSpecial01')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
         end
     end,
