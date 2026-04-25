@@ -257,7 +257,6 @@ CSKMDTL0203 = Class(TWalkingLandUnit) {
 	if self.load == false then
 	
 	else
-	ForkThread(function()
 	
 	local units = self:GetCargo()
 	if units[1] == nil then
@@ -276,11 +275,12 @@ CSKMDTL0203 = Class(TWalkingLandUnit) {
 	self.unit.CanTakeDamage = false
 	self.unit.CanBeKilled = false
 	SetIgnoreArmyUnitCap(self:GetArmy(), false)
+	ForkThread(function()
 	WaitSeconds(1)
+	end)
 	self.unit.CanTakeDamage = true
 	self.unit.CanBeKilled = true
 	end
-	end)
 	end	
 
 
