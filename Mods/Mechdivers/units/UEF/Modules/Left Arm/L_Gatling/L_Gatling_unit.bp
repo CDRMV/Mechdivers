@@ -115,6 +115,7 @@ UnitBlueprint {
     },
 		    Weapon = {
 				{
+				AlwaysRecheckTarget = false,
             AboveWaterTargetsOnly = true,
             AimsStraightOnDisable = false,
             Audio = {

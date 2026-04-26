@@ -37,7 +37,7 @@ UnitBlueprint {
 	     General = {
         CapCost = 0,
         Category = 'Utility',
-        Classification = 'RULEUC_MilitaryAircraft',
+        Classification = 'RULEUC_MilitaryVehicle',
         CommandCaps = {
             RULEUCC_Attack = true,
             RULEUCC_CallTransport = false,
@@ -115,6 +115,7 @@ UnitBlueprint {
     },
 		    Weapon = {
 		{
+		AlwaysRecheckTarget = false,
             AboveWaterTargetsOnly = true,
             Audio = {
                 Fire = Sound {

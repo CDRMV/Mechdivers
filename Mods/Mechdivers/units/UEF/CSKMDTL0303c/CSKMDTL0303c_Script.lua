@@ -25,34 +25,77 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
                 end,
                 
         OnGotTarget = function(self)
-		IssueClearCommands({self.unit.LArm, self.unit.RArm, self.unit.Turret})
+			if self.unit:GetFireState() == 2 then
 			local targetposition = self:GetCurrentTargetPos()
-			local target = self:GetCurrentTarget()
 			if targetposition then
-			IssueAttack({self.unit.LArm, self.unit.RArm, self.unit.Turret}, targetposition)
+			if self.unit.LArm and not self.unit.LArm.Dead then
+			IssueClearCommands({self.unit.LArm})
+			self.unit.LArm:GetWeapon(1):SetTargetGround(targetposition)
+			self.unit.LArm:GetWeapon(1):SetTargetingPriorities({})
+			IssueAttack({self.unit.LArm}, targetposition)
 			end
-			if target then
-			IssueAttack({self.unit.LArm, self.unit.RArm, self.unit.Turret}, target)
+			if self.unit.RArm and not self.unit.RArm.Dead then
+			IssueClearCommands({self.unit.RArm})
+			self.unit.RArm:GetWeapon(1):SetTargetGround(targetposition)
+			self.unit.RArm:GetWeapon(1):SetTargetingPriorities({})
+			IssueAttack({self.unit.RArm}, targetposition)
+			end
+			if self.unit.Turret and not self.unit.Turret.Dead then
+			IssueClearCommands({self.unit.Turret})
+			self.unit.Turret:GetWeapon(1):SetTargetGround(targetposition)
+			self.unit.Turret:GetWeapon(1):SetTargetingPriorities({})
+			IssueAttack({self.unit.Turret}, targetposition)
+			end
+			end
+			elseif self.unit:GetFireState() == 0 then
+
 			end
                DummyTurretWeapon.OnGotTarget(self)
         end,                
             },
         
         OnGotTarget = function(self)
-		IssueClearCommands({self.unit.LArm, self.unit.RArm, self.unit.Turret})
-					local targetposition = self:GetCurrentTargetPos()
-			local target = self:GetCurrentTarget()
+			if self.unit:GetFireState() == 2 then
+			local targetposition = self:GetCurrentTargetPos()
 			if targetposition then
-			IssueAttack({self.unit.LArm, self.unit.RArm, self.unit.Turret}, targetposition)
+			if self.unit.LArm and not self.unit.LArm.Dead then
+			IssueClearCommands({self.unit.LArm})
+			self.unit.LArm:GetWeapon(1):SetTargetGround(targetposition)
+			self.unit.LArm:GetWeapon(1):SetTargetingPriorities({})
+			IssueAttack({self.unit.LArm}, targetposition)
 			end
-			if target then
-			IssueAttack({self.unit.LArm, self.unit.RArm, self.unit.Turret}, target)
+			if self.unit.RArm and not self.unit.RArm.Dead then
+			IssueClearCommands({self.unit.RArm})
+			self.unit.RArm:GetWeapon(1):SetTargetGround(targetposition)
+			self.unit.RArm:GetWeapon(1):SetTargetingPriorities({})
+			IssueAttack({self.unit.RArm}, targetposition)
+			end
+			if self.unit.Turret and not self.unit.Turret.Dead then
+			IssueClearCommands({self.unit.Turret})
+			self.unit.Turret:GetWeapon(1):SetTargetGround(targetposition)
+			self.unit.Turret:GetWeapon(1):SetTargetingPriorities({})
+			IssueAttack({self.unit.Turret}, targetposition)
+			end
+			end
+			elseif self.unit:GetFireState() == 0 then
+
 			end
                DummyTurretWeapon.OnGotTarget(self)
         end,
         
         OnLostTarget = function(self)
-			IssueClearCommands({self.unit.LArm, self.unit.RArm, self.unit.Turret})
+		if self.unit:GetFireState() == 2 then
+		IssueStop({self.unit})
+		end
+			if self.unit.LArm and not self.unit.LArm.Dead then
+			IssueClearCommands({self.unit.LArm})
+			end
+			if self.unit.RArm and not self.unit.RArm.Dead then
+			IssueClearCommands({self.unit.RArm})
+			end
+			if self.unit.Turret and not self.unit.Turret.Dead then
+			IssueClearCommands({self.unit.Turret})
+			end
             DummyTurretWeapon.OnLostTarget(self)
         end,  	
 		

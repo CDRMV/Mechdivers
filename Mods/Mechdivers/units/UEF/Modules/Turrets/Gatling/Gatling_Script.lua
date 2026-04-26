@@ -45,7 +45,7 @@ Gatling = Class(DummyUnit) {
                 self.ExhaustEffects = EffectUtils.CreateBoneEffects( self.unit, 'Gatling_Turret_Muzzle', self.unit:GetArmy(), Effects.WeaponSteam01 )
                 TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
             end,
-        },
+        }, 	
     },  
 	
 	Parent = nil,
