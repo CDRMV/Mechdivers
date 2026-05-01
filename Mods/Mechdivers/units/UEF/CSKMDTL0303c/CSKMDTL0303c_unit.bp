@@ -48,7 +48,8 @@ UnitBlueprint {
     BuildIconSortPriority = 20,
     Categories = {
         'BOT',
-        #'BUILTBYTIER3FACTORY',
+		'BUILTBYTIER2FACTORY',
+        'BUILTBYTIER3FACTORY',
         'DIRECTFIRE',
         'INDIRECTFIRE',
 		'MODULARMECH',
@@ -59,7 +60,7 @@ UnitBlueprint {
         'OVERLAYINDIRECTFIRE',
         'RECLAIMABLE',
         'SELECTABLE',       
-        'TECH3',
+        'TECH2',
         'UEF',
         'VISIBLETORECON',
     },
@@ -76,9 +77,9 @@ UnitBlueprint {
     Description = 'Modular Bot',
     Display = {
         Abilities = {
-			'<LOC ability_customizable>Customizable',
-            '<LOC ability_deathaoe>Volatile',
-			'Usable Pilot as an seperated Unit',
+			'Can be Unmanned/Manned by an Mech Marine',
+			'Can be Upgraded with Modules',
+			'Only 10 can be builded',
         },
         AnimationDeath = {
             {

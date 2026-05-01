@@ -1,7 +1,7 @@
 
 function GetBackgroundTextures(unitID)
     local bp = __blueprints[unitID]
-    local validIcons = {land = true, air = true, sea = true, amph = true, orbit = true}
+    local validIcons = {land = true, air = true, sea = true, amph = true, orbit = true, none = true}
     local icon = "land"
 	local Modpath = "/mods/Mechdivers"
     if unitID and unitID ~= 'default' then

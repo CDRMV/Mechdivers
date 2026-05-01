@@ -34,6 +34,16 @@ local MyUnitIdTable = {
   
  
  -- UEF
+ 
+  -- Modules
+ 	  gatling=true,
+	  autocannon=true,
+	  l_gatling=true,
+	  r_gatling=true,
+	  l_autocannon=true,
+	  r_autocannon=true,
+	  l_missilelauncher=true,
+   	  r_missilelauncher=true,
    
  -- Air  	
    
@@ -70,6 +80,7 @@ local MyUnitIdTable = {
 	  cskmdtl0303=true, 
 	  cskmdtl0304=true, 
 	  cskmdtl0303b=true, 
+	  cskmdtl0303c=true, 
 	  cskmdtl0304b=true, 
 	  cskmdtl0305=true, 
 	  cskmdtl0306=true, 
@@ -154,7 +165,8 @@ local MyUnitIdTable = {
 	  cskmdcl0316=true,
 	  cskmdcl0317=true, 	
 	  cskmdcl0318=true, 	
-	  cskmdcl0319=true, 	
+	  cskmdcl0319=true, 
+	  cskmdcl0320=true, 	  
 
 -- Structures 
       -- Mines --

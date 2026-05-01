@@ -31,4 +31,8 @@ UnitList = {
 	T4LandExperimental1 = {
 		Cybran = {'CSKMDCL0319', 80},    -- Vox Engine, Tech 3 Heavy Tank bot
     },
+	
+	T4LandExperimental2 = {
+		Cybran = {'CSKMDCL0320', 80},    	-- Omega Engine, Tech 3 Heavy Shotgun Tank bot
+	},
 }

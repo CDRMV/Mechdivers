@@ -1,22 +1,17 @@
 
 UnitBlueprint {
     Categories = {
-        'SELECTABLE',
+        'UNSELECTABLE',
         'UEF',
         'MOBILE',
         'LAND',
-        'TECH1',
 		'DIRECTFIRE',
 		'OVERLAYDIRECTFIRE',
         'POD',
-        'REPAIR',
-        'RECLAIM',
-        'ENGINEER',
-        'CAPTURE',
+        'MODULE',
         'VISIBLETORECON',
-        'RECLAIMABLE',
     },
-       Defense = { Health = 100, MaxHealth = 100 },
+       Defense = { Health = 600, MaxHealth = 600 },
        Display = {         
 			Mesh = {
             IconFadeInZoom = 130,
@@ -54,7 +49,7 @@ UnitBlueprint {
             RULEUCC_Transport = false,
         },
         FactionName = 'UEF',
-        Icon = 'air',
+        Icon = 'none',
         OrderOverrides = {
             DroneL = {
                 bitmapId = 'drone',
@@ -63,7 +58,7 @@ UnitBlueprint {
         },
         SelectionPriority = 6,
         TechLevel = 'RULEUTL_Basic',
-        UnitName = '<LOC uea0001_name>C-D1 "Rover"',
+        UnitName = 'MA/G13 Miniguns',
         UnitWeight = 1,
     },
     Intel = {
@@ -100,7 +95,7 @@ UnitBlueprint {
     SizeX = 1,
     SizeY = 0.5,
     SizeZ = 1,
-    StrategicIconName = 'icon_land1_engineer',
+    StrategicIconName = 'icon_structure_generic',
     StrategicIconSize = 1,
     StrategicIconSortPriority = 105,
     Transport = {

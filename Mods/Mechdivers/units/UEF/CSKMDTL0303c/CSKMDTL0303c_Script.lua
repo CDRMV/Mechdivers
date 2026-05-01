@@ -385,6 +385,25 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
         TWalkingLandUnit.OnScriptBitSet(self, bit)
 		ForkThread(function()
 		if bit == 1 then 
+		if self.Turret and not self.Turret.Dead then
+		self.Turret:RemoveCommandCap('RULEUCC_Attack')
+		self.Turret:RemoveCommandCap('RULEUCC_Stop')
+		self.Turret:SetFireState(1)
+		self.Turret:RemoveCommandCap('RULEUCC_RetaliateToggle')
+		end
+		if self.LArm and not self.LArm.Dead then
+		self.LArm:RemoveCommandCap('RULEUCC_Attack')
+		self.LArm:RemoveCommandCap('RULEUCC_Stop')
+		self.LArm:SetFireState(1)
+		self.LArm:RemoveCommandCap('RULEUCC_RetaliateToggle')
+		end
+		if self.RArm and not self.RArm.Dead then
+		self.RArm:RemoveCommandCap('RULEUCC_Attack')
+		self.RArm:RemoveCommandCap('RULEUCC_Stop')
+		self.RArm:SetFireState(1)
+		self.RArm:RemoveCommandCap('RULEUCC_RetaliateToggle')
+		end
+
 		self:RemoveCommandCap('RULEUCC_Move')
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_Patrol')
@@ -466,6 +485,24 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self:SetFireState(0)
 		self:AddCommandCap('RULEUCC_RetaliateToggle')
 		self:AddCommandCap('RULEUCC_Guard')
+				if self.Turret and not self.Turret.Dead then
+		self.Turret:AddCommandCap('RULEUCC_Attack')
+		self.Turret:AddCommandCap('RULEUCC_Stop')
+		self.Turret:SetFireState(0)
+		self.Turret:AddCommandCap('RULEUCC_RetaliateToggle')
+		end
+		if self.LArm and not self.LArm.Dead then
+		self.LArm:AddCommandCap('RULEUCC_Attack')
+		self.LArm:AddCommandCap('RULEUCC_Stop')
+		self.LArm:SetFireState(0)
+		self.LArm:AddCommandCap('RULEUCC_RetaliateToggle')
+		end
+		if self.RArm and not self.RArm.Dead then
+		self.RArm:AddCommandCap('RULEUCC_Attack')
+		self.RArm:AddCommandCap('RULEUCC_Stop')
+		self.RArm:SetFireState(0)
+		self.RArm:AddCommandCap('RULEUCC_RetaliateToggle')
+		end
 		self.fold = false
 		elseif bit == 7 then
 		self.load = false
