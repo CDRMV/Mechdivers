@@ -626,9 +626,9 @@ UnitBlueprint {
             WeaponCategory = 'Direct Fire Naval',
         },
         {
-            Damage = 100,
+            Damage = 300,
             DamageFriendly = true,
-            DamageRadius = 1,
+            DamageRadius = 2,
             DamageType = 'Normal',
             DisplayName = 'Air Crash',
             DummyWeapon = true,
