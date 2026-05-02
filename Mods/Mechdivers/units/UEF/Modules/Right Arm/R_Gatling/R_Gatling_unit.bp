@@ -58,7 +58,7 @@ UnitBlueprint {
         },
         SelectionPriority = 6,
         TechLevel = 'RULEUTL_Basic',
-        UnitName = 'MA/G13 Miniguns',
+        UnitName = 'MA/G13 Minigun',
         UnitWeight = 1,
     },
     Intel = {

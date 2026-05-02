@@ -1,0 +1,80 @@
+#****************************************************************************
+#**
+#**  File     :  /units/UEL0303b/UEL0303b_script.lua
+#**  Author(s):  CDRMV
+#**
+#**  Summary  :  UEF Patroit/Emancipator Mech Script
+#**
+#**  Copyright © 2025, Commander Survival Kit Project
+#****************************************************************************
+
+local DummyUnit = import('/lua/defaultunits.lua').MobileUnit
+local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
+
+L_AntiTankCannon = Class(DummyUnit) {
+
+    Weapons = {
+		Cannon = Class(TDFGaussCannonWeapon) {
+		
+		OnWeaponFired = function(self, target)
+		ForkThread( function()
+		self.unit:HideBone('Shell01', true)
+		self.unit.Animator:PlayAnim('/Mods/Mechdivers/units/UEF/Modules/Left Arm/L_AntiTankCannon/L_AntiTankCannon_Reload.sca', false):SetRate(-1)
+		if self.unit.Animator == nil then
+
+		else
+		WaitFor(self.unit.Animator)
+		end
+		end)
+		end,
+		
+		
+		PlayFxRackSalvoReloadSequence = function(self)
+		ForkThread( function()
+		self.unit:ShowBone('Shell01', true)
+        local bp = self.Blueprint
+            self.unit.Animator:PlayAnim('/Mods/Mechdivers/units/UEF/Modules/Left Arm/L_AntiTankCannon/L_AntiTankCannon_Reload.sca', false):SetRate(1)
+			if self.unit.Animator == nil then
+
+			else
+			WaitFor(self.unit.Animator)
+			end
+			end)
+		end,
+		
+		
+		--[[
+		PlayFxMuzzleSequence = function(self, muzzle)
+		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
+		if muzzle == 'Cannon_Muzzle01' then
+		CreateAttachedEmitter(self.unit, 'Cannon_Shell01', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
+		end
+		if muzzle == 'Cannon_Muzzle02' then
+		CreateAttachedEmitter(self.unit, 'Cannon_Shell02', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
+		end
+		end,
+		]]--
+		},
+    }, 
+	
+	OnCreate = function(self)
+		local animator = CreateAnimator(self)
+        self.Animator = animator
+        DummyUnit.OnCreate(self)
+    end,
+
+    Parent = nil,
+
+    SetParent = function(self, parent, podName)
+        self.Parent = parent
+        self.Pod = podName
+    end,
+
+    OnKilled = function(self, instigator, type, overkillRatio)
+        self.Parent:NotifyOfPodDeath(self.Pod)
+        self.Parent = nil
+        DummyUnit.OnKilled(self, instigator, type, overkillRatio)
+    end,	
+	  
+}
+TypeClass = L_AntiTankCannon
