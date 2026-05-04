@@ -21,10 +21,14 @@ UABMD0204 = Class(AStructureUnit) {
 			self.Effect1:SetDrawScale(0.21)
 			self:SetScriptBit('RULEUTC_ProductionToggle', true)
 			self:SetScriptBit('RULEUTC_ProductionToggle', false)
+			self.Circle = nil
     end,
 	
 	OnScriptBitSet = function(self, bit)
         AStructureUnit.OnScriptBitSet(self, bit)
+		if bit == 1 then 
+
+        end
         if bit == 4 then 
 		KillThread(self.AutomaticForceFieldThreadHandle)
 		self.RemoveAutomaticForceFieldThreadHandle = self:ForkThread(self.RemoveAutomaticForceFieldThread)
@@ -32,11 +36,16 @@ UABMD0204 = Class(AStructureUnit) {
 		self.Effect1:SetVizToNeutrals('Never')
 		self.Effect1:SetVizToEnemies('Never')
 		self:SetMaintenanceConsumptionInactive()
+		--self:RemoveToggleCap('RULEUTC_WeaponToggle')
 		end
     end,
 
     OnScriptBitClear = function(self, bit)
         AStructureUnit.OnScriptBitClear(self, bit)
+		if bit == 1 then 
+		local Pos = self:GetPosition()
+		--self.Circle = DrawCircle(Pos, 10, 'ffffff')
+        end
         if bit == 4 then
 		ForkThread(function()
 		KillThread(self.RemoveAutomaticForceFieldThreadHandle)
@@ -45,6 +54,7 @@ UABMD0204 = Class(AStructureUnit) {
 		self.Effect1:SetVizToNeutrals('Intel')
 		self.Effect1:SetVizToEnemies('Intel')
 		self:SetMaintenanceConsumptionActive()
+		--self:AddToggleCap('RULEUTC_WeaponToggle')
 		end)		
 		end
     end,
@@ -52,27 +62,20 @@ UABMD0204 = Class(AStructureUnit) {
 	AutomaticForceFieldThread = function(self)
 			local unitPos = self:GetPosition()
 			local radius = self:GetBlueprint().Intel.VisionRadius
+			local regenbuff = 0
 			while not self:IsDead() do
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Ally')
             for _,unit in units do
 			if unit:GetFractionComplete() == 1 then
 			    if GetDistanceBetweenTwoEntities(unit, self) < 10 then
 				local regen = unit:GetBlueprint().Defense.RegenRate
-				local maxhealth = unit:GetBlueprint().Defense.MaxHealth
-				local health = unit:GetBlueprint().Defense.Health
-				  unit:SetMaxHealth(maxhealth + 1000)
-				  unit:SetHealth(unit, health + 1000)
-                  unit:SetRegenRate(regen + 10)
+                  unit:SetRegenRate(regen + 30)
 				end
 				if GetDistanceBetweenTwoEntities(unit, self) > 12 then
 				local regen = unit:GetBlueprint().Defense.RegenRate
-				local maxhealth = unit:GetBlueprint().Defense.MaxHealth
-				local health = unit:GetBlueprint().Defense.Health
-				  unit:SetMaxHealth(maxhealth)
-				  unit:SetHealth(unit, health)
-                  unit:SetRegenRate(regen)	
+                  unit:SetRegenRate(regen)
+				end  
                 end
-			end	
             end
 			WaitSeconds(0.1)
 			end
@@ -85,10 +88,6 @@ UABMD0204 = Class(AStructureUnit) {
             for _,unit in units do
 				if unit:GetFractionComplete() == 1 then
 				local regen = unit:GetBlueprint().Defense.RegenRate
-				local maxhealth = unit:GetBlueprint().Defense.MaxHealth
-				local health = unit:GetBlueprint().Defense.Health
-				  unit:SetMaxHealth(maxhealth)
-				  unit:SetHealth(unit, health)
                   unit:SetRegenRate(regen)
 				end  
             end

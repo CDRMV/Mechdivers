@@ -134,6 +134,9 @@ UnitBlueprint {
 			RULEUTC_ProductionToggle = {
 				helpText = 'Turn On/Off Buff Forcefield',
             },
+			RULEUTC_WeaponToggle = {
+				helpText = 'Show/Hide Forcefield Range',
+            },
         },
 		ToggleCaps = {
             RULEUTC_ProductionToggle = true,
