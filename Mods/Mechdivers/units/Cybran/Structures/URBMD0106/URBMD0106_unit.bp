@@ -53,8 +53,8 @@ UnitBlueprint {
         AirThreatLevel = 0,
         ArmorType = 'Structure',
         EconomyThreatLevel = 3,
-        Health = 1300,
-        MaxHealth = 1300,
+        Health = 2100,
+        MaxHealth = 2100,
         RegenRate = 0,
         SubThreatLevel = 0,
         SurfaceThreatLevel = 6,
@@ -79,9 +79,9 @@ UnitBlueprint {
         UniformScale = 0.030,
     },
     Economy = {
-        BuildCostEnergy = 2000,
-        BuildCostMass = 250,
-        BuildTime = 250,
+        BuildCostEnergy = 2500,
+        BuildCostMass = 300,
+        BuildTime = 300,
         RebuildBonusIds = {
             'urbmd0106',
         },
@@ -121,7 +121,7 @@ UnitBlueprint {
         },
     },
     Intel = {
-        VisionRadius = 24,
+        VisionRadius = 36,
     },
     Interface = {
         HelpText = '<LOC urb2101_help>Point Defense',
@@ -176,7 +176,7 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
-            Damage = 25,
+            Damage = 500,
             DamageType = 'Normal',
             DisplayName = 'Light Pulse Laser',
             FireTargetLayerCapsTable = {
@@ -185,7 +185,7 @@ UnitBlueprint {
             },
             FiringTolerance = 2,
             Label = 'MainGun',
-            MaxRadius = 26,
+            MaxRadius = 42,
 			MinRadius = 3,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
