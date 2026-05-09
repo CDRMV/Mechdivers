@@ -31,7 +31,7 @@ UnitBlueprint {
 	     General = {
         CapCost = 0,
         Category = 'Utility',
-        Classification = 'RULEUC_MilitaryAircraft',
+        Classification = 'RULEUC_MilitaryVehicle',
         CommandCaps = {
             RULEUCC_Attack = true,
             RULEUCC_CallTransport = false,
@@ -72,7 +72,7 @@ UnitBlueprint {
     Physics = {
         BankingSlope = 0.5,
         BuildOnLayerCaps = {
-            LAYER_Air = true,
+            LAYER_Air = false,
             LAYER_Land = true,
             LAYER_Orbit = false,
             LAYER_Seabed = false,
@@ -84,7 +84,7 @@ UnitBlueprint {
         MaxSpeed = 10,
         MaxSteerForce = 100,
         MinSpeedPercent = 0.85,
-        MotionType = 'RULEUMT_Air',
+        MotionType = 'RULEUMT_Land',
         TurnRadius = 100,
         TurnRate = 100,
     },
