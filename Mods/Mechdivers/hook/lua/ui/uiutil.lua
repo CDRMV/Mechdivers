@@ -49,6 +49,9 @@ local MyUnitIdTable = {
    	  r_antitankcannon=true,
 	  l_flamethrower=true,
    	  r_flamethrower=true,
+	  r_balisticshield=true,
+	  l_balisticshield=true,
+	  balisticshield=true,
 	  
  -- Air  	
    

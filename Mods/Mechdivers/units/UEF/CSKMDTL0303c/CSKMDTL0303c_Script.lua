@@ -154,20 +154,22 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.fold = false
 		self.LArm = nil
 		self.RArm = nil
+		self.LBalisticShield = nil
+		self.RBalisticShield = nil
 		self.Turret = nil
 		
 		--[[
-		self.LArm = CreateUnitHPR('L_Flamethrower', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.LArm:SetParent(self, 'LeftFlamethrower')
+		self.LArm = CreateUnitHPR('L_BalisticShield', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.LArm:SetParent(self, 'LeftBalisticShield')
         self.LArm:SetCreator(self)
-		self.LArm:AttachBoneTo('FlameThrower_Attach', self, 'AttachSpecial02')
-		
-		self.RArm = CreateUnitHPR('R_Flamethrower', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.RArm:SetParent(self, 'RightFlamethrower')
+		self.LArm:AttachBoneTo('BalisticShield_Attach', self, 'AttachSpecial02')
+
+		self.RArm = CreateUnitHPR('R_BalisticShield', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.RArm:SetParent(self, 'RightBalisticShield')
         self.RArm:SetCreator(self)
-		self.RArm:AttachBoneTo('FlameThrower_Attach', self, 'AttachSpecial03')
-		
+		self.RArm:AttachBoneTo('BalisticShield_Attach', self, 'AttachSpecial03')
 		]]--
+
 		
 		local RandomNumber = math.random(1,3)
 		
@@ -256,12 +258,20 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
             self:CreateEnhancement('RightFlameThrowerRemove')
             self:CreateEnhancement('RightEmpty')
             self:RequestRefreshUI()
+		elseif pod == 'RightBalisticShield' then
+            self:CreateEnhancement('RightBalisticShieldRemove')
+            self:CreateEnhancement('RightEmpty')
+            self:RequestRefreshUI()
 		elseif pod == 'LeftAntiTankCannon' then
             self:CreateEnhancement('LeftAntiTankCannonRemove')
             self:CreateEnhancement('LeftEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'LeftFlameThrower' then
             self:CreateEnhancement('LeftFlameThrowerRemove')
+            self:CreateEnhancement('LeftEmpty')
+            self:RequestRefreshUI()
+		elseif pod == 'LeftBalisticShield' then
+            self:CreateEnhancement('LeftBalisticShieldRemove')
             self:CreateEnhancement('LeftEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'AutocannonTurret' then
@@ -339,6 +349,33 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.RArm:AttachBoneTo('FlameThrower_Attach', self, 'AttachSpecial03')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
+		elseif enh == 'RightBalisticShield' then
+		self.RBalisticShield = true
+		if self.RArm then
+		self.RArm:Destroy()
+		end
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition('AttachSpecial03')
+		self.RArm = CreateUnitHPR('R_BalisticShield', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.RArm:SetParent(self, 'RightBalisticShield')
+        self.RArm:SetCreator(self)
+		self.RArm:AttachBoneTo('BalisticShield_Attach', self, 'AttachSpecial03')
+		
+		if self.LBalisticShield == true then
+		self.LArm:RevertAnimation()
+		else
+		self.RArm:DoAnimation()
+		end
+		
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		
+		elseif enh == 'RightBalisticShieldRemove' then
+		self.RArm:Destroy()
+		self.RBalisticShield = false
+		if self.LArm and self.LBalisticShield == true then
+		self.LArm:DoAnimation()
+		end
+		
 		elseif enh == 'LeftAntiTankCannon' then
 		if self.LArm then
 		self.LArm:Destroy()
@@ -362,6 +399,33 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
         self.LArm:SetCreator(self)
 		self.LArm:AttachBoneTo('FlameThrower_Attach', self, 'AttachSpecial02')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		
+		elseif enh == 'LeftBalisticShield' then
+		self.LBalisticShield = true
+		if self.LArm then
+		self.LArm:Destroy()
+		end
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition('AttachSpecial02')
+		self.LArm = CreateUnitHPR('L_BalisticShield', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.LArm:SetParent(self, 'LeftBalisticShield')
+        self.LArm:SetCreator(self)
+		self.LArm:AttachBoneTo('BalisticShield_Attach', self, 'AttachSpecial02')
+		
+		if self.RBalisticShield == true then
+		self.RArm:RevertAnimation()
+		else
+		self.LArm:DoAnimation()
+		end
+		
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		
+		elseif enh == 'LeftBalisticShieldRemove' then
+		self.LBalisticShield = false
+		self.LArm:Destroy()
+		if self.RArm and self.RBalisticShield == true then
+		self.RArm:DoAnimation()
+		end
 		
 		elseif enh == 'LeftAutoCannon' then
 		if self.LArm then
