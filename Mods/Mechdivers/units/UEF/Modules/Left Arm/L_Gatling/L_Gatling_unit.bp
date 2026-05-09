@@ -110,7 +110,7 @@ UnitBlueprint {
     },
 		    Weapon = {
 				{
-				AlwaysRecheckTarget = false,
+			AlwaysRecheckTarget = false,
             AboveWaterTargetsOnly = true,
             AimsStraightOnDisable = false,
             Audio = {
@@ -137,7 +137,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0.3,
             MuzzleSalvoSize = 15,
             MuzzleVelocity = 25,
-            NoPause = true,
+			NoPause = true,
             ProjectileId = '/projectiles/TDFMachineGun01/TDFMachineGun01_proj.bp',
             ProjectileLifetimeUsesMultiplier = 1.15,
             ProjectilesPerOnFire = 1,

@@ -46,9 +46,9 @@ R_Gatling = Class(DummyUnit) {
                 TDFMachineGunWeapon.PlayFxRackSalvoChargeSequence(self)
             end,
         },
-    },  
-	
-	Parent = nil,
+    },
+
+    Parent = nil,
 
     SetParent = function(self, parent, podName)
         self.Parent = parent

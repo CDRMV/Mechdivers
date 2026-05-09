@@ -33,12 +33,12 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 			
 			local targetposition = self:GetCurrentTargetPos()
 			if targetposition then
-			if self.unit.LArm and not self.unit.LArm.Dead then
+			if self.unit.LArm and not self.unit.LArm.Dead and self.unit.LBalisticShield == false then
 			IssueClearCommands({self.unit.LArm})
 			self.unit.LArm:GetWeapon(1):SetTargetGround(targetposition)
 			IssueAttack({self.unit.LArm}, targetposition)
 			end
-			if self.unit.RArm and not self.unit.RArm.Dead then
+			if self.unit.RArm and not self.unit.RArm.Dead and self.unit.RBalisticShield == false then
 			IssueClearCommands({self.unit.RArm})
 			self.unit.RArm:GetWeapon(1):SetTargetGround(targetposition)
 			IssueAttack({self.unit.RArm}, targetposition)
@@ -51,10 +51,10 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 			end
 			end
 			elseif self.unit:GetFireState() == 0 then
-			if self.unit.LArm and not self.unit.LArm.Dead then
+			if self.unit.LArm and not self.unit.LArm.Dead and self.unit.LBalisticShield == false then
 			IssueClearCommands({self.unit.LArm})
 			end
-			if self.unit.RArm and not self.unit.RArm.Dead then
+			if self.unit.RArm and not self.unit.RArm.Dead and self.unit.RBalisticShield == false then
 			IssueClearCommands({self.unit.RArm})
 			end
 			if self.unit.Turret and not self.unit.Turret.Dead then
@@ -73,12 +73,12 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 			else
 			local targetposition = self:GetCurrentTargetPos()
 			if targetposition then
-			if self.unit.LArm and not self.unit.LArm.Dead then
+			if self.unit.LArm and not self.unit.LArm.Dead and self.unit.LBalisticShield == false then
 			IssueClearCommands({self.unit.LArm})
 			self.unit.LArm:GetWeapon(1):SetTargetGround(targetposition)
 			IssueAttack({self.unit.LArm}, targetposition)
 			end
-			if self.unit.RArm and not self.unit.RArm.Dead then
+			if self.unit.RArm and not self.unit.RArm.Dead and self.unit.RBalisticShield == false then
 			IssueClearCommands({self.unit.RArm})
 			self.unit.RArm:GetWeapon(1):SetTargetGround(targetposition)
 			IssueAttack({self.unit.RArm}, targetposition)
@@ -154,8 +154,8 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.fold = false
 		self.LArm = nil
 		self.RArm = nil
-		self.LBalisticShield = nil
-		self.RBalisticShield = nil
+		self.LBalisticShield = false
+		self.RBalisticShield = false
 		self.Turret = nil
 		
 		--[[
