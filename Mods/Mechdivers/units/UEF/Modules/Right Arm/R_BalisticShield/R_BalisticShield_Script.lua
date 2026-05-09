@@ -55,11 +55,11 @@ R_BalisticShield = Class(DummyUnit) {
     end,
 	
 	RevertAnimation = function(self)
-		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/Modules/Left Arm/R_BalisticShield/R_BalisticShield_Unpack.sca', false):SetRate(-2)
+		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/Modules/Right Arm/R_BalisticShield/R_BalisticShield_Unpack.sca', false):SetRate(-2)
     end,
 	
 	DoAnimation = function(self)
-		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/Modules/Left Arm/R_BalisticShield/R_BalisticShield_Unpack.sca', false):SetRate(2)
+		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/Modules/Right Arm/R_BalisticShield/R_BalisticShield_Unpack.sca', false):SetRate(2)
     end,
 	
 	OnDestroy = function(self) 
