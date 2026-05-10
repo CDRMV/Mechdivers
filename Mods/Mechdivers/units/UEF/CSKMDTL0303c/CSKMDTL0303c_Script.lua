@@ -159,19 +159,18 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.Turret = nil
 		
 		--[[
-		self.LArm = CreateUnitHPR('L_BalisticShield', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.LArm:SetParent(self, 'LeftBalisticShield')
+		self.LArm = CreateUnitHPR('L_Shotgun', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.LArm:SetParent(self, 'LeftScatterGun')
         self.LArm:SetCreator(self)
-		self.LArm:AttachBoneTo('BalisticShield_Attach', self, 'AttachSpecial02')
+		self.LArm:AttachBoneTo('Launcher_Attach', self, 'AttachSpecial02')
 
-		self.RArm = CreateUnitHPR('R_BalisticShield', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		self.RArm:SetParent(self, 'RightBalisticShield')
+		self.RArm = CreateUnitHPR('R_Shotgun', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.RArm:SetParent(self, 'RightScatterGun')
         self.RArm:SetCreator(self)
-		self.RArm:AttachBoneTo('BalisticShield_Attach', self, 'AttachSpecial03')
+		self.RArm:AttachBoneTo('Launcher_Attach', self, 'AttachSpecial03')
 		]]--
 
-		
-		local RandomNumber = math.random(1,3)
+		local RandomNumber = math.random(1,4)
 		
 		if RandomNumber == 1 then
 
@@ -187,6 +186,12 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 
 		self:CreateEnhancement('RightAntiTankCannon')
 		self:CreateEnhancement('LeftFlameThrower')
+		self:CreateEnhancement('Empty')
+		
+		elseif RandomNumber == 4 then
+
+		self:CreateEnhancement('RightScatterGun')
+		self:CreateEnhancement('LeftBalisticShield')
 		self:CreateEnhancement('Empty')
 		end
 		
@@ -203,7 +208,7 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.RArm = nil
 		self.Turret = nil
 		
-		local RandomNumber = math.random(1,3)
+		local RandomNumber = math.random(1,4)
 		
 		if RandomNumber == 1 then
 
@@ -219,6 +224,12 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 
 		self:CreateEnhancement('RightAntiTankCannon')
 		self:CreateEnhancement('LeftFlameThrower')
+		self:CreateEnhancement('Empty')
+		
+		elseif RandomNumber == 4 then
+
+		self:CreateEnhancement('RightScatterGun')
+		self:CreateEnhancement('LeftBalisticShield')
 		self:CreateEnhancement('Empty')
 		end
 
@@ -262,6 +273,10 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
             self:CreateEnhancement('RightBalisticShieldRemove')
             self:CreateEnhancement('RightEmpty')
             self:RequestRefreshUI()
+		elseif pod == 'RightScatterGun' then
+            self:CreateEnhancement('RightScatterGunRemove')
+            self:CreateEnhancement('RightEmpty')
+            self:RequestRefreshUI()
 		elseif pod == 'LeftAntiTankCannon' then
             self:CreateEnhancement('LeftAntiTankCannonRemove')
             self:CreateEnhancement('LeftEmpty')
@@ -272,6 +287,10 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
             self:RequestRefreshUI()
 		elseif pod == 'LeftBalisticShield' then
             self:CreateEnhancement('LeftBalisticShieldRemove')
+            self:CreateEnhancement('LeftEmpty')
+            self:RequestRefreshUI()
+		elseif pod == 'LeftScatterGun' then
+            self:CreateEnhancement('LeftScatterGunRemove')
             self:CreateEnhancement('LeftEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'AutocannonTurret' then
@@ -349,6 +368,18 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.RArm:AttachBoneTo('FlameThrower_Attach', self, 'AttachSpecial03')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
+		elseif enh == 'RightScatterGun' then
+		if self.RArm then
+		self.RArm:Destroy()
+		end
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition('AttachSpecial03')
+		self.RArm = CreateUnitHPR('R_Shotgun', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.RArm:SetParent(self, 'RightScatterGun')
+        self.RArm:SetCreator(self)
+		self.RArm:AttachBoneTo('Launcher_Attach', self, 'AttachSpecial03')
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		
 		elseif enh == 'RightBalisticShield' then
 		self.RBalisticShield = true
 		if self.RArm then
@@ -398,6 +429,18 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.LArm:SetParent(self, 'LeftFlameThrower')
         self.LArm:SetCreator(self)
 		self.LArm:AttachBoneTo('FlameThrower_Attach', self, 'AttachSpecial02')
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		
+		elseif enh == 'LeftScatterGun' then
+		if self.LArm then
+		self.LArm:Destroy()
+		end
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition('AttachSpecial02')
+		self.LArm = CreateUnitHPR('L_Shotgun', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.LArm:SetParent(self, 'LeftScatterGun')
+        self.LArm:SetCreator(self)
+		self.LArm:AttachBoneTo('Launcher_Attach', self, 'AttachSpecial02')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'LeftBalisticShield' then
