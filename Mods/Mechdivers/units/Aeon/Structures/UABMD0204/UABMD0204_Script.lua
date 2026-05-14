@@ -10,8 +10,22 @@
 
 local AStructureUnit = import('/lua/defaultunits.lua').StructureUnit
 local GetDistanceBetweenTwoEntities = import("/lua/utilities.lua").GetDistanceBetweenTwoEntities
-
+local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 UABMD0204 = Class(AStructureUnit) {
+
+    Weapons = {
+		Dummy = Class(DummyTurretWeapon) {
+		
+		OnWeaponFired = function(self)
+			ForkThread( function()
+			local animator = CreateAnimator(self.unit)
+            animator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0205/CSKMDAL0205_Claw.sca', false):SetRate(1)
+			WaitFor(animator)
+			animator:Destroy()
+			end)
+		end,
+		},
+    },
     OnStopBeingBuilt = function(self,builder,layer)
         AStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			EffectMesh1 = '/mods/Mechdivers/units/Aeon/Structures/UABMD0204/UABMD0204_ForceField_mesh'
@@ -26,9 +40,6 @@ UABMD0204 = Class(AStructureUnit) {
 	
 	OnScriptBitSet = function(self, bit)
         AStructureUnit.OnScriptBitSet(self, bit)
-		if bit == 1 then 
-
-        end
         if bit == 4 then 
 		KillThread(self.AutomaticForceFieldThreadHandle)
 		self.RemoveAutomaticForceFieldThreadHandle = self:ForkThread(self.RemoveAutomaticForceFieldThread)
@@ -36,16 +47,11 @@ UABMD0204 = Class(AStructureUnit) {
 		self.Effect1:SetVizToNeutrals('Never')
 		self.Effect1:SetVizToEnemies('Never')
 		self:SetMaintenanceConsumptionInactive()
-		--self:RemoveToggleCap('RULEUTC_WeaponToggle')
 		end
     end,
 
     OnScriptBitClear = function(self, bit)
         AStructureUnit.OnScriptBitClear(self, bit)
-		if bit == 1 then 
-		local Pos = self:GetPosition()
-		--self.Circle = DrawCircle(Pos, 10, 'ffffff')
-        end
         if bit == 4 then
 		ForkThread(function()
 		KillThread(self.RemoveAutomaticForceFieldThreadHandle)
@@ -54,7 +60,6 @@ UABMD0204 = Class(AStructureUnit) {
 		self.Effect1:SetVizToNeutrals('Intel')
 		self.Effect1:SetVizToEnemies('Intel')
 		self:SetMaintenanceConsumptionActive()
-		--self:AddToggleCap('RULEUTC_WeaponToggle')
 		end)		
 		end
     end,
@@ -77,7 +82,7 @@ UABMD0204 = Class(AStructureUnit) {
 				end  
                 end
             end
-			WaitSeconds(0.1)
+			WaitSeconds(0.5)
 			end
     end,
 	

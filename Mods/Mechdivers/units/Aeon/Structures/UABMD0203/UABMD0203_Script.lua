@@ -70,7 +70,7 @@ UABMD0203 = Class(AStructureUnit) {
         AStructureUnit.OnScriptBitClear(self, bit)
         if bit == 2 then
 		ForkThread(function()
-		self.Effect01 = CreateAttachedEmitter(self,'Effect',self:GetArmy(), '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/effect01_emit.bp'):OffsetEmitter(0, 42, 0):ScaleEmitter(2.1)
+		self.Effect01 = CreateAttachedEmitter(self,'Effect',self:GetArmy(), '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/effect01_emit.bp'):OffsetEmitter(0, 26, 0):ScaleEmitter(2.1)
 		--self.Effect02 = CreateAttachedEmitter(self,'Effect',self:GetArmy(), '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/effect02_emit.bp')
 		self.Beam = CreateBeamEmitterOnEntity(self, 'Beam', self:GetArmy(), '/mods/Mechdivers/units/Aeon/Structures/UABMD0203/beam_01_emit.bp')
 		KillThread(self.RemoveAutomaticCognitiveThreadHandle)
