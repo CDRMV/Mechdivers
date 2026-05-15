@@ -19,11 +19,11 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 		Dummy = Class(DummyTurretWeapon) {},
 		LGun = Class(ADFCannonQuantumWeapon) {
 		OnWeaponFired = function(self)
+		if self.LBeam then
+			self.LBeam:Destroy()
+		end
 		ForkThread(function()
-				if self.LBeam then
-					self.LBeam:Destroy()
-					end
-        ADFCannonQuantumWeapon.OnLostTarget(self)
+        self:OnLostTarget()
 		ChangeState(self, self.RackSalvoReloadState)
 		WaitSeconds(2)
 		ChangeState(self, self.IdleState)
@@ -41,11 +41,11 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
         },
 		RGun = Class(ADFCannonQuantumWeapon) {
 		OnWeaponFired = function(self)
+		if self.RBeam then
+			self.RBeam:Destroy()
+		end
 		ForkThread(function()
-				if self.RBeam then
-				self.RBeam:Destroy()
-				end
-        ADFCannonQuantumWeapon.OnLostTarget(self)
+        self:OnLostTarget()
 		ChangeState(self, self.RackSalvoReloadState)
 		WaitSeconds(2)
 		ChangeState(self, self.IdleState)
@@ -65,11 +65,12 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 		LGatlingGun = Class(ADFCannonQuantumWeapon) {
 		OnWeaponFired = function(self)
 		ForkThread(function()
-        ADFCannonQuantumWeapon.OnLostTarget(self)
+        self:OnLostTarget()
 		self:SetEnabled(false)
 		WaitSeconds(2)
 		ChangeState(self, self.IdleState)
 		WaitSeconds(5)
+		IssueAttack({self.unit}, nil)
 		self.unit.LGun:SetEnabled(true)
 		end)
 		end, 
@@ -107,11 +108,12 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 		RGatlingGun = Class(ADFCannonQuantumWeapon) {
 		OnWeaponFired = function(self)
 		ForkThread(function()
-        ADFCannonQuantumWeapon.OnLostTarget(self)
+        self:OnLostTarget()
 		self:SetEnabled(false)
 		WaitSeconds(2)
 		ChangeState(self, self.IdleState)
 		WaitSeconds(5)
+		IssueAttack({self.unit}, nil)
 		self.unit.RGun:SetEnabled(true)
 		end)
 		end, 
@@ -186,6 +188,13 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 	self.Effect1:Destroy()
 	end	
 	
+	if self.LBeam then
+		self.LBeam:Destroy()
+	end
+	
+	if self.RBeam then
+		self.RBeam:Destroy()
+	end
 	
 	ForkThread(function()
 	local RandomNumber = math.random(1, 2)
@@ -212,6 +221,14 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 	OnReclaimed = function(self, reclaimer)
 	if self.Effect1 then
 	self.Effect1:Destroy()
+	end
+
+	if self.LBeam then
+		self.LBeam:Destroy()
+	end
+	
+	if self.RBeam then
+		self.RBeam:Destroy()
 	end	
 		
 			self.unit:ShowBone(0, true)

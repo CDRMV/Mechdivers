@@ -9,8 +9,10 @@
 #****************************************************************************
 
 local AStructureUnit = import('/lua/defaultunits.lua').StructureUnit
-local GetDistanceBetweenTwoEntities = import("/lua/utilities.lua").GetDistanceBetweenTwoEntities
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
+local Buff = import('/lua/sim/Buff.lua')
+local GetDistanceBetweenTwoEntities = import("/lua/utilities.lua").GetDistanceBetweenTwoEntities
+
 UABMD0204 = Class(AStructureUnit) {
 
     Weapons = {
@@ -35,14 +37,17 @@ UABMD0204 = Class(AStructureUnit) {
 			self.Effect1:SetDrawScale(0.21)
 			self:SetScriptBit('RULEUTC_ProductionToggle', true)
 			self:SetScriptBit('RULEUTC_ProductionToggle', false)
-			self.Circle = nil
+			self.AuraEffect = nil
+			
     end,
 	
 	OnScriptBitSet = function(self, bit)
         AStructureUnit.OnScriptBitSet(self, bit)
         if bit == 4 then 
+		if self.AuraEffect then
+		self.AuraEffect:Destroy()
+		end
 		KillThread(self.AutomaticForceFieldThreadHandle)
-		self.RemoveAutomaticForceFieldThreadHandle = self:ForkThread(self.RemoveAutomaticForceFieldThread)
 		self.Effect1:SetVizToAllies('Never')
 		self.Effect1:SetVizToNeutrals('Never')
 		self.Effect1:SetVizToEnemies('Never')
@@ -54,7 +59,6 @@ UABMD0204 = Class(AStructureUnit) {
         AStructureUnit.OnScriptBitClear(self, bit)
         if bit == 4 then
 		ForkThread(function()
-		KillThread(self.RemoveAutomaticForceFieldThreadHandle)
 		self.AutomaticForceFieldThreadHandle = self:ForkThread(self.AutomaticForceFieldThread)
 		self.Effect1:SetVizToAllies('Intel')
 		self.Effect1:SetVizToNeutrals('Intel')
@@ -65,37 +69,45 @@ UABMD0204 = Class(AStructureUnit) {
     end,
 	
 	AutomaticForceFieldThread = function(self)
+	self.AuraEffect = CreateAttachedEmitter( self, 0, self:GetArmy(), '/effects/emitters/seraphim_regenerative_aura_01_emit.bp' )
 			local unitPos = self:GetPosition()
 			local radius = self:GetBlueprint().Intel.VisionRadius
-			local regenbuff = 0
+            if not Buffs['MonolithRegenAura'] then
+                BuffBlueprint {
+                    Name = 'MonolithRegenAura',
+                    DisplayName = 'MonolithRegenAura',
+                    BuffType = 'COMMANDERAURA',
+                    Stacks = 'REPLACE',
+                    Duration = 5,
+                    Affects = {
+                        RegenPercent = {
+                            Add = 0,
+                            Mult = 0.0055555555 or 0.1,
+                            Ceil = 75,
+                            Floor = 0,
+                        },
+                    },
+                }
+                
+            end
 			while not self:IsDead() do
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Ally')
             for _,unit in units do
 			if unit:GetFractionComplete() == 1 then
 			    if GetDistanceBetweenTwoEntities(unit, self) < 10 then
-				local regen = unit:GetBlueprint().Defense.RegenRate
-                  unit:SetRegenRate(regen + 30)
+				if not Buff.HasBuff(unit, 'MonolithRegenAura') then
+					Buff.ApplyBuff(unit, 'MonolithRegenAura')
+				end	
 				end
 				if GetDistanceBetweenTwoEntities(unit, self) > 12 then
-				local regen = unit:GetBlueprint().Defense.RegenRate
-                  unit:SetRegenRate(regen)
+				if Buff.HasBuff(unit, 'MonolithRegenAura') then
+					Buff.RemoveBuff(unit, 'MonolithRegenAura')
+				end	
 				end  
-                end
             end
-			WaitSeconds(0.5)
+            end
+			WaitSeconds(5)
 			end
-    end,
-	
-	RemoveAutomaticForceFieldThread = function(self)
-			local unitPos = self:GetPosition()
-			local radius = self:GetBlueprint().Intel.VisionRadius
-			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Ally')
-            for _,unit in units do
-				if unit:GetFractionComplete() == 1 then
-				local regen = unit:GetBlueprint().Defense.RegenRate
-                  unit:SetRegenRate(regen)
-				end  
-            end
     end,
 	
 	DeathThread = function( self, overkillRatio , instigator)  
