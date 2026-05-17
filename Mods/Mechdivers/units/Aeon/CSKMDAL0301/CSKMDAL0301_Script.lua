@@ -20,11 +20,11 @@ CSKMDAL0301 = Class(AWalkingLandUnit) {
 			local animator = CreateAnimator(self.unit)
 			local number = math.random(1,3)
 			if number == 1 then
-            animator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0301/CSKMDAL0301_LClaw.sca', false):SetRate(2)
+            animator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0301/CSKMDAL0301_LClaw.sca', false):SetRate(2.5)
 			elseif number == 2 then
-			animator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0301/CSKMDAL0301_RClaw.sca', false):SetRate(2)
+			animator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0301/CSKMDAL0301_RClaw.sca', false):SetRate(2.5)
 			elseif number == 3 then
-			animator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0301/CSKMDAL0301_Fist.sca', false):SetRate(2)
+			animator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0301/CSKMDAL0301_Fist.sca', false):SetRate(2.5)
 			end
 			WaitFor(animator)
 			animator:Destroy()

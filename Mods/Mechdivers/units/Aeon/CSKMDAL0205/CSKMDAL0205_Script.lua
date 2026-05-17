@@ -18,11 +18,12 @@ CSKMDAL0205 = Class(AWalkingLandUnit) {
 		OnWeaponFired = function(self)
 			ForkThread( function()
 			local animator = CreateAnimator(self.unit)
-            animator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0205/CSKMDAL0205_Claw.sca', false):SetRate(1)
+			animator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0205/CSKMDAL0205_Claw.sca', false):SetRate(1)
 			WaitFor(animator)
 			animator:Destroy()
 			end)
 		end,
+
 		},
     },
 	
