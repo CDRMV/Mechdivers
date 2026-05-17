@@ -26,8 +26,20 @@ function SetLayout()
     controls.bg.LBracket:SetTexture(UIUtil.SkinnableFile('/game/bracket-left-energy/bracket_bmp.dds'))
     controls.bg.RBracket:SetTexture(UIUtil.SkinnableFile('/game/bracket-right-energy/bracket_bmp.dds'))
 
+	if focusarmy >= 1 then
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'AEON' then
+	picture = Bitmap(controls.bg.panel, '/mods/Mechdivers/textures/Overship.dds')
+		end
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'CYBRAN' then
+	picture = Bitmap(controls.bg.panel, '/mods/Mechdivers/textures/Empty.dds')
+		end
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'UEF' then
 	picture = Bitmap(controls.bg.panel, '/mods/Mechdivers/textures/Superdestroyer.dds')
-    
+		end
+    	if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'SERAPHIM' then
+	picture = Bitmap(controls.bg.panel, '/mods/Mechdivers/textures/Empty.dds')
+		end
+	end
     LayoutHelpers.LeftOf(controls.bg, multiControl, 5) -- 5
 
 	

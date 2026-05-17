@@ -15,7 +15,8 @@ local MyUnitIdTable = {
  -- Air
 	  cskmdaa0100=true, 
  	  cskmdaa0303=true, 	
-	  cskmdaa0306=true, 	 
+	  cskmdaa0306=true, 
+	  cskmdaa0400=true, 	  
  
  -- Land
 	  cskmdal0100=true,
@@ -80,6 +81,10 @@ local MyUnitIdTable = {
 	  cskmdta0302i=true, 
 	  cskmdta0302j=true, 
 	  cskmdta0303=true, 
+	  cskmdta0303b=true,
+	  cskmdta0303c=true,
+	  cskmdta0303d=true,
+	  cskmdta0303e=true,
 	  cskmdta0400=true,
 	  
  -- Land 
@@ -199,6 +204,7 @@ local MyUnitIdTable = {
 	  urbmd0301=true,
 	  urbmd0302=true,
 	  urbmd0303=true,
+	  urbmd0304=true,
 
  -- Seraphim
  

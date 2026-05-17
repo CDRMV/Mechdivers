@@ -107,7 +107,7 @@ UnitBlueprint {
         MaxHealth = 1000000,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 18,
+        SurfaceThreatLevel = 500,
     },
     Description = 'Super Destroyer',
     Display = {

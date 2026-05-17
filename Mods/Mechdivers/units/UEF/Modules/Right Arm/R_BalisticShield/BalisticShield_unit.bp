@@ -14,7 +14,7 @@ UnitBlueprint {
 		'OVERLAYDIRECTFIRE',
         'VISIBLETORECON',
     },
-       Defense = { Health = 2000, MaxHealth = 2000, SurfaceThreatLevel = 45,},
+       Defense = { Health = 9500, MaxHealth = 9500, SurfaceThreatLevel = 45,},
        Display = {         
 			Mesh = {
             IconFadeInZoom = 130,
