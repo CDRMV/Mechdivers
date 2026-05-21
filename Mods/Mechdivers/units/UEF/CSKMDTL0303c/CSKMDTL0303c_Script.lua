@@ -15,7 +15,7 @@ local Effects = import('/lua/effecttemplates.lua')
 local explosion = import('/lua/defaultexplosions.lua')
 local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
 
-CSKMDTL0303b = Class(TWalkingLandUnit) {
+CSKMDTL0303c = Class(TWalkingLandUnit) {
 
     Weapons = {
 		Dummy = Class(DummyTurretWeapon) {
@@ -91,10 +91,10 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 			end
 			end
 			elseif self.unit:GetFireState() == 0 then
-			if self.unit.LArm and not self.unit.LArm.Dead then
+			if self.unit.LArm and not self.unit.LArm.Dead and self.unit.LBalisticShield == false then
 			IssueClearCommands({self.unit.LArm})
 			end
-			if self.unit.RArm and not self.unit.RArm.Dead then
+			if self.unit.RArm and not self.unit.RArm.Dead and self.unit.RBalisticShield == false then
 			IssueClearCommands({self.unit.RArm})
 			end
 			if self.unit.Turret and not self.unit.Turret.Dead then
@@ -128,6 +128,44 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
         self.HasRightPod = false
 		self.HasCenterPod = false
 		if self:GetAIBrain().BrainType == 'Human' then
+		
+		ForkThread(function()
+		while self and not self.Dead do
+		if self:GetFireState() == 0 then
+		if self.LArm and not self.LArm.Dead then
+		self.LArm:SetFireState(0)
+		end
+		if self.RArm and not self.RArm.Dead then
+		self.RArm:SetFireState(0)
+		end
+		if self.Turret and not self.Turret.Dead then
+		self.Turret:SetFireState(0)
+		end
+		elseif self:GetFireState() == 1 then
+		if self.LArm and not self.LArm.Dead then
+		self.LArm:SetFireState(1)
+		end
+		if self.RArm and not self.RArm.Dead then
+		self.RArm:SetFireState(1)
+		end
+		if self.Turret and not self.Turret.Dead then
+		self.Turret:SetFireState(1)
+		end
+		elseif self:GetFireState() == 2 then
+		if self.LArm and not self.LArm.Dead then
+		self.LArm:SetFireState(2)
+		end
+		if self.RArm and not self.RArm.Dead then
+		self.RArm:SetFireState(2)
+		end
+		if self.Turret and not self.Turret.Dead then
+		self.Turret:SetFireState(2)
+		end
+		end
+		WaitSeconds(1)
+		end
+		end)
+		
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition()
 		self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
@@ -232,7 +270,7 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self:CreateEnhancement('LeftBalisticShield')
 		self:CreateEnhancement('Empty')
 		end
-
+		
 		end
     end,
 	
@@ -824,4 +862,4 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
     end,
 	  
 }
-TypeClass = CSKMDTL0303b
+TypeClass = CSKMDTL0303c
