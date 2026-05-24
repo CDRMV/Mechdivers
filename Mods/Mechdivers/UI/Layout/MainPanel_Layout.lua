@@ -31,7 +31,7 @@ function SetLayout()
 	picture = Bitmap(controls.bg.panel, '/mods/Mechdivers/textures/Overship.dds')
 		end
 		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'CYBRAN' then
-	picture = Bitmap(controls.bg.panel, '/mods/Mechdivers/textures/Empty.dds')
+	picture = Bitmap(controls.bg.panel, '/mods/Mechdivers/textures/Spacebattleship.dds')
 		end
 		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'UEF' then
 	picture = Bitmap(controls.bg.panel, '/mods/Mechdivers/textures/Superdestroyer.dds')
