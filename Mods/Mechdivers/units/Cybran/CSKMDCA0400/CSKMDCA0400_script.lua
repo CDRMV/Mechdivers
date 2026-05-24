@@ -10,12 +10,44 @@
 
 local CAirUnit = import('/lua/defaultunits.lua').AirUnit
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
-local EffectUtils = import('/lua/effectutilities.lua')
-local Effects = import('/lua/effecttemplates.lua')
+local ModWeaponsFile = import('/mods/Mechdivers/lua/CSKMDWeapons.lua')
+local CDFLaserFusionWeapon = ModWeaponsFile.CDFLaserFusionWeapon
+local CIFGrenadeWeapon = import('/lua/cybranweapons.lua').CIFGrenadeWeapon
+local CDFHLaserFusionWeapon2 = ModWeaponsFile.CDFHLaserFusionWeapon2
+local ModEffects = '/mods/Mechdivers/effects/emitters/'
 
 CSKMDCA0400 = Class(CAirUnit) {
+	ChargeEffects = {
+		ModEffects .. 'fusion_electricity_01_emit.bp',
+		ModEffects .. 'heavyfusion_flash_01_emit.bp',
+        ModEffects .. 'heavyfusion_flash_02_emit.bp',
+        ModEffects .. 'heavyfusion_flash_03_emit.bp',
+    },
+	
 	Weapons = {
-
+		Dummy = Class(DummyTurretWeapon) {},
+		RailGun = Class(CDFHLaserFusionWeapon2) {
+		PlayFxRackSalvoChargeSequence = function(self)
+		ForkThread( function()
+        local bp = self.Blueprint
+        local muzzleBones = {
+			'MainGun_Muzzle',
+		}
+        for _, effect in self.unit.ChargeEffects do
+            for _, muzzle in muzzleBones do
+                CreateAttachedEmitter(self.unit, muzzle, self.unit:GetArmy(), effect):ScaleEmitter(1)
+				WaitSeconds(1)
+            end
+        end
+        local chargeStart = bp.Audio.ChargeStart
+        if chargeStart then
+            self:PlaySound(chargeStart)
+        end
+		end)
+		end,
+		},
+		MainGun = Class(CDFLaserFusionWeapon) {},
+		MissileRack = Class(CIFGrenadeWeapon) {},
     },
 	
 	OnStopBeingBuilt = function(self,builder,layer)
