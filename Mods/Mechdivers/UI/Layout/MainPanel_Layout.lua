@@ -75,7 +75,20 @@ FSButton = UIUtil.CreateButtonStd(controls.bg.panel, '/mods/Mechdivers/textures/
 
 	
 FSButton.OnClick = function(control)
+	if focusarmy >= 1 then
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'AEON' then
+UISelectionByCategory("OVERSHIP", false, false, false, false)
+		end
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'CYBRAN' then
+UISelectionByCategory("FLEETDESTROYER", false, false, false, false)
+		end
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'UEF' then
 UISelectionByCategory("SUPERDESTROYER", false, false, false, false)
+		end
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'SERAPHIM' then
+
+		end
+	end
 end
 
    

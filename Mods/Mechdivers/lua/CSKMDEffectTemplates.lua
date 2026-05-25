@@ -35,6 +35,18 @@ CHeavyFusionLaserFXTrail02 =  {
     ModBpPath .. 'HFusion_laser_fxtrail_02_emit.bp',     
 }
 
+CHeavyFusionLaserFXTrail03 =  { 
+    ModBpPath .. 'HFusion_laser_fxtrail_03_emit.bp',     
+}
+
+CHeavyFusionRailGunFXTrail03 =  { 
+    ModBpPath .. 'HFusion_laser_fxtrail_03_emit.bp',     
+}
+
+CHeavyFusionRailGunPolyTrail3 = ModBpPath .. 'Fusion_Laser4_emit.bp'
+
+CHeavyFusionLaserPolyTrail3 = ModBpPath .. 'Fusion_Laser5_emit.bp'
+
 CHeavyFusionLaserPolyTrail2 = ModBpPath .. 'Fusion_Laser2_emit.bp'
 
 CHeavyFusionLaserPolyTrail = ModBpPath .. 'Fusion_Laser3_emit.bp'

@@ -55,6 +55,13 @@ TDFHeatBeam = Class(DefaultBeamWeapon) {
     },
 }
 
+CDFTronBeam = Class(DefaultBeamWeapon) {
+    BeamType = ModCollisionBeams.TronCollisionBeam,
+    FxChargeMuzzleFlash = {
+
+    },
+}
+
 CDFLaserHydrogenWeapon = Class(DefaultProjectileWeapon) {
     FxMuzzleFlash = ModEffectTemplate.CHydrogenLaserMuzzleFlash,
 }
@@ -88,6 +95,16 @@ CDFHLaserFusionWeapon2 = Class(DefaultProjectileWeapon) {
         ModEffects .. 'heavyfusion_flash_02_emit.bp',
         ModEffects .. 'heavyfusion_flash_03_emit.bp',
     },
+}
+
+CDFHLaserFusionWeapon3 = Class(DefaultProjectileWeapon) {
+    FxMuzzleFlash = ModEffectTemplate.CFusionLaserMuzzleFlash,
+	FxRackChargeMuzzleFlash  = {
+		ModEffects .. 'heavyfusion_flash_01_emit.bp',
+        ModEffects .. 'heavyfusion_flash_02_emit.bp',
+        ModEffects .. 'heavyfusion_flash_03_emit.bp',
+    },
+	 FxRackChargeEffectScale = 1,
 }
 
 CDFFusionMortarWeapon = Class(DefaultProjectileWeapon) {

@@ -140,10 +140,10 @@ local MyUnitIdTable = {
 
  -- Air
  	  cskmdca0300=true, 
-	  cskmdca0301=true, 
-	  cskmdca0400=true, 
-	  ura0104c=true, 
-	  ura0107c=true,  
+	  cskmdca0300b=true, 
+	  cskmdca0301=true,
+	  cskmdca0301b=true, 	  
+	  cskmdca0400=true,   
 
  -- Land	
 	  cskmdcl0100=true, 

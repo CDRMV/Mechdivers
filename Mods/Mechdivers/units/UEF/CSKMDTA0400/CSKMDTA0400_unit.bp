@@ -94,7 +94,6 @@ UnitBlueprint {
         'RADAR',
         'SONAR',
         'VISIBLETORECON',
-        'RECLAIMABLE',
         'OVERLAYRADAR',
         'OVERLAYOMNI',
     },

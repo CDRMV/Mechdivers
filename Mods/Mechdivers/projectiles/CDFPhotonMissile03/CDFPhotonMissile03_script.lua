@@ -36,7 +36,7 @@ CDFPhotonMissile03 = Class(TDFGaussCannonProjectile) {
             self:ForkThread(self.DestroyOnWaterThread)
         end
 		ForkThread(function()
-		WaitSeconds(5)
+		WaitSeconds(15)
 		self:TrackTarget(false)
 		end)
     end,
