@@ -43,7 +43,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 			self.unit.RArm:GetWeapon(1):SetTargetGround(targetposition)
 			IssueAttack({self.unit.RArm}, targetposition)
 			end
-			if self.unit.Turret and not self.unit.Turret.Dead then
+			if self.unit.Turret and not self.unit.Turret.Dead and self.unit.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
 			IssueClearCommands({self.unit.Turret})
 			self.unit.Turret:GetWeapon(1):SetTargetGround(targetposition)
 			IssueAttack({self.unit.Turret}, targetposition)
@@ -57,7 +57,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 			if self.unit.RArm and not self.unit.RArm.Dead and self.unit.RBalisticShield == false then
 			IssueClearCommands({self.unit.RArm})
 			end
-			if self.unit.Turret and not self.unit.Turret.Dead then
+			if self.unit.Turret and not self.unit.Turret.Dead and self.unit.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
 			IssueClearCommands({self.unit.Turret})
 			end
 			end
@@ -83,7 +83,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 			self.unit.RArm:GetWeapon(1):SetTargetGround(targetposition)
 			IssueAttack({self.unit.RArm}, targetposition)
 			end
-			if self.unit.Turret and not self.unit.Turret.Dead then
+			if self.unit.Turret and not self.unit.Turret.Dead and self.unit.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
 			IssueClearCommands({self.unit.Turret})
 			self.unit.Turret:GetWeapon(1):SetTargetGround(targetposition)
 			IssueAttack({self.unit.Turret}, targetposition)
@@ -97,7 +97,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 			if self.unit.RArm and not self.unit.RArm.Dead and self.unit.RBalisticShield == false then
 			IssueClearCommands({self.unit.RArm})
 			end
-			if self.unit.Turret and not self.unit.Turret.Dead then
+			if self.unit.Turret and not self.unit.Turret.Dead and self.unit.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
 			IssueClearCommands({self.unit.Turret})
 			end
 			end
@@ -111,7 +111,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 			if self.unit.RArm and not self.unit.RArm.Dead then
 			IssueClearCommands({self.unit.RArm})
 			end
-			if self.unit.Turret and not self.unit.Turret.Dead then
+			if self.unit.Turret and not self.unit.Turret.Dead and self.unit.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
 			IssueClearCommands({self.unit.Turret})
 			end
             DummyTurretWeapon.OnLostTarget(self)
@@ -138,7 +138,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		if self.RArm and not self.RArm.Dead then
 		self.RArm:SetFireState(0)
 		end
-		if self.Turret and not self.Turret.Dead then
+		if self.Turret and not self.Turret.Dead and self.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
 		self.Turret:SetFireState(0)
 		end
 		elseif self:GetFireState() == 1 then
@@ -148,7 +148,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		if self.RArm and not self.RArm.Dead then
 		self.RArm:SetFireState(1)
 		end
-		if self.Turret and not self.Turret.Dead then
+		if self.Turret and not self.Turret.Dead and self.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false  then
 		self.Turret:SetFireState(1)
 		end
 		elseif self:GetFireState() == 2 then
@@ -158,7 +158,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		if self.RArm and not self.RArm.Dead then
 		self.RArm:SetFireState(2)
 		end
-		if self.Turret and not self.Turret.Dead then
+		if self.Turret and not self.Turret.Dead and self.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
 		self.Turret:SetFireState(2)
 		end
 		end
@@ -619,8 +619,6 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		ForkThread(function()
 		if bit == 1 then 
 		if self.Turret and not self.Turret.Dead then
-		self.Turret:RemoveCommandCap('RULEUCC_Attack')
-		self.Turret:RemoveCommandCap('RULEUCC_Stop')
 		self.Turret:SetFireState(1)
 		self.Turret:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		end
@@ -719,8 +717,6 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self:AddCommandCap('RULEUCC_RetaliateToggle')
 		self:AddCommandCap('RULEUCC_Guard')
 				if self.Turret and not self.Turret.Dead then
-		self.Turret:AddCommandCap('RULEUCC_Attack')
-		self.Turret:AddCommandCap('RULEUCC_Stop')
 		self.Turret:SetFireState(0)
 		self.Turret:AddCommandCap('RULEUCC_RetaliateToggle')
 		end

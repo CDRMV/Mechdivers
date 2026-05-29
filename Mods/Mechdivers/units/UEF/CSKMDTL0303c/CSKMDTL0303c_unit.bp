@@ -61,7 +61,6 @@ UnitBlueprint {
         'LAND',
         'MOBILE',
         'OVERLAYDIRECTFIRE',
-		'PODSTAGINGPLATTFORM',
         'OVERLAYINDIRECTFIRE',
         'RECLAIMABLE',
         'SELECTABLE',       
