@@ -161,6 +161,122 @@ QuantumCollisionBeam = Class(CollisionBeam) {
 	FxBeamEndPointScale = 0.5,
     SplatTexture = 'czar_mark01_albedo',
     ScorchSplatDropTime = 0.25,
+	
+
+
+    OnImpact = function(self, impactType, targetEntity)
+        if impactType == 'Terrain' then
+            if self.Scorching == nil then
+                self.Scorching = self:ForkThread( self.ScorchThread )   
+            end
+        elseif not impactType == 'Unit' then
+            KillThread(self.Scorching)
+            self.Scorching = nil
+        end
+        CollisionBeam.OnImpact(self, impactType, targetEntity)
+    end,
+    
+    OnDisable = function( self )
+        CollisionBeam.OnDisable(self)
+        KillThread(self.Scorching)
+        self.Scorching = nil   
+    end,
+
+    ScorchThread = function(self)
+        local army = self:GetArmy()
+        local size = 0.75 + (Random() * 0.75) 
+        local CurrentPosition = self:GetPosition(1)
+        local LastPosition = Vector(0,0,0)
+        local skipCount = 1
+        while true do
+            if Util.GetDistanceBetweenTwoVectors( CurrentPosition, LastPosition ) > 0.25 or skipCount > 100 then
+                CreateSplat( CurrentPosition, Util.GetRandomFloat(0,2*math.pi), self.SplatTexture, size, size, 100, 100, army )
+                LastPosition = CurrentPosition
+                skipCount = 1
+            else
+                skipCount = skipCount + self.ScorchSplatDropTime
+            end
+                
+            WaitSeconds( self.ScorchSplatDropTime )
+            size = 1.2 + (Random() * 1.5)
+            CurrentPosition = self:GetPosition(1)
+        end
+    end,
+}	
+	
+	QuantumCollisionBeam2 = Class(CollisionBeam) {
+
+    TerrainImpactType = 'LargeBeam01',
+    TerrainImpactScale = 1,
+    FxBeamStartPoint = {
+		'/mods/Mechdivers/effects/emitters/quantum_beam_flash_01_emit.bp',
+		'/mods/Mechdivers/effects/emitters/quantum_beam_flash_01_emit.bp',
+	},
+    FxBeam = {
+		'/mods/Mechdivers/effects/emitters/quantum_beam_02_emit.bp'
+	},
+    FxBeamEndPoint = {
+		'/mods/Mechdivers/effects/emitters/quantum_beam_end_01_emit.bp',
+		'/mods/Mechdivers/effects/emitters/quantum_beam_end_02_emit.bp',
+		'/mods/Mechdivers/effects/emitters/quantum_beam_end_03_emit.bp',
+		'/mods/Mechdivers/effects/emitters/quantum_beam_end_04_emit.bp',
+		'/mods/Mechdivers/effects/emitters/quantum_beam_end_05_emit.bp',
+		'/mods/Mechdivers/effects/emitters/quantum_beam_end_06_emit.bp',
+	},
+	FxBeamStartPointScale = 12,
+	FxBeamEndPointScale = 0.8,
+    SplatTexture = 'czar_mark01_albedo',
+    ScorchSplatDropTime = 0.25,
+	
+	Beam1 = nil,	
+	Beam2 = nil,	
+	Beam3 = nil,	
+	Beam4 = nil,	
+	Beam5 = nil,	
+	Beam6 = nil,	
+	Beam7 = nil,	
+	Beam8 = nil,	
+
+	 CreateBeamEffects = function(self)
+		for k, y in self.FxBeamStartPoint do
+            local fx = CreateAttachedEmitter(self, 0, self.Army, y):ScaleEmitter(self.FxBeamStartPointScale)
+            table.insert(self.BeamEffectsBag, fx)
+            self.Trash:Add(fx)
+        end
+        for k, y in self.FxBeamEndPoint do
+            local fx = CreateAttachedEmitter(self, 1, self.Army, y):ScaleEmitter(self.FxBeamEndPointScale)
+            table.insert(self.BeamEffectsBag, fx)
+            self.Trash:Add(fx)
+        end
+        for k, v in self.FxBeam do
+		self.Effect1 = CreateAttachedEmitter(self:GetLauncher(), 'Center_Beam', self:GetArmy(), '/effects/emitters/oblivion_cannon_flash_04_emit.bp'):ScaleEmitter(3):SetEmitterParam('LIFETIME', -1)
+		self.Effect2 = CreateAttachedEmitter(self:GetLauncher(), 'Center_Beam', self:GetArmy(), '/effects/emitters/oblivion_cannon_flash_05_emit.bp'):ScaleEmitter(3):SetEmitterParam('LIFETIME', -1)
+		self.Effect3 = CreateAttachedEmitter(self:GetLauncher(), 'Center_Beam', self:GetArmy(), '/effects/emitters/oblivion_cannon_flash_06_emit.bp'):ScaleEmitter(3):SetEmitterParam('LIFETIME', -1)
+		self.Beam1 = CreateBeamEmitterOnEntity(self:GetLauncher(), 'Tentacle01_Muzzle', self:GetArmy(), '/mods/Mechdivers/effects/emitters/quantum_beam_01_emit.bp' ):SetBeamParam('LENGTH', 20)
+		self.Beam2 = CreateBeamEmitterOnEntity(self:GetLauncher(), 'Tentacle02_Muzzle', self:GetArmy(), '/mods/Mechdivers/effects/emitters/quantum_beam_01_emit.bp' ):SetBeamParam('LENGTH', 20)
+		self.Beam3 = CreateBeamEmitterOnEntity(self:GetLauncher(), 'Tentacle03_Muzzle', self:GetArmy(), '/mods/Mechdivers/effects/emitters/quantum_beam_01_emit.bp' ):SetBeamParam('LENGTH', 20)
+		self.Beam4 = CreateBeamEmitterOnEntity(self:GetLauncher(), 'Tentacle04_Muzzle', self:GetArmy(), '/mods/Mechdivers/effects/emitters/quantum_beam_01_emit.bp' ):SetBeamParam('LENGTH', 20)
+		self.Beam5 = CreateBeamEmitterOnEntity(self:GetLauncher(), 'Tentacle05_Muzzle', self:GetArmy(), '/mods/Mechdivers/effects/emitters/quantum_beam_01_emit.bp' ):SetBeamParam('LENGTH', 20)
+		self.Beam6 = CreateBeamEmitterOnEntity(self:GetLauncher(), 'Tentacle06_Muzzle', self:GetArmy(), '/mods/Mechdivers/effects/emitters/quantum_beam_01_emit.bp' ):SetBeamParam('LENGTH', 20)
+		self.Beam7 = CreateBeamEmitterOnEntity(self:GetLauncher(), 'Tentacle07_Muzzle', self:GetArmy(), '/mods/Mechdivers/effects/emitters/quantum_beam_01_emit.bp' ):SetBeamParam('LENGTH', 20)
+		self.Beam8 = CreateBeamEmitterOnEntity(self:GetLauncher(), 'Tentacle08_Muzzle', self:GetArmy(), '/mods/Mechdivers/effects/emitters/quantum_beam_01_emit.bp' ):SetBeamParam('LENGTH', 20)
+		table.insert( self.BeamEffectsBag, self.Effect1 )
+		table.insert( self.BeamEffectsBag, self.Effect2 )
+		table.insert( self.BeamEffectsBag, self.Effect3 )
+		table.insert( self.BeamEffectsBag, self.Beam1 )
+		table.insert( self.BeamEffectsBag, self.Beam2 )
+		table.insert( self.BeamEffectsBag, self.Beam3 )
+		table.insert( self.BeamEffectsBag, self.Beam4 )
+		table.insert( self.BeamEffectsBag, self.Beam5 )
+		table.insert( self.BeamEffectsBag, self.Beam6 )
+		table.insert( self.BeamEffectsBag, self.Beam7 )
+		table.insert( self.BeamEffectsBag, self.Beam8 )
+			local fxBeam = CreateBeamEntityToEntity(self, 0, self, 1, self:GetArmy(), v )
+			table.insert( self.BeamEffectsBag, fxBeam )
+			self.Trash:Add(fxBeam)
+        end
+        CollisionBeam.CreateBeamEffects(self)
+    end,
 
     OnImpact = function(self, impactType, targetEntity)
         if impactType == 'Terrain' then

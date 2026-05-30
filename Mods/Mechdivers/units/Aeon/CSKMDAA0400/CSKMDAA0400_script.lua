@@ -10,19 +10,37 @@
 
 local AAirUnit = import('/lua/defaultunits.lua').MobileUnit
 local aWeapons = import('/lua/aeonweapons.lua')
-local AQuantumBeamGenerator = aWeapons.AQuantumBeamGenerator
-local AAAZealotMissileWeapon = aWeapons.AAAZealotMissileWeapon
-local AANDepthChargeBombWeapon = aWeapons.AANDepthChargeBombWeapon
-local AAATemporalFizzWeapon = aWeapons.AAATemporalFizzWeapon
+local ADFQuantumBeam = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').ADFQuantumBeam
+local ADFQuantumBeam2 = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').ADFQuantumBeam2
 local explosion = import('/lua/defaultexplosions.lua')
+local ADFCannonQuantumWeapon = aWeapons.ADFCannonQuantumWeapon
+local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 
 CSKMDAA0400 = Class(AAirUnit) {
     DestroyNoFallRandomChance = 1.1,
     Weapons = {
-
-        QuantumBeamGeneratorWeapon = Class(AQuantumBeamGenerator){
+		Dummy = Class(DummyTurretWeapon) {},
+        QuantumBeamGeneratorWeapon = Class(ADFQuantumBeam2){
 		
+		PlayFxWeaponUnpackSequence = function(self)
+		self.unit.OpenAnimManip:Destroy()
+		ADFQuantumBeam.PlayFxWeaponUnpackSequence(self)
+		end,
+		
+			PlayFxWeaponPackSequence = function(self)
+				self.unit.OpenAnimManip = CreateAnimator(self.unit)
+				self.unit.OpenAnimManip:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAA0400/CSKMDAA0400_Fly.sca', true):SetRate(0.1)
+                ADFQuantumBeam.PlayFxWeaponPackSequence(self)
+            end,
 		},
+		QuantumGun01 = Class(ADFCannonQuantumWeapon) {},
+		QuantumGun02 = Class(ADFCannonQuantumWeapon) {},
+		QuantumGun03 = Class(ADFCannonQuantumWeapon) {},
+		QuantumGun04 = Class(ADFCannonQuantumWeapon) {},
+		QuantumBeam1 = Class(ADFQuantumBeam) {},
+		QuantumBeam2 = Class(ADFQuantumBeam) {},
+		QuantumBeam3 = Class(ADFQuantumBeam) {},
+		QuantumBeam4 = Class(ADFQuantumBeam) {},
     },
 
     OnKilled = function(self, instigator, type, overkillRatio)
@@ -62,6 +80,7 @@ CSKMDAA0400 = Class(AAirUnit) {
 		self.Trash:Add(self.OpenAnimManip)
 		self.OpenAnimManip:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAA0400/CSKMDAA0400_Fly.sca', true):SetRate(0.1)
         ChangeState(self, self.IdleState)
+		self:HideBone('Center_Beam',false)
     end,
 
     OnFailedToBuild = function(self)
