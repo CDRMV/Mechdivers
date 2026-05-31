@@ -51,6 +51,10 @@ end,
 		local position1, position2 = self:GetArmyStartPos()
 		CreateUnitHPR('CSKMDCA0400', self:GetArmyIndex(), position1, 0, position2, 0, 0, 0)
 		end
+		if key == 'aeon' then  
+		local position1, position2 = self:GetArmyStartPos()
+		CreateUnitHPR('CSKMDAA0400', self:GetArmyIndex(), position1, 0, position2, 0, 0, 0)
+		end
     end,
 	
 	DeimosAmmuntionMechanic = function(self)

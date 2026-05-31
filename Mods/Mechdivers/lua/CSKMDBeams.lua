@@ -139,6 +139,92 @@ HeatCollisionBeam = Class(CollisionBeam) {
     end,
 }
 
+DustSwirl = Class(CollisionBeam) {
+
+    TerrainImpactType = 'LargeBeam01',
+    TerrainImpactScale = 1,
+    FxBeamStartPoint = {
+
+	},
+    FxBeam = {
+	'/mods/Mechdivers/effects/emitters/dustswirl_beam_emit.bp',
+	},
+    FxBeamEndPoint1 = {
+		'/mods/Mechdivers/effects/emitters/dustswirl_emit.bp',
+	},
+	FxBeamEndPoint2 = {
+		'/mods/Mechdivers/effects/emitters/dustswirl_cloud_emit.bp',
+	},
+	FxBeamEndPoint1Scale = 1.0,
+	FxBeamEndPoint2Scale = 3.0,
+    SplatTexture = 'czar_mark01_albedo',
+    ScorchSplatDropTime = 0.25,
+	
+	 CreateBeamEffects = function(self)
+		for k, y in self.FxBeamStartPoint do
+            local fx = CreateAttachedEmitter(self, 0, self.Army, y):ScaleEmitter(self.FxBeamStartPointScale)
+            table.insert(self.BeamEffectsBag, fx)
+            self.Trash:Add(fx)
+        end
+        for k, y in self.FxBeamEndPoint1 do
+            local fx = CreateAttachedEmitter(self, 1, self.Army, y):ScaleEmitter(self.FxBeamEndPoint1Scale)
+            table.insert(self.BeamEffectsBag, fx)
+            self.Trash:Add(fx)
+        end
+		for k, y in self.FxBeamEndPoint2 do
+            local fx = CreateAttachedEmitter(self, 1, self.Army, y):ScaleEmitter(self.FxBeamEndPoint2Scale)
+            table.insert(self.BeamEffectsBag, fx)
+            self.Trash:Add(fx)
+        end
+        for k, v in self.FxBeam do
+			local fxBeam = CreateBeamEntityToEntity(self, 0, self, 1, self:GetArmy(), v )
+			table.insert( self.BeamEffectsBag, fxBeam )
+			self.Trash:Add(fxBeam)
+        end
+        CollisionBeam.CreateBeamEffects(self)
+    end,
+
+    OnImpact = function(self, impactType, targetEntity)
+	
+        if impactType == 'Terrain' then
+            if self.Scorching == nil then
+                self.Scorching = self:ForkThread( self.ScorchThread )   
+            end
+        elseif not impactType == 'Unit' then
+            KillThread(self.Scorching)
+            self.Scorching = nil
+        end 
+        CollisionBeam.OnImpact(self, impactType, targetEntity)
+    end,
+    
+    OnDisable = function( self )
+        CollisionBeam.OnDisable(self)
+        KillThread(self.Scorching)
+        self.Scorching = nil   
+    end,
+
+    ScorchThread = function(self)
+        local army = self:GetArmy()
+        local size = 18.75 + (Random() * 18.75) 
+        local CurrentPosition = self:GetPosition(1)
+        local LastPosition = Vector(0,0,0)
+        local skipCount = 1
+        while true do
+            if Util.GetDistanceBetweenTwoVectors( CurrentPosition, LastPosition ) > 0.25 or skipCount > 100 then
+                CreateSplat( CurrentPosition, Util.GetRandomFloat(0,2*math.pi), self.SplatTexture, size, size, 500, 500, army )
+                LastPosition = CurrentPosition
+                skipCount = 5
+            else
+                skipCount = skipCount + self.ScorchSplatDropTime
+            end
+                
+            WaitSeconds( self.ScorchSplatDropTime )
+            size = 18.2 + (Random() * 18.5)
+            CurrentPosition = self:GetPosition(1)
+        end
+    end,
+}	
+
 QuantumCollisionBeam = Class(CollisionBeam) {
 
     TerrainImpactType = 'LargeBeam01',

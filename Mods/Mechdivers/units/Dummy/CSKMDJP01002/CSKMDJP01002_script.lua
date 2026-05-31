@@ -26,8 +26,6 @@ CSKMDJP0100 = Class(TAirUnit) {
 		for _, unit in cargo or {} do
 		local Health = unit:GetHealth()
 		local MaxHealth = unit:GetMaxHealth()
-		LOG(Health)
-		LOG(MaxHealth)
 		self:SetMaxHealth(Health)
 		self:SetHealth(nil, Health)
         end
