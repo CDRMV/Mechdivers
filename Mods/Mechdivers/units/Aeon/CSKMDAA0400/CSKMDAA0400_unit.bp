@@ -84,7 +84,9 @@ UnitBlueprint {
 		'OVERSHIP',
         'AEON',
         'MOBILE',
+		'NORANDOMELEVATION',
         'AIR',
+		'ORBITAL',
         'HIGHALTAIR',
         'TECH3',
         'AIRSTAGINGPLATFORM',
@@ -137,7 +139,7 @@ UnitBlueprint {
         BuildRate = 180,
         BuildTime = 33750,
         BuildableCategory = {
-            #'cskmdaa0303',
+            'cskmdaa0303',
         },
     },
     Footprint = {
@@ -162,6 +164,29 @@ UnitBlueprint {
                 x = -10,
                 y = 30,
             },
+        },
+		Hangarbay = {
+            BuildCostEnergy = 10,
+            BuildCostMass = 5,
+            BuildTime = 5,
+			Description = 'Add access to Hangarbay',
+            Icon = 'sic',
+            Name = 'Hangarbay',
+            Slot = 'RCH',
+        },
+        HangarbayRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'sic',
+			Description = 'Remove access to Hangarbay',
+            Name = 'Hangarbay',
+            Prerequisite = 'Hangarbay',
+            RemoveEnhancements = {
+				'Hangarbay',
+				'HangarbayRemove',
+            },
+            Slot = 'RCH',
         },
 		OrbitalPlasmaCannonBarrage = {
             BuildCostEnergy = 10,
@@ -235,8 +260,9 @@ UnitBlueprint {
 		
 	},	
     General = {
-        Category = 'Experimental',
-        Classification = 'RULEUC_MilitaryAircraft',
+		CapCost = 0,
+        Category = 'Command',
+        Classification = 'RULEUC_Commander',
         CommandCaps = {
             RULEUCC_Attack = true,
             RULEUCC_CallTransport = false,
@@ -250,11 +276,11 @@ UnitBlueprint {
             RULEUCC_Repair = false,
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
-            RULEUCC_Transport = false,
+            RULEUCC_Transport = true,
         },
         ConstructionBar = true,
         FactionName = 'Aeon',
-        Icon = 'air',
+        Icon = 'orbit',
         OrderOverrides = {
             RULEUCC_Transport = {
                 bitmapId = 'deploy',

@@ -1,7 +1,14 @@
 UnitBlueprint {
     AI = {
-        GuardReturnRadius = 125,
-        GuardScanRadius = 100,
+        GuardReturnRadius = 175,
+        GuardScanRadius = 125,
+        RefuelingMultiplier = 50,
+        RefuelingRepairAmount = 500,
+        RepairConsumeEnergy = 5,
+        RepairConsumeMass = 0.5,
+        TargetBones = {
+            'CSKMDCA0400',
+        },
     },
     Air = {
         AutoLandTime = 0,
@@ -82,12 +89,16 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
+		'NORANDOMELEVATION',
 		'TECH3',
         'CYBRAN',
         'MOBILE',
 		'FLEETDESTROYER',
         'AIR',
 		'ORBITAL',
+		'AIRSTAGINGPLATFORM',
+        'CARRIER',
+		'FACTORY',
         'HIGHALTAIR',
         'TECH3',
         'INTELLIGENCE',
@@ -96,6 +107,7 @@ UnitBlueprint {
         'VISIBLETORECON',
         'OVERLAYRADAR',
         'OVERLAYOMNI',
+		'CANNOTUSEAIRSTAGING',
     },
     CollisionOffsetY = 0.07,
     Defense = {
@@ -131,8 +143,11 @@ UnitBlueprint {
     Economy = {
         BuildCostEnergy = 105000,
         BuildCostMass = 1500,
-		BuildRate = 5,
+		BuildRate = 180,
         BuildTime = 7500,
+		BuildableCategory = {
+            'PREDATORDRONE',
+        },
     },
 	Enhancements = {
         Slots = {
@@ -151,6 +166,29 @@ UnitBlueprint {
                 x = -10,
                 y = 30,
             },
+        },
+		Hangarbay = {
+            BuildCostEnergy = 10,
+            BuildCostMass = 5,
+            BuildTime = 5,
+			Description = 'Add access to Hangarbay',
+            Icon = 'srs',
+            Name = 'Hangarbay',
+            Slot = 'RCH',
+        },
+        HangarbayRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'srs',
+			Description = 'Remove access to Hangarbay',
+            Name = 'Hangarbay',
+            Prerequisite = 'Hangarbay',
+            RemoveEnhancements = {
+				'Hangarbay',
+				'HangarbayRemove',
+            },
+            Slot = 'RCH',
         },
 		OrbitalHeavyFusionRailgun = {
             BuildCostEnergy = 10,
@@ -262,20 +300,18 @@ UnitBlueprint {
             RULEUCC_Repair = false,
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
-            RULEUCC_Transport = false,
+            RULEUCC_Transport = true,
         },
+		ConstructionBar = true,
 		OrderOverrides = {
             RULEUTC_WeaponToggle = {
                 bitmapId = 'production',
 				helpText = 'Open/Close Hangarbay',		
             },
-			RULEUTC_SpecialToggle = {
-			    bitmapId = 'Deploy',
-				helpText = 'Deploy/Land Drones',
+			RULEUCC_Transport = {
+                bitmapId = 'deploy',
+                helpText = 'deploy',
             },
-        },
-        ToggleCaps = {
-            RULEUTC_WeaponToggle = true,
         },
         FactionName = 'Cybran',
         Icon = 'orbit',
@@ -323,7 +359,10 @@ UnitBlueprint {
     StrategicIconSortPriority = 55,
     Transport = {
         AirClass = true,
-        TransportClass = 3,
+        Class4AttachSize = 0,
+        ClassGenericUpTo = 2,
+        StorageSlots = 150,
+        TransportClass = 10,
     },
     Weapon = {
 		{

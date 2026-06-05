@@ -1,7 +1,7 @@
 UnitBlueprint {
     AI = {
-        GuardReturnRadius = 115,
-        GuardScanRadius = 120,
+        GuardReturnRadius = 55,
+        GuardScanRadius = 60,
     },
     Air = {
         AutoLandTime = 0,
@@ -13,13 +13,13 @@ UnitBlueprint {
         CirclingRadiusChangeMaxRatio = 0.9,
         CirclingRadiusChangeMinRatio = 0.6,
         CirclingTurnMult = 3,
-        KLift = 3,
-        KLiftDamping = 2.5,
-        KMove = 1,
+        KLift = 0.2,
+        KLiftDamping = 2,
+        KMove = 0.2,
         KMoveDamping = 2,
         KTurn = 1,
         KTurnDamping = 1.5,
-        LiftFactor = 7,
+        LiftFactor = 0.6,
         MaxAirspeed = 5,
         MinAirspeed = 1.5,
         StartTurnDistance = 5,
@@ -89,11 +89,12 @@ UnitBlueprint {
     BuildIconSortPriority = 40,
     Categories = {
         'PRODUCTSC1',
-        'UNSELECTABLE',
+        'SELECTABLE',
         'CYBRAN',
         'MOBILE',
         'AIR',
         'TECH3',
+		'PREDATORDRONE',
 		'GROUNDATTACK',
         #'BUILTBYTIER3FACTORY',
         'VISIBLETORECON',
@@ -232,8 +233,8 @@ UnitBlueprint {
             LAYER_Sub = false,
             LAYER_Water = false,
         },
-        Elevation = 230,
-        FuelUseTime = 1000,
+        Elevation = 7,
+        FuelUseTime = 100,
         GroundCollisionOffset = 1.6,
         MaxAcceleration = 10,
         MaxSpeed = 10,
@@ -258,7 +259,7 @@ UnitBlueprint {
     UseOOBTestZoom = 200,
 	Transport = {
         AirClass = true,
-        TransportClass = 3,
+        TransportClass = 2,
     },
     Veteran = {
         Level1 = 3,
@@ -269,7 +270,6 @@ UnitBlueprint {
     },
 	Weapon = {
         {
-			AutoInitiateAttackCommand = true,
             AboveWaterTargetsOnly = true,
             Audio = {
                 Fire = Sound {
@@ -340,7 +340,6 @@ UnitBlueprint {
             WeaponCategory = 'Direct Fire',
         },
 			    {
-				AutoInitiateAttackCommand = true,
             AboveWaterTargetsOnly = true,
             Audio = {
                 Fire = Sound {
@@ -418,7 +417,6 @@ UnitBlueprint {
             WeaponUnpacks = false,
         },
 					    {
-						AutoInitiateAttackCommand = true,
             AboveWaterTargetsOnly = true,
             Audio = {
                 Fire = Sound {

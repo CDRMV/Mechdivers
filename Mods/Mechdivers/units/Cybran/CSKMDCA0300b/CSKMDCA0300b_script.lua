@@ -53,6 +53,7 @@ CSKMDCA0300b = Class(CAirUnit) {
 		
 	OnStopBeingBuilt = function(self,builder,layer)
         CAirUnit.OnStopBeingBuilt(self,builder,layer)
+		self:SetUnSelectable(true)
 		ForkThread(function()
 			SetArmyEconomy(self:GetArmy(), -250,  -4500)
         self.EngineManipulators = {}
@@ -66,19 +67,7 @@ CSKMDCA0300b = Class(CAirUnit) {
 			self.Scan:SetVizToEnemies('Intel')
 			self.Spinner2 = CreateRotator(self, 'Barrel', 'x', 10, 10, 0, 10):SetTargetSpeed(5)
 			self:ForkThread(self.CreateIntelEntity,'Scanner', 'Vision')	
-		WaitSeconds(5)
-		local Elevation = 230
-		while not self.Dead do
-		Elevation = Elevation - 10
-		if Elevation == 10 then
-		self:SetFireState(0)
-		self:SetElevation(10)
-		break
-		else
-		self:SetElevation(Elevation)
-		end
-		WaitSeconds(1)
-		end
+			self:DoScan()
 		end)
     end,
 	
@@ -112,6 +101,7 @@ CSKMDCA0300b = Class(CAirUnit) {
     end
 end,
 
+
 	Scan = function( self)  
 	ForkThread(function()
 		while not self.Dead do
@@ -121,6 +111,37 @@ end,
 		WaitSeconds(0.1)
 		end	
 		end)
+    end,
+	
+	DoScan = function( self)  
+	ForkThread(function()
+		while not self.Dead do
+		if self:IsUnitState('Attached') then
+		self:HideScan()
+		else
+		self:ShowScan()
+		end
+		WaitSeconds(0.1)
+		end	
+		end)
+    end,
+	
+	HideScan = function( self)  
+		self.Scan:SetVizToFocusPlayer('Never')
+		self.Scan:SetVizToAllies('Never')
+		self.Scan:SetVizToNeutrals('Never')
+		self.Scan:SetVizToEnemies('Never')
+    end,
+	
+	ShowScan = function( self)  
+		self.Scan:SetVizToFocusPlayer('Always')
+		self.Scan:SetVizToAllies('Intel')
+		self.Scan:SetVizToNeutrals('Intel')
+		self.Scan:SetVizToEnemies('Intel')
+    end,
+	
+	MakeSelectable = function( self)  
+		self:SetUnSelectable(false)
     end,
 	
 	DestroyScan = function( self)  

@@ -78,7 +78,7 @@ CSKMDAA0400 = Class(AAirUnit) {
         explosion.CreateDebrisProjectiles(self, explosion.GetAverageBoundingXYZRadius(self), {self:GetUnitSizes()})
     end,
 
-    BuildAttachBone = 'CSKMDAA0400',
+    BuildAttachBone = 'Build',
 
     OnStopBeingBuilt = function(self,builder,layer)
         AAirUnit.OnStopBeingBuilt(self,builder,layer)
@@ -107,6 +107,9 @@ CSKMDAA0400 = Class(AAirUnit) {
 		self.QuantumBeam3:SetEnabled(false)
 		self.QuantumBeam4 = self:GetWeaponByLabel('QuantumBeam4')
 		self.QuantumBeam4:SetEnabled(false)
+		ChangeState(self, self.IdleState)
+		self:RemoveCommandCap('RULEUCC_Transport')
+		self:CreateEnhancement('HangarbayRemove')
 		ForkThread(function()
 			local elevation = nil
 			while not self.Dead do 
@@ -191,11 +194,13 @@ CSKMDAA0400 = Class(AAirUnit) {
         Main = function(self)
             self:DetachAll(self.BuildAttachBone)
             self:SetBusy(false)
+			self:SetImmobile(false)
         end,
 
         OnStartBuild = function(self, unitBuilding, order)
             AAirUnit.OnStartBuild(self, unitBuilding, order)
             self.UnitBeingBuilt = unitBuilding
+			self:SetImmobile(true)
             ChangeState(self, self.BuildingState)
         end,
     },
@@ -274,7 +279,13 @@ CSKMDAA0400 = Class(AAirUnit) {
         local bp = self:GetBlueprint().Enhancements[enh]
         if not bp then return end
 		local wep = self:GetWeaponByLabel('MainGun')
-        if enh == 'OrbitalPlasmaCannonBarrage' then
+		if enh == 'Hangarbay' then
+		self:RemoveBuildRestriction(categories.STINGRAY)
+		self:AddCommandCap('RULEUCC_Transport')
+		elseif enh == 'HangarbayRemove' then
+		self:AddBuildRestriction(categories.STINGRAY)
+		self:RemoveCommandCap('RULEUCC_Transport')
+        elseif enh == 'OrbitalPlasmaCannonBarrage' then
 		self.QuantumBeam:SetEnabled(false)
 		self.QuantumGun01:SetEnabled(true)
 		self.QuantumGun02:SetEnabled(true)

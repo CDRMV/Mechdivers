@@ -93,6 +93,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
+		'STINGRAY',
         'BUILTBYTIER3FACTORY',
         'AEON',
         'MOBILE',
@@ -247,7 +248,7 @@ UnitBlueprint {
     StrategicIconSortPriority = 55,
     Transport = {
         AirClass = true,
-        TransportClass = 3,
+        TransportClass = 2,
     },
     Veteran = {
         Level1 = 6,
