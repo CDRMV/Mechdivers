@@ -87,6 +87,7 @@ UnitBlueprint {
 		'NORANDOMELEVATION',
         'AIR',
 		'ORBITAL',
+		'SHIELD',
         'HIGHALTAIR',
         'TECH3',
         'AIRSTAGINGPLATFORM',
@@ -107,6 +108,20 @@ UnitBlueprint {
         EconomyThreatLevel = 0,
         Health = 1000000,
         MaxHealth = 1000000,
+		Shield = {
+            ImpactEffects = 'UEFShieldHit01',
+            OwnerShieldMesh = '/Mods/Mechdivers/units/Aeon/CSKMDAA0400/CSKMDAA0400_PersonalShield_mesh',
+            PersonalShield = true,
+            RegenAssistMult = 60,
+            ShieldEnergyDrainRechargeTime = 5,
+            ShieldMaxHealth = 2200,
+            ShieldRechargeTime = 60,
+            ShieldRegenRate = 9,
+            ShieldRegenStartTime = 3,
+            ShieldSize = 2.5,
+            ShieldVerticalOffset = 0,
+            StartsOff = true,
+        },
         RegenRate = 0,
         SubThreatLevel = 0,
         SurfaceThreatLevel = 500,
@@ -115,8 +130,6 @@ UnitBlueprint {
     Display = {
 		Abilities = {
             'In Development',
-			'Is currently usable as an Czar Clone',
-			'It has temporary access to the Czar Center Beam Weapon only.',
         },
         Mesh = {
             IconFadeInZoom = 130,
@@ -137,6 +150,7 @@ UnitBlueprint {
         BuildCostEnergy = 731250,
         BuildCostMass = 45000,
         BuildRate = 180,
+		MaintenanceConsumptionPerSecondEnergy = 25,
         BuildTime = 33750,
         BuildableCategory = {
             'cskmdaa0303',
@@ -286,6 +300,13 @@ UnitBlueprint {
                 bitmapId = 'deploy',
                 helpText = 'deploy',
             },
+			RULEUTC_ShieldToggle = {
+                bitmapId = 'shield-personal',
+                helpText = 'toggle_shield_personal',
+            },
+        },
+		ToggleCaps = {
+            RULEUTC_ShieldToggle = true,
         },
         TechLevel = 'RULEUTL_Secret',
         UnitName = 'Omblesum Class',

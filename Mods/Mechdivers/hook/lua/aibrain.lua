@@ -41,19 +41,18 @@ end,
 	
 	SpawnSpaceship = function(self)
 		local factionIndex = self:GetFactionIndex()
-		local key  = import("/lua/factions.lua").Factions[factionIndex].Key 
 
-		if key == 'uef' then  
+		if factionIndex == 1 then  
 		local position1, position2 = self:GetArmyStartPos()
 		CreateUnitHPR('CSKMDTA0400', self:GetArmyIndex(), position1, 0, position2, 0, 0, 0)
 		end
-		if key == 'cybran' then  
-		local position1, position2 = self:GetArmyStartPos()
-		CreateUnitHPR('CSKMDCA0400', self:GetArmyIndex(), position1, 0, position2, 0, 0, 0)
-		end
-		if key == 'aeon' then  
+		if factionIndex == 2 then  
 		local position1, position2 = self:GetArmyStartPos()
 		CreateUnitHPR('CSKMDAA0400', self:GetArmyIndex(), position1, 0, position2, 0, 0, 0)
+		end
+		if factionIndex == 3 then  
+		local position1, position2 = self:GetArmyStartPos()
+		CreateUnitHPR('CSKMDCA0400', self:GetArmyIndex(), position1, 0, position2, 0, 0, 0)
 		end
     end,
 	
