@@ -84,6 +84,7 @@ UnitBlueprint {
 		'OVERSHIP',
         'AEON',
         'MOBILE',
+		'NOENHANCEMENTCONFIMATION',
 		'NORANDOMELEVATION',
         'AIR',
 		'ORBITAL',

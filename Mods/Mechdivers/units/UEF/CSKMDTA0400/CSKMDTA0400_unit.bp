@@ -82,6 +82,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
+		'NOENHANCEMENTCONFIMATION',
 		'TECH3',
         'UEF',
         'MOBILE',

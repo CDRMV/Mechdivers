@@ -89,6 +89,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
+		'NOENHANCEMENTCONFIMATION',
 		'NORANDOMELEVATION',
 		'TECH3',
         'CYBRAN',
