@@ -1,0 +1,16 @@
+MeshBlueprint {
+    LODs = {
+        {
+
+
+					MeshName = '/Mods/Mechdivers/units/UEF/Modules/Right Arm/R_Shotgun/R_Shotgun_lod0.scm',
+            ShaderName = 'ShieldUEF',
+			AlbedoName = "/meshes/generic/cube02_albedo.dds",
+			SpecularName = "/textures/effects/UEFBuildSpecular.dds",
+			SecondaryName = "/textures/effects/UEFBuildSpecular.dds",
+            LODCutoff = 300,
+            
+        },
+    },
+    SortOrder = 999,
+}

@@ -206,7 +206,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.RArm:SetParent(self, 'RightScatterGun')
         self.RArm:SetCreator(self)
 		self.RArm:AttachBoneTo('Launcher_Attach', self, 'AttachSpecial03')
-		]]--
+
 
 		local RandomNumber = math.random(1,4)
 		
@@ -232,8 +232,9 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self:CreateEnhancement('LeftBalisticShield')
 		self:CreateEnhancement('Empty')
 		end
-		
+				]]--
 		else
+		
 		self:RemoveCommandCap('RULEUCC_Transport')
 		if not self.AnimationManipulator then
             self.AnimationManipulator = CreateAnimator(self)
@@ -246,6 +247,8 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.RArm = nil
 		self.Turret = nil
 		
+		--[[
+		
 		local RandomNumber = math.random(1,4)
 		
 		if RandomNumber == 1 then
@@ -270,8 +273,10 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self:CreateEnhancement('LeftBalisticShield')
 		self:CreateEnhancement('Empty')
 		end
-		
+		]]--
+
 		end
+	
     end,
 	
 	NotifyOfPodDeath = function(self, pod)
@@ -786,8 +791,6 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		
 	else
 	units[1]:Destroy()
-	end
-	
 	local RandomNumber = math.random(1, 2)
 	if RandomNumber == 2 then
 	SetIgnoreArmyUnitCap(self:GetArmy(), true)
@@ -804,6 +807,9 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 	self.unit.CanTakeDamage = true
 	self.unit.CanBeKilled = true
 	end
+	
+	end
+	
 	end	
 
 				if self.Turret and not self.Turret.Dead then
@@ -856,6 +862,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.RArm:Destroy()
 		end
     end,
+	
 	  
 }
 TypeClass = CSKMDTL0303c
