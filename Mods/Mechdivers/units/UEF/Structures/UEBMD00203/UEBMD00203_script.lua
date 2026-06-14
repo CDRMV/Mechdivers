@@ -10,8 +10,14 @@
 
 local TStructureUnit = import('/lua/defaultunits.lua').ModularFactoryUnit
 local CreateDefaultBuildBeams = import('/lua/effectutilities.lua').CreateDefaultBuildBeams
+local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 
 UEBMD00203 = Class(TStructureUnit) {
+
+	Weapons = {
+		Dummy = Class(DummyTurretWeapon) {},	
+	},	
+	
 	OnCreate = function(self)
 		self:CreateEnhancement('MMFacLeftEmpty')
 		self:CreateEnhancement('MMFacEmpty')
@@ -40,6 +46,10 @@ UEBMD00203 = Class(TStructureUnit) {
 		if not self.CCraneAnim then
             self.CCraneAnim = CreateAnimator(self):PlayAnim('/mods/Mechdivers/units/UEF/Structures/UEBMD00203/UEBMD00203_CenterCrane.sca', true):SetRate(0)
             self.Trash:Add(self.CCraneAnim)
+		end	
+		if not self.CCraneSlideAnim then
+            self.CCraneSlideAnim = CreateAnimator(self):PlayAnim('/mods/Mechdivers/units/UEF/Structures/UEBMD00203/UEBMD00203_CenterCrane_Slide.sca', true):SetRate(0)
+            self.Trash:Add(self.CCraneSlideAnim)
 		end	
 		self.BuildProgress = false
 	end,
@@ -201,6 +211,8 @@ UEBMD00203 = Class(TStructureUnit) {
 		end
 		
 		if self:HasEnhancement( 'MMFacEmpty' ) == false then
+		self.CCraneAnim:SetRate(0.5)
+		self.CCraneSlideAnim:SetRate(0.3)
 		self.CBeam = AttachBeamEntityToEntity(self, 'Center_Crane_Muzzle', unitBeingBuilt, 'AttachSpecial01', self:GetArmy(), BeamBuildEmtBp)
 		self.CEffect = CreateAttachedEmitter( unitBeingBuilt, 'AttachSpecial01', unitBeingBuilt:GetArmy(),'/effects/emitters/sparks_08_emit.bp')
 		end
@@ -210,10 +222,13 @@ UEBMD00203 = Class(TStructureUnit) {
 		self.RBeam = AttachBeamEntityToEntity(self, 'R_Crane_Muzzle', unitBeingBuilt, 'AttachSpecial02', self:GetArmy(), BeamBuildEmtBp)
 		self.REffect = CreateAttachedEmitter( unitBeingBuilt, 'AttachSpecial02', unitBeingBuilt:GetArmy(),'/effects/emitters/sparks_08_emit.bp')
 		end
-
 		
+		local CenterUpgradeEntityPos = unitBeingBuilt:GetPosition('AttachSpecial01')
+		 
+		 
         while true do
-			if number == 10 then
+			if number == 150 then
+			self:GetWeaponByLabel('Dummy'):SetTargetGround(self:GetPosition())
 			self.BuildProgress = false
 			self.LBeam:Destroy()
 			self.RBeam:Destroy()
@@ -223,6 +238,7 @@ UEBMD00203 = Class(TStructureUnit) {
 			self.CEffect:Destroy()
 			self.ArmSlider:SetGoal(0, 0, 0)
 			self.CCraneAnim:SetRate(0)
+			self.CCraneSlideAnim:SetRate(0)
 			self.LCraneAnim:SetRate(0)
 			self.RCraneAnim:SetRate(0)
 			self.LeftUpgradeEntity:Destroy()
@@ -238,13 +254,8 @@ UEBMD00203 = Class(TStructureUnit) {
 			WaitSeconds(5)
 			number = number + 1
 			else
-			self.CCraneAnim:SetRate(-1)
-			if not self.ArmSlider then return end
-            self.ArmSlider:SetGoal(1, 0, 0)
-            self.ArmSlider:SetSpeed(1)
-            WaitFor(self.ArmSlider)
-            self.ArmSlider:SetGoal(-1, 0, 0)
-            WaitFor(self.ArmSlider)
+			self:GetWeaponByLabel('Dummy'):SetTargetGround(CenterUpgradeEntityPos)
+			WaitSeconds(0.1)
 			number = number + 1
 			end
 			end
@@ -263,6 +274,18 @@ UEBMD00203 = Class(TStructureUnit) {
         else
             self:SetBusy(false)
             self:SetBlockCommandQueue(false)
+        end
+    end,
+	
+	MovingArmsThread = function(self)
+        TStructureUnit.MovingArmsThread(self)
+        while true do
+			if not self.ArmSlider then return end
+            self.ArmSlider:SetGoal(1, 0, 0)
+            self.ArmSlider:SetSpeed(1)
+            WaitFor(self.ArmSlider)
+            self.ArmSlider:SetGoal(-1, 0, 0)
+            WaitFor(self.ArmSlider)
         end
     end,
 	
