@@ -1,5 +1,14 @@
 do 
 
+local enhancementSlotNames = 
+{
+skin = "<LOC uvd_0007>Back",
+    back = "<LOC uvd_0007>Back",
+    lch = "<LOC uvd_0008>LCH",
+    rch = "<LOC uvd_0009>RCH",
+}
+
+
 local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
 
 if version < 3652 then

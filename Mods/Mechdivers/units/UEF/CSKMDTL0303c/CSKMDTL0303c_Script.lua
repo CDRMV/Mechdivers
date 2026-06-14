@@ -587,6 +587,10 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
         self.Turret:SetCreator(self)
 		self.Turret:AttachBoneTo(0, self, 'AttachSpecial01')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		elseif enh == 'DefaultSkin' then
+			self:SetMesh(self:GetBlueprint().Display.MeshBlueprint, true)
+		elseif enh == 'Skin1' then
+			self:SetMesh(self:GetBlueprint().Display.Skin1.Skin1Mesh, true)
         end
     end,
 	

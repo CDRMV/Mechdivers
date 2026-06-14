@@ -22,6 +22,7 @@ UEBMD00203 = Class(TStructureUnit) {
 		self:CreateEnhancement('MMFacLeftEmpty')
 		self:CreateEnhancement('MMFacEmpty')
 		self:CreateEnhancement('MMFacRightEmpty')
+		self:CreateEnhancement('MMDefaultSkin')
         TStructureUnit.OnCreate(self)
     end,
 	
@@ -94,6 +95,15 @@ UEBMD00203 = Class(TStructureUnit) {
 		
         self:SetBusy(true)
         self:SetBlockCommandQueue(true)
+		
+		if self:HasEnhancement( 'MMDefaultSkin' ) then
+			unitBeingBuilt:CreateEnhancement('DefaultSkin')
+		end	
+		
+		if self:HasEnhancement( 'MMSkin1' ) then
+			unitBeingBuilt:CreateEnhancement('Skin1')
+		end	
+		
         local bp = self:GetBlueprint()
         local bpAnim = bp.Display.AnimationFinishBuildLand
         if bpAnim and EntityCategoryContains(categories.LAND, unitBeingBuilt) then

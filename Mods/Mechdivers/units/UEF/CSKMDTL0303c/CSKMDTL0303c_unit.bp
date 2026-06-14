@@ -53,6 +53,7 @@ UnitBlueprint {
     BuildIconSortPriority = 20,
     Categories = {
         'BOT',
+		'NOENHANCEMENTCONFIMATION',
 		'BUILTBYTIER2MODULARFACTORY',
 		'BUILTBYTIER3MODULARFACTORY',
         'DIRECTFIRE',
@@ -116,6 +117,9 @@ UnitBlueprint {
                 },
             },
         },
+		Skin1 = {
+            Skin1Mesh = "/Mods/Mechdivers/units/UEF/CSKMDTL0303c/CSKMDTL0303c_Skin1_mesh",
+        },
         MovementEffects = {
             Land = {
                 Effects = {
@@ -135,6 +139,11 @@ UnitBlueprint {
     },
 	Enhancements = {
         Slots = {
+		    Skin = {
+                name = '<LOC _Skin>',
+				x = 105,
+                y = 30,
+            },
             Back = {
                 name = '<LOC _Back>',
                 x = 38,
@@ -150,6 +159,52 @@ UnitBlueprint {
                 x = -10,
                 y = 30,
             },
+        },
+		DefaultSkin = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+			Description = '<LOC AddDefaultSkin>Paint in Default Skin',
+            Icon = 'dsu',
+            Name = '<LOC DefaultSkin>Default Skin',
+            Slot = 'Skin',
+        },
+        DefaultSkinRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'dsu',
+			Description = '<LOC RemoveDefaultSkin>Removes the Default Skin',
+            Name = '<LOC DefaultSkin>Default Skin',
+            Prerequisite = 'DefaultSkin',
+            RemoveEnhancements = {
+				'DefaultSkin',
+				'DefaultSkinRemove',
+            },
+            Slot = 'Skin',
+        },
+		Skin1 = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+			Description = '<LOC AddSkin1>Paint in Skin 1. ',
+            Icon = 'dsu',
+            Name = '<LOC Skin1>Skin 1',
+            Slot = 'Skin',
+        },
+        Skin1Remove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'dsu',
+			Description = '<LOC RemoveSkin1>Removes the Skin 1',
+            Name = '<LOC Skin1>Skin 1',
+            Prerequisite = 'Skin1',
+            RemoveEnhancements = {
+				'Skin1',
+				'Skin1Remove',
+            },
+            Slot = 'Skin',
         },
 		Empty = {
             BuildCostEnergy = 10,

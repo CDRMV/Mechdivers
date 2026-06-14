@@ -1,0 +1,13 @@
+MeshBlueprint {
+	IconFadeInZoom = 130,
+    LODs = {
+        {
+			LODCutoff = 300,
+            ShaderName = 'Unit',
+			MeshName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303c/CSKMDTL0303c_lod0.scm',
+			AlbedoName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303c/CSKMDTL0303c_Albedo2.dds',
+			SpecularName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303c/CSKMDTL0303c_SpecTeam2.dds',
+			NormalsName = '/Mods/Mechdivers/units/UEF/CSKMDTL0303c/CSKMDTL0303c_NormalsTs2.dds',      
+        },
+    },
+}
