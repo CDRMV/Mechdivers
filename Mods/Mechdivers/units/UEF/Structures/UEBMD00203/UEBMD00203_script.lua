@@ -29,10 +29,6 @@ UEBMD00203 = Class(TStructureUnit) {
 	
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
-		if not self.ArmSlider then
-            self.ArmSlider = CreateSlider(self, 'Center_Crane')
-            self.Trash:Add(self.ArmSlider)
-        end
 		self.CenterUpgrade = nil
 		self.RightUpgrade = nil
 		self.LeftUpgrade = nil
@@ -115,7 +111,7 @@ UEBMD00203 = Class(TStructureUnit) {
 			self.RollOffAnim:SetRate(0.2)			
             WaitFor(self.RollOffAnim)
         end
-		local number = 0
+		local number = nil
 		local Modpath = '/mods/Mechdivers/Decorations/Modules/Turrets/'
 		local LModpath = '/mods/Mechdivers/Decorations/Modules/Left Arm/'
 		local RModpath = '/mods/Mechdivers/Decorations/Modules/Right Arm/'
@@ -215,9 +211,9 @@ UEBMD00203 = Class(TStructureUnit) {
 
 		     
 		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false then
-		self.LCraneAnim:SetRate(0.5)
-		self.LBeam = AttachBeamEntityToEntity(self, 'L_Crane_Muzzle', unitBeingBuilt, 'AttachSpecial03', self:GetArmy(), BeamBuildEmtBp)
-		self.LEffect = CreateAttachedEmitter( unitBeingBuilt, 'AttachSpecial03', unitBeingBuilt:GetArmy(),'/effects/emitters/sparks_08_emit.bp')
+		self.RCraneAnim:SetRate(0.5)
+		self.RBeam = AttachBeamEntityToEntity(self, 'R_Crane_Muzzle', unitBeingBuilt, 'AttachSpecial02', self:GetArmy(), BeamBuildEmtBp)
+		self.REffect = CreateAttachedEmitter( unitBeingBuilt, 'AttachSpecial02', unitBeingBuilt:GetArmy(),'/effects/emitters/sparks_08_emit.bp')
 		end
 		
 		if self:HasEnhancement( 'MMFacEmpty' ) == false then
@@ -228,40 +224,90 @@ UEBMD00203 = Class(TStructureUnit) {
 		end
 		
 		if self:HasEnhancement( 'MMFacRightEmpty' ) == false then
-		self.RCraneAnim:SetRate(0.5)
-		self.RBeam = AttachBeamEntityToEntity(self, 'R_Crane_Muzzle', unitBeingBuilt, 'AttachSpecial02', self:GetArmy(), BeamBuildEmtBp)
-		self.REffect = CreateAttachedEmitter( unitBeingBuilt, 'AttachSpecial02', unitBeingBuilt:GetArmy(),'/effects/emitters/sparks_08_emit.bp')
+		self.LCraneAnim:SetRate(0.5)
+		self.LBeam = AttachBeamEntityToEntity(self, 'L_Crane_Muzzle', unitBeingBuilt, 'AttachSpecial03', self:GetArmy(), BeamBuildEmtBp)
+		self.LEffect = CreateAttachedEmitter( unitBeingBuilt, 'AttachSpecial03', unitBeingBuilt:GetArmy(),'/effects/emitters/sparks_08_emit.bp')
 		end
 		
 		local CenterUpgradeEntityPos = unitBeingBuilt:GetPosition('AttachSpecial01')
 		 
 		 
-        while true do
-			if number == 150 then
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacEmpty' ) == true and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
+		number = 90
+		end
+		
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacEmpty' ) == true and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
+		number = 30
+		end
+		
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacEmpty' ) == false and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
+		number = 30
+		end
+		
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacEmpty' ) == false and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
+		number = 30
+		end
+		
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacEmpty' ) == false and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
+		number = 60
+		end
+		
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacEmpty' ) == true and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
+		number = 60
+		end
+		
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacEmpty' ) == true and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
+		number = 60
+		end
+		
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacEmpty' ) == false and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
+		number = 0
+		end
+		
+        while self and not self.Dead do
+			if number == 90 then
+			number = 0
 			self:GetWeaponByLabel('Dummy'):SetTargetGround(self:GetPosition())
 			self.BuildProgress = false
+			if self.LBeam then 
 			self.LBeam:Destroy()
+			end
+			if self.RBeam then 
 			self.RBeam:Destroy()
+			end
+			if self.CBeam then 
 			self.CBeam:Destroy()
+			end
+			if self.LEffect then
 			self.LEffect:Destroy()
+			end
+			if self.REffect then
 			self.REffect:Destroy()
+			end
+			if self.CEffect then
 			self.CEffect:Destroy()
-			self.ArmSlider:SetGoal(0, 0, 0)
+			end
 			self.CCraneAnim:SetRate(0)
 			self.CCraneSlideAnim:SetRate(0)
 			self.LCraneAnim:SetRate(0)
 			self.RCraneAnim:SetRate(0)
+			if self.LeftUpgradeEntity then
 			self.LeftUpgradeEntity:Destroy()
+			end
+			if self.CenterUpgradeEntity then
 			self.CenterUpgradeEntity:Destroy()
+			end
+			if self.RightUpgradeEntity then
 			self.RightUpgradeEntity:Destroy()
+			end
 			unitBeingBuilt:CreateEnhancement(self.LeftUpgrade)
 			unitBeingBuilt:CreateEnhancement(self.CenterUpgrade)
 			unitBeingBuilt:CreateEnhancement(self.RightUpgrade)
 			break
 			else
 			if self:HasEnhancement( 'MMFacEmpty' ) == true then
-			self.ArmSlider:SetGoal(0, 0, 0)
-			WaitSeconds(5)
+			self:GetWeaponByLabel('Dummy'):SetTargetGround(self:GetPosition())
+			WaitSeconds(0.1)
 			number = number + 1
 			else
 			self:GetWeaponByLabel('Dummy'):SetTargetGround(CenterUpgradeEntityPos)
@@ -287,34 +333,40 @@ UEBMD00203 = Class(TStructureUnit) {
         end
     end,
 	
-	MovingArmsThread = function(self)
-        TStructureUnit.MovingArmsThread(self)
-        while true do
-			if not self.ArmSlider then return end
-            self.ArmSlider:SetGoal(1, 0, 0)
-            self.ArmSlider:SetSpeed(1)
-            WaitFor(self.ArmSlider)
-            self.ArmSlider:SetGoal(-1, 0, 0)
-            WaitFor(self.ArmSlider)
-        end
-    end,
-	
 	
 	OnKilled = function(self, instigator, type, overkillRatio)
 		if self.BuildProgress == true then
+			if self.LBeam then 
 			self.LBeam:Destroy()
+			end
+			if self.RBeam then 
 			self.RBeam:Destroy()
+			end
+			if self.CBeam then 
 			self.CBeam:Destroy()
+			end
+			if self.LEffect then
 			self.LEffect:Destroy()
+			end
+			if self.REffect then
 			self.REffect:Destroy()
+			end
+			if self.CEffect then
 			self.CEffect:Destroy()
-			self.ArmSlider:SetGoal(0, 0, 0)
+			end
 			self.CCraneAnim:SetRate(0)
+			self.CCraneSlideAnim:SetRate(0)
 			self.LCraneAnim:SetRate(0)
 			self.RCraneAnim:SetRate(0)
+			if self.LeftUpgradeEntity then
 			self.LeftUpgradeEntity:Destroy()
+			end
+			if self.CenterUpgradeEntity then
 			self.CenterUpgradeEntity:Destroy()
+			end
+			if self.RightUpgradeEntity then
 			self.RightUpgradeEntity:Destroy()
+			end
 		end
 		local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
 
@@ -342,19 +394,37 @@ UEBMD00203 = Class(TStructureUnit) {
 	
 	OnReclaimed = function(self, reclaimer)
 		if self.BuildProgress == true then
+			if self.LBeam then 
 			self.LBeam:Destroy()
+			end
+			if self.RBeam then 
 			self.RBeam:Destroy()
+			end
+			if self.CBeam then 
 			self.CBeam:Destroy()
+			end
+			if self.LEffect then
 			self.LEffect:Destroy()
+			end
+			if self.REffect then
 			self.REffect:Destroy()
+			end
+			if self.CEffect then
 			self.CEffect:Destroy()
-			self.ArmSlider:SetGoal(0, 0, 0)
+			end
 			self.CCraneAnim:SetRate(0)
+			self.CCraneSlideAnim:SetRate(0)
 			self.LCraneAnim:SetRate(0)
 			self.RCraneAnim:SetRate(0)
+			if self.LeftUpgradeEntity then
 			self.LeftUpgradeEntity:Destroy()
+			end
+			if self.CenterUpgradeEntity then
 			self.CenterUpgradeEntity:Destroy()
+			end
+			if self.RightUpgradeEntity then
 			self.RightUpgradeEntity:Destroy()
+			end
 		end
 		local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
 
