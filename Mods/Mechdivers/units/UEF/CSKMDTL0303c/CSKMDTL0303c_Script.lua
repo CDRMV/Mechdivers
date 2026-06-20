@@ -351,7 +351,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
         TWalkingLandUnit.CreateEnhancement(self, enh)
         local bp = self:GetBlueprint().Enhancements[enh]
         if not bp then return end
-        if enh == 'LeftGatling' then
+        if enh == 'ModularLeftGatling' then
 		if self.LArm then
 		self.LArm:Destroy()
 		end
@@ -363,7 +363,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.LArm:AttachBoneTo('Gatling_Attach', self, 'AttachSpecial02')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-        elseif enh == 'RightGatling' then
+        elseif enh == 'ModularRightGatling' then
 		if self.RArm then
 		self.RArm:Destroy()
 		end
@@ -375,7 +375,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.RArm:AttachBoneTo('Gatling_Attach', self, 'AttachSpecial03')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'RightAutoCannon' then
+		elseif enh == 'ModularRightAutoCannon' then
 		if self.RArm then
 		self.RArm:Destroy()
 		end
@@ -387,7 +387,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.RArm:AttachBoneTo('Cannon_Attach', self, 'AttachSpecial03')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'RightAntiTankCannon' then
+		elseif enh == 'ModularRightAntiTankCannon' then
 		if self.RArm then
 		self.RArm:Destroy()
 		end
@@ -399,7 +399,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.RArm:AttachBoneTo('AntiTankCannon_Attach', self, 'AttachSpecial03')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'RightFlameThrower' then
+		elseif enh == 'ModularRightFlameThrower' then
 		if self.RArm then
 		self.RArm:Destroy()
 		end
@@ -411,7 +411,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.RArm:AttachBoneTo('FlameThrower_Attach', self, 'AttachSpecial03')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'RightScatterGun' then
+		elseif enh == 'ModularRightScatterGun' then
 		if self.RArm then
 		self.RArm:Destroy()
 		end
@@ -423,7 +423,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.RArm:AttachBoneTo('Launcher_Attach', self, 'AttachSpecial03')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'RightBalisticShield' then
+		elseif enh == 'ModularRightBalisticShield' then
 		self.RBalisticShield = true
 		if self.RArm then
 		self.RArm:Destroy()
@@ -443,14 +443,14 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'RightBalisticShieldRemove' then
+		elseif enh == 'ModularRightBalisticShieldRemove' then
 		self.RArm:Destroy()
 		self.RBalisticShield = false
 		if self.LArm and self.LBalisticShield == true then
 		self.LArm:DoAnimation()
 		end
 		
-		elseif enh == 'LeftAntiTankCannon' then
+		elseif enh == 'ModularLeftAntiTankCannon' then
 		if self.LArm then
 		self.LArm:Destroy()
 		end
@@ -462,7 +462,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.LArm:AttachBoneTo('AntiTankCannon_Attach', self, 'AttachSpecial02')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'LeftFlameThrower' then
+		elseif enh == 'ModularLeftFlameThrower' then
 		if self.LArm then
 		self.LArm:Destroy()
 		end
@@ -474,7 +474,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.LArm:AttachBoneTo('FlameThrower_Attach', self, 'AttachSpecial02')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'LeftScatterGun' then
+		elseif enh == 'ModularLeftScatterGun' then
 		if self.LArm then
 		self.LArm:Destroy()
 		end
@@ -486,7 +486,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.LArm:AttachBoneTo('Launcher_Attach', self, 'AttachSpecial02')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'LeftBalisticShield' then
+		elseif enh == 'ModularLeftBalisticShield' then
 		self.LBalisticShield = true
 		if self.LArm then
 		self.LArm:Destroy()
@@ -506,14 +506,14 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'LeftBalisticShieldRemove' then
+		elseif enh == 'ModularLeftBalisticShieldRemove' then
 		self.LBalisticShield = false
 		self.LArm:Destroy()
 		if self.RArm and self.RBalisticShield == true then
 		self.RArm:DoAnimation()
 		end
 		
-		elseif enh == 'LeftAutoCannon' then
+		elseif enh == 'ModularLeftAutoCannon' then
 		if self.LArm then
 		self.LArm:Destroy()
 		end
@@ -525,7 +525,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.LArm:AttachBoneTo('Cannon_Attach', self, 'AttachSpecial02')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'LeftMissileLauncher' then
+		elseif enh == 'ModularLeftMissileLauncher' then
 		if self.LArm then
 		self.LArm:Destroy()
 		end
@@ -537,7 +537,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.LArm:AttachBoneTo('MissileLauncher_Attach', self, 'AttachSpecial02')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'RightMissileLauncher' then
+		elseif enh == 'ModularRightMissileLauncher' then
 		if self.RArm then
 		self.RArm:Destroy()
 		end
@@ -549,22 +549,22 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.RArm:AttachBoneTo('MissileLauncher_Attach', self, 'AttachSpecial03')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'Empty' then
+		elseif enh == 'ModularEmpty' then
 		if self.Turret then
 		self.Turret:Destroy()
 		end
 		
-		elseif enh == 'LeftEmpty' then
+		elseif enh == 'ModularLeftEmpty' then
 		if self.LArm then
 		self.LArm:Destroy()
 		end
 		
-		elseif enh == 'RightEmpty' then
+		elseif enh == 'ModularRightEmpty' then
 		if self.RArm then
 		self.RArm:Destroy()
 		end
 		
-		elseif enh == 'AutocannonTurret' then
+		elseif enh == 'ModularAutocannonTurret' then
 		if self.Turret then
 		self.Turret:Destroy()
 		end
@@ -576,7 +576,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.Turret:AttachBoneTo(0, self, 'AttachSpecial01')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
-		elseif enh == 'GatlingTurret' then
+		elseif enh == 'ModularGatlingTurret' then
 		if self.Turret then
 		self.Turret:Destroy()
 		end
@@ -587,9 +587,9 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
         self.Turret:SetCreator(self)
 		self.Turret:AttachBoneTo(0, self, 'AttachSpecial01')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
-		elseif enh == 'DefaultSkin' then
+		elseif enh == 'ModularDefaultSkin' then
 			self:SetMesh(self:GetBlueprint().Display.MeshBlueprint, true)
-		elseif enh == 'Skin1' then
+		elseif enh == 'ModularSkin1' then
 			self:SetMesh(self:GetBlueprint().Display.Skin1.Skin1Mesh, true)
         end
     end,

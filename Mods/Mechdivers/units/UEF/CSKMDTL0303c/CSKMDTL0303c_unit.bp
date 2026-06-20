@@ -83,7 +83,7 @@ UnitBlueprint {
     Display = {
         Abilities = {
 			'Can be Unmanned/Manned by an Mech Marine',
-			'Can be Upgraded with Modules',
+			'Can be Upgraded with Modules in an Modular Mech Workshop',
 			'Only 10 can be builded',
         },
         AnimationDeath = {
@@ -160,7 +160,7 @@ UnitBlueprint {
                 y = 30,
             },
         },
-		DefaultSkin = {
+		ModularDefaultSkin = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
@@ -169,21 +169,21 @@ UnitBlueprint {
             Name = '<LOC DefaultSkin>Default Skin',
             Slot = 'Skin',
         },
-        DefaultSkinRemove = {
+        ModularDefaultSkinRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'dsu',
 			Description = '<LOC RemoveDefaultSkin>Removes the Default Skin',
             Name = '<LOC DefaultSkin>Default Skin',
-            Prerequisite = 'DefaultSkin',
+            Prerequisite = 'ModularDefaultSkin',
             RemoveEnhancements = {
-				'DefaultSkin',
-				'DefaultSkinRemove',
+				'ModularDefaultSkin',
+				'ModularDefaultSkinRemove',
             },
             Slot = 'Skin',
         },
-		Skin1 = {
+		ModularSkin1 = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
@@ -192,21 +192,21 @@ UnitBlueprint {
             Name = '<LOC Skin1>Skin 1',
             Slot = 'Skin',
         },
-        Skin1Remove = {
+        ModularSkin1Remove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'dsu',
 			Description = '<LOC RemoveSkin1>Removes the Skin 1',
             Name = '<LOC Skin1>Skin 1',
-            Prerequisite = 'Skin1',
+            Prerequisite = 'ModularSkin1',
             RemoveEnhancements = {
-				'Skin1',
-				'Skin1Remove',
+				'ModularSkin1',
+				'ModularSkin1Remove',
             },
             Slot = 'Skin',
         },
-		Empty = {
+		ModularEmpty = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -215,21 +215,21 @@ UnitBlueprint {
             Name = '<LOC Empty>No Turrets',
             Slot = 'Back',
         },
-        EmptyRemove = {
+        ModularEmptyRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'dsu',
 			Description = '<LOC RemoveEmpty>No Turrets installed on this Mech.',
             Name = '<LOC Empty>No Turrets',
-            Prerequisite = 'Empty',
+            Prerequisite = 'ModularEmpty',
             RemoveEnhancements = {
-				'Empty',
-				'EmptyRemove',
+				'ModularEmpty',
+				'ModularEmptyRemove',
             },
             Slot = 'Back',
         },
-		AutocannonTurret = {
+		ModularAutocannonTurret = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -238,21 +238,21 @@ UnitBlueprint {
             Name = '<LOC GaussAutoCannonTurret>Gauss Autocannon Turret',
             Slot = 'Back',
         },
-        AutocannonTurretRemove = {
+        ModularAutocannonTurretRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
 			Description = '<LOC RemoveGaussAutoCannonTurret>Removes the Gauss Autocannon Turret from this Mech.',
             Name = '<LOC GaussAutoCannonTurret>Gauss Autocannon Turret',
-            Prerequisite = 'AutocannonTurret',
+            Prerequisite = 'ModularAutocannonTurret',
             RemoveEnhancements = {
-				'AutocannonTurret',
-				'AutocannonTurretRemove',
+				'ModularAutocannonTurret',
+				'ModularAutocannonTurretRemove',
             },
             Slot = 'Back',
         },
-		GatlingTurret = {
+		ModularGatlingTurret = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -261,21 +261,21 @@ UnitBlueprint {
             Name = '<LOC GatlingTurret>Gatling Turret',
             Slot = 'Back',
         },
-        GatlingTurretRemove = {
+        ModularGatlingTurretRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
 			Description = '<LOC RemoveGatlingTurret>Removes the Gatling Turret from this Mech.',
             Name = '<LOC GatlingTurret>Gatling Turret',
-            Prerequisite = 'GatlingTurret',
+            Prerequisite = 'ModularGatlingTurret',
             RemoveEnhancements = {
-				'GatlingTurret',
-				'GatlingTurretRemove',
+				'ModularGatlingTurret',
+				'ModularGatlingTurretRemove',
             },
             Slot = 'Back',
         },
-		LeftEmpty = {
+		ModularLeftEmpty = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -284,21 +284,21 @@ UnitBlueprint {
             Name = '<LOC LeftEmpty>No Modules',
             Slot = 'LCH',
         },
-        LeftEmptyRemove = {
+        ModularLeftEmptyRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'dsu',
 			Description = '<LOC RemoveLeftEmpty>No Weapons installed on this Arm.',
             Name = '<LOC LeftEmpty>No Modules',
-            Prerequisite = 'LeftEmpty',
+            Prerequisite = 'ModularLeftEmpty',
             RemoveEnhancements = {
-				'LeftEmpty',
-				'LeftEmptyRemove',
+				'ModularLeftEmpty',
+				'ModularLeftEmptyRemove',
             },
             Slot = 'LCH',
         },
-		LeftBalisticShield = {
+		ModularLeftBalisticShield = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -307,21 +307,21 @@ UnitBlueprint {
             Name = '<LOC BalisticShield>Balistic Shield',
             Slot = 'LCH',
         },
-        LeftBalisticShieldRemove = {
+        ModularLeftBalisticShieldRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'dsu',
 			Description = '<LOC RemoveBalisticShield>Removes the Balistic Shield from this Arm.',
             Name = '<LOC BalisticShield>Balistic Shield',
-            Prerequisite = 'LeftBalisticShield',
+            Prerequisite = 'ModularLeftBalisticShield',
             RemoveEnhancements = {
-				'LeftBalisticShield',
-				'LeftBalisticShieldRemove',
+				'ModularLeftBalisticShield',
+				'ModularLeftBalisticShieldRemove',
             },
             Slot = 'LCH',
         },
-		LeftAntiTankCannon = {
+		ModularLeftAntiTankCannon = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -330,21 +330,21 @@ UnitBlueprint {
             Name = '<LOC AntiTankCannon>Anti Tank Cannon',
             Slot = 'LCH',
         },
-        LeftAntiTankCannonRemove = {
+        ModularLeftAntiTankCannonRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
 			Description = '<LOC RemoveAntiTankCannon>Removes the Anti Tank Cannon from this Arm.',
             Name = '<LOC AntiTankCannon>Anti Tank Cannon',
-            Prerequisite = 'LeftAntiTankCannon',
+            Prerequisite = 'ModularLeftAntiTankCannon',
             RemoveEnhancements = {
-				'LeftAntiTankCannon',
-				'LeftAntiTankCannonRemove',
+				'ModularLeftAntiTankCannon',
+				'ModularLeftAntiTankCannonRemove',
             },
             Slot = 'LCH',
         },
-		LeftFlameThrower = {
+		ModularLeftFlameThrower = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -353,21 +353,21 @@ UnitBlueprint {
             Name = '<LOC FlameThrower>Flamethrower',
             Slot = 'LCH',
         },
-        LeftFlameThrowerRemove = {
+        ModularLeftFlameThrowerRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
 			Description = '<LOC RemoveFlameThrower>Removes the Flamethrower from this Arm.',
             Name = '<LOC FlameThrower>Flamethrower',
-            Prerequisite = 'LeftFlameThrower',
+            Prerequisite = 'ModularLeftFlameThrower',
             RemoveEnhancements = {
-				'LeftFlameThrower',
-				'LeftFlameThrowerRemove',
+				'ModularLeftFlameThrower',
+				'ModularLeftFlameThrowerRemove',
             },
             Slot = 'LCH',
         },
-		LeftAutoCannon = {
+		ModularLeftAutoCannon = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -376,21 +376,21 @@ UnitBlueprint {
             Name = '<LOC GaussAutocannons>Gauss Autocannons',
             Slot = 'LCH',
         },
-        LeftAutoCannonRemove = {
+        ModularLeftAutoCannonRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
 			Description = '<LOC RemoveGaussAutoCannons>Removes the two Gauss Autocannons from this Arm.',
             Name = '<LOC GaussAutocannons>Gauss Autocannons',
-            Prerequisite = 'LeftAutoCannon',
+            Prerequisite = 'ModularLeftAutoCannon',
             RemoveEnhancements = {
-				'LeftAutoCannon',
-				'LeftAutoCannonRemove',
+				'ModularLeftAutoCannon',
+				'ModularLeftAutoCannonRemove',
             },
             Slot = 'LCH',
         },
-        LeftGatling = {
+        ModularLeftGatling = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -399,21 +399,21 @@ UnitBlueprint {
 			Description = '<LOC AddGatlingGun>Add a Gatling Gun to this Arm.',
             Slot = 'LCH',
         },
-        LeftGatlingRemove = {
+        ModularLeftGatlingRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
             Name = '<LOC GatlingGun>Gatling Gun',
 			Description = '<LOC RemoveGatlingGun>Remove the Gatling Gun from this Arm.',
-            Prerequisite = 'LeftGatling',
+            Prerequisite = 'ModularLeftGatling',
             RemoveEnhancements = {
-				'LeftGatling',
-				'LeftGatlingRemove',
+				'ModularLeftGatling',
+				'ModularLeftGatlingRemove',
             },
             Slot = 'LCH',
         },
-		LeftMissileLauncher = {
+		ModularLeftMissileLauncher = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -422,21 +422,21 @@ UnitBlueprint {
 			Description = '<LOC AddArmMissileLauncher>Add a Missile Launcher to this Arm.',
             Slot = 'LCH',
         },
-        LeftMissileLauncherRemove = {
+        ModularLeftMissileLauncherRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'tm',
 			Description = '<LOC RemoveArmMissileLauncher>Remove Missile Launcher from this Arm.',
             Name = '<LOC ArmMissileLauncher>Missile Launcher',
-            Prerequisite = 'LeftMissileLauncher',
+            Prerequisite = 'ModularLeftMissileLauncher',
             Slot = 'LCH',
 			RemoveEnhancements = {
-				'LeftMissileLauncher',
-				'LeftMissileLauncherRemove',
+				'ModularLeftMissileLauncher',
+				'ModularLeftMissileLauncherRemove',
             },
         },
-		LeftScatterGun = {
+		ModularLeftScatterGun = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -445,21 +445,21 @@ UnitBlueprint {
 			Description = '<LOC AddScatterGun>Add a Heavy Flak Cannon to this Arm.',
             Slot = 'LCH',
         },
-        LeftScatterGunRemove = {
+        ModularLeftScatterGunRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
             Name = '<LOC ScatterGun>Heavy Flak Cannon',
 			Description = '<LOC RemoveScatterGun>Remove the Heavy Flak Cannon from this Arm.',
-            Prerequisite = 'LeftScatterGun',
+            Prerequisite = 'ModularLeftScatterGun',
             Slot = 'LCH',
 			RemoveEnhancements = {
-				'LeftScatterGun',
-				'LeftScatterGunRemove',
+				'ModularLeftScatterGun',
+				'ModularLeftScatterGunRemove',
             },
         },
-		RightEmpty = {
+		ModularRightEmpty = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -468,21 +468,21 @@ UnitBlueprint {
             Name = '<LOC RightEmpty>No Modules',
             Slot = 'RCH',
         },
-        RightEmptyRemove = {
+        ModularRightEmptyRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'dsu',
 			Description = '<LOC RemoveRightEmpty>No Weapons installed on this Arm.',
             Name = '<LOC RightEmpty>No Modules',
-            Prerequisite = 'RightEmpty',
+            Prerequisite = 'ModularRightEmpty',
             RemoveEnhancements = {
-				'RightEmpty',
-				'RightEmptyRemove',
+				'ModularRightEmpty',
+				'ModularRightEmptyRemove',
             },
             Slot = 'RCH',
         },
-		RightBalisticShield = {
+		ModularRightBalisticShield = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -491,21 +491,21 @@ UnitBlueprint {
             Name = '<LOC BalisticShield>Balistic Shield',
             Slot = 'RCH',
         },
-        RightBalisticShieldRemove = {
+        ModularRightBalisticShieldRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'dsu',
 			Description = '<LOC RemoveBalisticShield>Removes the Balistic Shield from this Arm.',
             Name = '<LOC BalisticShield>Balistic Shield',
-            Prerequisite = 'RightBalisticShield',
+            Prerequisite = 'ModularRightBalisticShield',
             RemoveEnhancements = {
-				'RightBalisticShield',
-				'RightBalisticShieldRemove',
+				'ModularRightBalisticShield',
+				'ModularRightBalisticShieldRemove',
             },
             Slot = 'RCH',
         },
-		RightAntiTankCannon = {
+		ModularRightAntiTankCannon = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -514,21 +514,21 @@ UnitBlueprint {
             Name = '<LOC AntiTankCannon>Anti Tank Cannon',
             Slot = 'RCH',
         },
-        RightAntiTankCannonRemove = {
+        ModularRightAntiTankCannonRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
 			Description = '<LOC RemoveAntiTankCannon>Removes the Anti Tank Cannon from this Arm.',
             Name = '<LOC AntiTankCannon>Anti Tank Cannon',
-            Prerequisite = 'RightAntiTankCannon',
+            Prerequisite = 'ModularRightAntiTankCannon',
             RemoveEnhancements = {
-				'RightAntiTankCannon',
-				'RightAntiTankCannonRemove',
+				'ModularRightAntiTankCannon',
+				'ModularRightAntiTankCannonRemove',
             },
             Slot = 'RCH',
         },
-		RightFlameThrower = {
+		ModularRightFlameThrower = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -537,21 +537,21 @@ UnitBlueprint {
             Name = '<LOC FlameThrower>Flamethrower',
             Slot = 'RCH',
         },
-        RightFlameThrowerRemove = {
+        ModularRightFlameThrowerRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
 			Description = '<LOC RemoveFlameThrower>Removes the Flamethrower from this Arm.',
             Name = '<LOC FlameThrower>Flamethrower',
-            Prerequisite = 'RightFlameThrower',
+            Prerequisite = 'ModularRightFlameThrower',
             RemoveEnhancements = {
-				'RightFlameThrower',
-				'RightFlameThrowerRemove',
+				'ModularRightFlameThrower',
+				'ModularRightFlameThrowerRemove',
             },
             Slot = 'RCH',
         },
-		RightAutoCannon = {
+		ModularRightAutoCannon = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -560,21 +560,21 @@ UnitBlueprint {
             Name = '<LOC GaussAutocannons>Gauss Autocannons',
             Slot = 'RCH',
         },
-        RightAutoCannonRemove = {
+        ModularRightAutoCannonRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
             Name = '<LOC GaussAutocannons>Gauss Autocannons',
 			Description = '<LOC RemoveGaussAutoCannons>Remove the two Gauss Autocannons to this Arm.',
-            Prerequisite = 'RightAutoCannon',
+            Prerequisite = 'ModularRightAutoCannon',
             RemoveEnhancements = {
-				'RightAutoCannon',
-				'RightAutoCannonRemove',
+				'ModularRightAutoCannon',
+				'ModularRightAutoCannonRemove',
             },
             Slot = 'RCH',
         },
-		RightGatling = {
+		ModularRightGatling = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -583,21 +583,21 @@ UnitBlueprint {
 			Description = '<LOC AddGatlingGun>Add a Gatling Gun to this Arm.',
             Slot = 'RCH',
         },
-        RightGatlingRemove = {
+        ModularRightGatlingRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
             Name = '<LOC GatlingGun>Gatling Gun',
 			Description = '<LOC RemoveGatlingGun>Remove the Gatling Gun from this Arm.',
-            Prerequisite = 'RightGatling',
+            Prerequisite = 'ModularRightGatling',
             Slot = 'RCH',
 			RemoveEnhancements = {
-				'RightGatling',
-				'RightGatlingRemove',
+				'ModularRightGatling',
+				'ModularRightGatlingRemove',
             },
         },
-		RightMissileLauncher = {
+		ModularRightMissileLauncher = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -606,21 +606,21 @@ UnitBlueprint {
 			Description = '<LOC AddArmMissileLauncher>Add a Missile Launcher to this Arm.',
             Slot = 'RCH',
         },
-        RightMissileLauncherRemove = {
+        ModularRightMissileLauncherRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'tm',
 			Description = '<LOC RemoveArmMissileLauncher>Remove Missile Launcher from this Arm.',
             Name = '<LOC ArmMissileLauncher>Missile Launcher',
-            Prerequisite = 'RightMissileLauncher',
+            Prerequisite = 'ModularRightMissileLauncher',
             Slot = 'RCH',
 			RemoveEnhancements = {
-				'RightMissileLauncher',
-				'RightMissileLauncherRemove',
+				'ModularRightMissileLauncher',
+				'ModularRightMissileLauncherRemove',
             },
         },
-		RightScatterGun = {
+		ModularRightScatterGun = {
             BuildCostEnergy = 10,
             BuildCostMass = 5,
             BuildTime = 5,
@@ -629,18 +629,18 @@ UnitBlueprint {
 			Description = '<LOC AddScatterGun>Add a Heavy Flak Cannon to this Arm.',
             Slot = 'RCH',
         },
-        RightScatterGunRemove = {
+        ModularRightScatterGunRemove = {
             BuildCostEnergy = 1,
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'hamc',
             Name = '<LOC ScatterGun>Heavy Flak Cannon',
 			Description = '<LOC RemoveScatterGun>Remove the Heavy Flak Cannon from this Arm.',
-            Prerequisite = 'RightScatterGun',
+            Prerequisite = 'ModularRightScatterGun',
             Slot = 'RCH',
 			RemoveEnhancements = {
-				'RightScatterGun',
-				'RightScatterGunRemove',
+				'ModularRightScatterGun',
+				'ModularRightScatterGunRemove',
             },
         },
     },	

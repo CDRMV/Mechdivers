@@ -10,7 +10,6 @@ local OldCreateTabs = CreateTabs
 function CreateTabs(type)
 OldCreateTabs(type)
     if type == 'enhancement' then
-	LOG('Test')
 		local selection = sortedOptions.selection
         local enhancements = selection[1]:GetBlueprint().Enhancements 
         local enhCommon = import('/lua/enhancementcommon.lua')
@@ -57,6 +56,276 @@ OldCreateTabs(type)
         end
         defaultTabOrder = {Back=1, LCH=2, RCH=3, Skin=4}
     end
+end
+
+function OnSelection(buildableCategories, selection, isOldSelection)
+	local GetCSKUnitsPath = function() for i, mod in __active_mods do if mod.CSKProjectModName == "CSK-Units" then return mod.location end end end
+	local CSKUnitsPath = GetCSKUnitsPath()
+	
+	if CSKUnitsPath then
+	if table.getsize(selection) > 0 then
+        capturingKeys = false
+        #Sorting down units
+        local buildableUnits = EntityCategoryGetUnitList(buildableCategories)
+        if not isOldSelection then
+            previousTabSet = nil
+            previousTabSize = nil
+            activeTab = nil
+            ClearSessionExtraSelectList()
+        end
+        sortedOptions = {}
+        UnitViewDetail.Hide()
+        
+        local sortDowns = EntityCategoryFilterDown(categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+        
+		sortedOptions.t1 = EntityCategoryFilterDown(categories.TECH1-categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+        sortedOptions.t2 = EntityCategoryFilterDown(categories.TECH2-categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+        sortedOptions.t3 = EntityCategoryFilterDown(categories.TECH3-categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+		sortedOptions.t35 = EntityCategoryFilterDown(categories.ELITE-categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+        sortedOptions.t4 = EntityCategoryFilterDown(categories.EXPERIMENTAL-categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+		sortedOptions.t5 = EntityCategoryFilterDown(categories.TITAN-categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+		sortedOptions.t6 = EntityCategoryFilterDown(categories.HERO-categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+        
+        for _, unit in sortDowns do
+		    if EntityCategoryContains(categories.HERO, unit) then
+                table.insert(sortedOptions.t5, unit)
+			elseif EntityCategoryContains(categories.TITAN, unit) then
+                table.insert(sortedOptions.t4, unit)
+			elseif EntityCategoryContains(categories.EXPERIMENTAL, unit) then
+                table.insert(sortedOptions.t35, unit)
+            elseif EntityCategoryContains(categories.ELITE, unit) then
+                table.insert(sortedOptions.t3, unit)
+            elseif EntityCategoryContains(categories.TECH3, unit) then
+                table.insert(sortedOptions.t2, unit)
+            elseif EntityCategoryContains(categories.TECH2, unit) then
+                table.insert(sortedOptions.t1, unit)
+            end
+        end
+        
+        if table.getn(buildableUnits) > 0 then
+            controls.constructionTab:Enable()
+        else
+            controls.constructionTab:Disable()
+            if BuildMode.IsInBuildMode() then
+                BuildMode.ToggleBuildMode()
+            end
+        end
+        
+        sortedOptions.selection = selection
+        controls.selectionTab:Enable()
+        
+        local allSameUnit = true
+        local bpID = false
+        local allMobile = true
+        for i, v in selection do
+            if allMobile and not v:IsInCategory('MOBILE') then
+                allMobile = false
+            end
+            if allSameUnit and bpID and bpID != v:GetBlueprint().BlueprintId then
+                allSameUnit = false
+            else
+                bpID = v:GetBlueprint().BlueprintId
+            end
+            if not allMobile and not allSameUnit then
+                break
+            end
+        end
+        
+        if table.getn(selection) == 1 and selection[1]:GetBlueprint().Enhancements then
+			if EntityCategoryContains(categories.MODULARMECH, selection[1]) then
+			controls.enhancementTab:Disable()
+			else
+            controls.enhancementTab:Enable()
+			end
+        else
+            controls.enhancementTab:Disable()
+        end
+            
+        local templates = Templates.GetTemplates()
+        if allMobile and templates and table.getsize(templates) > 0 then
+            sortedOptions.templates = {}
+            for templateIndex, template in templates do
+                local valid = true
+                for _, entry in template.templateData do
+                    if type(entry) == 'table' then
+                        if not table.find(buildableUnits, entry[1]) then
+                            valid = false
+                            break
+                        end
+                    end
+                end
+                if valid then
+                    template.templateID = templateIndex
+                    table.insert(sortedOptions.templates, template)
+                end
+            end
+        end
+        
+        if table.getn(selection) == 1 then
+            currentCommandQueue = SetCurrentFactoryForQueueDisplay(selection[1])
+        else
+            currentCommandQueue = {}
+            ClearCurrentFactoryForQueueDisplay()
+        end
+        
+        if not isOldSelection then
+            if not controls.constructionTab:IsDisabled() then
+                controls.constructionTab:SetCheck(true)
+            else
+                controls.selectionTab:SetCheck(true)
+            end
+        elseif controls.constructionTab:IsChecked() then
+            controls.constructionTab:SetCheck(true)
+        elseif controls.enhancementTab:IsChecked() then
+            controls.enhancementTab:SetCheck(true)
+        else
+            controls.selectionTab:SetCheck(true)
+        end
+        
+        prevSelection = selection
+        prevBuildCategories = buildableCategories
+        prevBuildables = buildableUnits
+        import(UIUtil.GetLayoutFilename('construction')).OnSelection(false)
+        
+        controls.constructionGroup:Show()
+        controls.choices:CalcVisible()
+        controls.secondaryChoices:CalcVisible()
+    else
+        if BuildMode.IsInBuildMode() then
+            BuildMode.ToggleBuildMode()
+        end
+        currentCommandQueue = {}
+        ClearCurrentFactoryForQueueDisplay()
+        import(UIUtil.GetLayoutFilename('construction')).OnSelection(true)
+    end
+	else
+    if table.getsize(selection) > 0 then
+        capturingKeys = false
+        #Sorting down units
+        local buildableUnits = EntityCategoryGetUnitList(buildableCategories)
+        if not isOldSelection then
+            previousTabSet = nil
+            previousTabSize = nil
+            activeTab = nil
+            ClearSessionExtraSelectList()
+        end
+        sortedOptions = {}
+        UnitViewDetail.Hide()
+        
+        local sortDowns = EntityCategoryFilterDown(categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+        
+        sortedOptions.t1 = EntityCategoryFilterDown(categories.TECH1-categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+        sortedOptions.t2 = EntityCategoryFilterDown(categories.TECH2-categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+        sortedOptions.t3 = EntityCategoryFilterDown(categories.TECH3-categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+        sortedOptions.t4 = EntityCategoryFilterDown(categories.EXPERIMENTAL-categories.CONSTRUCTIONSORTDOWN, buildableUnits)
+        
+        for _, unit in sortDowns do
+            if EntityCategoryContains(categories.EXPERIMENTAL, unit) then
+                table.insert(sortedOptions.t3, unit)
+            elseif EntityCategoryContains(categories.TECH3, unit) then
+                table.insert(sortedOptions.t2, unit)
+            elseif EntityCategoryContains(categories.TECH2, unit) then
+                table.insert(sortedOptions.t1, unit)
+            end
+        end
+        
+        if table.getn(buildableUnits) > 0 then
+            controls.constructionTab:Enable()
+        else
+            controls.constructionTab:Disable()
+            if BuildMode.IsInBuildMode() then
+                BuildMode.ToggleBuildMode()
+            end
+        end
+        
+        sortedOptions.selection = selection
+        controls.selectionTab:Enable()
+        
+        local allSameUnit = true
+        local bpID = false
+        local allMobile = true
+        for i, v in selection do
+            if allMobile and not v:IsInCategory('MOBILE') then
+                allMobile = false
+            end
+            if allSameUnit and bpID and bpID != v:GetBlueprint().BlueprintId then
+                allSameUnit = false
+            else
+                bpID = v:GetBlueprint().BlueprintId
+            end
+            if not allMobile and not allSameUnit then
+                break
+            end
+        end
+        
+        if table.getn(selection) == 1 and selection[1]:GetBlueprint().Enhancements then
+			if EntityCategoryContains(categories.MODULARMECH, selection[1]) then
+			controls.enhancementTab:Disable()
+			else
+            controls.enhancementTab:Enable()
+			end
+        else
+            controls.enhancementTab:Disable()
+        end
+            
+        local templates = Templates.GetTemplates()
+        if allMobile and templates and table.getsize(templates) > 0 then
+            sortedOptions.templates = {}
+            for templateIndex, template in templates do
+                local valid = true
+                for _, entry in template.templateData do
+                    if type(entry) == 'table' then
+                        if not table.find(buildableUnits, entry[1]) then
+                            valid = false
+                            break
+                        end
+                    end
+                end
+                if valid then
+                    template.templateID = templateIndex
+                    table.insert(sortedOptions.templates, template)
+                end
+            end
+        end
+        
+        if table.getn(selection) == 1 then
+            currentCommandQueue = SetCurrentFactoryForQueueDisplay(selection[1])
+        else
+            currentCommandQueue = {}
+            ClearCurrentFactoryForQueueDisplay()
+        end
+        
+        if not isOldSelection then
+            if not controls.constructionTab:IsDisabled() then
+                controls.constructionTab:SetCheck(true)
+            else
+                controls.selectionTab:SetCheck(true)
+            end
+        elseif controls.constructionTab:IsChecked() then
+            controls.constructionTab:SetCheck(true)
+        elseif controls.enhancementTab:IsChecked() then
+            controls.enhancementTab:SetCheck(true)
+        else
+            controls.selectionTab:SetCheck(true)
+        end
+        
+        prevSelection = selection
+        prevBuildCategories = buildableCategories
+        prevBuildables = buildableUnits
+        import(UIUtil.GetLayoutFilename('construction')).OnSelection(false)
+        
+        controls.constructionGroup:Show()
+        controls.choices:CalcVisible()
+        controls.secondaryChoices:CalcVisible()
+    else
+        if BuildMode.IsInBuildMode() then
+            BuildMode.ToggleBuildMode()
+        end
+        currentCommandQueue = {}
+        ClearCurrentFactoryForQueueDisplay()
+        import(UIUtil.GetLayoutFilename('construction')).OnSelection(true)
+    end
+	end
 end
 
 function FormatData(unitData, type)

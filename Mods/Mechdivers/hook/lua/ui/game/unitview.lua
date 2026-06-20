@@ -114,6 +114,7 @@ local MyUnitIdTable = {
 	  -----------
 	  uebmd00100=true,
 	  uebmd00203=true,
+	  uebmd00204=true,
 	  uebmd00300=true,
 	  uebmd00301=true,
 	  uebmd00302=true,
