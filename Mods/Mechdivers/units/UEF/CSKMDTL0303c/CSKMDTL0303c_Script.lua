@@ -281,68 +281,68 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 	
 	NotifyOfPodDeath = function(self, pod)
         if pod == 'LeftGatling' then
-            self:CreateEnhancement('LeftGatlingRemove')
-            self:CreateEnhancement('LeftEmpty')
+            self:CreateEnhancement('ModularLeftGatlingRemove')
+            self:CreateEnhancement('ModularLeftEmpty')
             self:RequestRefreshUI()
         elseif pod == 'RightGatling' then
-            self:CreateEnhancement('RightGatlingRemove')
-            self:CreateEnhancement('RightEmpty')
+            self:CreateEnhancement('ModularRightGatlingRemove')
+            self:CreateEnhancement('ModularRightEmpty')
             self:RequestRefreshUI()
         elseif pod == 'RightAutoCannon' then
-            self:CreateEnhancement('RightAutoCannonRemove')
-            self:CreateEnhancement('RightEmpty')
+            self:CreateEnhancement('ModularRightAutoCannonRemove')
+            self:CreateEnhancement('ModularRightEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'LeftAutoCannon' then
-            self:CreateEnhancement('LeftAutoCannonRemove')
-            self:CreateEnhancement('LeftEmpty')
+            self:CreateEnhancement('ModularLeftAutoCannonRemove')
+            self:CreateEnhancement('ModularLeftEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'LeftMissileLauncher' then
-            self:CreateEnhancement('LeftMissileLauncherRemove')
-            self:CreateEnhancement('LeftEmpty')
+            self:CreateEnhancement('ModularLeftMissileLauncherRemove')
+            self:CreateEnhancement('ModularLeftEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'RightMissileLauncher' then
-            self:CreateEnhancement('RightMissileLauncherRemove')
-            self:CreateEnhancement('RightEmpty')
+            self:CreateEnhancement('ModularRightMissileLauncherRemove')
+            self:CreateEnhancement('ModularRightEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'RightAntiTankCannon' then
-            self:CreateEnhancement('RightAntiTankCannonRemove')
-            self:CreateEnhancement('RightEmpty')
+            self:CreateEnhancement('ModularRightAntiTankCannonRemove')
+            self:CreateEnhancement('ModularRightEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'RightFlameThrower' then
-            self:CreateEnhancement('RightFlameThrowerRemove')
-            self:CreateEnhancement('RightEmpty')
+            self:CreateEnhancement('ModularRightFlameThrowerRemove')
+            self:CreateEnhancement('ModularRightEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'RightBalisticShield' then
-            self:CreateEnhancement('RightBalisticShieldRemove')
-            self:CreateEnhancement('RightEmpty')
+            self:CreateEnhancement('ModularRightBalisticShieldRemove')
+            self:CreateEnhancement('ModularRightEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'RightScatterGun' then
-            self:CreateEnhancement('RightScatterGunRemove')
-            self:CreateEnhancement('RightEmpty')
+            self:CreateEnhancement('ModularRightScatterGunRemove')
+            self:CreateEnhancement('ModularRightEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'LeftAntiTankCannon' then
-            self:CreateEnhancement('LeftAntiTankCannonRemove')
-            self:CreateEnhancement('LeftEmpty')
+            self:CreateEnhancement('ModularLeftAntiTankCannonRemove')
+            self:CreateEnhancement('ModularLeftEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'LeftFlameThrower' then
-            self:CreateEnhancement('LeftFlameThrowerRemove')
-            self:CreateEnhancement('LeftEmpty')
+            self:CreateEnhancement('ModularLeftFlameThrowerRemove')
+            self:CreateEnhancement('ModularLeftEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'LeftBalisticShield' then
-            self:CreateEnhancement('LeftBalisticShieldRemove')
-            self:CreateEnhancement('LeftEmpty')
+            self:CreateEnhancement('ModularLeftBalisticShieldRemove')
+            self:CreateEnhancement('ModularLeftEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'LeftScatterGun' then
-            self:CreateEnhancement('LeftScatterGunRemove')
-            self:CreateEnhancement('LeftEmpty')
+            self:CreateEnhancement('ModularLeftScatterGunRemove')
+            self:CreateEnhancement('ModularLeftEmpty')
             self:RequestRefreshUI()
 		elseif pod == 'AutocannonTurret' then
-            self:CreateEnhancement('AutocannonTurretRemove')
-            self:CreateEnhancement('Empty')
+            self:CreateEnhancement('ModularAutocannonTurretRemove')
+            self:CreateEnhancement('ModularEmpty')
             self:RequestRefreshUI()	
 		elseif pod == 'GatlingTurret' then
-            self:CreateEnhancement('GatlingTurretRemove')
-            self:CreateEnhancement('Empty')
+            self:CreateEnhancement('ModularGatlingTurretRemove')
+            self:CreateEnhancement('ModularEmpty')
             self:RequestRefreshUI()	
         end
     end,
