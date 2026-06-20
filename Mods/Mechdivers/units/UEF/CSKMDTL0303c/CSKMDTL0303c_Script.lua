@@ -105,10 +105,10 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
         end,
         
         OnLostTarget = function(self)
-			if self.unit.LArm and not self.unit.LArm.Dead then
+			if self.unit.LArm and not self.unit.LArm.Dead and self.unit.LBalisticShield == false then
 			IssueClearCommands({self.unit.LArm})
 			end
-			if self.unit.RArm and not self.unit.RArm.Dead then
+			if self.unit.RArm and not self.unit.RArm.Dead and self.unit.RBalisticShield == false then
 			IssueClearCommands({self.unit.RArm})
 			end
 			if self.unit.Turret and not self.unit.Turret.Dead and self.unit.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
@@ -352,6 +352,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
         local bp = self:GetBlueprint().Enhancements[enh]
         if not bp then return end
         if enh == 'ModularLeftGatling' then
+		self.RBalisticShield = false
 		if self.LArm then
 		self.LArm:Destroy()
 		end
@@ -364,6 +365,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
         elseif enh == 'ModularRightGatling' then
+		self.RBalisticShield = false
 		if self.RArm then
 		self.RArm:Destroy()
 		end
@@ -388,6 +390,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'ModularRightAntiTankCannon' then
+		self.RBalisticShield = false
 		if self.RArm then
 		self.RArm:Destroy()
 		end
@@ -400,6 +403,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'ModularRightFlameThrower' then
+		self.RBalisticShield = false
 		if self.RArm then
 		self.RArm:Destroy()
 		end
@@ -412,6 +416,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'ModularRightScatterGun' then
+		self.RBalisticShield = false
 		if self.RArm then
 		self.RArm:Destroy()
 		end
@@ -451,6 +456,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		end
 		
 		elseif enh == 'ModularLeftAntiTankCannon' then
+		self.LBalisticShield = false
 		if self.LArm then
 		self.LArm:Destroy()
 		end
@@ -463,6 +469,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'ModularLeftFlameThrower' then
+		self.LBalisticShield = false
 		if self.LArm then
 		self.LArm:Destroy()
 		end
@@ -475,6 +482,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'ModularLeftScatterGun' then
+		self.LBalisticShield = false
 		if self.LArm then
 		self.LArm:Destroy()
 		end
@@ -514,6 +522,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		end
 		
 		elseif enh == 'ModularLeftAutoCannon' then
+		self.LBalisticShield = false
 		if self.LArm then
 		self.LArm:Destroy()
 		end
@@ -526,6 +535,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'ModularLeftMissileLauncher' then
+		self.LBalisticShield = false
 		if self.LArm then
 		self.LArm:Destroy()
 		end
@@ -538,6 +548,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'ModularRightMissileLauncher' then
+		self.RBalisticShield = false
 		if self.RArm then
 		self.RArm:Destroy()
 		end
@@ -555,11 +566,13 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		end
 		
 		elseif enh == 'ModularLeftEmpty' then
+		self.LBalisticShield = false
 		if self.LArm then
 		self.LArm:Destroy()
 		end
 		
 		elseif enh == 'ModularRightEmpty' then
+		self.RBalisticShield = false
 		if self.RArm then
 		self.RArm:Destroy()
 		end
