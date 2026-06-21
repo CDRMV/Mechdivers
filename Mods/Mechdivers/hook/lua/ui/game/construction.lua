@@ -3,6 +3,9 @@ local enhancementTooltips = {
     RCH = 'construction_tab_enhancment_right',
     Back = 'construction_tab_enhancment_back',
 	Skin = 'construction_tab_enhancment_skin',
+	LTurret = 'construction_tab_enhancment_lturret',
+	RTurret = 'construction_tab_enhancment_rturret',
+	Chassis = 'construction_tab_enhancment_chassis',
 }
 
 local OldCreateTabs = CreateTabs
@@ -13,7 +16,7 @@ OldCreateTabs(type)
 		local selection = sortedOptions.selection
         local enhancements = selection[1]:GetBlueprint().Enhancements 
         local enhCommon = import('/lua/enhancementcommon.lua')
-        local enhancementPrefixes = {Skin = 'b-', Back = 'b-', LCH = 'la-', RCH = 'ra-'}
+        local enhancementPrefixes = {Skin = 'b-', LTurret = 'b-', RTurret = 'b-', Chassis = 'b-', Back = 'b-', LCH = 'la-', RCH = 'ra-'}
         local newTabs = {}
         if enhancements.Slots then
             local tabIndex = 1
@@ -54,7 +57,7 @@ OldCreateTabs(type)
             end
             desiredTabs = table.getsize(enhancements.Slots)
         end
-        defaultTabOrder = {Back=1, LCH=2, RCH=3, Skin=4}
+        defaultTabOrder = {Back=1, LCH=2, RCH=3, Skin=4, LTurret = 5, RTurret = 6, Chassis = 7}
     end
 end
 
@@ -453,6 +456,9 @@ function FormatData(unitData, type)
             LCH = 'la',
             Back = 'b',
 			Skin = 'b',
+			LTurret = 'b', 
+			RTurret = 'b',
+			Chassis = 'b',
         }
         local filteredEnh = {}
         local usedEnhancements = {}

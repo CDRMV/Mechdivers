@@ -22,6 +22,8 @@ UEBMD00204 = Class(TStructureUnit) {
 	OnCreate = function(self)
 		self:CreateEnhancement('MMFacLeftEmpty')
 		self:CreateEnhancement('MMFacEmpty')
+		self:CreateEnhancement('MMFacLTurretEmpty')
+		self:CreateEnhancement('MMFacRTurretEmpty')
 		self:CreateEnhancement('MMFacRightEmpty')
 		self:CreateEnhancement('MMDefaultSkin')
 		if not self.ElevatorAnim then
@@ -85,13 +87,20 @@ UEBMD00204 = Class(TStructureUnit) {
 		self.Unit:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		self.Unit:RemoveCommandCap('RULEUCC_Stop')
 		self.Unit:CreateEnhancement('ModularLeftEmpty')
+		self.Unit:CreateEnhancement('ModularLTurretEmpty')
 		self.Unit:CreateEnhancement('ModularEmpty')
+		self.Unit:CreateEnhancement('ModularRTurretEmpty')
 		self.Unit:CreateEnhancement('ModularRightEmpty')
-		self.CenterUpgradeEntity = import('/lua/sim/Entity.lua').Entity()
-		self.CenterUpgradeEntity:SetDrawScale(0.42)
-		self.CenterUpgradeEntity:SetVizToAllies('Intel')
-		self.CenterUpgradeEntity:SetVizToNeutrals('Intel')
-		self.CenterUpgradeEntity:SetVizToEnemies('Intel')
+		self.RTurretUpgradeEntity = import('/lua/sim/Entity.lua').Entity()
+		self.RTurretUpgradeEntity:SetDrawScale(0.42)
+		self.RTurretUpgradeEntity:SetVizToAllies('Intel')
+		self.RTurretUpgradeEntity:SetVizToNeutrals('Intel')
+		self.RTurretUpgradeEntity:SetVizToEnemies('Intel')
+		self.LTurretUpgradeEntity = import('/lua/sim/Entity.lua').Entity()
+		self.LTurretUpgradeEntity:SetDrawScale(0.42)
+		self.LTurretUpgradeEntity:SetVizToAllies('Intel')
+		self.LTurretUpgradeEntity:SetVizToNeutrals('Intel')
+		self.LTurretUpgradeEntity:SetVizToEnemies('Intel')
 		self.RightUpgradeEntity = import('/lua/sim/Entity.lua').Entity()
 		self.RightUpgradeEntity:SetDrawScale(0.42)
 		self.RightUpgradeEntity:SetVizToAllies('Intel')
@@ -108,9 +117,11 @@ UEBMD00204 = Class(TStructureUnit) {
 		self.LBeam = nil
 		self.RBeam = nil
 		self.CBeam = nil
+		self.CBeam2 = nil
 		self.LEffect = nil
 		self.REffect = nil
 		self.CEffect = nil
+		self.CEffect2 = nil
 		
         self:SetBusy(true)
         self:SetBlockCommandQueue(true)
@@ -123,23 +134,56 @@ UEBMD00204 = Class(TStructureUnit) {
 			self.Unit:CreateEnhancement('ModularSkin1')
 		end	
 		
+		if self:HasEnhancement( 'MMFacLTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRTurretEmpty' ) == true then
+		self.ChassisUpgrade = 'ModularDefaultChassis'
+		self.Unit:CreateEnhancement(self.ChassisUpgrade)	
+		elseif self:HasEnhancement( 'MMFacLTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRTurretEmpty' ) == true then
+		self.ChassisUpgrade = 'ModularLTurretChassis'
+		self.Unit:CreateEnhancement(self.ChassisUpgrade)
+		elseif self:HasEnhancement( 'MMFacLTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRTurretEmpty' ) == false then
+		self.ChassisUpgrade = 'ModularRTurretChassis'
+		self.Unit:CreateEnhancement(self.ChassisUpgrade)
+		elseif self:HasEnhancement( 'MMFacLTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRTurretEmpty' ) == false then
+		self.ChassisUpgrade = 'ModularBothTurretsChassis'
+		self.Unit:CreateEnhancement(self.ChassisUpgrade)
+		end
+		
 		local number = nil
 		local Modpath = '/mods/Mechdivers/Decorations/Modules/Turrets/'
 		local LModpath = '/mods/Mechdivers/Decorations/Modules/Left Arm/'
 		local RModpath = '/mods/Mechdivers/Decorations/Modules/Right Arm/'
 		
 		if self:HasEnhancement( 'MMFacEmpty' ) then
-		self.CenterUpgrade = 'ModularEmpty'
+		self.SubSystemsUpgrade = 'ModularEmpty'
 		end
+		
+		if self:HasEnhancement( 'MMFacLTurretEmpty' ) then
+		self.LTurretUpgrade = 'ModularLTurretEmpty'
+		end
+		
+		if self:HasEnhancement( 'MMFacRTurretEmpty' ) then
+		self.RTurretUpgrade = 'ModularRTurretEmpty'
+		end
+		
 		if self:HasEnhancement( 'MMFacAutocannonTurret' ) then
-		self.CenterUpgrade = 'ModularAutocannonTurret'
-		self.CenterUpgradeEntity:SetMesh(Modpath .. 'Autocannon_mesh')
-		self.CenterUpgradeEntity:AttachBoneTo( 0, self.Unit, 'AttachSpecial01' )
+		self.RTurretUpgrade = 'ModularAutocannonTurret'
+		self.RTurretUpgradeEntity:SetMesh(Modpath .. 'Autocannon_mesh')
+		self.RTurretUpgradeEntity:AttachBoneTo( 0, self.Unit, 'AttachSpecial01' )
 		end
 		if self:HasEnhancement( 'MMFacGatlingTurret' ) then
-		self.CenterUpgrade = 'ModularGatlingTurret'
-		self.CenterUpgradeEntity:SetMesh(Modpath .. 'Gatling_mesh')
-		self.CenterUpgradeEntity:AttachBoneTo( 0, self.Unit, 'AttachSpecial01' )
+		self.RTurretUpgrade = 'ModularGatlingTurret'
+		self.RTurretUpgradeEntity:SetMesh(Modpath .. 'Gatling_mesh')
+		self.RTurretUpgradeEntity:AttachBoneTo( 0, self.Unit, 'AttachSpecial01' )
+		end
+		if self:HasEnhancement( 'MMFacAutocannonTurret2' ) then
+		self.LTurretUpgrade = 'ModularAutocannonTurret2'
+		self.LTurretUpgradeEntity:SetMesh(Modpath .. 'Autocannon_mesh')
+		self.LTurretUpgradeEntity:AttachBoneTo( 0, self.Unit, 'AttachSpecial04' )
+		end
+		if self:HasEnhancement( 'MMFacGatlingTurret2' ) then
+		self.LTurretUpgrade = 'ModularGatlingTurret2'
+		self.LTurretUpgradeEntity:SetMesh(Modpath .. 'Gatling_mesh')
+		self.LTurretUpgradeEntity:AttachBoneTo( 0, self.Unit, 'AttachSpecial04' )
 		end
 		
 		if self:HasEnhancement( 'MMFacRightEmpty' ) then
@@ -261,6 +305,33 @@ UEBMD00204 = Class(TStructureUnit) {
 		
 		end
 		
+		if self:HasEnhancement( 'MMFacLTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRTurretEmpty' ) == false then
+		self.CCraneAnim:SetRate(0.5)
+		self.CCraneSlideAnim:SetRate(0.3)
+		self.CBeam = AttachBeamEntityToEntity(self, 'Center_Crane_Muzzle', self.Unit, 'AttachSpecial01', self:GetArmy(), BeamBuildEmtBp)
+		self.CEffect = CreateAttachedEmitter( self.Unit, 'AttachSpecial01', self.Unit:GetArmy(),'/effects/emitters/sparks_08_emit.bp')
+		self.CCrane2Anim:SetRate(0.5)
+		self.CCraneSlide2Anim:SetRate(0.3)
+		self.CBeam2 = AttachBeamEntityToEntity(self, 'Center_Crane2_Muzzle', self.Unit, 'AttachSpecial04', self:GetArmy(), BeamBuildEmtBp)
+		self.CEffect2 = CreateAttachedEmitter( self.Unit, 'AttachSpecial04', self.Unit:GetArmy(),'/effects/emitters/sparks_08_emit.bp')
+		elseif self:HasEnhancement( 'MMFacLTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRTurretEmpty' ) == true then
+		self.CCraneAnim:SetRate(0.5)
+		self.CCraneSlideAnim:SetRate(0.3)
+		self.CBeam = AttachBeamEntityToEntity(self, 'Center_Crane_Muzzle', self.Unit, 'AttachSpecial04', self:GetArmy(), BeamBuildEmtBp)
+		self.CCrane2Anim:SetRate(0.5)
+		self.CCraneSlide2Anim:SetRate(0.3)
+		self.CBeam2 = AttachBeamEntityToEntity(self, 'Center_Crane2_Muzzle', self.Unit, 'AttachSpecial04', self:GetArmy(), BeamBuildEmtBp)
+		self.CEffect2 = CreateAttachedEmitter( self.Unit, 'AttachSpecial04', self.Unit:GetArmy(),'/effects/emitters/sparks_08_emit.bp')
+		elseif self:HasEnhancement( 'MMFacLTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRTurretEmpty' ) == false then
+		self.CCraneAnim:SetRate(0.5)
+		self.CCraneSlideAnim:SetRate(0.3)
+		self.CBeam = AttachBeamEntityToEntity(self, 'Center_Crane_Muzzle', self.Unit, 'AttachSpecial01', self:GetArmy(), BeamBuildEmtBp)
+		self.CCrane2Anim:SetRate(0.5)
+		self.CCraneSlide2Anim:SetRate(0.3)
+		self.CBeam2 = AttachBeamEntityToEntity(self, 'Center_Crane2_Muzzle', self.Unit, 'AttachSpecial01', self:GetArmy(), BeamBuildEmtBp)
+		self.CEffect2 = CreateAttachedEmitter( self.Unit, 'AttachSpecial01', self.Unit:GetArmy(),'/effects/emitters/sparks_08_emit.bp')
+		end
+		
 		
 		if self:HasEnhancement( 'MMFacEmpty' ) == false then
 		self.CCraneAnim:SetRate(0.5)
@@ -273,38 +344,57 @@ UEBMD00204 = Class(TStructureUnit) {
 		end
 		
 		
-		local CenterUpgradeEntityPos = self.Unit:GetPosition('AttachSpecial01')
+		local BothTurretsUpgradeEntityPos = self.Unit:GetPosition()
+		local LTurretUpgradeEntityPos = self.Unit:GetPosition('AttachSpecial01')
+		local RTurretUpgradeEntityPos = self.Unit:GetPosition('AttachSpecial04')
 		 
 		 
-		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacEmpty' ) == true and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacLTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
 		number = 90
 		end
 		
-		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacEmpty' ) == true and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
+		
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacLTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
 		number = 30
 		end
 		
-		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacEmpty' ) == false and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacLTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
 		number = 30
 		end
 		
-		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacEmpty' ) == false and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacLTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
 		number = 30
 		end
 		
-		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacEmpty' ) == false and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacLTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
 		number = 60
 		end
 		
-		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacEmpty' ) == true and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacLTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRTurretEmpty' ) == true  and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
 		number = 60
 		end
 		
-		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacEmpty' ) == true and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacLTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRTurretEmpty' ) == true  and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
 		number = 60
 		end
 		
-		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacEmpty' ) == false and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacLTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRTurretEmpty' ) == false  and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
+		number = 60
+		end
+		
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacLTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRTurretEmpty' ) == false  and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
+		number = 60
+		end
+		
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacLTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRTurretEmpty' ) == true  and self:HasEnhancement( 'MMFacRightEmpty' ) == true then
+		number = 60
+		end
+		
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == true and self:HasEnhancement( 'MMFacLTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRTurretEmpty' ) == true  and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
+		number = 60
+		end
+		
+		if self:HasEnhancement( 'MMFacLeftEmpty' ) == false and self:HasEnhancement( 'MMFacLTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRightEmpty' ) == false then
 		number = 0
 		end
 		
@@ -320,10 +410,12 @@ UEBMD00204 = Class(TStructureUnit) {
 			if self.RBeam then 
 			self.RBeam:Destroy()
 			end
-			if self.CBeam then 
+			if self.CBeam and self.CBeam2 then 
 			self.CBeam:Destroy()
-			end
-			if self.CBeam2 then 
+			self.CBeam2:Destroy()
+			elseif self.CBeam then
+			self.CBeam:Destroy()
+			elseif self.CBeam2 then
 			self.CBeam2:Destroy()
 			end
 			if self.LEffect then
@@ -332,10 +424,12 @@ UEBMD00204 = Class(TStructureUnit) {
 			if self.REffect then
 			self.REffect:Destroy()
 			end
-			if self.CEffect then
+			if self.CEffect and self.CEffect2 then
 			self.CEffect:Destroy()
-			end
-			if self.CEffect2 then
+			self.CEffect2:Destroy()
+			elseif self.CEffect then
+			self.CEffect:Destroy()
+			elseif self.CEffect2 then
 			self.CEffect2:Destroy()
 			end
 			self.CCraneAnim:SetRate(0)
@@ -347,14 +441,19 @@ UEBMD00204 = Class(TStructureUnit) {
 			if self.LeftUpgradeEntity then
 			self.LeftUpgradeEntity:Destroy()
 			end
-			if self.CenterUpgradeEntity then
-			self.CenterUpgradeEntity:Destroy()
+			if self.RTurretUpgradeEntity then
+			self.RTurretUpgradeEntity:Destroy()
+			end
+			if self.LTurretUpgradeEntity then
+			self.LTurretUpgradeEntity:Destroy()
 			end
 			if self.RightUpgradeEntity then
 			self.RightUpgradeEntity:Destroy()
 			end
 			self.Unit:CreateEnhancement(self.LeftUpgrade)
-			self.Unit:CreateEnhancement(self.CenterUpgrade)
+			self.Unit:CreateEnhancement(self.SubSystemsUpgrade)
+			self.Unit:CreateEnhancement(self.LTurretUpgrade)
+			self.Unit:CreateEnhancement(self.RTurretUpgrade)
 			self.Unit:CreateEnhancement(self.RightUpgrade)
 			self.Unit:AddCommandCap('RULEUCC_Move')
 			self.Unit:AddCommandCap('RULEUCC_Attack')
@@ -364,14 +463,22 @@ UEBMD00204 = Class(TStructureUnit) {
 			self.Unit:AddCommandCap('RULEUCC_Stop')
 			break
 			else
-			if self:HasEnhancement( 'MMFacEmpty' ) == true then
+			if self:HasEnhancement( 'MMFacLTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRTurretEmpty' ) == true then
 			self:GetWeaponByLabel('Dummy'):SetTargetGround(self:GetPosition())
 			self:GetWeaponByLabel('Dummy2'):SetTargetGround(self:GetPosition())
 			WaitSeconds(0.1)
 			number = number + 1
 			else
-			self:GetWeaponByLabel('Dummy'):SetTargetGround(CenterUpgradeEntityPos)
-			self:GetWeaponByLabel('Dummy2'):SetTargetGround(CenterUpgradeEntityPos)
+			if self:HasEnhancement( 'MMFacLTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRTurretEmpty' ) == false then
+			self:GetWeaponByLabel('Dummy'):SetTargetGround(BothTurretsUpgradeEntityPos)
+			self:GetWeaponByLabel('Dummy2'):SetTargetGround(BothTurretsUpgradeEntityPos)
+			elseif self:HasEnhancement( 'MMFacLTurretEmpty' ) == true and self:HasEnhancement( 'MMFacRTurretEmpty' ) == false then
+			self:GetWeaponByLabel('Dummy'):SetTargetGround(RTurretUpgradeEntityPos)
+			self:GetWeaponByLabel('Dummy2'):SetTargetGround(RTurretUpgradeEntityPos)
+			elseif self:HasEnhancement( 'MMFacLTurretEmpty' ) == false and self:HasEnhancement( 'MMFacRTurretEmpty' ) == true then
+			self:GetWeaponByLabel('Dummy'):SetTargetGround(LTurretUpgradeEntityPos)
+			self:GetWeaponByLabel('Dummy2'):SetTargetGround(LTurretUpgradeEntityPos)
+			end
 			WaitSeconds(0.1)
 			number = number + 1
 			end
@@ -409,10 +516,12 @@ UEBMD00204 = Class(TStructureUnit) {
 			if self.RBeam then 
 			self.RBeam:Destroy()
 			end
-			if self.CBeam then 
+			if self.CBeam and self.CBeam2 then 
 			self.CBeam:Destroy()
-			end
-			if self.CBeam2 then 
+			self.CBeam2:Destroy()
+			elseif self.CBeam then
+			self.CBeam:Destroy()
+			elseif self.CBeam2 then
 			self.CBeam2:Destroy()
 			end
 			if self.LEffect then
@@ -421,10 +530,12 @@ UEBMD00204 = Class(TStructureUnit) {
 			if self.REffect then
 			self.REffect:Destroy()
 			end
-			if self.CEffect then
+			if self.CEffect and self.CEffect2 then
 			self.CEffect:Destroy()
-			end
-			if self.CEffect2 then
+			self.CEffect2:Destroy()
+			elseif self.CEffect then
+			self.CEffect:Destroy()
+			elseif self.CEffect2 then
 			self.CEffect2:Destroy()
 			end
 			self.CCraneAnim:SetRate(0)
@@ -436,8 +547,11 @@ UEBMD00204 = Class(TStructureUnit) {
 			if self.LeftUpgradeEntity then
 			self.LeftUpgradeEntity:Destroy()
 			end
-			if self.CenterUpgradeEntity then
-			self.CenterUpgradeEntity:Destroy()
+			if self.RTurretUpgradeEntity then
+			self.RTurretUpgradeEntity:Destroy()
+			end
+			if self.LTurretUpgradeEntity then
+			self.LTurretUpgradeEntity:Destroy()
 			end
 			if self.RightUpgradeEntity then
 			self.RightUpgradeEntity:Destroy()
@@ -463,10 +577,12 @@ UEBMD00204 = Class(TStructureUnit) {
 			if self.RBeam then 
 			self.RBeam:Destroy()
 			end
-			if self.CBeam then 
+			if self.CBeam and self.CBeam2 then 
 			self.CBeam:Destroy()
-			end
-			if self.CBeam2 then 
+			self.CBeam2:Destroy()
+			elseif self.CBeam then
+			self.CBeam:Destroy()
+			elseif self.CBeam2 then
 			self.CBeam2:Destroy()
 			end
 			if self.LEffect then
@@ -475,10 +591,12 @@ UEBMD00204 = Class(TStructureUnit) {
 			if self.REffect then
 			self.REffect:Destroy()
 			end
-			if self.CEffect then
+			if self.CEffect and self.CEffect2 then
 			self.CEffect:Destroy()
-			end
-			if self.CEffect2 then
+			self.CEffect2:Destroy()
+			elseif self.CEffect then
+			self.CEffect:Destroy()
+			elseif self.CEffect2 then
 			self.CEffect2:Destroy()
 			end
 			self.CCraneAnim:SetRate(0)
@@ -490,8 +608,11 @@ UEBMD00204 = Class(TStructureUnit) {
 			if self.LeftUpgradeEntity then
 			self.LeftUpgradeEntity:Destroy()
 			end
-			if self.CenterUpgradeEntity then
-			self.CenterUpgradeEntity:Destroy()
+			if self.RTurretUpgradeEntity then
+			self.RTurretUpgradeEntity:Destroy()
+			end
+			if self.LTurretUpgradeEntity then
+			self.LTurretUpgradeEntity:Destroy()
 			end
 			if self.RightUpgradeEntity then
 			self.RightUpgradeEntity:Destroy()

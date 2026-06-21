@@ -40,6 +40,9 @@ if version < 3652 then
         RCH = '/game/construct-tech_btn/r_upgrade_btn_',
         Back = '/game/construct-tech_btn/m_upgrade_btn_',
 		Skin = '/game/construct-tech_btn/m_upgrade_btn_',
+		LTurret = '/game/construct-tech_btn/m_upgrade_btn_', 
+		RTurret = '/game/construct-tech_btn/m_upgrade_btn_',
+		Chassis = '/game/construct-tech_btn/m_upgrade_btn_',
     }
 	else
 	
@@ -53,6 +56,9 @@ if version < 3652 then
         RCH = '/game/construct-tech_btn/r_upgrade_btn_',
         Back = '/game/construct-tech_btn/m_upgrade_btn_',
 		Skin = '/game/construct-tech_btn/m_upgrade_btn_',
+		LTurret = '/game/construct-tech_btn/m_upgrade_btn_', 
+		RTurret = '/game/construct-tech_btn/m_upgrade_btn_',
+		Chassis = '/game/construct-tech_btn/m_upgrade_btn_',
     }
 	
 	end
@@ -148,6 +154,9 @@ else
         RCH = '/game/construct-tech_btn/r_upgrade_btn_',
         Back = '/game/construct-tech_btn/m_upgrade_btn_',
 		Skin = '/game/construct-tech_btn/m_upgrade_btn_',
+		LTurret = '/game/construct-tech_btn/m_upgrade_btn_', 
+		RTurret = '/game/construct-tech_btn/m_upgrade_btn_',
+		Chassis = '/game/construct-tech_btn/m_upgrade_btn_',
     }
 	else
 	
@@ -161,6 +170,9 @@ else
         RCH = '/game/construct-tech_btn/r_upgrade_btn_',
         Back = '/game/construct-tech_btn/m_upgrade_btn_',
 		Skin = '/game/construct-tech_btn/m_upgrade_btn_',
+		LTurret = '/game/construct-tech_btn/m_upgrade_btn_', 
+		RTurret = '/game/construct-tech_btn/m_upgrade_btn_',
+		Chassis = '/game/construct-tech_btn/m_upgrade_btn_',
     }
 	
 	end

@@ -48,6 +48,11 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 			self.unit.Turret:GetWeapon(1):SetTargetGround(targetposition)
 			IssueAttack({self.unit.Turret}, targetposition)
 			end
+			if self.unit.Turret2 and not self.unit.Turret2.Dead and self.unit.Turret2:GetScriptBit('RULEUTC_WeaponToggle') == false then
+			IssueClearCommands({self.unit.Turret2})
+			self.unit.Turret2:GetWeapon(1):SetTargetGround(targetposition)
+			IssueAttack({self.unit.Turret2}, targetposition)
+			end
 			end
 			end
 			elseif self.unit:GetFireState() == 0 then
@@ -59,6 +64,9 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 			end
 			if self.unit.Turret and not self.unit.Turret.Dead and self.unit.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
 			IssueClearCommands({self.unit.Turret})
+			end
+			if self.unit.Turret2 and not self.unit.Turret2.Dead and self.unit.Turret2:GetScriptBit('RULEUTC_WeaponToggle') == false then
+			IssueClearCommands({self.unit.Turret2})
 			end
 			end
                DummyTurretWeapon.OnGotTarget(self)
@@ -88,6 +96,11 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 			self.unit.Turret:GetWeapon(1):SetTargetGround(targetposition)
 			IssueAttack({self.unit.Turret}, targetposition)
 			end
+			if self.unit.Turret2 and not self.unit.Turret2.Dead and self.unit.Turret2:GetScriptBit('RULEUTC_WeaponToggle') == false then
+			IssueClearCommands({self.unit.Turret2})
+			self.unit.Turret2:GetWeapon(1):SetTargetGround(targetposition)
+			IssueAttack({self.unit.Turret2}, targetposition)
+			end
 			end
 			end
 			elseif self.unit:GetFireState() == 0 then
@@ -99,6 +112,9 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 			end
 			if self.unit.Turret and not self.unit.Turret.Dead and self.unit.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
 			IssueClearCommands({self.unit.Turret})
+			end
+			if self.unit.Turret2 and not self.unit.Turret2.Dead and self.unit.Turret2:GetScriptBit('RULEUTC_WeaponToggle') == false then
+			IssueClearCommands({self.unit.Turret2})
 			end
 			end
                DummyTurretWeapon.OnGotTarget(self)
@@ -114,15 +130,19 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 			if self.unit.Turret and not self.unit.Turret.Dead and self.unit.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
 			IssueClearCommands({self.unit.Turret})
 			end
+			if self.unit.Turret2 and not self.unit.Turret2.Dead and self.unit.Turret2:GetScriptBit('RULEUTC_WeaponToggle') == false then
+			IssueClearCommands({self.unit.Turret2})
+			end
             DummyTurretWeapon.OnLostTarget(self)
         end,  	
 		
 		},	
     },  
-
 	
 	OnStopBeingBuilt = function(self,builder,layer)
         TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+					self:HideBone('L_B02', true)
+		self:HideBone('R_B01', true)
 		self.build = true
 		        self.HasLeftPod = false
         self.HasRightPod = false
@@ -141,6 +161,9 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		if self.Turret and not self.Turret.Dead and self.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
 		self.Turret:SetFireState(0)
 		end
+		if self.Turret2 and not self.Turret2.Dead and self.Turret2:GetScriptBit('RULEUTC_WeaponToggle') == false then
+		self.Turret2:SetFireState(0)
+		end
 		elseif self:GetFireState() == 1 then
 		if self.LArm and not self.LArm.Dead then
 		self.LArm:SetFireState(1)
@@ -151,6 +174,9 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		if self.Turret and not self.Turret.Dead and self.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false  then
 		self.Turret:SetFireState(1)
 		end
+		if self.Turret2 and not self.Turret2.Dead and self.Turret2:GetScriptBit('RULEUTC_WeaponToggle') == false  then
+		self.Turret2:SetFireState(1)
+		end
 		elseif self:GetFireState() == 2 then
 		if self.LArm and not self.LArm.Dead then
 		self.LArm:SetFireState(2)
@@ -160,6 +186,9 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		end
 		if self.Turret and not self.Turret.Dead and self.Turret:GetScriptBit('RULEUTC_WeaponToggle') == false then
 		self.Turret:SetFireState(2)
+		end
+		if self.Turret2 and not self.Turret2.Dead and self.Turret2:GetScriptBit('RULEUTC_WeaponToggle') == false then
+		self.Turret2:SetFireState(2)
 		end
 		end
 		WaitSeconds(1)
@@ -195,7 +224,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.LBalisticShield = false
 		self.RBalisticShield = false
 		self.Turret = nil
-		
+		self.Turret2 = nil
 		--[[
 		self.LArm = CreateUnitHPR('L_Shotgun', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
 		self.LArm:SetParent(self, 'LeftScatterGun')
@@ -246,7 +275,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self.LArm = nil
 		self.RArm = nil
 		self.Turret = nil
-		
+		self.Turret2 = nil
 		--[[
 		
 		local RandomNumber = math.random(1,4)
@@ -338,11 +367,19 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
             self:RequestRefreshUI()
 		elseif pod == 'AutocannonTurret' then
             self:CreateEnhancement('ModularAutocannonTurretRemove')
-            self:CreateEnhancement('ModularEmpty')
+            self:CreateEnhancement('ModularRTurretEmpty')
             self:RequestRefreshUI()	
 		elseif pod == 'GatlingTurret' then
             self:CreateEnhancement('ModularGatlingTurretRemove')
-            self:CreateEnhancement('ModularEmpty')
+            self:CreateEnhancement('ModularRTurretEmpty')
+            self:RequestRefreshUI()	
+		elseif pod == 'AutocannonTurret2' then
+            self:CreateEnhancement('ModularAutocannonTurret2Remove')
+            self:CreateEnhancement('ModularLTurretEmpty')
+            self:RequestRefreshUI()	
+		elseif pod == 'GatlingTurret2' then
+            self:CreateEnhancement('ModularGatlingTurret2Remove')
+            self:CreateEnhancement('ModularLTurretEmpty')
             self:RequestRefreshUI()	
         end
     end,
@@ -561,8 +598,16 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
 		
 		elseif enh == 'ModularEmpty' then
+
+		
+		elseif enh == 'ModularRTurretEmpty' then
 		if self.Turret then
 		self.Turret:Destroy()
+		end
+		
+		elseif enh == 'ModularLTurretEmpty' then
+		if self.Turret2 then
+		self.Turret2:Destroy()
 		end
 		
 		elseif enh == 'ModularLeftEmpty' then
@@ -581,7 +626,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		if self.Turret then
 		self.Turret:Destroy()
 		end
-		
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition('AttachSpecial01')
 		self.Turret = CreateUnitHPR('Autocannon', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
 		self.Turret:SetParent(self, 'AutocannonTurret')
@@ -593,17 +638,62 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		if self.Turret then
 		self.Turret:Destroy()
 		end
-		
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition('AttachSpecial01')
 		self.Turret = CreateUnitHPR('Gatling', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
 		self.Turret:SetParent(self, 'GatlingTurret')
         self.Turret:SetCreator(self)
 		self.Turret:AttachBoneTo(0, self, 'AttachSpecial01')
 		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		
+		elseif enh == 'ModularAutocannonTurret2' then
+		if self.Turret then
+		self.Turret:Destroy()
+		end
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition('AttachSpecial04')
+		self.Turret2 = CreateUnitHPR('Autocannon', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.Turret2:SetParent(self, 'AutocannonTurret')
+        self.Turret2:SetCreator(self)
+		self.Turret2:AttachBoneTo(0, self, 'AttachSpecial04')
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		
+		elseif enh == 'ModularGatlingTurret2' then
+		if self.Turret then
+		self.Turret:Destroy()
+		end
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local position = self:GetPosition('AttachSpecial04')
+		self.Turret2 = CreateUnitHPR('Gatling', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
+		self.Turret2:SetParent(self, 'GatlingTurret')
+        self.Turret2:SetCreator(self)
+		self.Turret2:AttachBoneTo(0, self, 'AttachSpecial04')
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		
 		elseif enh == 'ModularDefaultSkin' then
 			self:SetMesh(self:GetBlueprint().Display.MeshBlueprint, true)
 		elseif enh == 'ModularSkin1' then
 			self:SetMesh(self:GetBlueprint().Display.Skin1.Skin1Mesh, true)
+		elseif enh == 'ModularDefaultChassis' then
+			self:ShowBone('L_B01', true)
+			self:ShowBone('R_B01', true)
+			self:HideBone('L_B02', true)
+			self:HideBone('R_B02', true)
+		elseif enh == 'ModularLTurretChassis' then
+			self:HideBone('L_B01', true)
+			self:ShowBone('R_B01', true)
+			self:ShowBone('L_B02', true)
+			self:HideBone('R_B02', true)
+		elseif enh == 'ModularRTurretChassis' then
+			self:ShowBone('L_B01', true)
+			self:HideBone('R_B01', true)
+			self:HideBone('L_B02', true)
+			self:ShowBone('R_B02', true)
+		elseif enh == 'ModularBothTurretsChassis' then
+			self:HideBone('L_B01', true)
+			self:HideBone('R_B01', true)
+			self:ShowBone('L_B02', true)
+			self:ShowBone('R_B02', true)
         end
     end,
 	
@@ -643,6 +733,10 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		if self.Turret and not self.Turret.Dead then
 		self.Turret:SetFireState(1)
 		self.Turret:RemoveCommandCap('RULEUCC_RetaliateToggle')
+		end
+		if self.Turret2 and not self.Turret2.Dead then
+		self.Turret2:SetFireState(1)
+		self.Turret2:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		end
 		if self.LArm and not self.LArm.Dead then
 		self.LArm:RemoveCommandCap('RULEUCC_Attack')
@@ -738,9 +832,13 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		self:SetFireState(0)
 		self:AddCommandCap('RULEUCC_RetaliateToggle')
 		self:AddCommandCap('RULEUCC_Guard')
-				if self.Turret and not self.Turret.Dead then
+		if self.Turret and not self.Turret.Dead then
 		self.Turret:SetFireState(0)
 		self.Turret:AddCommandCap('RULEUCC_RetaliateToggle')
+		end
+		if self.Turret2 and not self.Turret2.Dead then
+		self.Turret2:SetFireState(0)
+		self.Turret2:AddCommandCap('RULEUCC_RetaliateToggle')
 		end
 		if self.LArm and not self.LArm.Dead then
 		self.LArm:AddCommandCap('RULEUCC_Attack')
@@ -829,13 +927,16 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 	
 	end	
 
-				if self.Turret and not self.Turret.Dead then
+		if self.Turret and not self.Turret.Dead then
 		self.Turret:Destroy()
 		end
-				if self.LArm and not self.LArm.Dead then
+		if self.Turret2 and not self.Turret2.Dead then
+		self.Turret2:Destroy()
+		end
+		if self.LArm and not self.LArm.Dead then
 		self.LArm:Destroy()
 		end
-				if self.RArm and not self.RArm.Dead then
+		if self.RArm and not self.RArm.Dead then
 		self.RArm:Destroy()
 		end
 
@@ -871,6 +972,9 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 		
 		if self.Turret and not self.Turret.Dead then
 		self.Turret:Destroy()
+		end
+		if self.Turret2 and not self.Turret2.Dead then
+		self.Turret2:Destroy()
 		end
 		if self.LArm and not self.LArm.Dead then
 		self.LArm:Destroy()
