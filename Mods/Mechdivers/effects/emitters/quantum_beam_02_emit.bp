@@ -8,4 +8,5 @@ BeamBlueprint {
     UShift = 0.0,
     VShift = -0.35,
     Blendmode = 3.0,
+	LODCutoff = 400,
 }

@@ -57,14 +57,11 @@ CSKMDAA0400 = Class(AAirUnit) {
 
         self.detector = CreateCollisionDetector(self)
         self.Trash:Add(self.detector)
-        self.detector:WatchBone('Left_Turret01_Muzzle')
-        self.detector:WatchBone('Right_Turret01_Muzzle')
-        self.detector:WatchBone('Left_Turret02_WepFocus')
-        self.detector:WatchBone('Right_Turret02_WepFocus')
-        self.detector:WatchBone('Left_Turret03_Muzzle')
-        self.detector:WatchBone('Right_Turret03_Muzzle')
+        self.detector:WatchBone('CSKMDAA0400')
         self.detector:WatchBone('Attachpoint01')
         self.detector:WatchBone('Attachpoint02')
+        self.detector:WatchBone('Attachpoint03')
+        self.detector:WatchBone('Attachpoint04')
         self.detector:EnableTerrainCheck(true)
         self.detector:Enable()
 
