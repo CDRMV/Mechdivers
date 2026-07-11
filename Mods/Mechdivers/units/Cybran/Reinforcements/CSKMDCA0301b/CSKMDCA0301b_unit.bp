@@ -91,7 +91,6 @@ UnitBlueprint {
         'MOBILE',
         'AIR',
         'TECH3',
-        'BUILTBYLANDINGPAD',
         'VISIBLETORECON',
 		'TRANSPORTATION',
 		'TRANSPORTFOCUS',
