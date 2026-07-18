@@ -9,13 +9,16 @@
 #****************************************************************************
 
 local TStructureUnit = import('/lua/defaultunits.lua').StructureUnit
-local TIFArtilleryWeapon = import('/lua/terranweapons.lua').TIFArtilleryWeapon
+local TAAFlakArtilleryCannon = import('/lua/terranweapons.lua').TAAFlakArtilleryCannon
 
 UEBMD00303 = Class(TStructureUnit) {
 	Weapons = {
-        MainGun = Class(TIFArtilleryWeapon) {
+        MainGun = Class(TAAFlakArtilleryCannon) {
             FxMuzzleFlashScale = 3,
-        }
+        },
+		GroundGun = Class(TAAFlakArtilleryCannon) {
+            FxMuzzleFlashScale = 3,
+        },
     },
 	
 	OnCreate = function(self)
@@ -40,6 +43,10 @@ UEBMD00303 = Class(TStructureUnit) {
         end
         self.AnimationUnpack3Manipulator:PlayAnim(self:GetBlueprint().Display.AnimationUnpack3, false):SetRate(0)
         TStructureUnit.OnCreate(self)
+		self:SetWeaponEnabledByLabel('GroundGun', false)
+		self.wep = self:GetWeaponByLabel('MainGun')
+		self.wep:SetEnabled(false)
+		self:RemoveToggleCap('RULEUTC_WeaponToggle')
     end,
 	
 	OnStopBeingBuilt = function(self,builder,layer)
@@ -56,8 +63,27 @@ UEBMD00303 = Class(TStructureUnit) {
         self.AnimationUnpack3Manipulator:SetRate(0.6)
 		WaitFor(self.AnimationUnpack3Manipulator)
 		self.wep:SetEnabled(true)
+		self:AddToggleCap('RULEUTC_WeaponToggle')
+		self:SetScriptBit('RULEUTC_WeaponToggle', true)
+		self:RemoveToggleCap('RULEUTC_WeaponToggle')
 		end)
-	end,	
+	end,
+
+    OnScriptBitSet = function(self, bit)
+        TStructureUnit.OnScriptBitSet(self, bit)
+        if bit == 1 then 
+            self:SetWeaponEnabledByLabel('GroundGun', true)
+            self:SetWeaponEnabledByLabel('MainGun', false)
+        end
+    end,
+
+    OnScriptBitClear = function(self, bit)
+        TStructureUnit.OnScriptBitClear(self, bit)
+        if bit == 1 then 
+            self:SetWeaponEnabledByLabel('GroundGun', false)
+            self:SetWeaponEnabledByLabel('MainGun', true)
+        end
+    end,	
 	
 	
 }

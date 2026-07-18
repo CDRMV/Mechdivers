@@ -58,13 +58,85 @@ URBMD0304 = Class(CStructureUnit) {
                     CreateAttachedEmitter(self.unit, 'Barrel_Recoil', army, v)
                 end
             end,
-        }
+        },
+		GroundGun = Class(CIFArtilleryWeapon) {
+            FxMuzzleFlashScale = 0.6,
+            FxGroundEffect = EffectTemplate.CDisruptorGroundEffect,
+	        FxVentEffect = EffectTemplate.CDisruptorVentEffect,
+	        FxMuzzleEffect = EffectTemplate.CElectronBolterMuzzleFlash01,
+	        FxCoolDownEffect = EffectTemplate.CDisruptorCoolDownEffect,
+    
+		PlayFxRackSalvoReloadSequence = function(self)
+		ForkThread( function()
+		local OldFireState = self.unit:GetFireState()
+		self.unit:SetFireState('HoldFire')
+		local turretpitchmin, turretpitchmax = self:GetTurretPitchMinMax()
+		self:SetTurretPitch(0,0)
+		WaitSeconds(1)
+        local bp = self.Blueprint
+            self.unit.Animator:PlayAnim('/Mods/Mechdivers/units/Cybran/Structures/URBMD0304/URBMD0304_Reload.sca', false):SetRate(0.2)
+			if self.unit.Animator == nil then
+
+			else
+			WaitFor(self.unit.Animator)
+			self.unit:HideBone('Fusion_Capsule', true)
+			self.unit.Animator:SetRate(-0.2)
+			WaitFor(self.unit.Animator)
+			self.unit:ShowBone('Fusion_Capsule', true)
+			end
+			self:SetTurretPitch(turretpitchmin, turretpitchmax)
+			self.unit:SetFireState(OldFireState)
+			end)
+		end,
+
+	        PlayFxMuzzleSequence = function(self, muzzle)
+		        local army = self.unit:GetArmy()
+		        DefaultProjectileWeapon.PlayFxMuzzleSequence(self, muzzle)
+	            for k, v in self.FxGroundEffect do
+                    CreateAttachedEmitter(self.unit, 'URBMD0304', army, v)
+                end
+  	            for k, v in self.FxMuzzleEffect do
+                    CreateAttachedEmitter(self.unit, 'Muzzle', army, v)
+                end
+  	            for k, v in self.FxCoolDownEffect do
+                    CreateAttachedEmitter(self.unit, 'Barrel_Recoil', army, v)
+                end
+            end,
+        },
     },
 	
 	OnCreate = function(self)
 		local animator = CreateAnimator(self)
         self.Animator = animator
         CStructureUnit.OnCreate(self)
+		self:SetWeaponEnabledByLabel('GroundGun', false)
+		self.wep = self:GetWeaponByLabel('MainGun')
+		self.wep:SetEnabled(false)
+    end,
+	
+	OnStopBeingBuilt = function(self,builder,layer)
+        CStructureUnit.OnStopBeingBuilt(self,builder,layer)
+		self.wep = self:GetWeaponByLabel('MainGun')
+		self.wep:SetEnabled(true)
+		self:SetScriptBit('RULEUTC_WeaponToggle', true)
+		self:RemoveToggleCap('RULEUTC_WeaponToggle')
+	end,
+	
+	
+    OnScriptBitSet = function(self, bit)
+        CStructureUnit.OnScriptBitSet(self, bit)
+        if bit == 1 then 
+            self:SetWeaponEnabledByLabel('GroundGun', true)
+            self:SetWeaponEnabledByLabel('MainGun', false)
+        end
+    end,
+
+    OnScriptBitClear = function(self, bit)
+        CStructureUnit.OnScriptBitClear(self, bit)
+        if bit == 1 then 
+            self:SetWeaponEnabledByLabel('GroundGun', false)
+            self:SetWeaponEnabledByLabel('MainGun', true)
+        end
     end,
 }
 
