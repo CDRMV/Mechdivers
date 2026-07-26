@@ -594,6 +594,16 @@ StructureUnit2 = Class(Unit) {
 			end		
 		end
     end,
+	
+	HideLandBones = function(self)
+        if self.LandBuiltHiddenBones and self.Layer == 'Land' then
+            for _, v in self.LandBuiltHiddenBones do
+                if self:IsValidBone(v) then
+                    self:HideBone(v, true)
+                end
+            end
+        end
+    end,
     
     StopBeingBuiltEffects = function(self, builder, layer)
         local FactionName = self:GetBlueprint().General.FactionName

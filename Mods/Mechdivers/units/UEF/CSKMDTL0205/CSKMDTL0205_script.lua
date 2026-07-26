@@ -85,14 +85,24 @@ CSKMDTL0205 = Class(TLandUnit) {
             self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
         end
 		
+			if self.load == false then
+	
+	else
+	if self.Bot then
+	self.Bot:Destroy()
+	end
+	local RandomNumber = math.random(1, 2)
+	if RandomNumber == 2 then
+	SetIgnoreArmyUnitCap(self:GetArmy(), true)
+	local position = self:GetPosition()
+	local orientation = self:GetOrientation()
+	local angle = 2 * math.acos(orientation[2])
+	self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, angle, 0)
+	SetIgnoreArmyUnitCap(self:GetArmy(), false)
+	end
+	end
+		
 		self:CreateWreckage(overkillRatio or self.overkillRatio)
-		local RandomNumber = math.random(1, 2)
-		if RandomNumber == 2 then
-		SetIgnoreArmyUnitCap(self:GetArmy(), true)
-		local position = self:GetPosition()
-		local Nanites = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		SetIgnoreArmyUnitCap(self:GetArmy(), false)
-		end
         self:PlayUnitSound('Destroyed')
         self:Destroy()
     end,
@@ -191,23 +201,6 @@ CSKMDTL0205 = Class(TLandUnit) {
 	if self.Beacon then
 	self.Beacon:Destroy()
 	end	
-	
-	if self.load == false then
-	
-	else
-	if self.Bot then
-	self.Bot:Destroy()
-	end
-	local RandomNumber = math.random(1, 2)
-	if RandomNumber == 2 then
-	SetIgnoreArmyUnitCap(self:GetArmy(), true)
-	local position = self:GetPosition()
-	local orientation = self:GetOrientation()
-	local angle = 2 * math.acos(orientation[2])
-	self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, angle, 0)
-	SetIgnoreArmyUnitCap(self:GetArmy(), false)
-	end
-	end
 	
 	
     TLandUnit.OnKilled(self, instigator, type, overkillRatio)	

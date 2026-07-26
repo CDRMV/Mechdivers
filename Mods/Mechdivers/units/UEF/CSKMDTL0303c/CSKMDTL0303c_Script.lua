@@ -705,6 +705,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
             WaitFor(self.DeathAnimManip)
         end
 		end
+		
 
         if self.DeathAnimManip then
             WaitFor(self.DeathAnimManip)
@@ -905,6 +906,7 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 	if units[1] == nil then
 		
 	else
+	ForkThread(function()
 	units[1]:Destroy()
 	local RandomNumber = math.random(1, 2)
 	if RandomNumber == 2 then
@@ -916,13 +918,11 @@ CSKMDTL0303c = Class(TWalkingLandUnit) {
 	self.unit.CanTakeDamage = false
 	self.unit.CanBeKilled = false
 	SetIgnoreArmyUnitCap(self:GetArmy(), false)
-	ForkThread(function()
 	WaitSeconds(1)
-		end)
 	self.unit.CanTakeDamage = true
 	self.unit.CanBeKilled = true
 	end
-	
+	end)
 	end
 	
 	end	

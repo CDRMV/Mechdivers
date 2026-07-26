@@ -10,7 +10,10 @@
 
 local TLandUnit = import('/lua/defaultunits.lua').MobileUnit
 local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
+local explosion = import('/lua/defaultexplosions.lua')
+local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
 local EffectTemplate = import('/lua/EffectTemplates.lua')
+local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 
 CSKMDTL0207 = Class(TLandUnit) {
 
@@ -53,6 +56,7 @@ CSKMDTL0207 = Class(TLandUnit) {
         end
 		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTL0205/CSKMDTL0205_Door.sca', false):SetRate(0)
 		self.load = true
+		self.SuicideMode = false
     end,
 	
 		OnMotionHorzEventChange = function(self, new, old)
@@ -84,14 +88,48 @@ CSKMDTL0207 = Class(TLandUnit) {
             self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
         end
 		
-		self:CreateWreckage(overkillRatio or self.overkillRatio)
-		local RandomNumber = math.random(1, 2)
-		if RandomNumber == 2 then
-		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+	if self.load == false and self.SuicideMode == false then
+	
+	else
+	if self.Bot then
+	self.Bot:Destroy()
+	end
+	local RandomNumber = math.random(1, 2)
+	if RandomNumber == 2 then
+	SetIgnoreArmyUnitCap(self:GetArmy(), true)
+	local position = self:GetPosition()
+	local orientation = self:GetOrientation()
+	local angle = 2 * math.acos(orientation[2])
+	self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, angle, 0)
+	SetIgnoreArmyUnitCap(self:GetArmy(), false)
+	end
+	end
+		
+		if self.SuicideMode == true then
+        CreateAttachedEmitter(self,0, army, '/effects/emitters/explosion_fire_sparks_02_emit.bp')
+		CreateAttachedEmitter(self,0, army, '/effects/emitters/napalm_01_emit.bp')
+		CreateAttachedEmitter(self,0, army, '/effects/emitters/napalm_02_emit.bp')
+		CreateAttachedEmitter(self,0, army, '/effects/emitters/napalm_03_emit.bp')
+		CreateDeathExplosion( self, 0, 1.0)
+		explosion.CreateFlash( self, 0, 2.5, army )
+		local FxDeath = EffectTemplate.TAPDSHit01
+		local FxDeath2 = EffectTemplate.CMobileKamikazeBombExplosion
+		for k, v in FxDeath do
+            CreateEmitterAtBone(self,-2,army,v):ScaleEmitter(1)
+        end  
+		for k, v in FxDeath2 do
+            CreateEmitterAtBone(self,-2,army,v):ScaleEmitter(1.5)
+        end  
+		
 		local position = self:GetPosition()
-		local Nanites = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
-		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		local rotation = 6.28 * Random()
+        DamageArea(self, position, 6, 1, 'TreeForce', true)
+        DamageArea(self, position, 6, 1, 'TreeForce', true)
+		DamageArea(self, position, 500, 1, 'Normal', true)
+        CreateDecal(position, rotation, 'scorch_010_albedo', '', 'Albedo', 11, 11, 250, 120, army)
 		end
+		
+		self:CreateWreckage(overkillRatio or self.overkillRatio)
         self:PlayUnitSound('Destroyed')
         self:Destroy()
     end,
@@ -145,7 +183,14 @@ CSKMDTL0207 = Class(TLandUnit) {
 		elseif bit == 3 then
 		self.Beacon:HideBone(0, true)		
 		elseif bit == 4 then
+		if self.SuicideMode == true then
+		self.SuicideMode = false
+		self:SetSpeedMult(1)
+		elseif self.SuicideMode == false then
+		self.SuicideMode = true
 		self:SetSpeedMult(2)
+		end
+		self:SetScriptBit('RULEUTC_ProductionToggle', false)
 		end
     end,
 
@@ -181,7 +226,6 @@ CSKMDTL0207 = Class(TLandUnit) {
 		elseif bit == 3 then
 		self.Beacon:ShowBone(0, true)
 		elseif bit == 4 then
-		self:SetSpeedMult(1)
 		end
     end,
 	
@@ -190,23 +234,6 @@ CSKMDTL0207 = Class(TLandUnit) {
 	if self.Beacon then
 	self.Beacon:Destroy()
 	end	
-	
-	if self.load == false then
-	
-	else
-	if self.Bot then
-	self.Bot:Destroy()
-	end
-	local RandomNumber = math.random(1, 2)
-	if RandomNumber == 2 then
-	SetIgnoreArmyUnitCap(self:GetArmy(), true)
-	local position = self:GetPosition()
-	local orientation = self:GetOrientation()
-	local angle = 2 * math.acos(orientation[2])
-	self.unit = CreateUnitHPR('UEL0106', self:GetArmy(), position[1], position[2], position[3], 0, angle, 0)
-	SetIgnoreArmyUnitCap(self:GetArmy(), false)
-	end
-	end
 	
 	
     TLandUnit.OnKilled(self, instigator, type, overkillRatio)	

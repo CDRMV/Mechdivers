@@ -157,8 +157,8 @@ UnitBlueprint {
 				helpText = 'Load/Unload Mech Marines',
             },
 			RULEUTC_ProductionToggle = {
-			    bitmapId = 'production',
-				helpText = 'Speed Booster',	
+			    bitmapId = 'OverCharge',
+				helpText = 'Suicide Mode',	
             },
         },
         FactionName = 'UEF',
