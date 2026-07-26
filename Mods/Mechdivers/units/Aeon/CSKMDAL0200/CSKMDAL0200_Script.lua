@@ -16,13 +16,17 @@ CSKMDAL0200 = Class(AHoverLandUnit) {
 		IdleState = State (ADFLightningBeam.IdleState) {
         Main = function(self)
 			self.unit:RemoveToggleCap('RULEUTC_WeaponToggle')
+			if self.unit.Scan then
 			self.unit.Scan:SetMesh('/mods/Mechdivers/Decorations/AeonScan_mesh') 
+			end
            ADFLightningBeam.IdleState.Main(self)
         end,
                 
         OnGotTarget = function(self)
 			self.unit:AddToggleCap('RULEUTC_WeaponToggle')
+			if self.unit.Scan then
 			self.unit.Scan:SetMesh('/mods/Mechdivers/Decorations/AeonScan_Alert_mesh') 
+			end
 			ADFLightningBeam.OnGotTarget(self)
         end,                
         },
@@ -30,7 +34,9 @@ CSKMDAL0200 = Class(AHoverLandUnit) {
         
         OnLostTarget = function(self)
 			self.unit:RemoveToggleCap('RULEUTC_WeaponToggle')
+			if self.unit.Scan then
 			self.unit.Scan:SetMesh('/mods/Mechdivers/Decorations/AeonScan_mesh') 
+			end
             ADFLightningBeam.OnLostTarget(self)
         end,  			
 		},
