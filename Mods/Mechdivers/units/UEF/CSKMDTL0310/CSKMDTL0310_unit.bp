@@ -136,7 +136,7 @@ UnitBlueprint {
         FactionName = 'UEF',
         Icon = 'land',
         TechLevel = 'RULEUTL_Basic',
-        UnitName = 'T 122 Tiger',
+        UnitName = 'T 120 Peacekeeper',
         UnitWeight = 1,
     },
     Intel = {
