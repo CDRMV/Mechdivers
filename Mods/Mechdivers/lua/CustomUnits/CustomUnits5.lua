@@ -1,5 +1,9 @@
 UnitList = {
 
+	T2LandDFTank = {
+		UEF = {'CSKMDTL0206', 80},      -- Amigo SG-100, Tech 2 Supply Truck
+	},
+
 	T3AirFighter = {
 		UEF = {'CSKMDTA0302g', 80},  -- Eagle, Tech 3 Groundattack Fighter
 	},

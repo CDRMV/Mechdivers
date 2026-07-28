@@ -132,3 +132,15 @@ TDFLightningBeam = Class(DefaultBeamWeapon) {
     FxUpackingChargeEffects = EffectTemplate.CMicrowaveLaserCharge01,
     FxUpackingChargeEffectScale = 0.1,
 }
+
+TMobileKamikazeBombWeapon = Class(KamikazeWeapon){
+	FxDeath = EffectTemplate.TAPDSHit01,
+    OnFire = function(self)
+		local army = self.unit:GetArmy()
+        for k, v in self.FxDeath do
+            CreateEmitterAtBone(self.unit,-2,army,v):ScaleEmitter(1)
+        end 
+        CreateLightParticle( self.unit, -1, -1, 15, 10, 'flare_lens_add_02', 'ramp_red_10' ) 
+		KamikazeWeapon.OnFire(self)
+    end,
+}

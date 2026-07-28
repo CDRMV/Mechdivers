@@ -52,13 +52,12 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-		#'BUILTBYTIER1FACTORY',
-        #'BUILTBYTIER2FACTORY',
-        #'BUILTBYTIER3FACTORY',
+        'BUILTBYTIER2FACTORY',
+        'BUILTBYTIER3FACTORY',
         'UEF',
         'MOBILE',
         'LAND',
-        'TECH1',
+        'TECH2',
         'VISIBLETORECON',
         'RECLAIMABLE',
     },
@@ -66,14 +65,21 @@ UnitBlueprint {
         AirThreatLevel = 0,
         ArmorType = 'Normal',
         EconomyThreatLevel = 0,
-        Health = 500,
-        MaxHealth = 500,
+        Health = 1000,
+        MaxHealth = 1000,
         RegenRate = 0,
         SubThreatLevel = 0,
         SurfaceThreatLevel = 12,
     },
     Description = 'Flamethrower Truck',
     Display = {
+		Abilities = {
+			'Has access to the Kamikaze Mode',
+			'This allows the Truck to move Faster.',
+			'If he dies it causes an larger Explosion than usual.',
+			'The larger Explosion is caused by the integrated Fluid Canister.',
+			'If the Movespeed increases the Fluid becomes instable.',
+        },
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -119,9 +125,9 @@ UnitBlueprint {
         UniformScale = 0.17,
     },
     Economy = {
-        BuildCostEnergy = 500,
-        BuildCostMass = 70,
-        BuildTime = 300,
+        BuildCostEnergy = 700,
+        BuildCostMass = 100,
+        BuildTime = 400,
         TeleportEnergyMod = 0.15,
         TeleportMassMod = 1,
         TeleportTimeMod = 0.01,
@@ -158,7 +164,7 @@ UnitBlueprint {
             },
 			RULEUTC_ProductionToggle = {
 			    bitmapId = 'OverCharge',
-				helpText = 'Suicide Mode',	
+				helpText = 'Kamikaze Mode',	
             },
         },
         FactionName = 'UEF',
@@ -207,7 +213,7 @@ UnitBlueprint {
     SizeX = 0.6,
     SizeY = 0.6,
     SizeZ = 1.3,
-    StrategicIconName = 'icon_land1_directfire',
+    StrategicIconName = 'icon_land2_directfire',
     StrategicIconSortPriority = 125,
     Transport = {
         TransportClass = 1,
@@ -285,6 +291,47 @@ UnitBlueprint {
             UseFiringSolutionInsteadOfAimBone = true,
             WeaponCategory = 'Direct Fire',
 		},	
+		{
+            AboveWaterTargetsOnly = true,
+            CollideFriendly = false,
+
+            Damage = 1500,
+            DamageFriendly = true,
+            DamageRadius = 4,
+            DamageType = 'Normal',
+
+            DisplayName = 'Suicide',
+
+            FireTargetLayerCapsTable = {
+                Land = 'Land|Water|Seabed',
+				Seabed = 'Land|Water|Seabed',
+            },
+
+            FiringTolerance = 360,
+
+            Label = 'Suicide',
+
+            MaxRadius = 4,
+
+            ProjectileId = '/projectiles/NullShell/NullShell_proj.bp',
+            ProjectileLifetime = 0.1,
+
+            RackBones = {
+                { MuzzleBones = { 0 }, RackBone = 0 },
+            },
+
+            RangeCategory = 'UWRC_DirectFire',
+
+            TargetCheckInterval = 1,
+            TargetPriorities = {
+                'SPECIALHIGHPRI',
+                'MOBILE',
+                'STRUCTURE',
+                'ALLUNITS',
+            },
+            TargetRestrictDisallow = 'UNTARGETABLE',
+            Turreted = false,
+        },
     },
     Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',

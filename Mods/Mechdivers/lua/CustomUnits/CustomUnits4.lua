@@ -1,6 +1,7 @@
 UnitList = {
 	
 	T2AttackTankSorian = {
+		UEF = {'CSKMDTL0207', 80},      -- Firey M-13, Tech 2 Flamethrower Truck
 		Cybran = {'CSKMDCL0204', 80},  -- Devastator, Tech 2 Advanced Shotgun Bot
     },
 	

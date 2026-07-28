@@ -9,7 +9,7 @@
 #****************************************************************************
 
 local TLandUnit = import('/lua/defaultunits.lua').MobileUnit
-local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
+local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFShipGaussCannonWeapon
 local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 
 CSKMDTL0310 = Class(TLandUnit) {

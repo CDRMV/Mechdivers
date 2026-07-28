@@ -28,6 +28,10 @@ UnitList = {
     Cybran =	{'URBMD0102', 70}, -- Tech 2 Assault Drone Station
 	},
 	
+	T3ArmoredAssault = {
+		UEF = {'CSKMDTL0310', 80},      -- T 120 Peacekeeper, Tech 3 Heavy Tank
+    },
+	
 	T4LandExperimental1 = {
 		Cybran = {'CSKMDCL0319', 80},    -- Vox Engine, Tech 3 Heavy Tank bot
     },

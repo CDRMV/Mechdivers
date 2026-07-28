@@ -10,6 +10,7 @@
 
 local TLandUnit = import('/lua/defaultunits.lua').MobileUnit
 local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
+local TMobileKamikazeBombWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').TMobileKamikazeBombWeapon
 local explosion = import('/lua/defaultexplosions.lua')
 local CreateDeathExplosion = explosion.CreateDefaultHitExplosionAtBone
 local EffectTemplate = import('/lua/EffectTemplates.lua')
@@ -19,6 +20,13 @@ CSKMDTL0207 = Class(TLandUnit) {
 
     Weapons = {
         Flamethrower = Class(TDFMachineGunWeapon) {
+        },
+		Suicide = Class(TMobileKamikazeBombWeapon) {   
+     
+			OnFire = function(self)			
+				self.unit:Kill()
+				TMobileKamikazeBombWeapon.OnFire(self)
+			end,
         },
     },
 
@@ -90,7 +98,7 @@ CSKMDTL0207 = Class(TLandUnit) {
 		
 	if self.load == false and self.SuicideMode == false then
 	
-	else
+	elseif self.load == true and self.SuicideMode == false then
 	if self.Bot then
 	self.Bot:Destroy()
 	end
@@ -123,9 +131,8 @@ CSKMDTL0207 = Class(TLandUnit) {
 		
 		local position = self:GetPosition()
 		local rotation = 6.28 * Random()
-        DamageArea(self, position, 6, 1, 'TreeForce', true)
-        DamageArea(self, position, 6, 1, 'TreeForce', true)
-		DamageArea(self, position, 500, 1, 'Normal', true)
+        DamageArea(self, position, 6, 3, 'TreeForce', true)
+        DamageArea(self, position, 6, 3, 'TreeForce', true)
         CreateDecal(position, rotation, 'scorch_010_albedo', '', 'Albedo', 11, 11, 250, 120, army)
 		end
 		
@@ -185,10 +192,12 @@ CSKMDTL0207 = Class(TLandUnit) {
 		elseif bit == 4 then
 		if self.SuicideMode == true then
 		self.SuicideMode = false
+		KillThread(self.AutomaticDetonationThreadHandle)
 		self:SetSpeedMult(1)
 		elseif self.SuicideMode == false then
 		self.SuicideMode = true
-		self:SetSpeedMult(2)
+		self.AutomaticDetonationThreadHandle = self:ForkThread(self.AutomaticDetonationThread)
+		self:SetSpeedMult(3)
 		end
 		self:SetScriptBit('RULEUTC_ProductionToggle', false)
 		end
@@ -263,6 +272,21 @@ CSKMDTL0207 = Class(TLandUnit) {
 		end
 		
 		end
+    end,
+	
+	AutomaticDetonationThread = function(self)
+		while not self:IsDead() do
+			local unitPos = self:GetPosition()
+            #Get Enemy units in the area
+			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, 2, 'Enemy')
+            for _,unit in units do
+				self:GetWeaponByLabel'Suicide':FireWeapon()
+				self:Kill()
+            end
+            
+            #Wait 2 seconds
+            WaitSeconds(2)
+		end	
     end,
 	
 }
