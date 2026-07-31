@@ -49,9 +49,9 @@ UnitBlueprint {
     },
     CollisionOffsetY = -0.5,
     Defense = {
-        AirThreatLevel = 27,
+        AirThreatLevel = 0,
         ArmorType = 'Structure',
-        EconomyThreatLevel = 17,
+        EconomyThreatLevel = 1151,
         Health = 10500,
         MaxHealth = 10500,
         RegenRate = 0,
@@ -99,12 +99,12 @@ UnitBlueprint {
         UniformScale = 0.20,
     },
     Economy = {
-        BuildCostEnergy = 40000,
-        BuildCostMass = 4500,
+        BuildCostEnergy = 870000,
+        BuildCostMass = 87000,
+        BuildTime = 29000,
 		BuildRate = 5,
-        BuildTime = 2800,
         RebuildBonusIds = {
-            'uebmd00302',
+            'uebmd00303',
         },
     },
     Footprint = {

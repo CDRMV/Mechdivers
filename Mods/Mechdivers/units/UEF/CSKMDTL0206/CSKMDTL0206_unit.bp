@@ -158,7 +158,7 @@ UnitBlueprint {
         FactionName = 'UEF',
         Icon = 'land',
 		UnitName = 'Amigo SG-100',
-        TechLevel = 'RULEUTL_Basic',
+        TechLevel = 'RULEUTL_Advanced',
         UnitWeight = 1,
     },
     Intel = {
