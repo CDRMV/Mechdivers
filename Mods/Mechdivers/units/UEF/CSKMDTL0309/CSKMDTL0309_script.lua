@@ -9,14 +9,20 @@
 #****************************************************************************
 
 local TLandUnit = import('/lua/defaultunits.lua').MobileUnit
-local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
+local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
 local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 
 CSKMDTL0309 = Class(TLandUnit) {
 
     Weapons = {
-        MachineGun = Class(TDFMachineGunWeapon) {
-        },
+		ACGun = Class(TDFGaussCannonWeapon) {
+		PlayFxMuzzleSequence = function(self, muzzle)
+		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
+		if muzzle == 'Turret_Muzzle' then
+		CreateAttachedEmitter(self.unit, 'Turret_Shell', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
+		end
+		end,
+		},
     },
 
 	OnStopBeingBuilt = function(self,builder,layer)
@@ -61,7 +67,7 @@ CSKMDTL0309 = Class(TLandUnit) {
 		self.Effect2 = CreateAttachedEmitter(self,'Drill_Effect',self:GetArmy(), '/effects/emitters/dust_cloud_06_emit.bp'):ScaleEmitter(2):SetEmitterParam('LIFETIME', -1):OffsetEmitter(0,-1,0)
 		self.Trash:Add(self.Effect2)
 		WaitSeconds(1)
-		CreateDecal(self:GetPosition('Drill_Head'), rotation, 'scorch_001_albedo', '', 'Albedo', size, size, 150, 150, self:GetArmy())
+		CreateDecal(self:GetPosition('Drill_Head'), rotation, 'scorch_001_albedo', '', 'Albedo', size, size, 150, 0, self:GetArmy())
 		WaitFor(self.AnimationManipulator2)
 		if not self.AnimationManipulator3 then
             self.AnimationManipulator3 = CreateAnimator(self)
