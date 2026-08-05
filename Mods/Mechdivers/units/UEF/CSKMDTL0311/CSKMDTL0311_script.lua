@@ -10,8 +10,8 @@
 
 local TLandUnit = import('/lua/defaultunits.lua').MobileUnit
 local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
-local TMobileKamikazeBombWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').TMobileKamikazeBombWeapon
 local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
+local EffectUtil = import('/lua/EffectUtilities.lua')
 
 CSKMDTL0311 = Class(TLandUnit) {
 
@@ -33,9 +33,141 @@ CSKMDTL0311 = Class(TLandUnit) {
             self.AnimationManipulator1 = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator1)
         end
-		self.AnimationManipulator1:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTL0312/CSKMDTL0312_ADeploy.sca', false):SetRate(0)
+		self.AnimationManipulator1:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTL0311/CSKMDTL0311_ADeploy.sca', false):SetRate(0)
+		 ChangeState(self, self.IdleState)
+		self.Module = nil
     end,
 	
+	BuildAttachBone = 'AttachPoint',
+
+    OnFailedToBuild = function(self)
+        TLandUnit.OnFailedToBuild(self)
+        ChangeState(self, self.IdleState)
+    end,
+
+    IdleState = State {
+        OnStartBuild = function(self, unitBuilding, order)
+            self:SetBusy(true)
+            TLandUnit.OnStartBuild(self, unitBuilding, order)
+            self.UnitBeingBuilt = unitBuilding
+            ChangeState(self, self.BuildingState)
+        end,
+
+        Main = function(self)
+            self:SetBusy(false)
+        end,
+    },
+
+    BuildingState = State {
+
+        Main = function(self)
+            local unitBuilding = self.UnitBeingBuilt
+            local bone = self.BuildAttachBone
+            if not self.UnitBeingBuilt:IsDead() then
+                unitBuilding:AttachBoneTo( -2, self, bone )
+            end
+			for k, v in self:GetBlueprint().General.BuildBones.BuildEffectBones do
+            self.BuildEffectsBag:Add( CreateAttachedEmitter( self, v, self:GetArmy(), '/effects/emitters/flashing_blue_glow_01_emit.bp' ) )         
+            self.BuildEffectsBag:Add(self:CreateDefaultBuildBeams(unitBuilding, {v}, self.BuildEffectsBag ))
+			end
+            WaitSeconds(3)
+            unitBuilding:ShowBone(0,true)
+            local unitBuilding = self.UnitBeingBuilt
+            self.UnitDoneBeingBuilt = false
+        end,
+
+        OnStopBuild = function(self, unitBeingBuilt)
+            TLandUnit.OnStopBuild(self, unitBeingBuilt)
+
+            ChangeState(self, self.FinishedBuildingState)
+        end,
+
+    },
+
+    FinishedBuildingState = State {
+        Main = function(self)
+            self:SetBusy(true)
+            local unitBuilding = self.UnitBeingBuilt
+			self:AddBuildRestriction(categories.BUILTBYTIER3MODULARTRUCK)
+			self:AddToggleCap('RULEUTC_WeaponToggle')
+            self:SetBusy(false)
+            self:RequestRefreshUI()
+			self.Module = unitBuilding
+            ChangeState(self, self.IdleState)
+        end,
+    },
+	
+	OnScriptBitSet = function(self, bit)
+        TLandUnit.OnScriptBitSet(self, bit)
+		if bit == 1 then 
+		if self.Module and not self.Module.Dead then
+		self.Module:Destroy()
+		self:RemoveBuildRestriction(categories.BUILTBYTIER3MODULARTRUCK)
+		self:SetScriptBit('RULEUTC_WeaponToggle',false)
+		self:RemoveToggleCap('RULEUTC_WeaponToggle')
+		end
+		end
+    end,
+
+    OnScriptBitClear = function(self, bit)
+        TLandUnit.OnScriptBitClear(self, bit)
+		if bit == 1 then 
+
+		end
+    end,
+	
+	
+	OnKilled = function(self, instigator, type, overkillRatio)
+	if self.Beacon then
+	self.Beacon:Destroy()
+	end	
+	
+
+	if self.Module and not self.Module.Dead then
+	self.Module:Kill()
+	end
+
+
+
+    TLandUnit.OnKilled(self, instigator, type, overkillRatio)	
+    end,
+	
+	CreateDefaultBuildBeams = function(builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag )
+	ForkThread( function()
+    local BeamBuildEmtBp = '/effects/emitters/build_beam_01_emit.bp'
+    local ox, oy, oz = unpack(builder:GetPosition('AttachPoint'))
+	local Entity = import('/lua/sim/Entity.lua').Entity
+    local BeamEndEntity = Entity()
+    local army = builder:GetArmy()
+    BuildEffectsBag:Add( BeamEndEntity )
+    Warp( BeamEndEntity, Vector(ox, oy, oz))   
+   
+    local BuildBeams = {}
+
+    # Create build beams
+    if BuildEffectBones != nil then
+        local beamEffect = nil
+        for i, BuildBone in BuildEffectBones do
+            local beamEffect = AttachBeamEntityToEntity(builder, BuildBone, BeamEndEntity, -2, army, BeamBuildEmtBp )
+            table.insert( BuildBeams, beamEffect )
+            BuildEffectsBag:Add(beamEffect)
+        end
+    end    
+
+    CreateEmitterOnEntity( BeamEndEntity, builder:GetArmy(),'/effects/emitters/sparks_08_emit.bp')
+    local waitTime = RandomFloat( 0.3, 1.5 )
+
+    while true do
+	if BeamEndEntity:BeenDestroyed() then
+	break
+	else
+        local x, y, z = builder.GetRandomOffset(unitBeingBuilt, 1 )
+        Warp( BeamEndEntity, Vector(ox + x, oy + y, oz + z))
+	end
+        WaitSeconds(waitTime)
+    end
+	end)
+end
 
 }
 

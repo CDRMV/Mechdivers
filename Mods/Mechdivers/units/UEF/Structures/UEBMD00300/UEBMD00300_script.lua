@@ -466,7 +466,7 @@ UEBMD00300 = Class(TStructureUnit) {
 		self.wep:SetEnabled(true)
 		local number = 0
 		while true do
-		if self:GetTacticalSiloAmmoCount() == 0 then
+		if self:GetTacticalSiloAmmoCount() == 0 and not self.Dead then
 		self:SetFireState('HoldFire')
 		WaitSeconds(1)
 		self:RemoveCommandCap('RULEUCC_Attack')
@@ -475,21 +475,21 @@ UEBMD00300 = Class(TStructureUnit) {
 		if number == 0 then
 		number = 1
 		if self:GetAIBrain().BrainType == 'Human' then
-		while self:GetTacticalSiloAmmoCount() <= 24 do
+		while self:GetTacticalSiloAmmoCount() <= 24 and not self.Dead do
 		WaitSeconds(2)
 		self:GiveTacticalSiloAmmo(1)
 		self:CheckSiloAmount()
 		end
 		--self:AddCommandCap('RULEUCC_SiloBuildTactical')
 		else
-		while self:GetTacticalSiloAmmoCount() <= 24 do
+		while self:GetTacticalSiloAmmoCount() <= 24 and not self.Dead do
 		WaitSeconds(2)
 		self:GiveTacticalSiloAmmo(1)
 		self:CheckSiloAmount()
 		end
 		end
 		end
-		elseif self:GetTacticalSiloAmmoCount() == 25 then
+		elseif self:GetTacticalSiloAmmoCount() == 25 and not self.Dead then
 		self:RemoveTacticalSiloAmmo(1)
 		self:AddCommandCap('RULEUCC_Attack')
 		self:AddCommandCap('RULEUCC_Stop')

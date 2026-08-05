@@ -3,6 +3,7 @@ UnitBlueprint {
                     Categories = {
                         'INVULNERABLE',
                         'STRUCTURE',
+						'INSIGNIFICANTUNIT',
                         'BENIGN',
                         'UNSELECTABLE',
                         'UNTARGETABLE',

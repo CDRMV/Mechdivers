@@ -89,6 +89,7 @@ UnitBlueprint {
         'UNSELECTABLE',
         'UEF',
         'MOBILE',
+		'INSIGNIFICANTUNIT',
         'AIR',
         'TECH3',
 		'UNTARGETABLE',

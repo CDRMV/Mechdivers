@@ -93,6 +93,7 @@ UnitBlueprint {
         'TECH3',
         'VISIBLETORECON',
 		'TRANSPORTATION',
+		'INSIGNIFICANTUNIT',
 		'TRANSPORTFOCUS',
         'RECLAIMABLE',
 		'ANTIAIR',

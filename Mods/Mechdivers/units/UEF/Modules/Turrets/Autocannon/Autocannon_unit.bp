@@ -4,6 +4,7 @@ UnitBlueprint {
         'SELECTABLE',
         'UEF',
         'MOBILE',
+		'INSIGNIFICANTUNIT',
         'LAND',
 		'DIRECTFIRE',
 		'OVERLAYDIRECTFIRE',

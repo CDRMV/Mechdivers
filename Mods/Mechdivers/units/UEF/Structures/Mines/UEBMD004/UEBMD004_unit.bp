@@ -1,9 +1,10 @@
 UnitBlueprint {
     Categories = {
         'UEF',
+		'SELECTABLE',
 		'MINE',
         'STRUCTURE',
-		'SELECTABLE',
+		'INSIGNIFICANTUNIT',
         'TECH1',
         'VISIBLETORECON',
 		'UNTARGETDABLE',

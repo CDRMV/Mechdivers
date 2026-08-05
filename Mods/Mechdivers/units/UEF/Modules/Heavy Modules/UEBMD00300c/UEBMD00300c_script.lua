@@ -8,10 +8,10 @@
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 
-local TStructureUnit = import('/lua/defaultunits.lua').StructureUnit2
+local DummyUnit = import('/lua/defaultunits.lua').MobileUnit
 local TSAMLauncher = import('/lua/terranweapons.lua').TSAMLauncher
 
-UEBMD00300b = Class(TStructureUnit) {
+UEBMD00300 = Class(DummyUnit) {
     Weapons = {
         MissileRack01 = Class(TSAMLauncher) {
 		OnWeaponFired = function(self)
@@ -118,33 +118,12 @@ UEBMD00300b = Class(TStructureUnit) {
     },
 	
 	OnCreate = function(self)
-					self:RemoveCommandCap('RULEUCC_Reclaim')
-		if not self.AnimationManipulator then
-            self.AnimationManipulator = CreateAnimator(self)
-            self.Trash:Add(self.AnimationManipulator)
-        end
-        self.AnimationManipulator:PlayAnim(self:GetBlueprint().Display.AnimationUnpack, false):SetRate(0)
 		if not self.AnimationUnpack1Manipulator then
             self.AnimationUnpack1Manipulator = CreateAnimator(self)
             self.Trash:Add(self.AnimationUnpack1Manipulator)
         end
-        self.AnimationUnpack1Manipulator:PlayAnim(self:GetBlueprint().Display.AnimationUnpack1, false):SetRate(1)	
-		if not self.AnimationUnpack2Manipulator then
-            self.AnimationUnpack2Manipulator = CreateAnimator(self)
-            self.Trash:Add(self.AnimationUnpack2Manipulator)
-        end
-        self.AnimationUnpack2Manipulator:PlayAnim(self:GetBlueprint().Display.AnimationUnpack2, false):SetRate(0)
-		if not self.AnimationUnpack3Manipulator then
-            self.AnimationUnpack3Manipulator = CreateAnimator(self)
-            self.Trash:Add(self.AnimationUnpack3Manipulator)
-        end
-        self.AnimationUnpack3Manipulator:PlayAnim(self:GetBlueprint().Display.AnimationUnpack3, false):SetRate(0)
-		if not self.AnimationUnpack4Manipulator then
-            self.AnimationUnpack4Manipulator = CreateAnimator(self)
-            self.Trash:Add(self.AnimationUnpack4Manipulator)
-        end
-        self.AnimationUnpack4Manipulator:PlayAnim(self:GetBlueprint().Display.AnimationUnpack4, false):SetRate(-1)	
-        TStructureUnit.OnCreate(self)
+        self.AnimationUnpack1Manipulator:PlayAnim(self:GetBlueprint().Display.AnimationUnpack1, false):SetRate(0)		
+        DummyUnit.OnCreate(self)
     end,
 	
 	CheckSiloAmount = function(self)
@@ -341,7 +320,7 @@ UEBMD00300b = Class(TStructureUnit) {
 		if self:GetTacticalSiloAmmoCount() == 1 then 
 		self:ShowBone('Missile01', true)
 		end
-        TStructureUnit.OnSiloBuildStart(self,weapon)
+        DummyUnit.OnSiloBuildStart(self,weapon)
     end,
 	
 	OnSiloBuildEnd = function(self, weapon)
@@ -440,75 +419,24 @@ UEBMD00300b = Class(TStructureUnit) {
 		if self:GetTacticalSiloAmmoCount() == 1 then 
 		self:ShowBone('Missile01', true)
 		end
-        TStructureUnit.OnSiloBuildEnd(self,weapon)
+        DummyUnit.OnSiloBuildEnd(self,weapon)
     end,
 	
 	OnStopBeingBuilt = function(self,builder,layer)
-        TStructureUnit.OnStopBeingBuilt(self,builder,layer)
-		self:CreateTarmac(true, true, true, false, false)
+        DummyUnit.OnStopBeingBuilt(self,builder,layer)
 		self:RemoveCommandCap('RULEUCC_Attack')
 		self:RemoveCommandCap('RULEUCC_Stop')
 		self:RemoveCommandCap('RULEUCC_RetaliateToggle')
 		self.wep = self:GetWeaponByLabel('MissileRack01')
 		self.wep:SetEnabled(false)
-		self:GiveTacticalSiloAmmo(24)
-		self.ReclaimedMass = 0
-		self.ReclaimedEnergy = 0
-	end,
-	
-	CreateEnhancement = function(self, enh)
-        TStructureUnit.CreateEnhancement(self, enh)
-        local bp = self:GetBlueprint().Enhancements[enh]
-        if not bp then return end
-        if enh == 'RaiseMissileLauncher' then
-		
-        elseif enh == 'RemoveRaiseMissileLauncher' then
-		
-		elseif enh == 'Guidance' then
-		
-		elseif enh == 'RemoveGuidance' then
-		
-		elseif enh == 'Targeting' then
-		
-		elseif enh == 'RemoveTargeting' then
-		
-		elseif enh == 'WarHead' then
-		
-		elseif enh == 'RemoveWarHead' then
-		
-		elseif enh == 'Propulsion' then
-		
-		elseif enh == 'RemovePropulsion' then
-        end
-    end,
-	
-    OnWorkBegin = function(self, work)
-		TStructureUnit.OnWorkBegin(self, work)
-		local tempEnhanceBp = self:GetBlueprint().Enhancements[work]
-		if tempEnhanceBp.Name == '<LOC RaiseMissileLauncher>Raise surface to air launcher' then
-		self.AnimationManipulator:SetRate(0.03)
-		return true
-		end
-		if tempEnhanceBp.Name == '<LOC GuidanceSubsystem>Guidance Subsystem' then
-		 self.AnimationUnpack1Manipulator:SetRate(-1)
-		return true
-		end
-		if tempEnhanceBp.Name == '<LOC TargetingSubsystem>Targeting Subsystem' then
-		 self.AnimationUnpack2Manipulator:SetRate(1)
-		 return true
-		end
-		if tempEnhanceBp.Name == '<LOC WarheadSubsystem>Warhead Subsystem' then
-		 self.AnimationUnpack3Manipulator:SetRate(1)
-		 return true
-		end
-		if tempEnhanceBp.Name == '<LOC PropulsionSubsystem>Propulsion Subsystem' then
-		 self.AnimationUnpack4Manipulator:SetRate(1)
-		 ForkThread( function()	
-		 WaitFor(self.AnimationUnpack4Manipulator)
+		ForkThread( function()
+        self.AnimationUnpack1Manipulator:SetRate(0.1)
+		WaitFor(self.AnimationUnpack1Manipulator)		
 		self:AddCommandCap('RULEUCC_Attack')
 		self:AddCommandCap('RULEUCC_Stop')
 		self:AddCommandCap('RULEUCC_RetaliateToggle')
 		self.wep:SetEnabled(true)
+		self.Parent = nil
 		local number = 0
 		while true do
 		if self:GetTacticalSiloAmmoCount() == 0 and not self.Dead then
@@ -555,10 +483,10 @@ UEBMD00300b = Class(TStructureUnit) {
 		WaitSeconds(0.1)
 		end
 		end)
-		return true
-		end
-		return false
-    end,	
+	end,	
+	
+	    CreateWreckage = function(self, overkillRatio)
+    end,
 }
 
-TypeClass = UEBMD00300b
+TypeClass = UEBMD00300

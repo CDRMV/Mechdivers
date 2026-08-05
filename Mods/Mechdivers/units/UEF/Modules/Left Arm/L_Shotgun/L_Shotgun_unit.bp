@@ -6,6 +6,7 @@ UnitBlueprint {
         'MOBILE',
         'LAND',
 		'DIRECTFIRE',
+		'INSIGNIFICANTUNIT',
 		'OVERLAYDIRECTFIRE',
         'POD',
         'MODULE',

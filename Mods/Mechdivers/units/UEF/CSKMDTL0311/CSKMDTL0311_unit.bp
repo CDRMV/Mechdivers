@@ -59,11 +59,16 @@ UnitBlueprint {
         'UEF',
         'MOBILE',
         'LAND',
+		'CONSTRUCTION',
+		'FACTORY',
+		'CARRIER',
+		'ANTIAIR',
         'TECH3',
         'VISIBLETORECON',
         'RECLAIMABLE',
 		'DIRECTFIRE',
 		'OVERLAYDIRECTFIRE',
+		'OVERLAYANTIAIR',
     },
     Defense = {
         AirThreatLevel = 0,
@@ -78,7 +83,9 @@ UnitBlueprint {
     Description = 'Modular Truck',
     Display = {
 	    Abilities = {
-			'In Development',
+			'A Module can be installed on the Truck.',
+			'Choose a specific Modulse in the Build List.',
+			'A installed module can be removed with the "Remove Module" Button.',
         },
         Mesh = {
             IconFadeInZoom = 130,
@@ -127,12 +134,21 @@ UnitBlueprint {
     Economy = {
         BuildCostEnergy = 16000,
         BuildCostMass = 2200,
+		BuildRate = 180,
         BuildTime = 7200,
+		BuildableCategory = {
+            'BUILTBYTIER3MODULARTRUCK UEF',
+        },
         TeleportEnergyMod = 0.15,
         TeleportMassMod = 1,
         TeleportTimeMod = 0.01,
     },
     General = {
+	    BuildBones = {
+            BuildEffectBones = {
+                'Center_Crane_Muzzle',
+            },
+        },
         Category = 'Indirect Fire',
         Classification = 'RULEUC_MilitaryVehicle',
         CommandCaps = {
@@ -148,6 +164,12 @@ UnitBlueprint {
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
             RULEUCC_Transport = false,
+        },
+		OrderOverrides = {
+			RULEUTC_WeaponToggle = {
+                bitmapId = 'production',
+				helpText = 'Remove Module',
+            },
         },
         FactionName = 'UEF',
         Icon = 'land',
@@ -203,6 +225,7 @@ UnitBlueprint {
     StrategicIconSortPriority = 125,
     Transport = {
         TransportClass = 3,
+		StorageSlots = 10,
     },
 	 Weapon = {
 	    {

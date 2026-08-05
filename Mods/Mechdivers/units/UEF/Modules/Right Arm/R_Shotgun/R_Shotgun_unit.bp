@@ -5,6 +5,7 @@ UnitBlueprint {
         'UEF',
         'MOBILE',
         'LAND',
+		'INSIGNIFICANTUNIT',
 		'DIRECTFIRE',
 		'OVERLAYDIRECTFIRE',
         'POD',

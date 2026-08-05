@@ -12,6 +12,7 @@ UnitBlueprint {
         'VISIBLETORECON',
 		'UNTARGETDABLE',
 		'DIRECTFIRE',
+		'INSIGNIFICANTUNIT',
 		#'OVERLAYDIRECTFIRE',
     },
     Defense = {

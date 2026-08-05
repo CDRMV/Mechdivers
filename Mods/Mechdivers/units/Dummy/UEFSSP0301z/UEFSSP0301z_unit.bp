@@ -21,6 +21,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'UNSELECTABLE',
+		'INSIGNIFICANTUNIT',
 		'INVULNERABLE',
 		'UNTARGETABLE',
         'UEF',
