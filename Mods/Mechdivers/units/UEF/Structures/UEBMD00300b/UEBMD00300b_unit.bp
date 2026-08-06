@@ -341,7 +341,7 @@ UnitBlueprint {
     },
     Weapon = {
         {
-            #AlwaysRecheckTarget = true,
+            AlwaysRecheckTarget = true,
             Audio = {
                 Fire = Sound {
                     Bank = 'UELWeapon',
@@ -349,6 +349,7 @@ UnitBlueprint {
                     LodCutoff = 'Weapon_LodCutoff',
                 },
             },
+			AutoInitiateAttackCommand = true,
             BallisticArc = 'RULEUBA_None',
             CannotAttackGround = true,
 			ForceSingleFire = true,

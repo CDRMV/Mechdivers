@@ -12,10 +12,63 @@ local TLandUnit = import('/lua/defaultunits.lua').MobileUnit
 local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
 local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 local EffectUtil = import('/lua/EffectUtilities.lua')
+local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 
 CSKMDTL0311 = Class(TLandUnit) {
 
     Weapons = {
+		AADummy = Class(DummyTurretWeapon) {
+		IdleState = State (DummyTurretWeapon.IdleState) {
+        Main = function(self)
+                    DummyTurretWeapon.IdleState.Main(self)
+                end,
+                
+        OnGotTarget = function(self)
+		LOG(self.unit:GetFireState())
+			if self.unit:GetFireState() == 0 then
+			local target = self.unit:GetTargetEntity()
+			if target then
+			if self.unit.Module and not self.unit.Module.Dead then
+			IssueClearCommands({self.unit.Module})
+			self.unit.Module:GetWeapon(1):SetTargetEntity(target)
+			IssueAttack({self.unit.Module}, target)
+			end
+			end
+			elseif self.unit:GetFireState() == 1 then
+			if self.unit.Module and not self.unit.Module.Dead then
+			IssueClearCommands({self.unit.Module})
+			end
+			end
+               DummyTurretWeapon.OnGotTarget(self)
+        end,                
+            },
+			
+		OnGotTarget = function(self)
+			if self.unit:GetFireState() == 0 then
+			local target = self.unit:GetTargetEntity()
+			if target then
+			if self.unit.Module and not self.unit.Module.Dead then
+			IssueClearCommands({self.unit.Module})
+			self.unit.Module:GetWeapon(1):SetTargetEntity(target)
+			IssueAttack({self.unit.Module}, target)
+			end
+			end
+			elseif self.unit:GetFireState() == 1 then
+			if self.unit.Module and not self.unit.Module.Dead then
+			IssueClearCommands({self.unit.Module})
+			end
+			end
+               DummyTurretWeapon.OnGotTarget(self)
+        end, 
+        
+        OnLostTarget = function(self)
+			if self.unit.Module and not self.unit.Module.Dead then
+			IssueClearCommands({self.unit.Module})
+			end
+            DummyTurretWeapon.OnLostTarget(self)
+        end,  	
+		
+		},
 		ACGun = Class(TDFGaussCannonWeapon) {
 		PlayFxMuzzleSequence = function(self, muzzle)
 		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
@@ -36,6 +89,26 @@ CSKMDTL0311 = Class(TLandUnit) {
 		self.AnimationManipulator1:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTL0311/CSKMDTL0311_ADeploy.sca', false):SetRate(0)
 		 ChangeState(self, self.IdleState)
 		self.Module = nil
+		self.wep = self:GetWeaponByLabel('AADummy')
+		self.wep:SetEnabled(false)
+		ForkThread(function()
+		while self and not self.Dead do
+		if self:GetFireState() == 0 then
+		if self.Module and not self.Module.Dead then
+		self.Module:SetFireState(0)
+		end
+		elseif self:GetFireState() == 1 then
+		if self.Module and not self.Module.Dead then
+		self.Module:SetFireState(1)
+		end
+		elseif self:GetFireState() == 2 then
+		if self.Module and not self.Module.Dead then
+		self.Module:SetFireState(2)
+		end
+		end
+		WaitSeconds(1)
+		end
+		end)
     end,
 	
 	BuildAttachBone = 'AttachPoint',
@@ -93,6 +166,9 @@ CSKMDTL0311 = Class(TLandUnit) {
             self:SetBusy(false)
             self:RequestRefreshUI()
 			self.Module = unitBuilding
+			if self.Module:GetBlueprint().General.UnitName == 'Slatter' then
+			self.wep:SetEnabled(true)
+			end
             ChangeState(self, self.IdleState)
         end,
     },
@@ -167,7 +243,7 @@ CSKMDTL0311 = Class(TLandUnit) {
         WaitSeconds(waitTime)
     end
 	end)
-end
+	end
 
 }
 
