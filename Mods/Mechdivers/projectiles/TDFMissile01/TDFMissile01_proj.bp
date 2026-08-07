@@ -20,9 +20,12 @@ ProjectileBlueprint {
         'UEF',
         'PROJECTILE',
         'DIRECTFIRE',
-        'MISSILE',
     },
     Display = {
+        ImpactEffects = {
+            Scale = 0.4,
+            Type = 'Medium02',
+        },
         Mesh = {
             LODs = {
                 {
@@ -30,25 +33,25 @@ ProjectileBlueprint {
                 },
             },
         },
-        StrategicIconSize = 2,
+        StrategicIconSize = 1,
         UniformScale = 0.45,
     },
     General = {
-        Category = 'Artillery',
-        Faction = 'UEF',
-        TechLevel = 3,
-        Weapon = 'Flayer SAM Launcher',
+        Category = 'Direct Fire',
+        Weapon = 'Gauss Cannon',
     },
     Interface = {
         HelpText = 0,
     },
     Physics = {
-        DestroyOnWater = true,
-        InitialSpeed = 50,
-        InitialSpeedRange = 12,
-        InitialSpeedReduceDistance = 115,
-        LeadTarget = false,
-        Lifetime = 30,
+        Acceleration = 0,
+        DestroyOnWater = false,
+        InitialSpeed = 12,
+        InitialSpeedRange = 0,
+        InitialSpeedReduceDistance = 0,
+        MaxSpeed = 0,
+        RotationalVelocity = 0,
+        RotationalVelocityRange = 0,
         TurnRate = 360,
         VelocityAlign = true,
     },

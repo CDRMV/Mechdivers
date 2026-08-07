@@ -1,5 +1,7 @@
 local DefaultProjectileFile = import('/lua/sim/defaultprojectiles.lua')
 local SingleBeamProjectile = DefaultProjectileFile.SingleBeamProjectile
+EmtBpPath = '/effects/emitters/'
+local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 
 TDFMissile01 = Class(SingleBeamProjectile) {
     InitialEffects = {'/effects/emitters/nuke_munition_launch_trail_02_emit.bp',},
@@ -13,6 +15,40 @@ TDFMissile01 = Class(SingleBeamProjectile) {
     },
 	
 	BeamName = '/effects/emitters/missile_exhaust_fire_beam_01_emit.bp',
+	
+	# Hit Effects
+    FxImpactUnit = {  
+	EmtBpPath .. 'uef_t2_artillery_hit_01_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_02_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_03_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_04_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_05_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_06_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_07_emit.bp',
+	EmtBpPath .. 'destruction_unit_hit_shrapnel_01_emit.bp',
+	},
+    FxImpactProp = {  
+	EmtBpPath .. 'uef_t2_artillery_hit_01_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_02_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_03_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_04_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_05_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_06_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_07_emit.bp',
+	},
+    FxImpactLand = {
+	EmtBpPath .. 'uef_t2_artillery_hit_01_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_02_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_03_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_04_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_05_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_06_emit.bp',
+	EmtBpPath .. 'uef_t2_artillery_hit_07_emit.bp',
+	},
+    FxLandHitScale = 1.2,
+    FxUnitHitScale = 1.5,
+    FxSplatScale = 4,
+    FxImpactUnderWater = {},
 	
 	OnCreate = function(self)
 	    self.DamageData = {
@@ -36,6 +72,15 @@ TDFMissile01 = Class(SingleBeamProjectile) {
         for k, v in EffectTable do
             CreateAttachedEmitter(self, -1, army, v):ScaleEmitter(scale):OffsetEmitter(0,0,2)
         end
+    end,
+	
+	OnImpact = function(self, targetType, targetEntity)
+        if targetType == 'Terrain' then
+           	local rotation = RandomFloat(0,2*math.pi)
+			local size = RandomFloat(5,5)
+			CreateDecal(self:GetPosition(), rotation, 'scorch_001_albedo', '', 'Albedo', size, size, 150, 150, self:GetArmy())
+        end
+        SingleBeamProjectile.OnImpact(self, targetType, targetEntity)
     end,
 
 }
