@@ -9,19 +9,14 @@
 #****************************************************************************
 
 local TLandUnit = import('/lua/defaultunits.lua').MobileUnit
-local TDFRiotWeapon = import('/lua/terranweapons.lua').TDFRiotWeapon
-local EffectTemplate = import('/lua/EffectTemplates.lua')
+local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
 
 CSKMDTL0300 = Class(TLandUnit) {
 
     Weapons = {
-        LMG = Class(TDFRiotWeapon) {
-		FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank
-        },
-		RMG = Class(TDFRiotWeapon) {
-		FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank
-        },
+        LMG = Class(TDFMachineGunWeapon) {},
+		RMG = Class(TDFMachineGunWeapon) {},
 		ACGun = Class(TDFGaussCannonWeapon) {
 		PlayFxMuzzleSequence = function(self, muzzle)
 		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)

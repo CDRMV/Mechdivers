@@ -213,19 +213,19 @@ UnitBlueprint {
         TransportClass = 1,
     },
 	 Weapon = {
-        {
+		{
             AboveWaterTargetsOnly = true,
             AimControlPrecedence = 10,
             Audio = {
                 Fire = Sound {
                     Bank = 'UELWeapon',
-                    Cue = 'UEL0203_Riot_Gun',
+                    Cue = 'UEL0101_MachineGun',
                     LodCutoff = 'Weapon_LodCutoff',
                 },
             },
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
-            Damage = 25,
+            Damage = 35,
             DamageType = 'Normal',
             DisplayName = 'Tom Cat Machinegun',
             FireTargetLayerCapsTable = {
@@ -235,12 +235,12 @@ UnitBlueprint {
             FiringTolerance = 2,
             Label = 'MainGun',
             MaxRadius = 25,
-            MuzzleSalvoDelay = 0,
-            MuzzleSalvoSize = 1,
+            MuzzleSalvoDelay = 0.2,
+            MuzzleSalvoSize = 5,
             MuzzleVelocity = 25,
-            ProjectileId = '/projectiles/TDFRiot02/TDFRiot02_proj.bp',
+            ProjectileId = '/projectiles/TDFMachineGun01/TDFMachineGun01_proj.bp',
             ProjectileLifetimeUsesMultiplier = 1.15,
-            ProjectilesPerOnFire = 1,
+            ProjectilesPerOnFire = 5,
             RackBones = {
                 {
                     MuzzleBones = {
@@ -256,7 +256,7 @@ UnitBlueprint {
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
             RangeCategory = 'UWRC_DirectFire',
-            RateOfFire = 3,
+            RateOfFire = 0.5,
             TargetCheckInterval = 1,
             TargetPriorities = {
                 'SPECIALHIGHPRI',

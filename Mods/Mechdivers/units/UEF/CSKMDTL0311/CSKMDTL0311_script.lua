@@ -69,6 +69,68 @@ CSKMDTL0311 = Class(TLandUnit) {
         end,  	
 		
 		},
+		Dummy = Class(DummyTurretWeapon) {
+		IdleState = State (DummyTurretWeapon.IdleState) {
+        Main = function(self)
+                    DummyTurretWeapon.IdleState.Main(self)
+                end,
+                
+        OnGotTarget = function(self)
+		LOG(self.unit:GetFireState())
+			if self.unit:GetFireState() == 2 then
+			local target = self.unit:GetTargetEntity()
+			if target then
+			
+			else
+			local targetposition = self:GetCurrentTargetPos()
+			if targetposition then
+			if self.unit.Module and not self.unit.Module.Dead then
+			IssueClearCommands({self.unit.Module})
+			self.unit.Module:GetWeapon(1):SetTargetGround(targetposition)
+			IssueAttack({self.unit.Module}, targetposition)
+			end
+			end
+			end
+			elseif self.unit:GetFireState() == 0 then
+			if self.unit.Module and not self.unit.Module.Dead then
+			IssueClearCommands({self.unit.Module})
+			end
+			end
+               DummyTurretWeapon.OnGotTarget(self)
+        end,                
+            },
+			
+		OnGotTarget = function(self)
+			if self.unit:GetFireState() == 2 then
+			local target = self.unit:GetTargetEntity()
+			if target then
+			
+			else
+			local targetposition = self:GetCurrentTargetPos()
+			if targetposition then
+			if self.unit.Module and not self.unit.Module.Dead then
+			IssueClearCommands({self.unit.Module})
+			self.unit.Module:GetWeapon(1):SetTargetGround(targetposition)
+			IssueAttack({self.unit.Module}, targetposition)
+			end
+			end
+			end
+			elseif self.unit:GetFireState() == 0 then
+			if self.unit.Module and not self.unit.Module.Dead then
+			IssueClearCommands({self.unit.Module})
+			end
+			end
+               DummyTurretWeapon.OnGotTarget(self)
+        end, 
+        
+        OnLostTarget = function(self)
+			if self.unit.Module and not self.unit.Module.Dead then
+			IssueClearCommands({self.unit.Module})
+			end
+            DummyTurretWeapon.OnLostTarget(self)
+        end,  	
+		
+		},
 		ACGun = Class(TDFGaussCannonWeapon) {
 		PlayFxMuzzleSequence = function(self, muzzle)
 		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
@@ -91,6 +153,8 @@ CSKMDTL0311 = Class(TLandUnit) {
 		self.Module = nil
 		self.wep = self:GetWeaponByLabel('AADummy')
 		self.wep:SetEnabled(false)
+		self.wep2 = self:GetWeaponByLabel('Dummy')
+		self.wep2:SetEnabled(false)
 		ForkThread(function()
 		while self and not self.Dead do
 		if self:GetFireState() == 0 then
@@ -166,8 +230,10 @@ CSKMDTL0311 = Class(TLandUnit) {
             self:SetBusy(false)
             self:RequestRefreshUI()
 			self.Module = unitBuilding
-			if self.Module:GetBlueprint().General.UnitName == 'Slatter' then
+			if self.Module:GetBlueprint().General.UnitName == 'Slatter' or self.Module:GetBlueprint().General.UnitName == 'L/64 Air Guard' then
 			self.wep:SetEnabled(true)
+			else
+			self.wep2:SetEnabled(true)
 			end
             ChangeState(self, self.IdleState)
         end,

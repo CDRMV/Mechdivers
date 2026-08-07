@@ -55,6 +55,7 @@ UnitBlueprint {
 		'DRAGBUILD',
         'AEON',
         'MOBILE',
+		'LARGEUNIT',
         'LAND',
         'TECH3',
 		'INDIRECTFIRE',

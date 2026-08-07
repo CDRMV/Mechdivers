@@ -32,14 +32,13 @@ UnitBlueprint {
 		'BUILTBYTIER3MODULARTRUCK',
         'UEF',
 		'ARTILLERY',
-		'SILO',
         'TECH3',
 		 'RECLAIM',
 		 'INSIGNIFICANTUNIT',
-        'ANTIAIR',
+        'DIRECTFIRE',
         'VISIBLETORECON',
         'RECLAIMABLE',
-        'OVERLAYANTIAIR',
+        'OVERLAYDIRECTFIRE',
         'SORTDEFENSE',
         'MOBILE',
         'LAND',
@@ -57,15 +56,11 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Heavy Anti-Air SAM Launcher',
+    Description = 'Heavy Missile Battery',
     Display = {
-	AnimationUnpack1 = '/mods/Mechdivers/units/UEF/Modules/Heavy Modules/UEBMD00300c/UEBMD00300c_UnPack.sca',
         Abilities = {
-            '<LOC ability_aa>Anti-Air',
-			'Can be captured and activated by installing of the Enhancement Upgrades by the Player.',
-			'Can only Target large Air Units such as Air Transports and Air Experimentals',
 			'Has 24 Missiles in its Storage and fires 1 with each Salvo',
-			'If the Storage goes empty (0) the Missiles will be refueled automatically',
+			'If the Storage goes empty (0) the Missiles will be refueled.',
         },
         Mesh = {
             IconFadeInZoom = 130,
@@ -81,7 +76,7 @@ UnitBlueprint {
         },
         PlaceholderMeshName = 'UXB0001',
         SpawnRandomRotation = true,
-        UniformScale = 0.45,
+        UniformScale = 0.08,
     },
     Economy = {
         BuildCostEnergy = 8000,
@@ -111,7 +106,7 @@ UnitBlueprint {
         Icon = 'none',
         SelectionPriority = 5,
         TechLevel = 'RULEUTL_Secret',
-        UnitName = 'Slatter',
+        UnitName = 'HIMARS 3000',
         UnitWeight = 1,
     },
     Intel = {
@@ -148,7 +143,7 @@ UnitBlueprint {
     SizeX = 0.5,
     SizeY = 1.7,
     SizeZ = 0.5,
-    StrategicIconName = 'icon_structure_antiair',
+    StrategicIconName = 'icon_structure_directfire',
     StrategicIconSize = 1,
     StrategicIconSortPriority = 105,
 	Transport = {
@@ -163,7 +158,7 @@ UnitBlueprint {
     },
     Weapon = {
         {
-            #AlwaysRecheckTarget = true,
+            AlwaysRecheckTarget = false,
             Audio = {
                 Fire = Sound {
                     Bank = 'UELWeapon',
@@ -172,203 +167,83 @@ UnitBlueprint {
                 },
             },
             BallisticArc = 'RULEUBA_None',
-            CannotAttackGround = true,
-			ForceSingleFire = true,
-			CountedProjectile = true,
+            CannotAttackGround = false,
             CollideFriendly = false,
-			InitialProjectileStorage = 24,
-			ManualFire = false,
-            MaxProjectileStorage = 24,
             Damage = 4500,
             DamageRadius = 1,
             DamageType = 'Normal',
             DisplayName = 'Flayer SAM Launcher',
             FireTargetLayerCapsTable = {
-                Air = 'Air',
-                Land = 'Air',
-                Water = 'Air',
+                Land = 'Land|Water|Seabed',
             },
-            FiringTolerance = 10,
+            FiringTolerance = 4,
+			FiringRandomness = 1,
             Label = 'MissileRack01',
             MaxRadius = 100,
-            MuzzleSalvoDelay = 0,
-            MuzzleSalvoSize = 1,
+            MuzzleSalvoDelay = 0.4,
+            MuzzleSalvoSize = 24,
             MuzzleVelocity = 30,
-            ProjectileId = '/mods/Mechdivers/projectiles/TAAMissile01/TAAMissile01_proj.bp',
-            ProjectileLifetime = 6,
+            ProjectileId = '/mods/Mechdivers/projectiles/TDFMissile01/TDFMissile01_proj.bp',
+            ProjectileLifetimeUsesMultiplier = 1.15,
             ProjectilesPerOnFire = 1,
             RackBones = {
                 {
                     MuzzleBones = {
                         'Missile01',
+						'Missile02',
+						'Missile03',
+						'Missile04',
+						'Missile05',
+						'Missile06',
+						'Missile07',
+						'Missile08',
+						'Missile09',
+						'Missile10',
+						'Missile11',
+						'Missile12',
+						'Missile13',
+						'Missile14',
+						'Missile15',
+						'Missile16',
+						'Missile17',
+						'Missile18',
+						'Missile19',
+						'Missile20',
+						'Missile21',
+						'Missile22',
+						'Missile23',
+						'Missile24',
                     },
-                    RackBone = 'Missile01',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile02',
-                    },
-                    RackBone = 'Missile02',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile03',
-                    },
-                    RackBone = 'Missile03',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile04',
-                    },
-                    RackBone = 'Missile04',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile05',
-                    },
-                    RackBone = 'Missile05',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile06',
-                    },
-                    RackBone = 'Missile06',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile07',
-                    },
-                    RackBone = 'Missile07',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile08',
-                    },
-                    RackBone = 'Missile08',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile09',
-                    },
-                    RackBone = 'Missile09',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile10',
-                    },
-                    RackBone = 'Missile10',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile11',
-                    },
-                    RackBone = 'Missile11',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile12',
-                    },
-                    RackBone = 'Missile12',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile13',
-                    },
-                    RackBone = 'Missile13',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile14',
-                    },
-                    RackBone = 'Missile14',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile15',
-                    },
-                    RackBone = 'Missile15',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile16',
-                    },
-                    RackBone = 'Missile16',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile17',
-                    },
-                    RackBone = 'Missile17',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile18',
-                    },
-                    RackBone = 'Missile18',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile19',
-                    },
-                    RackBone = 'Missile19',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile20',
-                    },
-                    RackBone = 'Missile20',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile21',
-                    },
-                    RackBone = 'Missile21',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile22',
-                    },
-                    RackBone = 'Missile22',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile23',
-                    },
-                    RackBone = 'Missile23',
-                },
-				{
-                    MuzzleBones = {
-                        'Missile24',
-                    },
-                    RackBone = 'Missile24',
+                    RackBone = 'Barrel',
                 },
             },
             RackFireTogether = false,
             RackRecoilDistance = 0,
-            RackReloadTimeout = 60,
+            RackReloadTimeout = 10,
             RackSalvoChargeTime = 0,
             RackSalvoReloadTime = 0,
             RackSalvoSize = 1,
             RackSlavedToTurret = false,
-            RangeCategory = 'UWRC_AntiAir',
-            RateOfFire = 0.15,
+            RangeCategory = 'UWRC_DirectFire',
+            RateOfFire = 0.05,
             TargetCheckInterval = 0.3,
             TargetPriorities = {
-                'AIR MOBILE TRANSPORTATION',
-                'AIR MOBILE EXPERIMENTAL',
+                'SPECIALHIGHPRI',
+                'SPECIALLOWPRI',
+                'ALLUNITS',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             TrackingRadius = 1.4,
             TurretBoneMuzzle = 'Missile01',
             TurretBonePitch = 'Barrel',
-            TurretBoneYaw = 'Turret',
+            TurretBoneYaw = 'UEBMD00300c',
             TurretDualManipulators = false,
             TurretPitch = 25,
             TurretPitchRange = 80,
             TurretPitchSpeed = 180,
             TurretYaw = 0,
             TurretYawRange = 180,
-            TurretYawSpeed = 180,
+            TurretYawSpeed = 100,
             Turreted = true,
             WeaponCategory = 'Missile',
             WeaponRepackTimeout = 0,

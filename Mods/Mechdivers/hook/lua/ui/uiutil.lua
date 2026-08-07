@@ -58,6 +58,11 @@ local MyUnitIdTable = {
 	  l_balisticshield=true,
 	  balisticshield=true,
 	  
+	  truck_heavygauss=true,
+	  truck_aaflak=true,
+	  truck_aasam=true,
+	  truck_missilebattery=true,
+	  
  -- Air  	
    
       cskmdta0300=true,  

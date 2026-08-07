@@ -52,6 +52,7 @@ UnitBlueprint {
         'BUILTBYTIER3FACTORY',
         'AEON',
         'MOBILE',
+		'LARGEUNIT',
 		'OVERLAYRADAR',
 		'RADAR',
         'LAND',

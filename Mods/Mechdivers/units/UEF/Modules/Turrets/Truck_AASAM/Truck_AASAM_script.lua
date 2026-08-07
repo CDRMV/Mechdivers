@@ -11,7 +11,7 @@
 local DummyUnit = import('/lua/defaultunits.lua').MobileUnit
 local TSAMLauncher = import('/lua/terranweapons.lua').TSAMLauncher
 
-UEBMD00300 = Class(DummyUnit) {
+Truck_AASAM = Class(DummyUnit) {
     Weapons = {
         MissileRack01 = Class(TSAMLauncher) {
 		OnWeaponFired = function(self)
@@ -489,4 +489,4 @@ UEBMD00300 = Class(DummyUnit) {
     end,
 }
 
-TypeClass = UEBMD00300
+TypeClass = Truck_AASAM

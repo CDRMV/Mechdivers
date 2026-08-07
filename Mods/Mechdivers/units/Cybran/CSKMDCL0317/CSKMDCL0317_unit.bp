@@ -104,6 +104,7 @@ UnitBlueprint {
         'NEEDMOBILEBUILD',
 		'DRAGBUILD',
 		'DETECTORFACTORYSTRIDER',
+		'LARGEUNIT',
         'CYBRAN',
         'MOBILE',
         'LAND',

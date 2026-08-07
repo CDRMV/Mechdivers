@@ -9,14 +9,13 @@
 #****************************************************************************
 
 local TLandUnit = import('/lua/defaultunits.lua').MobileUnit
-local TDFRiotWeapon = import('/lua/terranweapons.lua').TDFRiotWeapon
+local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 
 CSKMDTL0205 = Class(TLandUnit) {
 
     Weapons = {
-        MainGun = Class(TDFRiotWeapon) {
-		FxMuzzleFlash = EffectTemplate.TRiotGunMuzzleFxTank
+        MainGun = Class(TDFMachineGunWeapon) {
         },
     },
 

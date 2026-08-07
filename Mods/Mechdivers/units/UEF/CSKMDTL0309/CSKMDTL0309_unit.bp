@@ -55,6 +55,7 @@ UnitBlueprint {
 		#'BUILTBYTIER3COMMANDER',
         #'BUILTBYTIER3ENGINEER',
 		'NEEDMOBILEBUILD',
+		'LARGEUNIT',
 		'DRAGBUILD',
         'UEF',
         'MOBILE',
@@ -111,12 +112,24 @@ UnitBlueprint {
                     TreadMarks = {
                         {
                             BoneName = 'CSKMDTL0309',
-                            TreadMarks = 'tank_treads_albedo',
-                            TreadMarksInterval = 0.3,
-                            TreadMarksSizeX = 0.9,
-                            TreadMarksSizeZ = 0.7,
-                            TreadOffset = {
+                            TreadMarks = 'tank_treads07_albedo',
+                            TreadMarksInterval = 0.1,
+                            TreadMarksSizeX = 0.3,
+                            TreadMarksSizeZ = 0.42,
+							TreadOffset = {
+                                0.75,
                                 0,
+                                0,
+                            },
+                        },
+						{
+                            BoneName = 'CSKMDTL0309',
+                            TreadMarks = 'tank_treads07_albedo',
+                            TreadMarksInterval = 0.1,
+                            TreadMarksSizeX = 0.3,
+                            TreadMarksSizeZ = 0.42,
+							TreadOffset = {
+                                -0.75,
                                 0,
                                 0,
                             },

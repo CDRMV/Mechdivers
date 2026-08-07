@@ -42,6 +42,7 @@ UnitBlueprint {
 		'BUILTBYTIER3COMMANDER',
         'BUILTBYTIER3ENGINEER',
         'NEEDMOBILEBUILD',
+		'LARGEUNIT',
 		'DRAGBUILD',
         'CYBRAN',
         'MOBILE',
