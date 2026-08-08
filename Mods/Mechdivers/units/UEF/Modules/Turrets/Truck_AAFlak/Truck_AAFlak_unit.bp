@@ -61,7 +61,7 @@ UnitBlueprint {
         Abilities = {
             '<LOC ability_aa>Anti-Air',
 			'Can only Target large Air Units:',
-			'Air Transports and Air Experimentals',
+			'Leviathans, Air Transports and Air Experimentals',
         },
         Mesh = {
             IconFadeInZoom = 130,
@@ -217,6 +217,7 @@ UnitBlueprint {
             TargetPriorities = {
                 'AIR MOBILE TRANSPORTATION',
                 'AIR MOBILE EXPERIMENTAL',
+				'AIR MOBILE LARGEUNIT',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             TrackingRadius = 1.4,

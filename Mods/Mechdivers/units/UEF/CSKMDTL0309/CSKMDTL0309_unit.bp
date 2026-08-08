@@ -52,8 +52,8 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-		#'BUILTBYTIER3COMMANDER',
-        #'BUILTBYTIER3ENGINEER',
+		'BUILTBYTIER3COMMANDER',
+        'BUILTBYTIER3ENGINEER',
 		'NEEDMOBILEBUILD',
 		'LARGEUNIT',
 		'DRAGBUILD',
@@ -249,7 +249,6 @@ UnitBlueprint {
                     LodCutoff = 'Weapon_LodCutoff',
                 },
             },
-            AutoInitiateAttackCommand = true,
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
             Damage = 150,
@@ -302,7 +301,6 @@ UnitBlueprint {
             TurretYawRange = 130,
             TurretYawSpeed = 180,
             Turreted = true,
-            UseFiringSolutionInsteadOfAimBone = true,
             WeaponCategory = 'Direct Fire',
         },
 		{

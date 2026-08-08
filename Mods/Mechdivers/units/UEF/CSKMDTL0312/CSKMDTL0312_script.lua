@@ -16,13 +16,26 @@ local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 CSKMDTL0312 = Class(TLandUnit) {
 
     Weapons = {
-		ACGun = Class(TDFGaussCannonWeapon) {
+		LACGun = Class(TDFGaussCannonWeapon) {
+		--[[
 		PlayFxMuzzleSequence = function(self, muzzle)
 		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
 		if muzzle == 'L_Turret_Muzzle' then
 		CreateAttachedEmitter(self.unit, 'L_Turret_Shell', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
 		end
 		end,
+		]]--
+		},
+		RACGun = Class(TDFGaussCannonWeapon) {
+		--[[
+		PlayFxMuzzleSequence = function(self, muzzle)
+		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
+		if muzzle == 'R_Turret_Muzzle' then
+		CreateAttachedEmitter(self.unit, 'R_Turret_Shell', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
+		end
+		end,
+		]]--
+		},
 		},
     },
 

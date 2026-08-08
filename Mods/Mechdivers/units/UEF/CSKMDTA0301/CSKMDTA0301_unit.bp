@@ -307,7 +307,6 @@ UnitBlueprint {
                     LodCutoff = 'Weapon_LodCutoff',
                 },
             },
-            AutoInitiateAttackCommand = true,
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
             Damage = 150,
@@ -360,7 +359,6 @@ UnitBlueprint {
             TurretYawRange = 180,
             TurretYawSpeed = 180,
             Turreted = true,
-            UseFiringSolutionInsteadOfAimBone = true,
             WeaponCategory = 'Direct Fire',
         },
         {

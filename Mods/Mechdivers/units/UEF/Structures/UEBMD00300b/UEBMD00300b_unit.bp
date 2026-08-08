@@ -68,7 +68,7 @@ UnitBlueprint {
 			'Can be captured by the Player.',
 			'Can be activated by installing of the Enhancement Upgrades by the Player.',
 			'Can only Target large Air Units:',
-			'Air Transports and Air Experimentals',
+			'Leviathans, Air Transports and Air Experimentals',
 			'Has 24 Missiles in its Storage and fires 1 with each Salvo',
 			'If the Storage goes empty (0) the Missiles will be refueled',
         },
@@ -537,6 +537,7 @@ UnitBlueprint {
             TargetPriorities = {
                 'AIR MOBILE TRANSPORTATION',
                 'AIR MOBILE EXPERIMENTAL',
+				'AIR MOBILE LARGEUNIT',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             TrackingRadius = 1.4,

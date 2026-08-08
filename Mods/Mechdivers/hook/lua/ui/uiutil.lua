@@ -97,6 +97,7 @@ local MyUnitIdTable = {
 	  cskmdtl0201=true, 
 	  cskmdtl0202=true, 
 	  cskmdtl0203=true, 
+	  cskmdtl0204=true,
  	  cskmdtl0205=true, 
 	  cskmdtl0206=true, 
 	  cskmdtl0207=true, 
@@ -109,8 +110,11 @@ local MyUnitIdTable = {
 	  cskmdtl0305=true, 
 	  cskmdtl0306=true, 
 	  cskmdtl0307=true, 
-	  cskmdtl0308=true, 
+	  cskmdtl0308=true,
+	  cskmdtl0309=true, 	  
 	  cskmdtl0310=true, 
+	  cskmdtl0311=true, 
+	  cskmdtl0312=true, 
 		  
 -- Structures
 

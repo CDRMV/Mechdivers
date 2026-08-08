@@ -17,6 +17,7 @@ local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyT
 CSKMDTL0311 = Class(TLandUnit) {
 
     Weapons = {
+	    Dummy = Class(DummyTurretWeapon) {},
 		AADummy = Class(DummyTurretWeapon) {
 		IdleState = State (DummyTurretWeapon.IdleState) {
         Main = function(self)
@@ -69,14 +70,13 @@ CSKMDTL0311 = Class(TLandUnit) {
         end,  	
 		
 		},
-		Dummy = Class(DummyTurretWeapon) {
+		GroundDummy = Class(DummyTurretWeapon) {
 		IdleState = State (DummyTurretWeapon.IdleState) {
         Main = function(self)
                     DummyTurretWeapon.IdleState.Main(self)
                 end,
                 
         OnGotTarget = function(self)
-		LOG(self.unit:GetFireState())
 			if self.unit:GetFireState() == 2 then
 			local target = self.unit:GetTargetEntity()
 			if target then
@@ -131,19 +131,31 @@ CSKMDTL0311 = Class(TLandUnit) {
         end,  	
 		
 		},
-		ACGun = Class(TDFGaussCannonWeapon) {
+		LACGun = Class(TDFGaussCannonWeapon) {
+		--[[
 		PlayFxMuzzleSequence = function(self, muzzle)
 		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
 		if muzzle == 'L_Turret_Muzzle' then
 		CreateAttachedEmitter(self.unit, 'L_Turret_Shell', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
 		end
 		end,
+		]]--
 		},
+		RACGun = Class(TDFGaussCannonWeapon) {
+		--[[
+		PlayFxMuzzleSequence = function(self, muzzle)
+		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
+		if muzzle == 'R_Turret_Muzzle' then
+		CreateAttachedEmitter(self.unit, 'R_Turret_Shell', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
+		end
+		end,
+		]]--
+		},
+		Gun = Class(TDFGaussCannonWeapon) {},
     },
 
 	OnStopBeingBuilt = function(self,builder,layer)
 		TLandUnit.OnStopBeingBuilt(self,builder,layer)
-		self:AddToggleCap('RULEUTC_WeaponToggle')
 		if not self.AnimationManipulator1 then
             self.AnimationManipulator1 = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator1)
@@ -153,8 +165,10 @@ CSKMDTL0311 = Class(TLandUnit) {
 		self.Module = nil
 		self.wep = self:GetWeaponByLabel('AADummy')
 		self.wep:SetEnabled(false)
-		self.wep2 = self:GetWeaponByLabel('Dummy')
+		self.wep2 = self:GetWeaponByLabel('GroundDummy')
 		self.wep2:SetEnabled(false)
+		self.wep3 = self:GetWeaponByLabel('Dummy')
+		self.wep3:ChangeMaxRadius(35)
 		ForkThread(function()
 		while self and not self.Dead do
 		if self:GetFireState() == 0 then
@@ -231,9 +245,21 @@ CSKMDTL0311 = Class(TLandUnit) {
             self:RequestRefreshUI()
 			self.Module = unitBuilding
 			if self.Module:GetBlueprint().General.UnitName == 'Slatter' or self.Module:GetBlueprint().General.UnitName == 'L/64 Air Guard' then
+			self.wep:ChangeMaxRadius(100)
 			self.wep:SetEnabled(true)
 			else
+			self.wep:ChangeMaxRadius(0.01)
+			self.wep:SetEnabled(false)
+			end
+			if self.Module:GetBlueprint().General.UnitName == 'Pak 150' or self.Module:GetBlueprint().General.UnitName == 'HIMARS 3000' then
+			self:RemoveToggleCap('RULEUTC_SpecialToggle')
 			self.wep2:SetEnabled(true)
+			self.wep2:ChangeMaxRadius(150)
+			self.wep3:ChangeMaxRadius(150)
+			else
+			self.wep2:SetEnabled(false)
+			self.wep2:ChangeMaxRadius(35)
+			self.wep3:ChangeMaxRadius(35)
 			end
             ChangeState(self, self.IdleState)
         end,
@@ -241,36 +267,42 @@ CSKMDTL0311 = Class(TLandUnit) {
 	
 	OnScriptBitSet = function(self, bit)
         TLandUnit.OnScriptBitSet(self, bit)
+		ForkThread(function()
 		if bit == 1 then 
 		if self.Module and not self.Module.Dead then
 		self.Module:Destroy()
 		self:RemoveBuildRestriction(categories.BUILTBYTIER3MODULARTRUCK)
+		self:RequestRefreshUI()
 		self:SetScriptBit('RULEUTC_WeaponToggle',false)
 		self:RemoveToggleCap('RULEUTC_WeaponToggle')
+		self:AddToggleCap('RULEUTC_SpecialToggle')
 		end
+		elseif bit == 7 then 
+		self:SetImmobile(true)
+		self.AnimationManipulator1:SetRate(1)
+		WaitFor(self.AnimationManipulator1)
 		end
+		end)
     end,
 
     OnScriptBitClear = function(self, bit)
         TLandUnit.OnScriptBitClear(self, bit)
+		ForkThread(function()
 		if bit == 1 then 
 
+		elseif bit == 7 then 
+		self.AnimationManipulator1:SetRate(-1)
+		WaitFor(self.AnimationManipulator1)
+		self:SetImmobile(false)
 		end
+		end)
     end,
 	
 	
 	OnKilled = function(self, instigator, type, overkillRatio)
-	if self.Beacon then
-	self.Beacon:Destroy()
-	end	
-	
-
 	if self.Module and not self.Module.Dead then
 	self.Module:Kill()
 	end
-
-
-
     TLandUnit.OnKilled(self, instigator, type, overkillRatio)	
     end,
 	
@@ -309,8 +341,7 @@ CSKMDTL0311 = Class(TLandUnit) {
         WaitSeconds(waitTime)
     end
 	end)
-	end
-
+	end,
 }
 
 TypeClass = CSKMDTL0311

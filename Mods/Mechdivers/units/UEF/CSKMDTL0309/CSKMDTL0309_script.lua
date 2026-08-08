@@ -17,12 +17,14 @@ CSKMDTL0309 = Class(TLandUnit) {
 
     Weapons = {
 		ACGun = Class(TDFGaussCannonWeapon) {
+		--[[
 		PlayFxMuzzleSequence = function(self, muzzle)
 		TDFGaussCannonWeapon.PlayFxMuzzleSequence(self, muzzle)
 		if muzzle == 'Turret_Muzzle' then
 		CreateAttachedEmitter(self.unit, 'Turret_Shell', self.unit:GetArmy(), '/mods/Mechdivers/effects/emitters/autocannon_shell_01_emit.bp')
 		end
 		end,
+		]]--
 		},
 		Suicide = Class(TMobileKamikazeBombWeapon) {   
      

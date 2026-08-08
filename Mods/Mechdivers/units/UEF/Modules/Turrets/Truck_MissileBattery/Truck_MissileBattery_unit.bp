@@ -59,8 +59,8 @@ UnitBlueprint {
     Description = 'Heavy Missile Battery',
     Display = {
         Abilities = {
-			'Has 24 Missiles in its Storage and fires 1 with each Salvo',
-			'If the Storage goes empty (0) the Missiles will be refueled.',
+			'Can only Target large Land Units:',
+			'Factory Striders, War Striders, Engines, Tripods and Experimentals',
         },
         Mesh = {
             IconFadeInZoom = 130,
@@ -170,7 +170,7 @@ UnitBlueprint {
             CannotAttackGround = false,
             CollideFriendly = false,
             Damage = 4500,
-            DamageRadius = 1,
+            DamageRadius = 3,
             DamageType = 'Normal',
             DisplayName = 'Flayer SAM Launcher',
             FireTargetLayerCapsTable = {
@@ -229,9 +229,8 @@ UnitBlueprint {
             RateOfFire = 0.03,
             TargetCheckInterval = 0.3,
             TargetPriorities = {
-                'SPECIALHIGHPRI',
-                'SPECIALLOWPRI',
-                'ALLUNITS',
+                'LAND MOBILE LARGEUNIT',
+                'LAND MOBILE EXPERIMENTAL',
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             TrackingRadius = 1.4,

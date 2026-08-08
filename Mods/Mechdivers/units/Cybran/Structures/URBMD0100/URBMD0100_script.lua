@@ -55,16 +55,12 @@ URBMD0100 = Class(CStructureUnit) {
                 
         OnGotTarget = function(self)
 		self.unit:AddToggleCap('RULEUTC_WeaponToggle')
-		self.unit.Spinner2:SetTargetSpeed(0)
-		self.unit.Spinner2:SetGoal(self.unit.Spinner2:GetCurrentAngle() - self.unit.Spinner2:GetCurrentAngle())
                CDFLaserFusionWeapon.OnGotTarget(self)
         end,                
             },
         
         OnGotTarget = function(self)
-		self.unit.Spinner2:SetTargetSpeed(0)
 		self.unit:AddToggleCap('RULEUTC_WeaponToggle')
-		self.unit.Spinner2:SetGoal(self.unit.Spinner2:GetCurrentAngle() - self.unit.Spinner2:GetCurrentAngle())
                CDFLaserFusionWeapon.OnGotTarget(self)
         end,
         
@@ -209,7 +205,8 @@ end,
 		if self.Spinner2 then
 		local wep = self:GetWeaponByLabel('MainGun')
 		if wep:WeaponHasTarget() then
-		self.Spinner2:SetGoal(0)
+		self.Spinner2:SetTargetSpeed(0)
+		self.Spinner2:SetGoal(self.Spinner2:GetCurrentAngle() - self.Spinner2:GetCurrentAngle())
 		else
 		self.Spinner2:SetGoal(math.random(-10,20))
 		end
