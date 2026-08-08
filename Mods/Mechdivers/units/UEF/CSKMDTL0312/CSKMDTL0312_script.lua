@@ -36,7 +36,6 @@ CSKMDTL0312 = Class(TLandUnit) {
 		end,
 		]]--
 		},
-		},
     },
 
 	OnStopBeingBuilt = function(self,builder,layer)
