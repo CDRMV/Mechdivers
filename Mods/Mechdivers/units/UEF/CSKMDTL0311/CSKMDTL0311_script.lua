@@ -251,7 +251,9 @@ CSKMDTL0311 = Class(TLandUnit) {
 			self.wep:ChangeMaxRadius(0.01)
 			self.wep:SetEnabled(false)
 			end
-			if self.Module:GetBlueprint().General.UnitName == 'Pak 150' or self.Module:GetBlueprint().General.UnitName == 'HIMARS 3000' then
+			if self.Module:GetBlueprint().General.UnitName == 'Pak 150' or 
+			self.Module:GetBlueprint().General.UnitName == 'HIMARS 3000' or 
+			self.Module:GetBlueprint().General.UnitName == 'Karl Mark II' then
 			self:RemoveToggleCap('RULEUTC_SpecialToggle')
 			self.wep2:SetEnabled(true)
 			self.wep2:ChangeMaxRadius(150)
