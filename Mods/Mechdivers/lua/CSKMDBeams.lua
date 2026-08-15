@@ -230,8 +230,7 @@ QuantumCollisionBeam = Class(CollisionBeam) {
     TerrainImpactType = 'LargeBeam01',
     TerrainImpactScale = 1,
     FxBeamStartPoint = {
-		'/mods/Mechdivers/effects/emitters/quantum_beam_flash_01_emit.bp',
-		'/mods/Mechdivers/effects/emitters/quantum_beam_flash_01_emit.bp',
+
 	},
     FxBeam = {
 		'/mods/Mechdivers/effects/emitters/quantum_beam_01_emit.bp'

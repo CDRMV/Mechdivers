@@ -40,6 +40,11 @@ ADFQuantumBeam = Class(DefaultBeamWeapon) {
     },
 }
 
+ADFQuantumBeam3 = Class(DefaultBeamWeapon) {
+    BeamType = ModCollisionBeams.QuantumCollisionBeam,
+}
+
+
 ADFDustSwirl = Class(DefaultBeamWeapon) {
     BeamType = ModCollisionBeams.DustSwirl,
 }
