@@ -62,6 +62,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTFA',
         'UNSELECTABLE',
+		'INSIGNIFICANTUNIT',
 		'UNTARGETABLE',
         'AEON',
         'MOBILE',

@@ -62,7 +62,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTFA',
         'SELECTABLE',
-		'BUILTBYTIER1WARPSHIPFACTORY',
+		'BUILTBYTIER2WARPGATEWAY',
         'BUILTBYTIER2FACTORY',
         'BUILTBYTIER3FACTORY',
         'AEON',

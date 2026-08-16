@@ -25,9 +25,9 @@ self.unit.OpenAnimManip:SetRate(2)
     end, 
 		},
     },
-	
-	OnCreate = function(self)
-        AHoverLandUnit.OnCreate(self)
+	 
+	OnStopBeingBuilt = function(self,builder,layer)
+        AHoverLandUnit.OnStopBeingBuilt(self,builder,layer)
 			self.OpenAnimManip = CreateAnimator(self)
 			self.Trash:Add(self.OpenAnimManip)
 			self.OpenAnimManip:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0203/CSKMDAL0203_Attack.sca', false):SetRate(0)
@@ -39,7 +39,6 @@ self.unit.OpenAnimManip:SetRate(2)
             self.Trash:Add(self.Effect1)
 			self.Effect2 = CreateBeamEmitterOnEntity(self,self.EffectBones[2],self:GetArmy(),  '/effects/emitters/air_move_trail_beam_01_emit.bp'):SetBeamParam('LENGTH', 0.2)
             self.Trash:Add(self.Effect2)
-    end,
-	 
+    end, 
 }
 TypeClass = CSKMDAL0203
