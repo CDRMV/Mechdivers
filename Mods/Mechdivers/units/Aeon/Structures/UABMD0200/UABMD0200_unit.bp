@@ -63,6 +63,7 @@ UnitBlueprint {
     Description = 'Warp Gateway',
     Display = {
 	AnimationBuild = '/mods/Mechdivers/units/Aeon/Structures/UABMD0200/UABMD0200_AOpenGate.sca',
+	BuildAttachBone = 'AttachPoint',
         DamageEffects = {
             {
                 Bone = 0,

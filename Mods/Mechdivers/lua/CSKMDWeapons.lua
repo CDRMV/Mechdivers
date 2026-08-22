@@ -12,7 +12,7 @@ local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 local ModEffectTemplate = import('/mods/Mechdivers/lua/CSKMDEffectTemplates.lua')
 
 DummyTurretWeapon = Class(DefaultProjectileWeapon) {
-    
+    FxMuzzleFlash = {},
 }
 
 MineExplosion = Class(KamikazeWeapon){

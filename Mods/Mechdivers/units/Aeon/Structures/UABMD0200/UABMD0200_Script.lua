@@ -22,6 +22,7 @@ UABMD0200 = Class(AStructureUnit) {
 		Spinner1 = CreateRotator(self, 'Gate_Spinner', 'z', nil, 0, 60, 360):SetTargetSpeed(0)
         Spinner2 = CreateRotator(self, 'Gate_Spinner2', 'z', nil, 0, 60, -360):SetTargetSpeed(0)
 		BuildEffectMesh = '/mods/Mechdivers/Decorations/AeonGateEffect_mesh'
+		BuildEffectMesh4 = '/mods/Mechdivers/Decorations/AeonGateEffect2_mesh'
 		self.BuildEffect = import('/lua/sim/Entity.lua').Entity()
 		self.BuildEffect:AttachBoneTo( -2, self, 'Gate_Effect' )
 		self.BuildEffect:SetMesh(BuildEffectMesh)
@@ -29,9 +30,33 @@ UABMD0200 = Class(AStructureUnit) {
 		self.BuildEffect:SetVizToAllies('Never')
 		self.BuildEffect:SetVizToNeutrals('Never')
 		self.BuildEffect:SetVizToEnemies('Never')
+		BuildEffectMesh2 = '/mods/Mechdivers/Decorations/AeonGateEffectDisk_mesh'
+		self.BuildEffect2 = import('/lua/sim/Entity.lua').Entity()
+		self.BuildEffect2:AttachBoneTo( -2, self, 'Gate_Effect1' )
+		self.BuildEffect2:SetMesh(BuildEffectMesh2)
+		self.BuildEffect2:SetDrawScale(0.5)
+		self.BuildEffect2:SetVizToAllies('Never')
+		self.BuildEffect2:SetVizToNeutrals('Never')
+		self.BuildEffect2:SetVizToEnemies('Never')
+		BuildEffectMesh3 = '/mods/Mechdivers/Decorations/AeonGateEffectDisk2_mesh'
+		self.BuildEffect3 = import('/lua/sim/Entity.lua').Entity()
+		self.BuildEffect3:AttachBoneTo( -2, self, 'Gate_Effect' )
+		self.BuildEffect3:SetMesh(BuildEffectMesh3)
+		self.BuildEffect3:SetDrawScale(1.9)
+		self.BuildEffect3:SetVizToAllies('Never')
+		self.BuildEffect3:SetVizToNeutrals('Never')
+		self.BuildEffect3:SetVizToEnemies('Never')
+		self.BuildEffect4 = import('/lua/sim/Entity.lua').Entity()
+		self.BuildEffect4:AttachBoneTo( -2, self, 'Gate_Effect' )
+		self.BuildEffect4:SetMesh(BuildEffectMesh4)
+		self.BuildEffect4:SetDrawScale(0.4)
+		self.BuildEffect4:SetVizToAllies('Never')
+		self.BuildEffect4:SetVizToNeutrals('Never')
+		self.BuildEffect4:SetVizToEnemies('Never')
 	end,
 
     OnStartBuild = function(self, unitBeingBuilt, order )
+		unitBeingBuilt:HideBone(0,true)
         self:ChangeBlinkingLights('Yellow')
         AStructureUnit.OnStartBuild(self, unitBeingBuilt, order )
         self.BuildingUnit = true
@@ -46,6 +71,15 @@ UABMD0200 = Class(AStructureUnit) {
 		self.BuildEffect:SetVizToAllies('Intel')
 		self.BuildEffect:SetVizToNeutrals('Intel')
 		self.BuildEffect:SetVizToEnemies('Intel')
+		self.BuildEffect2:SetVizToAllies('Intel')
+		self.BuildEffect2:SetVizToNeutrals('Intel')
+		self.BuildEffect2:SetVizToEnemies('Intel')
+		self.BuildEffect3:SetVizToAllies('Intel')
+		self.BuildEffect3:SetVizToNeutrals('Intel')
+		self.BuildEffect3:SetVizToEnemies('Intel')
+		self.BuildEffect4:SetVizToAllies('Intel')
+		self.BuildEffect4:SetVizToNeutrals('Intel')
+		self.BuildEffect4:SetVizToEnemies('Intel')
     end,
 
     OnStopBuild = function(self, unitBeingBuilt, order )
@@ -65,9 +99,19 @@ UABMD0200 = Class(AStructureUnit) {
 		self.BuildEffect:SetVizToAllies('Never')
 		self.BuildEffect:SetVizToNeutrals('Never')
 		self.BuildEffect:SetVizToEnemies('Never')
+		self.BuildEffect2:SetVizToAllies('Never')
+		self.BuildEffect2:SetVizToNeutrals('Never')
+		self.BuildEffect2:SetVizToEnemies('Never')
+		self.BuildEffect3:SetVizToAllies('Never')
+		self.BuildEffect3:SetVizToNeutrals('Never')
+		self.BuildEffect3:SetVizToEnemies('Never')
+		self.BuildEffect4:SetVizToAllies('Never')
+		self.BuildEffect4:SetVizToNeutrals('Never')
+		self.BuildEffect4:SetVizToEnemies('Never')
     end,
 
     FinishBuildThread = function(self, unitBeingBuilt, order )
+		CreateLightParticle( self, 'AttachPoint', self:GetArmy(), 6, 6, 'glow_03', 'ramp_white_01' ) 
         self:SetBusy(true)
         self:SetBlockCommandQueue(true)
 		self.AnimationManipulator:SetRate(-1)
@@ -76,6 +120,15 @@ UABMD0200 = Class(AStructureUnit) {
 		self.BuildEffect:SetVizToAllies('Never')
 		self.BuildEffect:SetVizToNeutrals('Never')
 		self.BuildEffect:SetVizToEnemies('Never')
+		self.BuildEffect2:SetVizToAllies('Never')
+		self.BuildEffect2:SetVizToNeutrals('Never')
+		self.BuildEffect2:SetVizToEnemies('Never')
+		self.BuildEffect3:SetVizToAllies('Never')
+		self.BuildEffect3:SetVizToNeutrals('Never')
+		self.BuildEffect3:SetVizToEnemies('Never')
+		self.BuildEffect4:SetVizToAllies('Never')
+		self.BuildEffect4:SetVizToNeutrals('Never')
+		self.BuildEffect4:SetVizToEnemies('Never')
         local bp = self:GetBlueprint()
         local bpAnim = bp.Display.AnimationFinishBuildLand
         if bpAnim and EntityCategoryContains(categories.LAND, unitBeingBuilt) then
@@ -85,6 +138,7 @@ UABMD0200 = Class(AStructureUnit) {
             WaitFor(self.RollOffAnim)
         end
         if unitBeingBuilt and not unitBeingBuilt:IsDead() then
+			unitBeingBuilt:ShowBone(0,true)
             unitBeingBuilt:DetachFrom(true)
         end
         self:DetachAll(bp.Display.BuildAttachBone or 0)
@@ -116,6 +170,15 @@ UABMD0200 = Class(AStructureUnit) {
 		self.BuildEffect:SetVizToAllies('Never')
 		self.BuildEffect:SetVizToNeutrals('Never')
 		self.BuildEffect:SetVizToEnemies('Never')
+		self.BuildEffect2:SetVizToAllies('Never')
+		self.BuildEffect2:SetVizToNeutrals('Never')
+		self.BuildEffect2:SetVizToEnemies('Never')
+		self.BuildEffect3:SetVizToAllies('Never')
+		self.BuildEffect3:SetVizToNeutrals('Never')
+		self.BuildEffect3:SetVizToEnemies('Never')
+		self.BuildEffect4:SetVizToAllies('Never')
+		self.BuildEffect4:SetVizToNeutrals('Never')
+		self.BuildEffect4:SetVizToEnemies('Never')
         ChangeState(self, self.IdleState)
     end,
 

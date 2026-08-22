@@ -1,0 +1,14 @@
+MeshBlueprint {
+    LODs = {
+        {
+            MeshName = '/mods/Mechdivers/Decorations/GateEffect_Disk_lod0.scm',
+            ShaderName = 'ShieldSeraphim',
+            AlbedoName = '/mods/Mechdivers/Decorations/AeonScan_Albedo.dds',
+            NormalsName = '/mods/Mechdivers/Decorations/AeonScan_Albedo.dds',
+			SpecularName = '/mods/Mechdivers/Decorations/AeonScan_Specular.dds',
+            LODCutoff = 300,
+            
+        },
+    },
+    SortOrder = 999,
+}

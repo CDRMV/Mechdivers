@@ -26,6 +26,8 @@ local MyUnitIdTable = {
 	  cskmdal0203=true,
 	  cskmdal0204=true,
 	  cskmdal0205=true,
+	  cskmdal0206=true,
+	  cskmdal0207=true,
 	  cskmdal0300=true,
 	  cskmdal0301=true,
  	  cskmdal0306=true,
@@ -62,9 +64,11 @@ local MyUnitIdTable = {
 	  balisticshield=true,
 	  
 	  truck_heavygauss=true,
+	  truck_heavymortar=true,
 	  truck_aaflak=true,
 	  truck_aasam=true,
 	  truck_missilebattery=true,
+	  truck_guidemissilelauncher=true,
 	  
  -- Air  	
    
