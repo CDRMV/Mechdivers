@@ -60,6 +60,7 @@ UnitBlueprint {
         'MOBILE',
 		'LARGEUNIT',
         'LAND',
+		'SILO',
 		'CONSTRUCTION',
 		'FACTORY',
 		'CARRIER',
@@ -172,7 +173,7 @@ UnitBlueprint {
             RULEUCC_Guard = true,
             RULEUCC_Move = true,
             RULEUCC_Nuke = false,
-            RULEUCC_Patrol = true,
+            RULEUCC_Patrol = false,
             RULEUCC_Reclaim = false,
             RULEUCC_Repair = false,
             RULEUCC_RetaliateToggle = true,
@@ -187,6 +188,10 @@ UnitBlueprint {
 			RULEUTC_SpecialToggle = {
                 bitmapId = 'production',
 				helpText = 'Deploy',
+            },
+			RULEUTC_IntelToggle = {
+                bitmapId = 'tactical',
+				helpText = 'Launch Guide Missile',
             },
         },
 		ToggleCaps = {
@@ -649,10 +654,7 @@ UnitBlueprint {
             Turreted = false,
             WeaponCategory = 'Direct Fire',
             WeaponRepackTimeout = 0,
-            WeaponUnpackAnimation = '/Mods/Mechdivers/units/UEF/CSKMDTL0311/CSKMDTL0311_ADeploy.sca',
-            WeaponUnpackAnimationRate = 1,
-            WeaponUnpackLocksMotion = true,
-            WeaponUnpacks = true,
+            WeaponUnpacks = false,
         },
     },
     Wreckage = {

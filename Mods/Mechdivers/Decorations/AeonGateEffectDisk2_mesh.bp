@@ -3,9 +3,9 @@ MeshBlueprint {
         {
             MeshName = '/mods/Mechdivers/Decorations/GateEffect_Disk_lod0.scm',
             ShaderName = 'UEFQuantumGate',
-            AlbedoName = '/mods/Mechdivers/Decorations/AeonScan_Albedo.dds',
-            NormalsName = '/mods/Mechdivers/Decorations/AeonScan_Normals.dds',
-			SpecularName = '/mods/Mechdivers/Decorations/AeonScan_Albedo.dds',
+            AlbedoName = '/mods/Mechdivers/Decorations/ShieldSection01_Albedo.dds',
+            SpecularName = '/mods/Mechdivers/Decorations/ShieldSection01_Normals.dds',
+			SpecularName = '/mods/Mechdivers/Decorations/ShieldSection01_Specular.dds',
             LODCutoff = 300,
             
         },

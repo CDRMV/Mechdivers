@@ -36,6 +36,11 @@ ProjectileBlueprint {
         StrategicIconSize = 1,
         UniformScale = 0.45,
     },
+	Economy = {
+        BuildCostEnergy = 3600,
+        BuildCostMass = 180,
+        BuildTime = 2400,
+    },
     General = {
         Category = 'Direct Fire',
         Weapon = 'Gauss Cannon',

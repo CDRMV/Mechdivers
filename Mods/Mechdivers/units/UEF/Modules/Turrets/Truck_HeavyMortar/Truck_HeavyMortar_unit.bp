@@ -29,7 +29,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-		#'BUILTBYTIER3MODULARTRUCK',
+		'BUILTBYTIER3MODULARTRUCK',
         'UEF',
 		'ARTILLERY',
         'TECH3',
@@ -195,7 +195,7 @@ UnitBlueprint {
             FiringRandomness = 0.3,
             FiringTolerance = 2,
             Label = 'MainGun',
-            MaxRadius = 150,
+            MaxRadius = 152,
 			MinRadius = 10,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,

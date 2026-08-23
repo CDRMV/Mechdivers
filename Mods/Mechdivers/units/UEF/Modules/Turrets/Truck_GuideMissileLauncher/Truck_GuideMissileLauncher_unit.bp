@@ -29,7 +29,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-		#'BUILTBYTIER3MODULARTRUCK',
+		'BUILTBYTIER3MODULARTRUCK',
         'UEF',
 		'SILO',
         'TECH3',
@@ -60,8 +60,11 @@ UnitBlueprint {
     Display = {
 	AnimationOpen = '/mods/Mechdivers/units/UEF/Modules/Turrets/Truck_GuideMissileLauncher/Truck_GuideMissileLauncher_aopen.sca',
         Abilities = {
-			'Can only Target large Land Units:',
-			'Factory Striders, War Striders, Engines, Tripods and Experimentals',
+			'Can build and store 4 Guide Missiles',
+			'To Launch a Missile:Launch Guide Missile.',
+			'Select the Modular Truck > click on Launch Guide Missile Button.',
+			'The Missile is selectable and can be ordered to switch a Target.',
+			'Just give it a Attack Order on a new Target for the Missile.',
         },
         Mesh = {
             IconFadeInZoom = 130,
@@ -82,7 +85,7 @@ UnitBlueprint {
     Economy = {
         BuildCostEnergy = 8000,
         BuildCostMass = 800,
-		BuildRate = 5,
+		BuildRate = 80,
         BuildTime = 800,
     },
     General = {
@@ -101,6 +104,7 @@ UnitBlueprint {
 			RULEUCC_SiloBuildTactical = true,
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
+			RULEUCC_Tactical = true,
             RULEUCC_Transport = false,
         },
         FactionName = 'UEF',
@@ -170,7 +174,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_None',
             CannotAttackGround = false,
             CollideFriendly = false,
-            Damage = 4500,
+            Damage = 8000,
 			ForceSingleFire = true,
 			CountedProjectile = true,
             CollideFriendly = false,
@@ -186,23 +190,38 @@ UnitBlueprint {
             FiringTolerance = 4,
 			FiringRandomness = 1,
             Label = 'MissileRack01',
-            MaxRadius = 150,
-			MinRadius = 5,
+            MaxRadius = 152,
+			MinRadius = 10,
             MuzzleSalvoDelay = 0.4,
-            MuzzleSalvoSize = 4,
-            MuzzleVelocity = 35,
+            MuzzleSalvoSize = 1,
+            MuzzleVelocity = 20,
             ProjectileId = '/mods/Mechdivers/projectiles/TDFGuideMissile01/TDFGuideMissile01_proj.bp',
-            ProjectileLifetimeUsesMultiplier = 1.15,
+            ProjectileLifetimeUsesMultiplier = 50.15,
             ProjectilesPerOnFire = 1,
             RackBones = {
                 {
                     MuzzleBones = {
                         'Missile01',
+                    },
+                    RackBone = 'Missile01',
+                },
+				{
+                    MuzzleBones = {
 						'Missile02',
+                    },
+                    RackBone = 'Missile02',
+                },
+				{
+                    MuzzleBones = {
 						'Missile03',
+                    },
+                    RackBone = 'Missile03',
+                },
+				{
+                    MuzzleBones = {
 						'Missile04',
                     },
-                    RackBone = 'Barrel',
+                    RackBone = 'Missile04',
                 },
             },
             RackFireTogether = false,
@@ -215,10 +234,6 @@ UnitBlueprint {
             RangeCategory = 'UWRC_DirectFire',
             RateOfFire = 0.1,
             TargetCheckInterval = 0.3,
-            TargetPriorities = {
-                'LAND MOBILE LARGEUNIT',
-                'LAND MOBILE EXPERIMENTAL',
-            },
             TargetRestrictDisallow = 'UNTARGETABLE',
             TrackingRadius = 1.4,
             Turreted = false,

@@ -51,6 +51,12 @@ TDFGuideMissile01 = Class(SingleBeamProjectile) {
     FxImpactUnderWater = {},
 	
 	OnCreate = function(self)
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
+		local Oldlocation = self:GetPosition()
+		local qx, qy, qz, qw = unpack(self:GetOrientation())
+		self.Unit = CreateUnit('CSKMDGuideMissile01',self:GetArmy(),Oldlocation[1], Oldlocation[2], Oldlocation[3],qx, qy, qz, qw, 0)
+		SetIgnoreArmyUnitCap(self:GetArmy(), false)
+		self.Unit:AttachBoneTo(0, self, 0)
 	    self.DamageData = {
             DamageRadius = 0,
             DamageAmount = nil,
@@ -63,6 +69,23 @@ TDFGuideMissile01 = Class(SingleBeamProjectile) {
 		local army = self:GetArmy()
 		self.Army = self:GetArmy()
 		self:MovementThread()
+		self:SetTargetThread()
+    end,
+	
+	SetTargetThread = function(self)
+	 ForkThread( function()
+        while not self:BeenDestroyed() do
+			if self.Unit:GetWeapon(1):GetCurrentTarget() then
+			self:SetTurnRate(50)
+			self:SetNewTarget(self.Unit:GetWeapon(1):GetCurrentTarget())
+			end
+			if self.Unit:GetWeapon(1):GetCurrentTargetPos() then
+			self:SetTurnRate(50)
+			self:SetNewTargetGround(self.Unit:GetWeapon(1):GetCurrentTargetPos())
+			end
+            WaitSeconds(0.01)
+        end
+		end)
     end,
 	
 	 MovementThread = function(self)
@@ -74,15 +97,14 @@ TDFGuideMissile01 = Class(SingleBeamProjectile) {
 		self.CreateEffects( self, self.LaunchEffects, army, 1 )
 		self.CreateEffects( self, self.ThrustEffects, army, 3 )
 		CreateBeamEmitterOnEntity(self, 'Exhaust', army, self.BeamName):SetBeamParam('THICKNESS', 0.01):SetBeamParam('LENGTH', 1.5)
-        WaitSeconds(0.3)		# Height
+        WaitSeconds(3.0)		# Height
         self:SetCollision(true)
         WaitSeconds(0.3)
         self:TrackTarget(true) # Turn ~90 degrees towards target
         self:SetDestroyOnWater(true)
-        self:SetTurnRate(47.36)
-        WaitSeconds(2) 					# Now set turn rate to zero so nuke flies straight
         self:SetTurnRate(0)
-        self:SetAcceleration(0.001)
+        WaitSeconds(2) 					# Now set turn rate to zero so nuke flies straight
+        self:SetAcceleration(0)
         self.WaitTime = 0.5
         while not self:BeenDestroyed() do
             self:SetTurnRateByDist()
@@ -139,12 +161,22 @@ TDFGuideMissile01 = Class(SingleBeamProjectile) {
     end,
 	
 	OnImpact = function(self, targetType, targetEntity)
+		if self.Unit then
+		self.Unit:Destroy()
+		end
         if targetType == 'Terrain' then
            	local rotation = RandomFloat(0,2*math.pi)
 			local size = RandomFloat(5,5)
 			CreateDecal(self:GetPosition(), rotation, 'scorch_001_albedo', '', 'Albedo', size, size, 150, 150, self:GetArmy())
         end
         SingleBeamProjectile.OnImpact(self, targetType, targetEntity)
+    end,
+	
+	OnKilled = function(self, instigator, type, overkillRatio)
+		if self.Unit then
+		self.Unit:Destroy()
+		end
+    SingleBeamProjectile.OnKilled(self, instigator, type, overkillRatio)	
     end,
 
 }

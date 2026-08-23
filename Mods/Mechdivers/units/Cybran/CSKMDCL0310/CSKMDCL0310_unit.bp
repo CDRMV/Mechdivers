@@ -372,7 +372,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0.1,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 0,
-            ProjectileId = '/mods/Mechdivers/projectiles/Null/Null_proj.bp',
+            ProjectileId = '/mods/Mechdivers/projectiles/Melee/Melee_proj.bp',
             ProjectileLifetimeUsesMultiplier = 1.15,
             ProjectilesPerOnFire = 1,
             RackBones = {

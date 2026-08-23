@@ -70,6 +70,8 @@ local MyUnitIdTable = {
 	  truck_missilebattery=true,
 	  truck_guidemissilelauncher=true,
 	  
+	  cskmdguidemissile01=true,
+	  
  -- Air  	
    
       cskmdta0300=true,  

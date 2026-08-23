@@ -42,20 +42,27 @@ UABMD0200 = Class(AStructureUnit) {
 		self.BuildEffect3 = import('/lua/sim/Entity.lua').Entity()
 		self.BuildEffect3:AttachBoneTo( -2, self, 'Gate_Effect' )
 		self.BuildEffect3:SetMesh(BuildEffectMesh3)
-		self.BuildEffect3:SetDrawScale(1.9)
+		self.BuildEffect3:SetDrawScale(1.4)
 		self.BuildEffect3:SetVizToAllies('Never')
 		self.BuildEffect3:SetVizToNeutrals('Never')
 		self.BuildEffect3:SetVizToEnemies('Never')
 		self.BuildEffect4 = import('/lua/sim/Entity.lua').Entity()
-		self.BuildEffect4:AttachBoneTo( -2, self, 'Gate_Effect' )
-		self.BuildEffect4:SetMesh(BuildEffectMesh4)
-		self.BuildEffect4:SetDrawScale(0.4)
+		self.BuildEffect4:AttachBoneTo( -2, self, 'Gate_Effect3' )
+		self.BuildEffect4:SetMesh(BuildEffectMesh3)
+		self.BuildEffect4:SetDrawScale(1.9)
 		self.BuildEffect4:SetVizToAllies('Never')
 		self.BuildEffect4:SetVizToNeutrals('Never')
 		self.BuildEffect4:SetVizToEnemies('Never')
+		if not self.Ring then
+            self.Ring = CreateSlider(self, 'Gate_Effect')
+            self.Trash:Add(self.Ring)
+        end
+		self.Build = false
 	end,
 
     OnStartBuild = function(self, unitBeingBuilt, order )
+	ForkThread( function()
+		self.Build = true
 		unitBeingBuilt:HideBone(0,true)
         self:ChangeBlinkingLights('Yellow')
         AStructureUnit.OnStartBuild(self, unitBeingBuilt, order )
@@ -74,17 +81,31 @@ UABMD0200 = Class(AStructureUnit) {
 		self.BuildEffect2:SetVizToAllies('Intel')
 		self.BuildEffect2:SetVizToNeutrals('Intel')
 		self.BuildEffect2:SetVizToEnemies('Intel')
-		self.BuildEffect3:SetVizToAllies('Intel')
-		self.BuildEffect3:SetVizToNeutrals('Intel')
-		self.BuildEffect3:SetVizToEnemies('Intel')
 		self.BuildEffect4:SetVizToAllies('Intel')
 		self.BuildEffect4:SetVizToNeutrals('Intel')
 		self.BuildEffect4:SetVizToEnemies('Intel')
+		self.BuildEffect5 = CreateAttachedEmitter( self, 'Gate_Effect4', self:GetArmy(), '/mods/Mechdivers/effects/emitters/aeon_gateeffect01_emit.bp' ):ScaleEmitter(2)
+		self.BuildEffect6 = CreateAttachedEmitter( self, 'Gate_Effect4', self:GetArmy(), '/mods/Mechdivers/effects/emitters/aeon_gateeffect02_emit.bp' ):ScaleEmitter(1):OffsetEmitter(0, 1, 0)
+		while true do
+            if not self.Ring or self.Build == false or self.FactoryBuildFailed == true then return end
+		self.BuildEffect3:SetVizToAllies('Intel')
+		self.BuildEffect3:SetVizToNeutrals('Intel')
+		self.BuildEffect3:SetVizToEnemies('Intel')
+            self.Ring:SetGoal(0, 0, 10)
+            self.Ring:SetSpeed(10)
+            WaitFor(self.Ring)
+			self.BuildEffect3:SetVizToAllies('Never')
+			self.BuildEffect3:SetVizToNeutrals('Never')
+			self.BuildEffect3:SetVizToEnemies('Never')
+            self.Ring:SetGoal(0, 0, 0)
+            WaitFor(self.Ring)
+        end
+		end)
     end,
 
     OnStopBuild = function(self, unitBeingBuilt, order )
         AStructureUnit.OnStopBuild(self, unitBeingBuilt, order )
-        
+        self.Build = false
         if not self.FactoryBuildFailed then
             if not EntityCategoryContains(categories.AIR, unitBeingBuilt) then
                 self:RollOffUnit()
@@ -108,9 +129,12 @@ UABMD0200 = Class(AStructureUnit) {
 		self.BuildEffect4:SetVizToAllies('Never')
 		self.BuildEffect4:SetVizToNeutrals('Never')
 		self.BuildEffect4:SetVizToEnemies('Never')
+		self.BuildEffect5:Destroy()
+		self.BuildEffect6:Destroy()
     end,
 
     FinishBuildThread = function(self, unitBeingBuilt, order )
+		self.Build = false
 		CreateLightParticle( self, 'AttachPoint', self:GetArmy(), 6, 6, 'glow_03', 'ramp_white_01' ) 
         self:SetBusy(true)
         self:SetBlockCommandQueue(true)
@@ -129,6 +153,8 @@ UABMD0200 = Class(AStructureUnit) {
 		self.BuildEffect4:SetVizToAllies('Never')
 		self.BuildEffect4:SetVizToNeutrals('Never')
 		self.BuildEffect4:SetVizToEnemies('Never')
+		self.BuildEffect5:Destroy()
+		self.BuildEffect6:Destroy()
         local bp = self:GetBlueprint()
         local bpAnim = bp.Display.AnimationFinishBuildLand
         if bpAnim and EntityCategoryContains(categories.LAND, unitBeingBuilt) then
@@ -179,6 +205,8 @@ UABMD0200 = Class(AStructureUnit) {
 		self.BuildEffect4:SetVizToAllies('Never')
 		self.BuildEffect4:SetVizToNeutrals('Never')
 		self.BuildEffect4:SetVizToEnemies('Never')
+		self.BuildEffect5:Destroy()
+		self.BuildEffect6:Destroy()
         ChangeState(self, self.IdleState)
     end,
 

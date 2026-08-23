@@ -77,6 +77,7 @@ CSKMDTL0311 = Class(TLandUnit) {
                 end,
                 
         OnGotTarget = function(self)
+			self.unit:SetScriptBit('RULEUTC_SpecialToggle',true)
 			if self.unit:GetFireState() == 2 then
 			local target = self.unit:GetTargetEntity()
 			if target then
@@ -101,6 +102,7 @@ CSKMDTL0311 = Class(TLandUnit) {
             },
 			
 		OnGotTarget = function(self)
+			self.unit:SetScriptBit('RULEUTC_SpecialToggle',true)
 			if self.unit:GetFireState() == 2 then
 			local target = self.unit:GetTargetEntity()
 			if target then
@@ -124,6 +126,7 @@ CSKMDTL0311 = Class(TLandUnit) {
         end, 
         
         OnLostTarget = function(self)
+			self.unit:SetScriptBit('RULEUTC_SpecialToggle',false)
 			if self.unit.Module and not self.unit.Module.Dead then
 			IssueClearCommands({self.unit.Module})
 			end
@@ -251,10 +254,14 @@ CSKMDTL0311 = Class(TLandUnit) {
 			self.wep:ChangeMaxRadius(0.01)
 			self.wep:SetEnabled(false)
 			end
+			if self.Module:GetBlueprint().General.UnitName == 'HIMARS 3000' then
+			self:AddToggleCap('RULEUTC_IntelToggle')
+			self:GiveTacticalSiloAmmo(4)
+			end
 			if self.Module:GetBlueprint().General.UnitName == 'Pak 150' or 
 			self.Module:GetBlueprint().General.UnitName == 'HIMARS 3000' or 
 			self.Module:GetBlueprint().General.UnitName == 'Karl Mark II' then
-			self:RemoveToggleCap('RULEUTC_SpecialToggle')
+			self:AddToggleCap('RULEUTC_SpecialToggle')
 			self.wep2:SetEnabled(true)
 			self.wep2:ChangeMaxRadius(150)
 			self.wep3:ChangeMaxRadius(150)
@@ -277,12 +284,22 @@ CSKMDTL0311 = Class(TLandUnit) {
 		self:RequestRefreshUI()
 		self:SetScriptBit('RULEUTC_WeaponToggle',false)
 		self:RemoveToggleCap('RULEUTC_WeaponToggle')
+		self:RemoveToggleCap('RULEUTC_IntelToggle')
 		self:AddToggleCap('RULEUTC_SpecialToggle')
 		end
 		elseif bit == 7 then 
 		self:SetImmobile(true)
 		self.AnimationManipulator1:SetRate(1)
 		WaitFor(self.AnimationManipulator1)
+		elseif bit == 3 then
+		self:SetScriptBit('RULEUTC_SpecialToggle',true)
+		if self.Module:GetTacticalSiloAmmoCount() == 0 then
+		
+		else
+		self.Module:GetWeaponByLabel('MissileRack01'):SetTargetGround(self:GetPosition())
+		self.Module:GetWeaponByLabel('MissileRack01'):FireWeapon()
+		end
+		self:SetScriptBit('RULEUTC_IntelToggle',false)
 		end
 		end)
     end,
