@@ -41,7 +41,9 @@ UnitBlueprint {
         'BUILTBYCOMMANDER',
         'AEON',
         'STRUCTURE',
+		'ADVANCEDLIGHTBOTFACTORY',
         'LAND',
+		'ENERGYPRODUCTION',
         'TECH1',
 		'SHIELD',
         'CONSTRUCTION',
@@ -208,17 +210,16 @@ UnitBlueprint {
     Economy = {
         BuildCostEnergy = 2100,
         BuildCostMass = 240,
+		ProductionPerSecondEnergy = 30,
         BuildRate = 20,
         BuildTime = 300,
-		MaintenanceConsumptionPerSecondEnergy = 25,
+		MaintenanceConsumptionPerSecondEnergy = 5,
         BuildableCategory = {
 			'BUILTBYTIER1WARPSHIPFACTORY AEON',
         },
         RebuildBonusIds = {
             'uabmd0100',
         },
-        StorageEnergy = 0,
-        StorageMass = 80,
     },
     Footprint = {
         SizeX = 5,

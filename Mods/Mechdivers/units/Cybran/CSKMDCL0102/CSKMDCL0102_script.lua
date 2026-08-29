@@ -89,7 +89,7 @@ CSKMDCL0102 = Class(CWalkingLandUnit) {
         CWalkingLandUnit.OnScriptBitSet(self, bit)
 		ForkThread(function()
         if bit == 1 then 
-		self:SetSpeedMult(2)
+		self:SetSpeedMult(1.5)
 		elseif bit == 7 then
 		self:SetWeaponEnabledByLabel('MainGun', false)
 		IssueClearCommands({self})

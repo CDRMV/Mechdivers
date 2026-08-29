@@ -3,12 +3,17 @@ do
         {
             'T1AdvancedLightBotFactory',
             --UEF       AEON      CYBRAN    SERAPHIM
-            {false,false,'URBMD0103',false},
+            {false,'UABMD0100','URBMD0103',false},
         },
 		{
             'T2AdvancedHeavyFactory',
             --UEF       AEON      CYBRAN    SERAPHIM
-            {false,false,'URBMD0104',false},
+            {false,'UABMD0200','URBMD0104',false},
+        },
+		{
+            'T2AdvancedHeavyFactory2',
+            --UEF       AEON      CYBRAN    SERAPHIM
+            {false,false,'URBMD0203',false},
         },
 		{
             'Landingpad',

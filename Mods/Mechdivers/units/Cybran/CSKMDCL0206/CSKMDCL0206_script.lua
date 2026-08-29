@@ -59,7 +59,7 @@ CSKMDCL0206 = Class(CWalkingLandUnit) {
         CWalkingLandUnit.OnScriptBitSet(self, bit)
 		ForkThread(function()
         if bit == 1 then 
-		self:SetSpeedMult(1.8)
+		self:SetSpeedMult(1.2)
 		self.AnimationManipulator3:SetRate(2)
         end
 		end)

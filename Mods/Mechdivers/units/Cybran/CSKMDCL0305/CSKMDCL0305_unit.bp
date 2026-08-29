@@ -40,9 +40,9 @@ UnitBlueprint {
         'PRODUCTSC1',
         'SELECTABLE',
 		'BUILTBYTIER3HEAVYFACTORY',
-        'BUILTBYTIER3FACTORY',
         'CYBRAN',
         'MOBILE',
+		'ADVANCEDSCOUTSTRIDER',
         'LAND',
         'TECH3',
         'DIRECTFIRE',
@@ -93,7 +93,7 @@ UnitBlueprint {
             },
         },
         AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0305/CSKMDCL0305_Awalk01.sca',
-        AnimationWalkRate = 1,
+        AnimationWalkRate = 1.5,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -188,7 +188,7 @@ UnitBlueprint {
         DragCoefficient = 0.2,
         MaxAcceleration = 4,
         MaxBrake = 1,
-        MaxSpeed = 1,
+		MaxSpeed = 1.5,
         MaxSpeedReverse = 0,
         MaxSteerForce = 7,
         MinSpeedPercent = 0,

@@ -96,6 +96,11 @@ CSKMDAL0206 = Class(AWalkingLandUnit) {
 			self.Trash:Add(self.walkanimator)
 			self.walkanimator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0206/CSKMDAL0206_AWalk.sca', true):SetRate(1)
 			self:SetSpeedMult(1)
+			else
+			self.walkanimator = CreateAnimator(self)
+			self.Trash:Add(self.walkanimator)
+			self.walkanimator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0206/CSKMDAL0206_AWalk.sca', true):SetRate(1)
+			self:SetSpeedMult(1)
 			end
 			
 			

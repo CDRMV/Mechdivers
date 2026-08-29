@@ -302,6 +302,7 @@ BuilderGroup {
                 Location = 'LocationType',
                 BuildStructures = {
                     'T2AdvancedHeavyFactory',
+					'T2AdvancedHeavyFactory2',
                 },
             }
         }
@@ -326,11 +327,13 @@ BuilderGroup {
                 Location = 'LocationType',
                 BuildStructures = {
                     'T2AdvancedHeavyFactory',
+					'T2AdvancedHeavyFactory2',
                 },
             }
         }
     },
 }
+
 
 BuilderGroup {
     BuilderGroupName = 'AdvancedHeavyFactorySupport',

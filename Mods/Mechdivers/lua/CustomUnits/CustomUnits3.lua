@@ -1,6 +1,7 @@
 UnitList = {
 
 	T2AttackTankSorian = {
+		Aeon = {'CSKMDAL0200', 80},      -- Watcher, Tech 2 Scout Drone
 		UEF = {'CSKMDTL0200', 80},      -- Fryer, Tech 2 Ambush Bot
     },
 	

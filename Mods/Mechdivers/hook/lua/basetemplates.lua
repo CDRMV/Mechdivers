@@ -6,6 +6,8 @@ do
         },
         {
             --Aeon
+			'T1AdvancedLightBotFactory',
+			'T2AdvancedHeavyFactory',
         },
         {
             --Cybran

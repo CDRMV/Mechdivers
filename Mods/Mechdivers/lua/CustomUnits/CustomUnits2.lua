@@ -26,7 +26,9 @@ UnitList = {
 	
 	T2ShieldDefense = {
     Cybran =	{'URBMD0102', 70}, -- Tech 2 Assault Drone Station
+	Aeon =	{'uabmd0205', 70}, -- Tech 2 Overship Communication Relay
 	},
+	
 	
 	T3ArmoredAssault = {
 		UEF = {'CSKMDTL0310', 80},      -- T 120 Peacekeeper, Tech 3 Heavy Tank

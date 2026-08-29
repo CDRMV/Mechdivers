@@ -63,9 +63,6 @@ UnitBlueprint {
         'PRODUCTFA',
         'SELECTABLE',
 		'BUILTBYTIER2WARPGATEWAY',
-        'BUILTBYTIER2FACTORY',
-        'BUILTBYTIER3FACTORY',
-		'SCOUTDRONE',
         'AEON',
         'MOBILE',
         'LAND',
@@ -75,6 +72,7 @@ UnitBlueprint {
         'RECLAIMABLE',
         'HOVER',
         'TANK',
+		'SCOUTDRONE',
         'OVERLAYDIRECTFIRE',
     },
     Defense = {

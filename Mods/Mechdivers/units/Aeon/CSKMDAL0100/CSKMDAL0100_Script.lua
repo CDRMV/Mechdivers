@@ -52,7 +52,7 @@ CSKMDAL0100 = Class(AWalkingLandUnit) {
         AWalkingLandUnit.OnScriptBitSet(self, bit)
 		ForkThread(function()
         if bit == 1 then 
-		self:SetSpeedMult(1.4)
+		self:SetSpeedMult(1.5)
         end
 		end)
     end,

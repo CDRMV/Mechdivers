@@ -45,7 +45,7 @@ CSKMDCL0105 = Class(CWalkingLandUnit) {
 	OnScriptBitSet = function(self, bit)
         CWalkingLandUnit.OnScriptBitSet(self, bit)
         if bit == 1 then 
-		self:SetSpeedMult(2)
+		self:SetSpeedMult(1.5)
         end
     end,
 

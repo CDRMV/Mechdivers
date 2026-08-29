@@ -49,6 +49,7 @@ UnitBlueprint {
         'VISIBLETORECON',
         'RECLAIMABLE',
         'BOT',
+		'ADVANCEDINFANTRY5',
         'OVERLAYDIRECTFIRE',
     },
     Defense = {
@@ -84,7 +85,7 @@ UnitBlueprint {
             },
         },
         AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0205/CSKMDCL0205_Awalk01.sca',
-        AnimationWalkRate = 1,
+        AnimationWalkRate = 1.1,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -164,7 +165,7 @@ UnitBlueprint {
         DragCoefficient = 0.2,
         MaxAcceleration = 4,
         MaxBrake = 0.5,
-        MaxSpeed = 0.7,
+        MaxSpeed = 1.1,
         MaxSpeedReverse = 0,
         MaxSteerForce = 7,
         MinSpeedPercent = 0,

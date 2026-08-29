@@ -11,6 +11,10 @@ Null = Class(import('/lua/terranprojectiles.lua').TShellRiotProjectileLand) {
     FxImpactProp = {},
     FxImpactLand = {},
     FxImpactUnderWater = {}, 
+	
+	OnCreate = function(self, inWater)
+	self:Destroy()
+    end,
 }
 
 TypeClass = Null
