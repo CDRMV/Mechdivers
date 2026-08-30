@@ -17,6 +17,8 @@ UABMD0100 = Class(ALandFactoryUnit) {
 
 
 	OnCreate = function(self)
+		self:AddBuildRestriction(categories.AEON * categories.BUILTBYTIER1WARPSHIPFACTORY)
+		self:AddBuildRestriction(categories.AEON * categories.BUILTBYTIER2WARPSHIPFACTORY)
 		self:SetUnSelectable(true)
 		self:HideBone(0, true)
 		self:SetDoNotTarget(true)
@@ -26,7 +28,6 @@ UABMD0100 = Class(ALandFactoryUnit) {
     OnStopBeingBuilt = function(self,builder,layer)
         ALandFactoryUnit.OnStopBeingBuilt(self,builder,layer)
 		ForkThread(function()
-		self:AddBuildRestriction(categories.AEON * categories.BUILTBYTIER1WARPSHIPFACTORY)
 		self:DisableShield()
 		self.ArmSlider1 = CreateSlider(self, 0)
 		self.Trash:Add(self.ArmSlider1)        
