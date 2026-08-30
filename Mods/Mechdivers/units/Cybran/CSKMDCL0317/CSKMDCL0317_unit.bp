@@ -112,7 +112,6 @@ UnitBlueprint {
 		'CONSTRUCTION',
         'DIRECTFIRE',
 		'FACTORY',
-		'INDIRECTFIRE',
         'VISIBLETORECON',
         'RECLAIMABLE',
         'BOT',

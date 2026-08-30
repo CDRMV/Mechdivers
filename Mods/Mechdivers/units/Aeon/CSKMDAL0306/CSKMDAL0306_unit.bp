@@ -58,7 +58,6 @@ UnitBlueprint {
 		'LARGEUNIT',
         'LAND',
         'TECH3',
-		'INDIRECTFIRE',
         'DIRECTFIRE',
         'VISIBLETORECON',
         'RECLAIMABLE',

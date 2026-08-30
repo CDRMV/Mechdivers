@@ -76,10 +76,14 @@ TDFGuideMissile01 = Class(SingleBeamProjectile) {
 	 ForkThread( function()
         while not self:BeenDestroyed() do
 			if self.Unit:GetWeapon(1):GetCurrentTarget() then
+			self:SetMaxSpeed(30)
+			self:SetVelocity(30)
 			self:SetTurnRate(50)
 			self:SetNewTarget(self.Unit:GetWeapon(1):GetCurrentTarget())
 			end
 			if self.Unit:GetWeapon(1):GetCurrentTargetPos() then
+			self:SetMaxSpeed(30)
+			self:SetVelocity(30)
 			self:SetTurnRate(50)
 			self:SetNewTargetGround(self.Unit:GetWeapon(1):GetCurrentTargetPos())
 			end

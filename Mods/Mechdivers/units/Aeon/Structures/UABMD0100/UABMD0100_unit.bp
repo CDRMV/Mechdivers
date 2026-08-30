@@ -84,7 +84,7 @@ UnitBlueprint {
     Display = {
 	    Abilities = {
 			'<LOC ability_personalshield>Personal Shield',
-            'Coming Soon',
+            'Has access to an Tech 2 Enhancement Upgrade to unlock Tech 2 Units',
         },
         BlinkingLights = {
             {
@@ -216,6 +216,7 @@ UnitBlueprint {
 		MaintenanceConsumptionPerSecondEnergy = 5,
         BuildableCategory = {
 			'BUILTBYTIER1WARPSHIPFACTORY AEON',
+			'BUILTBYTIER2WARPSHIPFACTORY AEON',
         },
         RebuildBonusIds = {
             'uabmd0100',
@@ -224,6 +225,46 @@ UnitBlueprint {
     Footprint = {
         SizeX = 5,
         SizeZ = 5,
+    },
+	Enhancements = {
+        Slots = {
+            Back = {
+                name = '<LOC _Back>',
+                x = 38,
+                y = -10,
+            },
+            LCH = {
+                name = '<LOC _LCH>',
+                x = 105,
+                y = 30,
+            },
+            RCH = {
+                name = '<LOC _RCH>',
+                x = -10,
+                y = 30,
+            },
+        },
+		T2Engineering = {
+            BuildCostEnergy = 18000,
+            BuildCostMass = 720,
+            BuildTime = 900,
+            Icon = 'aes',
+            Name = '<LOC enhancements_0000>Tech 2 Engineering Suite',
+            Slot = 'RCH',
+        },
+        T2EngineeringRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'aes',
+            Name = '<LOC enhancements_0001>Remove Tech 2 Engineering Suite',
+            Prerequisite = 'T2Engineering',
+            RemoveEnhancements = {
+                'T2Engineering',
+                'T2EngineeringRemove',
+            },
+            Slot = 'RCH',
+        },
     },
     General = {
         BuildBones = {

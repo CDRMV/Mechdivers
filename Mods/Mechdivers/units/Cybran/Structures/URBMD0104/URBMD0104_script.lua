@@ -18,16 +18,13 @@ URBMD0104 = Class(CLandFactoryUnit) {
 	
 	OnCreate = function(self)
         CLandFactoryUnit.OnCreate(self)
+		ForkThread(function()
 		self:CreateEnhancement('RegularLegion')
 		self.JETBRIGADE = false
 		self.INCINERATIONCORPS = false 
 		self.TECH3 = false 
-    end,
-	
-	OnStopBeingBuilt = function(self,builder,layer)
-        CLandFactoryUnit.OnStopBeingBuilt(self,builder,layer)
-		ForkThread(function()
 		while not self.Dead do
+		if self:GetFractionComplete() == 1 then
 		CreateAttachedEmitter(self,'Effect1',self:GetArmy(), modpath .. 'botfabricatoreffect_smoke_06_emit.bp'):ScaleEmitter(0.3)
 		CreateAttachedEmitter(self,'Effect1',self:GetArmy(), modpath .. 'botfabricatoreffect_smoke_07_emit.bp'):ScaleEmitter(0.3)
 		CreateAttachedEmitter(self,'Effect1',self:GetArmy(), modpath .. 'botfabricatoreffect_smoke_11_emit.bp'):ScaleEmitter(0.3)
@@ -44,7 +41,26 @@ URBMD0104 = Class(CLandFactoryUnit) {
 		CreateAttachedEmitter(self,'Effect4',self:GetArmy(), modpath .. 'botfabricatoreffect_smoke_07_emit.bp'):ScaleEmitter(0.3)
 		CreateAttachedEmitter(self,'Effect4',self:GetArmy(), modpath .. 'botfabricatoreffect_smoke_11_emit.bp'):ScaleEmitter(0.3)
 		CreateAttachedEmitter(self,'Effect4',self:GetArmy(), modpath .. 'botfabricatoreffect_smoke_12_emit.bp'):ScaleEmitter(0.3)
+		end
 		WaitSeconds(1.2)
+		end
+		end)
+    end,
+	
+	OnStopBeingBuilt = function(self,builder,layer)
+        CLandFactoryUnit.OnStopBeingBuilt(self,builder,layer)
+		ForkThread(function()
+		if self:GetAIBrain().BrainType == 'Human' then
+		
+		else
+		WaitSeconds(600)
+		local order = {
+            TaskName = "EnhanceTask",
+            Enhancement = 'T3Engineering'
+        }
+		IssueStop({self})
+        IssueClearCommands({self})
+        IssueScript({self}, order)
 		end
 		end)
     end,
@@ -84,6 +100,7 @@ URBMD0104 = Class(CLandFactoryUnit) {
 		self.TECH3 = true
 		self:SetMaxHealth(19000)
 		self:SetHealth(self, 19000)
+		self:SetBuildRate(60)
 		if self.JETBRIGADE == true then 
 		self:RemoveBuildRestriction(categories.CYBRAN * categories.BUILTBYTIER3HEAVYFACTORY - categories.INCINERATIONCORPS)
 		end
@@ -97,13 +114,8 @@ URBMD0104 = Class(CLandFactoryUnit) {
 		self.TECH3 = false 
 		self:SetMaxHealth(7800)
 		self:SetHealth(self, 7800)
-            local bp = self:GetBlueprint().Economy.BuildRate
-            if not bp then return end
-            self:RestoreBuildRestrictions()
-            if Buff.HasBuff( self, 'CybranACUT3BuildRate' ) then
-                Buff.RemoveBuff( self, 'CybranACUT3BuildRate' )
-            end
-            self:AddBuildRestriction(categories.CYBRAN * categories.BUILTBYTIER3HEAVYFACTORY) 
+		self:SetBuildRate(40)
+        self:AddBuildRestriction(categories.CYBRAN * categories.BUILTBYTIER3HEAVYFACTORY) 
         end
     end,
 	

@@ -26,7 +26,7 @@ UABMD0100 = Class(ALandFactoryUnit) {
     OnStopBeingBuilt = function(self,builder,layer)
         ALandFactoryUnit.OnStopBeingBuilt(self,builder,layer)
 		ForkThread(function()
-		self:AddBuildRestriction(categories.BUILTBYTIER1WARPSHIPFACTORY)
+		self:AddBuildRestriction(categories.AEON * categories.BUILTBYTIER1WARPSHIPFACTORY)
 		self:DisableShield()
 		self.ArmSlider1 = CreateSlider(self, 0)
 		self.Trash:Add(self.ArmSlider1)        
@@ -50,8 +50,40 @@ UABMD0100 = Class(ALandFactoryUnit) {
 		self:SetUnSelectable(false)
 		self.Effect1:Destroy()
 		self.Effect2:Destroy()
-		self:RemoveBuildRestriction(categories.BUILTBYTIER1WARPSHIPFACTORY)
+		self:RemoveBuildRestriction(categories.AEON * categories.BUILTBYTIER1WARPSHIPFACTORY)
+		self:AddBuildRestriction(categories.AEON *categories.BUILTBYTIER2WARPSHIPFACTORY)
+		if self:GetAIBrain().BrainType == 'Human' then
+		
+		else
+		WaitSeconds(600)
+		local order = {
+            TaskName = "EnhanceTask",
+            Enhancement = 'T2Engineering'
+        }
+		IssueStop({self})
+        IssueClearCommands({self})
+        IssueScript({self}, order)
+		end
 		end)
+    end,
+	
+	CreateEnhancement = function(self, enh)
+        ALandFactoryUnit.CreateEnhancement(self, enh)
+        local bp = self:GetBlueprint().Enhancements[enh]
+        if not bp then return end
+        if enh =='T2Engineering' then
+		self.TECH2 = true
+		self:SetMaxHealth(7800)
+		self:SetHealth(self, 7800)
+		self:SetBuildRate(40)
+		self:RemoveBuildRestriction(categories.AEON * categories.BUILTBYTIER2WARPSHIPFACTORY)
+        elseif enh =='T2EngineeringRemove' then
+		self.TECH2 = false 
+		self:SetMaxHealth(4400)
+		self:SetHealth(self, 4400)
+		self:SetBuildRate(20)
+        self:AddBuildRestriction(categories.AEON * categories.BUILTBYTIER2WARPSHIPFACTORY) 
+        end
     end,
 	
 	--------------------------------------------------------------------------------

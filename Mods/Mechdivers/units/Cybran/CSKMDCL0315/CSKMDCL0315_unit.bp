@@ -111,12 +111,10 @@ UnitBlueprint {
 		'CONSTRUCTION',
         'DIRECTFIRE',
 		'FACTORY',
-		'INDIRECTFIRE',
         'VISIBLETORECON',
         'RECLAIMABLE',
         'BOT',
         'OVERLAYDIRECTFIRE',
-		'OVERLAYINDIRECTFIRE',
 		'OVERLAYCOUNTERINTEL',
     },
     Defense = {

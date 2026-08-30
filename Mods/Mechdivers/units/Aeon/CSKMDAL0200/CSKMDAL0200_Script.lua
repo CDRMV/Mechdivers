@@ -15,10 +15,6 @@ CSKMDAL0200 = Class(AHoverLandUnit) {
 		LightningWeapon = Class(ADFLightningBeam) {
 		IdleState = State (ADFLightningBeam.IdleState) {
         Main = function(self)
-			self.unit:RemoveToggleCap('RULEUTC_WeaponToggle')
-			if self.unit.Scan then
-			self.unit.Scan:SetMesh('/mods/Mechdivers/Decorations/AeonScan_mesh') 
-			end
            ADFLightningBeam.IdleState.Main(self)
         end,
                 
@@ -96,7 +92,6 @@ CSKMDAL0200 = Class(AHoverLandUnit) {
                 ent:SetVizToAllies('Always')
                 ent:SetVizToNeutrals('Never')
                 ent:SetVizToEnemies('Never')
-				LOG(angle)
                 ent:InitIntel(self:GetArmy(), intel, angle)
                 ent:EnableIntel(intel)
             end

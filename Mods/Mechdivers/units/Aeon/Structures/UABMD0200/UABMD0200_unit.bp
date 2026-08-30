@@ -67,6 +67,9 @@ UnitBlueprint {
     },
     Description = 'Warp Gateway',
     Display = {
+		Abilities = {
+            'Has access to an Tech 3 Enhancement Upgrade to unlock Tech 3 Units',
+        },
 	AnimationBuild = '/mods/Mechdivers/units/Aeon/Structures/UABMD0200/UABMD0200_AOpenGate.sca',
 	BuildAttachBone = 'AttachPoint',
         DamageEffects = {
@@ -114,6 +117,7 @@ UnitBlueprint {
         BuildTime = 1600,
 		BuildableCategory = {
             'BUILTBYTIER2WARPGATEWAY AEON',
+			'BUILTBYTIER3WARPGATEWAY AEON',
         },
         RebuildBonusIds = {
             'uabmd0200',
@@ -124,6 +128,46 @@ UnitBlueprint {
 	Footprint = {
         SizeX = 5,
         SizeZ = 5,
+    },
+	Enhancements = {
+        Slots = {
+            Back = {
+                name = '<LOC _Back>',
+                x = 38,
+                y = -10,
+            },
+            LCH = {
+                name = '<LOC _LCH>',
+                x = 105,
+                y = 30,
+            },
+            RCH = {
+                name = '<LOC _RCH>',
+                x = -10,
+                y = 30,
+            },
+        },
+		T3Engineering = {
+            BuildCostEnergy = 50000,
+            BuildCostMass = 2400,
+            BuildTime = 6000,
+            Icon = 'ees',
+            Name = '<LOC enhancements_0103>Tech 3 Engineering Suite',
+            Slot = 'RCH',
+        },
+        T3EngineeringRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'ees',
+            Name = '<LOC enhancements_0104>Remove Tech 3 Engineering Suite',
+            Prerequisite = 'T3Engineering',
+            RemoveEnhancements = {
+                'T3Engineering',
+                'T3EngineeringRemove',
+            },
+            Slot = 'RCH',
+        },
     },
     General = {
         Category = 'Factory',

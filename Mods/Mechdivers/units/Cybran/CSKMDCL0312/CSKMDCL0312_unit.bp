@@ -107,7 +107,6 @@ UnitBlueprint {
         'TECH3',
 		'HEAVYARMOREDARTYBOT',
         'DIRECTFIRE',
-		'INDIRECTFIRE',
         'VISIBLETORECON',
         'RECLAIMABLE',
         'BOT',

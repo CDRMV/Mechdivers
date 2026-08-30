@@ -49,7 +49,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-		'BUILTBYTIER2WARPGATEWAY',
+		'BUILTBYTIER3WARPGATEWAY',
         'AEON',
         'MOBILE',
 		'LARGEUNIT',
@@ -58,13 +58,11 @@ UnitBlueprint {
 		'RADAR',
         'LAND',
         'TECH3',
-		'INDIRECTFIRE',
         'DIRECTFIRE',
         'VISIBLETORECON',
         'RECLAIMABLE',
         'BOT',
         'OVERLAYDIRECTFIRE',
-		'OVERLAYINDIRECTFIRE',
     },
     CollisionOffsetY = 0,
     Defense = {

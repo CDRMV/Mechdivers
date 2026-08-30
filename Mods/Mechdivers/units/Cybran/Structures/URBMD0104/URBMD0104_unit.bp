@@ -64,8 +64,9 @@ UnitBlueprint {
     },
     Description = 'Advanced Heavy Factory',
     Display = {
-        Abilities = {
-            '<LOC ability_upgradable>Upgradeable',
+		Abilities = {
+            'Has access to an Tech 3 Enhancement Upgrade to unlock Tech 3 Units',
+			'Has access to several Enhancement Upgrades, which unlock Legions',
         },
 		AnimationFinishBuildLand = '/mods/Mechdivers/units/Cybran/Structures/urbmd0104/urbmd0104_aopen.sca',
         BuildAttachBone = 'Attachpoint',
@@ -208,7 +209,6 @@ UnitBlueprint {
             BuildTime = 6000,
             Icon = 'ees',
             Name = '<LOC enhancements_0103>Tech 3 Engineering Suite',
-            NewBuildRate = 90,
             Slot = 'RCH',
         },
         T3EngineeringRemove = {

@@ -58,6 +58,21 @@ UABMD0200 = Class(AStructureUnit) {
             self.Trash:Add(self.Ring)
         end
 		self.Build = false
+		self:AddBuildRestriction(categories.AEON * categories.BUILTBYTIER3WARPGATEWAY)
+		if self:GetAIBrain().BrainType == 'Human' then
+		
+		else
+		ForkThread( function()
+		WaitSeconds(600)
+		local order = {
+            TaskName = "EnhanceTask",
+            Enhancement = 'T3Engineering'
+        }
+		IssueStop({self})
+        IssueClearCommands({self})
+        IssueScript({self}, order)
+		end)
+		end
 	end,
 
     OnStartBuild = function(self, unitBeingBuilt, order )
@@ -329,6 +344,25 @@ UABMD0200 = Class(AStructureUnit) {
         AStructureUnit.OnKilled(self, instigator, type, overkillRatio)
         if self.UnitBeingBuilt then
             self.UnitBeingBuilt:Destroy()
+        end
+    end,
+	
+	CreateEnhancement = function(self, enh)
+        AStructureUnit.CreateEnhancement(self, enh)
+        local bp = self:GetBlueprint().Enhancements[enh]
+        if not bp then return end
+        if enh =='T3Engineering' then
+		self.TECH3 = true
+		self:SetMaxHealth(19000)
+		self:SetHealth(self, 19000)
+		self:SetBuildRate(60)
+		self:RemoveBuildRestriction(categories.AEON * categories.BUILTBYTIER3WARPGATEWAY)
+        elseif enh =='T3EngineeringRemove' then
+		self.TECH3 = false 
+		self:SetMaxHealth(7800)
+		self:SetHealth(self, 7800)
+		self:SetBuildRate(40)
+        self:AddBuildRestriction(categories.AEON * categories.BUILTBYTIER3WARPGATEWAY) 
         end
     end,
 	

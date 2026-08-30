@@ -48,7 +48,6 @@ UnitBlueprint {
         'LAND',
         'TECH1',
         'DIRECTFIRE',
-		'INDIRECTFIRE',
         'VISIBLETORECON',
         'RECLAIMABLE',
         'BOT',

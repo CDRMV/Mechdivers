@@ -57,13 +57,11 @@ UnitBlueprint {
 		'RADAR',
         'LAND',
         'TECH2',
-		'INDIRECTFIRE',
         'DIRECTFIRE',
         'VISIBLETORECON',
         'RECLAIMABLE',
         'BOT',
         'OVERLAYDIRECTFIRE',
-		'OVERLAYINDIRECTFIRE',
     },
     CollisionOffsetY = 0,
     Defense = {

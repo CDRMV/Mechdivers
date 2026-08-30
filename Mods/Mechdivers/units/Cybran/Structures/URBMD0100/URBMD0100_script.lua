@@ -117,10 +117,6 @@ GetNearestPlayablePoint = function(self,position)
 	
 	if playableArea[1] == 0 and playableArea[2] == 0 then
 	
-	
-	LOG('position[1]', position[1])
-	LOG('position[3]', position[3])
-	
 	local x, z
 	
 	if position[1] == 0 then
@@ -239,7 +235,6 @@ end,
                 ent:SetVizToAllies('Always')
                 ent:SetVizToNeutrals('Never')
                 ent:SetVizToEnemies('Never')
-				LOG(angle)
                 ent:InitIntel(self:GetArmy(), intel, angle)
                 ent:EnableIntel(intel)
             end
