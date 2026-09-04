@@ -158,7 +158,6 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 		self.RGatlingGun = self:GetWeaponByLabel('RGatlingGun')
 		self.LGatlingGun:SetEnabled(false)
 		self.RGatlingGun:SetEnabled(false)
-		if self:GetAIBrain().BrainType == 'Human' then
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition()
 		self.unit = CreateUnitHPR('UAL0106', self:GetArmy(), position[1], position[2], position[3], 0, 0, 0)
@@ -179,7 +178,6 @@ CSKMDAL0300 = Class(AWalkingLandUnit) {
 			self.Effect1:AttachBoneTo( -2, self, 'Shield' )
 			self.Effect1:SetMesh(EffectMesh1)
 			self.Effect1:SetDrawScale(0.6)
-		end
 		self:RemoveCommandCap('RULEUCC_Transport')
     end,
 	

@@ -6,7 +6,7 @@ MeshBlueprint {
             AlbedoName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0400/Exospire_Effect1_Albedo.dds',
             NormalsName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0400/Exospire_Effect1_Normals.dds',
 			SpecularName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0400/Exospire_Effect1_Specular.dds',
-            LODCutoff = 600,
+            LODCutoff = 800,
             
         },
     },
