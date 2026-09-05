@@ -14,6 +14,8 @@ end,
 	OldAIBrain.OnCreateHuman(self)
 		self:ForkThread(self.CheckAssaultDroneStationStep1)
 		self:ForkThread(self.CheckDetectorTowerStep1)
+		self:ForkThread(self.CheckExospireStep1)
+		self:ForkThread(self.CheckSensorFlowerStep1)
 		self:ForkThread(self.CheckDetectorFactoryStriderStep1)
 		self:ForkThread(self.CheckScoutDroneStep1)
 		self:ForkThread(self.CheckCommissarStep1)
@@ -31,6 +33,8 @@ end,
 		self:ForkThread(self.CheckDetectorTowerStep1)
 		self:ForkThread(self.CheckDetectorFactoryStriderStep1)
 		self:ForkThread(self.CheckScoutDroneStep1)
+		self:ForkThread(self.CheckExospireStep1)
+		self:ForkThread(self.CheckSensorFlowerStep1)
 		self:ForkThread(self.CheckCommissarStep1)
 		self:ForkThread(self.DeimosAmmuntionMechanic)
 		self:ForkThread(self.DeimosAmmuntionEnhancementManageStep1)
@@ -243,6 +247,54 @@ end,
 			if table.getn(labs) < 3  then
 				RemoveBuildRestriction(self:GetArmyIndex(), categories.DETECTORTOWER)
 				self:ForkThread(self.CheckDetectorTowerStep1)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	CheckExospireStep1 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.EXOSPIRE, true)
+			if table.getn(labs) >= 1 then
+				AddBuildRestriction(self:GetArmyIndex(), categories.EXOSPIRE)
+				self:ForkThread(self.CheckExospireStep2)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	CheckExospireStep2 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.EXOSPIRE, true)
+			if table.getn(labs) < 1  then
+				RemoveBuildRestriction(self:GetArmyIndex(), categories.EXOSPIRE)
+				self:ForkThread(self.CheckExospireStep1)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	CheckSensorFlowerStep1 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.SENSORFLOWER, true)
+			if table.getn(labs) >= 3 then
+				AddBuildRestriction(self:GetArmyIndex(), categories.SENSORFLOWER)
+				self:ForkThread(self.CheckSensorFlowerStep2)
+				break
+			end
+			WaitSeconds(1)
+			end
+    end,
+	
+	CheckSensorFlowerStep2 = function(self)
+	        while true do
+			local labs = self:GetListOfUnits(categories.SENSORFLOWER, true)
+			if table.getn(labs) < 3  then
+				RemoveBuildRestriction(self:GetArmyIndex(), categories.SENSORFLOWER)
+				self:ForkThread(self.CheckSensorFlowerStep1)
 				break
 			end
 			WaitSeconds(1)

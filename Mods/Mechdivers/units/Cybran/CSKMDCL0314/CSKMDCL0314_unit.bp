@@ -206,7 +206,7 @@ UnitBlueprint {
         },
         FactionName = 'Cybran',
         Icon = 'land',
-        TechLevel = 'RULEUTL_Secret',
+        TechLevel = 'RULEUTL_Experimental',
         UnitName = 'CX-300: Factory Strider',
         UnitWeight = 1,
     },

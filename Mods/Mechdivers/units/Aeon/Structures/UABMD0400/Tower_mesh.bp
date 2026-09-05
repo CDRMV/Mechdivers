@@ -1,0 +1,14 @@
+MeshBlueprint {
+    LODs = {
+        {
+            MeshName = '/mods/Mechdivers/units/Aeon/Structures/UABMD0400/Tower_lod0.scm',
+            AlbedoName = '/Mods/Mechdivers/units/Aeon/Structures/UABMD0204/SeraphimShield01_Specular3.dds',
+            NormalsName = '/Mods/Mechdivers/units/Aeon/Structures/UABMD0204/SeraphimShield01_Specular2.dds',
+            SpecularName = '/Mods/Mechdivers/units/Aeon/Structures/UABMD0204/SeraphimShield01_Specular2.dds',
+			LookupName = '/Mods/Mechdivers/units/Aeon/Structures/UABMD0204/SeraphimShield01_Specular2.dds',
+            ShaderName = 'UEFQuantumGate',
+            LODCutoff = 500,           
+        },
+    },
+    SortOrder = 999,
+}

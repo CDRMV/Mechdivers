@@ -54,6 +54,11 @@ UABMD0400 = Class(AStructureUnit) {
 			self.Effect4:AttachBoneTo( -2, self, 'Base_Effect' )
 			self.Effect4:SetMesh(EffectMesh5)
 			self.Effect4:SetDrawScale(0.30)
+			EffectMesh6 = '/mods/Mechdivers/units/Aeon/Structures/UABMD0400/Tower_mesh'
+			self.Tower = import('/lua/sim/Entity.lua').Entity()
+			self.Tower:AttachBoneTo( -2, self, 'Tower' )
+			self.Tower:SetMesh(EffectMesh6)
+			self.Tower:SetDrawScale(0.26)
 		self.Effect1:SetVizToAllies('Never')
 		self.Effect1:SetVizToNeutrals('Never')
 		self.Effect1:SetVizToEnemies('Never')
@@ -66,6 +71,9 @@ UABMD0400 = Class(AStructureUnit) {
 		self.Effect4:SetVizToAllies('Never')
 		self.Effect4:SetVizToNeutrals('Never')
 		self.Effect4:SetVizToEnemies('Never')
+		self.Tower:SetVizToAllies('Never')
+		self.Tower:SetVizToNeutrals('Never')
+		self.Tower:SetVizToEnemies('Never')
 		self.Spinner1 = CreateRotator(self, 'Effect', 'y', nil, 0, 60, 360):SetTargetSpeed(0)
 		self.Spinner2 = CreateRotator(self, 'Spinner', 'y', nil, 0, 60, 360):SetTargetSpeed(0)
 		self.Spinner3 = CreateRotator(self, 'Spinner2', 'y', nil, 0, 60, 360):SetTargetSpeed(0)
@@ -106,6 +114,9 @@ UABMD0400 = Class(AStructureUnit) {
 		self.Effect4:SetVizToAllies('Never')
 		self.Effect4:SetVizToNeutrals('Never')
 		self.Effect4:SetVizToEnemies('Never')
+		self.Tower:SetVizToAllies('Never')
+		self.Tower:SetVizToNeutrals('Never')
+		self.Tower:SetVizToEnemies('Never')
 		if self.Effect5 then
 		self.Effect5:Destroy()
 		end
@@ -166,12 +177,130 @@ UABMD0400 = Class(AStructureUnit) {
 		self.Effect4:SetVizToAllies('Intel')
 		self.Effect4:SetVizToNeutrals('Intel')
 		self.Effect4:SetVizToEnemies('Intel')
+		self.Tower:SetVizToAllies('Intel')
+		self.Tower:SetVizToNeutrals('Intel')
+		self.Tower:SetVizToEnemies('Intel')
 		self:SetMaintenanceConsumptionActive()
 		end
 		end)
     end,
 	
+	OnReclaimed = function(self, reclaimer)
+		self:SetMaintenanceConsumptionInactive()
+		if self.unit then
+		self.unit:Destroy()
+		end
+		if self.unit2 then
+		self.unit2:Destroy()
+		end
+		if self.Spinner1 then
+		self.Spinner1:SetTargetSpeed(0)
+		end
+		if self.Spinner2 then
+		self.Spinner2:SetTargetSpeed(0)
+		end
+		if self.Spinner3 then
+		self.Spinner3:SetTargetSpeed(0)
+		end
+		self.Effect1:SetVizToAllies('Never')
+		self.Effect1:SetVizToNeutrals('Never')
+		self.Effect1:SetVizToEnemies('Never')
+		self.Effect2:SetVizToAllies('Never')
+		self.Effect2:SetVizToNeutrals('Never')
+		self.Effect2:SetVizToEnemies('Never')
+		self.Effect3:SetVizToAllies('Never')
+		self.Effect3:SetVizToNeutrals('Never')
+		self.Effect3:SetVizToEnemies('Never')
+		self.Effect4:SetVizToAllies('Never')
+		self.Effect4:SetVizToNeutrals('Never')
+		self.Effect4:SetVizToEnemies('Never')
+		self.Tower:SetVizToAllies('Never')
+		self.Tower:SetVizToNeutrals('Never')
+		self.Tower:SetVizToEnemies('Never')
+		if self.Effect5 then
+		self.Effect5:Destroy()
+		end
+		if self.Effect6 then
+		self.Effect6:Destroy() 
+		end
+		if self.Effect7 then
+		self.Effect7:Destroy()
+		end
+		if self.Effect8 then
+		self.Effect8:Destroy()
+		end
+		if self.Effect9 then
+		self.Effect9:Destroy()
+		end
+		if self.Effect10 then
+		self.Effect10:Destroy()
+		end
+		if self.Effect11 then
+		self.Effect11:Destroy()
+		end
+		if self.Effect12 then
+		self.Effect12:Destroy()
+		end
+    end,
 	
+	OnKilled = function(self, instigator, type, overkillRatio)
+		self:SetMaintenanceConsumptionInactive()
+		if self.unit then
+		self.unit:Destroy()
+		end
+		if self.unit2 then
+		self.unit2:Destroy()
+		end
+		if self.Spinner1 then
+		self.Spinner1:SetTargetSpeed(0)
+		end
+		if self.Spinner2 then
+		self.Spinner2:SetTargetSpeed(0)
+		end
+		if self.Spinner3 then
+		self.Spinner3:SetTargetSpeed(0)
+		end
+		self.Effect1:SetVizToAllies('Never')
+		self.Effect1:SetVizToNeutrals('Never')
+		self.Effect1:SetVizToEnemies('Never')
+		self.Effect2:SetVizToAllies('Never')
+		self.Effect2:SetVizToNeutrals('Never')
+		self.Effect2:SetVizToEnemies('Never')
+		self.Effect3:SetVizToAllies('Never')
+		self.Effect3:SetVizToNeutrals('Never')
+		self.Effect3:SetVizToEnemies('Never')
+		self.Effect4:SetVizToAllies('Never')
+		self.Effect4:SetVizToNeutrals('Never')
+		self.Effect4:SetVizToEnemies('Never')
+		self.Tower:SetVizToAllies('Never')
+		self.Tower:SetVizToNeutrals('Never')
+		self.Tower:SetVizToEnemies('Never')
+		if self.Effect5 then
+		self.Effect5:Destroy()
+		end
+		if self.Effect6 then
+		self.Effect6:Destroy() 
+		end
+		if self.Effect7 then
+		self.Effect7:Destroy()
+		end
+		if self.Effect8 then
+		self.Effect8:Destroy()
+		end
+		if self.Effect9 then
+		self.Effect9:Destroy()
+		end
+		if self.Effect10 then
+		self.Effect10:Destroy()
+		end
+		if self.Effect11 then
+		self.Effect11:Destroy()
+		end
+		if self.Effect12 then
+		self.Effect12:Destroy()
+		end
+    AStructureUnit.OnKilled(self, instigator, type, overkillRatio)	
+    end,
 }
 
 TypeClass = UABMD0400

@@ -46,6 +46,9 @@ BuilderGroup {
 					'T1AdvancedLightBotFactory',
                     'T1EnergyProduction',
                     'T1EnergyProduction',
+					'T2AdvancedHeavyFactoryBuilders',
+					'T2AdvancedHeavyFactoryBuilders',
+					'T2AdvancedHeavyFactoryBuilders',
                 }
             }
         }

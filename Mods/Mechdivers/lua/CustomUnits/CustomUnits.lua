@@ -94,7 +94,7 @@ UnitList = {
 	T3AADefense = {
 	UEF =	{'URBMD00300', 80}, -- Slatter Tech 3 Heavy Anti Air Sam Launcher
     Cybran =	{'URBMD0302', 80}, -- Smilodon Tech 3 Anti Air Quad Autocannon
-},
+	},
 
 	T3Artillery = {
     Cybran =	{'URBMD0303', 80}, -- Pyros Tech 3 Mortar
@@ -104,4 +104,8 @@ UnitList = {
     Cybran =	{'urbmd0101', 80}, -- Tech 2 Tactical Jammer
 	Aeon =	{'uabmd0203', 80}, -- Tech 2 Tactical Jammer
 	},
-}
+
+	T3ShieldDefense = {
+	Aeon = {'UABMD0400', 80},    	-- Exospire, Experimetnal Weather manipulator
+	},
+}	

@@ -41,7 +41,8 @@ local MyUnitIdTable = {
 	  uabmd0203=true,
 	  uabmd0204=true,	
 	  uabmd0205=true,		  
-	  uabmd0303=true,	  
+	  uabmd0303=true,	
+	  uabmd0400=true,	  	  
  
  -- UEF
  
