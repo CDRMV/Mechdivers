@@ -141,7 +141,7 @@ UnitBlueprint {
                 Land = 'Land|Seabed',
             },
 			RackRecoilDistance = 0,
-			ProjectileId = '/mods/Commander Survival Kit/projectiles/Nanites2/Nanites2_proj.bp',
+			ProjectileId = '/mods/Mechdivers/projectiles/Nanites2/Nanites2_proj.bp',
 			RackBones = {
                 {
                     MuzzleBones = {0},

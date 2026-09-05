@@ -43,7 +43,6 @@ UnitBlueprint {
         'STRUCTURE',
 		'ADVANCEDLIGHTBOTFACTORY',
         'LAND',
-		'ENERGYPRODUCTION',
         'TECH1',
 		'SHIELD',
         'CONSTRUCTION',

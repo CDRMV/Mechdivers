@@ -465,7 +465,7 @@ TerranLightningCollisionBeam = Class(SCCollisionBeam) {
     TerrainImpactScale = 0.1,
     FxBeamStartPoint = EffectTemplate.SExperimentalUnstablePhasonLaserMuzzle01,
 	FxBeam = {
-		'/mods/Commander Survival Kit Units/effects/emitters/lightning_beam_01_emit.bp',
+		'/mods/Mechdivers/effects/emitters/lightning_beam_01_emit.bp',
 	},
     FxBeamEndPoint = EffectTemplate.OthuyElectricityStrikeHit,
 	FxBeamEndPointScale = 0.1,

@@ -90,6 +90,10 @@ BuilderGroup {
         },
         BuilderType = 'Land',
     },
+}	
+BuilderGroup {
+    BuilderGroupName = 'T1WarpshipBuilders',	
+	BuildersType = 'FactoryBuilder',
 	Builder {
         BuilderName = 'T1 Voteless - Tech 1',
         PlatoonTemplate = 'T1Voteless',
@@ -102,7 +106,6 @@ BuilderGroup {
         BuilderType = 'Land',
     },
 }	
-
 BuilderGroup {
     BuilderGroupName = 'T2AdvancedHeavyFactoryBuilders',
     BuildersType = 'FactoryBuilder',
@@ -114,7 +117,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDINFANTRY } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -125,7 +128,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDINFANTRY2 } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -136,7 +139,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDINFANTRY3 } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -147,7 +150,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDINFANTRY4 } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -158,7 +161,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDINFANTRY5 } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -169,7 +172,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDINFANTRY6 } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -180,20 +183,14 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.SCOUTSTRIDER } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
-	Builder {
-        BuilderName = 'T3 AdvancedScoutStrider - Tech 3',
-        PlatoonTemplate = 'T3AdvancedScoutStrider',
-        Priority = 1500,
-        BuilderType = 'Land',
-        BuilderConditions = {
-            { IBC, 'BrainNotLowPowerMode', {} },
-			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDSCOUTSTRIDER } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
-        },
-    },
+}
+
+BuilderGroup {
+    BuilderGroupName = 'T2CyborgFactoryBuilders',	
+	BuildersType = 'FactoryBuilder',
 	Builder {
         BuilderName = 'T2 AssaultCyborg - Tech 2',
         PlatoonTemplate = 'T2AssaultCyborg',
@@ -202,7 +199,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.CYBORG } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -213,7 +210,45 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.CYBORG2 } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+}	
+	
+BuilderGroup {
+    BuilderGroupName = 'T3AdvancedHeavyFactoryBuilders',	
+	BuildersType = 'FactoryBuilder',
+	Builder {
+        BuilderName = 'T3 AdvancedScoutStrider - Tech 3',
+        PlatoonTemplate = 'T3AdvancedScoutStrider',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDSCOUTSTRIDER } },
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+	Builder {
+        BuilderName = 'T2 AssaultCyborg - Tech 2',
+        PlatoonTemplate = 'T2AssaultCyborg',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.CYBORG } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+	Builder {
+        BuilderName = 'T2 ShotgunCyborg - Tech 2',
+        PlatoonTemplate = 'T2ShotgunCyborg',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.CYBORG2 } },
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -224,7 +259,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYTANK } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -235,7 +270,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.MISSILEBATTERY } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -246,7 +281,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ANTIAIRTANK } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -257,7 +292,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYMORTARTANK } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -268,7 +303,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.AUTOCANNONTANK } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -279,7 +314,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYASSAULTBOT } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -290,7 +325,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYAMBUSHBOT } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -301,7 +336,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYSIEGEBOT } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -312,7 +347,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYARMOREDAMBUSHBOT } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -323,7 +358,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYJETPACKAMBUSHBOT } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -334,7 +369,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYJETPACKASSAULTBOT } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	Builder {
@@ -345,32 +380,13 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYARMOREDARTYBOT } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
-	Builder {
-        BuilderName = 'T2 WatcherDrone - Tech 2',
-        PlatoonTemplate = 'T2WatcherDrone',
-        Priority = 1500,
-        BuilderType = 'Land',
-        BuilderConditions = {
-            { IBC, 'BrainNotLowPowerMode', {} },
-			{ UCBC, 'HaveLessThanUnitsWithCategory', { 3, categories.MOBILE * categories.SCOUTDRONE } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
-        },
-    },
-	Builder {
-        BuilderName = 'T2 ObtruderDrone - Tech 2',
-        PlatoonTemplate = 'T2ObtruderDrone',
-        Priority = 1500,
-        BuilderType = 'Land',
-        BuilderConditions = {
-            { IBC, 'BrainNotLowPowerMode', {} },
-			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ASSAULTDRONE } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
-        },
-    },
-	
+}	
+BuilderGroup {
+    BuilderGroupName = 'T2WarpShipBuilders',
+	BuildersType = 'FactoryBuilder',
 	Builder {
         BuilderName = 'T2 Overseer - Tech 2',
         PlatoonTemplate = 'T2Overseer',
@@ -379,7 +395,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDANDROID } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	
@@ -391,7 +407,57 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDANDROID2 } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+}	
+BuilderGroup {
+    BuilderGroupName = 'T2WarpGateBuilders',
+	BuildersType = 'FactoryBuilder',
+	Builder {
+        BuilderName = 'T2 WatcherDrone - Tech 2',
+        PlatoonTemplate = 'T2WatcherDrone',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 3, categories.MOBILE * categories.SCOUTDRONE } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+	Builder {
+        BuilderName = 'T2 ObtruderDrone - Tech 2',
+        PlatoonTemplate = 'T2ObtruderDrone',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ASSAULTDRONE } },
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+	
+	Builder {
+        BuilderName = 'T2 Overseer - Tech 2',
+        PlatoonTemplate = 'T2Overseer',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDANDROID } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+	
+	Builder {
+        BuilderName = 'T2 Jetpack Overseer - Tech 2',
+        PlatoonTemplate = 'T2JetpackOverseer',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDANDROID2 } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	
@@ -403,7 +469,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDANDROID3 } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+           -- { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	
@@ -415,7 +481,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDMELEEANDROID } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	
@@ -427,7 +493,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDMELEEANDROID2 } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	
@@ -439,10 +505,13 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ADVANCEDMELEEANDROID3 } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
-	
+}	
+BuilderGroup {
+    BuilderGroupName = 'T3WarpGateBuilders',
+	BuildersType = 'FactoryBuilder',
 	Builder {
         BuilderName = 'T3 AssaultTripod - Tech 3',
         PlatoonTemplate = 'T3AssaultTripod',
@@ -451,7 +520,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.ASSAULTTRIPOD } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 	
@@ -463,7 +532,7 @@ BuilderGroup {
         BuilderConditions = {
             { IBC, 'BrainNotLowPowerMode', {} },
 			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.MELEETRIPOD } },
-            { EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
         },
     },
 }
