@@ -11,14 +11,10 @@
 #****************************************************************************
 
 local StructureUnit = import('/lua/defaultunits.lua').StructureUnit
-local DefaultProjectileWeapon = import('/lua/sim/DefaultWeapons.lua').DefaultProjectileWeapon
 local Effectpath = '/effects/emitters/'
 
 
 UEFSSP0200p = Class(StructureUnit) {
-    Weapons = {
-        Nanites = Class(DefaultProjectileWeapon) {},
-    },
 	
 	DamageThread = function(self)
         while not self:IsDead() do

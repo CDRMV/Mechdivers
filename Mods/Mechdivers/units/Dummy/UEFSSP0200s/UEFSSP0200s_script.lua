@@ -11,14 +11,10 @@
 #****************************************************************************
 
 local StructureUnit = import('/lua/defaultunits.lua').StructureUnit
-local DefaultProjectileWeapon = import('/lua/sim/DefaultWeapons.lua').DefaultProjectileWeapon
 local Effectpath = '/effects/emitters/'
 local ModEffectpath = '/mods/Mechdivers/effects/emitters/'
 
 UEFSSP0200r= Class(StructureUnit) {
-    Weapons = {
-        Nanites = Class(DefaultProjectileWeapon) {},
-    },
 	
 	StunThread = function(self)
         while not self:IsDead() do
