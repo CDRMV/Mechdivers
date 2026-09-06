@@ -72,7 +72,7 @@ UnitBlueprint {
         MaxHealth = 2500,
         RegenRate = 5,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 18,
+        SurfaceThreatLevel = 23,
     },
     Description = 'Advanced Melee Android',
     Display = {

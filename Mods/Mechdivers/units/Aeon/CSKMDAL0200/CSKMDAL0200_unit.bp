@@ -83,7 +83,7 @@ UnitBlueprint {
         MaxHealth = 1050,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 3,
+        SurfaceThreatLevel = 5,
     },
     Description = 'Scout Drone',
     Display = {

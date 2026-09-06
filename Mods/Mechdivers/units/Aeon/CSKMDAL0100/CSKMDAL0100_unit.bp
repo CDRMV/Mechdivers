@@ -72,7 +72,7 @@ UnitBlueprint {
         MaxHealth = 500,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 18,
+        SurfaceThreatLevel = 2,
     },
     Description = 'Melee Android',
     Display = {

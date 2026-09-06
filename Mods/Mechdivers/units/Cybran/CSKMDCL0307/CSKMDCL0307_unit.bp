@@ -120,7 +120,7 @@ UnitBlueprint {
         MaxHealth = 9300,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 0.33,
+        SurfaceThreatLevel = 32,
     },
     Description = 'Heavy Ambush Bot',
     Display = {

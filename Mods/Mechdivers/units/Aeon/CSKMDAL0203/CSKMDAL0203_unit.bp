@@ -90,7 +90,7 @@ UnitBlueprint {
         MaxHealth = 1050,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 3,
+        SurfaceThreatLevel = 27,
     },
     Description = 'Advanced Jetpack Bot',
     Display = {

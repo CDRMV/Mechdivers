@@ -63,7 +63,7 @@ UnitBlueprint {
         MaxHealth = 19000,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 0.33,
+        SurfaceThreatLevel = 100,
     },
     Description = 'Heavy Shotgun Tank Bot',
     Display = {

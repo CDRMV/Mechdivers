@@ -121,7 +121,7 @@ UnitBlueprint {
         MaxHealth = 11000,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 0.33,
+        SurfaceThreatLevel = 32,
     },
     Description = 'Heavy Armored Artillery Bot',
     Display = {

@@ -125,7 +125,7 @@ UnitBlueprint {
         MaxHealth = 17000,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 0.33,
+        SurfaceThreatLevel = 100,
     },
     Description = 'Heavy Support Walker',
     Display = {

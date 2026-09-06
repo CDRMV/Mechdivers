@@ -123,7 +123,7 @@ UnitBlueprint {
         MaxHealth = 11500,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 0.33,
+        SurfaceThreatLevel = 60,
     },
     Description = 'Heavy Siege Bot (War Strider)',
     Display = {

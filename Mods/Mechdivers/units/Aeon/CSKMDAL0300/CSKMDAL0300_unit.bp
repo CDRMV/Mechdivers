@@ -56,7 +56,6 @@ UnitBlueprint {
 		'ASSAULTTRIPOD',
         'LAND',
         'TECH3',
-		'INDIRECTFIRE',
         'DIRECTFIRE',
         'VISIBLETORECON',
         'RECLAIMABLE',
@@ -73,7 +72,7 @@ UnitBlueprint {
         MaxHealth = 5000,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 18,
+        SurfaceThreatLevel = 32,
     },
     Description = 'Assault Tripod',
     Display = {

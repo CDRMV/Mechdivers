@@ -61,7 +61,7 @@ UnitBlueprint {
         MaxHealth = 12000,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 3,
+        SurfaceThreatLevel = 32,
     },
     Description = 'Heavy Mortar Tank',
     Display = {

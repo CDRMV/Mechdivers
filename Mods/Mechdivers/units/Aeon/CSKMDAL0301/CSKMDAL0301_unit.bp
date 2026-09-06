@@ -73,7 +73,7 @@ UnitBlueprint {
         MaxHealth = 5000,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 18,
+        SurfaceThreatLevel = 32,
     },
     Description = 'Melee Tripod',
     Display = {

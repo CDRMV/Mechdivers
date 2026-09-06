@@ -59,7 +59,7 @@ UnitBlueprint {
         MaxHealth = 1500,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 0.33,
+        SurfaceThreatLevel = 32,
     },
     Description = 'Medium Assault Bot (Advanced Scout Strider)',
     Display = {

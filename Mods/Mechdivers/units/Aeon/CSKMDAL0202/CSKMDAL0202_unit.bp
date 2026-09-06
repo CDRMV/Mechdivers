@@ -67,7 +67,7 @@ UnitBlueprint {
         MaxHealth = 1050,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 3,
+        SurfaceThreatLevel = 21,
     },
     Description = 'Advanced Assault Bot',
     Display = {
