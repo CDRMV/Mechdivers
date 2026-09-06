@@ -37,6 +37,7 @@ UnitBlueprint {
         'TECH3',
         'INDIRECTFIRE',
         'ARTILLERY',
+		'ANTIORBITALCANNON',
 		'ANTIAIR',
         'DRAGBUILD',
         'SIZE16',
@@ -99,9 +100,9 @@ UnitBlueprint {
         UniformScale = 0.20,
     },
     Economy = {
-        BuildCostEnergy = 870000,
-        BuildCostMass = 87000,
-        BuildTime = 29000,
+        BuildCostEnergy = 57800,
+        BuildCostMass = 3440,
+        BuildTime = 5500,
 		BuildRate = 5,
         RebuildBonusIds = {
             'uebmd00303',

@@ -38,6 +38,7 @@ UnitBlueprint {
         'BUILTBYTIER3COMMANDER',
         'CYBRAN',
         'STRUCTURE',
+		'ANTIORBITALCANNON',
         'STRATEGIC',
         'TECH3',
         'INDIRECTFIRE',
@@ -100,9 +101,9 @@ UnitBlueprint {
         UniformScale = 0.30,
     },
     Economy = {
-        BuildCostEnergy = 870000,
-        BuildCostMass = 87000,
-        BuildTime = 29000,
+        BuildCostEnergy = 57800,
+        BuildCostMass = 3440,
+        BuildTime = 5500,
         RebuildBonusIds = {
             'urb2302',
         },

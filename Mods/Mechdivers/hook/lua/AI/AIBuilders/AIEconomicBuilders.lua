@@ -17,8 +17,13 @@ BuilderGroup {
         PlatoonAddFunctions = { {SAI, 'BuildOnce'}, },
         BuilderData = {
             Construction = {
-                BaseTemplateFile = '/mods/Mechdivers/hook/lua/AI/AIBaseTemplates/ACUBaseTemplate.lua',
-                BaseTemplate = 'ACUBaseTemplate',
+                BuildStructures = {
+				 'T1EnergyProduction',
+				'T1AdvancedLightBotFactory',
+                    'T1LandFactory',
+                    'T1AirFactory',
+                    'T1EnergyProduction',
+                }
             }
         }
     },
@@ -39,16 +44,6 @@ BuilderGroup {
                     'T1LandFactory',
                     'T1AirFactory',
                     'T1EnergyProduction',
-                    'T1EnergyProduction',
-                    'T1AirFactory',
-					'T1AdvancedLightBotFactory',
-					'T1AdvancedLightBotFactory',
-					'T1AdvancedLightBotFactory',
-                    'T1EnergyProduction',
-                    'T1EnergyProduction',
-					'T2AdvancedHeavyFactoryBuilders',
-					'T2AdvancedHeavyFactoryBuilders',
-					'T2AdvancedHeavyFactoryBuilders',
                 }
             }
         }
@@ -72,8 +67,13 @@ BuilderGroup {
         PlatoonAddFunctions = { {SAI, 'BuildOnce'}, },
         BuilderData = {
             Construction = {
-                BaseTemplateFile = '/mods/Mechdivers/hook/lua/AI/AIBaseTemplates/ACUBaseTemplate.lua',
-                BaseTemplate = 'ACUBaseTemplate',
+                BuildStructures = {
+				 'T1EnergyProduction',
+				'T1AdvancedLightBotFactory',
+                    'T1LandFactory',
+                    'T1AirFactory',
+                    'T1EnergyProduction',
+                }
             }
         }
     },
@@ -94,11 +94,6 @@ BuilderGroup {
                     'T1LandFactory',
                     'T1AirFactory',
                     'T1EnergyProduction',
-                    'T1EnergyProduction',
-                    'T1AirFactory',
-					'T1AdvancedLightBotFactory',
-					'T1AdvancedLightBotFactory',
-					'T1AdvancedLightBotFactory',
                 }
             }
         }
@@ -122,8 +117,13 @@ BuilderGroup {
         PlatoonAddFunctions = { {SAI, 'BuildOnce'}, },
         BuilderData = {
             Construction = {
-                BaseTemplateFile = '/mods/Mechdivers/hook/lua/AI/AIBaseTemplates/ACUBaseTemplate.lua',
-                BaseTemplate = 'ACUBaseTemplate',
+                BuildStructures = {
+				 'T1EnergyProduction',
+				'T1AdvancedLightBotFactory',
+                    'T1LandFactory',
+                    'T1AirFactory',
+                    'T1EnergyProduction',
+                }
             }
         }
     },
@@ -144,11 +144,6 @@ BuilderGroup {
                     'T1LandFactory',
                     'T1AirFactory',
                     'T1EnergyProduction',
-                    'T1EnergyProduction',
-                    'T1AirFactory',
-					'T1AdvancedLightBotFactory',
-					'T1AdvancedLightBotFactory',
-					'T1AdvancedLightBotFactory',
                 }
             }
         }

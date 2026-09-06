@@ -3,16 +3,31 @@ do
         {
             --UEF
 			'Landingpad',
+			'T3MDAntiOrbitalCannon',
+			'T3MDDeimos',
+			'T3MDDeimosStorage',
+			'MDExMissileLauncher',
         },
         {
             --Aeon
 			'T1AdvancedLightBotFactory',
 			'T2AdvancedHeavyFactory',
+			'T1MDGroundDefense',
+			'T1MDGroundDefense2',
+			'T3MDAntiOrbitalCannon',
         },
         {
             --Cybran
             'T1AdvancedLightBotFactory',
 			'T2AdvancedHeavyFactory',
+			'T1MDGroundDefense',
+			'T2MDGroundDefense',
+			'T3MDGroundDefense',
+			'T3MDGroundDefense2',
+			'T2MDDronestation',
+			'T3MDMortar',
+			'T3MDAADefense',
+			'T3MDAntiOrbitalCannon',
         },
         {
             --Seraphim
