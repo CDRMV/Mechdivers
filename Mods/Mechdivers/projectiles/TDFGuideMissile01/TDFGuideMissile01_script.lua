@@ -70,6 +70,7 @@ TDFGuideMissile01 = Class(SingleBeamProjectile) {
 		self.Army = self:GetArmy()
 		self:MovementThread()
 		self:SetTargetThread()
+		self.Duration = 0
     end,
 	
 	SetTargetThread = function(self)
@@ -109,9 +110,20 @@ TDFGuideMissile01 = Class(SingleBeamProjectile) {
         self:SetTurnRate(0)
         WaitSeconds(2) 					# Now set turn rate to zero so nuke flies straight
         self:SetAcceleration(0)
-        self.WaitTime = 0.5
+        self.WaitTime = 0.1
         while not self:BeenDestroyed() do
-            self:SetTurnRateByDist()
+			if self.Unit:GetWeapon(1):GetCurrentTarget() and self.Duration >= 0 then
+			
+			elseif self.Unit:GetWeapon(1):GetCurrentTargetPos() and self.Duration >= 0 then
+			
+			elseif self.Unit:GetWeapon(1):GetCurrentTarget() == nil and self.Duration >= 0 then
+			self.Duration = self.Duration + 1
+			if self.Duration == 100 then
+			self.Unit:Destroy()
+			self:Destroy()
+			end
+			
+			end
             WaitSeconds(self.WaitTime)
         end
 		end)

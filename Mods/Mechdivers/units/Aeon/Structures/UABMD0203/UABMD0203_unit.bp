@@ -39,6 +39,7 @@ UnitBlueprint {
         'BUILTBYTIER3ENGINEER',
         'AEON',
         'STRUCTURE',
+		'TACTICALJAMMER',
         'TECH2',
         'DRAGBUILD',
         'SIZE16',

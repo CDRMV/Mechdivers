@@ -74,10 +74,11 @@ BuilderGroup {
     Builder {
         BuilderName = 'T2 MDDronestation',
         PlatoonTemplate = 'EngineerBuilder',
-        Priority = 1500,
+        Priority = 2000,
         BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.DEFENSE * categories.ASSAULTDRONESTATION } },
-			{ UCBC, 'UnitsLessAtLocation', { 'LocationType', 2, 'DEFENSE TECH2 DIRECTFIRE' }},
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.ASSAULTDRONESTATION * categories.TECH2} },
+			{ UCBC, 'HaveGreaterThanUnitsWithCategory', { 1, 'ENERGYPRODUCTION TECH2' }},
+			{ UCBC, 'UnitsLessAtLocation', { 'LocationType', 2, 'ASSAULTDRONESTATION TECH2' }},
             { IBC, 'BrainNotLowPowerMode', {} },
         },
         BuilderType = 'Any',
@@ -128,35 +129,6 @@ BuilderGroup {
             }
         }
     },
-	Builder {
-        BuilderName = 'T3 T3MDDefenses AA2',
-        PlatoonTemplate = 'T3EngineerBuilder',
-        Priority = 1500,
-        BuilderConditions = {
-            { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.DEFENSE * categories.TECH3 * categories.ANTIAIR * categories.SILO} },
-			{ UCBC, 'UnitsLessAtLocation', { 'LocationType', 2, 'DEFENSE TECH3 ANTIAIR SILO' }},
-            { IBC, 'BrainNotLowPowerMode', {} },
-        },
-        BuilderType = 'Any',
-        BuilderData = {
-            NumAssistees = 2,
-                NearMarkerType = 'Start Location',
-                MarkerRadius = 20,
-                LocationRadius = 75,
-				 ThreatMin = 0,
-                ThreatMax = 1,
-                ThreatRings = 2,
-                ThreatType = 'AntiSurface',
-                MarkerUnitCount = 1,
-            Construction = {
-                BuildClose = false,
-                BuildStructures = {
-                    'T3MDAADefense2',
-                },
-                Location = 'LocationType',
-            }
-        }
-    },
     Builder {
         BuilderName = 'T3 T3MDDefenses PD',
         PlatoonTemplate = 'T3EngineerBuilder',
@@ -182,6 +154,8 @@ BuilderGroup {
                 BuildStructures = {
                     'T3MDGroundDefense',
 					'T3MDGroundDefense2',
+					'T3MDGroundDefense3',
+					'T3MDGroundDefense4',
                 },
                 Location = 'LocationType',
             }
@@ -227,6 +201,7 @@ BuilderGroup {
         Priority = 1500,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 2, categories.STRATEGIC * categories.ANTIORBITALCANNON } },
+			{ UCBC, 'HaveGreaterThanUnitsWithCategory', { 1, 'ENERGYPRODUCTION TECH3' }},
 			{ UCBC, 'UnitsLessAtLocation', { 'LocationType', 2, 'STRATEGIC TECH3 ANTIORBITALCANNON' }},
             { IBC, 'BrainNotLowPowerMode', {} },
         },
@@ -234,17 +209,39 @@ BuilderGroup {
         BuilderData = {
             NumAssistees = 2,
                 NearMarkerType = 'Start Location',
-                MarkerRadius = 20,
-                LocationRadius = 35,
-				 ThreatMin = 0,
-                ThreatMax = 1,
-                ThreatRings = 2,
-                ThreatType = 'AntiSurface',
                 MarkerUnitCount = 2,
             Construction = {
                 BuildClose = false,
                 BuildStructures = {
                     'T3MDAntiOrbitalCannon',
+                },
+                Location = 'LocationType',
+            }
+        }
+    },
+}
+
+BuilderGroup {
+    BuilderGroupName = 'T3SlatterSAM',
+    BuildersType = 'EngineerBuilder',
+    Builder {
+        BuilderName = 'T3 MDSlatterSAM',
+        PlatoonTemplate = 'T3EngineerBuilder',
+        Priority = 1500,
+        BuilderConditions = {
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 3, categories.DEFENSE * categories.TECH3 * categories.ANTIAIR * categories.SILO} },
+			{ UCBC, 'UnitsLessAtLocation', { 'LocationType', 3, 'DEFENSE TECH3 ANTIAIR SILO' }},
+            { IBC, 'BrainNotLowPowerMode', {} },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            NumAssistees = 2,
+                NearMarkerType = 'Start Location',
+                MarkerUnitCount = 3,
+            Construction = {
+                BuildClose = false,
+                BuildStructures = {
+                    'T3MDSlatterSAM',
                 },
                 Location = 'LocationType',
             }
@@ -313,6 +310,7 @@ BuilderGroup {
         Priority = 1500,
         BuilderConditions = {
             { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.STRATEGIC * categories.EXPERIMENTAL * categories.SILO} },
+			{ UCBC, 'HaveGreaterThanUnitsWithCategory', { 1, 'ENERGYPRODUCTION TECH3' }},
 			{ UCBC, 'UnitsLessAtLocation', { 'LocationType', 1, 'STRATEGIC EXPERIMENTAL SILO' }},
             { IBC, 'BrainNotLowPowerMode', {} },
         },
@@ -320,17 +318,41 @@ BuilderGroup {
         BuilderData = {
             NumAssistees = 2,
                 NearMarkerType = 'Start Location',
-                MarkerRadius = 20,
-                LocationRadius = 35,
-				 ThreatMin = 0,
-                ThreatMax = 1,
-                ThreatRings = 2,
-                ThreatType = 'AntiSurface',
-                MarkerUnitCount = 2,
+                MarkerUnitCount = 1,
             Construction = {
                 BuildClose = false,
                 BuildStructures = {
                     'MDExMissileLauncher',
+                },
+                Location = 'LocationType',
+            }
+        }
+    },
+}
+
+
+BuilderGroup {
+    BuilderGroupName = 'ExWeatherManipulator',
+    BuildersType = 'EngineerBuilder',
+    Builder {
+        BuilderName = 'MDExWeatherManipulator',
+        PlatoonTemplate = 'T3EngineerBuilder',
+        Priority = 1500,
+        BuilderConditions = {
+            { UCBC, 'HaveLessThanUnitsWithCategory', { 1, categories.EXPERIMENTAL * categories.WEATHERMANIPULATOR} },
+			{ UCBC, 'HaveGreaterThanUnitsWithCategory', { 1, 'ENERGYPRODUCTION TECH3' }},
+			{ UCBC, 'UnitsLessAtLocation', { 'LocationType', 1, 'EXPERIMENTAL WEATHERMANIPULATOR' }},
+            { IBC, 'BrainNotLowPowerMode', {} },
+        },
+        BuilderType = 'Any',
+        BuilderData = {
+            NumAssistees = 2,
+                NearMarkerType = 'Start Location',
+                MarkerUnitCount = 1,
+            Construction = {
+                BuildClose = false,
+                BuildStructures = {
+                    'MDExWeatherManipulator',
                 },
                 Location = 'LocationType',
             }

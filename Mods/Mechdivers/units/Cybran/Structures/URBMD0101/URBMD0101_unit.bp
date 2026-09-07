@@ -36,6 +36,7 @@ UnitBlueprint {
         'CYBRAN',
         'STRUCTURE',
         'TECH2',
+		'TACTICALJAMMER',
         'DRAGBUILD',
         'SIZE4',
         'VISIBLETORECON',

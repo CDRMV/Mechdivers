@@ -3,6 +3,7 @@ do
         {
             --UEF
 			'Landingpad',
+			'T3MDSlatterSAM',
 			'T3MDAntiOrbitalCannon',
 			'T3MDDeimos',
 			'T3MDDeimosStorage',
@@ -14,7 +15,11 @@ do
 			'T2AdvancedHeavyFactory',
 			'T1MDGroundDefense',
 			'T1MDGroundDefense2',
+			'T2MDTacticalJammer',
+			'T2MDMonolith',
+			'T2MDOvershipComArray',
 			'T3MDAntiOrbitalCannon',
+			'MDExWeatherManipulator',
         },
         {
             --Cybran
@@ -24,7 +29,11 @@ do
 			'T2MDGroundDefense',
 			'T3MDGroundDefense',
 			'T3MDGroundDefense2',
+			'T3MDGroundDefense3',
+			'T3MDGroundDefense4',
 			'T2MDDronestation',
+			'T2MDDetectorTower',
+			'T2MDTacticalJammer',
 			'T3MDMortar',
 			'T3MDAADefense',
 			'T3MDAntiOrbitalCannon',

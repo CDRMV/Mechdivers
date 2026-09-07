@@ -11,6 +11,26 @@ do
             {false,'UABMD0202',false,false},
         },
 		{
+            'T2MDDetectorTower',
+            --UEF       AEON      CYBRAN    SERAPHIM
+            {false,false,'URBMD0100',false},
+        },
+		{
+            'T2MDTacticalJammer',
+            --UEF       AEON      CYBRAN    SERAPHIM
+            {false,'UABMD0203','URBMD0101',false},
+        },
+		{
+            'T2MDMonolith',
+            --UEF       AEON      CYBRAN    SERAPHIM
+            {false,'UABMD0204',false,false},
+        },
+		{
+            'T2MDOvershipComArray',
+            --UEF       AEON      CYBRAN    SERAPHIM
+            {false,'UABMD0205',false,false},
+        },
+		{
             'T2MDDronestation',
             --UEF       AEON      CYBRAN    SERAPHIM
             {false,false,'URBMD0102',false},
@@ -31,12 +51,22 @@ do
             {false,false,'URBMD0301',false},
         },
 		{
+            'T3MDGroundDefense3',
+            --UEF       AEON      CYBRAN    SERAPHIM
+            {false,false,'URBMD0201',false},
+        },
+		{
+            'T3MDGroundDefense4',
+            --UEF       AEON      CYBRAN    SERAPHIM
+            {false,false,'URBMD0202',false},
+        },
+		{
             'T3MDAADefense',
             --UEF       AEON      CYBRAN    SERAPHIM
             {false,false,'URBMD0302',false},
         },
 		{
-            'T3MDAADefense2',
+            'T3MDSlatterSAM',
             --UEF       AEON      CYBRAN    SERAPHIM
             {'UEBMD00300',false,false,false},
         },
@@ -59,6 +89,11 @@ do
             'T3MDAntiOrbitalCannon',
             --UEF       AEON      CYBRAN    SERAPHIM
             {'UEBMD00303','UABMD0303','URBMD0304',false},
+        },
+		{
+            'MDExWeatherManipulator',
+            --UEF       AEON      CYBRAN    SERAPHIM
+            {false,'UABMD0400',false,false},
         },
 		{
             'MDExMissileLauncher',

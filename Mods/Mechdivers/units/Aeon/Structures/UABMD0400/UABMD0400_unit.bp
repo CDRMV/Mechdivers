@@ -41,6 +41,7 @@ UnitBlueprint {
 		'EXOSPIRE',
         'STRUCTURE',
         'DEFENSE',
+		'WEATHERMANIPULATOR',
         'EXPERIMENTAL',
         'DIRECTFIRE',
         'DRAGBUILD',
