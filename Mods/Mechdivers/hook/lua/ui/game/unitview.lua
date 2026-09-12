@@ -242,7 +242,16 @@ local MyUnitIdTable = {
  -- Air	
  
  -- Structures
-	   
+
+ -- Terminids
+ 
+ -- Land
+	tel0101=true,
+	tel0201=true,
+ -- Air	
+ 
+ -- Structures  
+	teb0101=true,	   
 
 }
 
