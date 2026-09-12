@@ -247,10 +247,13 @@ local MyUnitIdTable = {
  -- Land
 	tel0101=true,
 	tel0201=true,
+	
  -- Air	
- 
+	tea0101=true,
+	
  -- Structures  
 	teb0101=true,
+	teb0102=true,
 }
 
 
