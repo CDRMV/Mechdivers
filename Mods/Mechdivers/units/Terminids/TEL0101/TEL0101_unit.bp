@@ -63,6 +63,9 @@ UnitBlueprint {
     },
     Description = 'Acid Spitter',
     Display = {
+		Abilities = {
+			'In Development.',
+        },
         AnimationDeath = {
             {
                 Animation = '/mods/Mechdivers/units/Terminids/TEL0101/TEL0101_Adeath01.sca',

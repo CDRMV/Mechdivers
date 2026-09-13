@@ -44,7 +44,7 @@ UnitBlueprint {
         'UEF',
         'MOBILE',
         'LAND',
-        'TECH2',
+        'TECH1',
         'DIRECTFIRE',
         'VISIBLETORECON',
         'RECLAIMABLE',
@@ -61,21 +61,21 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
     },
-    Description = 'Acid Spewer',
+    Description = 'Scavenger',
     Display = {
 		Abilities = {
 			'In Development.',
         },
         AnimationDeath = {
             {
-                Animation = '/mods/Mechdivers/units/Terminids/TEL0201/TEL0201_Adeath01.sca',
+                Animation = '/mods/Mechdivers/units/Terminids/TEL0102/TEL0102_Adeath01.sca',
                 AnimationRateMax = 1.25,
                 AnimationRateMin = 0.75,
                 Weight = 10,
             },
         },
-        AnimationWalk = '/mods/Mechdivers/units/Terminids/TEL0201/TEL0201_Awalk01.sca',
-        AnimationWalkRate = 2,
+        AnimationWalk = '/mods/Mechdivers/units/Terminids/TEL0102/TEL0102_Awalk01.sca',
+        AnimationWalkRate = 3,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -106,7 +106,7 @@ UnitBlueprint {
                 Weight = 100,
             },
         },
-        UniformScale = 0.6,
+        UniformScale = 0.4,
     },
     Economy = {
         BuildCostEnergy = 140,
@@ -135,7 +135,7 @@ UnitBlueprint {
         },
         FactionName = 'UEF',
         Icon = 'land',
-        TechLevel = 'RULEUTL_Advanced',
+        TechLevel = 'RULEUTL_Basic',
         UnitWeight = 1,
     },
     Intel = {
@@ -160,7 +160,7 @@ UnitBlueprint {
         DragCoefficient = 0.2,
         MaxAcceleration = 4,
         MaxBrake = 4,
-        MaxSpeed = 1.2,
+        MaxSpeed = 2,
         MaxSpeedReverse = 0,
         MaxSteerForce = 7,
         MeshExtentsX = 0.45,
@@ -178,7 +178,7 @@ UnitBlueprint {
     SizeX = 0.6,
     SizeY = 0.6,
     SizeZ = 0.6,
-    StrategicIconName = 'icon_bot2_directfire',
+    StrategicIconName = 'icon_bot1_directfire',
     StrategicIconSortPriority = 135,
     Transport = {
         CanFireFromTransport = true,
@@ -222,9 +222,9 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'Muzzle',
+                        'Melee',
                     },
-                    RackBone = 'Muzzle',
+                    RackBone = 'Melee',
                 },
             },
             RackFireTogether = false,
@@ -248,9 +248,9 @@ UnitBlueprint {
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             TrackingRadius = 1.15,
-            TurretBoneMuzzle = 'Muzzle',
-            TurretBonePitch = 'Muzzle',
-            TurretBoneYaw = 'Muzzle',
+            TurretBoneMuzzle = 'Melee',
+            TurretBonePitch = 'Melee',
+            TurretBoneYaw = 'Melee',
             TurretDualManipulators = false,
             TurretPitch = 0,
             TurretPitchRange = 120,
