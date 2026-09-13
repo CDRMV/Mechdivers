@@ -23,6 +23,7 @@ Truck_HeavyMortar = Class(DummyUnit) {
             self.ArtyAnim:PlayAnim(self:GetBlueprint().Display.AnimationOpen):SetRate(1)
             self.Trash:Add(self.ArtyAnim)
         end
+		self:SetAutoMode(true)
     end,
 	
 	CreateWreckage = function(self, overkillRatio)

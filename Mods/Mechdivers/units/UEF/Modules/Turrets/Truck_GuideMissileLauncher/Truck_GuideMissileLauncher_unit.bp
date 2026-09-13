@@ -177,7 +177,6 @@ UnitBlueprint {
             Damage = 8000,
 			ForceSingleFire = true,
 			CountedProjectile = true,
-            CollideFriendly = false,
 			InitialProjectileStorage = 4,
 			ManualFire = true,
             MaxProjectileStorage = 4,

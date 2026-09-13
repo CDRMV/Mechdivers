@@ -33,6 +33,7 @@ UnitBlueprint {
         'UEF',
 		'ARTILLERY',
         'TECH3',
+		'SILO',
 		 'RECLAIM',
 		 'INSIGNIFICANTUNIT',
         'DIRECTFIRE',
@@ -81,7 +82,7 @@ UnitBlueprint {
     Economy = {
         BuildCostEnergy = 8000,
         BuildCostMass = 800,
-		BuildRate = 5,
+		BuildRate = 60,
         BuildTime = 800,
     },
     General = {
@@ -97,10 +98,11 @@ UnitBlueprint {
             RULEUCC_Patrol = false,
             RULEUCC_Reclaim = false,
             RULEUCC_Repair = false,
-			RULEUCC_SiloBuildTactical = false,
+			RULEUCC_SiloBuildTactical = true,
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
             RULEUCC_Transport = false,
+			RULEUCC_Tactical = true,
         },
         FactionName = 'UEF',
         Icon = 'none',
@@ -186,6 +188,11 @@ UnitBlueprint {
             CollideFriendly = false,
             Damage = 4500,
             DamageRadius = 3,
+			ForceSingleFire = true,
+			CountedProjectile = true,
+			InitialProjectileStorage = 1,
+			ManualFire = false,
+            MaxProjectileStorage = 1,
             DamageType = 'Normal',
             DisplayName = 'Gauss Cannon',
             FireTargetLayerCapsTable = {
@@ -199,7 +206,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 30,
-            ProjectileId = '/projectiles/TDFGauss03/TDFGauss03_proj.bp',
+            ProjectileId = '/mods/Mechdivers/projectiles/TDFGauss05/TDFGauss05_proj.bp',
             ProjectilesPerOnFire = 1,
             RackBones = {
                 {

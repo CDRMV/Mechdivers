@@ -187,6 +187,14 @@ CSKMDTL0311 = Class(TLandUnit) {
 		self.Module:SetFireState(2)
 		end
 		end
+		if self.Module then
+		if self.Module:GetBlueprint().General.UnitName == 'Pak 150' or 
+		self.Module:GetBlueprint().General.UnitName == 'HIMARS 3000' or 
+		self.Module:GetBlueprint().General.UnitName == 'Karl Mark II' then
+		local workprogress = self.Module:GetWorkProgress()
+		self:SetWorkProgress(workprogress)
+		end
+		end
 		WaitSeconds(1)
 		end
 		end)
@@ -258,6 +266,12 @@ CSKMDTL0311 = Class(TLandUnit) {
 			self:AddToggleCap('RULEUTC_IntelToggle')
 			self:GiveTacticalSiloAmmo(4)
 			end
+			if self.Module:GetBlueprint().General.UnitName == 'Karl Mark II' then
+			self:GiveTacticalSiloAmmo(1)
+			end
+			if self.Module:GetBlueprint().General.UnitName == 'Pak 150' then
+			self:GiveTacticalSiloAmmo(1)
+			end
 			if self.Module:GetBlueprint().General.UnitName == 'Pak 150' or 
 			self.Module:GetBlueprint().General.UnitName == 'HIMARS 3000' or 
 			self.Module:GetBlueprint().General.UnitName == 'Karl Mark II' then
@@ -280,6 +294,7 @@ CSKMDTL0311 = Class(TLandUnit) {
 		if bit == 1 then 
 		if self.Module and not self.Module.Dead then
 		self.Module:Destroy()
+		self:SetWorkProgress(0)
 		self:RemoveBuildRestriction(categories.BUILTBYTIER3MODULARTRUCK)
 		self:RequestRefreshUI()
 		self:SetScriptBit('RULEUTC_WeaponToggle',false)

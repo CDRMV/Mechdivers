@@ -17,7 +17,10 @@ Truck_HeavyGauss = Class(DummyUnit) {
         },
     },
 	
-	
+	OnStopBeingBuilt = function(self,builder,layer)
+		DummyUnit.OnStopBeingBuilt(self,builder,layer)
+		self:SetAutoMode(true)
+    end,
 	
 	CreateWreckage = function(self, overkillRatio)
     end,
