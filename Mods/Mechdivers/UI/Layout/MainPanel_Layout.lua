@@ -39,6 +39,9 @@ function SetLayout()
     	if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'SERAPHIM' then
 	picture = Bitmap(controls.bg.panel, '/mods/Mechdivers/textures/Empty.dds')
 		end
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'TERMINIDS' then
+	picture = Bitmap(controls.bg.panel, '/mods/Mechdivers/textures/Empty.dds')
+		end
 	end
     LayoutHelpers.LeftOf(controls.bg, multiControl, 5) -- 5
 
@@ -70,6 +73,9 @@ FSButton = UIUtil.CreateButtonStd(controls.bg.panel, '/mods/Mechdivers/textures/
 		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'SERAPHIM' then
 FSButton = UIUtil.CreateButtonStd(controls.bg.panel, '/mods/Mechdivers/textures/medium-sera_btn/small-sera', nil, 11)
 		end
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'TERMINIDS' then
+FSButton = UIUtil.CreateButtonStd(controls.bg.panel, '/mods/Mechdivers/textures/medium-sera_btn/small-sera', nil, 11)
+		end
 	end
 	
 
@@ -86,6 +92,9 @@ UISelectionByCategory("FLEETDESTROYER", false, false, false, false)
 UISelectionByCategory("SUPERDESTROYER", false, false, false, false)
 		end
 		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'SERAPHIM' then
+
+		end
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'TERMINIDS' then
 
 		end
 	end

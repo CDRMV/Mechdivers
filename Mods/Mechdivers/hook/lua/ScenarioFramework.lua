@@ -339,7 +339,7 @@ function SetPlayableArea(rect, voFlag)
 
     SetPlayableRect(x0, y0, x1, y1)
     if voFlag then
-        ForkThread(PlayableRectCameraThread, rect)
+        --ForkThread(PlayableRectCameraThread, rect)
         SyncVoice({Cue = 'Computer_Computer_MapExpansion_01380', Bank = 'XGG'})
     end
 
@@ -378,7 +378,7 @@ function SetPlayableArea(rect, voFlag)
 
     SetPlayableRect(x0, y0, x1, y1)
     if voFlag then
-        ForkThread(PlayableRectCameraThread, rect)
+       -- ForkThread(PlayableRectCameraThread, rect)
         SyncVoice({Cue = 'Computer_Computer_MapExpansion_01380', Bank = 'XGG'})
     end
 

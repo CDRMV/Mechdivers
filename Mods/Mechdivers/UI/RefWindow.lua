@@ -80,6 +80,14 @@ if focusarmy >= 1 then
 		Ref5button = UIUtil.CreateButtonStd(UI, '/mods/Mechdivers/textures/medium-seraphim_btn/medium-seraphim', nil, 11, 0, 0)
 		Ref6button = UIUtil.CreateButtonStd(UI, '/mods/Mechdivers/textures/medium-seraphim_btn/medium-seraphim', nil, 11, 0, 0)
 	end
+	if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'TERMINIDS' then
+		Ref1button = UIUtil.CreateButtonStd(UI, '/mods/Mechdivers/textures/medium-seraphim_btn/medium-seraphim', nil, 11, 0, 0)
+		Ref2button = UIUtil.CreateButtonStd(UI, '/mods/Mechdivers/textures/medium-seraphim_btn/medium-seraphim', nil, 11, 0, 0)
+		Ref3button = UIUtil.CreateButtonStd(UI, '/mods/Mechdivers/textures/medium-seraphim_btn/medium-seraphim', nil, 11, 0, 0)
+		Ref4button = UIUtil.CreateButtonStd(UI, '/mods/Mechdivers/textures/medium-seraphim_btn/medium-seraphim', nil, 11, 0, 0)
+		Ref5button = UIUtil.CreateButtonStd(UI, '/mods/Mechdivers/textures/medium-seraphim_btn/medium-seraphim', nil, 11, 0, 0)
+		Ref6button = UIUtil.CreateButtonStd(UI, '/mods/Mechdivers/textures/medium-seraphim_btn/medium-seraphim', nil, 11, 0, 0)
+	end
 end
 
 

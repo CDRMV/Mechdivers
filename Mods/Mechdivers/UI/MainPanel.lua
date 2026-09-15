@@ -143,11 +143,27 @@ end
 
 
 function ShowPanel()
-controls.bg:Show()
+local focusarmy = GetFocusArmy()
+local armyInfo = GetArmiesTable()
+ if focusarmy >= 1 then
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'SERAPHIM' or factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'TERMINIDS' then
+			controls.bg:Hide()
+		else
+		controls.bg:Show()
+		end 
+ end
 end
 
 function InitialAnimation()
-    controls.bg:Show()
+local focusarmy = GetFocusArmy()
+local armyInfo = GetArmiesTable()
+ if focusarmy >= 1 then
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'SERAPHIM' or factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'TERMINIDS' then
+			controls.bg:Hide()
+		else
+		controls.bg:Show()
+		end 
+ end
     controls.bg.Left:Set(savedParent.Left()-controls.bg.Width())
     controls.bg:SetNeedsFrameUpdate(true)
     controls.bg.OnFrame = function(self, delta)
