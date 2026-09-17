@@ -133,7 +133,7 @@ UnitBlueprint {
             RULEUCC_Stop = true,
             RULEUCC_Transport = false,
         },
-        FactionName = 'UEF',
+        FactionName = 'Seraphim',
         Icon = 'land',
         TechLevel = 'RULEUTL_Advanced',
         UnitWeight = 1,
