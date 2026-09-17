@@ -259,6 +259,7 @@ local MyUnitIdTable = {
  -- Structures  
 	teb0101=true,
 	teb0102=true,
+	teb0201=true,
 }
 
 	local IconPath = "/Mods/Mechdivers"

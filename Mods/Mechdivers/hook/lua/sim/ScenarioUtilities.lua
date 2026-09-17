@@ -1,5 +1,23 @@
 do 
 
+
+
+function CommanderWarpDelay(cdrUnit, delay, ArmyBrain)
+		
+    if ArmyBrain.BrainType == 'Human' then
+        cdrUnit:SetBlockCommandQueue(true)
+    end
+    WaitSeconds(delay)
+	local factionIndex = GetArmyBrain(1):GetFactionIndex()
+		local Faction = import("/lua/factions.lua").Factions[factionIndex].DisplayName
+			LOG(Faction)
+	if Faction == 'Terminids' then
+
+	else
+    cdrUnit:PlayCommanderWarpInEffect()
+	end
+end
+
 function SpawnCivilianSlatter(UnitID, MarkerName, Amount)
 --[[
 

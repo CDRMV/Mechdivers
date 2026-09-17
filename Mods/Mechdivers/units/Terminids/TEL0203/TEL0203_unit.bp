@@ -39,7 +39,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
-        'BUILTBYTIER1BUGHOLE',
+        'BUILTBYTIER2HEAVYBUGHOLE',
 		'TERMINIDS',
         'UEF',
         'MOBILE',

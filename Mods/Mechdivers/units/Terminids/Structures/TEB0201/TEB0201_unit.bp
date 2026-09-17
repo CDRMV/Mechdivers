@@ -73,7 +73,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Small Bug Hole',
+    Description = 'Bug Hole',
     Display = {
         BuildAttachBone = 'Attachpoint',
         Mesh = {
@@ -87,7 +87,7 @@ UnitBlueprint {
         },
         PlaceholderMeshName = 'UEB0101',
         SpawnRandomRotation = false,
-        UniformScale = 2.0,
+        UniformScale = 2.6,
     },
     Economy = {
         BuildCostEnergy = 2100,
@@ -95,7 +95,7 @@ UnitBlueprint {
         BuildRate = 20,
         BuildTime = 300,
         BuildableCategory = {
-            'BUILTBYTIER1BUGHOLE TERMINIDS',
+			'BUILTBYTIER2HEAVYBUGHOLE TERMINIDS',
         },
         RebuildBonusIds = {
             'teb0101',
