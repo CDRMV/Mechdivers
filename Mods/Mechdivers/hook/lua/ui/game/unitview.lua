@@ -259,6 +259,9 @@ local MyUnitIdTable = {
 	teb0101=true,
 	teb0102=true,
 	teb0201=true,
+	teb1101=true,
+	teb1102=true,
+	teb1103=true,
 
 }
 
