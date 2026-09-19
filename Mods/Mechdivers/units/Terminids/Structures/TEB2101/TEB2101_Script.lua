@@ -9,11 +9,11 @@
 #****************************************************************************
 
 local TStructureUnit = import('/lua/defaultunits.lua').StructureUnit
-local TDFLightPlasmaCannonWeapon = import('/lua/terranweapons.lua').TDFLightPlasmaCannonWeapon
+local AcidWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
 
 TEB2101 = Class(TStructureUnit) {
     Weapons = {
-        MainGun = Class(TDFLightPlasmaCannonWeapon) {}
+        MainGun = Class(AcidWeapon) {}
     },
 }
 

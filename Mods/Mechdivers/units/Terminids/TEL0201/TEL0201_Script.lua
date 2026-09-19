@@ -9,12 +9,12 @@
 #****************************************************************************
 local TWalkingLandUnit = import('/lua/Defaultunits.lua').WalkingLandUnit
 local Unit = import('/lua/sim/Unit.lua').Unit
-local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
+local AcidWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
 
 
 TEL0201 = Class(TWalkingLandUnit) {
     Weapons = {
-        ArmCannonTurret = Class(TDFMachineGunWeapon) {
+        MainGun = Class(AcidWeapon) {
 
         },
     },

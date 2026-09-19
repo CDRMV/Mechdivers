@@ -413,4 +413,44 @@ MissileRedirect = Class(Entity) {
 
 
 
+#------------------------------------------------------------------------
+#  Terminids PROJECTILES
+#------------------------------------------------------------------------
+
+SmallAcidthrower = Class(EmitterProjectile) {
+    FxTrails = {'/mods/Mechdivers/Effects/Emitters/AcidrthrowerTrailFX.bp',},
+       FxTrailScale = 0.5,
+    
+    FxImpactTrajectoryAligned = false,
+
+    FxImpactUnit = ModEffectTemplate.TAcidLand01,
+    FxImpactProp = ModEffectTemplate.TAcidLand01,
+    FxImpactLand = ModEffectTemplate.TAcidLand01,
+    FxImpactWater = {},
+    FxImpactUnderWater = {},
+    FxLandHitScale = 0.5,
+    FxPropHitScale = 0.5,
+    FxUnitHitScale = 0.5,
+    FxNoneHitScale = 0.5,
+}
+
+SmallAcid = Class(EmitterProjectile) {
+    FxTrails = {'/mods/Mechdivers/Effects/Emitters/AcidrthrowerTrailFX.bp',},
+       FxTrailScale = 0.35,
+    
+    FxImpactTrajectoryAligned = false,
+
+    FxImpactUnit = ModEffectTemplate.TAcidLand01,
+    FxImpactProp = ModEffectTemplate.TAcidLand01,
+    FxImpactLand = ModEffectTemplate.TAcidLand01,
+    FxImpactWater = {},
+    FxImpactUnderWater = {},
+    FxLandHitScale = 0.2,
+    FxPropHitScale = 0.2,
+    FxUnitHitScale = 0.2,
+    FxNoneHitScale = 0.2,
+}
+
+
+
 

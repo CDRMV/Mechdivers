@@ -11,7 +11,7 @@ local Shield = import('/lua/shield.lua').Shield
 
 local TWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
 local TerranWeaponFile = import('/lua/terranweapons.lua')
-local TDFZephyrCannonWeapon = TerranWeaponFile.TDFZephyrCannonWeapon
+local AcidWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
 local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
 local TIFCommanderDeathWeapon = nil
 if version < 3652 then
@@ -22,7 +22,7 @@ local ACUDeathWeapon = import("/lua/sim/defaultweapons.lua").ACUDeathWeapon
 TIFCommanderDeathWeapon = ACUDeathWeapon
 end
 local EffectTemplate = import('/lua/EffectTemplates.lua')
-local TDFOverchargeWeapon = TerranWeaponFile.TDFOverchargeWeapon
+local TDFOverchargeWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
 local EffectUtil = import('/lua/EffectUtilities.lua')
 local Buff = import('/lua/sim/Buff.lua')
 
@@ -31,7 +31,7 @@ TEL0001 = Class(TWalkingLandUnit) {
 
     Weapons = {
         DeathWeapon = Class(TIFCommanderDeathWeapon) {},
-        RightZephyr = Class(TDFZephyrCannonWeapon) {},
+        RightZephyr = Class(AcidWeapon) {},
         OverCharge = Class(TDFOverchargeWeapon) {
 
             OnCreate = function(self)

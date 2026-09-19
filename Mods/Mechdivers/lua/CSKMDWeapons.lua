@@ -15,6 +15,10 @@ DummyTurretWeapon = Class(DefaultProjectileWeapon) {
     FxMuzzleFlash = {},
 }
 
+AcidWeapon = Class(DefaultProjectileWeapon) {
+    FxMuzzleFlash = {},
+}
+
 MineExplosion = Class(KamikazeWeapon){
 
 }

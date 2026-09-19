@@ -69,3 +69,7 @@ CIcarusMissileFxtrails= {
 	ModBpPath .. 'icarus_missile_fxtrail_emit.bp',
     ModBpPath .. 'icarus_missile_smoke_exhaust_emit.bp',
 }
+
+TAcidLand01 = {
+ModBpPath .. 'acid_cloud_01_emit.bp',
+}

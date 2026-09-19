@@ -7,14 +7,14 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local TWalkingLandUnit = import('/lua/Defaultunits.lua').WalkingLandUnit
+local TWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
 local Unit = import('/lua/sim/Unit.lua').Unit
-local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
+local AcidWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
 
 
 TEL0101 = Class(TWalkingLandUnit) {
     Weapons = {
-        ArmCannonTurret = Class(TDFMachineGunWeapon) {
+        MainGun = Class(AcidWeapon) {
         },
     },
 }
