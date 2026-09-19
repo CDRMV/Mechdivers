@@ -146,7 +146,7 @@ function ShowPanel()
 local focusarmy = GetFocusArmy()
 local armyInfo = GetArmiesTable()
  if focusarmy >= 1 then
-		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'SERAPHIM' or factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'TERMINIDS' then
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'SERAPHIM' or factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'TERMINIDS' or SessionGetScenarioInfo().Options.StartASTerminids == 1 then
 			controls.bg:Hide()
 		else
 		controls.bg:Show()
@@ -158,7 +158,7 @@ function InitialAnimation()
 local focusarmy = GetFocusArmy()
 local armyInfo = GetArmiesTable()
  if focusarmy >= 1 then
-		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'SERAPHIM' or factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'TERMINIDS' then
+		if factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'SERAPHIM' or factions[armyInfo.armiesTable[focusarmy].faction+1].Category == 'TERMINIDS' or SessionGetScenarioInfo().Options.StartASTerminids == 1 then
 			controls.bg:Hide()
 		else
 		controls.bg:Show()

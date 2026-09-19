@@ -245,6 +245,7 @@ local MyUnitIdTable = {
  -- Terminids
  
  -- Land
+	tel0001=true,
 	tel0101=true,
 	tel0102=true,
 	tel0201=true,
@@ -261,6 +262,7 @@ local MyUnitIdTable = {
 	teb1101=true,
 	teb1102=true,
 	teb1103=true,
+	teb2101=true,
 }
 
 

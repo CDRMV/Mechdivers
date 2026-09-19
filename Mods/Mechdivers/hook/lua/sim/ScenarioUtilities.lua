@@ -1,21 +1,102 @@
 do 
 
+function CreateInitialArmyGroup(strArmy, createCommander)
+    local tblGroup = CreateArmyGroup(strArmy, 'INITIAL')
+    local cdrUnit
 
+    if createCommander and (tblGroup == nil or table.empty(tblGroup)) then
+        local factionIndex = GetArmyBrain(strArmy):GetFactionIndex()
+        local initialUnitName = import("/lua/factions.lua").Factions[factionIndex].InitialUnit
+		if ScenarioInfo.Options['StartASTerminids1'] == 1 and strArmy == "ARMY_1" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids2'] == 1 and strArmy == "ARMY_2" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids3'] == 1 and strArmy == "ARMY_3" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids4'] == 1 and strArmy == "ARMY_4" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids5'] == 1 and strArmy == "ARMY_5" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids6'] == 1 and strArmy == "ARMY_6" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids7'] == 1 and strArmy == "ARMY_7" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids8'] == 1 and strArmy == "ARMY_8" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids9'] == 1 and strArmy == "ARMY_9" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids10'] == 1 and strArmy == "ARMY_10" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids11'] == 1 and strArmy == "ARMY_11" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids12'] == 1 and strArmy == "ARMY_12" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids13'] == 1 and strArmy == "ARMY_13" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids14'] == 1 and strArmy == "ARMY_14" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids15'] == 1 and strArmy == "ARMY_15" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+		if ScenarioInfo.Options['StartASTerminids16'] == 1 and strArmy == "ARMY_16" then
+		SetArmyFactionIndex(strArmy, 4)
+		initialUnitName = 'tel0001'
+		end
+        cdrUnit = CreateInitialArmyUnit(strArmy, initialUnitName)
+        if EntityCategoryContains(categories.COMMAND, cdrUnit) then
+            if ScenarioInfo.Options['PrebuiltUnits'] == 'Off' then
+                cdrUnit:HideBone(0, true)
+                ForkThread(CommanderWarpDelay, cdrUnit, 3, GetArmyBrain(strArmy))
+            end
+			local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
 
-function CommanderWarpDelay(cdrUnit, delay, ArmyBrain)
-		
-    if ArmyBrain.BrainType == 'Human' then
-        cdrUnit:SetBlockCommandQueue(true)
+			if version < 3652 then
+			
+			else
+            local rotateOpt = ScenarioInfo.Options['RotateACU']
+            if not rotateOpt or rotateOpt == 'On' then
+                cdrUnit:RotateTowardsMid()
+            elseif rotateOpt == 'Marker' then
+                local marker = GetMarker(strArmy) or {}
+                if marker['orientation'] then
+                    local o = EulerToQuaternion(unpack(marker['orientation']))
+                    cdrUnit:SetOrientation(o, true)
+                end
+            end
+			end
+        end
     end
-    WaitSeconds(delay)
-	local factionIndex = GetArmyBrain(1):GetFactionIndex()
-		local Faction = import("/lua/factions.lua").Factions[factionIndex].DisplayName
-			LOG(Faction)
-	if Faction == 'Terminids' then
 
-	else
-    cdrUnit:PlayCommanderWarpInEffect()
-	end
+    return tblGroup, cdrUnit
 end
 
 function SpawnCivilianSlatter(UnitID, MarkerName, Amount)

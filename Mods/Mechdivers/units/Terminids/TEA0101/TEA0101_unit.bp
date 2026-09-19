@@ -156,7 +156,7 @@ UnitBlueprint {
             RULEUCC_Stop = true,
             RULEUCC_Transport = false,
         },
-        FactionName = 'Seraphim',
+        FactionName = 'Terminids',
         Icon = 'air',
         TechLevel = 'RULEUTL_Basic',
         UnitWeight = 1,
