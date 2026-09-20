@@ -73,3 +73,11 @@ CIcarusMissileFxtrails= {
 TAcidLand01 = {
 ModBpPath .. 'acid_cloud_01_emit.bp',
 }
+
+TAcidArtilleryPolyTrail =  ModBpPath .. 'acid_emit.bp'
+
+TAcidArtilleryFXTrail01 =  { 
+    ModBpPath .. 'acid_fxtrail_01_emit.bp', 
+    ModBpPath .. 'acid_trail_emit.bp', 
+ModBpPath .. 'acid_fxtrail_02_emit.bp',     
+}

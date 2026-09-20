@@ -451,6 +451,26 @@ SmallAcid = Class(EmitterProjectile) {
     FxNoneHitScale = 0.2,
 }
 
+TSmallAcidArtilleryProjectile = Class(MultiPolyTrailProjectile) {
+    PolyTrails = {
+        ModEffectTemplate.TAcidArtilleryPolyTrail,
+    },
+    PolyTrailOffset = {0,0}, 
+
+    FxTrails = ModEffectTemplate.TAcidArtilleryFXTrail01,
+	FxTrailScale = 1.2,
+	PolyTrailScale = 12,
+    #PolyTrail = ModEffectTemplate.CHeavyFusionLaserPolyTrail,
+    FxImpactUnit = ModEffectTemplate.TAcidLand01,
+    FxImpactProp = ModEffectTemplate.TAcidLand01,
+    FxImpactLand = ModEffectTemplate.TAcidLand01,
+    FxTrailOffset = 0,
+	FxLandHitScale = 0.2,
+    FxPropHitScale = 0.2,
+    FxUnitHitScale = 0.2,
+    FxNoneHitScale = 0.2,
+    FxImpactUnderWater = {},
+}	
 
 
 

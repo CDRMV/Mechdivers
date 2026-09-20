@@ -258,6 +258,11 @@ local MyUnitIdTable = {
 	tea0101=true,
 	
  -- Structures  
+ 
+    -- Mines --
+	teb0001=true,
+	  
+	-----------  
 	teb0101=true,
 	teb0102=true,
 	teb0201=true,
@@ -265,6 +270,7 @@ local MyUnitIdTable = {
 	teb1102=true,
 	teb1103=true,
 	teb2101=true,
+	teb2104=true,
 }
 
 	local IconPath = "/Mods/Mechdivers"
