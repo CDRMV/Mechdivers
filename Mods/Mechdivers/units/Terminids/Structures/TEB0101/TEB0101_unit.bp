@@ -103,7 +103,7 @@ UnitBlueprint {
         },
         PlaceholderMeshName = 'UEB0101',
         SpawnRandomRotation = false,
-        UniformScale = 1.8,
+        UniformScale = 2.0,
     },
     Economy = {
         BuildCostEnergy = 2100,

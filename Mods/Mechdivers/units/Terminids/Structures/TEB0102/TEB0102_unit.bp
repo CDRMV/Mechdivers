@@ -148,7 +148,7 @@ UnitBlueprint {
         },
         ConstructionBar = true,
         FactionName = 'Terminids',
-        Icon = 'land',
+        Icon = 'air',
         SelectionPriority = 5,
         TechLevel = 'RULEUTL_Basic',
         UnitWeight = 1,
