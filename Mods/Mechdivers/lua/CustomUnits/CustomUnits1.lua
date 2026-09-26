@@ -25,6 +25,7 @@ UnitList = {
     },
 	
 	T3LandArtillery = {
+		UEF = {'CSKMDTL0313', 80}, -- UD-310 Maelstorm MK V, Tech 3 Heavy Combat Tank
 		Cybran = {'CSKMDCL0303', 80},      -- Breaker, Tech 3 Heavy Mortar Tank
 	},
 	

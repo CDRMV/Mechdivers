@@ -125,6 +125,7 @@ local MyUnitIdTable = {
 	  cskmdtl0310=true, 
 	  cskmdtl0311=true, 
 	  cskmdtl0312=true, 
+	  cskmdtl0313=true, 
 		  
 -- Structures
 
