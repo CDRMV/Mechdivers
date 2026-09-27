@@ -13,6 +13,7 @@ local TWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
 local TerranWeaponFile = import('/lua/terranweapons.lua')
 local AcidWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
 local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 local TIFCommanderDeathWeapon = nil
 if version < 3652 then
 TIFCommanderDeathWeapon = TerranWeaponFile.TIFCommanderDeathWeapon
@@ -179,22 +180,45 @@ TEL0001 = Class(TWalkingLandUnit) {
         self:SetWeaponEnabledByLabel('TacMissile', false)
         self:SetWeaponEnabledByLabel('TacNukeMissile', false)
         self:ForkThread(self.GiveInitialResources)
+		self.ArrivalAnimManip = CreateAnimator(self)
+        self.Trash:Add(self.ArrivalAnimManip)
+        self.ArrivalAnimManip:PlayAnim(self:GetBlueprint().Display.AnimationArrival, false):SetRate(0)
 		self:ShowBone(0,true)
+		ForkThread(function()
+		self.Slider= CreateSlider(self, 'Body', 0, -2, 0, 25)
+        self.Trash:Add(self.Slider)
+		WaitFor(self.Slider)
+		end)
     end,
 
     PlayCommanderWarpInEffect = function(self)
-self:ShowBone(0,true)
+		self:ShowBone(0,true)
         self:SetUnSelectable(true)
         self:SetBusy(true)
 		self:ForkThread(self.WarpInEffectThread)
     end,
 
     WarpInEffectThread = function(self)
-	 WaitSeconds(2.1)
+		local rotation = RandomFloat(0,2*math.pi)
+		local size = RandomFloat(5.75,5.0)
+		self.Effect1 = CreateAttachedEmitter(self,0,self:GetArmy(), '/effects/emitters/dust_cloud_05_emit.bp'):ScaleEmitter(2):SetEmitterParam('LIFETIME', 10)
+		self.Trash:Add(self.Effect1)
+		self.Effect2 = CreateAttachedEmitter(self,0,self:GetArmy(), '/effects/emitters/dust_cloud_06_emit.bp'):ScaleEmitter(5):SetEmitterParam('LIFETIME', 10):OffsetEmitter(0,-1,0)
+		self:ShakeCamera(5, 1, 0, 2)
+		self.Trash:Add(self.Effect2)
+		CreateDecal(self:GetPosition(), rotation, 'scorch_001_albedo', '', 'Albedo', size, size, 150, 150, self:GetArmy())
+		self.Slider= CreateSlider(self, 'Body', 0, 2, 0, 1)
+        self.Trash:Add(self.Slider)
+		self.ArrivalAnimManip:SetRate(0.7)
+		WaitFor(self.Slider)
         self:ShowBone(0, true)
         self:SetUnSelectable(false)
         self:SetBusy(false)
         self:SetBlockCommandQueue(false)
+		self.Effect1:Destroy()
+		self.Effect2:Destroy()
+		WaitFor(self.ArrivalAnimManip)
+		self.ArrivalAnimManip:Destroy()
     end,
 
     OnStartBuild = function(self, unitBeingBuilt, order)

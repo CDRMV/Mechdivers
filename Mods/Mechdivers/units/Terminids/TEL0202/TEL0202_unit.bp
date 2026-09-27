@@ -41,7 +41,6 @@ UnitBlueprint {
         'SELECTABLE',
         'BUILTBYTIER2HEAVYBUGHOLE',
 		'TERMINIDS',
-        'UEF',
         'MOBILE',
         'LAND',
         'TECH2',
@@ -100,12 +99,6 @@ UnitBlueprint {
         },
         PlaceholderMeshName = 'UXB0000',
         SpawnRandomRotation = false,
-        TransportAnimation = {
-            {
-                Animation = '/units/UEL0106/UEL0106_afold.sca',
-                Weight = 100,
-            },
-        },
         UniformScale = 0.6,
     },
     Economy = {

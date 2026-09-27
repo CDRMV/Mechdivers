@@ -139,7 +139,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 75,
     },
-    Description = 'Queen <LOC uel0001_desc>Armored Command Unit',
+    Description = 'Queen (Armored Command Unit)',
     Display = {
         Abilities = {
             '<LOC ability_amphibious>Amphibious',
@@ -152,6 +152,7 @@ UnitBlueprint {
 
         # AnimationIdle = '/units/uel0001/uel0001_a002.sca',
         AnimationWalk = '/mods/Mechdivers/units/Terminids/Tel0001/Tel0001_awalk.sca',
+		AnimationArrival = '/mods/Mechdivers/units/Terminids/Tel0001/Tel0001_arrive.sca',
         AnimationWalkRate = 0.6,
         AttackReticleSize = 55,
         DamageEffects = {
@@ -228,18 +229,6 @@ UnitBlueprint {
         },
         PlaceholderMeshName = 'UXB0000',
         SpawnRandomRotation = true,
-        TransportAnimation = {
-            {
-                Animation = '/units/UEL0001/UEL0001_afold.sca',
-                Weight = 100,
-            },
-        },
-        TransportDropAnimation = {
-            {
-                Animation = '/units/UEL0001/UEL0001_aunfold.sca',
-                Weight = 100,
-            },
-        },
         UniformScale = 1.2,
     },
     Economy = {
@@ -249,8 +238,6 @@ UnitBlueprint {
         BuildTime = 60000,
         BuildableCategory = {
             'BUILTBYCOMMANDER TERMINIDS',
-            'BUILTBYTIER2COMMANDER TERMINIDS',
-            'BUILTBYTIER3COMMANDER TERMINIDS',
         },
         MaxBuildDistance = 10,
         NaturalProducer = true,

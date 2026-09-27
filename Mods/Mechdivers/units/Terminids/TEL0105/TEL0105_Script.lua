@@ -10,22 +10,13 @@
 local TWalkingLandUnit = import('/lua/Defaultunits.lua').WalkingLandUnit
 local Unit = import('/lua/sim/Unit.lua').Unit
 local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
-local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 
-TEL0102 = Class(TWalkingLandUnit) {
+
+TEL0105 = Class(TWalkingLandUnit) {
     Weapons = {
-		Melee = Class(DummyTurretWeapon) {
-		
-		OnWeaponFired = function(self)
-			ForkThread( function()
-			local animator = CreateAnimator(self.unit)
-            animator:PlayAnim('/Mods/Mechdivers/units/Terminids/TEL0102/TEL0102_AMelee01.sca', false):SetRate(2)
-			WaitFor(animator)
-			animator:Destroy()
-			end)
-		end,
-			},
+        ArmCannonTurret = Class(TDFMachineGunWeapon) {
+        },
     },
 }
-TypeClass = TEL0102
+TypeClass = TEL0105
 

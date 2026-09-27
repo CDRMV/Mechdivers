@@ -1,5 +1,8 @@
--- Note that the order here will determine the faction index
--- (it's the automatically assigned array index)
+local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+
+if version < 3652 then 
+
+else
 Factions = {
     {
         Key = 'uef',
@@ -43,6 +46,7 @@ Factions = {
             },
         },
     },
+
     {
         Key = 'aeon',
         Category = 'AEON',
@@ -84,6 +88,7 @@ Factions = {
             },
         },
     },
+
     {
         Key = 'cybran',
         Category = 'CYBRAN',
@@ -125,6 +130,7 @@ Factions = {
             },
         },
     },
+
     {
         Key = 'seraphim',
         Category = 'SERAPHIM',
@@ -167,10 +173,8 @@ Factions = {
         },
     },
 	{
-        Key = 'tem',
+        Key = 'terminids',
         Category = 'TERMINIDS',
-        FactionInUnitBp = 'Terminids',
-        IsCustomFaction = true,
         DisplayName = "Terminids",
         SoundPrefix = 'Terminids',
         InitialUnit = 'tel0001',
@@ -186,20 +190,26 @@ Factions = {
         loadingColor = 'FFffd700',
         loadingTexture = '/seraphim_load.dds',
         IdleEngTextures = {
-            T1 = '/mods/Mechdivers/icons/units/uel0105_icon.dds',
-            T2 = '/mods/Mechdivers/icons/units/uel0208_icon.dds',
-            T3 = '/mods/Mechdivers/icons/units/uel0309_icon.dds',
-            SCU = '/mods/Mechdivers/icons/units/uel0301_icon.dds',
+            T1 = '/mods/Mechdivers/icons/units/tel0105_icon.dds',
+            T2 = '/icons/units/default_icon.dds',
+            T3 = '/icons/units/default_icon.dds',
+            SCU = '/icons/units/default_icon.dds',
         },
         IdleFactoryTextures = {
             LAND = {
                 '/mods/Mechdivers/icons/units/teb0101_icon.dds',
+				'/mods/Mechdivers/icons/units/teb0201_icon.dds',
+				'/icons/units/default_icon.dds',
             },
             AIR = {
-                '/mods/Mechdivers/icons/units/ueb0102_icon.dds',
+                '/mods/Mechdivers/icons/units/teb0102_icon.dds',
+				'/icons/units/default_icon.dds',
+				'/icons/units/default_icon.dds',
             },
             NAVAL = {
-                '/mods/Mechdivers/icons/units/ueb0103_icon.dds',
+				'/icons/units/default_icon.dds',
+				'/icons/units/default_icon.dds',
+				'/icons/units/default_icon.dds',
             },
         },
 	},
@@ -216,4 +226,4 @@ for index, value in Factions do
     FactionDesToKey[value.CampaignFileDesignator] = value.Key
 end
 
-
+end

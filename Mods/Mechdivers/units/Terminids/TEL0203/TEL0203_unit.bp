@@ -41,7 +41,6 @@ UnitBlueprint {
         'SELECTABLE',
         'BUILTBYTIER2HEAVYBUGHOLE',
 		'TERMINIDS',
-        'UEF',
         'MOBILE',
         'LAND',
         'TECH2',

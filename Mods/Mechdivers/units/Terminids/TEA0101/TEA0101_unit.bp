@@ -67,7 +67,6 @@ UnitBlueprint {
         'SELECTABLE',
         'BUILTBYTIER1SHRIEKERNEST',
 		'TERMINIDS',
-        'UEF',
         'MOBILE',
         'AIR',
         'TECH1',

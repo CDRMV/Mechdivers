@@ -30,7 +30,6 @@ UnitBlueprint {
         'BUILTBYTIER2ENGINEER',
         'BUILTBYTIER3ENGINEER',
         'BUILTBYTIER2COMMANDER',
-		'BUILTBYCOMMANDER',
         'TERMINIDS',
         'STRUCTURE',
         'ECONOMIC',
