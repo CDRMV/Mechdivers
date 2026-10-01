@@ -88,16 +88,6 @@ UnitBlueprint {
     },
     Description = 'Shrieker',
     Display = {
-        AnimationDeath = {
-            {
-                Animation = '/mods/Mechdivers/units/Terminids/TEL0101/TEL0101_Adeath01.sca',
-                AnimationRateMax = 1.25,
-                AnimationRateMin = 0.75,
-                Weight = 10,
-            },
-        },
-        AnimationWalk = '/mods/Mechdivers/units/Terminids/TEL0101/TEL0101_Awalk01.sca',
-        AnimationWalkRate = 3,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -244,9 +234,9 @@ UnitBlueprint {
             RackBones = {
                 {
                     MuzzleBones = {
-                        'Muzzle',
+                        'Melee',
                     },
-                    RackBone = 'Muzzle',
+                    RackBone = 'Melee',
                 },
             },
             RackFireTogether = false,
@@ -270,9 +260,9 @@ UnitBlueprint {
             },
             TargetRestrictDisallow = 'UNTARGETABLE',
             TrackingRadius = 1.15,
-            TurretBoneMuzzle = 'Muzzle',
-            TurretBonePitch = 'Muzzle',
-            TurretBoneYaw = 'Muzzle',
+            TurretBoneMuzzle = 'Melee',
+            TurretBonePitch = 'Melee',
+            TurretBoneYaw = 'Melee',
             TurretDualManipulators = false,
             TurretPitch = 0,
             TurretPitchRange = 120,

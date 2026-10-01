@@ -24,16 +24,17 @@ TEA0101 = Class(TWalkingLandUnit) {
             self.Trash:Add(self.AnimationManipulator)
         end
         self.AnimationManipulator:PlayAnim('/mods/Mechdivers/units/Terminids/TEA0101/TEA0101_A01.sca', false):SetRate(0)
-		if not self.AnimationUnpack1Manipulator then
-            self.AnimationUnpack1Manipulator = CreateAnimator(self)
-            self.Trash:Add(self.AnimationUnpack1Manipulator)
-        end
-        self.AnimationUnpack1Manipulator:PlayAnim('/mods/Mechdivers/units/Terminids/TEA0101/TEL0101_AWings01.sca', true):SetRate(0)	
         TWalkingLandUnit.OnCreate(self)
     end,
 	
 	OnStopBeingBuilt = function(self,builder,layer)
         TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+		if not self.AnimationUnpack1Manipulator then
+            self.AnimationUnpack1Manipulator = CreateAnimator(self)
+            self.Trash:Add(self.AnimationUnpack1Manipulator)
+        end
+        self.AnimationUnpack1Manipulator:PlayAnim('/mods/Mechdivers/units/Terminids/TEA0101/TEL0101_AWings01.sca', true):SetRate(0)	
+		self.AnimationManipulator:SetRate(2)	
         self.AnimationUnpack1Manipulator:SetRate(2)	
     end,
 
