@@ -8,7 +8,6 @@
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 local TWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
-local Unit = import('/lua/sim/Unit.lua').Unit
 local AcidWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
 
 

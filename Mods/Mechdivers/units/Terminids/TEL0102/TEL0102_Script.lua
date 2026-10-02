@@ -8,7 +8,6 @@
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 local TWalkingLandUnit = import('/lua/Defaultunits.lua').WalkingLandUnit
-local Unit = import('/lua/sim/Unit.lua').Unit
 local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 

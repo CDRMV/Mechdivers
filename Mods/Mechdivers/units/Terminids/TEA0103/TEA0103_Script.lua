@@ -11,12 +11,21 @@ local TWalkingLandUnit = import('/lua/Defaultunits.lua').WalkingLandUnit
 local AcidWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
 
 
-TEL0201 = Class(TWalkingLandUnit) {
+TEA0103 = Class(TWalkingLandUnit) {
     Weapons = {
         MainGun = Class(AcidWeapon) {
-
         },
     },
+	
+	OnStopBeingBuilt = function(self,builder,layer)
+        TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+		if not self.AnimationUnpack1Manipulator then
+            self.AnimationUnpack1Manipulator = CreateAnimator(self)
+            self.Trash:Add(self.AnimationUnpack1Manipulator)
+        end
+        self.AnimationUnpack1Manipulator:PlayAnim('/mods/Mechdivers/units/Terminids/TEA0103/TEA0103_AWings01.sca', true):SetRate(1)	
+    end,
+
 }
-TypeClass = TEL0201
+TypeClass = TEA0103
 

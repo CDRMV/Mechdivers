@@ -46,16 +46,6 @@ UnitBlueprint {
             Cue = 'GLB_Enhance_Start',
             LodCutoff = 'UnitMove_LodCutoff',
         },
-        FootFallGeneric = Sound {
-            Bank = 'UEL',
-            Cue = 'UEL0001_Move_Step',
-            LodCutoff = 'UnitMove_LodCutoff',
-        },
-        FootFallGenericSeabed = Sound {
-            Bank = 'UEL',
-            Cue = 'UEL0001_Move_UW_Step',
-            LodCutoff = 'UnitMove_LodCutoff',
-        },
         Killed = Sound {
             Bank = 'Explosions',
             Cue = 'UEF_Nuke_Impact',
@@ -71,19 +61,9 @@ UnitBlueprint {
             Cue = 'UEL0001_Capture_Start',
             LodCutoff = 'UnitMove_LodCutoff',
         },
-        StartMove = Sound {
-            Bank = 'UEL',
-            Cue = 'UEL0001_Move_Start',
-            LodCutoff = 'UnitMove_LodCutoff',
-        },
         StartReclaim = Sound {
             Bank = 'UEL',
             Cue = 'UEL0001_Reclaim_Start',
-            LodCutoff = 'UnitMove_LodCutoff',
-        },
-        StopMove = Sound {
-            Bank = 'UEL',
-            Cue = 'UEL0001_Move_Stop',
             LodCutoff = 'UnitMove_LodCutoff',
         },
         UISelection = Sound {

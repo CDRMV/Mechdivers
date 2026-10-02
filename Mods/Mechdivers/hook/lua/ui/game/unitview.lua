@@ -257,6 +257,8 @@ local MyUnitIdTable = {
 	
  -- Air	
 	tea0101=true,
+	tea0102=true,
+	tea0103=true,
 	
  -- Structures  
  
@@ -274,6 +276,7 @@ local MyUnitIdTable = {
 	teb1106=true,
 	teb2101=true,
 	teb2104=true,
+	teb3101=true,
 
 }
 
