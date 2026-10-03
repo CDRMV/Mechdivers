@@ -264,7 +264,10 @@ local MyUnitIdTable = {
  
     -- Mines --
 	teb0001=true,
-	  
+		
+	-- Eggs --
+	teb0100=true,
+	
 	-----------  
 	teb0101=true,
 	teb0102=true,

@@ -73,7 +73,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Small Bug Hole',
+    Description = 'Land Factory',
     Display = {
         BuildAttachBone = 'Attachpoint',
         Mesh = {
@@ -150,6 +150,7 @@ UnitBlueprint {
         ConstructionBar = true,
         FactionName = 'Terminids',
         Icon = 'land',
+		UnitName = 'Small Bug Hole',
         SelectionPriority = 5,
         TechLevel = 'RULEUTL_Basic',
         UnitWeight = 1,

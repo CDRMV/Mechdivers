@@ -60,7 +60,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
     },
-    Description = 'Queen Baby (Engineer)',
+    Description = 'Engineer',
     Display = {
 		Abilities = {
 			'In Development.',
@@ -143,6 +143,7 @@ UnitBlueprint {
 		ConstructionBar = true,
         FactionName = 'Terminids',
         Icon = 'land',
+		UnitName = 'Queen Baby',
         TechLevel = 'RULEUTL_Basic',
         UnitWeight = 1,
     },

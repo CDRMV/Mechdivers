@@ -58,7 +58,6 @@ UnitBlueprint {
     },
     BuildIconSortPriority = 30,
     Categories = {
-        'PRODUCTSC1',
         'SELECTABLE',
         'BUILTBYTIER1SHRIEKERNEST',
 		'TERMINIDS',
@@ -68,7 +67,7 @@ UnitBlueprint {
         'DIRECTFIRE',
         'VISIBLETORECON',
         'RECLAIMABLE',
-        'BOT',
+        'HIGHALTAIR',
         'OVERLAYDIRECTFIRE',
     },
     Defense = {
@@ -81,7 +80,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
     },
-    Description = 'Shrieker',
+    Description = 'Ground Attack Bug',
     Display = {
         Mesh = {
             IconFadeInZoom = 130,
@@ -142,6 +141,7 @@ UnitBlueprint {
         },
         FactionName = 'Terminids',
         Icon = 'air',
+		UnitName = 'Shrieker',
         TechLevel = 'RULEUTL_Basic',
         UnitWeight = 1,
     },
@@ -215,7 +215,7 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'Tom Cat Machinegun',
             FireTargetLayerCapsTable = {
-                Air = 'Air|Land|Water|Seabed',
+                Air = 'Land|Water|Seabed',
             },
             FiringTolerance = 2,
             Label = 'ArmCannonTurret',

@@ -73,7 +73,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Shrieker Nest',
+    Description = 'Air Factory',
     Display = {
         BuildAttachBone = 'Attachpoint',
         Mesh = {
@@ -148,6 +148,7 @@ UnitBlueprint {
             RULEUCC_Transport = false,
         },
         ConstructionBar = true,
+		UnitName = 'Shrieker Nest',
         FactionName = 'Terminids',
         Icon = 'air',
         SelectionPriority = 5,

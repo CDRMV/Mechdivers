@@ -55,7 +55,6 @@ UnitBlueprint {
     },
     BuildIconSortPriority = 30,
     Categories = {
-        'PRODUCTSC1',
         'SELECTABLE',
         'BUILTBYTIER1SHRIEKERNEST',
 		'TERMINIDS',
@@ -65,7 +64,7 @@ UnitBlueprint {
         'DIRECTFIRE',
         'VISIBLETORECON',
         'RECLAIMABLE',
-        'BOT',
+        'HIGHALTAIR',
         'OVERLAYDIRECTFIRE',
     },
     Defense = {
@@ -78,7 +77,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
     },
-    Description = 'Muraylisk',
+    Description = 'Gunship Bug',
     Display = {
         Mesh = {
             IconFadeInZoom = 130,
@@ -140,6 +139,7 @@ UnitBlueprint {
         FactionName = 'Terminids',
         Icon = 'air',
         TechLevel = 'RULEUTL_Basic',
+		UnitName = 'Muraylisk',
         UnitWeight = 1,
     },
     Intel = {

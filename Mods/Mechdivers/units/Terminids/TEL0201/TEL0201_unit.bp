@@ -55,7 +55,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
     },
-    Description = 'Acid Spewer',
+    Description = 'Assault Bug',
     Display = {
 		Abilities = {
 			'In Development.',
@@ -122,6 +122,7 @@ UnitBlueprint {
             RULEUCC_Transport = false,
         },
         FactionName = 'Terminids',
+		UnitName = 'Acid Spewer',
         Icon = 'land',
         TechLevel = 'RULEUTL_Advanced',
         UnitWeight = 1,

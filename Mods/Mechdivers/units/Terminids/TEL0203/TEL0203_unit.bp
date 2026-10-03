@@ -55,7 +55,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
     },
-    Description = 'Charger',
+    Description = 'Heavy Melee Bug',
     Display = {
 		Abilities = {
 			'In Development.',
@@ -128,6 +128,7 @@ UnitBlueprint {
             RULEUCC_Transport = false,
         },
         FactionName = 'Terminids',
+		UnitName = 'Charger',
         Icon = 'land',
         TechLevel = 'RULEUTL_Advanced',
         UnitWeight = 1,

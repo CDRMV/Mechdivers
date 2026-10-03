@@ -55,7 +55,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
     },
-    Description = 'Acid Spitter',
+    Description = 'Assault Bug',
     Display = {
 		Abilities = {
 			'Attacks enemy Land Units with Acid',
@@ -123,6 +123,7 @@ UnitBlueprint {
         },
         FactionName = 'Terminids',
         Icon = 'land',
+		UnitName = 'Acid Spitter',
         TechLevel = 'RULEUTL_Basic',
         UnitWeight = 1,
     },

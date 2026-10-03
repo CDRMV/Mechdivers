@@ -64,7 +64,9 @@ CSKMDTL0308 = Class(TLandUnit) {
         TLandUnit.OnScriptBitSet(self, bit)
         if bit == 1 then 
 		local location = self:GetPosition()
+		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 			local SmokeUnit = CreateUnitHPR('UEFSSP0100b', self:GetArmy(), location[1], location[2], location[3], 0, 0, 0)
+			SetIgnoreArmyUnitCap(self:GetArmy(), false)
 			self:SetScriptBit('RULEUTC_WeaponToggle', false)
         end
     end,

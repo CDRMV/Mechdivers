@@ -251,7 +251,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 45,
-            ProjectileId = '/mods/Mechdivers/projectiles/TEAcidArtillery01/TEAcidArtillery01_proj.bp',
+            ProjectileId = '/mods/Mechdivers/projectiles/TEAAAcid/TEAAAcid_proj.bp',
             ProjectileLifetimeUsesMultiplier = 1.25,
             ProjectilesPerOnFire = 2,
             RackBones = {

@@ -289,7 +289,25 @@ TEL0001 = Class(TWalkingLandUnit) {
             TWalkingLandUnit.StartBuildingEffects(self, self:GetUnitBeingBuilt(), self.UnitBuildOrder)
         end
         TWalkingLandUnit.OnUnpaused(self)
-    end,      
+    end,   
+
+    OnScriptBitSet = function(self, bit)
+        TWalkingLandUnit.OnScriptBitSet(self, bit)
+        if bit == 1 then 
+			local location = self:GetPosition('Egg')
+			SetIgnoreArmyUnitCap(self:GetArmy(), true)
+			local Egg = CreateUnitHPR('TEB0100', self:GetArmy(), location[1], location[2], location[3], 0, 0, 0)
+			SetIgnoreArmyUnitCap(self:GetArmy(), false)
+			self:SetScriptBit('RULEUTC_WeaponToggle', false)
+        end
+    end,
+
+    OnScriptBitClear = function(self, bit)
+        TWalkingLandUnit.OnScriptBitClear(self, bit)
+        if bit == 1 then 
+			
+        end
+    end,	
 
 }
 

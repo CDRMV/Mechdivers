@@ -122,6 +122,7 @@ UnitBlueprint {
     Description = 'Queen (Armored Command Unit)',
     Display = {
         Abilities = {
+			'Can lay Eggs to produce Tech 1 Land Units',
             '<LOC ability_amphibious>Amphibious',
             '<LOC ability_customizable>Customizable',
             '<LOC ability_engineeringsuite>Engineering Suite',
@@ -286,6 +287,15 @@ UnitBlueprint {
         SelectionPriority = 3,
         TechLevel = 'RULEUTL_Experimental',
         UnitWeight = 1,
+		OrderOverrides = {
+		    RULEUTC_WeaponToggle = {
+				helpText = 'Lay an Egg',
+				bitmapId = 'production',
+            },
+        }, 
+        ToggleCaps = {
+            RULEUTC_WeaponToggle = true,
+        },
     },
     Intel = {
         FreeIntel = true,
