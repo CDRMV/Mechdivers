@@ -250,6 +250,7 @@ local MyUnitIdTable = {
 	tel0101=true,
 	tel0102=true,
 	tel0105=true,
+	tel0106=true,
 	tel0201=true,
 	tel0202=true,
 	tel0203=true,
@@ -279,6 +280,7 @@ local MyUnitIdTable = {
 	teb2101=true,
 	teb2104=true,
 	teb3101=true,
+	teb5101=true,
 }
 
 
