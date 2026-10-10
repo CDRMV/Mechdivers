@@ -176,7 +176,7 @@ UnitBlueprint {
     StrategicIconName = 'icon_bot2_directfire',
     StrategicIconSortPriority = 135,
     Transport = {
-        CanFireFromTransport = true,
+        CanFireFromTransport = false,
     },
     Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',

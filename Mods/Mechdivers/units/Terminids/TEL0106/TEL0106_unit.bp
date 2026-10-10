@@ -178,7 +178,7 @@ UnitBlueprint {
     StrategicIconName = 'icon_bot1_directfire',
     StrategicIconSortPriority = 135,
     Transport = {
-        CanFireFromTransport = true,
+        CanFireFromTransport = false,
     },
     Veteran = {
         Level1 = 2,

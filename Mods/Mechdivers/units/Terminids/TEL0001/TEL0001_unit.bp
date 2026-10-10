@@ -360,7 +360,7 @@ UnitBlueprint {
             Audio = {
                 Fire = Sound {
                     Bank = 'UELWeapon',
-                    Cue = 'UEL0106_MachineGun',
+                    Cue = 'UEB2101_Cannon_Sgl',
                     LodCutoff = 'Weapon_LodCutoff',
                 },
             },
@@ -436,7 +436,7 @@ UnitBlueprint {
             Audio = {
                 Fire = Sound {
                     Bank = 'UELWeapon',
-                    Cue = 'UEL0106_MachineGun',
+                    Cue = 'UEB2101_Cannon_Sgl',
                     LodCutoff = 'Weapon_LodCutoff',
                 },
             },

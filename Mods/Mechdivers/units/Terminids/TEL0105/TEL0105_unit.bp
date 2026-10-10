@@ -190,7 +190,7 @@ UnitBlueprint {
     StrategicIconName = 'icon_land1_engineer',
     StrategicIconSortPriority = 135,
     Transport = {
-        CanFireFromTransport = true,
+        CanFireFromTransport = false,
     },
     Veteran = {
         Level1 = 2,
