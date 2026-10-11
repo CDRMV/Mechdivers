@@ -7,7 +7,7 @@
 #** 
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local TWallStructureUnit = import('/lua/defaultunits.lua').WallStructureUnit
+local TWallStructureUnit = import('/lua/defaultunits.lua').TerminideWallStructureUnit
 
 TEB5101 = Class(TWallStructureUnit) {
 }

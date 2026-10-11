@@ -8,7 +8,7 @@
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 
-local TMassCollectionUnit = import('/lua/defaultunits.lua').MassCollectionUnit
+local TMassCollectionUnit = import('/lua/defaultunits.lua').TerminideMassCollectionUnit
 
 TEB1103 = Class(TMassCollectionUnit) {
 

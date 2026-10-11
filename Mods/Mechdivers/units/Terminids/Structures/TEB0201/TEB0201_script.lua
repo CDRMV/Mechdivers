@@ -8,8 +8,14 @@
 #**  Copyright © 2006 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 
-local TLandFactoryUnit = import('/lua/Defaultunits.lua').FactoryUnit
+local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+local TLandFactoryUnit = nil
+if version < 3652 then 
+TLandFactoryUnit = import('/lua/Defaultunits.lua').BugHole
+else
+TLandFactoryUnit = import('/mods/Mechdivers/hook/lua/FAFDefaultunits.lua').FAFBugHole
+end
 
-TEB0101 = Class(TLandFactoryUnit) {}
+TEB0201 = Class(TLandFactoryUnit) {}
 
-TypeClass = TEB0101
+TypeClass = TEB0201

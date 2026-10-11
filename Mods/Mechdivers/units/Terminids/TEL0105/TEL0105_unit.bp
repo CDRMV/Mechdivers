@@ -220,7 +220,7 @@ UnitBlueprint {
                 Water = 'Land|Water|Seabed',
             },
             FiringTolerance = 2,
-            Label = 'ArmCannonTurret',
+            Label = 'Melee',
             MaxRadius = 14,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,

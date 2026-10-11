@@ -81,3 +81,9 @@ TAcidArtilleryFXTrail01 =  {
     ModBpPath .. 'acid_trail_emit.bp', 
 ModBpPath .. 'acid_fxtrail_02_emit.bp',     
 }
+
+TerminideBuildBeams01 = {
+    ModBpPath .. 'terminide_build_beam_01_emit.bp',
+    ModBpPath .. 'terminide_build_beam_02_emit.bp',
+    ModBpPath .. 'terminide_build_beam_03_emit.bp',
+}

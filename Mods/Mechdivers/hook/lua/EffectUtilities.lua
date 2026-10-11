@@ -370,6 +370,132 @@ function CreateAdjacencyBeams( unit, adjacentUnit, AdjacencyBeamsBag )
     end
 end
 
+function CreateTerminideBuildBaseThread( unitBeingBuilt, builder, EffectsBag )
+    local bp = unitBeingBuilt:GetBlueprint()
+    local x, y, z = unpack(unitBeingBuilt:GetPosition())
+    local mul = 0.5
+    local sx = bp.Physics.MeshExtentsX or bp.Footprint.SizeX * mul
+    local sz = bp.Physics.MeshExtentsZ or bp.Footprint.SizeZ * mul
+    local sy = bp.Physics.MeshExtentsY or sx + sz
 
+    local slice = nil
+    WaitSeconds(0.1)
+
+    local BuildBaseEffect = unitBeingBuilt:CreateProjectile('/effects/entities/SeraphimBuildEffect01/SeraphimBuildEffect01_proj.bp', nil, 0, 0, nil, nil, nil )
+    BuildBaseEffect:SetScale(sx, 1, sz)
+    BuildBaseEffect:SetOrientation( unitBeingBuilt:GetOrientation(), true)    
+    Warp( BuildBaseEffect, Vector(x,y,z))
+    unitBeingBuilt.Trash:Add(BuildBaseEffect)
+    EffectsBag:Add(BuildBaseEffect)
+
+    local BuildEffectBaseEmitters = {
+        '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_01_emit.bp',
+    }
+
+    local BuildEffectsEmitters = {
+        '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_02_emit.bp',
+        '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_03_emit.bp',
+        '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_04_emit.bp', 
+        '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_05_emit.bp',    
+		'/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_09_emit.bp',
+		'/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_10_emit.bp',
+    }
+    
+    local AdjustedEmitters = {}
+    local effect = nil
+    for k, vEffect in BuildEffectsEmitters do
+        effect = CreateAttachedEmitter( unitBeingBuilt, -1, builder:GetArmy(), vEffect):OffsetEmitter(0,-0.8,0)
+        table.insert( AdjustedEmitters, effect )
+        EffectsBag:Add(effect)
+    end
+
+    for k, vEffect in BuildEffectBaseEmitters do
+        effect = CreateAttachedEmitter( unitBeingBuilt, -1, builder:GetArmy(), vEffect):OffsetEmitter(0,-2.5,0)
+        table.insert( AdjustedEmitters, effect )
+        EffectsBag:Add(effect)
+    end
+	local fp = unitBeingBuilt:GetBlueprint().Footprint
+	local unitScaleMetric =  math.max(fp.SizeX, fp.SizeZ)
+	 fractionComplete = unitBeingBuilt:GetFractionComplete()
+	        for k, vEffect in AdjustedEmitters do
+             vEffect:ScaleEmitter(unitScaleMetric + 1)	    
+        end  
+	
+	unitBeingBuilt:CreateTarmac(true, true, true, false, false)
+
+    WaitSeconds(0.5)
+    BuildBaseEffect:Destroy()
+end
+
+function CreateTerminideConstructionUnitBuildingEffects( builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag )
+	local ModEffectTemplate = import('/mods/Mechdivers/lua/CSKMDEffectTemplates.lua')
+	local army = builder:GetArmy()
+    local beamEnd = Entity()
+    BuildEffectsBag:Add(beamEnd)
+    Warp( beamEnd, unitBeingBuilt:GetPosition() )
+
+    for kBone, vBone in BuildEffectBones do
+		BuildEffectsBag:Add( CreateAttachedEmitter( builder, vBone, army, '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_02_emit.bp' ) )
+		BuildEffectsBag:Add( CreateAttachedEmitter( builder, vBone, army, '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_09_emit.bp' ):OffsetEmitter(0,-0.2,0) )
+		BuildEffectsBag:Add( CreateAttachedEmitter( builder, vBone, army, '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_10_emit.bp' ):OffsetEmitter(0,-0.1,0) )
+    	for k, v in ModEffectTemplate.TerminideBuildBeams01 do
+			local beamEffect = AttachBeamEntityToEntity(builder, vBone, beamEnd, -1, army, v )
+			BuildEffectsBag:Add(beamEffect)
+		end
+	end
+end
+
+function CreateTerminideUnitBuildingEffects( builder, unitBeingBuilt, BuildEffectBones, EffectsBag )
+    local bp = unitBeingBuilt:GetBlueprint()
+    local x, y, z = unpack(unitBeingBuilt:GetPosition())
+    local mul = 0.5
+    local sx = bp.Physics.MeshExtentsX or bp.Footprint.SizeX * mul
+    local sz = bp.Physics.MeshExtentsZ or bp.Footprint.SizeZ * mul
+    local sy = bp.Physics.MeshExtentsY or sx + sz
+
+    local slice = nil
+    WaitSeconds(0.1)
+
+    local BuildBaseEffect = unitBeingBuilt:CreateProjectile('/effects/entities/SeraphimBuildEffect01/SeraphimBuildEffect01_proj.bp', nil, 0, 0, nil, nil, nil )
+    BuildBaseEffect:SetScale(sx, 1, sz)
+    BuildBaseEffect:SetOrientation( unitBeingBuilt:GetOrientation(), true)    
+    Warp( BuildBaseEffect, Vector(x,y,z))
+    unitBeingBuilt.Trash:Add(BuildBaseEffect)
+    EffectsBag:Add(BuildBaseEffect)
+
+    local BuildEffectBaseEmitters = {
+        '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_01_emit.bp',
+    }
+
+    local BuildEffectsEmitters = {
+        '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_02_emit.bp',
+        '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_03_emit.bp',
+        '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_04_emit.bp', 
+        '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_05_emit.bp',    
+		'/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_09_emit.bp',
+		'/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_10_emit.bp',
+    }
+    
+    local AdjustedEmitters = {}
+    local effect = nil
+    for k, vEffect in BuildEffectsEmitters do
+        effect = CreateAttachedEmitter( unitBeingBuilt, -1, builder:GetArmy(), vEffect):OffsetEmitter(0,-0.8,0)
+        table.insert( AdjustedEmitters, effect )
+        EffectsBag:Add(effect)
+    end
+
+    for k, vEffect in BuildEffectBaseEmitters do
+        effect = CreateAttachedEmitter( unitBeingBuilt, -1, builder:GetArmy(), vEffect):OffsetEmitter(0,-2.5,0)
+        table.insert( AdjustedEmitters, effect )
+        EffectsBag:Add(effect)
+    end
+	
+		local fp = unitBeingBuilt:GetBlueprint().Footprint
+	local unitScaleMetric =  math.max(fp.SizeX, fp.SizeZ)
+	 fractionComplete = unitBeingBuilt:GetFractionComplete()
+	        for k, vEffect in AdjustedEmitters do
+             vEffect:ScaleEmitter(unitScaleMetric + 1)	    
+        end  
+end
 
 end

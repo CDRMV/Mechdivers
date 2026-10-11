@@ -8,7 +8,7 @@
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 
-local TRadarUnit = import('/lua/defaultunits.lua').RadarUnit
+local TRadarUnit = import('/lua/defaultunits.lua').TerminideRadarUnit
 
 TEB3101 = Class(TRadarUnit) {
 

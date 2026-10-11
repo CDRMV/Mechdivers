@@ -7,7 +7,7 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local TEnergyStorageUnit = import('/lua/defaultunits.lua').EnergyStorageUnit
+local TEnergyStorageUnit = import('/lua/defaultunits.lua').TerminideEnergyStorageUnit
 
 TEB1105 = Class(TEnergyStorageUnit) {
 

@@ -8,7 +8,7 @@
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 
-local TEnergyCreationUnit = import('/lua/defaultunits.lua').EnergyCreationUnit
+local TEnergyCreationUnit = import('/lua/defaultunits.lua').TerminideEnergyCreationUnit
 TEB1102 = Class(TEnergyCreationUnit) {
     DestructionPartsHighToss = {'Exhaust01',},
     DestructionPartsLowToss = {'Exhaust01','Exhaust02','Exhaust03','Exhaust04','Exhaust05',},

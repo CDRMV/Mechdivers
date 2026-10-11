@@ -8,7 +8,7 @@
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 
-local TEnergyCreationUnit = import('/lua/defaultunits.lua').EnergyCreationUnit
+local TEnergyCreationUnit = import('/lua/defaultunits.lua').TerminideEnergyCreationUnit
 
 TEB1101 = Class(TEnergyCreationUnit) {
 

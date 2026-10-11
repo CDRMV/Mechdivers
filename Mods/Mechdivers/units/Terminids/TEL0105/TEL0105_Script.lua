@@ -8,14 +8,24 @@
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 local TWalkingLandUnit = import('/lua/Defaultunits.lua').WalkingLandUnit
-local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
-
+local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
+local EffectUtil = import('/lua/EffectUtilities.lua')
 
 TEL0105 = Class(TWalkingLandUnit) {
     Weapons = {
-        ArmCannonTurret = Class(TDFMachineGunWeapon) {
+        Melee = Class(DummyTurretWeapon) {
         },
     },
+	
+	CreateBuildEffects = function( self, unitBeingBuilt, order )
+        local UpgradesFrom = unitBeingBuilt:GetBlueprint().General.UpgradesFrom
+        # If we are assisting an upgrading unit, or repairing a unit, play seperate effects
+        if (order == 'Repair' and not unitBeingBuilt:IsBeingBuilt()) or (UpgradesFrom and UpgradesFrom != 'none' and self:IsUnitState('Guarding'))then
+            EffectUtil.CreateTerminideConstructionUnitBuildingEffects( self, unitBeingBuilt, self:GetBlueprint().General.BuildBones.BuildEffectBones, self.BuildEffectsBag )
+        else
+            EffectUtil.CreateTerminideConstructionUnitBuildingEffects( self, unitBeingBuilt, self:GetBlueprint().General.BuildBones.BuildEffectBones, self.BuildEffectsBag )        
+        end           
+    end,
 }
 TypeClass = TEL0105
 
