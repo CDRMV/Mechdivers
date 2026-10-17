@@ -78,7 +78,7 @@ UnitBlueprint {
             '<LOC ability_upgradable>Upgradeable',
         },
         AnimationUpgrade = '/units/ueb0103/ueb0103_aupgrade.sca',
-        BuildAttachBone = 'Attachpoint',
+        BuildAttachBone = 'Attachpoint01',
         IdleEffects = {
             Water = {
                 Effects = {
@@ -131,7 +131,7 @@ UnitBlueprint {
     General = {
         BuildBones = {
             BuildEffectBones = {
-                'Right_Exhaust',
+                'Muzzle',
             },
         },
         Category = 'Factory',
@@ -200,8 +200,8 @@ UnitBlueprint {
                 Z = 8,
             },
         },
-        SkirtOffsetX = -4,
-        SkirtOffsetZ = -2,
+        SkirtOffsetX = -7,
+        SkirtOffsetZ = -3,
         SkirtSizeX = 12,
         SkirtSizeZ = 14,
         TurnRate = 0,

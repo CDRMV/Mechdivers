@@ -22,13 +22,12 @@ TES0100 = Class(TSeaUnit) {
             self.AnimationManipulator = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator)
         end
-        self.AnimationManipulator:PlayAnim('/mods/Mechdivers/units/Terminids/TES0100/TES0100_A01.sca', false):SetRate(0)
+        self.AnimationManipulator:PlayAnim('/mods/Mechdivers/units/Terminids/TES0100/TES0100_A01.sca', false):SetRate(2)
         TSeaUnit.OnCreate(self)
     end,
 	
 	OnStopBeingBuilt = function(self,builder,layer)
         TSeaUnit.OnStopBeingBuilt(self,builder,layer)
-		self.AnimationManipulator:SetRate(2)
 		if not self.AnimationUnpack1Manipulator then
             self.AnimationUnpack1Manipulator = CreateAnimator(self)
             self.Trash:Add(self.AnimationUnpack1Manipulator)

@@ -445,6 +445,26 @@ function CreateTerminideConstructionUnitBuildingEffects( builder, unitBeingBuilt
 	end
 end
 
+function CreateTerminideConstructionUnitBuildingEffects2( builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag )
+	local ModEffectTemplate = import('/mods/Mechdivers/lua/CSKMDEffectTemplates.lua')
+	local army = builder:GetArmy()
+    local beamEnd = Entity()
+    BuildEffectsBag:Add(beamEnd)
+    Warp( beamEnd, builder:GetPosition('Attachpoint01') )
+
+    for kBone, vBone in BuildEffectBones do
+		BuildEffectsBag:Add( CreateAttachedEmitter( builder, vBone, army, '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_02_emit.bp' ) )
+		BuildEffectsBag:Add( CreateAttachedEmitter( builder, vBone, army, '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_09_emit.bp' ):OffsetEmitter(0,-0.2,0) )
+		BuildEffectsBag:Add( CreateAttachedEmitter( builder, vBone, army, '/mods/Mechdivers/effects/emitters/terminide_being_built_ambient_10_emit.bp' ):OffsetEmitter(0,-0.1,0) )
+    	for k, v in ModEffectTemplate.TerminideBuildBeams01 do
+			local beamEffect = AttachBeamEntityToEntity(builder, vBone, beamEnd, -1, army, v )
+			BuildEffectsBag:Add(beamEffect)
+		end
+	end
+end
+
+
+
 function CreateTerminideUnitBuildingEffects( builder, unitBeingBuilt, BuildEffectBones, EffectsBag )
     local bp = unitBeingBuilt:GetBlueprint()
     local x, y, z = unpack(unitBeingBuilt:GetPosition())
