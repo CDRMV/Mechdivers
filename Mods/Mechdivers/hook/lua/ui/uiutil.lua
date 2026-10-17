@@ -263,6 +263,11 @@ local MyUnitIdTable = {
 	tea0105=true,
 	tea0107=true,
 	
+-- Naval
+	tes0100=true,
+	tes0103=true,
+	tes0203=true,
+	
  -- Structures  
  
     -- Mines --
@@ -274,6 +279,7 @@ local MyUnitIdTable = {
 	-----------  
 	teb0101=true,
 	teb0102=true,
+	teb0103=true,
 	teb0201=true,
 	teb1101=true,
 	teb1102=true,
@@ -283,6 +289,7 @@ local MyUnitIdTable = {
 	teb2101=true,
 	teb2104=true,
 	teb3101=true,
+	teb3102=true,
 	teb5101=true,
 }
 
