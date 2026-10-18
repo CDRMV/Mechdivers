@@ -451,6 +451,23 @@ SmallAcid = Class(EmitterProjectile) {
     FxNoneHitScale = 0.2,
 }
 
+SmallSeaAcid = Class(EmitterProjectile) {
+    FxTrails = {'/mods/Mechdivers/Effects/Emitters/watercompression_projectile_fxtrail_01_emit.bp', '/effects/emitters/torpedo_underwater_wake_01_emit.bp', '/effects/emitters/torpedo_munition_trail_01_emit.bp',},
+       FxTrailScale = 0.35,
+    
+    FxImpactTrajectoryAligned = false,
+
+    FxImpactUnit = ModEffectTemplate.TAcidLand01,
+    FxImpactProp = ModEffectTemplate.TAcidLand01,
+    FxImpactLand = ModEffectTemplate.TAcidLand01,
+    FxImpactWater = {},
+    FxImpactUnderWater = EffectTemplate.TTorpedoHitUnit01,
+    FxLandHitScale = 0.2,
+    FxPropHitScale = 0.2,
+    FxUnitHitScale = 0.2,
+    FxNoneHitScale = 0.2,
+}
+
 TSmallAcidArtilleryProjectile = Class(MultiPolyTrailProjectile) {
     PolyTrails = {
         ModEffectTemplate.TAcidArtilleryPolyTrail,

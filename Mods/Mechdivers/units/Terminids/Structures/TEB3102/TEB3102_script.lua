@@ -8,7 +8,7 @@
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 
-local TSonarUnit = import('/lua/defaultunits.lua').SonarUnit
+local TSonarUnit = import('/lua/defaultunits.lua').TerminideSonarUnit
 
 TEB3102 = Class(TSonarUnit) {
     TimedSonarTTIdleEffects = {

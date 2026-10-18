@@ -1950,11 +1950,16 @@ TerminideSonarUnit = Class(TerminideStructureUnit) {
 }
 
 
-TerminideSeaFactoryUnit = Class(FactoryUnit) {
+TerminideSeaFactoryUnit = Class(BugHole) {
     StartRocking = function(self)
     end,
 
     StopRocking = function(self)
+    end,
+	
+	CreateBuildEffects = function( self, unitBeingBuilt, order )
+        EffectUtil.CreateTerminideUnitBuildingEffects( self, unitBeingBuilt, self:GetBlueprint().General.BuildBones.BuildEffectBones, self.BuildEffectsBag )      
+		EffectUtil.CreateTerminideConstructionUnitBuildingEffects2( self, unitBeingBuilt, self:GetBlueprint().General.BuildBones.BuildEffectBones, self.BuildEffectsBag )		
     end,
 }
 

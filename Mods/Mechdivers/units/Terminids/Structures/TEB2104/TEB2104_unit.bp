@@ -97,7 +97,7 @@ UnitBlueprint {
         BuildCostMass = 250,
         BuildTime = 250,
         RebuildBonusIds = {
-            'teb2101',
+            'teb2104',
         },
     },
     General = {
