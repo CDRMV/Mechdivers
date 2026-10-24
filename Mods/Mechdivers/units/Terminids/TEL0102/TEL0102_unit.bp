@@ -59,6 +59,7 @@ UnitBlueprint {
     Display = {
 		Abilities = {
 			'Attacks enemy Land Units with Melee',
+			'Can burrow to hide itself if Idle.',
         },
         AnimationDeath = {
             {
@@ -123,6 +124,15 @@ UnitBlueprint {
         },
         FactionName = 'Terminids',
         Icon = 'land',
+		OrderOverrides = {
+			RULEUTC_WeaponToggle = {
+				bitmapId = 'production',
+				helpText = 'Entrench',
+            },
+        },
+		ToggleCaps = {
+			RULEUTC_WeaponToggle = true,
+        },
 		UnitName = 'Scavenger',
         TechLevel = 'RULEUTL_Basic',
         UnitWeight = 1,
@@ -191,8 +201,7 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'Gauss Cannon',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Seabed|Air',
-                Water = 'Land|Water|Seabed|Air',
+                Land = 'Land',
             },
             FiringTolerance = 1,
             Label = 'Melee',

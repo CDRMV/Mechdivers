@@ -199,8 +199,7 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'Gauss Cannon',
             FireTargetLayerCapsTable = {
-                Land = 'Land|Water|Seabed|Air',
-                Water = 'Land|Water|Seabed|Air',
+                Land = 'Land',
             },
             FiringTolerance = 1,
             Label = 'Melee',

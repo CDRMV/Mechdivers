@@ -215,9 +215,7 @@ UnitBlueprint {
             DamageType = 'Normal',
             DisplayName = 'Tom Cat Machinegun',
             FireTargetLayerCapsTable = {
-                Air = 'Land|Water|Seabed',
-                Land = 'Land|Water|Seabed',
-                Water = 'Land|Water|Seabed',
+                Land = 'Land',
             },
             FiringTolerance = 2,
             Label = 'Melee',
@@ -225,7 +223,7 @@ UnitBlueprint {
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,
             MuzzleVelocity = 25,
-            ProjectileId = '/projectiles/TDFMachineGun01/TDFMachineGun01_proj.bp',
+            ProjectileId = '/mods/Mechdivers/projectiles/Melee/Melee_proj.bp',
             ProjectileLifetimeUsesMultiplier = 1.15,
             ProjectilesPerOnFire = 1,
             RackBones = {

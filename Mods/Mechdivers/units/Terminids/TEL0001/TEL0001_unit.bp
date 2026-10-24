@@ -134,7 +134,7 @@ UnitBlueprint {
         # AnimationIdle = '/units/uel0001/uel0001_a002.sca',
         AnimationWalk = '/mods/Mechdivers/units/Terminids/Tel0001/Tel0001_awalk.sca',
 		AnimationArrival = '/mods/Mechdivers/units/Terminids/Tel0001/Tel0001_arrive.sca',
-        AnimationWalkRate = 0.6,
+        AnimationWalkRate = 1.0,
         AttackReticleSize = 55,
         DamageEffects = {
             {

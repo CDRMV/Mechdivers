@@ -254,6 +254,7 @@ local MyUnitIdTable = {
 	tel0103=true,
 	tel0105=true,
 	tel0106=true,
+	tel0107=true,
 	tel0201=true,
 	tel0202=true,
 	tel0203=true,

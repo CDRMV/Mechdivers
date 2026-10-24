@@ -55,7 +55,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0.33,
     },
-    Description = 'Assault Bug',
+    Description = 'Light Assault Bug',
     Display = {
 		Abilities = {
 			'Attacks enemy Land Units with Acid',

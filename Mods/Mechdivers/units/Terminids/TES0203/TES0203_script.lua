@@ -8,13 +8,22 @@
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
 local TSeaUnit = import('/lua/defaultunits.lua').SeaUnit
-local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
+local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 
 TES0203 = Class(TSeaUnit) {
 
     Weapons = {
-        MainGun = Class(TDFGaussCannonWeapon) {
-        },
+		Melee = Class(DummyTurretWeapon) {
+		
+		OnWeaponFired = function(self)
+			ForkThread( function()
+			local animator = CreateAnimator(self.unit)
+            animator:PlayAnim('/Mods/Mechdivers/units/Terminids/TES0203/TES0203_AMelee01.sca', false):SetRate(2)
+			WaitFor(animator)
+			animator:Destroy()	
+			end)
+		end,
+			},
     },
 	OnCreate = function(self)
 		if not self.AnimationManipulator then

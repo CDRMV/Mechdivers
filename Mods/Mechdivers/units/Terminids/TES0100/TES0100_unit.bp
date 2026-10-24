@@ -81,7 +81,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 9,
     },
-    Description = 'Water Bug / Sea Engineer (WIP)',
+    Description = 'Water Bug / Sea Engineer',
     Display = {
         Abilities = {
             'In Development',
