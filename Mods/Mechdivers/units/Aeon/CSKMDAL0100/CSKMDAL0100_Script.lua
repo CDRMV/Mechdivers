@@ -21,9 +21,6 @@ CSKMDAL0100 = Class(AWalkingLandUnit) {
             animator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0100/CSKMDAL0100_Claw.sca', false):SetRate(2)
 			WaitFor(animator)
 			animator:Destroy()
-			if self:GetCurrentTarget() == nil then
-			IssueClearCommands({self.unit})
-			end
 			end)
 		end,
 		},

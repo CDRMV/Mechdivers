@@ -28,9 +28,6 @@ CSKMDAL0301 = Class(AWalkingLandUnit) {
 			end
 			WaitFor(animator)
 			animator:Destroy()
-			if self:GetCurrentTarget() == nil then
-			IssueClearCommands({self.unit})
-			end
 			end)
 		end,
 		},
