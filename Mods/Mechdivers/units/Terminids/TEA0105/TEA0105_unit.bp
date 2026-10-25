@@ -69,13 +69,13 @@ UnitBlueprint {
     },
     Defense = {
         AirThreatLevel = 0,
-        ArmorType = 'Normal',
+        ArmorType = 'Light',
         EconomyThreatLevel = 0,
-        Health = 75,
-        MaxHealth = 75,
+        Health = 525,
+        MaxHealth = 525,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 0.33,
+        SurfaceThreatLevel = 2,
     },
     Description = 'Gunship Bug',
     Display = {
@@ -93,9 +93,9 @@ UnitBlueprint {
         UniformScale = 1.2,
     },
     Economy = {
-        BuildCostEnergy = 140,
-        BuildCostMass = 35,
-        BuildTime = 140,
+        BuildCostEnergy = 5000,
+        BuildCostMass = 200,
+        BuildTime = 1000,
     },
     General = {
         Category = 'Direct Fire',

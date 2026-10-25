@@ -1,9 +1,7 @@
 UnitBlueprint {
     AI = {
         TargetBones = {
-            'UEB0103',
-            'Center_Deck',
-            'Center_BottomDeck',
+            'Bone',
         },
     },
     Audio = {
@@ -152,12 +150,12 @@ UnitBlueprint {
             RULEUCC_Transport = false,
         },
         ConstructionBar = true,
+		UnitName = 'Sea Scorpion Nest',
         FactionName = 'Terminids',
         Icon = 'sea',
         SelectionPriority = 5,
         TechLevel = 'RULEUTL_Basic',
         UnitWeight = 1,
-        UpgradesTo = 'teb0203',
     },
     Intel = {
         VisionRadius = 20,

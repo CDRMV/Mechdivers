@@ -71,14 +71,14 @@ UnitBlueprint {
         'OVERLAYDIRECTFIRE',
     },
     Defense = {
-        AirThreatLevel = 0,
-        ArmorType = 'Normal',
+        AirThreatLevel = 0.33,
+        ArmorType = 'Light',
         EconomyThreatLevel = 0,
-        Health = 75,
-        MaxHealth = 75,
+        Health = 295,
+        MaxHealth = 295,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 0.33,
+        SurfaceThreatLevel = 0,
     },
     Description = 'Ground Attack Bug',
     Display = {
@@ -96,9 +96,9 @@ UnitBlueprint {
         UniformScale = 1.2,
     },
     Economy = {
-        BuildCostEnergy = 140,
-        BuildCostMass = 35,
-        BuildTime = 140,
+		BuildCostEnergy = 2250,
+        BuildCostMass = 50,
+        BuildTime = 500,
     },
     General = {
         Category = 'Direct Fire',

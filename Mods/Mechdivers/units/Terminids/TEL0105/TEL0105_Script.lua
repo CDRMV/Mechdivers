@@ -9,6 +9,7 @@
 #****************************************************************************
 local TWalkingLandUnit = import('/lua/Defaultunits.lua').WalkingLandUnit
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
+local EffectUtil = import('/lua/EffectUtilities.lua')
 
 TEL0105 = Class(TWalkingLandUnit) {
     Weapons = {

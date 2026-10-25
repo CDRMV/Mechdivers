@@ -54,17 +54,14 @@ UnitBlueprint {
         AirThreatLevel = 0,
         ArmorType = 'Normal',
         EconomyThreatLevel = 0,
-        Health = 75,
-        MaxHealth = 75,
+        Health = 150,
+        MaxHealth = 150,
         RegenRate = 0,
         SubThreatLevel = 0,
-        SurfaceThreatLevel = 0.33,
+        SurfaceThreatLevel = 0,
     },
     Description = 'Engineer',
     Display = {
-		Abilities = {
-			'In Development.',
-        },
         AnimationDeath = {
             {
                 Animation = '/mods/Mechdivers/units/Terminids/TEL0105/TEL0105_Adeath01.sca',
@@ -102,14 +99,16 @@ UnitBlueprint {
         UniformScale = 0.4,
     },
     Economy = {
-        BuildCostEnergy = 140,
-        BuildCostMass = 35,
-        BuildTime = 140,
-		BuildRate = 10,
+        BuildCostEnergy = 260,
+        BuildCostMass = 52,
+        BuildRate = 5,
+        BuildTime = 260,
         BuildableCategory = {
             'BUILTBYTIER1ENGINEER TERMINIDS',
         },
         MaxBuildDistance = 10,
+		StorageEnergy = 0,
+        StorageMass = 10,
         NeedToFaceTargetToBuild = true,
         TeleportEnergyMod = 0.15,
         TeleportMassMod = 1,
