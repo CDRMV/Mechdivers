@@ -53,21 +53,12 @@ UnitBlueprint {
 		'CONSTRUCTION',
         'ENGINEER',
         'REPAIR',
-        'RECLAIM',
         'CAPTURE',
         'NAVAL',
         'TECH1',
         'DIRECTFIRE',
-        'INTELLIGENCE',
-        'COUNTERINTELLIGENCE',
-        'RADAR',
-        'SONAR',
         'VISIBLETORECON',
         'RECLAIMABLE',
-        'OVERLAYANTIAIR',
-        'OVERLAYCOUNTERINTEL',
-        'OVERLAYRADAR',
-        'OVERLAYSONAR',
         'OVERLAYDIRECTFIRE',
     },
     CollisionOffsetY = -0.4,
@@ -83,15 +74,6 @@ UnitBlueprint {
     },
     Description = 'Water Bug / Sea Engineer',
     Display = {
-        Abilities = {
-            'In Development',
-        },
-        AnimationDeath = {
-            {
-                Animation = '/mods/Mechdivers/units/Terminids/tes0100/tes0100_ADeath01.sca',
-                Weight = 100,
-            },
-        },
         IdleEffects = {
             Water = {
                 Effects = {
@@ -160,13 +142,13 @@ UnitBlueprint {
         CommandCaps = {
             RULEUCC_Attack = true,
             RULEUCC_CallTransport = false,
-            RULEUCC_Capture = false,
+            RULEUCC_Capture = true,
             RULEUCC_Guard = true,
             RULEUCC_Move = true,
             RULEUCC_Nuke = false,
             RULEUCC_Patrol = true,
             RULEUCC_Reclaim = false,
-            RULEUCC_Repair = false,
+            RULEUCC_Repair = true,
             RULEUCC_RetaliateToggle = true,
             RULEUCC_Stop = true,
             RULEUCC_Transport = false,
@@ -179,10 +161,8 @@ UnitBlueprint {
         UnitWeight = 1,
     },
     Intel = {
-        RadarRadius = 80,
-        SonarRadius = 82,
         VisionRadius = 32,
-        WaterVisionRadius = 16,
+        WaterVisionRadius = 32,
     },
     Interface = {
         HelpText = '<LOC ues0103_help>Frigate',

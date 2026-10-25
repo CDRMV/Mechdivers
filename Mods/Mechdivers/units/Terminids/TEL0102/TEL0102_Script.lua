@@ -31,6 +31,7 @@ TEL0102 = Class(TWalkingLandUnit) {
         TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self.Slider= CreateSlider(self, 'Body', 0, 0, 0, 0.5)
 		self.Trash:Add(self.Slider)
+		self.DoMeleeThreadHandle = self:ForkThread(self.DoMeleeThread)
     end,
 	
 	OnMotionHorzEventChange = function(self, new, old)
@@ -100,6 +101,22 @@ TEL0102 = Class(TWalkingLandUnit) {
 		self:SetDoNotTarget(false)		
 		end)
         end
+    end,
+	
+	DoMeleeThread = function(self)
+			local unitPos = self:GetPosition()
+			local radius = self:GetBlueprint().Intel.VisionRadius
+			while not self:IsDead() do
+			if self:GetFireState() == 1 then
+			
+			else
+			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Enemy')
+            for _,unit in units do
+			IssueAttack({self}, unit)
+            end
+			end
+			WaitSeconds(0.1)
+			end
     end,
 }
 TypeClass = TEL0102

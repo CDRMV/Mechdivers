@@ -38,6 +38,9 @@ CSKMDAL0206 = Class(AWalkingLandUnit) {
 			end	
             self.unit.animator:SetRate(-2)
 			WaitFor(self.unit.animator)
+			if self:GetCurrentTarget() == nil then
+			IssueClearCommands({self.unit})
+			end
 			end)
                 DummyTurretWeapon.PlayFxRackSalvoChargeSequence(self)
             end,  

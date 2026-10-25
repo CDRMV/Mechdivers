@@ -53,17 +53,9 @@ UnitBlueprint {
         'NAVAL',
         'TECH1',
         'DIRECTFIRE',
-        'INTELLIGENCE',
-        'COUNTERINTELLIGENCE',
-        'RADAR',
-        'SONAR',
         'VISIBLETORECON',
         'RECLAIMABLE',
         'FRIGATE',
-        'OVERLAYANTIAIR',
-        'OVERLAYCOUNTERINTEL',
-        'OVERLAYRADAR',
-        'OVERLAYSONAR',
         'OVERLAYDIRECTFIRE',
     },
     CollisionOffsetY = -0.4,
@@ -79,18 +71,6 @@ UnitBlueprint {
     },
     Description = 'Sea Scorpion',
     Display = {
-        Abilities = {
-            '<LOC ability_aa>Anti-Air',
-            '<LOC ability_jamming>Jamming',
-            '<LOC ability_radar>Radar',
-            '<LOC ability_sonar>Sonar',
-        },
-        AnimationDeath = {
-            {
-                Animation = '/mods/Mechdivers/units/Terminids/tes0100/tes0100_ADeath01.sca',
-                Weight = 100,
-            },
-        },
         IdleEffects = {
             Water = {
                 Effects = {
@@ -163,10 +143,8 @@ UnitBlueprint {
         UnitWeight = 1,
     },
     Intel = {
-        RadarRadius = 80,
-        SonarRadius = 82,
         VisionRadius = 32,
-        WaterVisionRadius = 16,
+        WaterVisionRadius = 32,
     },
     Interface = {
         HelpText = '<LOC ues0103_help>Frigate',

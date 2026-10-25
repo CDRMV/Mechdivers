@@ -26,6 +26,11 @@ TEL0106 = Class(TWalkingLandUnit) {
 			},
     },
 	
+	OnStopBeingBuilt = function(self,builder,layer)
+        TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+		self.DoMeleeThreadHandle = self:ForkThread(self.DoMeleeThread)
+    end,
+	
 	OnMotionHorzEventChange = function(self, new, old)
         TWalkingLandUnit.OnMotionHorzEventChange(self, new, old)
 		if old == 'Stopped' then
@@ -65,6 +70,22 @@ TEL0106 = Class(TWalkingLandUnit) {
 			self.Effect3:Destroy()
 			self.Effect4:Destroy()
         end
+    end,
+	
+	DoMeleeThread = function(self)
+			local unitPos = self:GetPosition()
+			local radius = self:GetBlueprint().Intel.VisionRadius
+			while not self:IsDead() do
+			if self:GetFireState() == 1 then
+			
+			else
+			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Enemy')
+            for _,unit in units do
+			IssueAttack({self}, unit)
+            end
+			end
+			WaitSeconds(0.1)
+			end
     end,
 }
 TypeClass = TEL0106

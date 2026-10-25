@@ -9,12 +9,13 @@
 #****************************************************************************
 local TSeaUnit = import('/lua/defaultunits.lua').SeaUnit
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
+local TANTorpedoLandWeapon = import('/lua/terranweapons.lua').TANTorpedoLandWeapon
 
 TES0203 = Class(TSeaUnit) {
 
     Weapons = {
-		Melee = Class(DummyTurretWeapon) {
-		
+		Turret01 = Class(TANTorpedoLandWeapon) {},
+		Melee = Class(DummyTurretWeapon) {	 
 		OnWeaponFired = function(self)
 			ForkThread( function()
 			local animator = CreateAnimator(self.unit)
