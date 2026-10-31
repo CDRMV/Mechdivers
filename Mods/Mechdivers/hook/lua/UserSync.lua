@@ -8,5 +8,4 @@ function OnSync()
 	elseif Sync.EnableButton == false then
 	import('/mods/Mechdivers/UI/RefWindow.lua').ManageUI(false)
 	end
-	
 end

@@ -45,7 +45,7 @@ end,
 	
 	SpawnSpaceship = function(self)
 		local factionIndex = self:GetFactionIndex()
-
+		
 		if factionIndex == 1 then  
 		local position1, position2 = self:GetArmyStartPos()
 		CreateUnitHPR('CSKMDTA0400', self:GetArmyIndex(), position1, 0, position2, 0, 0, 0)
@@ -58,6 +58,35 @@ end,
 		local position1, position2 = self:GetArmyStartPos()
 		CreateUnitHPR('CSKMDCA0400', self:GetArmyIndex(), position1, 0, position2, 0, 0, 0)
 		end
+		
+		--[[
+		ForkThread(function()
+		while true do
+		if Sync.Terminids == nil then
+
+		elseif Sync.Terminids == true then
+		break
+		elseif Sync.Terminids == false then
+		if factionIndex == 1 then  
+		local position1, position2 = self:GetArmyStartPos()
+		CreateUnitHPR('CSKMDTA0400', self:GetArmyIndex(), position1, 0, position2, 0, 0, 0)
+		break
+		end
+		if factionIndex == 2 then  
+		local position1, position2 = self:GetArmyStartPos()
+		CreateUnitHPR('CSKMDAA0400', self:GetArmyIndex(), position1, 0, position2, 0, 0, 0)
+		break
+		end
+		if factionIndex == 3 then  
+		local position1, position2 = self:GetArmyStartPos()
+		CreateUnitHPR('CSKMDCA0400', self:GetArmyIndex(), position1, 0, position2, 0, 0, 0)
+		break
+		end
+		end
+		WaitSeconds(0.1)
+		end
+		end)
+		]]--		
     end,
 	
 	DeimosAmmuntionMechanic = function(self)

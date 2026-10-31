@@ -97,6 +97,122 @@ function CreateInitialArmyGroup(strArmy, createCommander)
     end
 
     return tblGroup, cdrUnit
+
+
+--[[
+
+    local tblGroup = CreateArmyGroup(strArmy, 'INITIAL')
+    local cdrUnit
+local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+
+if version < 3652 then
+
+    if createCommander and (tblGroup == nil or table.empty(tblGroup)) then
+        local factionIndex = GetArmyBrain(strArmy):GetFactionIndex()
+        local initialUnitName = import("/lua/factions.lua").Factions[factionIndex].InitialUnit
+        cdrUnit = CreateInitialArmyUnit(strArmy, initialUnitName)
+        if EntityCategoryContains(categories.COMMAND, cdrUnit) then
+            if ScenarioInfo.Options['PrebuiltUnits'] == 'Off' then
+                cdrUnit:HideBone(0, true)
+                ForkThread(CommanderWarpDelay, cdrUnit, 3, GetArmyBrain(strArmy))
+            end
+			local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+
+			if version < 3652 then
+			
+			else
+            local rotateOpt = ScenarioInfo.Options['RotateACU']
+            if not rotateOpt or rotateOpt == 'On' then
+                cdrUnit:RotateTowardsMid()
+            elseif rotateOpt == 'Marker' then
+                local marker = GetMarker(strArmy) or {}
+                if marker['orientation'] then
+                    local o = EulerToQuaternion(unpack(marker['orientation']))
+                    cdrUnit:SetOrientation(o, true)
+                end
+            end
+			end
+        end
+	    return tblGroup, cdrUnit	
+    end
+
+else	
+	
+	ForkThread(function()
+while true do
+if Sync.Terminids == nil then
+
+elseif Sync.Terminids == true then	
+SetArmyFactionIndex(strArmy, 4)
+initialUnitName = 'tel0001'
+    if createCommander and (tblGroup == nil or table.empty(tblGroup)) then
+        local factionIndex = GetArmyBrain(strArmy):GetFactionIndex()
+        local initialUnitName = import("/lua/factions.lua").Factions[factionIndex].InitialUnit
+        cdrUnit = CreateInitialArmyUnit(strArmy, initialUnitName)
+		cdrUnit:SetUnSelectable(true)
+        if EntityCategoryContains(categories.COMMAND, cdrUnit) then
+            if ScenarioInfo.Options['PrebuiltUnits'] == 'Off' then
+                cdrUnit:HideBone(0, true)
+                ForkThread(CommanderWarpDelay, cdrUnit, 3, GetArmyBrain(strArmy))
+            end
+			local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+
+			if version < 3652 then
+			
+			else
+            local rotateOpt = ScenarioInfo.Options['RotateACU']
+            if not rotateOpt or rotateOpt == 'On' then
+                cdrUnit:RotateTowardsMid()
+            elseif rotateOpt == 'Marker' then
+                local marker = GetMarker(strArmy) or {}
+                if marker['orientation'] then
+                    local o = EulerToQuaternion(unpack(marker['orientation']))
+                    cdrUnit:SetOrientation(o, true)
+                end
+            end
+			end
+			break
+        end
+		return tblGroup, cdrUnit
+    end
+elseif Sync.Terminids == false then
+    if createCommander and (tblGroup == nil or table.empty(tblGroup)) then
+        local factionIndex = GetArmyBrain(strArmy):GetFactionIndex()
+        local initialUnitName = import("/lua/factions.lua").Factions[factionIndex].InitialUnit
+        cdrUnit = CreateInitialArmyUnit(strArmy, initialUnitName)
+		cdrUnit:SetUnSelectable(true)
+        if EntityCategoryContains(categories.COMMAND, cdrUnit) then
+            if ScenarioInfo.Options['PrebuiltUnits'] == 'Off' then
+                cdrUnit:HideBone(0, true)
+                ForkThread(CommanderWarpDelay, cdrUnit, 3, GetArmyBrain(strArmy))
+            end
+			local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+
+			if version < 3652 then
+			
+			else
+            local rotateOpt = ScenarioInfo.Options['RotateACU']
+            if not rotateOpt or rotateOpt == 'On' then
+                cdrUnit:RotateTowardsMid()
+            elseif rotateOpt == 'Marker' then
+                local marker = GetMarker(strArmy) or {}
+                if marker['orientation'] then
+                    local o = EulerToQuaternion(unpack(marker['orientation']))
+                    cdrUnit:SetOrientation(o, true)
+                end
+            end
+			end
+			break
+        end
+		return tblGroup, cdrUnit
+    end
+end
+WaitSeconds(0.1)
+end	
+end)
+end
+   
+]]--
 end
 
 function SpawnCivilianSlatter(UnitID, MarkerName, Amount)

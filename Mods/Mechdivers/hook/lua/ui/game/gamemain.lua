@@ -2841,15 +2841,31 @@ function OnFirstUpdate()
     import("/lua/keymap/hotbuild.lua").init()
     EnableWorldSounds()
     import("/lua/usermusic.lua").StartPeaceMusic()
-
-    local avatars = GetArmyAvatars()
+	local avatars = GetArmyAvatars()
     local armiesInfo = GetArmiesTable()
     local focusArmy = armiesInfo.focusArmy
     local playerArmy = armiesInfo.armiesTable[focusArmy]
-    if avatars and avatars[1]:IsInCategory("COMMAND") then
+
+	if avatars and avatars[1]:IsInCategory("COMMAND") then
         avatars[1]:SetCustomName(playerArmy.nickname)
         ForkThread(StartupSequence, avatars)
     end
+
+	--[[
+		ForkThread(function()
+while true do	
+if Sync.Terminids == true or Sync.Terminids == false then 
+	    local avatars = GetArmyAvatars()
+    if avatars and avatars[1]:IsInCategory("COMMAND") then
+        avatars[1]:SetCustomName(playerArmy.nickname)
+        ForkThread(StartupSequence, avatars)
+		break
+    end
+end	
+WaitSeconds(0.1)
+end
+end)
+	]]--
 
     FlushEvents()
     if not IsNISMode() then
@@ -2891,7 +2907,7 @@ function StartupSequence(avatars)
             SelectUnits(avatars)
             selected = GetSelectedUnits()
         end
-    until not table.empty(selected) or GameTick() > 50
+    until not table.empty(selected) or GameTick() > 50	
 end
 
 function CreateUI(isReplay)
@@ -3020,6 +3036,7 @@ function CreateUI(isReplay)
     import("/lua/ui/game/economy.lua").CreateEconomyBar(statusClusterGroup)
     import("/lua/ui/game/tabs.lua").Create(mapGroup)
 import('/mods/Mechdivers/UI/MainPanel.lua').CreatePanel(controlClusterGroup)
+--import('/mods/Mechdivers/hook/lua/ui/game/terminideselect.lua').RequestPlayerFaction(gameParent)
     mfdControl = import("/mods/Mechdivers/hook/lua/ui/game/multifunction.lua").Create(controlClusterGroup)
     controls.mfd = mfdControl
 

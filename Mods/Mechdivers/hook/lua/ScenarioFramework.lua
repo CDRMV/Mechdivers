@@ -393,3 +393,32 @@ end
 end
 
 end
+
+
+function OnFactionSelect(data)
+Sync.Terminids = nil
+LOG(data.Faction)
+if data.Faction == 'terminids' then
+Sync.Terminids = true
+else
+Sync.Terminids = false
+end
+    if ScenarioInfo.campaignInfo then
+        ScenarioInfo.campaignInfo.campaignID = data.Faction
+    end
+    if not table.empty(factionCallbacks) then
+        for _, callback in factionCallbacks do
+            if callback then
+                callback(data)
+            end
+        end
+	elseif data.Faction == 'terminids' or data.Faction == 'no' then
+	        for _, callback in factionCallbacks do
+            if callback then
+                callback(data)
+            end
+        end
+    else
+        WARN('I chose ', data.Faction, ' but I dont have a callback set!')
+    end
+end
