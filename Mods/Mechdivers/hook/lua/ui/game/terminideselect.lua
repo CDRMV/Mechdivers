@@ -42,7 +42,12 @@ local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1
             data.icon..'_btn_sel.dds',
             data.icon..'_btn_over.dds',
             data.icon..'_btn_dis.dds')
-        Tooltip.AddButtonTooltip(buttons[index], 'faction_select_'..data.key)
+		if key == 'terminids' then
+		 Tooltip.AddButtonTooltip(buttons[index], import('/mods/Mechdivers/lua/AI/CustomAITooltips/MDTooltips.lua').faction_select_terminids)
+		end 
+		if key == 'no' then
+		 Tooltip.AddButtonTooltip(buttons[index], import('/mods/Mechdivers/lua/AI/CustomAITooltips/MDTooltips.lua').faction_select_no)
+		end
         buttons[index].cue = data.sound
         buttons[index].OnRolloverEvent = function(self, event)
             if event == 'enter' then

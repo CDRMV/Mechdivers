@@ -122,7 +122,8 @@ UnitBlueprint {
     Description = 'Queen (Armored Command Unit)',
     Display = {
         Abilities = {
-			'Can lay Eggs to produce Tech 1 Land Units',
+			'Can lay Eggs, which can produce Tech 1 Land Units',
+			'Enhancement Upgrades in Development.',
             '<LOC ability_amphibious>Amphibious',
             '<LOC ability_customizable>Customizable',
             '<LOC ability_engineeringsuite>Engineering Suite',
@@ -248,6 +249,29 @@ UnitBlueprint {
                 x = -10,
                 y = 30,
             },
+        },
+		Empty = {
+            BuildCostEnergy = 10,
+            BuildCostMass = 5,
+            BuildTime = 5,
+			Description = 'Coming Soon',
+            Icon = 'dsu',
+            Name = 'Coming Soon',
+            Slot = 'Back',
+        },
+        EmptyRemove = {
+            BuildCostEnergy = 1,
+            BuildCostMass = 1,
+            BuildTime = 0.1,
+            Icon = 'dsu',
+			Description = 'Coming Soon',
+            Name = 'Coming Soon',
+            Prerequisite = 'Empty',
+            RemoveEnhancements = {
+				'Empty',
+				'EmptyRemove',
+            },
+            Slot = 'Back',
         },
     },
     General = {
