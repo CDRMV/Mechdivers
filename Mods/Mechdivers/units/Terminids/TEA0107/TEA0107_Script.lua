@@ -7,18 +7,19 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local TWalkingLandUnit = import('/lua/Defaultunits.lua').WalkingLandUnit
+local TerminideAnimatedAirUnit = import('/lua/Defaultunits.lua').TerminideAnimatedAirUnit
 local AcidWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
 
 
-TEA0103 = Class(TWalkingLandUnit) {
+TEA0107 = Class(TerminideAnimatedAirUnit) {
+
     Weapons = {
         MainGun = Class(AcidWeapon) {
         },
     },
 	
 	OnStopBeingBuilt = function(self,builder,layer)
-        TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+        TerminideAnimatedAirUnit.OnStopBeingBuilt(self,builder,layer)
 		if not self.AnimationUnpack1Manipulator then
             self.AnimationUnpack1Manipulator = CreateAnimator(self)
             self.Trash:Add(self.AnimationUnpack1Manipulator)
@@ -27,5 +28,5 @@ TEA0103 = Class(TWalkingLandUnit) {
     end,
 
 }
-TypeClass = TEA0103
+TypeClass = TEA0107
 

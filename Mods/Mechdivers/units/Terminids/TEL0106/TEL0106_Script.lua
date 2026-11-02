@@ -7,11 +7,11 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local TWalkingLandUnit = import('/lua/Defaultunits.lua').WalkingLandUnit
+local TerminideWalkingLandUnit = import('/lua/Defaultunits.lua').TerminideWalkingLandUnit
 local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 
-TEL0106 = Class(TWalkingLandUnit) {
+TEL0106 = Class(TerminideWalkingLandUnit) {
     Weapons = {
 		Melee = Class(DummyTurretWeapon) {
 		
@@ -27,12 +27,12 @@ TEL0106 = Class(TWalkingLandUnit) {
     },
 	
 	OnStopBeingBuilt = function(self,builder,layer)
-        TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+        TerminideWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self.DoMeleeThreadHandle = self:ForkThread(self.DoMeleeThread)
     end,
 	
 	OnMotionHorzEventChange = function(self, new, old)
-        TWalkingLandUnit.OnMotionHorzEventChange(self, new, old)
+        TerminideWalkingLandUnit.OnMotionHorzEventChange(self, new, old)
 		if old == 'Stopped' then
 			self:AddToggleCap('RULEUTC_WeaponToggle')
 			self:SetScriptBit('RULEUTC_WeaponToggle', false)
@@ -42,7 +42,7 @@ TEL0106 = Class(TWalkingLandUnit) {
     end,
 	
 	OnScriptBitSet = function(self, bit)
-        TWalkingLandUnit.OnScriptBitSet(self, bit)
+        TerminideWalkingLandUnit.OnScriptBitSet(self, bit)
         if bit == 1 then 
 			local Oldlocation = self:GetPosition()
 			local MovePos = self:GetCurrentMoveLocation()
@@ -61,7 +61,7 @@ TEL0106 = Class(TWalkingLandUnit) {
     end,
 
     OnScriptBitClear = function(self, bit)
-        TWalkingLandUnit.OnScriptBitClear(self, bit)
+        TerminideWalkingLandUnit.OnScriptBitClear(self, bit)
         if bit == 1 then 
 		self:SetSpeedMult(1)
         elseif bit == 7 then 

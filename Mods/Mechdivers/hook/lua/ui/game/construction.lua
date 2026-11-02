@@ -1006,7 +1006,7 @@ function GetBackgroundTextures(unitID)
     local bp = __blueprints[unitID]
     local validIcons = {land = true, air = true, sea = true, amph = true, orbit = true, none = true}
     local icon = "land"
-	local Modpath = "/mods/Mechdivers"
+	local Modpath = "/mods/Mechdivers/icons/units/backgrounds/"
     if unitID and unitID ~= 'default' then
         if not validIcons[bp.General.Icon] then
             if bp.General.Icon then WARN(debug.traceback(nil, "Invalid icon" .. bp.General.Icon .. " for unit " .. tostring(unitID))) end
@@ -1015,10 +1015,9 @@ function GetBackgroundTextures(unitID)
 			icon = bp.General.Icon
 		end
     end
-	return UIUtil.UIFile(Modpath .. '/icons/units/backgrounds/' .. icon .. '_up.dds'),
-			UIUtil.UIFile(Modpath .. '/icons/units/backgrounds/' .. icon .. '_down.dds'),
-			UIUtil.UIFile(Modpath .. '/icons/units/backgrounds/' .. icon .. '_over.dds'),
-			UIUtil.UIFile(Modpath .. '/icons/units/backgrounds/' .. icon .. '_up.dds')
+	return UIUtil.UIFile(Modpath .. icon .. '_up.dds'),
+			UIUtil.UIFile(Modpath .. icon .. '_down.dds'),
+			UIUtil.UIFile(Modpath .. icon .. '_over.dds')	
 end
 
 function GetEnhancementPrefix(unitID, iconID)

@@ -7,11 +7,11 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local TSeaUnit = import('/lua/defaultunits.lua').SeaUnit
+local TerminideSeaUnit = import('/lua/defaultunits.lua').TerminideSeaUnit
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 local TANTorpedoLandWeapon = import('/lua/terranweapons.lua').TANTorpedoLandWeapon
 
-TES0203 = Class(TSeaUnit) {
+TES0203 = Class(TerminideSeaUnit) {
 
     Weapons = {
 		Turret01 = Class(TANTorpedoLandWeapon) {},
@@ -32,11 +32,11 @@ TES0203 = Class(TSeaUnit) {
             self.Trash:Add(self.AnimationManipulator)
         end
         self.AnimationManipulator:PlayAnim('/mods/Mechdivers/units/Terminids/TES0203/TES0203_A01.sca', false):SetRate(2)
-        TSeaUnit.OnCreate(self)
+        TerminideSeaUnit.OnCreate(self)
     end,
 	
 	OnStopBeingBuilt = function(self,builder,layer)
-        TSeaUnit.OnStopBeingBuilt(self,builder,layer)
+        TerminideSeaUnit.OnStopBeingBuilt(self,builder,layer)
 		if not self.AnimationUnpack1Manipulator then
             self.AnimationUnpack1Manipulator = CreateAnimator(self)
             self.Trash:Add(self.AnimationUnpack1Manipulator)

@@ -7,11 +7,11 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local TWalkingLandUnit = import('/lua/Defaultunits.lua').WalkingLandUnit
+local TerminideWalkingLandUnit = import('/lua/Defaultunits.lua').TerminideWalkingLandUnit
 local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 
 
-TEL0201 = Class(TWalkingLandUnit) {
+TEL0201 = Class(TerminideWalkingLandUnit) {
     Weapons = {
         ArmCannonTurret = Class(TDFMachineGunWeapon) {
 

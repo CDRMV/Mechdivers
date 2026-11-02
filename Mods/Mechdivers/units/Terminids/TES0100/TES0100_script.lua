@@ -7,11 +7,11 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local TSeaUnit = import('/lua/defaultunits.lua').SeaUnit
+local TerminideSeaUnit = import('/lua/defaultunits.lua').TerminideSeaUnit
 local TDFGaussCannonWeapon = import('/lua/terranweapons.lua').TDFGaussCannonWeapon
 local EffectUtil = import('/lua/EffectUtilities.lua')
 
-TES0100 = Class(TSeaUnit) {
+TES0100 = Class(TerminideSeaUnit) {
 
     Weapons = {
         MainGun = Class(TDFGaussCannonWeapon) {
@@ -23,11 +23,11 @@ TES0100 = Class(TSeaUnit) {
             self.Trash:Add(self.AnimationManipulator)
         end
         self.AnimationManipulator:PlayAnim('/mods/Mechdivers/units/Terminids/TES0100/TES0100_A01.sca', false):SetRate(2)
-        TSeaUnit.OnCreate(self)
+        TerminideSeaUnit.OnCreate(self)
     end,
 	
 	OnStopBeingBuilt = function(self,builder,layer)
-        TSeaUnit.OnStopBeingBuilt(self,builder,layer)
+        TerminideSeaUnit.OnStopBeingBuilt(self,builder,layer)
 		if not self.AnimationUnpack1Manipulator then
             self.AnimationUnpack1Manipulator = CreateAnimator(self)
             self.Trash:Add(self.AnimationUnpack1Manipulator)

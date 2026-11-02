@@ -7,11 +7,11 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local TWalkingLandUnit = import('/lua/Defaultunits.lua').WalkingLandUnit
+local TerminideWalkingLandUnit = import('/lua/Defaultunits.lua').TerminideWalkingLandUnit
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 local EffectUtil = import('/lua/EffectUtilities.lua')
 
-TEL0105 = Class(TWalkingLandUnit) {
+TEL0105 = Class(TerminideWalkingLandUnit) {
     Weapons = {
         Melee = Class(DummyTurretWeapon) {
         },

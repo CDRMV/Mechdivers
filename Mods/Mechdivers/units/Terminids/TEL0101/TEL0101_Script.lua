@@ -7,15 +7,15 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local TWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
+local TerminideWalkingLandUnit = import('/lua/defaultunits.lua').TerminideWalkingLandUnit
 local AcidWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
+local EffectTemplate = import("/lua/effecttemplates.lua")
 
-
-TEL0101 = Class(TWalkingLandUnit) {
+TEL0101 = Class(TerminideWalkingLandUnit) {
     Weapons = {
         MainGun = Class(AcidWeapon) {
         },
-    },
+    },	
 }
 TypeClass = TEL0101
 

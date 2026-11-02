@@ -1,5 +1,9 @@
 
 local Explosion = import('/lua/defaultexplosions.lua')
+local ModEffectTemplate = import('/mods/Mechdivers/lua/CSKMDEffectTemplates.lua')
+local ModPath = '/mods/Mechdivers/effects/emitters/'
+local Util = import('/lua/utilities.lua')
+local RandomFloat = Util.GetRandomFloat
 
 function GetPlayableArea()
     if ScenarioInfo.MapData.PlayableRect then
@@ -1967,4 +1971,462 @@ TerminideSeaFactoryUnit = Class(BugHole) {
 TerminideWallStructureUnit = Class(TerminideStructureUnit) {
 }
 
+TerminideWalkingLandUnit = Class(MobileUnit) {
 
+	FxDamage1 = { ModEffectTemplate.TerminideBlood },
+    FxDamage2 = { ModEffectTemplate.TerminideBlood },
+    FxDamage3 = { ModEffectTemplate.TerminideBlood },
+	
+	
+	TerminideBloodExplosion = {
+	ModPath .. 'terminide_unit_explosion_01_emit.bp',
+	ModPath .. 'terminide_unit_explosion_02_emit.bp',
+	ModPath .. 'terminide_unit_explosion_03_emit.bp',
+	ModPath .. 'terminide_unit_explosion_04_emit.bp',
+	ModPath .. 'terminide_unit_explosion_05_emit.bp',
+	},
+
+    WalkingAnim = nil,
+    WalkingAnimRate = 1,
+    IdleAnim = false,
+    IdleAnimRate = 1,
+    DeathAnim = false,
+    DisabledBones = {},
+
+    OnMotionHorzEventChange = function( self, new, old )
+        MobileUnit.OnMotionHorzEventChange(self, new, old)
+        
+        if ( old == 'Stopped' ) then
+            if (not self.Animator) then
+                self.Animator = CreateAnimator(self, true)
+            end
+            local bpDisplay = self:GetBlueprint().Display
+            if bpDisplay.AnimationWalk then
+                self.Animator:PlayAnim(bpDisplay.AnimationWalk, true)
+                self.Animator:SetRate(bpDisplay.AnimationWalkRate or 1)
+            end
+        elseif ( new == 'Stopped' ) then
+            # only keep the animator around if we are dying and playing a death anim
+            # or if we have an idle anim
+            if(self.IdleAnim and not self:IsDead()) then
+                self.Animator:PlayAnim(self.IdleAnim, true)
+            elseif(not self.DeathAnim or not self:IsDead()) then
+                self.Animator:Destroy()
+                self.Animator = false
+            end
+        end
+    end,
+	
+    PlayDamageEffect = function(self, fxTable, fxBag)
+        local army = self:GetArmy()
+        local effects = fxTable[Random(1,table.getn(fxTable))]
+        if not effects then return end
+        local totalBones = self:GetBoneCount()
+        local bone = Random(1, totalBones) - 1
+        local bpDE = self:GetBlueprint().Display.DamageEffects
+        for k, v in effects do
+            local fx
+            if bpDE then
+                local num = Random(1, table.getsize(bpDE))
+                local bpFx = bpDE[num]
+                fx = CreateAttachedEmitter(self, bpFx.Bone,army, v):ScaleEmitter(self.FxDamageScale):OffsetEmitter(bpFx.OffsetX or 0, bpFx.OffsetY or 0, bpFx.OffsetZ or 0)
+            else
+                fx = CreateAttachedEmitter(self, bone, army, v):ScaleEmitter(self.FxDamageScale)
+            end
+            table.insert(fxBag, fx)
+        end
+    end,
+	
+	DeathThread = function( self, overkillRatio , instigator)  
+		local army = self:GetArmy()
+		local bp = self:GetBlueprint()
+						for e, effect in self.TerminideBloodExplosion do 
+				CreateAttachedEmitter(self, 'Body', army, effect):ScaleEmitter(bp.BloodExplosionSize or 1)
+				end
+		local position = self:GetPosition()
+		local orientation = RandomFloat(0,2*math.pi)
+		CreateDecal(position, orientation, '/mods/Mechdivers/decals/acid_splash.dds', '', 'Albedo', bp.DecalSizeX or 1, bp.DecalSizeX or 1, 150, 55, self:GetArmy())
+		if self.DeathAnimManip then
+            WaitFor(self.DeathAnimManip)
+        end
+						for e, effect in self.TerminideBloodExplosion do 
+				CreateEmitterAtEntity(self, army, effect):ScaleEmitter(bp.BloodExplosionSize or 1)
+				end
+        self:DestroyAllDamageEffects()
+        self:CreateWreckage( overkillRatio )
+		
+		
+        self:PlayUnitSound('Destroyed')
+        self:Destroy()
+    end,
+}
+
+TerminideAnimatedAirUnit = Class(MobileUnit) {
+	ShowUnitDestructionDebris = false,
+	DestroyNoFallRandomChance = 0.5,
+
+	FxDamage1 = { ModEffectTemplate.TerminideBlood },
+    FxDamage2 = { ModEffectTemplate.TerminideBlood },
+    FxDamage3 = { ModEffectTemplate.TerminideBlood },
+	
+	TerminideBloodExplosion = {
+	ModPath .. 'terminide_unit_explosion_01_emit.bp',
+	ModPath .. 'terminide_unit_explosion_02_emit.bp',
+	ModPath .. 'terminide_unit_explosion_03_emit.bp',
+	ModPath .. 'terminide_unit_explosion_04_emit.bp',
+	ModPath .. 'terminide_unit_explosion_05_emit.bp',
+	},
+
+    WalkingAnim = nil,
+    WalkingAnimRate = 1,
+    IdleAnim = false,
+    IdleAnimRate = 1,
+    DeathAnim = false,
+	
+    OnStopBeingBuilt = function(self,builder,layer)
+        MobileUnit.OnStopBeingBuilt(self,builder,layer)
+		ForkThread(function()
+        local bp = self:GetBlueprint()
+        if bp.SizeSphere then
+            self:SetCollisionShape(
+                'Sphere', 
+                bp.CollisionSphereOffsetX or 0, 
+                bp.CollisionSphereOffsetY or 0, 
+                bp.CollisionSphereOffsetZ or 0, 
+                bp.SizeSphere
+            )
+        end  
+		while not self.Dead do
+		local RandomElevation = math.random(8,11)
+		if not self.Dead then
+		self:SetElevation(RandomElevation)
+		end
+		WaitSeconds(1)
+		end
+		end)		
+    end,
+	
+    DisabledBones = {}, 
+
+    OnMotionHorzEventChange = function( self, new, old )
+        MobileUnit.OnMotionHorzEventChange(self, new, old)
+        if ( old == 'Stopped' ) then
+            if not self.Animator and not self.Dead then
+                self.Animator = CreateAnimator(self, true)
+            end
+            local bpDisplay = self:GetBlueprint().Display
+            if bpDisplay.AnimationWalk then
+                self.Animator:PlayAnim(bpDisplay.AnimationWalk, true)
+                self.Animator:SetRate(bpDisplay.AnimationWalkRate or 1)
+            end
+        elseif ( new == 'Stopped' ) then
+            # only keep the animator around if we are dying and playing a death anim
+            # or if we have an idle anim
+            if self.IdleAnim and not self.Dead then
+                self.Animator:PlayAnim(self.IdleAnim, true)
+            elseif not self.DeathAnim or not self.Dead then
+                self.Animator:Destroy()
+                self.Animator = false
+            end
+        end
+    end,
+	
+	PlayDamageEffect = function(self, fxTable, fxBag)
+        local army = self:GetArmy()
+        local effects = fxTable[Random(1,table.getn(fxTable))]
+        if not effects then return end
+        local totalBones = self:GetBoneCount()
+        local bone = Random(1, totalBones) - 1
+        local bpDE = self:GetBlueprint().Display.DamageEffects
+        for k, v in effects do
+            local fx
+            if bpDE then
+                local num = Random(1, table.getsize(bpDE))
+                local bpFx = bpDE[num]
+                fx = CreateAttachedEmitter(self, bpFx.Bone,army, v):ScaleEmitter(self.FxDamageScale):OffsetEmitter(bpFx.OffsetX or 0, bpFx.OffsetY or 0, bpFx.OffsetZ or 0)
+            else
+                fx = CreateAttachedEmitter(self, bone, army, v):ScaleEmitter(self.FxDamageScale)
+            end
+            table.insert(fxBag, fx)
+        end
+    end,
+	
+	
+    OnImpact = function(self, with, other)
+        # Damage the area we have impacted with.
+        local bp = self:GetBlueprint()
+        local i = 1
+        local numWeapons = table.getn(bp.Weapon)
+
+        for i, numWeapons in bp.Weapon do
+            if(bp.Weapon[i].Label == 'DeathImpact') then
+                DamageArea(self, self:GetPosition(), bp.Weapon[i].DamageRadius, bp.Weapon[i].Damage, bp.Weapon[i].DamageType, bp.Weapon[i].DamageFriendly)
+                break
+            end
+        end
+
+        if with == 'Water' then
+            self:PlayUnitSound('AirUnitWaterImpact')
+            EffectUtil.CreateEffects( self, self:GetArmy(), EffectTemplate.DefaultProjectileWaterImpact )
+            self:Destroy()
+        else
+            # This is a bit of safety to keep us from calling the death thread twice in case we bounce twice quickly
+            if not self.DeathBounce then
+                self:ForkThread(self.DeathThread, self.OverKillRatio )
+                self.DeathBounce = 1
+            end
+        end
+    end,
+	
+	CreateUnitAirDestructionEffects = function( self, scale )
+	local army = self:GetArmy()
+	local bp = self:GetBlueprint()
+						for e, effect in self.TerminideBloodExplosion do 
+				CreateAttachedEmitter(self, 'Bone' or 'Sack', army, effect):ScaleEmitter(bp.BloodExplosionSize or 1)
+				end
+						local position = self:GetPosition()
+		local orientation = RandomFloat(0,2*math.pi)
+		CreateDecal(position, orientation, '/mods/Mechdivers/decals/acid_splash.dds', '', 'Albedo', bp.DecalSizeX or 1, bp.DecalSizeX or 1, 150, 55, self:GetArmy())
+
+    end,
+	
+    OnKilled = function(self, instigator, type, overkillRatio)
+		local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+
+		if version < 3652 then
+        local bp = self:GetBlueprint()
+        if (self:GetCurrentLayer() == 'Air' and Random() < self.DestroyNoFallRandomChance) then
+            
+            self.CreateUnitAirDestructionEffects( self, 1.0 )
+            self:DestroyTopSpeedEffects()
+            self:DestroyBeamExhaust()
+            self.OverKillRatio = overkillRatio
+            self:PlayUnitSound('Killed')
+            self:DoUnitCallbacks('OnKilled')
+            self:OnKilledVO()
+            if instigator and IsUnit(instigator) then
+                instigator:OnKilledUnit(self)
+            end
+        else
+            self.DeathBounce = 1
+            if instigator and IsUnit(instigator) then
+                instigator:OnKilledUnit(self)
+            end
+            MobileUnit.OnKilled(self, instigator, type, overkillRatio)
+        end
+		else
+		if self:GetFractionComplete() == 1 and
+            (self.Layer == 'Air' or EntityCategoryContains(categories.TRANSPORTATION, self))
+        then
+            local army = self.Army
+
+            self.Dead = true
+            -- We want to skip all the visual/audio/shield bounce/death weapon stuff if we're in internal storage
+            if type ~= "TransportDamage" then
+                self:CreateUnitAirDestructionEffects(1.0)
+                self:DestroyTopSpeedEffects()
+                self:DestroyBeamExhaust()
+                self.OverKillRatio = overkillRatio
+                self:PlayUnitSound('Killed')
+                self:DoUnitCallbacks('OnKilled')
+                self:DisableShield()
+
+                -- The unit falling is a death animation, so it needs collision turned off
+                self.DisallowCollisions = true
+
+                -- Store our death weapon's damage on the unit so it can be edited remotely by the shield bouncer projectile
+                local bp = self.Blueprint
+                for i, _ in bp.Weapon do
+                    if bp.Weapon[i].Label == 'DeathImpact' then
+                        self.deathWep = bp.Weapon[i]
+                        break
+                    end
+                end
+
+                if not self.deathWep or self.deathWep == {} then
+                    WARN(string.format('(%s) has no death weapon or the death weapon has an incorrect label!',
+                        tostring(bp.BlueprintId)))
+                else
+                    self.DeathCrashDamage = self.deathWep.Damage
+                end
+
+                -- Create a projectile we'll use to interact with Shields
+                local proj = self:CreateProjectileAtBone('/projectiles/ShieldCollider/ShieldCollider_proj.bp', 0) --[[@as ShiledCollider]]
+                self.colliderProj = proj
+                proj:Start(self, 0)
+                self.Trash:Add(proj)
+
+                self:DisableUnitIntel('Killed')
+
+                if not self.Blueprint.Air.EnableVisionWhileFalling then
+                    self:DisableIntel('Vision') -- Disable vision seperately, it's not handled in DisableUnitIntel
+                else
+                    -- Create a vision entity so vision shading is visible
+
+                    local x, y, z = self:GetPositionXYZ(0)
+                    ---@type VisionMarkerOpti
+                    local vizEnt = self.Trash:Add(VisionMarkerOpti({ Army = army }))
+                    vizEnt:UpdateIntel(army, self:GetIntelRadius("Vision"), "Vision", true)
+                    vizEnt:UpdatePosition(x, z)
+                    vizEnt:AttachTo(self, 0)
+                end
+            end
+
+            self:VeterancyDispersal()
+
+            -- awareness for traitor game mode and game statistics
+            ArmyBrains[army].LastUnitKilledBy = (instigator or self).Army
+            ArmyBrains[army]:AddUnitStat(self.UnitId, "lost", 1)
+
+            -- awareness of instigator that it killed a unit, but it can also be a projectile or nil
+            if instigator and instigator.OnKilledUnit then
+                instigator:OnKilledUnit(self)
+            end
+
+            self.Brain:OnUnitKilled(self, instigator, type, overkillRatio)
+
+            -- If we're in internal storage, we're done, destroy the unit to avoid OnImpact errors
+            if type == "TransportDamage" then
+                self:Destroy()
+            end
+        else
+            MobileUnitOnKilled(self, instigator, type, overkillRatio)
+        end
+		end
+    end,
+	
+	DeathThread = function( self, overkillRatio , instigator)  
+		local army = self:GetArmy()
+		local bp = self:GetBlueprint()
+
+		local position = self:GetPosition()
+		local orientation = RandomFloat(0,2*math.pi)
+		CreateDecal(position, orientation, '/mods/Mechdivers/decals/acid_splash.dds', '', 'Albedo', bp.DecalSizeX or 1, bp.DecalSizeX or 1, 150, 55, self:GetArmy())
+						for e, effect in self.TerminideBloodExplosion do 
+				CreateEmitterAtEntity(self, army, effect):ScaleEmitter(bp.BloodExplosionSize or 1)
+				end
+        self:DestroyAllDamageEffects()
+        self:CreateWreckage( overkillRatio )
+		
+		
+        self:PlayUnitSound('Destroyed')
+        self:Destroy()
+    end,
+	
+}
+
+TerminideSeaUnit = Class(MobileUnit) {
+	FxDamage1 = { ModEffectTemplate.TerminideBlood },
+    FxDamage2 = { ModEffectTemplate.TerminideBlood },
+    FxDamage3 = { ModEffectTemplate.TerminideBlood },
+	
+	TerminideBloodExplosion = {
+	ModPath .. 'terminide_unit_explosion_01_emit.bp',
+	ModPath .. 'terminide_unit_explosion_02_emit.bp',
+	ModPath .. 'terminide_unit_explosion_03_emit.bp',
+	ModPath .. 'terminide_unit_explosion_04_emit.bp',
+	ModPath .. 'terminide_unit_explosion_05_emit.bp',
+	},
+
+    DeathThreadDestructionWaitTime = 5,
+    ShowUnitDestructionDebris = false,
+    PlayEndAnimDestructionEffects = false,
+
+
+    OnStopBeingBuilt = function(self,builder,layer)
+        MobileUnit.OnStopBeingBuilt(self,builder,layer)
+        self:SetMaintenanceConsumptionActive()
+    end,
+
+    # by default, just destroy us when we are killed.
+    OnKilled = function(self, instigator, type, overkillRatio)
+        local layer = self:GetCurrentLayer()
+        self:DestroyIdleEffects()
+        if(layer == 'Water' or layer == 'Seabed' or layer == 'Sub')then
+            self.SinkExplosionThread = self:ForkThread(self.ExplosionThread)
+            self.SinkThread = self:ForkThread(self.SinkingThread)
+        end
+        MobileUnit.OnKilled(self, instigator, type, overkillRatio)
+    end,
+
+    ExplosionThread = function(self)
+        local maxcount = Util.GetRandomInt(6,20) # max number of above surface explosions. timed to animation
+        local i = maxcount # initializing the above surface counter
+        local d = 0 # delay offset after surface explosions cease
+        local sx, sy, sz = self:GetUnitSizes()
+        local vol = sx * sy * sz
+        local army = self:GetArmy()
+        local numBones = self:GetBoneCount() - 1
+		local bp = self:GetBlueprint()
+
+        while true do
+            if i > 0 then
+                local rx, ry, rz = self:GetRandomOffset(1)
+                local rs = Random(vol/2, vol*2) / (vol*2)
+                for e, effect in self.TerminideBloodExplosion do 
+				CreateEmitterAtEntity(self, army, effect):ScaleEmitter(bp.BloodExplosionSize or 2)
+				end
+            else
+                d = d + 1 # if submerged, increase delay offset
+                self:DestroyAllDamageEffects()
+            end
+            i = i - 1
+
+            local rx, ry, rz = self:GetRandomOffset(0.25)
+            local rs = Random(vol/2, vol*2) / (vol*2)
+            local randBone = Util.GetRandomInt( 0, numBones)
+            
+
+            local rd = Util.GetRandomFloat( 0.4, 1.0)
+            WaitSeconds(rd)
+        end
+    end,
+
+    SinkingThread = function(self)
+        local i = 8 # initializing the above surface counter
+        local sx, sy, sz = self:GetUnitSizes()
+        local vol = sx * sy * sz
+        local army = self:GetArmy()
+
+        while true do
+            if i > 0 then
+                local rx, ry, rz = self:GetRandomOffset(1)
+                local rs = Random(vol/2, vol*2) / (vol*2) 
+                CreateAttachedEmitter(self,-1,army,'/effects/emitters/destruction_water_sinking_ripples_01_emit.bp'):OffsetEmitter(rx, 0, rz):ScaleEmitter(rs)
+
+                local rx, ry, rz = self:GetRandomOffset(1)
+                CreateAttachedEmitter(self,self.LeftFrontWakeBone,army, '/effects/emitters/destruction_water_sinking_wash_01_emit.bp'):OffsetEmitter(rx, 0, rz):ScaleEmitter(rs)
+
+                local rx, ry, rz = self:GetRandomOffset(1)
+                CreateAttachedEmitter(self,self.RightFrontWakeBone,army, '/effects/emitters/destruction_water_sinking_wash_01_emit.bp'):OffsetEmitter(rx, 0, rz):ScaleEmitter(rs)
+            end
+
+            local rx, ry, rz = self:GetRandomOffset(1)
+            local rs = Random(vol/2, vol*2) / (vol*2)
+            CreateAttachedEmitter(self,-1,army,'/effects/emitters/destruction_underwater_sinking_wash_01_emit.bp'):OffsetEmitter(rx, 0, rz):ScaleEmitter(rs)
+
+            i = i - 1
+            WaitSeconds(1)
+        end
+    end,
+	
+	PlayDamageEffect = function(self, fxTable, fxBag)
+        local army = self:GetArmy()
+        local effects = fxTable[Random(1,table.getn(fxTable))]
+        if not effects then return end
+        local totalBones = self:GetBoneCount()
+        local bone = Random(1, totalBones) - 1
+        local bpDE = self:GetBlueprint().Display.DamageEffects
+        for k, v in effects do
+            local fx
+            if bpDE then
+                local num = Random(1, table.getsize(bpDE))
+                local bpFx = bpDE[num]
+                fx = CreateAttachedEmitter(self, bpFx.Bone,army, v):ScaleEmitter(self.FxDamageScale):OffsetEmitter(bpFx.OffsetX or 0, bpFx.OffsetY or 0, bpFx.OffsetZ or 0)
+            else
+                fx = CreateAttachedEmitter(self, bone, army, v):ScaleEmitter(self.FxDamageScale)
+            end
+            table.insert(fxBag, fx)
+        end
+    end,
+}

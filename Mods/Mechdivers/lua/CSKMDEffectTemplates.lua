@@ -87,3 +87,5 @@ TerminideBuildBeams01 = {
     ModBpPath .. 'terminide_build_beam_02_emit.bp',
     ModBpPath .. 'terminide_build_beam_03_emit.bp',
 }
+
+TerminideBlood = { ModBpPath .. 'terminide_blood_01_emit.bp', }

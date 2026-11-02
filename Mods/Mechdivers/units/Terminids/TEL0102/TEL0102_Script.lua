@@ -7,12 +7,12 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local TWalkingLandUnit = import('/lua/Defaultunits.lua').WalkingLandUnit
+local TerminideWalkingLandUnit = import('/lua/Defaultunits.lua').TerminideWalkingLandUnit
 local TDFMachineGunWeapon = import('/lua/terranweapons.lua').TDFMachineGunWeapon
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 
-TEL0102 = Class(TWalkingLandUnit) {
+TEL0102 = Class(TerminideWalkingLandUnit) {
     Weapons = {
 		Melee = Class(DummyTurretWeapon) {
 		
@@ -28,14 +28,14 @@ TEL0102 = Class(TWalkingLandUnit) {
     },
 	
 	OnStopBeingBuilt = function(self,builder,layer)
-        TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+        TerminideWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self.Slider= CreateSlider(self, 'Body', 0, 0, 0, 0.5)
 		self.Trash:Add(self.Slider)
 		self.DoMeleeThreadHandle = self:ForkThread(self.DoMeleeThread)
     end,
 	
 	OnMotionHorzEventChange = function(self, new, old)
-        TWalkingLandUnit.OnMotionHorzEventChange(self, new, old)
+        TerminideWalkingLandUnit.OnMotionHorzEventChange(self, new, old)
 		if old == 'Stopped' then
 			self:RemoveToggleCap('RULEUTC_WeaponToggle')
         elseif new == 'Stopped' then
@@ -44,7 +44,7 @@ TEL0102 = Class(TWalkingLandUnit) {
     end,
 	
 	OnScriptBitSet = function(self, bit)
-        TWalkingLandUnit.OnScriptBitSet(self, bit)
+        TerminideWalkingLandUnit.OnScriptBitSet(self, bit)
         if bit == 1 then 
 		ForkThread(function()
 		self:SetDoNotTarget(true)
@@ -75,7 +75,7 @@ TEL0102 = Class(TWalkingLandUnit) {
     end,
 
     OnScriptBitClear = function(self, bit)
-        TWalkingLandUnit.OnScriptBitClear(self, bit)
+        TerminideWalkingLandUnit.OnScriptBitClear(self, bit)
         if bit == 1 then 
 		ForkThread(function()
 		self.ArrivalAnimManip = CreateAnimator(self)

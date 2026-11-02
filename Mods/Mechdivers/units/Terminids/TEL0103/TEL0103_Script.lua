@@ -7,12 +7,12 @@
 #**
 #**  Copyright © 2005 Gas Powered Games, Inc.  All rights reserved.
 #****************************************************************************
-local TWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
+local TerminideWalkingLandUnit = import('/lua/defaultunits.lua').TerminideWalkingLandUnit
 local AcidWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 
 
-TEL0103 = Class(TWalkingLandUnit) {
+TEL0103 = Class(TerminideWalkingLandUnit) {
     Weapons = {
 		Dummy = Class(DummyTurretWeapon) {
 		IdleState = State (DummyTurretWeapon.IdleState) {

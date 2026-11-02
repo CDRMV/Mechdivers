@@ -318,6 +318,29 @@ local IconPath = "/Mods/Mechdivers"
 	function UIFile(filespec)
 		local skins = import('/lua/skins/skins.lua').skins
 		local visitingSkin = currentSkin()
+		local useSkin = currentSkin()
+		local currentPath = skins[useSkin].texturesPath
+		local origPath = currentPath
+
+    if visitingSkin == nil or currentPath == nil then
+        return nil
+    end
+
+    -- if current skin is default, then don't bother trying to look for it, just append the default dir
+    if visitingSkin == 'default' then
+        return currentPath .. filespec
+    else
+        while visitingSkin do
+            local curFile = currentPath .. filespec
+            if DiskGetFileInfo(curFile) then
+                return curFile
+            else
+                visitingSkin = skins[visitingSkin].default
+                if visitingSkin then currentPath = skins[visitingSkin].texturesPath end
+            end
+        end
+    end
+		
 		local OrderIconName = string.gsub(filespec,'.dds','')
 		OrderIconName = string.gsub(OrderIconName,'/game/orders/','')
 		if MyOrderIdTable[OrderIconName] then
@@ -330,7 +353,11 @@ local IconPath = "/Mods/Mechdivers"
 			local curfile =  IconPath .. filespec
 			return curfile
 		end
-		return oldUIFile(filespec)
+		
+		if not DiskGetFileInfo(filespec) then
+                SPEW('[uiutil.lua, function UIFile()] - Unable to find file:'.. origPath .. filespec)
+        end
+		return filespec
 	end
 	
 else 	

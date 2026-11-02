@@ -9,29 +9,21 @@
 #****************************************************************************
 local Shield = import('/lua/shield.lua').Shield
 
-local TWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
+local TerminideWalkingLandUnit = import('/lua/defaultunits.lua').TerminideWalkingLandUnit
 local TerranWeaponFile = import('/lua/terranweapons.lua')
 local AcidWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
 local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
 local RandomFloat = import('/lua/utilities.lua').GetRandomFloat
 local TIFCommanderDeathWeapon = nil
-if version < 3652 then
-TIFCommanderDeathWeapon = TerranWeaponFile.TIFCommanderDeathWeapon
-
-else
-local ACUDeathWeapon = import("/lua/sim/defaultweapons.lua").ACUDeathWeapon
-TIFCommanderDeathWeapon = ACUDeathWeapon
-end
 local EffectTemplate = import('/lua/EffectTemplates.lua')
 local TDFOverchargeWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').AcidWeapon
 local EffectUtil = import('/lua/EffectUtilities.lua')
 local Buff = import('/lua/sim/Buff.lua')
 
-TEL0001 = Class(TWalkingLandUnit) {    
+TEL0001 = Class(TerminideWalkingLandUnit) {    
     DeathThreadDestructionWaitTime = 2,
 
     Weapons = {
-        DeathWeapon = Class(TIFCommanderDeathWeapon) {},
         RightZephyr = Class(AcidWeapon) {},
         OverCharge = Class(TDFOverchargeWeapon) {
 
@@ -109,7 +101,7 @@ TEL0001 = Class(TWalkingLandUnit) {
     },
 
     OnCreate = function(self)
-        TWalkingLandUnit.OnCreate(self)
+        TerminideWalkingLandUnit.OnCreate(self)
         self:SetCapturable(false)
         self:SetupBuildBones()
         self.HasLeftPod = false
@@ -120,7 +112,7 @@ TEL0001 = Class(TWalkingLandUnit) {
     end,
 
     OnPrepareArmToBuild = function(self)
-        TWalkingLandUnit.OnPrepareArmToBuild(self)
+        TerminideWalkingLandUnit.OnPrepareArmToBuild(self)
         if self:BeenDestroyed() then return end
         self:BuildManipulatorSetEnabled(true)
         self.BuildArmManipulator:SetPrecedence(20)
@@ -130,7 +122,7 @@ TEL0001 = Class(TWalkingLandUnit) {
     end,
 
     OnStopCapture = function(self, target)
-        TWalkingLandUnit.OnStopCapture(self, target)
+        TerminideWalkingLandUnit.OnStopCapture(self, target)
         if self:BeenDestroyed() then return end
         self:BuildManipulatorSetEnabled(false)
         self.BuildArmManipulator:SetPrecedence(0)
@@ -140,7 +132,7 @@ TEL0001 = Class(TWalkingLandUnit) {
     end,
 
     OnFailedCapture = function(self, target)
-        TWalkingLandUnit.OnFailedCapture(self, target)
+        TerminideWalkingLandUnit.OnFailedCapture(self, target)
         self:BuildManipulatorSetEnabled(false)
         self.BuildArmManipulator:SetPrecedence(0)
         self:SetWeaponEnabledByLabel('RightZephyr', true)
@@ -149,7 +141,7 @@ TEL0001 = Class(TWalkingLandUnit) {
     end,
 
     OnStopReclaim = function(self, target)
-        TWalkingLandUnit.OnStopReclaim(self, target)
+        TerminideWalkingLandUnit.OnStopReclaim(self, target)
         if self:BeenDestroyed() then return end
         self:BuildManipulatorSetEnabled(false)
         self.BuildArmManipulator:SetPrecedence(0)
@@ -165,7 +157,7 @@ TEL0001 = Class(TWalkingLandUnit) {
     end,
 
     OnStopBeingBuilt = function(self,builder,layer)
-        TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
+        TerminideWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
         if self:BeenDestroyed() then return end
         self.Animator = CreateAnimator(self)
         self.Animator:SetPrecedence(0)
@@ -222,7 +214,7 @@ TEL0001 = Class(TWalkingLandUnit) {
     end,
 
     OnStartBuild = function(self, unitBeingBuilt, order)
-        TWalkingLandUnit.OnStartBuild(self, unitBeingBuilt, order)
+        TerminideWalkingLandUnit.OnStartBuild(self, unitBeingBuilt, order)
         if self.Animator then
             self.Animator:SetRate(0)
         end
@@ -232,7 +224,7 @@ TEL0001 = Class(TWalkingLandUnit) {
     end,
 
     OnFailedToBuild = function(self)
-        TWalkingLandUnit.OnFailedToBuild(self)
+        TerminideWalkingLandUnit.OnFailedToBuild(self)
         if self:BeenDestroyed() then return end
         self:BuildManipulatorSetEnabled(false)
         self.BuildArmManipulator:SetPrecedence(0)
@@ -252,7 +244,7 @@ TEL0001 = Class(TWalkingLandUnit) {
     end,
 
     OnStopBuild = function(self, unitBeingBuilt)
-        TWalkingLandUnit.OnStopBuild(self, unitBeingBuilt)
+        TerminideWalkingLandUnit.OnStopBuild(self, unitBeingBuilt)
         if self:BeenDestroyed() then return end
         if (self.IdleAnim and not self:IsDead()) then
             self.Animator:PlayAnim(self.IdleAnim, true)
@@ -268,7 +260,7 @@ TEL0001 = Class(TWalkingLandUnit) {
     end,
 
     CreateEnhancement = function(self, enh)
-        TWalkingLandUnit.CreateEnhancement(self, enh)
+        TerminideWalkingLandUnit.CreateEnhancement(self, enh)
         local bp = self:GetBlueprint().Enhancements[enh]
         if not bp then return end
         --[[if enh == 'LeftPod' then
@@ -278,21 +270,21 @@ TEL0001 = Class(TWalkingLandUnit) {
     end,
     
     OnPaused = function(self)
-        TWalkingLandUnit.OnPaused(self)
+        TerminideWalkingLandUnit.OnPaused(self)
         if self.BuildingUnit then
-            TWalkingLandUnit.StopBuildingEffects(self, self:GetUnitBeingBuilt())
+            TerminideWalkingLandUnit.StopBuildingEffects(self, self:GetUnitBeingBuilt())
         end    
     end,
     
     OnUnpaused = function(self)
         if self.BuildingUnit then
-            TWalkingLandUnit.StartBuildingEffects(self, self:GetUnitBeingBuilt(), self.UnitBuildOrder)
+            TerminideWalkingLandUnit.StartBuildingEffects(self, self:GetUnitBeingBuilt(), self.UnitBuildOrder)
         end
-        TWalkingLandUnit.OnUnpaused(self)
+        TerminideWalkingLandUnit.OnUnpaused(self)
     end,   
 
     OnScriptBitSet = function(self, bit)
-        TWalkingLandUnit.OnScriptBitSet(self, bit)
+        TerminideWalkingLandUnit.OnScriptBitSet(self, bit)
         if bit == 1 then 
 			local location = self:GetPosition('Egg')
 			SetIgnoreArmyUnitCap(self:GetArmy(), true)
@@ -303,7 +295,7 @@ TEL0001 = Class(TWalkingLandUnit) {
     end,
 
     OnScriptBitClear = function(self, bit)
-        TWalkingLandUnit.OnScriptBitClear(self, bit)
+        TerminideWalkingLandUnit.OnScriptBitClear(self, bit)
         if bit == 1 then 
 			
         end
