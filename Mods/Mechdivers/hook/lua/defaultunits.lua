@@ -4,6 +4,9 @@ local ModEffectTemplate = import('/mods/Mechdivers/lua/CSKMDEffectTemplates.lua'
 local ModPath = '/mods/Mechdivers/effects/emitters/'
 local Util = import('/lua/utilities.lua')
 local RandomFloat = Util.GetRandomFloat
+local EffectUtil = import('/lua/EffectUtilities.lua')
+local AdjacencyBuffs = import('/lua/sim/adjacencybuffs.lua')
+local Buff = import('/lua/sim/Buff.lua')
 
 function GetPlayableArea()
     if ScenarioInfo.MapData.PlayableRect then
@@ -63,69 +66,16 @@ ModularFactoryUnit = Class(StructureUnit) {
 
     OnStopBeingBuilt = function(self,builder,layer)
         local aiBrain = GetArmyBrain(self:GetArmy())
-        aiBrain:ESRegisterUnitMassStorage(self)
-        aiBrain:ESRegisterUnitEnergyStorage(self)
         local curEnergy = aiBrain:GetEconomyStoredRatio('ENERGY')
         local curMass = aiBrain:GetEconomyStoredRatio('MASS')
         if curEnergy > 0.11 and curMass > 0.11 then
-            self:CreateBlinkingLights('Green')
-            self.BlinkingLightsState = 'Green'
+
         else
-            self:CreateBlinkingLights('Red')
-            self.BlinkingLightsState = 'Red'
         end
         StructureUnit.OnStopBeingBuilt(self,builder,layer)
     end,
 
-    ChangeBlinkingLights = function(self, state)
-        local bls = self.BlinkingLightsState
-        if state == 'Yellow' then
-            if bls == 'Green' then
-                self:CreateBlinkingLights('Yellow')
-                self.BlinkingLightsState = state
-            end
-        elseif state == 'Green' then
-            if bls == 'Yellow' then
-                self:CreateBlinkingLights('Green')
-                self.BlinkingLightsState = state
-            elseif bls == 'Red' then
-                local aiBrain = GetArmyBrain(self:GetArmy())
-                local curEnergy = aiBrain:GetEconomyStoredRatio('ENERGY')
-                local curMass = aiBrain:GetEconomyStoredRatio('MASS')
-                if curEnergy > 0.11 and curMass > 0.11 then
-                    if self:GetNumBuildOrders(categories.ALLUNITS) == 0 then
-                        self:CreateBlinkingLights('Green')
-                        self.BlinkingLightsState = state
-                    else
-                        self:CreateBlinkingLights('Yellow')
-                        self.BlinkingLightsState = 'Yellow'
-                    end
-                end
-            end
-        elseif state == 'Red' then
-            self:CreateBlinkingLights('Red')
-            self.BlinkingLightsState = state
-        end
-    end,
-
-    OnMassStorageStateChange = function(self, newState)
-        if newState == 'EconLowMassStore' then
-            self:ChangeBlinkingLights('Red')
-        else
-            self:ChangeBlinkingLights('Green')
-        end
-    end,
-
-    OnEnergyStorageStateChange = function(self, newState)
-        if newState == 'EconLowEnergyStore' then
-            self:ChangeBlinkingLights('Red')
-        else
-            self:ChangeBlinkingLights('Green')
-        end
-    end,
-
     OnStartBuild = function(self, unitBeingBuilt, order )
-        self:ChangeBlinkingLights('Yellow')
         StructureUnit.OnStartBuild(self, unitBeingBuilt, order )
         self.BuildingUnit = true
         if order != 'Upgrade' then
@@ -275,7 +225,6 @@ ModularFactoryUnit = Class(StructureUnit) {
     IdleState = State {
 
         Main = function(self)
-            self:ChangeBlinkingLights('Green')
             self:SetBusy(false)
             self:SetBlockCommandQueue(false)
             self:DestroyBuildRotator()
@@ -733,8 +682,9 @@ TerminideStructureUnit = Class(Unit) {
     end,
 
     FlattenSkirt = function(self)
-        local x, y, z = unpack(self:GetPosition())
-        local x0,z0,x1,z1 = self:GetSkirtRect()
+		local x, y, z = unpack(self:GetPosition())
+		local bp = self:GetBlueprint()
+        local x0,z0,x1,z1 = self:GetSkirtRect(bp)
         x0,z0,x1,z1 = math.floor(x0),math.floor(z0),math.ceil(x1),math.ceil(z1)
         FlattenMapRect(x0, z0, x1-x0, z1-z0, y)
     end,
@@ -842,31 +792,6 @@ TerminideStructureUnit = Class(Unit) {
     end,
 
     OnEnergyStorageStateChange = function(self, state)
-    end,
-
-    CreateBlinkingLights = function(self, color)
-        self:DestroyBlinkingLights()
-        local bp = self:GetBlueprint().Display.BlinkingLights
-        local bpEmitters = self:GetBlueprint().Display.BlinkingLightsFx
-        if bp then
-            local fxbp = bpEmitters[color]
-            for k, v in bp do
-                if type(v) == 'table' then
-                    local fx = CreateAttachedEmitter(self, v.BLBone, self:GetArmy(), fxbp)
-                    fx:OffsetEmitter(v.BLOffsetX or 0, v.BLOffsetY or 0, v.BLOffsetZ or 0)
-                    fx:ScaleEmitter(v.BLScale or 1)
-                    table.insert(self.FxBlinkingLightsBag, fx)
-                    self.Trash:Add(fx)
-                end
-            end
-        end
-    end,
-
-    DestroyBlinkingLights = function(self)
-        for k, v in self.FxBlinkingLightsBag do
-            v:Destroy()
-        end
-        self.FxBlinkingLightsBag = {}
     end,
 
     CreateDestructionEffects = function( self, overKillRatio )
@@ -1108,69 +1033,15 @@ BugHole = Class(TerminideStructureUnit) {
 
     OnStopBeingBuilt = function(self,builder,layer)
         local aiBrain = GetArmyBrain(self:GetArmy())
-        aiBrain:ESRegisterUnitMassStorage(self)
-        aiBrain:ESRegisterUnitEnergyStorage(self)
         local curEnergy = aiBrain:GetEconomyStoredRatio('ENERGY')
         local curMass = aiBrain:GetEconomyStoredRatio('MASS')
         if curEnergy > 0.11 and curMass > 0.11 then
-            self:CreateBlinkingLights('Green')
-            self.BlinkingLightsState = 'Green'
         else
-            self:CreateBlinkingLights('Red')
-            self.BlinkingLightsState = 'Red'
         end
         StructureUnit.OnStopBeingBuilt(self,builder,layer)
     end,
 
-    ChangeBlinkingLights = function(self, state)
-        local bls = self.BlinkingLightsState
-        if state == 'Yellow' then
-            if bls == 'Green' then
-                self:CreateBlinkingLights('Yellow')
-                self.BlinkingLightsState = state
-            end
-        elseif state == 'Green' then
-            if bls == 'Yellow' then
-                self:CreateBlinkingLights('Green')
-                self.BlinkingLightsState = state
-            elseif bls == 'Red' then
-                local aiBrain = GetArmyBrain(self:GetArmy())
-                local curEnergy = aiBrain:GetEconomyStoredRatio('ENERGY')
-                local curMass = aiBrain:GetEconomyStoredRatio('MASS')
-                if curEnergy > 0.11 and curMass > 0.11 then
-                    if self:GetNumBuildOrders(categories.ALLUNITS) == 0 then
-                        self:CreateBlinkingLights('Green')
-                        self.BlinkingLightsState = state
-                    else
-                        self:CreateBlinkingLights('Yellow')
-                        self.BlinkingLightsState = 'Yellow'
-                    end
-                end
-            end
-        elseif state == 'Red' then
-            self:CreateBlinkingLights('Red')
-            self.BlinkingLightsState = state
-        end
-    end,
-
-    OnMassStorageStateChange = function(self, newState)
-        if newState == 'EconLowMassStore' then
-            self:ChangeBlinkingLights('Red')
-        else
-            self:ChangeBlinkingLights('Green')
-        end
-    end,
-
-    OnEnergyStorageStateChange = function(self, newState)
-        if newState == 'EconLowEnergyStore' then
-            self:ChangeBlinkingLights('Red')
-        else
-            self:ChangeBlinkingLights('Green')
-        end
-    end,
-
     OnStartBuild = function(self, unitBeingBuilt, order )
-        self:ChangeBlinkingLights('Yellow')
         StructureUnit.OnStartBuild(self, unitBeingBuilt, order )
         self.BuildingUnit = true
         if order != 'Upgrade' then
@@ -1325,7 +1196,6 @@ BugHole = Class(TerminideStructureUnit) {
     IdleState = State {
 
         Main = function(self)
-            self:ChangeBlinkingLights('Green')
             self:SetBusy(false)
             self:SetBlockCommandQueue(false)
             self:DestroyBuildRotator()
@@ -1381,69 +1251,15 @@ ShriekerNest = Class(TerminideStructureUnit) {
 
     OnStopBeingBuilt = function(self,builder,layer)
         local aiBrain = GetArmyBrain(self:GetArmy())
-        aiBrain:ESRegisterUnitMassStorage(self)
-        aiBrain:ESRegisterUnitEnergyStorage(self)
         local curEnergy = aiBrain:GetEconomyStoredRatio('ENERGY')
         local curMass = aiBrain:GetEconomyStoredRatio('MASS')
         if curEnergy > 0.11 and curMass > 0.11 then
-            self:CreateBlinkingLights('Green')
-            self.BlinkingLightsState = 'Green'
         else
-            self:CreateBlinkingLights('Red')
-            self.BlinkingLightsState = 'Red'
         end
         StructureUnit.OnStopBeingBuilt(self,builder,layer)
     end,
 
-    ChangeBlinkingLights = function(self, state)
-        local bls = self.BlinkingLightsState
-        if state == 'Yellow' then
-            if bls == 'Green' then
-                self:CreateBlinkingLights('Yellow')
-                self.BlinkingLightsState = state
-            end
-        elseif state == 'Green' then
-            if bls == 'Yellow' then
-                self:CreateBlinkingLights('Green')
-                self.BlinkingLightsState = state
-            elseif bls == 'Red' then
-                local aiBrain = GetArmyBrain(self:GetArmy())
-                local curEnergy = aiBrain:GetEconomyStoredRatio('ENERGY')
-                local curMass = aiBrain:GetEconomyStoredRatio('MASS')
-                if curEnergy > 0.11 and curMass > 0.11 then
-                    if self:GetNumBuildOrders(categories.ALLUNITS) == 0 then
-                        self:CreateBlinkingLights('Green')
-                        self.BlinkingLightsState = state
-                    else
-                        self:CreateBlinkingLights('Yellow')
-                        self.BlinkingLightsState = 'Yellow'
-                    end
-                end
-            end
-        elseif state == 'Red' then
-            self:CreateBlinkingLights('Red')
-            self.BlinkingLightsState = state
-        end
-    end,
-
-    OnMassStorageStateChange = function(self, newState)
-        if newState == 'EconLowMassStore' then
-            self:ChangeBlinkingLights('Red')
-        else
-            self:ChangeBlinkingLights('Green')
-        end
-    end,
-
-    OnEnergyStorageStateChange = function(self, newState)
-        if newState == 'EconLowEnergyStore' then
-            self:ChangeBlinkingLights('Red')
-        else
-            self:ChangeBlinkingLights('Green')
-        end
-    end,
-
     OnStartBuild = function(self, unitBeingBuilt, order )
-        self:ChangeBlinkingLights('Yellow')
         StructureUnit.OnStartBuild(self, unitBeingBuilt, order )
         self.BuildingUnit = true
         if order != 'Upgrade' then
@@ -1598,7 +1414,6 @@ ShriekerNest = Class(TerminideStructureUnit) {
     IdleState = State {
 
         Main = function(self)
-            self:ChangeBlinkingLights('Green')
             self:SetBusy(false)
             self:SetBlockCommandQueue(false)
             self:DestroyBuildRotator()
@@ -1660,22 +1475,16 @@ TerminideEnergyStorageUnit = Class(TerminideStructureUnit) {
     OnStopBeingBuilt = function(self,builder,layer)
         StructureUnit.OnStopBeingBuilt(self,builder,layer)
         local aiBrain = GetArmyBrain(self:GetArmy())
-        aiBrain:ESRegisterUnitEnergyStorage(self)
         local curEnergy = aiBrain:GetEconomyStoredRatio('ENERGY')
         if curEnergy > 0.11 then
-            self:CreateBlinkingLights('Yellow')
         else
-            self:CreateBlinkingLights('Red')
         end
     end,
 
     OnEnergyStorageStateChange = function(self, newState)
         if newState == 'EconLowEnergyStore' then
-            self:CreateBlinkingLights('Red')
         elseif newState == 'EconMidEnergyStore' then
-            self:CreateBlinkingLights('Yellow')
         elseif newState == 'EconFullEnergyStore' then
-            self:CreateBlinkingLights('Green')
         end
     end,
 
@@ -1806,23 +1615,17 @@ TerminideMassStorageUnit = Class(TerminideStructureUnit) {
     OnStopBeingBuilt = function(self,builder,layer)
         TerminideStructureUnit.OnStopBeingBuilt(self,builder,layer)
         local aiBrain = GetArmyBrain(self:GetArmy())
-        aiBrain:ESRegisterUnitMassStorage(self)
         local curMass = aiBrain:GetEconomyStoredRatio('MASS')
         if curMass > 0.11 then
-            self:CreateBlinkingLights('Yellow')
         else
-            self:CreateBlinkingLights('Red')
         end
     end,
 
 
     OnMassStorageStateChange = function(self, newState)
         if newState == 'EconLowMassStore' then
-            self:CreateBlinkingLights('Red')
         elseif newState == 'EconMidMassStore' then
-            self:CreateBlinkingLights('Yellow')
         elseif newState == 'EconFullMassStore' then
-            self:CreateBlinkingLights('Green')
         end
     end,
 
@@ -1839,14 +1642,10 @@ TerminideRadarUnit = Class(TerminideStructureUnit) {
     OnIntelDisabled = function(self)
         TerminideStructureUnit.OnIntelDisabled(self)
         self:DestroyIdleEffects()
-        self:DestroyBlinkingLights()
-        self:CreateBlinkingLights('Red')
     end,
 
     OnIntelEnabled = function(self)
         TerminideStructureUnit.OnIntelEnabled(self)
-        self:DestroyBlinkingLights()
-        self:CreateBlinkingLights('Green')
         self:CreateIdleEffects()
     end,
 }
@@ -1942,14 +1741,10 @@ TerminideSonarUnit = Class(TerminideStructureUnit) {
     
     OnIntelDisabled = function(self)
         TerminideStructureUnit.OnIntelDisabled(self)
-        self:DestroyBlinkingLights()
-        self:CreateBlinkingLights('Red')
     end,
 
     OnIntelEnabled = function(self)
         TerminideStructureUnit.OnIntelEnabled(self)
-        self:DestroyBlinkingLights()
-        self:CreateBlinkingLights('Green')
     end,
 }
 

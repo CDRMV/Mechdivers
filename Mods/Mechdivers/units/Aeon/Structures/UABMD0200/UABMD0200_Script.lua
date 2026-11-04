@@ -79,7 +79,6 @@ UABMD0200 = Class(AStructureUnit) {
 	ForkThread( function()
 		self.Build = true
 		unitBeingBuilt:HideBone(0,true)
-        self:ChangeBlinkingLights('Yellow')
         AStructureUnit.OnStartBuild(self, unitBeingBuilt, order )
         self.BuildingUnit = true
         if order != 'Upgrade' then
@@ -313,7 +312,6 @@ UABMD0200 = Class(AStructureUnit) {
     IdleState = State {
 
         Main = function(self)
-            self:ChangeBlinkingLights('Green')
             self:SetBusy(false)
             self:SetBlockCommandQueue(false)
             self:DestroyBuildRotator()

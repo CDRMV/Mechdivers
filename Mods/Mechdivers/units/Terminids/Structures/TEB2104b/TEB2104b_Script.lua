@@ -30,7 +30,7 @@ TEB2104 = Class(TStructureUnit) {
 		self.unit:GetWeaponByLabel('MainGun'):SetEnabled(false)
 		self.unit:GetWeaponByLabel('AAGun'):SetEnabled(true)
 		end
-		if self.unit:GetTargetEntity() and self.unit:GetBlueprint().CategoriesHash["LAND"] or self.unit:GetBlueprint().CategoriesHash["NAVAL"] then
+		if self.unit:GetTargetEntity() and self.unit:GetBlueprint().CategoriesHash["LAND"] or self.unit:GetTargetEntity() and self.unit:GetBlueprint().CategoriesHash["NAVAL"] then
 		LOG('Ground')
 		self.unit:GetWeaponByLabel('MainGun'):SetTargetEntity(self.unit:GetTargetEntity())
 		self.unit:GetWeaponByLabel('AAGun'):SetEnabled(false)

@@ -9,7 +9,7 @@
 #****************************************************************************
 
 local CAirUnit = import('/lua/defaultunits.lua').AirUnit
-local CAAMissileNaniteWeapon = import('/lua/cybranweapons.lua').CAAMissileNaniteWeapon
+local CAAMissileNaniteWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 
 CSKMDCA0301 = Class(CAirUnit) {
     EngineRotateBones = {'Jet_Front', 'Jet_Back',},

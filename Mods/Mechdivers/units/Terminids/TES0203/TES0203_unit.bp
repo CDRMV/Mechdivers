@@ -212,6 +212,7 @@ UnitBlueprint {
             CollideFriendly = false,
             Damage = 150,
             DamageType = 'Normal',
+			DamageFriendly = false,
             DisplayName = 'Angler Torpedo',
             FireTargetLayerCapsTable = {
 				Sub = 'Seabed|Sub|Water',
@@ -285,6 +286,7 @@ UnitBlueprint {
             },
             FiringTolerance = 1,
             Label = 'Melee',
+			DamageFriendly = false,
             MaxRadius = 1.6,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,

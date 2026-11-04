@@ -8,7 +8,6 @@ do
 					if wep.RangeCategory == 'UWRC_AntiAir' then
 						if not wep.AntiOrbital == true then
 							wep.TargetRestrictDisallow = wep.TargetRestrictDisallow .. ', SATELLITE, ORBITAL'
-							LOG('*ADDING RESTRICTION : ' .. bp.BlueprintId .. " : " .. wep.DisplayName)
 						end
 					end
 				end

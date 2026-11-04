@@ -9,7 +9,7 @@
 #****************************************************************************
 
 local TStructureUnit = import('/lua/defaultunits.lua').TerminideStructureUnit
-local TANTorpedoLandWeapon = import('/lua/terranweapons.lua').TANTorpedoLandWeapon
+local TANTorpedoLandWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 
 TEB2109 = Class(TStructureUnit) {
     Weapons = {

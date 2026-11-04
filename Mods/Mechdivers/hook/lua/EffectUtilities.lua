@@ -402,6 +402,9 @@ function CreateTerminideBuildBaseThread( unitBeingBuilt, builder, EffectsBag )
     }
     
     local AdjustedEmitters = {}
+	
+	
+	
     local effect = nil
     for k, vEffect in BuildEffectsEmitters do
         effect = CreateAttachedEmitter( unitBeingBuilt, -1, builder:GetArmy(), vEffect):OffsetEmitter(0,-0.8,0)
@@ -424,7 +427,32 @@ function CreateTerminideBuildBaseThread( unitBeingBuilt, builder, EffectsBag )
 	unitBeingBuilt:CreateTarmac(true, true, true, false, false)
 
     WaitSeconds(0.5)
-    BuildBaseEffect:Destroy()
+	local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+
+	if version < 3652 then
+	if DiskGetFileInfo('/lua/AI/CustomAIs_v2/ExtrasAI.lua') then
+	if import('/lua/AI/CustomAIs_v2/ExtrasAI.lua').AI.Name == 'AI Patch LOUD' then
+	 local cComplete = GetFractionComplete(unitBeingBuilt)
+	while not unitBeingBuilt.Dead and cComplete < 1.0 do
+		
+        if unitBeingBuilt.Dead then
+            break
+        end
+        cComplete = GetFractionComplete(unitBeingBuilt)
+		WaitSeconds(0.01)
+    end
+	if not BeenDestroyed(BuildBaseEffect) then
+		BuildBaseEffect:Destroy()
+	end
+	else
+	BuildBaseEffect:Destroy()
+	end
+	else
+	BuildBaseEffect:Destroy()
+	end
+	else
+	BuildBaseEffect:Destroy()
+	end
 end
 
 function CreateTerminideConstructionUnitBuildingEffects( builder, unitBeingBuilt, BuildEffectBones, BuildEffectsBag )

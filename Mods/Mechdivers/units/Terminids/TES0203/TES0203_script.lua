@@ -9,7 +9,7 @@
 #****************************************************************************
 local TerminideSeaUnit = import('/lua/defaultunits.lua').TerminideSeaUnit
 local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
-local TANTorpedoLandWeapon = import('/lua/terranweapons.lua').TANTorpedoLandWeapon
+local TANTorpedoLandWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 
 TES0203 = Class(TerminideSeaUnit) {
 

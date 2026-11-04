@@ -187,6 +187,7 @@ UnitBlueprint {
             CollideFriendly = false,
             Damage = 0.1,
             DamageRadius = 0,
+			DamageFriendly = false,
             DamageType = 'Normal',
             DisplayName = 'Gauss Cannon',
             FireTargetLayerCapsTable = {
@@ -230,7 +231,7 @@ UnitBlueprint {
             TrackingRadius = 1.15,
             Turreted = false,
             WeaponCategory = 'Direct Fire',
-            WeaponRepackTimeout = 0,
+            WeaponRepackTimeout = 1,
             WeaponUnpackAnimation = '/mods/Mechdivers/units/Terminids/TEL0103/TEL0103_aunpack.sca',
             WeaponUnpackAnimationRate = 2,
             WeaponUnpackLocksMotion = false,

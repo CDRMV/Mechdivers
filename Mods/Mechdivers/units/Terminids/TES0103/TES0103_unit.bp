@@ -262,7 +262,7 @@ UnitBlueprint {
             TurretYawSpeed = 90,
             Turreted = true,
             WeaponCategory = 'Direct Fire',
-			WeaponRepackTimeout = 0,
+			WeaponRepackTimeout = 1,
             WeaponUnpackAnimation = '/mods/Mechdivers/units/Terminids/TES0103/TES0103_aunpack.sca',
             WeaponUnpackAnimationRate = 2,
             WeaponUnpackLocksMotion = false,

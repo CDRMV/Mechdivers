@@ -192,6 +192,7 @@ UnitBlueprint {
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
             Damage = 7,
+			DamageFriendly = false,
             DamageType = 'Normal',
             DisplayName = 'Tom Cat Machinegun',
             FireTargetLayerCapsTable = {

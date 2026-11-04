@@ -43,7 +43,7 @@ TEL0001 = Class(TerminideWalkingLandUnit) {
                 self.unit:BuildManipulatorSetEnabled(false)
                 self.AimControl:SetEnabled(true)
                 self.AimControl:SetPrecedence(20)
-                self.unit.BuildArmManipulator:SetPrecedence(0)
+                --self.unit.BuildArmManipulator:SetPrecedence(0)
                 self.AimControl:SetHeadingPitch( self.unit:GetWeaponManipulatorByLabel('RightZephyr'):GetHeadingPitch() )
             end,
 
@@ -60,7 +60,7 @@ TEL0001 = Class(TerminideWalkingLandUnit) {
                 self.unit:BuildManipulatorSetEnabled(false)
                 self.AimControl:SetEnabled(false)
                 self.AimControl:SetPrecedence(0)
-                self.unit.BuildArmManipulator:SetPrecedence(0)
+                --self.unit.BuildArmManipulator:SetPrecedence(0)
                 self.unit:GetWeaponManipulatorByLabel('RightZephyr'):SetHeadingPitch( self.AimControl:GetHeadingPitch() )
             end,
             
@@ -109,6 +109,9 @@ TEL0001 = Class(TerminideWalkingLandUnit) {
         self.HasRightPod = false
         # Restrict what enhancements will enable later
         self:AddBuildRestriction( categories.UEF * (categories.BUILTBYTIER2COMMANDER + categories.BUILTBYTIER3COMMANDER) )
+		if ScenarioInfo.Options['PrebuiltUnits'] == 'On' then
+			self:PlayCommanderWarpInEffect()
+        end
     end,
 
     OnPrepareArmToBuild = function(self)

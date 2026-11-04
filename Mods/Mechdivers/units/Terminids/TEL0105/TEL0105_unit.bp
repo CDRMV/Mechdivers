@@ -218,6 +218,7 @@ UnitBlueprint {
             },
             FiringTolerance = 2,
             Label = 'Melee',
+			DamageFriendly = false,
             MaxRadius = 14,
             MuzzleSalvoDelay = 0,
             MuzzleSalvoSize = 1,

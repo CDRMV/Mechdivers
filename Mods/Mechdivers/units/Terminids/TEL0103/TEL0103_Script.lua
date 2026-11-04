@@ -32,7 +32,7 @@ TEL0103 = Class(TerminideWalkingLandUnit) {
 		self.unit:GetWeaponByLabel('MainGun'):SetEnabled(false)
 		self.unit:GetWeaponByLabel('AAGun'):SetEnabled(true)
 		end
-		if self.unit:GetTargetEntity() and self.unit:GetBlueprint().CategoriesHash["LAND"] or self.unit:GetBlueprint().CategoriesHash["NAVAL"] then
+		if self.unit:GetTargetEntity() and self.unit:GetBlueprint().CategoriesHash["LAND"] or self.unit:GetTargetEntity() and self.unit:GetBlueprint().CategoriesHash["NAVAL"] then
 		LOG('Ground')
 		self.unit:GetWeaponByLabel('Dummy'):ChangeMaxRadius(30)
 		self.unit:GetWeaponByLabel('Dummy'):ChangeMinRadius(5)

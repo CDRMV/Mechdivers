@@ -40,8 +40,6 @@ UnitBlueprint {
 		'GATE',
 		'RALLYPOINT',
         'STRUCTURE',
-		'CONSTRUCTION',
-        'FACTORY',
 		'SIZE16',
         'TECH2',
         'DRAGBUILD',

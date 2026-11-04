@@ -192,6 +192,7 @@ UnitBlueprint {
             },
             BallisticArc = 'RULEUBA_LowArc',
             CollideFriendly = false,
+			DamageFriendly = false,
             Damage = 150,
             DamageType = 'Normal',
             DisplayName = 'Angler Torpedo',
