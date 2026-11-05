@@ -129,7 +129,6 @@ UnitBlueprint {
         ToggleCaps = {
             RULEUTC_IntelToggle = true,
         },
-        UnitName = '<LOC ueb3102_name>SP1 - 1000',
         UnitWeight = 1,
         UpgradesTo = 'ueb3202',
     },
