@@ -225,6 +225,7 @@ end,
 		end
 		end)
 		ChangeState(self, self.IdleState)
+		self:CreateEnhancement('RegularLegion')
     end,
 	
 	OnFailedToBuild = function(self)
@@ -276,6 +277,26 @@ end,
         end,
 		
 	},	
+	
+	CreateEnhancement = function(self, enh)
+        CWalkingLandUnit.CreateEnhancement(self, enh)
+        local bp = self:GetBlueprint().Enhancements[enh]
+        if not bp then return end
+        if enh == 'RegularLegion' then
+		self:AddBuildRestriction(categories.CYBRAN * categories.JETBRIGADE)
+		self:AddBuildRestriction(categories.CYBRAN * categories.INCINERATIONCORPS)
+        elseif enh == 'RegularLegionRemove' then
+		
+		elseif enh == 'JetBrigade' then
+		self:RemoveBuildRestriction(categories.CYBRAN * categories.JETBRIGADE)		
+		elseif enh == 'JetBrigadeRemove' then
+		self:AddBuildRestriction(categories.CYBRAN * categories.JETBRIGADE)				
+		elseif enh == 'IncinerationCorps' then
+		self:RemoveBuildRestriction(categories.CYBRAN * categories.INCINERATIONCORPS)						
+		elseif enh == 'IncinerationCorpsRemove' then
+		self:AddBuildRestriction(categories.CYBRAN * categories.INCINERATIONCORPS)
+        end
+    end,
 
 	
 		CreateIntelEntity = function(self, bone, intel)

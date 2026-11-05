@@ -103,8 +103,6 @@ CSKMDCL0106 = Class(CWalkingLandUnit) {
         CWalkingLandUnit.OnScriptBitSet(self, bit)
 		ForkThread(function()
         if bit == 1 then 
-		self:SetSpeedMult(1.5)
-        elseif bit == 7 then 
 			local Oldlocation = self:GetPosition()
 			local MovePos = self:GetCurrentMoveLocation()
 			local LandUnit = {} 
@@ -141,8 +139,6 @@ CSKMDCL0106 = Class(CWalkingLandUnit) {
     OnScriptBitClear = function(self, bit)
         CWalkingLandUnit.OnScriptBitClear(self, bit)
         if bit == 1 then 
-		self:SetSpeedMult(1)
-        elseif bit == 7 then 
 			self.Effect1:Destroy()
 			self.Effect2:Destroy()
 			self.Effect3:Destroy()

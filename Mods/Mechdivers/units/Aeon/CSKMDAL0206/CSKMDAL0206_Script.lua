@@ -89,17 +89,17 @@ CSKMDAL0206 = Class(AWalkingLandUnit) {
 			self.attackanimator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0206/CSKMDAL0206_Attack.sca', false):SetRate(1)
 			self.walkanimator = CreateAnimator(self)
 			self.Trash:Add(self.walkanimator)
-			self.walkanimator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0206/CSKMDAL0206_AWalk2.sca', true):SetRate(1)
+			self.walkanimator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0206/CSKMDAL0206_AWalk2.sca', true):SetRate(1.7)
 			self:SetSpeedMult(1.4)
 			elseif self:IsUnitState('Moving')then
 			self.walkanimator = CreateAnimator(self)
 			self.Trash:Add(self.walkanimator)
-			self.walkanimator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0206/CSKMDAL0206_AWalk.sca', true):SetRate(1)
+			self.walkanimator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0206/CSKMDAL0206_AWalk.sca', true):SetRate(1.7)
 			self:SetSpeedMult(1)
 			else
 			self.walkanimator = CreateAnimator(self)
 			self.Trash:Add(self.walkanimator)
-			self.walkanimator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0206/CSKMDAL0206_AWalk.sca', true):SetRate(1)
+			self.walkanimator:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0206/CSKMDAL0206_AWalk.sca', true):SetRate(1.7)
 			self:SetSpeedMult(1)
 			end
 			

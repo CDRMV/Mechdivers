@@ -36,20 +36,6 @@ CSKMDCL0103 = Class(CWalkingLandUnit) {
 		self.DoMeleeThreadHandle = self:ForkThread(self.DoMeleeThread)
     end,
 	
-	OnScriptBitSet = function(self, bit)
-        CWalkingLandUnit.OnScriptBitSet(self, bit)
-        if bit == 1 then 
-		self:SetSpeedMult(1.5)
-        end
-    end,
-
-    OnScriptBitClear = function(self, bit)
-        CWalkingLandUnit.OnScriptBitClear(self, bit)
-        if bit == 1 then 
-		self:SetSpeedMult(1)
-        end
-    end,
-	
 	DoMeleeThread = function(self)
 			local unitPos = self:GetPosition()
 			local radius = self:GetBlueprint().Intel.VisionRadius

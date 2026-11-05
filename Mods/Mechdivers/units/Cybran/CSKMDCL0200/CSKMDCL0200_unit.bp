@@ -64,7 +64,6 @@ UnitBlueprint {
     Description = 'Medium Assault Bot (Scout Strider)',
     Display = {
 	    Abilities = {
-            'Speed Booster',
 			'Usable Pilot as an seperated Unit',
         },
         AnimationDeath = {
@@ -94,7 +93,7 @@ UnitBlueprint {
             },
         },
         AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0200/CSKMDCL0200_Awalk01.sca',
-        AnimationWalkRate = 1.5,
+        AnimationWalkRate = 2,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -155,10 +154,6 @@ UnitBlueprint {
         FactionName = 'Cybran',
         Icon = 'land',
         OrderOverrides = {
-            RULEUTC_WeaponToggle = {
-                bitmapId = 'production',
-				helpText = 'Speed Booster',		
-            },
 			RULEUTC_SpecialToggle = {
 			    bitmapId = 'Deploy',
 				helpText = 'Load/Unload Pilot',
@@ -173,9 +168,6 @@ UnitBlueprint {
             },
         },
         TechLevel = 'RULEUTL_Advanced',
-        ToggleCaps = {
-            RULEUTC_WeaponToggle = true,
-        },
         UnitName = 'Hunter II',
         UnitWeight = 1,
     },
@@ -200,8 +192,8 @@ UnitBlueprint {
         },
         DragCoefficient = 0.2,
         MaxAcceleration = 4,
-        MaxBrake = 1,
-        MaxSpeed = 1.5,
+        MaxBrake = 3.6,
+        MaxSpeed = 3.6,
         MaxSpeedReverse = 0,
         MaxSteerForce = 7,
         MinSpeedPercent = 0,

@@ -36,20 +36,6 @@ CSKMDCL0107 = Class(CWalkingLandUnit) {
         self.DropRifle:SetVizToEnemies('Never')
     end,
 	
-	OnScriptBitSet = function(self, bit)
-        CWalkingLandUnit.OnScriptBitSet(self, bit)
-        if bit == 1 then 
-		self:SetSpeedMult(1.5)
-        end
-    end,
-
-    OnScriptBitClear = function(self, bit)
-        CWalkingLandUnit.OnScriptBitClear(self, bit)
-        if bit == 1 then 
-		self:SetSpeedMult(1)
-        end
-    end,
-	
 	HideRifle = function(self)
 		CWalkingLandUnit.OnCreate(self)
         self.Rifle:SetVizToAllies('Never')

@@ -29,6 +29,7 @@ CSKMDCL0314 = Class(CWalkingLandUnit) {
 		self.AnimationManipulator2 = CreateAnimator(self)
         self.AnimationManipulator2:PlayAnim(self:GetBlueprint().Display.AnimationDeco2, true):SetRate(0.5)
 		ChangeState(self, self.IdleState)
+		self:CreateEnhancement('RegularLegion')
     end,
 	
 	OnFailedToBuild = function(self)
@@ -80,6 +81,26 @@ CSKMDCL0314 = Class(CWalkingLandUnit) {
         end,
 
     },
+	
+	CreateEnhancement = function(self, enh)
+        CWalkingLandUnit.CreateEnhancement(self, enh)
+        local bp = self:GetBlueprint().Enhancements[enh]
+        if not bp then return end
+        if enh == 'RegularLegion' then
+		self:AddBuildRestriction(categories.CYBRAN * categories.JETBRIGADE)
+		self:AddBuildRestriction(categories.CYBRAN * categories.INCINERATIONCORPS)
+        elseif enh == 'RegularLegionRemove' then
+		
+		elseif enh == 'JetBrigade' then
+		self:RemoveBuildRestriction(categories.CYBRAN * categories.JETBRIGADE)		
+		elseif enh == 'JetBrigadeRemove' then
+		self:AddBuildRestriction(categories.CYBRAN * categories.JETBRIGADE)				
+		elseif enh == 'IncinerationCorps' then
+		self:RemoveBuildRestriction(categories.CYBRAN * categories.INCINERATIONCORPS)						
+		elseif enh == 'IncinerationCorpsRemove' then
+		self:AddBuildRestriction(categories.CYBRAN * categories.INCINERATIONCORPS)
+        end
+    end,
 	
 }
 

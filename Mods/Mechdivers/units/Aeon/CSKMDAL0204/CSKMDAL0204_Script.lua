@@ -108,7 +108,7 @@ MainGun2 = Class(ADFCannonQuantumWeapon) {
 		if old == 'Stopped' then
 			self.OpenAnimManip = CreateAnimator(self)
 			self.Trash:Add(self.OpenAnimManip)
-			self.OpenAnimManip:PlayAnim('/mods/Mechdivers/units/Aeon/CSKMDAL0204/CSKMDAL0204_Awalk01.sca', true):SetRate(1)
+			self.OpenAnimManip:PlayAnim('/mods/Mechdivers/units/Aeon/CSKMDAL0204/CSKMDAL0204_Awalk01.sca', true):SetRate(2)
         elseif new == 'Stopped' then
 			if self.OpenAnimManip then
 			self.OpenAnimManip:Destroy()

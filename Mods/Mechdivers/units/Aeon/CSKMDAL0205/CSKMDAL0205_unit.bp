@@ -85,7 +85,7 @@ UnitBlueprint {
             },
         },
         AnimationWalk = '/Mods/Mechdivers/units/Aeon/CSKMDAL0205/CSKMDAL0205_awalk.sca',
-        AnimationWalkRate = 0.7,
+        AnimationWalkRate = 2.2,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -146,16 +146,7 @@ UnitBlueprint {
         },
         FactionName = 'Aeon',
         Icon = 'amph',
-		 OrderOverrides = {
-            RULEUTC_WeaponToggle = {
-                bitmapId = 'production',
-				helpText = 'Speed Booster',		
-            },
-        },
         TechLevel = 'RULEUTL_Advanced',
-        ToggleCaps = {
-            RULEUTC_WeaponToggle = true,
-        },
         UnitName = 'Neomob',
         UnitWeight = 1,
     },
@@ -181,8 +172,8 @@ UnitBlueprint {
         },
         DragCoefficient = 0.2,
         MaxAcceleration = 2,
-        MaxBrake = 1,
-        MaxSpeed = 1,
+        MaxBrake = 3.5,
+        MaxSpeed = 3.5,
         MaxSpeedReverse = 0,
         MaxSteerForce = 10,
         MinSpeedPercent = 0,

@@ -88,9 +88,7 @@ CSKMDCL0102 = Class(CWalkingLandUnit) {
 	OnScriptBitSet = function(self, bit)
         CWalkingLandUnit.OnScriptBitSet(self, bit)
 		ForkThread(function()
-        if bit == 1 then 
-		self:SetSpeedMult(1.5)
-		elseif bit == 7 then
+        if bit == 7 then
 		self:SetWeaponEnabledByLabel('MainGun', false)
 		IssueClearCommands({self})
 		self:SetImmobile(true)
@@ -118,9 +116,7 @@ CSKMDCL0102 = Class(CWalkingLandUnit) {
 
     OnScriptBitClear = function(self, bit)
         CWalkingLandUnit.OnScriptBitClear(self, bit)
-        if bit == 1 then 
-		self:SetSpeedMult(1)
-		elseif bit == 7 then
+        if bit == 7 then
 		self:SetScriptBit('RULEUTC_SpecialToggle', true)
 		end
     end,

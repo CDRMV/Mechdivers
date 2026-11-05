@@ -93,11 +93,11 @@ IdleState = State (ADFCannonQuantumWeapon.IdleState) {
 			end
 			self.OpenAnimManip = CreateAnimator(self)
 			self.Trash:Add(self.OpenAnimManip)
-			self.OpenAnimManip:PlayAnim('/mods/Mechdivers/units/Aeon/CSKMDAL0202/CSKMDAL0202_Awalk02.sca', true):SetRate(1)
+			self.OpenAnimManip:PlayAnim('/mods/Mechdivers/units/Aeon/CSKMDAL0202/CSKMDAL0202_Awalk02.sca', true):SetRate(2)
 		else
 			self.OpenAnimManip = CreateAnimator(self)
 			self.Trash:Add(self.OpenAnimManip)
-			self.OpenAnimManip:PlayAnim('/mods/Mechdivers/units/Aeon/CSKMDAL0202/CSKMDAL0202_Awalk01.sca', true):SetRate(1)
+			self.OpenAnimManip:PlayAnim('/mods/Mechdivers/units/Aeon/CSKMDAL0202/CSKMDAL0202_Awalk01.sca', true):SetRate(2)
 			self.ArmAnimManip = CreateAnimator(self)
 			self.Trash:Add(self.ArmAnimManip)
 			self.ArmAnimManip:PlayAnim('/Mods/Mechdivers/units/Aeon/CSKMDAL0202/CSKMDAL0202_AArm01.sca', true):SetRate(1)

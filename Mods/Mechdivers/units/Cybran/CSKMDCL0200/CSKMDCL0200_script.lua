@@ -47,9 +47,7 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 	
 	OnScriptBitSet = function(self, bit)
         CWalkingLandUnit.OnScriptBitSet(self, bit)
-        if bit == 1 then 
-		self:SetSpeedMult(1.2)
-		elseif bit == 0 then 
+        if bit == 0 then 
 		ForkThread(function()
 		self:RemoveCommandCap('RULEUCC_Move')
 		self:RemoveCommandCap('RULEUCC_Attack')
@@ -112,9 +110,7 @@ CSKMDCL0200 = Class(CWalkingLandUnit) {
 
     OnScriptBitClear = function(self, bit)
         CWalkingLandUnit.OnScriptBitClear(self, bit)
-        if bit == 1 then 
-		self:SetSpeedMult(1)
-		elseif bit == 0 then 
+        if bit == 0 then 
 		ForkThread(function()
 		if self.Beacon then
 		self.Beacon:Destroy()

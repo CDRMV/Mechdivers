@@ -48,22 +48,6 @@ CSKMDAL0205 = Class(AWalkingLandUnit) {
 			WaitSeconds(0.1)
 			end
     end,
-	
-	OnScriptBitSet = function(self, bit)
-        AWalkingLandUnit.OnScriptBitSet(self, bit)
-		ForkThread(function()
-        if bit == 1 then 
-		self:SetSpeedMult(1.4)
-        end
-		end)
-    end,
-
-    OnScriptBitClear = function(self, bit)
-        AWalkingLandUnit.OnScriptBitClear(self, bit)
-        if bit == 1 then 
-		self:SetSpeedMult(1)
-        end
-    end,
 }
 
 TypeClass = CSKMDAL0205

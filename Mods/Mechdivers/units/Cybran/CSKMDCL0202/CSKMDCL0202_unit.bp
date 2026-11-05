@@ -63,9 +63,6 @@ UnitBlueprint {
     },
     Description = 'Advanced Siege Bot',
     Display = {
-	    Abilities = {
-            'Speed Booster',
-        },
         AnimationDeath = {
             {
                 Animation = '/mods/Mechdivers/units/Cybran/CSKMDCL0202/CSKMDCL0202_Adeath01.sca',
@@ -81,7 +78,7 @@ UnitBlueprint {
             },
         },
         AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0202/CSKMDCL0202_Awalk01.sca',
-        AnimationWalkRate = 1.1,
+        AnimationWalkRate = 1.6,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -122,16 +119,7 @@ UnitBlueprint {
         },
         FactionName = 'Cybran',
         Icon = 'land',
-        OrderOverrides = {
-            RULEUTC_WeaponToggle = {
-                bitmapId = 'production',
-				helpText = 'Speed Booster',		
-            },
-        },
         TechLevel = 'RULEUTL_Advanced',
-        ToggleCaps = {
-            RULEUTC_WeaponToggle = true,
-        },
         UnitName = 'Heavy Devastator',
         UnitWeight = 1,
     },
@@ -156,8 +144,8 @@ UnitBlueprint {
         },
         DragCoefficient = 0.2,
         MaxAcceleration = 4,
-        MaxBrake = 0.5,
-        MaxSpeed = 1.1,
+        MaxBrake = 2.7,
+        MaxSpeed = 2.7,
         MaxSpeedReverse = 0,
         MaxSteerForce = 7,
         MinSpeedPercent = 0,
