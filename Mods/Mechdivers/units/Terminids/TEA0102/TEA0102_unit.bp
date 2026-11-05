@@ -80,7 +80,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Ground Attack Bug',
+    Description = 'Groundattack Bug',
     Display = {
         Mesh = {
             IconFadeInZoom = 130,
