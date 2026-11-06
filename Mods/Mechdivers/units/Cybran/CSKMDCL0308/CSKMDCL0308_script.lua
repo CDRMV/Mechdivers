@@ -19,20 +19,6 @@ CSKMDCL0308 = Class(CWalkingLandUnit) {
 		MissileRack = Class(CIFGrenadeWeapon) {},
     },
 	
-	OnScriptBitSet = function(self, bit)
-        CWalkingLandUnit.OnScriptBitSet(self, bit)
-        if bit == 1 then 
-		self:SetSpeedMult(2)
-        end
-    end,
-
-    OnScriptBitClear = function(self, bit)
-        CWalkingLandUnit.OnScriptBitClear(self, bit)
-        if bit == 1 then 
-		self:SetSpeedMult(1)
-        end
-    end,
-	
 	OnCreate = function(self)
 		CWalkingLandUnit.OnCreate(self)
 		self:HideBone('B01', true)

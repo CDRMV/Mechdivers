@@ -143,7 +143,7 @@ UnitBlueprint {
             },
         },
         AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0309/CSKMDCL0309_Awalk01.sca',
-        AnimationWalkRate = 0.95,
+        AnimationWalkRate = 1.3,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -203,16 +203,7 @@ UnitBlueprint {
         },
         FactionName = 'Cybran',
         Icon = 'land',
-        OrderOverrides = {
-            RULEUTC_WeaponToggle = {
-                bitmapId = 'production',
-				helpText = 'Speed Booster',	
-            },
-        },
         TechLevel = 'RULEUTL_Secret',
-        ToggleCaps = {
-            RULEUTC_WeaponToggle = true,
-        },
         UnitName = 'Incineration Corps Hulk Scorcher',
         UnitWeight = 1,
     },
@@ -237,8 +228,8 @@ UnitBlueprint {
         },
         DragCoefficient = 0.2,
         MaxAcceleration = 4,
-        MaxBrake = 1,
-        MaxSpeed = 1,
+        MaxBrake = 1.8,
+        MaxSpeed = 1.8,
         MaxSpeedReverse = 0,
         MaxSteerForce = 7,
         MinSpeedPercent = 0,

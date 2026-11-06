@@ -57,20 +57,6 @@ CSKMDCL0307 = Class(CWalkingLandUnit) {
         Flamethrower = Class(TDFMachineGunWeapon) {},
     },
 	
-	OnScriptBitSet = function(self, bit)
-        CWalkingLandUnit.OnScriptBitSet(self, bit)
-        if bit == 1 then 
-		self:SetSpeedMult(2)
-        end
-    end,
-
-    OnScriptBitClear = function(self, bit)
-        CWalkingLandUnit.OnScriptBitClear(self, bit)
-        if bit == 1 then 
-		self:SetSpeedMult(1)
-        end
-    end,
-	
 	OnCreate = function(self)
 		CWalkingLandUnit.OnCreate(self)
 		self.FireEffect = CreateAttachedEmitter(self,'L_Arm_Fire',self:GetArmy(), '/effects/emitters/op_ambient_fire_01_emit.bp'):ScaleEmitter(0.05)

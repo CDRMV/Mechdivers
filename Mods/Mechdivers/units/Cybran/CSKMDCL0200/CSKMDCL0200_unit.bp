@@ -200,7 +200,7 @@ UnitBlueprint {
         MotionType = 'RULEUMT_Land',
         StandUpright = true,
         TurnRadius = 1,
-        TurnRate = 45,
+        TurnRate = 40,
     },
     SelectionCenterOffsetX = 0,
     SelectionCenterOffsetZ = -0.1,

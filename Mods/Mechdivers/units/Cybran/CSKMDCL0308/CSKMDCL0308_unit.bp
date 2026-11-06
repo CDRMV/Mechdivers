@@ -141,7 +141,7 @@ UnitBlueprint {
             },
         },
         AnimationWalk = '/mods/Mechdivers/units/Cybran/CSKMDCL0308/CSKMDCL0308_Awalk01.sca',
-        AnimationWalkRate = 0.95,
+        AnimationWalkRate = 1.2,
         Mesh = {
             IconFadeInZoom = 130,
             LODs = {
@@ -201,16 +201,7 @@ UnitBlueprint {
         },
         FactionName = 'Cybran',
         Icon = 'land',
-        OrderOverrides = {
-            RULEUTC_WeaponToggle = {
-                bitmapId = 'production',
-				helpText = 'Speed Booster',	
-            },
-        },
         TechLevel = 'RULEUTL_Secret',
-        ToggleCaps = {
-            RULEUTC_WeaponToggle = true,
-        },
         UnitName = 'Hulk Obliterator',
         UnitWeight = 1,
     },
@@ -235,8 +226,8 @@ UnitBlueprint {
         },
         DragCoefficient = 0.2,
         MaxAcceleration = 4,
-        MaxBrake = 1,
-        MaxSpeed = 1,
+        MaxBrake = 1.5,
+        MaxSpeed = 1.5,
         MaxSpeedReverse = 0,
         MaxSteerForce = 7,
         MinSpeedPercent = 0,
