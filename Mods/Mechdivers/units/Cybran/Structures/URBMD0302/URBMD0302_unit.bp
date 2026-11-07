@@ -119,7 +119,7 @@ UnitBlueprint {
         Icon = 'land',
         SelectionPriority = 5,
         TechLevel = 'RULEUTL_Advanced',
-        UnitName = 'Smilodon',
+        UnitName = 'Smilodon (Short Variant)',
         UnitWeight = 1,
     },
     Intel = {

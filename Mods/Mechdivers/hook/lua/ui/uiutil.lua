@@ -234,7 +234,9 @@ local MyUnitIdTable = {
 	  urbmd0302=true,
 	  urbmd0303=true,
 	  urbmd0304=true,
-
+	  urbmd0305=true,
+	  urbmd0306=true,
+	  
  -- Seraphim
  
  -- Land

@@ -59,7 +59,6 @@ UnitBlueprint {
         'BUILTBYTIER3FACTORY',
         'UEF',
         'MOBILE',
-		'CONSTRUCTION',
 		'FACTORY',
 		'CARRIER',
         'LAND',

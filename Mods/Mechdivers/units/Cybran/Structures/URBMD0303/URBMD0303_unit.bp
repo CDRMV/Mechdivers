@@ -120,7 +120,7 @@ UnitBlueprint {
         Icon = 'land',
         SelectionPriority = 5,
         TechLevel = 'RULEUTL_Advanced',
-        UnitName = 'Pyros',
+        UnitName = 'Pyros (Short Variant)',
         UnitWeight = 1,
     },
     Intel = {

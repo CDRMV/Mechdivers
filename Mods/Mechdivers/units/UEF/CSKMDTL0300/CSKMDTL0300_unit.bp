@@ -56,7 +56,6 @@ UnitBlueprint {
         'UEF',
         'MOBILE',
         'LAND',
-		'CONSTRUCTION',
 		'FACTORY',
 		'CARRIER',
         'TECH3',
