@@ -10,7 +10,7 @@
 
 local AStructureUnit = import('/lua/defaultunits.lua').StructureUnit
 
-UABMD0201 = Class(AStructureUnit) {
+UABMD0101 = Class(AStructureUnit) {
 
 	OnStopBeingBuilt = function(self,builder,layer)
         AStructureUnit.OnStopBeingBuilt(self,builder,layer)
@@ -71,4 +71,4 @@ UABMD0201 = Class(AStructureUnit) {
     end,
 }
 
-TypeClass = UABMD0201
+TypeClass = UABMD0101

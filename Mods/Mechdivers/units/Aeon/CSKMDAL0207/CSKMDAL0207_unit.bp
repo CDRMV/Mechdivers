@@ -76,7 +76,9 @@ UnitBlueprint {
     },
     Description = 'Melee Android',
     Display = {
-	AirDummyUnit = 'CSKMDJP0100',
+	    Abilities = {
+            'Executes an Attack Jump to an enemy Unit in an specific Range',
+        },
         AnimationDeath = {
             {
                 Animation = '/Mods/Mechdivers/units/Aeon/CSKMDAL0207/CSKMDAL0207_Adeath01.sca',
@@ -152,8 +154,8 @@ UnitBlueprint {
         UnitWeight = 1,
     },
     Intel = {
-		RadarRadius = 50,
-        VisionRadius = 45,
+		RadarRadius = 30,
+        VisionRadius = 25,
     },
     Interface = {
         HelpText = '<LOC ual0303_help>Heavy Assault Bot',

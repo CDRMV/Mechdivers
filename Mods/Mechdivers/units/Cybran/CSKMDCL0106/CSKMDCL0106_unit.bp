@@ -67,7 +67,6 @@ UnitBlueprint {
     },
     Description = 'Advanced Light Jetpack Bot',
     Display = {
-		AirDummyUnit = 'CSKMDJP0100',
 		JetPackEffectBones = {'B01_Exhaust01', 'B01_Exhaust02'},
 	    Abilities = {
 			'Jetpack Toggle Button is available if the Unit is moving',
@@ -215,7 +214,6 @@ UnitBlueprint {
             FiringTolerance = 2,
             Label = 'MainGun',
             MaxRadius = 15,
-			MinRadius = 0.9,
             MuzzleSalvoDelay = 0.5,
             MuzzleSalvoSize = 6,
             MuzzleVelocity = 25,

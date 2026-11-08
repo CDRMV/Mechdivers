@@ -164,6 +164,8 @@ UnitBlueprint {
     SelectionSizeX = 0.3,
     SelectionSizeZ = 0.3,
     SelectionThickness = 1.2,
+	DecalSizeX = 1,
+	DecalSizeZ = 1,
     SizeX = 0.6,
     SizeY = 0.6,
     SizeZ = 0.6,

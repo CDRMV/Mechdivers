@@ -1812,25 +1812,15 @@ TerminideWalkingLandUnit = Class(MobileUnit) {
         end
     end,
 	
-    PlayDamageEffect = function(self, fxTable, fxBag)
-        local army = self:GetArmy()
-        local effects = fxTable[Random(1,table.getn(fxTable))]
-        if not effects then return end
-        local totalBones = self:GetBoneCount()
-        local bone = Random(1, totalBones) - 1
-        local bpDE = self:GetBlueprint().Display.DamageEffects
-        for k, v in effects do
-            local fx
-            if bpDE then
-                local num = Random(1, table.getsize(bpDE))
-                local bpFx = bpDE[num]
-                fx = CreateAttachedEmitter(self, bpFx.Bone,army, v):ScaleEmitter(self.FxDamageScale):OffsetEmitter(bpFx.OffsetX or 0, bpFx.OffsetY or 0, bpFx.OffsetZ or 0)
-            else
-                fx = CreateAttachedEmitter(self, bone, army, v):ScaleEmitter(self.FxDamageScale)
-            end
-            table.insert(fxBag, fx)
+	CreateDamageEffects = function(self, bone, army)
+        for k, v in FxDamage1 do
+			if bone == 'Bone' then
+			else
+            CreateAttachedEmitter(self, bone, army, v):ScaleEmitter(1)
+			end
         end
     end,
+	
 	
 	DeathThread = function( self, overkillRatio , instigator)  
 		local army = self:GetArmy()
@@ -1840,7 +1830,7 @@ TerminideWalkingLandUnit = Class(MobileUnit) {
 				end
 		local position = self:GetPosition()
 		local orientation = RandomFloat(0,2*math.pi)
-		CreateDecal(position, orientation, '/mods/Mechdivers/decals/acid_splash.dds', '', 'Albedo', bp.DecalSizeX or 1, bp.DecalSizeX or 1, 150, 55, self:GetArmy())
+		CreateDecal(position, orientation, '/mods/Mechdivers/decals/acid_splash.dds', '', 'Albedo', bp.DecalSizeX or 1, bp.DecalSizeZ or 1, 150, 55, self:GetArmy())
 		if self.DeathAnimManip then
             WaitFor(self.DeathAnimManip)
         end
@@ -1926,23 +1916,12 @@ TerminideAnimatedAirUnit = Class(MobileUnit) {
         end
     end,
 	
-	PlayDamageEffect = function(self, fxTable, fxBag)
-        local army = self:GetArmy()
-        local effects = fxTable[Random(1,table.getn(fxTable))]
-        if not effects then return end
-        local totalBones = self:GetBoneCount()
-        local bone = Random(1, totalBones) - 1
-        local bpDE = self:GetBlueprint().Display.DamageEffects
-        for k, v in effects do
-            local fx
-            if bpDE then
-                local num = Random(1, table.getsize(bpDE))
-                local bpFx = bpDE[num]
-                fx = CreateAttachedEmitter(self, bpFx.Bone,army, v):ScaleEmitter(self.FxDamageScale):OffsetEmitter(bpFx.OffsetX or 0, bpFx.OffsetY or 0, bpFx.OffsetZ or 0)
-            else
-                fx = CreateAttachedEmitter(self, bone, army, v):ScaleEmitter(self.FxDamageScale)
-            end
-            table.insert(fxBag, fx)
+	CreateDamageEffects = function(self, bone, army)
+        for k, v in FxDamage1 do
+			if bone == 'Bone' then
+			else
+            CreateAttachedEmitter(self, bone, army, v):ScaleEmitter(1)
+			end
         end
     end,
 	
@@ -1981,7 +1960,7 @@ TerminideAnimatedAirUnit = Class(MobileUnit) {
 				end
 						local position = self:GetPosition()
 		local orientation = RandomFloat(0,2*math.pi)
-		CreateDecal(position, orientation, '/mods/Mechdivers/decals/acid_splash.dds', '', 'Albedo', bp.DecalSizeX or 1, bp.DecalSizeX or 1, 150, 55, self:GetArmy())
+		CreateDecal(position, orientation, '/mods/Mechdivers/decals/acid_splash.dds', '', 'Albedo', bp.DecalSizeX or 1, bp.DecalSizeZ or 1, 150, 55, self:GetArmy())
 
     end,
 	
@@ -2096,7 +2075,7 @@ TerminideAnimatedAirUnit = Class(MobileUnit) {
 
 		local position = self:GetPosition()
 		local orientation = RandomFloat(0,2*math.pi)
-		CreateDecal(position, orientation, '/mods/Mechdivers/decals/acid_splash.dds', '', 'Albedo', bp.DecalSizeX or 1, bp.DecalSizeX or 1, 150, 55, self:GetArmy())
+		CreateDecal(position, orientation, '/mods/Mechdivers/decals/acid_splash.dds', '', 'Albedo', bp.DecalSizeX or 1, bp.DecalSizeZ or 1, 150, 55, self:GetArmy())
 						for e, effect in self.TerminideBloodExplosion do 
 				CreateEmitterAtEntity(self, army, effect):ScaleEmitter(bp.BloodExplosionSize or 1)
 				end
@@ -2205,23 +2184,12 @@ TerminideSeaUnit = Class(MobileUnit) {
         end
     end,
 	
-	PlayDamageEffect = function(self, fxTable, fxBag)
-        local army = self:GetArmy()
-        local effects = fxTable[Random(1,table.getn(fxTable))]
-        if not effects then return end
-        local totalBones = self:GetBoneCount()
-        local bone = Random(1, totalBones) - 1
-        local bpDE = self:GetBlueprint().Display.DamageEffects
-        for k, v in effects do
-            local fx
-            if bpDE then
-                local num = Random(1, table.getsize(bpDE))
-                local bpFx = bpDE[num]
-                fx = CreateAttachedEmitter(self, bpFx.Bone,army, v):ScaleEmitter(self.FxDamageScale):OffsetEmitter(bpFx.OffsetX or 0, bpFx.OffsetY or 0, bpFx.OffsetZ or 0)
-            else
-                fx = CreateAttachedEmitter(self, bone, army, v):ScaleEmitter(self.FxDamageScale)
-            end
-            table.insert(fxBag, fx)
+	CreateDamageEffects = function(self, bone, army)
+        for k, v in FxDamage1 do
+			if bone == 'Bone' then
+			else
+            CreateAttachedEmitter(self, bone, army, v):ScaleEmitter(1)
+			end
         end
     end,
 }

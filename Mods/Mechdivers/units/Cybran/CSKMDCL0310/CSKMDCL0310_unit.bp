@@ -125,10 +125,9 @@ UnitBlueprint {
     },
     Description = 'Heavy Jetpack Ambush Bot',
     Display = {
-		AirDummyUnit = 'CSKMDJP0100',
 		JetPackEffectBones = {'B01_LExhaust', 'B01_RExhaust'},
 		Abilities = {
-            'Speed Booster',
+			'Executes an Attack Jump to an enemy Unit in an specific Range',
 			'Jetpack Toggle Button is available if the Unit is moving',
         },
         AnimationDeath = {

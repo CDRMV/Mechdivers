@@ -94,7 +94,7 @@ UnitBlueprint {
         'PRODUCTSC1',
         'SELECTABLE',
 		'STINGRAY',
-        'BUILTBYTIER3FACTORY',
+        'BUILTBYLANDINGPAD',
         'AEON',
         'MOBILE',
         'AIR',
