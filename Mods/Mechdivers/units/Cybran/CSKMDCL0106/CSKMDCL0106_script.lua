@@ -21,30 +21,6 @@ CSKMDCL0106 = Class(CWalkingLandUnit) {
     Weapons = {
 		Dummy = Class(DummyTurretWeapon) {
 		
-		IdleState = State (DummyTurretWeapon.IdleState) {
-        Main = function(self)
-            DummyTurretWeapon.IdleState.Main(self)
-        end,
-                
-        OnGotTarget = function(self)
-			   local wep1 = self.unit:GetWeaponByLabel('MainGun')
-			   wep1:SetEnabled(false)
-               DummyTurretWeapon.OnGotTarget(self)
-        end,                
-            },
-        
-        OnGotTarget = function(self)
-			   local wep1 = self.unit:GetWeaponByLabel('MainGun')
-			   wep1:SetEnabled(false)
-               DummyTurretWeapon.OnGotTarget(self)
-        end,
-        
-        OnLostTarget = function(self)
-			local wep1 = self.unit:GetWeaponByLabel('MainGun')
-			wep1:SetEnabled(true)
-            DummyTurretWeapon.OnLostTarget(self)
-        end, 
-		
 		OnWeaponFired = function(self)
 			ForkThread( function()
 			local animator = CreateAnimator(self.unit)
@@ -54,7 +30,30 @@ CSKMDCL0106 = Class(CWalkingLandUnit) {
 			end)
 		end,
 			},
-        MainGun = Class(CDFLaserFusionWeapon) {},
+        MainGun = Class(CDFLaserFusionWeapon) {
+						IdleState = State (CDFLaserFusionWeapon.IdleState) {
+        Main = function(self)
+            CDFLaserFusionWeapon.IdleState.Main(self)
+        end,
+                
+        OnGotTarget = function(self)
+			   local pos = self:GetCurrentTargetPos()
+			   local dist = self.unit:GetDistanceToTarget(pos, self.unit:GetPosition())
+			   	local number = math.random(1,2)
+				if number == 1 then
+
+				else
+
+				if dist < 3.5 then
+				elseif dist > 3.5 < 8.0 then
+				self.unit:Jump(pos)
+				pos = nil 
+				end
+				end
+               CDFLaserFusionWeapon.OnGotTarget(self)
+        end, 
+		},		
+		},
     },
 	
 	OnCreate = function(self)
@@ -192,6 +191,7 @@ CSKMDCL0106 = Class(CWalkingLandUnit) {
         self:Destroy()
     end,
 	
+	
 	DoMeleeThread = function(self)
 			local unitPos = self:GetPosition()
 			local radius = self:GetBlueprint().Intel.VisionRadius
@@ -201,15 +201,6 @@ CSKMDCL0106 = Class(CWalkingLandUnit) {
 			else
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Enemy')
             for _,unit in units do
-			local pos = unit:GetPosition()
-		local dist = self:GetDistanceToTarget(pos, self:GetPosition())
-		if self.jump == false then
-					if dist < 3.5 then
-		elseif dist > 3.5 < 8.0 then
-			self:Jump(pos)
-			pos = nil  
-			end
-			end
 			IssueAttack({self}, unit)
             end
 			end

@@ -15,6 +15,34 @@ local GRAVITY, JUMP_SPEED = 9.8, 20
 
 TEL0106 = Class(TerminideWalkingLandUnit) {
     Weapons = {
+		Dummy = Class(DummyTurretWeapon) {
+		
+		IdleState = State (DummyTurretWeapon.IdleState) {
+        Main = function(self)
+            DummyTurretWeapon.IdleState.Main(self)
+        end,
+                
+        OnGotTarget = function(self)
+			   local pos = self:GetCurrentTargetPos()
+			   local dist = self.unit:GetDistanceToTarget(pos, self.unit:GetPosition())
+			   	local number = math.random(1,2)
+				if number == 1 then
+				self:ChangeMaxRadius(1.0)
+				else
+				if dist < 3.5 then
+				elseif dist > 3.5 < 8.0 then
+				self.unit:Jump(pos)
+				pos = nil 
+				end
+				end
+               DummyTurretWeapon.OnGotTarget(self)
+        end,               
+            },
+		OnLostTarget = function(self)
+		self:ChangeMaxRadius(15)
+            DummyTurretWeapon.OnLostTarget(self)
+        end, 
+			},
 		Melee = Class(DummyTurretWeapon) {
 		
 		OnWeaponFired = function(self)
@@ -43,15 +71,6 @@ TEL0106 = Class(TerminideWalkingLandUnit) {
 			else
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Enemy')
             for _,unit in units do
-			local pos = unit:GetPosition()
-		local dist = self:GetDistanceToTarget(pos, self:GetPosition())
-		if self.jump == false then
-					if dist < 3.5 then
-		elseif dist > 3.5 < 8.0 then
-			self:Jump(pos)
-			pos = nil  
-			end
-			end
 			IssueAttack({self}, unit)
             end
 			end

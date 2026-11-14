@@ -11,6 +11,7 @@
 local CWalkingLandUnit = import('/lua/defaultunits.lua').WalkingLandUnit
 local ModWeaponsFile = import('/mods/Mechdivers/lua/CSKMDWeapons.lua')
 local CDFLaserFusionWeapon = ModWeaponsFile.CDFLaserFusionWeapon
+local DummyTurretWeapon = import('/mods/Mechdivers/lua/CSKMDWeapons.lua').DummyTurretWeapon
 local CIFGrenadeWeapon = import('/lua/cybranweapons.lua').CIFGrenadeWeapon
 local ModTexPath = '/mods/Mechdivers/textures/particles/'
 local ModEmPath = '/mods/Mechdivers/effects/emitters/'
@@ -19,6 +20,34 @@ local GRAVITY, JUMP_SPEED = 9.8, 20
 
 CSKMDCL0311 = Class(CWalkingLandUnit) {
     Weapons = {
+			Dummy = Class(DummyTurretWeapon) {
+		
+		IdleState = State (DummyTurretWeapon.IdleState) {
+        Main = function(self)
+            DummyTurretWeapon.IdleState.Main(self)
+        end,
+                
+        OnGotTarget = function(self)
+			   local pos = self:GetCurrentTargetPos()
+			   local dist = self.unit:GetDistanceToTarget(pos, self.unit:GetPosition())
+			   	local number = math.random(1,2)
+				if number == 1 then
+
+				else
+				if dist < 3.5 then
+				elseif dist > 3.5 < 8.0 then
+				self.unit:Jump(pos)
+				pos = nil 
+				end
+				end
+               DummyTurretWeapon.OnGotTarget(self)
+        end,               
+            },
+		OnLostTarget = function(self)
+
+            DummyTurretWeapon.OnLostTarget(self)
+        end, 
+			},
         MainGun = Class(CDFLaserFusionWeapon) {},
 		MissileRack = Class(CIFGrenadeWeapon) {},
     },
@@ -86,11 +115,11 @@ CSKMDCL0311 = Class(CWalkingLandUnit) {
 		CWalkingLandUnit.OnCreate(self)
 		self.JetPackEffectsBag = {}
 		self:RemoveToggleCap('RULEUTC_SpecialToggle')
-		self.DoMeleeThreadHandle = self:ForkThread(self.DoMeleeThread)
 		self.jump = false
+		self.DoMeleeThreadHandle = self:ForkThread(self.DoMeleeThread)
     end,
 	
-		DoMeleeThread = function(self)
+	DoMeleeThread = function(self)
 			local unitPos = self:GetPosition()
 			local radius = self:GetBlueprint().Intel.VisionRadius
 			while not self:IsDead() do
@@ -99,15 +128,6 @@ CSKMDCL0311 = Class(CWalkingLandUnit) {
 			else
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Enemy')
             for _,unit in units do
-			local pos = unit:GetPosition()
-		local dist = self:GetDistanceToTarget(pos, self:GetPosition())
-		if self.jump == false then
-					if dist < 3.5 then
-		elseif dist > 3.5 < 8.0 then
-			self:Jump(pos)
-			pos = nil  
-			end
-			end
 			IssueAttack({self}, unit)
             end
 			end

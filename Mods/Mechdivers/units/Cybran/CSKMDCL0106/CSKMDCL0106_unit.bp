@@ -191,7 +191,7 @@ UnitBlueprint {
         Level5 = 10,
     },
     Weapon = {
-        {
+		{
             AboveWaterTargetsOnly = true,
             Audio = {
                 Fire = Sound {
@@ -262,13 +262,14 @@ UnitBlueprint {
             TurretYawRange = 10,
             TurretYawSpeed = 90,
             Turreted = true,
+			UseFiringSolutionInsteadOfAimBone = true,
             WeaponCategory = 'Direct Fire',
 			WeaponRepackTimeout = 1,
             WeaponUnpackAnimation = '/mods/Mechdivers/units/Cybran/CSKMDCL0106/CSKMDCL0106_AUnpack.sca',
             WeaponUnpackAnimationRate = 2,
             WeaponUnpacks = true,
         },
-		{
+				{
 		    AlwaysRecheckTarget = true,
             AboveWaterTargetsOnly = true,
 			AutoInitiateAttackCommand = true,

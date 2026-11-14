@@ -321,6 +321,68 @@ MarkerNames
 					end)
 end
 
+function SpawnCivilianBunker(MarkerName, Amount)
+--[[
+
+MarkerNames
+
+- Expansion Area 
+- Large Expansion Area
+- Defensive Point
+- Protected Experimental Construction
+- Combat Zone
+- Transport Marker
+
+]]--
+
+
+
+					ForkThread(function()
+					local number = 0
+					while number <= Amount do
+					local Locations = nil
+					if MarkerName == 'Start Location' then
+					Locations = import('/lua/AI/aiutilities.lua').AIVanillaGetMarkerLocations(nil, MarkerName)
+					else
+					Locations = import('/lua/AI/aiutilities.lua').AIVanillaGetMarkerLocations('NEUTRAL_CIVILIAN', MarkerName) --Expansion Area, Large Expansion Area
+					end
+					local MarkerAmount = table.getsize(Locations)
+					local SetRandomLocation = math.random(1, MarkerAmount)
+					local MarkerPosition = Locations[SetRandomLocation].Position
+					local terrain  = GetTerrainType(MarkerPosition[1], MarkerPosition[3])
+					if string.find(terrain.Name, 'Water') then
+
+					else
+					local unit = nil
+					if terrain.Style == 'Evergreen' then
+					unit = CreateUnitHPR('UEMDC1000', 'NEUTRAL_CIVILIAN', MarkerPosition[1]+5, MarkerPosition[2], MarkerPosition[3]+5, 0, 0, 0)
+					local reclaim = nil
+					local pos = unit:GetPosition()
+					reclaim = GetEntitiesInRect(Rect(pos[1] - 0.7, pos[3] - 0.7, pos[1] + 0.7, pos[3] + 0.7))		
+					for _, r in reclaim do
+					if IsProp(r)then
+						 r:Destroy()
+					end
+					end
+					elseif terrain.Style == 'Tundra' then
+					unit = CreateUnitHPR('UEMDC1000b', 'NEUTRAL_CIVILIAN', MarkerPosition[1]+5, MarkerPosition[2], MarkerPosition[3]+5, 0, 0, 0)
+					local reclaim = nil
+					local pos = unit:GetPosition()
+					reclaim = GetEntitiesInRect(Rect(pos[1] - 0.7, pos[3] - 0.7, pos[1] + 0.7, pos[3] + 0.7))		
+					for _, r in reclaim do
+					if IsProp(r)then
+						 r:Destroy()
+					end
+					end
+					else
+					
+					end
+					number = number + 1
+					end
+					end
+					end)
+end
+
 
 OldInitializeArmies = InitializeArmies
 
@@ -336,6 +398,8 @@ LOG('Mechdivers Gameversion Analyzer: LOUD Detected')
 SpawnCivilianSlatter('UEBMD00300b', 'Combat Zone', 2)
 SpawnCivilianSlatter('UEBMD00300b', 'Transport Marker', 2)
 SpawnCivilianSlatter('UEBMD00300b', 'Land Path Node', 2)
+SpawnCivilianBunker('Transport Marker', 2)
+SpawnCivilianBunker('Combat Zone', 2)
 --SpawnCivilianSlatter('UEBMD00300b', 'Start Location', 2)
 
 else
@@ -343,6 +407,8 @@ LOG('Mechdivers Gameversion Analyzer: Other AI Mod Detected')
 SpawnCivilianSlatter('UEBMD00300b', 'Combat Zone', 2)
 SpawnCivilianSlatter('UEBMD00300b', 'Transport Marker', 2)
 SpawnCivilianSlatter('UEBMD00300b', 'Protected Experimental Construction', 2)
+SpawnCivilianBunker('Transport Marker', 2)
+SpawnCivilianBunker('Combat Zone', 2)
 --SpawnCivilianSlatter('UEBMD00300b', 'Start Location', 2)
 end
 
@@ -351,6 +417,8 @@ LOG('Mechdivers Gameversion Analyzer: Vanilla Detected')
 SpawnCivilianSlatter('UEBMD00300b', 'Combat Zone', 2)
 SpawnCivilianSlatter('UEBMD00300b', 'Transport Marker', 2)
 SpawnCivilianSlatter('UEBMD00300b', 'Protected Experimental Construction', 2)
+SpawnCivilianBunker('Transport Marker', 2)
+SpawnCivilianBunker('Combat Zone', 2)
 --SpawnCivilianSlatter('UEBMD00300b', 'Start Location', 2)
 end
 
@@ -359,6 +427,8 @@ LOG('Mechdivers Gameversion Analyzer: FAF Detected')
 SpawnCivilianSlatter('UEBMD00300b', 'Combat Zone', 2)
 SpawnCivilianSlatter('UEBMD00300b', 'Transport Marker', 2)
 SpawnCivilianSlatter('UEBMD00300b', 'Protected Experimental Construction', 2)
+SpawnCivilianBunker('Transport Marker', 2)
+SpawnCivilianBunker('Combat Zone', 2)
 --SpawnCivilianSlatter('UEBMD00300b', 'Start Location', 2)
 end
 end

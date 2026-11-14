@@ -26,6 +26,34 @@ CSKMDCL0310 = Class(CWalkingLandUnit) {
         end,
                 
         OnGotTarget = function(self)
+			   local pos = self:GetCurrentTargetPos()
+			   local dist = self.unit:GetDistanceToTarget(pos, self.unit:GetPosition())
+			   	local number = math.random(1,2)
+				if number == 1 then
+
+				else
+				if dist < 3.5 then
+				elseif dist > 3.5 < 8.0 then
+				self.unit:Jump(pos)
+				pos = nil 
+				end
+				end
+               DummyTurretWeapon.OnGotTarget(self)
+        end,               
+            },
+		OnLostTarget = function(self)
+
+            DummyTurretWeapon.OnLostTarget(self)
+        end, 
+			},
+		Melee = Class(DummyTurretWeapon) {
+		
+		IdleState = State (DummyTurretWeapon.IdleState) {
+        Main = function(self)
+            DummyTurretWeapon.IdleState.Main(self)
+        end,
+                
+        OnGotTarget = function(self)
 			   local wep1 = self.unit:GetWeaponByLabel('Flamethrower')
 			   wep1:SetEnabled(false)
                DummyTurretWeapon.OnGotTarget(self)
@@ -46,6 +74,7 @@ CSKMDCL0310 = Class(CWalkingLandUnit) {
 		
 		OnWeaponFired = function(self)
 			ForkThread( function()
+			self.unit.number = 0
 			local animator = CreateAnimator(self.unit)
 			local number = math.random(1,2)
 			if number == 1 then
@@ -127,8 +156,8 @@ CSKMDCL0310 = Class(CWalkingLandUnit) {
 		self.Saw = CreateRotator(self, 'R_Arm_Saw', 'x', nil, 0, 60, 360):SetTargetSpeed(270)
 		self.JetPackEffectsBag = {}
 		self:RemoveToggleCap('RULEUTC_SpecialToggle')
-		self.DoMeleeThreadHandle = self:ForkThread(self.DoMeleeThread)
 		self.jump = false
+		self.DoMeleeThreadHandle = self:ForkThread(self.DoMeleeThread)
     end,
 	
 	DoMeleeThread = function(self)
@@ -140,21 +169,13 @@ CSKMDCL0310 = Class(CWalkingLandUnit) {
 			else
 			local units = self:GetAIBrain():GetUnitsAroundPoint(categories.MOBILE + categories.LAND, unitPos, radius, 'Enemy')
             for _,unit in units do
-			local pos = unit:GetPosition()
-		local dist = self:GetDistanceToTarget(pos, self:GetPosition())
-		if self.jump == false then
-					if dist < 3.5 then
-		elseif dist > 3.5 < 8.0 then
-			self:Jump(pos)
-			pos = nil  
-			end
-			end
 			IssueAttack({self}, unit)
             end
 			end
 			WaitSeconds(0.1)
 			end
     end,
+	
 	
 	jump_target = function(self, location)
     local pos = self:GetPosition()

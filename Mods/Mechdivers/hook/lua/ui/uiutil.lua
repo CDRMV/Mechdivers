@@ -131,6 +131,10 @@ local MyUnitIdTable = {
 		  
 -- Structures
 
+	  -- Bunkers --
+	  uemdc1000=true,
+	  uemdc1000b=true,
+
       -- Mines --
 	  uebmd001=true,
 	  uebmd002=true,
