@@ -94,23 +94,6 @@ CSKMDTL0204 = Class(TLandUnit) {
         end
     end,
 	
-	DeathThread = function( self, overkillRatio , instigator)  
-		self.Bot:Destroy()
-        self:DestroyAllDamageEffects()
-		local army = self:GetArmy()
-
-		if self.PlayDestructionEffects then
-            self:CreateDestructionEffects(overkillRatio)
-        end
-
-        if self.ShowUnitDestructionDebris and overkillRatio then
-            self:CreateUnitDestructionDebris(true, true, overkillRatio > 2)
-        end
-		
-		self:CreateWreckage(overkillRatio or self.overkillRatio)
-        self:PlayUnitSound('Destroyed')
-        self:Destroy()
-    end,
 	
 	OnScriptBitSet = function(self, bit)
         TLandUnit.OnScriptBitSet(self, bit)

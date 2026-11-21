@@ -24,6 +24,10 @@ URBMD0105 = Class(CStructureUnit) {
 		self:ShowBone('Barrel', true)
     end,
 	
+	OnReceiveAdjacencyBuffTo = function(self, adjacentUnit) 
+	
+	end,
+	
 	OnStopBeingBuilt = function(self,builder,layer)
         CStructureUnit.OnStopBeingBuilt(self,builder,layer)
 		if self:GetAIBrain().BrainType == 'Human' then

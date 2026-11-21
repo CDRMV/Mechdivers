@@ -19,11 +19,17 @@ BuilderGroup {
             Construction = {
                 BuildStructures = {
 				 'T1EnergyProduction',
+				 'T1EnergyProduction',
+				 'T1Resource',
+				 'T1Resource',
 				'T1AdvancedLightBotFactory',
-				'VehicleFactory',
                     'T1LandFactory',
                     'T1AirFactory',
+					'VehicleFactory',
                     'T1EnergyProduction',
+					'T1Resource',
+					'T1EnergyProduction',
+					'T1Resource',
                 }
             }
         }
@@ -41,11 +47,13 @@ BuilderGroup {
         BuilderData = {
             Construction = {
                 BuildStructures = {
+				 'T1EnergyProduction',
 				'T1AdvancedLightBotFactory',
-				'VehicleFactory',
                     'T1LandFactory',
                     'T1AirFactory',
+					'VehicleFactory',
                     'T1EnergyProduction',
+					'T1EnergyProduction',
                 }
             }
         }
@@ -71,11 +79,17 @@ BuilderGroup {
             Construction = {
                 BuildStructures = {
 				 'T1EnergyProduction',
+				 'T1EnergyProduction',
+				 'T1Resource',
+				 'T1Resource',
 				'T1AdvancedLightBotFactory',
-				'VehicleFactory',
                     'T1LandFactory',
                     'T1AirFactory',
+					'VehicleFactory',
                     'T1EnergyProduction',
+					'T1Resource',
+					'T1EnergyProduction',
+					'T1Resource',
                 }
             }
         }
@@ -93,11 +107,13 @@ BuilderGroup {
         BuilderData = {
             Construction = {
                 BuildStructures = {
+				 'T1EnergyProduction',
 				'T1AdvancedLightBotFactory',
-				'VehicleFactory',
                     'T1LandFactory',
                     'T1AirFactory',
+					'VehicleFactory',
                     'T1EnergyProduction',
+					'T1EnergyProduction',
                 }
             }
         }
@@ -123,11 +139,17 @@ BuilderGroup {
             Construction = {
                 BuildStructures = {
 				 'T1EnergyProduction',
-				 'VehicleFactory',
+				 'T1EnergyProduction',
+				 'T1Resource',
+				 'T1Resource',
 				'T1AdvancedLightBotFactory',
                     'T1LandFactory',
                     'T1AirFactory',
+					'VehicleFactory',
                     'T1EnergyProduction',
+					'T1Resource',
+					'T1EnergyProduction',
+					'T1Resource',
                 }
             }
         }
@@ -145,11 +167,13 @@ BuilderGroup {
         BuilderData = {
             Construction = {
                 BuildStructures = {
+				 'T1EnergyProduction',
 				'T1AdvancedLightBotFactory',
-				'VehicleFactory',
                     'T1LandFactory',
                     'T1AirFactory',
+					'VehicleFactory',
                     'T1EnergyProduction',
+					'T1EnergyProduction',
                 }
             }
         }

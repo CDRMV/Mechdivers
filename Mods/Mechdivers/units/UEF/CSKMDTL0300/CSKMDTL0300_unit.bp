@@ -136,7 +136,7 @@ UnitBlueprint {
         TeleportTimeMod = 0.01,
     },
     General = {
-        Category = 'Factory',
+        Category = 'Direct Fire',
         Classification = 'RULEUC_MilitaryVehicle',
 		ConstructionBar = true,
         CommandCaps = {

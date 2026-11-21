@@ -289,7 +289,7 @@ BuilderGroup {
         BuilderData = {
             NumAssistees = 2,
                 NearMarkerType = 'Start Location',
-				MarkerUnitCount = 2,
+				MarkerUnitCount = 1,
             Construction = {
                 BuildClose = false,
                 BuildStructures = {

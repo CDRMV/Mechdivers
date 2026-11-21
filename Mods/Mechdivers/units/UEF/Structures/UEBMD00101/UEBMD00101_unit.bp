@@ -50,6 +50,7 @@ UnitBlueprint {
         'BUILTBYCOMMANDER',
         'UEF',
         'STRUCTURE',
+		'VEHICLEFACTORY',
         'LAND',
         'TECH1',
         'CONSTRUCTION',
@@ -72,7 +73,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = '<LOC ueb0101_desc>Land Factory',
+    Description = 'Vehicle Factory',
     Display = {
         Abilities = {
             '<LOC ability_upgradable>Upgradeable',
@@ -152,7 +153,7 @@ UnitBlueprint {
 			BuildCostMass = 800,
             BuildTime = 1600,
             Icon = 'aes',
-            Name = '<LOC enhancements_0103>Tech 2 Engineering Suite',
+            Name = '<LOC enhancements_0037>Tech 2 Engineering Suite',
             Slot = 'RCH',
         },
         T2EngineeringRemove = {
@@ -160,7 +161,7 @@ UnitBlueprint {
             BuildCostMass = 1,
             BuildTime = 0.1,
             Icon = 'aes',
-            Name = '<LOC enhancements_0104>Remove Tech 2 Engineering Suite',
+            Name = '<LOC enhancements_0038>Remove Tech 2 Engineering Suite',
             Prerequisite = 'T2Engineering',
             RemoveEnhancements = {
                 'T2Engineering',

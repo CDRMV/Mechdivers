@@ -69,7 +69,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = '<LOC ueb0302_desc>Air Factory',
+    Description = 'Eagle Factory',
     Display = {
 		Abilities = {
             'In Development',

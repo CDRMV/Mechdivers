@@ -44,6 +44,10 @@ UEBMD0106 = Class(TStructureUnit) {
         TStructureUnit.OnCreate(self)
     end,
 	
+	OnReceiveAdjacencyBuffTo = function(self, adjacentUnit) 
+	
+	end,
+	
 	OnStopBeingBuilt = function(self,builder,layer)
         TStructureUnit.OnStopBeingBuilt(self,builder,layer)
 			ForkThread( function()

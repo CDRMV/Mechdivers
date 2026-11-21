@@ -57,6 +57,10 @@ UEBMD0109 = Class(TStructureUnit) {
         TStructureUnit.OnCreate(self)
     end,
 	
+	OnReceiveAdjacencyBuffTo = function(self, adjacentUnit) 
+	
+	end,
+	
 	CreateEnhancement = function(self, enh)
         TStructureUnit.CreateEnhancement(self, enh)
         local bp = self:GetBlueprint().Enhancements[enh]

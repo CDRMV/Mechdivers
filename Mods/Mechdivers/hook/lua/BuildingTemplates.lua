@@ -3,12 +3,12 @@ do
 	    {
             'T1MDGroundDefense',
             --UEF       AEON      CYBRAN    SERAPHIM
-            {false,'UABMD0201','URBMD0105',false},
+            {'UEBMD0100','UABMD0201','URBMD0105',false},
         },
 		{
             'T1MDGroundDefense2',
             --UEF       AEON      CYBRAN    SERAPHIM
-            {false,'UABMD0202',false,false},
+            {'UEBMD0100','UABMD0202','URBMD0105',false},
         },
 		{
             'T2MDDetectorTower',

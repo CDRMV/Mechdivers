@@ -47,7 +47,7 @@ UnitBlueprint {
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
-    Description = 'Broadcast Tower',
+    Description = 'Broadcast Tower (Tactical Jammer)',
     Display = {
         Abilities = {
             '<LOC ability_jamming>Jamming',
@@ -140,7 +140,6 @@ UnitBlueprint {
         ToggleCaps = {
             RULEUTC_JammingToggle = true,
         },
-        UnitName = '<LOC ueb3101_name>SA1 - 1000',
         UnitWeight = 1,
     },
     Intel = {

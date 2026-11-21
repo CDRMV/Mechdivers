@@ -5,11 +5,12 @@ do
 			'VehicleFactory',
 			'EagleFactory',
 			'Landingpad',
+			'T1MDGroundDefense',
+			'T1MDGroundDefense2',
 			'T3MDSlatterSAM',
 			'T3MDAntiOrbitalCannon',
 			'T2MDTacticalJammer',
 			'T3MDDeimos',
-			'T3MDDeimosStorage',
 			'MDExMissileLauncher',
         },
         {

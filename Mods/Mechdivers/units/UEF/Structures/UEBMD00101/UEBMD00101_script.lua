@@ -20,6 +20,8 @@ UEBMD00101 = Class(TLandFactoryUnit) {
 	
 	OnStopBeingBuilt = function(self,builder,layer)
         TLandFactoryUnit.OnStopBeingBuilt(self,builder,layer)
+		self.Tech2 = false
+		self.Tech3 = false
 		ForkThread(function()
 		if self:GetAIBrain().BrainType == 'Human' then
 		
@@ -33,6 +35,7 @@ UEBMD00101 = Class(TLandFactoryUnit) {
         IssueClearCommands({self})
         IssueScript({self}, order)
 		WaitSeconds(600)
+		if self:HasEnhancement( 'T2Engineering' )then
 		local order = {
             TaskName = "EnhanceTask",
             Enhancement = 'T3Engineering'
@@ -40,6 +43,7 @@ UEBMD00101 = Class(TLandFactoryUnit) {
 		IssueStop({self})
         IssueClearCommands({self})
         IssueScript({self}, order)
+		end
 		end
 		end)
 	end,

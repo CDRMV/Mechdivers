@@ -499,7 +499,7 @@ BuilderGroup {
     },
 }	
 BuilderGroup {
-    BuilderGroupName = 'T2WarpShipBuilders',
+    BuilderGroupName = 'T2WarpshipBuilders',
 	BuildersType = 'FactoryBuilder',
 	Builder {
         BuilderName = 'T2 Overseer - Tech 2',

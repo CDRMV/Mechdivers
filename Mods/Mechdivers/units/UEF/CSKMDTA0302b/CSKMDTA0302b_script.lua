@@ -31,22 +31,19 @@ CSKMDTA0302b = Class(TAirUnit) {
 
 	OnCreate = function(self)
 		TAirUnit.OnCreate(self)
+		if not self.Animation then
+            self.Animation = CreateAnimator(self)
+            self.Trash:Add(self.Animation)
+        end
+		self.Animation:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTA0302/CSKMDTA0302_MainWings_BuildFinish.sca', false):SetRate(0)
 		if not self.AnimationManipulator then
             self.AnimationManipulator = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator)
         end
-		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTA0302/CSKMDTA0302_MainWings.sca', false):SetRate(2)
-		
 		if not self.AnimationManipulator2 then
             self.AnimationManipulator2 = CreateAnimator(self)
             self.Trash:Add(self.AnimationManipulator2)
         end
-		local number = math.random(1,2)
-		if number == 1 then
-		self.AnimationManipulator2:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTA0302/CSKMDTA0302_LeftBelowWing.sca', false):SetRate(2)
-		elseif number == 2 then
-		self.AnimationManipulator2:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTA0302/CSKMDTA0302_RightBelowWing.sca', false):SetRate(2)
-		end
 		self:HideBone('L_BombHold' ,true)
 		self:HideBone('R_BombHold' ,true)
 		self:HideBone('Bomb' ,true)
@@ -60,8 +57,17 @@ CSKMDTA0302b = Class(TAirUnit) {
 
 	OnStopBeingBuilt = function(self,builder,layer)
 		TAirUnit.OnStopBeingBuilt(self,builder,layer)
-		self.AnimationManipulator:SetRate(-2)
-		self.AnimationManipulator2:SetRate(-2)
+		ForkThread(function()
+		self.Animation:SetRate(1)
+		WaitFor(self.Animation)
+		self.AnimationManipulator:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTA0302/CSKMDTA0302_MainWings.sca', false):SetRate(-2)
+		local number = math.random(1,2)
+		if number == 1 then
+		self.AnimationManipulator2:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTA0302/CSKMDTA0302_LeftBelowWing.sca', false):SetRate(-2)
+		elseif number == 2 then
+		self.AnimationManipulator2:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTA0302/CSKMDTA0302_RightBelowWing.sca', false):SetRate(-2)
+		end	
+		end)
     end,
 	
 	OnMotionVertEventChange = function(self, new, old)
@@ -74,7 +80,9 @@ CSKMDTA0302b = Class(TAirUnit) {
         self.AnimationManipulator:SetRate(2)
 		self.AnimationManipulator2:SetRate(2)
         elseif (new == 'Up') then
+		if not self.AnimationManipulator then
 			self.AnimationManipulator:SetRate(-2)
+		end	
 			self.AnimationManipulator2:SetRate(-2)
         end
     end,
