@@ -1,4 +1,83 @@
+PlatoonTemplate {
+    Name = 'T1Truck',
+    FactionSquads = {
+        UEF = {
+            { 'CSKMDTL0205', 1, 1, 'attack', 'None' }
+        },
+    }
+}
 
+PlatoonTemplate {
+    Name = 'T2SupplyTruck',
+    FactionSquads = {
+        UEF = {
+            { 'CSKMDTL0206', 1, 1, 'attack', 'None' }
+        },
+    }
+}
+
+PlatoonTemplate {
+    Name = 'T2FlameTruck',
+    FactionSquads = {
+        UEF = {
+            { 'CSKMDTL0207', 1, 1, 'attack', 'None' }
+        },
+    }
+}
+
+PlatoonTemplate {
+    Name = 'T2AMMC',
+    FactionSquads = {
+        UEF = {
+            { 'CSKMDTL0204', 1, 1, 'attack', 'None' }
+        },
+    }
+}
+
+PlatoonTemplate {
+    Name = 'T2HeavyTank',
+    FactionSquads = {
+        UEF = {
+            { 'CSKMDTL0305', 1, 1, 'attack', 'None' }
+        },
+    }
+}
+
+PlatoonTemplate {
+    Name = 'T3HeavyAMMC',
+    FactionSquads = {
+        UEF = {
+            { 'CSKMDTL0300', 1, 1, 'attack', 'None' }
+        },
+    }
+}
+
+PlatoonTemplate {
+    Name = 'T3HeavyBreakthroughTank',
+    FactionSquads = {
+        UEF = {
+            { 'CSKMDTL0310', 1, 1, 'attack', 'None' }
+        },
+    }
+}
+
+PlatoonTemplate {
+    Name = 'T3HeavyCombatTank',
+    FactionSquads = {
+        UEF = {
+            { 'CSKMDTL0313', 1, 1, 'attack', 'None' }
+        },
+    }
+}
+
+PlatoonTemplate {
+    Name = 'T3HeavyTankhunter',
+    FactionSquads = {
+        UEF = {
+            { 'CSKMDTL0308', 1, 1, 'attack', 'None' }
+        },
+    }
+}
 
 PlatoonTemplate {
     Name = 'T1TrooperInfantry',

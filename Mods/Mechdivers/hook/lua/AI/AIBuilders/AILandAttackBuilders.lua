@@ -105,7 +105,148 @@ BuilderGroup {
         },
         BuilderType = 'Land',
     },
+}
+BuilderGroup {
+    BuilderGroupName = 'T1VehicleFactoryBuilders',	
+	BuildersType = 'FactoryBuilder',
+	Builder {
+        BuilderName = 'T1 Truck',
+        PlatoonTemplate = 'T1Truck',
+        Priority = 1500,
+        --Priority = 950,
+        BuilderConditions = {
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.TRUCK } },
+            { IBC, 'BrainNotLowPowerMode', {} },
+        },
+        BuilderType = 'Land',
+    },
 }	
+
+BuilderGroup {
+    BuilderGroupName = 'T2VehicleFactoryBuilders',
+    BuildersType = 'FactoryBuilder',
+    Builder {
+        BuilderName = 'T2 Heavy Tank',
+        PlatoonTemplate = 'T2HeavyTank',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYTANK } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+    Builder {
+        BuilderName = 'T2 SupplyTruck',
+        PlatoonTemplate = 'T2SupplyTruck',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.SUPPLYTRUCK } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+    Builder {
+        BuilderName = 'T2 FlameTruck',
+        PlatoonTemplate = 'T2FlameTruck',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.FLAMETRUCK } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+    Builder {
+        BuilderName = 'T2 AMMC',
+        PlatoonTemplate = 'T2AMMC',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.AMMC } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+}
+
+BuilderGroup {
+    BuilderGroupName = 'T3VehicleFactoryBuilders',
+    BuildersType = 'FactoryBuilder',
+    Builder {
+        BuilderName = 'T3 Heavy AMMC',
+        PlatoonTemplate = 'T3HeavyAMMC',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYAMMC } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+    Builder {
+        BuilderName = 'T3 Heavy Breakthrough Tank',
+        PlatoonTemplate = 'T3HeavyBreakthroughTank',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYBREAKTHROUGHTANK } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+    Builder {
+        BuilderName = 'T3 Heavy Combat Tank',
+        PlatoonTemplate = 'T3HeavyCombatTank',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYCOMBATTANK } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+    Builder {
+        BuilderName = 'T3 Heavy Tankhunter',
+        PlatoonTemplate = 'T3HeavyTankhunter',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.HEAVYTANKHUNTER } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+}
+
+BuilderGroup {
+    BuilderGroupName = 'T2CyborgFactoryBuilders',	
+	BuildersType = 'FactoryBuilder',
+	Builder {
+        BuilderName = 'T2 AssaultCyborg - Tech 2',
+        PlatoonTemplate = 'T2AssaultCyborg',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.CYBORG } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+	Builder {
+        BuilderName = 'T2 ShotgunCyborg - Tech 2',
+        PlatoonTemplate = 'T2ShotgunCyborg',
+        Priority = 1500,
+        BuilderType = 'Land',
+        BuilderConditions = {
+            { IBC, 'BrainNotLowPowerMode', {} },
+			{ UCBC, 'HaveLessThanUnitsWithCategory', { 20, categories.MOBILE * categories.CYBORG2 } },
+            --{ EBC, 'GreaterThanEconEfficiencyOverTime', { 0.7, 1.05 }},
+        },
+    },
+}	
+
 BuilderGroup {
     BuilderGroupName = 'T2AdvancedHeavyFactoryBuilders',
     BuildersType = 'FactoryBuilder',

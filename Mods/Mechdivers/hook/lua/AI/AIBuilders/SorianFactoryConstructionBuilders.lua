@@ -21,6 +21,7 @@ BuilderGroup {
                 BuildStructures = {
                    'T1LandFactory',
 					'T1AdvancedLightBotFactory',
+					'VehicleFactory',
                 },
                 Location = 'LocationType',
                 AdjacencyCategory = 'ENERGYPRODUCTION',
@@ -44,6 +45,7 @@ BuilderGroup {
                 BuildStructures = {
                    'T1LandFactory',
 					'T1AdvancedLightBotFactory',
+					'VehicleFactory',
                 },
                 Location = 'LocationType',
                 AdjacencyCategory = 'ENERGYPRODUCTION',
@@ -66,6 +68,7 @@ BuilderGroup {
                 BuildStructures = {
                    'T1LandFactory',
 					'T1AdvancedLightBotFactory',
+					'VehicleFactory',
                 },
                 Location = 'LocationType',
                 AdjacencyCategory = 'ENERGYPRODUCTION',
@@ -88,6 +91,7 @@ BuilderGroup {
                 BuildStructures = {
                     'T1LandFactory',
 					'T1AdvancedLightBotFactory',
+					'VehicleFactory',
                 },
             }
         }
@@ -117,6 +121,7 @@ BuilderGroup {
                 BuildStructures = {
                    'T1LandFactory',
 					'T1AdvancedLightBotFactory',
+					'VehicleFactory',
                 },
                 Location = 'LocationType',
                 AdjacencyCategory = 'ENERGYPRODUCTION',
@@ -140,6 +145,7 @@ BuilderGroup {
                 BuildStructures = {
                    'T1LandFactory',
 					'T1AdvancedLightBotFactory',
+					'VehicleFactory',
                 },
                 Location = 'LocationType',
                 AdjacencyCategory = 'ENERGYPRODUCTION',
@@ -162,6 +168,7 @@ BuilderGroup {
                 BuildStructures = {
                    'T1LandFactory',
 					'T1AdvancedLightBotFactory',
+					'VehicleFactory',
                 },
                 Location = 'LocationType',
                 AdjacencyCategory = 'ENERGYPRODUCTION',
@@ -184,6 +191,7 @@ BuilderGroup {
                 BuildStructures = {
                     'T1LandFactory',
 					'T1AdvancedLightBotFactory',
+					'VehicleFactory',
                 },
             }
         }
@@ -303,6 +311,7 @@ BuilderGroup {
                 BuildStructures = {
                     'T2AdvancedHeavyFactory',
 					'T2AdvancedHeavyFactory2',
+					'EagleFactory',
                 },
             }
         }
@@ -328,6 +337,7 @@ BuilderGroup {
                 BuildStructures = {
                     'T2AdvancedHeavyFactory',
 					'T2AdvancedHeavyFactory2',
+					'EagleFactory',
                 },
             }
         }

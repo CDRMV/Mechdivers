@@ -68,9 +68,11 @@ BuilderGroup {
                 BuildStructures = {                    
 					'T1GroundDefense',
 					'T1LandFactory',
+					'VehicleFactory',
 					'T1AdvancedLightBotFactory',
 					'T2AdvancedHeavyFactory',
 					'T2AdvancedHeavyFactory2',
+					'EagleFactory',
 					'T1AADefense',
 					'T1Radar',
                 }               
@@ -112,9 +114,11 @@ BuilderGroup {
                 BuildStructures = {                    
 					'T1GroundDefense',
 					'T1LandFactory',
+					'VehicleFactory',
 					'T1AdvancedLightBotFactory',
 					'T2AdvancedHeavyFactory',
 					'T2AdvancedHeavyFactory2',
+					'EagleFactory',
 					'T1AADefense',
 					'T1Radar',
                 }
@@ -156,9 +160,11 @@ BuilderGroup {
                 BuildStructures = {                    
 					'T2GroundDefense',
 					'T1LandFactory',
+					'VehicleFactory',
 					'T1AdvancedLightBotFactory',
 					'T2AdvancedHeavyFactory',
 					'T2AdvancedHeavyFactory2',
+					'EagleFactory',
 					'T2AADefense',
 					'T2Radar',
                 }
@@ -197,9 +203,11 @@ BuilderGroup {
                 BuildStructures = {
                     'T2GroundDefense',                    
                     'T1LandFactory',
+					'VehicleFactory',
 					'T1AdvancedLightBotFactory',
 					'T2AdvancedHeavyFactory',
 					'T2AdvancedHeavyFactory2',
+					'EagleFactory',
 					'T3AADefense',
 					'T2Radar',				
                 }
@@ -250,9 +258,11 @@ BuilderGroup {
                 BuildStructures = {                    
 					'T1GroundDefense',
 					'T1LandFactory',
+					'VehicleFactory',
 					'T1AdvancedLightBotFactory',
 					'T2AdvancedHeavyFactory',
 					'T2AdvancedHeavyFactory2',
+					'EagleFactory',
 					'T1AADefense',
 					'T1Radar',
                 }
@@ -294,9 +304,11 @@ BuilderGroup {
                 BuildStructures = {                    
 					'T2GroundDefense',
 					'T1LandFactory',
+					'VehicleFactory',
 					'T1AdvancedLightBotFactory',
 					'T2AdvancedHeavyFactory',
 					'T2AdvancedHeavyFactory2',
+					'EagleFactory',
 					'T2AADefense',
 					'T2Radar',
                 }
@@ -335,9 +347,11 @@ BuilderGroup {
                 BuildStructures = {
                     'T2GroundDefense',                    
                     'T1LandFactory',
+					'VehicleFactory',
 					'T1AdvancedLightBotFactory',
 					'T2AdvancedHeavyFactory',
 					'T2AdvancedHeavyFactory2',
+					'EagleFactory',
 					'T3AADefense',
 					'T2Radar',				
                 }
@@ -388,9 +402,11 @@ BuilderGroup {
                 BuildStructures = {                    
 					'T1GroundDefense',
 					'T1LandFactory',
+					'VehicleFactory',
 					'T1AdvancedLightBotFactory',
 					'T2AdvancedHeavyFactory',
 					'T2AdvancedHeavyFactory2',
+					'EagleFactory',
 					'T1AADefense',
 					'T1Radar',
                 }
@@ -466,9 +482,11 @@ BuilderGroup {
                 BuildStructures = {
 					'T2GroundDefense',
 					'T1LandFactory',
+					'VehicleFactory',
 					'T1AdvancedLightBotFactory',
 					'T2AdvancedHeavyFactory',
 					'T2AdvancedHeavyFactory2',
+					'EagleFactory',
                     'T2AADefense',
 					'T2Radar',				
                 }
@@ -508,9 +526,11 @@ BuilderGroup {
                 BuildStructures = {
 					'T2GroundDefense',
 					'T1LandFactory',
+					'VehicleFactory',
 					'T1AdvancedLightBotFactory',
 					'T2AdvancedHeavyFactory',
 					'T2AdvancedHeavyFactory2',
+					'EagleFactory',
 					'T3AADefense',
 					'T2Radar',				
                 }

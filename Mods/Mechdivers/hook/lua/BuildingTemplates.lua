@@ -18,7 +18,7 @@ do
 		{
             'T2MDTacticalJammer',
             --UEF       AEON      CYBRAN    SERAPHIM
-            {false,'UABMD0203','URBMD0101',false},
+            {'UEBMD00205','UABMD0203','URBMD0101',false},
         },
 		{
             'T2MDMonolith',
@@ -104,6 +104,16 @@ do
             'T1AdvancedLightBotFactory',
             --UEF       AEON      CYBRAN    SERAPHIM
             {false,'UABMD0100','URBMD0103',false},
+        },
+		{
+            'VehicleFactory',
+            --UEF       AEON      CYBRAN    SERAPHIM
+            {'UEBMD00101',false,false,false},
+        },
+		{
+            'EagleFactory',
+            --UEF       AEON      CYBRAN    SERAPHIM
+            {'UEBMD00202',false,false,false},
         },
 		{
             'T2AdvancedHeavyFactory',

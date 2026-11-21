@@ -2,9 +2,12 @@ do
     local groups = {
         {
             --UEF
+			'VehicleFactory',
+			'EagleFactory',
 			'Landingpad',
 			'T3MDSlatterSAM',
 			'T3MDAntiOrbitalCannon',
+			'T2MDTacticalJammer',
 			'T3MDDeimos',
 			'T3MDDeimosStorage',
 			'MDExMissileLauncher',
