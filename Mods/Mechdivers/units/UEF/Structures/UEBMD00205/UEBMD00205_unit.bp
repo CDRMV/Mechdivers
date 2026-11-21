@@ -41,10 +41,9 @@ UnitBlueprint {
     Defense = {
         AirThreatLevel = 0,
         ArmorType = 'Structure',
-        EconomyThreatLevel = 1,
-        Health = 10,
-        MaxHealth = 10,
-        RegenRate = 0,
+        EconomyThreatLevel = 6,
+        Health = 225,
+        MaxHealth = 225,
         SubThreatLevel = 0,
         SurfaceThreatLevel = 0,
     },
@@ -104,14 +103,12 @@ UnitBlueprint {
         UniformScale = 1.5,
     },
     Economy = {
-        BuildCostEnergy = 720,
-        BuildCostMass = 80,
-        BuildTime = 80,
-        MaintenanceConsumptionPerSecondEnergy = 20,
+        BuildCostEnergy = 5600,
+        BuildCostMass = 300,
+        BuildTime = 380,
+        MaintenanceConsumptionPerSecondEnergy = 75,
         RebuildBonusIds = {
-            'ueb3101',
-            'ueb3201',
-            'ueb3104',
+            'uebmd00205',
         },
     },
     Footprint = {
@@ -139,7 +136,7 @@ UnitBlueprint {
         FactionName = 'UEF',
         Icon = 'land',
         SelectionPriority = 5,
-        TechLevel = 'RULEUTL_Basic',
+        TechLevel = 'RULEUTL_Advanced',
         ToggleCaps = {
             RULEUTC_JammingToggle = true,
         },
