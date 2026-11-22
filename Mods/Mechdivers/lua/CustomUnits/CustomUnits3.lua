@@ -1,12 +1,7 @@
 UnitList = {
 
 	T2AttackTankSorian = {
-		Aeon = {'CSKMDAL0200', 80},      -- Watcher, Tech 2 Scout Drone
 		UEF = {'CSKMDTL0200', 80},      -- Fryer, Tech 2 Ambush Bot
-    },
-	
-	T2LandArtillery = {
-		Cybran = {'CSKMDCL0203', 80},      -- Rocket Devastator, Tech 2 Advanced Missile Bot
     },
 	
 	T3GroundDefense = {
@@ -16,8 +11,4 @@ UnitList = {
 	T3AirFighter = {
 		UEF = {'CSKMDTA0302d', 80},  -- Eagle, Tech 3 Groundattack Fighter
 	},
-	
-	T3LandBot = {
-		Cybran = {'CSKMDCL0308', 80},      -- Hulk Obliterator, Tech 3 Heavy Siege Bot
-    },
 }

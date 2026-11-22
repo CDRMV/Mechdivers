@@ -45,6 +45,15 @@ CSKMDTL0307 = Class(TWalkingLandUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self.build = true
+		self:HideBone( 'L_MissileLauncher', true )
+		self:HideBone( 'R_MissileLauncher', true )
+		self:HideBone( 'L_Gatling_Arm', true )
+		self:HideBone( 'R_Gatling_Arm', true )
+		self:HideBone( 'L_Cannon_Arm', true )
+		self:HideBone( 'R_Cannon_Arm', true )
+
+		self:ShowBone( 'R_LaserCannon', true )
+		self:ShowBone( 'L_LaserCannon', true )
 		if self:GetAIBrain().BrainType == 'Human' then
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition()

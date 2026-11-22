@@ -33,7 +33,7 @@ do
 		{
             'T2MDDronestation',
             --UEF       AEON      CYBRAN    SERAPHIM
-            {false,false,'URBMD0102',false},
+            {false,false,false,false},
         },
 		{
             'T2MDGroundDefense',

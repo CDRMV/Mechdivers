@@ -35,6 +35,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
+		'CUSTOMFACTORY',
         'BUILTBYTIER2ENGINEER',
         'BUILTBYTIER3ENGINEER',
 		'BUILTBYTIER2COMMANDER',

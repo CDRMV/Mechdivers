@@ -1,9 +1,14 @@
+-- This AIExecuteBuildStructure Function from fAF contains alot of more stuff
+-- You can see the Function below outcommented
+-- The Problem is this Variable BBC = __blueprints[BuildUnitWithID].CategoriesHash is sometimes nil for no Reason
+-- The results is an Log Entry where the AI is can not able to decide what to build even if the Unit is clear
+-- Reason for this the Techlevel can not be find because the Catagoryhash of the Unit is not loaded
+-- The Log will be filled with alot of those Entries.  
+-- I have replace the Function with the one from Vanilla because I don't really see a point for this. 
+
 do 
 function AIExecuteBuildStructure(aiBrain, builder, buildingType, closeToBuilder, relative, buildingTemplate, baseTemplate, reference, NearMarkerType)
-   local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
-
-	if version < 3652 then 
-	    local factionIndex = aiBrain:GetFactionIndex()
+   	    local factionIndex = aiBrain:GetFactionIndex()
     local whatToBuild = aiBrain:DecideWhatToBuild( builder, buildingType, buildingTemplate)
     # if we can't decide, we build NOTHING
     if not whatToBuild then
@@ -49,9 +54,13 @@ function AIExecuteBuildStructure(aiBrain, builder, buildingType, closeToBuilder,
     end
     
     #otherwise, we're SOL, so move on to the next thing
-	else
+end
 
-   local factionIndex = aiBrain:GetFactionIndex()
+end
+
+--[[
+function AIExecuteBuildStructure(aiBrain, builder, buildingType, closeToBuilder, relative, buildingTemplate, baseTemplate, reference, NearMarkerType)
+    local factionIndex = aiBrain:GetFactionIndex()
     local whatToBuild = aiBrain:DecideWhatToBuild(builder, buildingType, buildingTemplate)
     -- If the c-engine can't decide what to build, then search the build template manually.
     if not whatToBuild then
@@ -78,7 +87,6 @@ function AIExecuteBuildStructure(aiBrain, builder, buildingType, closeToBuilder,
         end
         -- get the needed tech level to build buildingType
         local BBC = __blueprints[BuildUnitWithID].CategoriesHash
-		LOG(__blueprints[BuildUnitWithID])
         local NeedTech
         if BBC.BUILTBYCOMMANDER or BBC.BUILTBYTIER1COMMANDER or BBC.BUILTBYTIER1ENGINEER then
             NeedTech = 1
@@ -199,8 +207,5 @@ function AIExecuteBuildStructure(aiBrain, builder, buildingType, closeToBuilder,
     end
     -- At this point we're out of options, so move on to the next thing
     return false
-	
-	end
 end
-
-end
+]]--

@@ -47,6 +47,7 @@ UnitBlueprint {
         'BUILTBYTIER3ENGINEER',
         'CYBRAN',
         'STRUCTURE',
+		'INTELLIGENCE',
         'LAND',
         'TECH2',
 		'RADAR',
@@ -118,8 +119,8 @@ UnitBlueprint {
         SizeZ = 5,
     },
     General = {
-        Category = 'Factory',
-        Classification = 'RULEUC_Factory',
+        Category = 'Intelligence',
+        Classification = 'RULEUC_Sensor',
         CommandCaps = {
             RULEUCC_Attack = false,
             RULEUCC_CallTransport = false,
@@ -187,7 +188,7 @@ UnitBlueprint {
     SizeX = 2.9,
     SizeY = 5,
     SizeZ = 4.2,
-    StrategicIconName = 'icon_factory3_air',
+    StrategicIconName = 'icon_factory2_air',
     StrategicIconSortPriority = 210,
     Wreckage = {
         Blueprint = '/props/DefaultWreckage/DefaultWreckage_prop.bp',

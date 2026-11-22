@@ -67,6 +67,14 @@ CSKMDTA0302b = Class(TAirUnit) {
 		elseif number == 2 then
 		self.AnimationManipulator2:PlayAnim('/Mods/Mechdivers/units/UEF/CSKMDTA0302/CSKMDTA0302_RightBelowWing.sca', false):SetRate(-2)
 		end	
+		self:HideBone('L_BombHold' ,true)
+		self:HideBone('R_BombHold' ,true)
+		self:HideBone('Bomb' ,true)
+		self:HideBone('MissilePod' ,true)
+		self:HideBone('L_MissilePod' ,true)
+		self:HideBone('L_MissilePod2' ,true)
+		self:HideBone('R_MissilePod' ,true)
+		self:HideBone('R_MissilePod2' ,true)
 		end)
     end,
 	

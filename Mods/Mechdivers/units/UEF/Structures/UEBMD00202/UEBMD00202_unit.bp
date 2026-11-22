@@ -43,6 +43,7 @@ UnitBlueprint {
     Categories = {
         'PRODUCTSC1',
         'SELECTABLE',
+		'CUSTOMFACTORY',
         'BUILTBYTIER2ENGINEER',
         'BUILTBYTIER2COMMANDER',
         'UEF',
@@ -121,9 +122,7 @@ UnitBlueprint {
     General = {
         BuildBones = {
             BuildEffectBones = {
-                'Muzzle01',
-                'Muzzle02',
-                'Muzzle03',
+                'Attachpoint',
             },
         },
         Category = 'Factory',
@@ -304,12 +303,6 @@ UnitBlueprint {
                 X = 0,
                 Y = 0,
                 Z = 3,
-            },
-            {
-                UnitSpin = -90,
-                X = -3,
-                Y = 0,
-                Z = 0,
             },
         },
         SkirtOffsetX = -1.5,

@@ -1,12 +1,9 @@
 UnitList = {
 
 	T2LandDFTank = {
-		Aeon = {'CSKMDAL0201', 80},      -- Obtruder, Tech 2 Assault Drone{
-		Cybran = {'CSKMDCL0201', 80},      -- Devastator, Tech 2 Advanced Assualt Bot
 		UEF = {'CSKMDTL0304', 80},      -- Patriot, Tech 2 Sturm Bot
     },
 	T2AttackTankSorian = {
-	    Aeon = {'CSKMDAL0203', 80},      -- Elevated Overseer, Tech 2 Advanced Jetpack Bot
 		UEF = {'CSKMDTL0303', 80},      -- Emancipator, Tech 2 Assualt Bot
     },
 	
@@ -19,20 +16,8 @@ UnitList = {
         Cybran = {'URBMD0301', 80}, -- Kratos  Tech 3 Heavy Point Defense
     },
 	
-	T3ArmoredAssault = {
-		UEF = {'CSKMDTL0308', 80},      -- UD-250 Bastion MK X, Tech 3 Heavy Tankhunter
-		Cybran = {'CSKMDCL0304', 80},      -- Mawler, Tech 3 Heavy Autocannon Tank
-    },
-	
-	T3LandArtillery = {
-		UEF = {'CSKMDTL0313', 80}, -- UD-310 Maelstorm MK V, Tech 3 Heavy Combat Tank
-		Cybran = {'CSKMDCL0303', 80},      -- Breaker, Tech 3 Heavy Mortar Tank
-	},
-	
 	T3LandBot = {
-		Cybran = {'CSKMDCL0306', 80},      -- Hulk Bruiser, Tech 3 Heavy Assualt Bot
 		UEF = {'CSKMDTL0304b', 80}, -- Patriot Mark II, Tech 3 Improved Sturm Bot
-		Aeon = {'CSKMDAL0301', 80},      -- Veracitor, Tech 3 Melee Tripod
     },
 	
 	T2ShieldDefense = {

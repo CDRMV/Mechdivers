@@ -160,9 +160,9 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		self.L_MissileLauncher = self:GetWeaponByLabel('L_MissileLauncher')
 		self.R_MissileLauncher = self:GetWeaponByLabel('R_MissileLauncher')
 
-		local RandomNumber = 1
+		self.RandomNumber = 1
 		
-		if RandomNumber == 1 then
+		if self.RandomNumber == 1 then
 		self:HideBone( 'L_MissileLauncher', true )
 		self:HideBone( 'R_MissileLauncher', true )
 		self:HideBone( 'L_Gatling_Arm', true )
@@ -172,7 +172,7 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 		Dummy:SetEnabled(true)
 		self:CreateEnhancement('RightAutoCannon')
 		self:CreateEnhancement('LeftAutoCannon')
-		elseif RandomNumber == 2 then
+		elseif self.RandomNumber == 2 then
 		self:ShowBone( 'L_MissileLauncher', true )
 		self:HideBone( 'R_MissileLauncher', true )
 		self:HideBone( 'L_Gatling_Arm', true )
@@ -190,6 +190,36 @@ CSKMDTL0303b = Class(TWalkingLandUnit) {
 	OnStopBeingBuilt = function(self,builder,layer)
         TWalkingLandUnit.OnStopBeingBuilt(self,builder,layer)
 		self.build = true
+		self:HideBone( 'L_MissileLauncher', true )
+		self:HideBone( 'R_MissileLauncher', true )
+		self:HideBone( 'L_Gatling_Arm', true )
+		self:HideBone( 'R_Gatling_Arm', true )
+		self:HideBone( 'L_Cannon_Arm', true )
+		self:HideBone( 'R_Cannon_Arm', true )
+		self:HideBone( 'L_LaserCannon', true )
+		self:HideBone( 'R_LaserCannon', true )
+		self:HideBone( 'Autocannon_Turret', true )
+		if self.RandomNumber == 1 then
+		self:HideBone( 'L_MissileLauncher', true )
+		self:HideBone( 'R_MissileLauncher', true )
+		self:HideBone( 'L_Gatling_Arm', true )
+		self:HideBone( 'R_Gatling_Arm', true )
+		self:ShowBone( 'L_Cannon_Arm', true )
+		self:ShowBone( 'R_Cannon_Arm', true )
+		Dummy:SetEnabled(true)
+		self:CreateEnhancement('RightAutoCannon')
+		self:CreateEnhancement('LeftAutoCannon')
+		elseif self.RandomNumber == 2 then
+		self:ShowBone( 'L_MissileLauncher', true )
+		self:HideBone( 'R_MissileLauncher', true )
+		self:HideBone( 'L_Gatling_Arm', true )
+		self:ShowBone( 'R_Gatling_Arm', true )
+		self:HideBone( 'L_Cannon_Arm', true )
+		self:HideBone( 'R_Cannon_Arm', true )
+		Dummy:SetEnabled(true)
+		self:CreateEnhancement('RightGatling')
+		self:CreateEnhancement('LeftMissileLauncher')
+		end
 		if self:GetAIBrain().BrainType == 'Human' then
 		SetIgnoreArmyUnitCap(self:GetArmy(), true)
 		local position = self:GetPosition()

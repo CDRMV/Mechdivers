@@ -1,4 +1,22 @@
+local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+
+if version < 3652 then 
+
+else
+
+-- Imports the FAF UEF Build Beam Fix
+
+local EffectUtilitiesUEF = import("/mods/Mechdivers/hook/lua/effectutilitiesuef.lua")
+CreateDefaultBuildBeams = EffectUtilitiesUEF.CreateDefaultBuildBeams
+CreateUEFBuildSliceBeams = EffectUtilitiesUEF.CreateUEFBuildSliceBeams
+CreateUEFUnitBeingBuiltEffects = EffectUtilitiesUEF.CreateUEFUnitBeingBuiltEffects
+CreateUEFCommanderBuildSliceBeams = EffectUtilitiesUEF.CreateUEFCommanderBuildSliceBeams
+CreateBuildCubeThread = EffectUtilitiesUEF.CreateBuildCubeThread
+
+end
+
 do
+
 function CreateAdjacencyBeams( unit, adjacentUnit, AdjacencyBeamsBag )
 
     local info = {

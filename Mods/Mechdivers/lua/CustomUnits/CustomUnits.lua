@@ -1,9 +1,5 @@
 UnitList = {
 
-	T1LandDFTank = {
-		UEF = {'CSKMDTL0205', 80},      -- Razer G-167, Tech 1 Attack Truck
-	},
-
     T3AirGunship = {
         UEF = {'CSKMDTA0300', 80}, 		-- Pelican, Tech 3 Mech Marine Transport Gunship
 		Cybran = {'CSKMDCA0300', 80}, 		-- Predator, Tech 3 Assault Drone
@@ -17,40 +13,9 @@ UnitList = {
         UEF = {'CSKMDTA0301', 80}, 		-- Hercules, Tech 3 Vehicle Transport Gunship
 		Cybran = {'CSKMDCA0301', 80}, 		-- Megacirus, Tech 3 Air Transport Drone
 	},
-	
-	T2LandDFTank = {
-	Aeon = {'CSKMDAL0200', 80},      -- Watcher, Tech 2 Scout Drone
-	UEF = {'CSKMDTL0305', 80},      --  T 080 DAD, Tech 2 Heavy Tank
-	Cybran = {'CSKMDCL0200', 80},      -- Hunter II, Tech 2 Medium Assualt Bot (Scout Strider)
-	},
-	
-	T2AttackTankSorian = {
-		Aeon = {'CSKMDAL0202', 80},      -- Overseer, Tech 2 Advanced Assault Bot
-		UEF = {'CSKMDTL0305', 80},      --  T 080 DAD, Tech 2 Heavy Tank
-		Cybran = {'CSKMDCL0200', 80},      -- Hunter II, Tech 2 Medium Assualt Bot (Scout Strider)
-    },
-	
-	T3ArmoredAssault = {
-		UEF = {'CSKMDTL0300', 80},      -- Boxer, Tech 3 Amored Mech Marine Carrier
-		Cybran = {'CSKMDCL0300', 80},      -- Annihilator, Tech 3 Heavy Tank
-    },
-	
-	T3LandAA = {
-		Cybran = {'CSKMDCL0302', 80},      -- Shredder, Tech 3 Heavy Autocannon Tank
-	},
-	
-	T2LandArtillery = {
-	Aeon = {'CSKMDAL0204', 80},      -- Crescent Overseer, Tech 2 Advanced Artillery Bot
-	},
-   
-	T3AttackTankSorian = {
-		UEF = {'CSKMDTL0300', 80},      -- Boxer, Tech 3 Amored Mech Marine Carrier
-		Cybran = {'CSKMDCL0300', 80},      -- Annihilator, Tech 3 Heavy Tank
-    },
 
 	T3LandBot = {
         UEF = {'CSKMDTL0303b', 80}, -- Emancipator Mark II, Tech 3 Improved Assault Bot
-		Aeon = {'CSKMDAL0300', 80},      -- Gatekeeper, Tech 3 Assault Tripod
     },
 	
 	T3AirFighter = {
