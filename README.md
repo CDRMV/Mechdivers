@@ -28,7 +28,7 @@ Navigate/Open the Mechdivers-main Folder
 
 Now you should see this following Folder:
 
-Mods
+Mods and gamedata 
 
 Copy and paste the Mods Folder here:
 
