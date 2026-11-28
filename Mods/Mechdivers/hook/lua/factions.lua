@@ -227,3 +227,13 @@ for index, value in Factions do
 end
 
 end
+
+local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+
+if version < 3652 then 
+
+else
+
+import('/mods/mechdivers/lua/terminids.lua').AddFaction(
+    Factions, FactionIndexMap, FactionDesToKey, FactionInUnitBpToKey)
+end	

@@ -1,7 +1,15 @@
 
-AIOpts = {
+AIOpts = {}
 
-}
+local version = tonumber( (string.gsub(string.gsub(GetVersion(), '1.5.', ''), '1.6.', '')) )
+
+if version < 3652 then 
+
+else
+
+import('/mods/mechdivers/lua/Terminids.lua').InstallInLobby()
+
+end
 
 --[[
 
